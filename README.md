@@ -3,9 +3,10 @@
 <div align="center">
 
 <figure>
-<img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="90" height="90" alt="TouchController"> 
-</figure>  
+<img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="90" height="90" alt="TouchController">
+</figure>
 </div>
+<br>
 A mod bringing controlling style of bedrock version to Java version.Currently in early development, report for bugs or
 other problems are welcome if you found!<br>
 <br>
@@ -104,9 +105,10 @@ Finally, you can run `./gradlew build` to compile, and built file can bu found i
 
 <figure>
 <img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="90" height="90" alt="TouchController"> 
-</figure>  
+</figure>
 </div>
 
+<br>
 一个为 Minecraft Java 版添加触控支持的 Mod。目前处于早期开发中，如果遇到 Bug 或者其他问题，欢迎积极报告！
 <br>
 <br>
