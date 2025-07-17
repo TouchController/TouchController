@@ -1,13 +1,15 @@
-# <p style="text-align:center">TouchController 
+# <h1 align="center">TouchController</h1>
+
+<div align="center">
 
 <figure>
 <img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="90" height="90" alt="TouchController"> 
 </figure>  
-A mod bringing controlling style of bedrock version to Java version.<br>
-Currently in early development, report for bugs or
-other problems are welcome if you found!
+</div>
+A mod bringing controlling style of bedrock version to Java version.Currently in early development, report for bugs or
+other problems are welcome if you found!<br>
 <br>
-<br>
+
 
 ## Download and install
 
@@ -96,13 +98,16 @@ Finally, you can run `./gradlew build` to compile, and built file can bu found i
 
 ---
 
-# <p style="text-align:center">触摸控制器
+# <h1 align="center">触摸控制器</h1>
+
+<div align="center">
 
 <figure>
 <img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="90" height="90" alt="TouchController"> 
 </figure>  
-一个为 Minecraft Java 版添加触控支持的 Mod。<br>
-目前处于早期开发中，如果遇到 Bug 或者其他问题，欢迎积极报告！
+</div>
+
+一个为 Minecraft Java 版添加触控支持的 Mod。目前处于早期开发中，如果遇到 Bug 或者其他问题，欢迎积极报告！
 <br>
 <br>
 
