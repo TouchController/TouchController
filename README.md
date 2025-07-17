@@ -3,7 +3,7 @@
 <div align="center">
 
 <figure>
-<img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="90" height="90" alt="TouchController">
+<img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="right" width="90" height="90" alt="TouchController">
 </figure>
 </div>
 <br>
@@ -104,7 +104,7 @@ Finally, you can run `./gradlew build` to compile, and built file can bu found i
 <div align="center">
 
 <figure>
-<img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="90" height="90" alt="TouchController"> 
+<img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="right" width="90" height="90" alt="TouchController"> 
 </figure>
 </div>
 
