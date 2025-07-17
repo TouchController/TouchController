@@ -3,7 +3,7 @@
 <div align="center">
 
 <figure>
-<img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="80" height="80" alt="TouchController">
+<img src="https://github.com/TouchController/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="80" height="80" alt="TouchController">
 </figure>
 </div>
 A mod bringing controlling style of bedrock version to Java version.Currently in early development, report for bugs or
@@ -103,7 +103,7 @@ Finally, you can run `./gradlew build` to compile, and built file can bu found i
 <div align="center">
 
 <figure>
-<img src="https://github.com/fengzhou0w0/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="80" height="80" alt="TouchController"> 
+<img src="https://github.com/TouchController/TouchController/blob/0.2/TC/src/main/assets/TouchControllerLOGO.png" align="left" width="80" height="80" alt="TouchController"> 
 </figure>
 </div>
 
