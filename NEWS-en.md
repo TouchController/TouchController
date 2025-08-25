@@ -1,5 +1,10 @@
 # TouchController NEWS - User visible changes.
 
+## 0.2.1-beta14
+
+- Added Ukrainian translation (StarmanMine142)
+- Added Russian translation (Xaerfly)
+
 ## 0.2.1-beta13
 
 - Fixed layout error of built-in layout screen on narrow screens

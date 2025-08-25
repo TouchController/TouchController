@@ -1,5 +1,10 @@
 # TouchController NEWS - 用户可见的更改。
 
+## 0.2.1-beta14
+
+- 添加了乌克兰语翻译 (StarmanMine142)
+- 添加了俄语翻译 (Xaerfly)
+
 ## 0.2.1-beta13
 
 - 修复了预置布局界面在屏幕较窄的情况下布局出错的问题
