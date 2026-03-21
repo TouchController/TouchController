@@ -60,8 +60,8 @@
   "touchcontroller.screen.config.status.status.enable.description": "TouchController 将正常运行。",
   "touchcontroller.screen.config.status.status.only_view.click_to_interact.title": "仅触控圈",
   "touchcontroller.screen.config.status.status.only_view.click_to_interact.description": "TouchController 将被禁用，但触控圈不受影响。",
-  "touchcontroller.screen.config.status.status.only_view.aiming_by_crosshair.title": "仅视角控制",
-  "touchcontroller.screen.config.status.status.only_view.aiming_by_crosshair.description": "TouchController 将被禁用，但你仍可通过屏幕移动视角。",
+  "touchcontroller.screen.config.status.status.only_view.aiming_by_crosshair.title": "仅分离控制",
+  "touchcontroller.screen.config.status.status.only_view.aiming_by_crosshair.description": "TouchController 将被禁用，但你仍可通过屏幕移动视角，并在准星方向进行交互。",
   "touchcontroller.screen.config.status.status.disable.title": "禁用",
   "touchcontroller.screen.config.status.status.disable.description": "TouchController 将被完全禁用。",
 
