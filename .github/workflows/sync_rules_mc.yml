@@ -16,7 +16,7 @@ on:
 
 jobs:
   sync:
-    if: github.repository == 'TouchController/TouchController-Monorepo'
+    if: github.repository == 'TouchController/TouchController'
     runs-on: ubuntu-latest
 
     steps:
