@@ -76,10 +76,10 @@ def _modrinth_pin_impl(rctx):
             "primary": rctx.attr.primary_file[version_id],
         }
 
-    rctx.file("pin_file.json", json.encode_indent(pin_content))
+    rctx.file("pin_file.json", json.encode_indent(pin_content) + "\n")
     rctx.template(
         "PinGenerator.java",
-        Label("@//repo/modrinth:PinGenerator.java"),  # TODO
+        Label("@//repo/modrinth:PinGenerator.java"),
         substitutions = {
             "$PIN_SOURCE": str(rctx.path("pin_file.json")),
             "$PIN_TARGET": str(pin_path),
