@@ -52,10 +52,9 @@ Below are platforms TouchController supports:
 - [Zalith Launcher](https://github.com/ZalithLauncher/ZalithLauncher)
 - [Zalith Launcher 2](https://github.com/ZalithLauncher/ZalithLauncher2)
 - [Pojav Glow·Worm](https://github.com/Vera-Firefly/Pojav-Glow-Worm)
+- [GlitchLauncher iOS](https://github.com/roggy666/GlitchLauncher-iOS)
 
-Support for touch screen for X11 on Linux may be added in the future. iOS and macOS will not be supported
-because I don't have corresponding environment and devices, but pull requests for iOS and macOS supported will be
-accepted.
+Support for touch screen for X11 on Linux may be added in the future. iOS and macOS will not be officially supported because I don't have corresponding environment and devices, but pull requests for iOS and macOS support are welcome.
 
 ## Features supported by now
 
@@ -151,10 +150,9 @@ Finally, you can run `./gradlew build` to compile, and built file can bu found i
 - [Zalith Launcher](https://github.com/ZalithLauncher/ZalithLauncher)
 - [Zalith Launcher 2](https://github.com/ZalithLauncher/ZalithLauncher2)
 - [Pojav Glow·Worm](https://github.com/Vera-Firefly/Pojav-Glow-Worm)
+- [GlitchLauncher iOS](https://github.com/roggy666/GlitchLauncher-iOS)
 
-在未来可能会添加 Linux 上 X11 触屏的支持。iOS 和 macOS 由于没有相应环境和设备，不会提供支持，但是接受 iOS 和 macOS 支持的
-Pull
-Request。
+在未来可能会添加 Linux 上 X11 触屏的支持。iOS 和 macOS 由于没有相应环境和设备，不会提供官方支持，但是接受 iOS 和 macOS 支持的 Pull Request。
 
 ## 目前支持的功能
 

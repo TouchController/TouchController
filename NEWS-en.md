@@ -1,5 +1,9 @@
 # TouchController NEWS - User visible changes.
 
+## 0.2.1-beta16
+
+- Added support for iOS - [GlitchLauncher iOS](https://github.com/roggy666/GlitchLauncher-iOS)
+
 ## 0.2.1-beta15
 
 - Added support for mods using Forge input events (like YSM)

@@ -56,6 +56,14 @@ class PresetManager : KoinComponent {
     fun load() {
         try {
             logger.info("Reading TouchController preset file")
+
+            // Create preset directory if it doesn't exist
+            if (!presetDir.exists()) {
+                presetDir.createDirectories()
+                _presets.value = PresetsContainer()
+                return
+            }
+
             val order = runCatching<PresetManager, List<Uuid>> {
                 orderFile.inputStream().use(json::decodeFromStream)
             }.getOrNull()?.toPersistentList() ?: persistentListOf()

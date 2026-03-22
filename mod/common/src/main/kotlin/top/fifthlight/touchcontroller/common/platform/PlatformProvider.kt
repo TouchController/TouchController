@@ -9,6 +9,7 @@ import top.fifthlight.touchcontroller.common.gal.GlfwPlatform
 import top.fifthlight.touchcontroller.common.gal.NativeLibraryPathGetter
 import top.fifthlight.touchcontroller.common.gal.PlatformWindowProvider
 import top.fifthlight.touchcontroller.common.platform.android.AndroidPlatform
+import top.fifthlight.touchcontroller.common.platform.ios.IOSPlatform
 import top.fifthlight.touchcontroller.common.platform.proxy.ProxyPlatform
 import top.fifthlight.touchcontroller.common.platform.wayland.WaylandPlatform
 import top.fifthlight.touchcontroller.common.platform.win32.Win32Platform
@@ -42,6 +43,26 @@ class PlatformProvider : KoinComponent {
         } catch (ex: IOException) {
             logger.info("Failed to access $path, may running on Android", ex)
             true
+        }
+    }
+
+    val isIOS: Boolean by lazy {
+        val systemName = System.getProperty("os.name") ?: ""
+        // iOS detection: check for Darwin/Mac OS X + /var/mobile path exists (iOS sandbox)
+        // or TOUCH_CONTROLLER_IOS_SOCKET env variable is set
+        if (systemName.contains("Darwin", ignoreCase = true) ||
+            systemName.contains("Mac OS X", ignoreCase = true) ||
+            systemName.contains("iOS", ignoreCase = true)) {
+            // Check if running on iOS by detecting /var/mobile (iOS-specific path)
+            val iosPath = Paths.get("/var/mobile")
+            try {
+                iosPath.exists() || System.getenv("TOUCH_CONTROLLER_IOS_SOCKET")?.isNotEmpty() == true
+            } catch (ex: Exception) {
+                logger.info("Failed to check iOS path, assuming iOS", ex)
+                true
+            }
+        } else {
+            false
         }
     }
 
@@ -120,6 +141,8 @@ class PlatformProvider : KoinComponent {
                 platformFactory = { AndroidPlatform(socketName) },
             )
         }
+
+        // iOS is handled separately in loadIOSPlatform() - native lib is statically linked
 
         val platform = windowProvider.platform
         when (platform) {
@@ -225,6 +248,22 @@ class PlatformProvider : KoinComponent {
         }
     }
 
+    private fun loadIOSPlatform(windowProvider: PlatformWindowProvider): Platform? {
+        // iOS: native library is statically linked into the launcher app
+        // No need to load it dynamically - JNI symbols are already available
+        val socketPath = System.getenv("TOUCH_CONTROLLER_IOS_SOCKET")
+        if (socketPath.isNullOrEmpty()) {
+            logger.info("TOUCH_CONTROLLER_IOS_SOCKET not set")
+            logger.info("Please enable TouchController in launcher settings and restart the game")
+            return null
+        }
+
+        logger.info("iOS: Using Unix socket at $socketPath (native library is statically linked)")
+        val platform = IOSPlatform(socketPath)
+        platform.resize(windowProvider.windowWidth, windowProvider.windowHeight)
+        return platform
+    }
+
     private fun loadPlatform(windowProvider: PlatformWindowProvider): Platform? {
         val socketPort = System.getenv("TOUCH_CONTROLLER_PROXY")?.toIntOrNull()
         if (socketPort != null) {
@@ -232,6 +271,11 @@ class PlatformProvider : KoinComponent {
             val proxy = localhostLauncherSocketProxyServer(socketPort) ?: return null
             @OptIn(DelicateCoroutinesApi::class)
             return ProxyPlatform(GlobalScope, proxy)
+        }
+
+        // iOS special case: native library is statically linked into launcher
+        if (isIOS) {
+            return loadIOSPlatform(windowProvider)
         }
 
         val info = probeNativeLibraryInfo(windowProvider) ?: return null

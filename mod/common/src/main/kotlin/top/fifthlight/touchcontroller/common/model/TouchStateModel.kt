@@ -11,6 +11,10 @@ class TouchStateModel : KoinComponent {
     fun addPointer(index: Int, position: Offset) {
         pointers[index]?.let { pointer ->
             pointer.position = position
+            // Reset state if it was Released (e.g., double-tap scenario)
+            if (pointer.state is PointerState.Released) {
+                pointer.state = PointerState.New
+            }
         } ?: run {
             pointers[index] = Pointer(position = position)
         }

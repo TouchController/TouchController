@@ -1,6 +1,7 @@
 {
   "touchcontroller.warning.proxy_not_connected": "Внимание: Прокси не подключён. TouchController не будет работать.",
   "touchcontroller.warning.proxy_not_connected_android": "Вы используете Android, но прокси управления выключен. Если ваш лаунчер поддерживает TouchController, то нужно включить прокси; если не поддержки нет, то смените лаунчер на тот, который поддерживает TouchController.",
+  "touchcontroller.warning.proxy_not_connected_ios": "Вы используете iOS, но TouchController bridge не включён. Включите TouchController в настройках лаунчера и перезапустите игру.",
   "touchcontroller.warning.proxy_not_connected_linux": "TouchController не запустился. Возможные причины: не загрузились динамические библиотеки TouchController; вы используете X11, но TouchController сейчас поддерживает только Wayland. Посмотрите подробности в логах.",
   "touchcontroller.warning.proxy_not_connected_windows": "TouchController не запустился. Посмотрите подробности в логах.",
   "touchcontroller.warning.proxy_not_connected_os_not_supported": "Вы используете не поддерживаемую ОС: %s, TouchController поддерживает только Windows, Linux и Android.",

@@ -22,6 +22,8 @@ object ConnectionEvents : KoinComponent {
             val isWindows = systemName.startsWith("Windows", ignoreCase = true)
             if ((isLinux && platformProvider.isAndroid) || systemName.contains("Android", ignoreCase = true)) {
                 gameAction.sendMessage(textFactory.of(Texts.WARNING_PROXY_NOT_CONNECTED_ANDROID))
+            } else if (platformProvider.isIOS) {
+                gameAction.sendMessage(textFactory.of(Texts.WARNING_PROXY_NOT_CONNECTED_IOS))
             } else if (isWindows) {
                 gameAction.sendMessage(textFactory.of(Texts.WARNING_PROXY_NOT_CONNECTED_WINDOWS))
             } else if (isLinux) {
