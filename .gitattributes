@@ -10,3 +10,5 @@
 *.pmd binary
 *.vmd binary
 *.fbx binary
+
+*.bazel linguist-generated=true
