@@ -1,11 +1,11 @@
-name: New feature submissions
+name: New feature submissions (English)
 description: Write down your suggestions for new features.
 title: "[Feat]: "
 labels: [ "enhancement" ]
 body:
     -   type: markdown
         attributes:
-            value: "# TouchController feature request"
+            value: "# Feature request"
     -   type: checkboxes
         id: feature_check
         attributes:
@@ -16,10 +16,24 @@ body:
                     required: true
                 -   label: This feature is not in [Pull Requests](https://github.com/TouchController/TouchController/pulls)
                     required: true
-                -   label: This feature has not been added in the latest version of the TouchController mod.
+                - label: This feature has not been added in the latest version of the related mod.
                     required: true
                 -   label: "I am aware that: If I only have some ideas rather than new features, they need to be submitted in the [Discussions](https://github.com/TouchController/TouchController/discussions/new?category=%E6%83%B3%E6%B3%95)."
                     required: true
+    - type: dropdown
+      id: feature_mod
+      attributes:
+          label: Mod
+          description: Please tell us which mod you want to add new feature.
+          options:
+              - TouchController
+              - ArmorStand
+              - BlazeRod
+              - AuthProxy
+              - BlazeSDL
+          default: 0
+      validations:
+          required: true
     -   type: input
         id: feature_summary
         attributes:

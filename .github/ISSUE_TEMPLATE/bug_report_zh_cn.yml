@@ -1,11 +1,11 @@
-name: Bug 报告
-description: 报告您发现的 TouchController 中的 BUG
+name: Bug 报告 (简体中文）
+description: 报告您发现的 BUG
 title: "[Bug]: "
 labels: [ "bug" ]
 body:
     -   type: markdown
         attributes:
-            value: "# TouchController bug 报告"
+            value: "# Bug 报告"
     -   type: checkboxes
         id: bug_check
         attributes:
@@ -16,12 +16,22 @@ body:
                     required: true
                 -   label: 此 bug 的修复不在 [Pull Requests](https://github.com/TouchController/TouchController/pulls) 中
                     required: true
-                -   label: 我已将 TouchController 模组更新到最新版本
+                - label: 我已将相关模组更新到最新版本
                     required: true
-                -   label: 我已阅读：《[TouchController 游玩须知](https://wiki.touchcontroller.fifthlight.top/%E7%8E%A9%E5%AE%B6%E6%89%8B%E5%86%8C/%E6%B8%B8%E7%8E%A9%E9%A1%BB%E7%9F%A5.html)》《[TouchController 常见问题](https://wiki.touchcontroller.fifthlight.top/%E7%8E%A9%E5%AE%B6%E6%89%8B%E5%86%8C/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html)》《[如何给 TouchController 报告 bug](https://wiki.touchcontroller.fifthlight.top/%E7%8E%A9%E5%AE%B6%E6%89%8B%E5%86%8C/%E6%8A%A5%E5%91%8ABUG.html)》
-                    required: true
-                -   label: 我已知晓：任何不合规定的 issue 都有可能被直接关闭
-                    required: true
+    - type: dropdown
+      id: bug_mod
+      attributes:
+          label: 模组
+          description: 出现问题的对应模组
+          options:
+              - TouchController
+              - ArmorStand
+              - BlazeRod
+              - AuthProxy
+              - BlazeSDL
+          default: 0
+      validations:
+          required: true
     -   type: dropdown
         id: bug_os
         attributes:
@@ -29,16 +39,19 @@ body:
             description: 您使用的操作系统，如果选择其它，请在下文中说明
             options:
                 - Android
+                - Linux
+                - macOS
                 - Windows
+                - iOS
                 - 其它
-            default: 1
+            default: 0
         validations:
             required: true
     -   type: input
         id: bug_version
         attributes:
             label: 版本
-            description: 您发现此 bug 使用的 TouchController 模组版本、Minecraft 版本以及模组加载器（Fabric、Forge、NeoForge）及其版本
+            description: 您发现此 bug 使用的相关模组版本、Minecraft 版本以及模组加载器（Fabric、Forge、NeoForge）及其版本
             placeholder: 模组版本：vx.x.x；Minecraft版本：x.x.x；模组加载器：***，版本：***
         validations:
             required: true

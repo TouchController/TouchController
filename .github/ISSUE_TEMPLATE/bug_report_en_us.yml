@@ -1,11 +1,11 @@
-name: Bug report
-description: Report bugs you found in TouchController!
+name: Bug report (English)
+description: Report bugs you found!
 title: "[Bug]: "
 labels: [ "bug" ]
 body:
     -   type: markdown
         attributes:
-            value: "# TouchController bug report"
+            value: "# Bug report"
     -   type: checkboxes
         id: bug_check
         attributes:
@@ -16,12 +16,22 @@ body:
                     required: true
                 -   label: The fix for this bug is not in [Pull Requests](https://github.com/TouchController/TouchController/pulls)
                     required: true
-                -   label: I have updated the TouchController mod to the latest version
+                - label: I have updated the related mod to the latest version
                     required: true
-                -   label: I am using the latest version Android launcher supporting TouchController, or using Windows on desktop.
-                    required: true
-                -   label: I understand that any issues on unsupported operating system cannot be reported here (for support of operating system other than iOS and macOS, please go to submit new features).
-                    required: true
+    - type: dropdown
+      id: bug_mod
+      attributes:
+          label: Mod
+          description: Which mod has this bug.
+          options:
+              - TouchController
+              - ArmorStand
+              - BlazeRod
+              - AuthProxy
+              - BlazeSDL
+          default: 0
+      validations:
+          required: true
     -   type: dropdown
         id: bug_os
         attributes:
@@ -29,16 +39,19 @@ body:
             description: The operating system you are using. If you choose "other", please explain below.
             options:
                 - Android
+                - Linux
+                - macOS
                 - Windows
+                - iOS
                 - Other
-            default: 1
+            default: 0
         validations:
             required: true
     -   type: input
         id: bug_version
         attributes:
             label: Version
-            description: The TouchController mod version, Minecraft version and mod loader (Fabric、Forge、NeoForge) with its version
+            description: Related mod's version, Minecraft version and mod loader (Fabric、Forge、NeoForge) with its version
             placeholder: "Mod version: vx.x.x; Minecraft version: x.x.x; Mod loader: ***, version: ***"
         validations:
             required: true
