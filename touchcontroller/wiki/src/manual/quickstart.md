@@ -17,6 +17,7 @@
 - 1.21.6 (Forge, NeoForge, Fabric)
 - 1.21.7 (Forge, NeoForge, Fabric)
 - 1.21.8 (Forge, NeoForge, Fabric)
+- 1.21.11 (Fabric)
 
 ## 支持平台
 
@@ -27,7 +28,6 @@
 - [Zalith Launcher 2](https://github.com/ZalithLauncher/ZalithLauncher2)
 - [Angel Aura Amethyst](https://github.com/AngelAuraMC/Amethyst-Android)
 - [Pojav Glow·Worm](https://github.com/Vera-Firefly/Pojav-Glow-Worm)
-- [修改版 PojavLauncher](https://github.com/TouchController/PojavLauncher)【**停止维护**】
 
 ## 下载
 
