@@ -89,7 +89,7 @@ TouchController.
 <br clear="left">
 <div align="center">
 
-[![CI](https://github.com/TouchController/TouchController/actions/workflows/build.yml/badge.svg)](https://github.com/TouchController/TouchController/actions) [![Modrinth](https://img.shields.io/modrinth/dt/touchcontroller?style=&logo=modrinth&color=008833)](https://modrinth.com/mod/touchcontroller) [![Issues](https://img.shields.io/github/issues/TouchController/TouchController?style=logo=github-square&color=F7E672)](https://github.com/TouchController/TouchController/issues) [![TC WIKI](https://img.shields.io/static/v1?label=TC%20WIKI&message=Online&color=F08B95)](https://wiki.touchcontroller.fifthlight.top/) [![MC 百科](https://img.shields.io/badge/MC_%E7%99%BE%E7%A7%91-blue?style=&color=ae94ff)](https://www.mcmod.cn/class/17432.html)
+[![Modrinth](https://img.shields.io/modrinth/dt/touchcontroller?style=&logo=modrinth&color=008833)](https://modrinth.com/mod/touchcontroller) [![Issues](https://img.shields.io/github/issues/TouchController/TouchController?style=logo=github-square&color=F7E672)](https://github.com/TouchController/TouchController/issues) [![TC WIKI](https://img.shields.io/static/v1?label=TC%20WIKI&message=Online&color=F08B95)](https://wiki.touchcontroller.fifthlight.top/) [![MC 百科](https://img.shields.io/badge/MC_%E7%99%BE%E7%A7%91-blue?style=&color=ae94ff)](https://www.mcmod.cn/class/17432.html)
 </div>
 
 ## 下载与安装
