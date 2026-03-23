@@ -15,5 +15,6 @@ merge_library_group(
         "//touchcontroller/common/control/serializer",
         "//touchcontroller/common/ui/chat/screen",
         "//touchcontroller/common/ui/config/tab/layout/provider:provider_impl",
+        "//touchcontroller/common/api",
     ],
 )

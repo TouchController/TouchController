@@ -1,0 +1,15 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "api",
+    srcs = glob(["*.kt"]),
+    visibility = ["//touchcontroller:__subpackages__"],
+    resources = glob(["resources/**"]),
+    resource_strip_prefix = "touchcontroller/common/api",
+    merge_deps = [
+        "//touchcontroller/common/api/text",
+    ],
+    deps = [
+        "//touchcontroller/api",
+    ],
+)

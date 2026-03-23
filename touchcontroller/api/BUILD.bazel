@@ -52,7 +52,7 @@ java_export(
     name = "api",
     srcs = glob(["**/*.java"]),
     coordinates = "top.fifthlight.touchcontroller:api:%s" % touchcontroller_api_version,
-    javacopts = ["--release=8"],
+    javacopts = ["--release=8", "-Xlint:-options"],
     resource_strip_prefix = "touchcontroller/api",
     resources = [
         ":fabric_mod_json",
