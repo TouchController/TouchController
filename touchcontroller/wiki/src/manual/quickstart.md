@@ -46,11 +46,7 @@
 
 #### 网址
 
-- <https://www.mcmod.cn/download/17432.html>
-- <https://modrinth.com/mod/touchcontroller/versions>
-- <https://www.curseforge.com/minecraft/mc-mods/touchcontroller/files/all?showAlphaFiles=show>
-- <https://github.com/TouchController/TouchController/releases>
-- <https://gitee.com/fifth_light/TouchController/releases>
+[MCMOD](https://www.mcmod.cn/download/17432.html) | [Modrinth](https://modrinth.com/mod/touchcontroller/versions) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/touchcontroller/files/all?showAlphaFiles=show) | [GitHub](https://github.com/TouchController/TouchController/releases) | [Gitee](https://gitee.com/fifth_light/TouchController/releases)
 
 #### 安装
 
