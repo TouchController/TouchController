@@ -44,14 +44,11 @@
 
 ### 从网站下载
 
-#### 网址
-
 [MCMOD](https://www.mcmod.cn/download/17432.html) | [Modrinth](https://modrinth.com/mod/touchcontroller/versions) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/touchcontroller/files/all?showAlphaFiles=show) | [GitHub](https://github.com/TouchController/TouchController/releases) | [Gitee](https://gitee.com/fifth_light/TouchController/releases)
 
-#### 安装
-
-1. 找到 mod 文件夹，一般在 `.minecraft/mods`，如果开启了版本隔离，mod 文件夹就在 `.minecraft/versions/<游戏版本名称>/mods`。
-2. 将下载的 TouchController 模组文件放进去，如果使用了 Fabric 版本，还需要安装 [Fabric API](https://modrinth.com/project/P7dR8mSH) 和 [Fabric Language Kotlin](https://modrinth.com/project/Ha28R6CL)。
+1. 从上述网站下载正确版本的 TouchController。
+2. 找到 mod 文件夹，一般在 `.minecraft/mods`，如果开启了版本隔离，mod 文件夹就在 `.minecraft/versions/<游戏版本名称>/mods`。
+3. 将下载的 TouchController 模组文件放进去，如果使用了 Fabric 版本，还需要安装 [Fabric API](https://modrinth.com/project/P7dR8mSH) 和 [Fabric Language Kotlin](https://modrinth.com/project/Ha28R6CL)。
 
 ## 游玩
 
