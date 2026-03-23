@@ -6,6 +6,7 @@ kt_merge_library(
     merge_deps = [
         "//touchcontroller/common/api/text",
         "//touchcontroller/common/control/action",
+        "//touchcontroller/common/gal/player",
     ],
     resource_strip_prefix = "touchcontroller/common/api/resources",
     resources = glob(["resources/**"]),

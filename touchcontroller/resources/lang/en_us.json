@@ -437,6 +437,7 @@
   "touchcontroller.widget.trigger.game_action.hide_hud": "Hide HUD",
   "touchcontroller.widget.trigger.player_action": "Player action",
   "touchcontroller.widget.trigger.player_action.type": "Action type",
+  "touchcontroller.widget.trigger.player_action.unknown": "Unknown",
   "touchcontroller.widget.trigger.player_action.cancel_flying": "Cancel flying",
   "touchcontroller.widget.trigger.player_action.start_sprint": "Start sprint",
   "touchcontroller.widget.trigger.player_action.stop_sprint": "Stop sprint",

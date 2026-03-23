@@ -14,6 +14,7 @@ import top.fifthlight.touchcontroller.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.GameActions
+import top.fifthlight.touchcontroller.common.control.action.PlayerActions
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonActiveTexture
@@ -283,8 +284,8 @@ data class BuiltinWidgets private constructor(
         grayOnClassic = true,
         swipeTrigger = false,
         action = ButtonTrigger(
-            down = WidgetTriggerAction.Player.StartSprint,
-            release = WidgetTriggerAction.Player.StopSprint,
+            down = WidgetTriggerAction.Player(PlayerActions.startSprint),
+            release = WidgetTriggerAction.Player(PlayerActions.stopSprint),
         ),
         name = Texts.WIDGET_SPRINT_BUTTON_NAME,
         align = Align.RIGHT_BOTTOM,

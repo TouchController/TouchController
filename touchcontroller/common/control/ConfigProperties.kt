@@ -35,13 +35,16 @@ import top.fifthlight.touchcontroller.assets.TextureSet
 import top.fifthlight.touchcontroller.assets.Textures
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.GameActions
+import top.fifthlight.touchcontroller.common.control.action.PlayerActions
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandler
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandlerFactory
 import top.fifthlight.touchcontroller.common.layout.align.Align
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
-import top.fifthlight.touchcontroller.common.ui.widget.*
+import top.fifthlight.touchcontroller.common.ui.widget.ListButton
+import top.fifthlight.touchcontroller.common.ui.widget.Scaffold
+import top.fifthlight.touchcontroller.common.ui.widget.TabButton
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.AppBar
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.BackButton
 
@@ -948,7 +951,7 @@ class TriggerActionProperty<Config : ControllerWidget>(
                                 },
                                 Pair(Text.translatable(WidgetTriggerAction.Type.PLAYER.nameId)) {
                                     if (value !is WidgetTriggerAction.Player) {
-                                        onConfigChanged(setValue(config, WidgetTriggerAction.Player.StartSprint))
+                                        onConfigChanged(setValue(config, WidgetTriggerAction.Player(PlayerActions.startSprint)))
                                     }
                                 },
                                 Pair(Text.translatable(WidgetTriggerAction.Type.LAYER_CONDITION.nameId)) {
@@ -1102,15 +1105,16 @@ class TriggerActionProperty<Config : ControllerWidget>(
                                 DropdownItemList(
                                     modifier = Modifier.verticalScroll(),
                                     onItemSelected = { expanded = false },
-                                    items = WidgetTriggerAction.Player.all.map {
-                                        Pair(Text.translatable(it.nameId)) {
-                                            onConfigChanged(setValue(config, it))
+                                    items = PlayerActions.registry.mapNotNull { action ->
+                                        if (action.hidden) return@mapNotNull null
+                                        Pair(action.name) {
+                                            onConfigChanged(setValue(config, WidgetTriggerAction.Player(action)))
                                         }
                                     }.toPersistentList()
                                 )
                             }
                         ) {
-                            Text(Text.translatable(value.nameId))
+                            Text(value.action.name)
                             SelectIcon(expanded = expanded)
                         }
                     }

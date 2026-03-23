@@ -437,6 +437,7 @@
   "touchcontroller.widget.trigger.game_action.hide_hud": "隐藏 HUD",
   "touchcontroller.widget.trigger.player_action": "玩家操作",
   "touchcontroller.widget.trigger.player_action.type": "操作类型",
+  "touchcontroller.widget.trigger.player_action.unknown": "未知",
   "touchcontroller.widget.trigger.player_action.cancel_flying": "停止飞行",
   "touchcontroller.widget.trigger.player_action.start_sprint": "开始疾跑",
   "touchcontroller.widget.trigger.player_action.stop_sprint": "停止疾跑",

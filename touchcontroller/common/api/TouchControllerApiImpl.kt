@@ -21,6 +21,8 @@ import top.fifthlight.touchcontroller.common.api.text.ApiTextFactory
 import top.fifthlight.touchcontroller.common.api.text.text
 import top.fifthlight.touchcontroller.common.control.action.GameActionInstanceImpl
 import top.fifthlight.touchcontroller.common.control.action.GameActions
+import top.fifthlight.touchcontroller.common.control.action.PlayerActionInstanceImpl
+import top.fifthlight.touchcontroller.common.control.action.PlayerActions
 import java.util.function.Consumer
 
 class TouchControllerApiImpl : TouchControllerApi {
@@ -38,10 +40,11 @@ class TouchControllerApiImpl : TouchControllerApi {
     override fun registerPlayerAction(
         id: String,
         name: Text,
-        action: PlayerAction
-    ): PlayerActionInstance {
-        TODO("Not yet implemented")
-    }
+        action: PlayerAction,
+    ): PlayerActionInstance = PlayerActionInstanceImpl(
+        name = name.text,
+        action = { action.action(it) },
+    ).also { PlayerActions.registry.register(id, it) }
 
     override fun getBuiltInWidgetTextureProvider(): BuiltInWidgetTextureProvider {
         TODO("Not yet implemented")

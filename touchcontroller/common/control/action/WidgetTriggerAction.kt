@@ -5,17 +5,13 @@
 
 package top.fifthlight.touchcontroller.common.control.action
 
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import top.fifthlight.combine.data.Identifier
 import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.common.control.action.provider.ChatScreenProvider
-import top.fifthlight.touchcontroller.common.gal.player.PlayerHandle
-import top.fifthlight.touchcontroller.common.gal.action.GameAction
-import top.fifthlight.touchcontroller.common.gal.action.GameActionFactory
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandler
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandlerFactory
+import top.fifthlight.touchcontroller.common.gal.player.PlayerHandle
 import top.fifthlight.touchcontroller.common.model.ControllerHudModel
 import kotlin.uuid.Uuid
 
@@ -129,57 +125,13 @@ sealed class WidgetTriggerAction {
 
     @Serializable
     @SerialName("player")
-    sealed class Player : WidgetTriggerAction() {
+    data class Player(
+        val action: PlayerActionInstanceImpl,
+    ) : WidgetTriggerAction() {
         override val actionType
             get() = Type.PLAYER
 
-        abstract val nameId: Identifier
-
-        final override fun trigger(uuid: Uuid, tick: Int, player: PlayerHandle) = trigger(player)
-        abstract fun trigger(player: PlayerHandle)
-
-        @Serializable
-        @SerialName("cancel_flying")
-        data object CancelFlying : Player() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_PLAYER_ACTION_CANCEL_FLYING
-
-            override fun trigger(player: PlayerHandle) {
-                player.isFlying = false
-            }
-        }
-
-        @Serializable
-        @SerialName("start_sprint")
-        data object StartSprint : Player() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_PLAYER_ACTION_START_SPRINT
-
-            override fun trigger(player: PlayerHandle) {
-                player.isSprinting = true
-            }
-        }
-
-        @Serializable
-        @SerialName("stop_sprint")
-        data object StopSprint : Player() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_PLAYER_ACTION_STOP_SPRINT
-
-            override fun trigger(player: PlayerHandle) {
-                player.isSprinting = false
-            }
-        }
-
-        companion object {
-            val all by lazy {
-                persistentListOf(
-                    CancelFlying,
-                    StartSprint,
-                    StopSprint,
-                )
-            }
-        }
+        override fun trigger(uuid: Uuid, tick: Int, player: PlayerHandle) = action(player)
     }
 
     @Serializable

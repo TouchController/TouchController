@@ -17,5 +17,8 @@ public class TouchControllerApiExample implements TouchControllerApiEntrypoint {
     public void preTouchControllerInitialize(TouchControllerApi api) {
         var gameActionName = api.getTextFactory().literal("Example game action");
         api.registerGameAction("touchcontroller-api-example:example", gameActionName, () -> logger.info("Game action triggered"));
+
+        var playerActionName = api.getTextFactory().literal("Example player action");
+        api.registerPlayerAction("touchcontroller-api-example:example", playerActionName, player -> logger.info("Player action triggered"));
     }
 }
