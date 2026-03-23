@@ -282,6 +282,7 @@
   "touchcontroller.screen.item_list.inventory.offhand": "Вторая рука",
 
   "touchcontroller.screen.component_list.title": "Список предметов",
+
   "touchcontroller.screen.component_list.search_placeholder": "Найти...",
   "touchcontroller.screen.component_list.remove": "Убрать >",
   "touchcontroller.screen.component_list.add": "Добавить +",

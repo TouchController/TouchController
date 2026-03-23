@@ -282,6 +282,7 @@
   "touchcontroller.screen.item_list.inventory.offhand": "Другорядна рука",
 
   "touchcontroller.screen.component_list.title": "Список компонентів",
+
   "touchcontroller.screen.component_list.search_placeholder": "Пошук…",
   "touchcontroller.screen.component_list.remove": "Видалити >",
   "touchcontroller.screen.component_list.add": "Додати +",

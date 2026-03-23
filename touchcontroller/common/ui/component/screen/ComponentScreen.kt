@@ -17,6 +17,7 @@ import top.fifthlight.combine.modifier.Modifier
 import top.fifthlight.combine.modifier.drawing.border
 import top.fifthlight.combine.modifier.placement.*
 import top.fifthlight.combine.modifier.scroll.verticalScroll
+import top.fifthlight.combine.widget.layout.Box
 import top.fifthlight.combine.widget.layout.Column
 import top.fifthlight.combine.widget.layout.Row
 import top.fifthlight.combine.widget.ui.EditText
@@ -25,6 +26,7 @@ import top.fifthlight.combine.widget.ui.IconButton
 import top.fifthlight.combine.widget.ui.Text
 import top.fifthlight.touchcontroller.assets.Texts
 import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.common.gal.gamestate.GameState
 import top.fifthlight.touchcontroller.common.gal.item.ItemDataComponentType
 import top.fifthlight.touchcontroller.common.gal.item.ItemDataComponentTypeProviderFactory
 import top.fifthlight.touchcontroller.common.ui.widget.*
@@ -59,95 +61,31 @@ class ComponentScreen(
                 )
             },
         ) { modifier ->
-            Row(modifier) {
-                val items by screenModel.value.collectAsState()
-                Column(
-                    modifier = Modifier
-                        .padding(2)
-                        .verticalScroll()
-                        .border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                        .fillMaxHeight()
-                        .weight(1f),
-                ) {
-                    for ((index, item) in items.withIndex()) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(IntrinsicSize.Min),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .border(LocalTouchControllerTheme.current.listButtonDrawablesUnchecked.normal)
-                                    .weight(1f)
-                                    .fillMaxHeight(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4),
-                            ) {
-                                val items = remember(item) { item.allItems }
-                                ItemShower(items = items)
-                                Text(
-                                    modifier = Modifier.weight(1f),
-                                    text = item.id.toString()
-                                )
-                            }
-
-                            IconButton(
-                                modifier = Modifier.fillMaxHeight(),
-                                onClick = { screenModel.removeItem(index) },
-                            ) {
-                                Icon(Textures.icon_delete)
-                            }
-                        }
-                    }
-                }
-                Column(
-                    modifier = Modifier
-                        .padding(4)
-                        .border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                        .fillMaxHeight()
-                        .weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4),
-                ) {
-                    var searchText by remember { mutableStateOf("") }
-
-                    EditText(
-                        modifier = Modifier.fillMaxWidth(),
-                        placeholder = Text.translatable(Texts.SCREEN_COMPONENT_LIST_SEARCH_PLACEHOLDER),
-                        value = searchText,
-                        onValueChanged = { searchText = it }
-                    )
-
+            if (GameState.inGame) {
+                Row(modifier) {
+                    val items by screenModel.value.collectAsState()
                     Column(
                         modifier = Modifier
+                            .padding(2)
                             .verticalScroll()
-                            .weight(1f)
-                            .fillMaxWidth(),
+                            .border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                            .fillMaxHeight()
+                            .weight(1f),
                     ) {
-                        val dataComponentTypes =
-                            remember(Unit) { ItemDataComponentTypeProviderFactory.of().allComponents }
-                        val showingTypes = remember(dataComponentTypes, searchText, items) {
-                            dataComponentTypes.filter {
-                                if (it in items) {
-                                    return@filter false
-                                }
-                                if (searchText.isNotEmpty() && !it.id.toString()
-                                        .contains(searchText, ignoreCase = true)
-                                ) {
-                                    return@filter false
-                                }
-                                true
-                            }.toPersistentList()
-                        }
-                        for (item in showingTypes) {
-                            ListButton(
-                                modifier = Modifier.fillMaxWidth(),
-                                onClick = { screenModel.addItem(item) },
+                        for ((index, item) in items.withIndex()) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(IntrinsicSize.Min),
+                                verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(4),
+                                    modifier = Modifier
+                                        .border(LocalTouchControllerTheme.current.listButtonDrawablesUnchecked.normal)
+                                        .weight(1f)
+                                        .fillMaxHeight(),
                                     verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(4),
                                 ) {
                                     val items = remember(item) { item.allItems }
                                     ItemShower(items = items)
@@ -155,11 +93,86 @@ class ComponentScreen(
                                         modifier = Modifier.weight(1f),
                                         text = item.id.toString()
                                     )
-                                    Text(Text.translatable(Texts.SCREEN_COMPONENT_LIST_ADD))
+                                }
+
+                                IconButton(
+                                    modifier = Modifier.fillMaxHeight(),
+                                    onClick = { screenModel.removeItem(index) },
+                                ) {
+                                    Icon(Textures.icon_delete)
                                 }
                             }
                         }
                     }
+                    Column(
+                        modifier = Modifier
+                            .padding(4)
+                            .border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                            .fillMaxHeight()
+                            .weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(4),
+                    ) {
+                        var searchText by remember { mutableStateOf("") }
+
+                        EditText(
+                            modifier = Modifier.fillMaxWidth(),
+                            placeholder = Text.translatable(Texts.SCREEN_COMPONENT_LIST_SEARCH_PLACEHOLDER),
+                            value = searchText,
+                            onValueChanged = { searchText = it }
+                        )
+
+                        Column(
+                            modifier = Modifier
+                                .verticalScroll()
+                                .weight(1f)
+                                .fillMaxWidth(),
+                        ) {
+                            val dataComponentTypes =
+                                remember(Unit) { ItemDataComponentTypeProviderFactory.of().allComponents }
+                            val showingTypes = remember(dataComponentTypes, searchText, items) {
+                                dataComponentTypes.filter {
+                                    if (it in items) {
+                                        return@filter false
+                                    }
+                                    if (searchText.isNotEmpty() && !it.id.toString()
+                                            .contains(searchText, ignoreCase = true)
+                                    ) {
+                                        return@filter false
+                                    }
+                                    true
+                                }.toPersistentList()
+                            }
+                            for (item in showingTypes) {
+                                ListButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    onClick = { screenModel.addItem(item) },
+                                ) {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.spacedBy(4),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                    ) {
+                                        val items = remember(item) { item.allItems }
+                                        ItemShower(items = items)
+                                        Text(
+                                            modifier = Modifier.weight(1f),
+                                            text = item.id.toString()
+                                        )
+                                        Text(Text.translatable(Texts.SCREEN_COMPONENT_LIST_ADD))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                Box(
+                    modifier = Modifier
+                        .border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                        .fillMaxSize(),
+                    alignment = Alignment.Center,
+                ) {
+                    Text(Text.translatable(Texts.SCREEN_COMPONENT_LIST_WARNING_NOT_IN_GAME))
                 }
             }
         }

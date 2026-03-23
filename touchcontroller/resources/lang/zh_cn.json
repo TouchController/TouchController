@@ -267,7 +267,7 @@
   "touchcontroller.screen.config.item.edit.title": "编辑",
 
   "touchcontroller.screen.item_list.title": "物品列表",
-  "touchcontroller.screen.item_list.warning_not_in_game": "请先进入游戏内，才能选择物品",
+  "touchcontroller.screen.item_list.warning_not_in_game": "游戏外无法加载物品列表，请先进入游戏",
   "touchcontroller.screen.item_list.content": "物品列表显示内容",
   "touchcontroller.screen.item_list.default": "默认物品表",
   "touchcontroller.screen.item_list.jei_items": "JEI 物品表",
@@ -282,6 +282,7 @@
   "touchcontroller.screen.item_list.inventory.offhand": "副手",
 
   "touchcontroller.screen.component_list.title": "组件列表",
+  "touchcontroller.screen.component_list.warning_not_in_game": "游戏外无法加载组件列表，请先进入游戏",
   "touchcontroller.screen.component_list.search_placeholder": "搜索…",
   "touchcontroller.screen.component_list.remove": "移除 >",
   "touchcontroller.screen.component_list.add": "添加 +",

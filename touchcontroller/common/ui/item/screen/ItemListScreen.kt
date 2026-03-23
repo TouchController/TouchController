@@ -31,6 +31,7 @@ import top.fifthlight.combine.widget.ui.IconButton
 import top.fifthlight.combine.widget.ui.Text
 import top.fifthlight.touchcontroller.assets.Texts
 import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.common.gal.gamestate.GameState
 import top.fifthlight.touchcontroller.common.ui.widget.*
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.AppBar
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.BackButton
@@ -56,53 +57,64 @@ class ItemListScreen(
                 )
             },
         ) { modifier ->
-            Row(modifier) {
-                Column(
-                    modifier = Modifier
-                        .padding(2)
-                        .verticalScroll()
-                        .border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                        .fillMaxHeight()
-                        .weight(.4f),
-                ) {
-                    val items by screenModel.value.collectAsState()
-                    for ((index, item) in items.withIndex()) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(IntrinsicSize.Min),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
+            if (GameState.inGame) {
+                Row(modifier) {
+                    Column(
+                        modifier = Modifier
+                            .padding(2)
+                            .verticalScroll()
+                            .border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                            .fillMaxHeight()
+                            .weight(.4f),
+                    ) {
+                        val items by screenModel.value.collectAsState()
+                        for ((index, item) in items.withIndex()) {
                             Row(
                                 modifier = Modifier
-                                    .border(LocalTouchControllerTheme.current.listButtonDrawablesUnchecked.normal)
-                                    .weight(1f)
-                                    .fillMaxHeight(),
+                                    .fillMaxWidth()
+                                    .height(IntrinsicSize.Min),
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4),
                             ) {
-                                Item(item = item)
-                                Text(
-                                    modifier = Modifier.weight(1f),
-                                    text = item.toStack().name,
-                                )
-                            }
+                                Row(
+                                    modifier = Modifier
+                                        .border(LocalTouchControllerTheme.current.listButtonDrawablesUnchecked.normal)
+                                        .weight(1f)
+                                        .fillMaxHeight(),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(4),
+                                ) {
+                                    Item(item = item)
+                                    Text(
+                                        modifier = Modifier.weight(1f),
+                                        text = item.toStack().name,
+                                    )
+                                }
 
-                            IconButton(
-                                modifier = Modifier.fillMaxHeight(),
-                                onClick = { screenModel.removeItem(index) },
-                            ) {
-                                Icon(Textures.icon_delete)
+                                IconButton(
+                                    modifier = Modifier.fillMaxHeight(),
+                                    onClick = { screenModel.removeItem(index) },
+                                ) {
+                                    Icon(Textures.icon_delete)
+                                }
                             }
                         }
                     }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .weight(.6f),
+                    ) {
+                        ItemChooser(screenModel::addItem)
+                    }
                 }
+            } else {
                 Box(
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .weight(.6f),
+                        .border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                        .fillMaxSize(),
+                    alignment = Alignment.Center,
                 ) {
-                    ItemChooser(screenModel::addItem)
+                    Text(Text.translatable(Texts.SCREEN_ITEM_LIST_WARNING_NOT_IN_GAME))
                 }
             }
         }

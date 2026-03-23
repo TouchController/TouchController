@@ -4,6 +4,7 @@ kt_merge_library(
     name = "screen",
     srcs = glob(["*.kt"]),
     merge_deps = [
+        "//touchcontroller/common/gal/gamestate",
         "//touchcontroller/common/gal/item",
         "//touchcontroller/common/ui/component/model",
         "//touchcontroller/common/ui/model",

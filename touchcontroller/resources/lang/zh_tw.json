@@ -282,6 +282,7 @@
   "touchcontroller.screen.item_list.inventory.offhand": "副手",
 
   "touchcontroller.screen.component_list.title": "元件列表",
+
   "touchcontroller.screen.component_list.search_placeholder": "搜尋…",
   "touchcontroller.screen.component_list.remove": "移除 >",
   "touchcontroller.screen.component_list.add": "新增 +",

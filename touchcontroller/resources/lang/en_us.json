@@ -282,6 +282,7 @@
   "touchcontroller.screen.item_list.inventory.offhand": "Offhand",
 
   "touchcontroller.screen.component_list.title": "Component list",
+  "touchcontroller.screen.component_list.warning_not_in_game": "Enter the game first to choose component",
   "touchcontroller.screen.component_list.search_placeholder": "Search...",
   "touchcontroller.screen.component_list.remove": "Remove >",
   "touchcontroller.screen.component_list.add": "Add +",
