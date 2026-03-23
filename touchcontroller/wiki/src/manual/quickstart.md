@@ -22,7 +22,7 @@
 ## 支持平台
 
 - Windows（版本最低为 Windows 7，支持 x86、x86_64 和 ARM64 架构）
-- BlazeSDL
+- [BlazeSDL](https://modrinth.com/project/QDgSARKw)
 - Linux Wayland（没有触控模拟鼠标支持，建议使用 BlazeSDL）
 - [Fold Craft Launcher](https://github.com/FCL-Team/FoldCraftLauncher)
 - [Zalith Launcher](https://github.com/ZalithLauncher/ZalithLauncher)
