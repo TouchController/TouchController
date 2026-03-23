@@ -427,6 +427,7 @@
   "touchcontroller.widget.trigger.key.lock_type.invert": "反转",
   "touchcontroller.widget.trigger.game_action": "游戏操作",
   "touchcontroller.widget.trigger.game_action.type": "操作类型",
+  "touchcontroller.widget.trigger.game_action.unknown": "未知",
   "touchcontroller.widget.trigger.game_action.vanilla_chat_screen": "原版聊天界面",
   "touchcontroller.widget.trigger.game_action.chat_screen": "聊天界面",
   "touchcontroller.widget.trigger.game_action.game_menu": "游戏菜单",

@@ -1,7 +1,7 @@
 load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("@rules_java//java:defs.bzl", "java_binary", "java_library")
 load("//touchcontroller:properties.bzl", "touchcontroller_api_license")
-load("@rules_java//java:defs.bzl", "java_library", "java_binary")
 
 expand_template(
     name = "fabric_mod_json",
@@ -29,6 +29,7 @@ java_library(
     ],
     deps = [
         "//game/26.1:game_client",
+        "//game/26.1:game_client_libraries",
         "//touchcontroller/api",
         "@maven_fabric_26_1//:net_fabricmc_fabric_loader",
     ],
@@ -70,5 +71,3 @@ java_binary(
         "@maven_fabric_26_1//:net_fabricmc_sponge_mixin",
     ],
 )
-
-

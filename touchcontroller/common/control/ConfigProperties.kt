@@ -34,6 +34,7 @@ import top.fifthlight.touchcontroller.assets.Texts
 import top.fifthlight.touchcontroller.assets.TextureSet
 import top.fifthlight.touchcontroller.assets.Textures
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
+import top.fifthlight.touchcontroller.common.control.action.GameActions
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandler
@@ -942,7 +943,7 @@ class TriggerActionProperty<Config : ControllerWidget>(
                                 },
                                 Pair(Text.translatable(WidgetTriggerAction.Type.GAME.nameId)) {
                                     if (value !is WidgetTriggerAction.Game) {
-                                        onConfigChanged(setValue(config, WidgetTriggerAction.Game.GameMenu))
+                                        onConfigChanged(setValue(config, WidgetTriggerAction.Game(GameActions.gameMenu)))
                                     }
                                 },
                                 Pair(Text.translatable(WidgetTriggerAction.Type.PLAYER.nameId)) {
@@ -1069,15 +1070,16 @@ class TriggerActionProperty<Config : ControllerWidget>(
                                 DropdownItemList(
                                     modifier = Modifier.verticalScroll(),
                                     onItemSelected = { expanded = false },
-                                    items = WidgetTriggerAction.Game.all.map {
-                                        Pair(Text.translatable(it.nameId)) {
-                                            onConfigChanged(setValue(config, it))
+                                    items = GameActions.registry.mapNotNull { action ->
+                                        if (action.hidden) return null
+                                        Pair(action.name) {
+                                            onConfigChanged(setValue(config, WidgetTriggerAction.Game(action)))
                                         }
                                     }.toPersistentList()
                                 )
                             }
                         ) {
-                            Text(Text.translatable(value.nameId))
+                            Text(value.action.name)
                             SelectIcon(expanded = expanded)
                         }
                     }

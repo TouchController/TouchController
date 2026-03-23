@@ -427,6 +427,7 @@
   "touchcontroller.widget.trigger.key.lock_type.invert": "Инвертирование",
   "touchcontroller.widget.trigger.game_action": "Игровое действие",
   "touchcontroller.widget.trigger.game_action.type": "Тип действия",
+
   "touchcontroller.widget.trigger.game_action.vanilla_chat_screen": "Ванильный экран чата",
   "touchcontroller.widget.trigger.game_action.chat_screen": "Экран чата",
   "touchcontroller.widget.trigger.game_action.game_menu": "Игровое меню",

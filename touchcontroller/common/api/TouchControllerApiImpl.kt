@@ -18,6 +18,9 @@ import top.fifthlight.touchcontroller.api.v1.widget.WidgetTexture
 import top.fifthlight.touchcontroller.api.v1.widget.WidgetTextureBuilder
 import top.fifthlight.touchcontroller.api.v1.widget.WidgetTriggerActionProvider
 import top.fifthlight.touchcontroller.common.api.text.ApiTextFactory
+import top.fifthlight.touchcontroller.common.api.text.text
+import top.fifthlight.touchcontroller.common.control.action.GameActionInstanceImpl
+import top.fifthlight.touchcontroller.common.control.action.GameActions
 import java.util.function.Consumer
 
 class TouchControllerApiImpl : TouchControllerApi {
@@ -27,9 +30,10 @@ class TouchControllerApiImpl : TouchControllerApi {
         id: String,
         name: Text,
         action: GameAction
-    ): GameActionInstance {
-        TODO("Not yet implemented")
-    }
+    ): GameActionInstance = GameActionInstanceImpl(
+        name = name.text,
+        action = action
+    ).also { GameActions.registry.register(id, it) }
 
     override fun registerPlayerAction(
         id: String,

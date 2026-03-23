@@ -427,6 +427,7 @@
   "touchcontroller.widget.trigger.key.lock_type.invert": "Invert",
   "touchcontroller.widget.trigger.game_action": "Game action",
   "touchcontroller.widget.trigger.game_action.type": "Action type",
+  "touchcontroller.widget.trigger.game_action.unknown": "Unknown",
   "touchcontroller.widget.trigger.game_action.vanilla_chat_screen": "Vanilla chat screen",
   "touchcontroller.widget.trigger.game_action.chat_screen": "Chat screen",
   "touchcontroller.widget.trigger.game_action.game_menu": "Game menu",

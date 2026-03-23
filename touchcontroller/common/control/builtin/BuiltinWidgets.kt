@@ -13,6 +13,7 @@ import top.fifthlight.touchcontroller.assets.Texts
 import top.fifthlight.touchcontroller.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
+import top.fifthlight.touchcontroller.common.control.action.GameActions
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonActiveTexture
@@ -339,7 +340,7 @@ data class BuiltinWidgets private constructor(
         grayOnClassic = true,
         swipeTrigger = false,
         action = ButtonTrigger(
-            down = WidgetTriggerAction.Game.ChatScreen,
+            down = WidgetTriggerAction.Game(GameActions.chatScreen),
         ),
         name = Texts.WIDGET_CHAT_BUTTON_NAME,
         align = Align.CENTER_TOP,
@@ -351,7 +352,7 @@ data class BuiltinWidgets private constructor(
         grayOnClassic = true,
         swipeTrigger = false,
         action = ButtonTrigger(
-            down = WidgetTriggerAction.Game.VanillaChatScreen,
+            down = WidgetTriggerAction.Game(GameActions.vanillaChatScreen),
         ),
         name = Texts.WIDGET_CHAT_BUTTON_NAME,
         align = Align.CENTER_TOP,
@@ -363,7 +364,7 @@ data class BuiltinWidgets private constructor(
         grayOnClassic = true,
         swipeTrigger = false,
         action = ButtonTrigger(
-            down = WidgetTriggerAction.Game.GameMenu,
+            down = WidgetTriggerAction.Game(GameActions.gameMenu),
         ),
         name = Texts.WIDGET_PAUSE_BUTTON_NAME,
         align = Align.CENTER_TOP,
@@ -375,7 +376,7 @@ data class BuiltinWidgets private constructor(
         grayOnClassic = true,
         swipeTrigger = false,
         action = ButtonTrigger(
-            down = WidgetTriggerAction.Game.HideHud,
+            down = WidgetTriggerAction.Game(GameActions.hideHud),
         ),
         name = Texts.WIDGET_HIDE_HUD_BUTTON_NAME,
         align = Align.CENTER_TOP,
@@ -387,7 +388,7 @@ data class BuiltinWidgets private constructor(
         grayOnClassic = true,
         swipeTrigger = false,
         action = ButtonTrigger(
-            down = WidgetTriggerAction.Game.NextPerspective,
+            down = WidgetTriggerAction.Game(GameActions.nextPerspective),
         ),
         name = Texts.WIDGET_PERSPECTIVE_SWITCH_BUTTON_NAME,
         align = Align.CENTER_TOP,
@@ -411,7 +412,7 @@ data class BuiltinWidgets private constructor(
         grayOnClassic = true,
         swipeTrigger = false,
         action = ButtonTrigger(
-            down = WidgetTriggerAction.Game.TakeScreenshot,
+            down = WidgetTriggerAction.Game(GameActions.takeScreenshot),
         ),
         name = Texts.WIDGET_SCREENSHOT_BUTTON_NAME,
         align = Align.CENTER_TOP,

@@ -118,107 +118,13 @@ sealed class WidgetTriggerAction {
 
     @Serializable
     @SerialName("game")
-    sealed class Game : WidgetTriggerAction() {
+    data class Game(
+        val action: GameActionInstanceImpl,
+    ) : WidgetTriggerAction() {
         override val actionType
             get() = Type.GAME
 
-        final override fun trigger(uuid: Uuid, tick: Int, player: PlayerHandle) = trigger(gameAction)
-        abstract fun trigger(gameAction: GameAction)
-
-        abstract val nameId: Identifier
-
-        @Serializable
-        @SerialName("vanilla_chat")
-        data object VanillaChatScreen : Game() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_GAME_ACTION_VANILLA_CHAT_SCREEN
-
-            override fun trigger(gameAction: GameAction) {
-                gameAction.openChatScreen()
-            }
-        }
-
-        @Serializable
-        @SerialName("chat")
-        data object ChatScreen : Game() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_GAME_ACTION_CHAT_SCREEN
-
-            override fun trigger(gameAction: GameAction) {
-                ChatScreenProvider.openChatScreen()
-            }
-        }
-
-        @Serializable
-        @SerialName("game_menu")
-        data object GameMenu : Game() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_GAME_ACTION_GAME_MENU
-
-            override fun trigger(gameAction: GameAction) {
-                gameAction.openGameMenu()
-            }
-        }
-
-        @Serializable
-        @SerialName("next_perspective")
-        data object NextPerspective : Game() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_GAME_ACTION_NEXT_PERSPECTIVE
-
-            override fun trigger(gameAction: GameAction) {
-                gameAction.nextPerspective()
-            }
-        }
-
-        @Serializable
-        @SerialName("take_screenshot")
-        data object TakeScreenshot : Game() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_GAME_ACTION_TAKE_SCREENSHOT
-
-            override fun trigger(gameAction: GameAction) {
-                gameAction.takeScreenshot()
-            }
-        }
-
-        @Serializable
-        @SerialName("take_panorama")
-        data object TakePanorama : Game() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_GAME_ACTION_TAKE_PANORAMA
-
-            override fun trigger(gameAction: GameAction) {
-                gameAction.takePanorama()
-            }
-        }
-
-        @Serializable
-        @SerialName("hide_hud")
-        data object HideHud : Game() {
-            override val nameId: Identifier
-                get() = Texts.WIDGET_TRIGGER_GAME_ACTION_HIDE_HUD
-
-            override fun trigger(gameAction: GameAction) {
-                gameAction.hudHidden = !gameAction.hudHidden
-            }
-        }
-
-        companion object {
-            private val gameAction: GameAction = GameActionFactory.of()
-
-            val all by lazy {
-                persistentListOf(
-                    VanillaChatScreen,
-                    ChatScreen,
-                    GameMenu,
-                    NextPerspective,
-                    TakeScreenshot,
-                    TakePanorama,
-                    HideHud,
-                )
-            }
-        }
+        override fun trigger(uuid: Uuid, tick: Int, player: PlayerHandle) = action()
     }
 
     @Serializable

@@ -14,12 +14,14 @@ kt_merge_library(
         "//touchcontroller/common/layout/data",
         "//touchcontroller/common/layout/widget/button",
         "//touchcontroller/common/model",
+        "//touchcontroller/common/util/registry",
         "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//:kotlin_serialization",
         "//combine/core/data",
+        "//touchcontroller/api",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],
 )
