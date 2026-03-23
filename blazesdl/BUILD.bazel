@@ -53,6 +53,7 @@ fabric_merge_jij(
     name = "blazesdl",
     input = ":blazesdl_unmerged",
     deps = {
+        "//blazesdl/api": "blazesdl-api:=",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl": "org_lwjgl_lwjgl_sdl:3.4.1",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows": "org_lwjgl_lwjgl_sdl_natives_windows:3.4.1",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_x86": "org_lwjgl_lwjgl_sdl_natives_windows_x86:3.4.1",
