@@ -14,6 +14,7 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.resources.Identifier
 import org.lwjgl.glfw.GLFW
 import top.fifthlight.combine.data.TextFactoryFactory
+import top.fifthlight.combine.data.TextStyle
 import top.fifthlight.combine.layout.Alignment
 import top.fifthlight.combine.layout.Arrangement
 import top.fifthlight.combine.modifier.Modifier
@@ -27,7 +28,6 @@ import top.fifthlight.combine.theme.blackstone.BlackstoneTheme
 import top.fifthlight.combine.theme.invoke
 import top.fifthlight.combine.theme.oreui.OreUITheme
 import top.fifthlight.combine.theme.vanilla.VanillaTheme
-import top.fifthlight.combine.ui.style.TextStyle
 import top.fifthlight.combine.widget.layout.Box
 import top.fifthlight.combine.widget.layout.Column
 import top.fifthlight.combine.widget.layout.Row

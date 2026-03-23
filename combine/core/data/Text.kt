@@ -28,7 +28,14 @@ data class TextStyle(
     val underline: Boolean = false,
     val italic: Boolean = false,
     val color: TextColor? = null,
-)
+) {
+    val haveStyle: Boolean
+        get() = bold || underline || italic || color != null
+
+    companion object {
+        val default = TextStyle()
+    }
+}
 
 interface TextBuilder {
     fun bold(bold: Boolean = true, block: TextBuilder.() -> Unit)
@@ -45,8 +52,10 @@ interface TextFactory {
     fun build(block: TextBuilder.() -> Unit): Text
     fun literal(string: String): Text
     fun of(identifier: Identifier): Text
+    fun of(id: String): Text
     fun empty(): Text
     fun format(identifier: Identifier, vararg arguments: Any?): Text
+    fun format(id: String, vararg arguments: Any?): Text
     fun toNative(text: Text): Any
 
     @ExpectFactory
@@ -54,10 +63,7 @@ interface TextFactory {
         fun of(): TextFactory
     }
 
-    companion object {
-        val current: TextFactory
-            get() = TextFactoryFactory.of()
-    }
+    companion object : TextFactory by TextFactoryFactory.of()
 }
 
 interface Text {
@@ -73,28 +79,27 @@ interface Text {
     operator fun plus(other: Text): Text
 
     @Composable
-    fun native(): Any = TextFactory.current.toNative(this)
+    fun native(): Any = TextFactory.toNative(this)
 
     companion object {
-        fun translatable(identifier: Identifier) = TextFactory.current.of(identifier)
+        fun translatable(identifier: Identifier) = TextFactory.of(identifier)
 
         fun format(identifier: Identifier, vararg arguments: Any?): Text {
-            val factory = TextFactory.current
             val outArguments = Array(arguments.size) { index ->
                 val item = arguments[index]
                 if (item is Text) {
-                    factory.toNative(item)
+                    TextFactory.toNative(item)
                 } else {
                     item
                 }
             }
-            return factory.format(identifier, *outArguments)
+            return TextFactory.format(identifier, *outArguments)
         }
 
-        fun empty() = TextFactory.current.empty()
+        fun empty() = TextFactory.empty()
 
-        fun literal(string: String) = TextFactory.current.literal(string)
+        fun literal(string: String) = TextFactory.literal(string)
 
-        fun build(block: TextBuilder.() -> Unit) = TextFactory.current.build(block)
+        fun build(block: TextBuilder.() -> Unit) = TextFactory.build(block)
     }
 }

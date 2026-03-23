@@ -46,7 +46,6 @@ fun EditText(
     placeholder: Text? = null,
 ) {
     val clipboard = LocalClipboard.current
-    val textFactory: TextFactory = TextFactory.current
     val inputManager = LocalInputHandler.current
     var textInputState by remember { mutableStateOf(TextInputState(value)) }
 
@@ -301,7 +300,7 @@ fun EditText(
             }
 
             // 构建富文本（处理预编辑文本的下划线）
-            val styledText = textFactory.build {
+            val styledText = TextFactory.build {
                 if (textInputState.composition != TextRange.EMPTY) {
                     val beforeComposition = fullText.take(textInputState.composition.start)
                     val compositionText = fullText.substring(textInputState.composition)

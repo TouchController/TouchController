@@ -64,7 +64,7 @@ fun <Config : ControllerWidget, Value> ControllerWidget.Property<Config, Value>.
     setValue = { config, value -> setValue(config, setInt(getValue(config), value)) },
     range = range,
     messageFormatter = {
-        Text.format(Texts.SCREEN_CONFIG_VALUE, TextFactory.current.toNative(name), it.toString())
+        Text.format(Texts.SCREEN_CONFIG_VALUE, TextFactory.toNative(name), it.toString())
     },
 )
 
@@ -100,7 +100,7 @@ fun <Config : ControllerWidget, Value> ControllerWidget.Property<Config, Value>.
     messageFormatter = {
         Text.format(
             Texts.SCREEN_CONFIG_PERCENT,
-            TextFactory.current.toNative(name),
+            TextFactory.toNative(name),
             (it * 100).toInt().toString()
         )
     },

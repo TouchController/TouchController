@@ -3,11 +3,11 @@ package top.fifthlight.combine.widget.ui
 import androidx.compose.runtime.Composable
 import top.fifthlight.combine.data.Text
 import top.fifthlight.combine.data.TextFactory
+import top.fifthlight.combine.data.TextStyle
 import top.fifthlight.combine.modifier.Modifier
 import top.fifthlight.combine.paint.Color
 import top.fifthlight.combine.ui.style.LocalColorTheme
 import top.fifthlight.combine.ui.style.LocalTextStyle
-import top.fifthlight.combine.ui.style.TextStyle
 import top.fifthlight.combine.widget.BaseText
 
 @Composable
@@ -17,11 +17,9 @@ fun Text(
     color: Color = LocalColorTheme.current.foreground,
     textStyle: TextStyle = LocalTextStyle.current,
 ) {
-    val textFactory: TextFactory = TextFactory.current
     if (textStyle.haveStyle) {
-        val text = textStyle.applyOnString(textFactory, text)
         BaseText(
-            text = text,
+            text = TextFactory.build { style(textStyle) { append(text) } },
             modifier = modifier,
             color = color,
         )
@@ -41,11 +39,9 @@ fun Text(
     color: Color = LocalColorTheme.current.foreground,
     textStyle: TextStyle = LocalTextStyle.current,
 ) {
-    val textFactory: TextFactory = TextFactory.current
     if (textStyle.haveStyle) {
-        val text = textStyle.applyOnText(textFactory, text)
         BaseText(
-            text = text,
+            text = text.style(textStyle),
             modifier = modifier,
             color = color,
         )

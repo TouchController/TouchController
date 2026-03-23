@@ -26,12 +26,18 @@ object TextFactoryImpl : TextFactory {
 
     override fun of(identifier: Identifier) = TextImpl(Component.translatable(transformIdentifier(identifier)))
 
+    override fun of(id: String) = TextImpl(Component.translatable(id))
+
     override fun empty() = TextImpl.EMPTY
 
     // Why Kotlin infer it as Array<Any>? It should be inferred as Array<Any?>
     @Suppress("UNCHECKED_CAST")
     override fun format(identifier: Identifier, vararg arguments: Any?) =
         TextImpl(Component.translatable(transformIdentifier(identifier), *(arguments as Array<out Any>)))
+
+    @Suppress("UNCHECKED_CAST")
+    override fun format(id: String, vararg arguments: Any?): CombineText =
+        TextImpl(Component.translatable(id, *(arguments as Array<out Any>)))
 
     override fun toNative(text: CombineText): Any = (text as TextImpl).inner
 }

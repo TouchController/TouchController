@@ -2,12 +2,12 @@ package top.fifthlight.combine.widget.ui
 
 import androidx.compose.runtime.Composable
 import top.fifthlight.combine.data.Text
+import top.fifthlight.combine.data.TextStyle
 import top.fifthlight.combine.modifier.Modifier
 import top.fifthlight.combine.modifier.pointer.clickable
 import top.fifthlight.combine.paint.Color
 import top.fifthlight.combine.paint.Colors
 import top.fifthlight.combine.ui.style.LocalTextStyle
-import top.fifthlight.combine.ui.style.TextStyle
 
 @Composable
 fun Link(
