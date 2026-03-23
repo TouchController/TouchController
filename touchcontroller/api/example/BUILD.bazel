@@ -1,0 +1,74 @@
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("//touchcontroller:properties.bzl", "touchcontroller_api_license")
+load("@rules_java//java:defs.bzl", "java_library", "java_binary")
+
+expand_template(
+    name = "fabric_mod_json",
+    out = "fabric.mod.json",
+    substitutions = {
+        "${license}": touchcontroller_api_license,
+    },
+    template = "resources/fabric.mod.json",
+)
+
+copy_file(
+    name = "icon",
+    src = "//touchcontroller/resources/texture:icon",
+    out = "icon.png",
+    is_executable = False,
+)
+
+java_library(
+    name = "example",
+    srcs = glob(["*.java"]),
+    resource_strip_prefix = "touchcontroller/api/example",
+    resources = [
+        ":fabric_mod_json",
+        ":icon",
+    ],
+    deps = [
+        "//game/26.1:game_client",
+        "//touchcontroller/api",
+        "@maven_fabric_26_1//:net_fabricmc_fabric_loader",
+    ],
+)
+
+java_binary(
+    name = "dev_client",
+    srcs = [],
+    data = [
+        "//game/26.1:game_client_assets",
+        "//game/26.1:game_client_assets_version",
+    ],
+    env = {
+        "LANG": "en_US.UTF8",
+    },
+    jvm_flags = [
+        "-Dfabric.development=true",
+        "-Ddev.launch.version=26.1-rc-2",
+        "-Ddev.launch.type=client",
+        "-Ddev.launch.assetsVersion=$(rlocationpath //game/26.1:game_client_assets_version)",
+        "-Ddev.launch.mainClass=net.fabricmc.loader.impl.launch.knot.KnotClient",
+        "-Xmx4G",
+    ] + select({
+        "@platforms//os:macos": ["-XstartOnFirstThread"],
+        "//conditions:default": [],
+    }),
+    main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
+    runtime_deps = [
+        "//game/26.1:game_client",
+        "//game/26.1:game_client_libraries",
+        # Classpath separator
+        ":example",
+        "//touchcontroller/versions/fabric/26.1:fabric_unmerged",
+        "//combine/backend/minecraft/fabric/26.1:fabric_merged",
+        "//rule/dev_launch_wrapper",
+        "@maven_fabric_26_1//:io_github_llamalad7_mixinextras_fabric",
+        "@maven_fabric_26_1//:net_fabricmc_fabric_language_kotlin",
+        "@maven_fabric_26_1//:net_fabricmc_fabric_loader",
+        "@maven_fabric_26_1//:net_fabricmc_sponge_mixin",
+    ],
+)
+
+

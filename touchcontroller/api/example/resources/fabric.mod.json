@@ -1,0 +1,14 @@
+{
+    "schemaVersion": 1,
+    "id": "touchcontroller-api-example",
+    "version": "0.0.1",
+    "name": "TouchController API Example",
+    "description": "Example for TouchController API.",
+    "authors": ["fifth_light"],
+    "license": "${license}",
+    "icon": "icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "touchcontroller-v1": ["top.fifthlight.touchcontroller.api.example.TouchControllerApiExample"]
+    }
+}
