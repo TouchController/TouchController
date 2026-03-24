@@ -4,3 +4,4 @@ bazel-*
 .*wb
 external
 compile_commands.json
+.claude

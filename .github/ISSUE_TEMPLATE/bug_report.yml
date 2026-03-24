@@ -1,0 +1,83 @@
+name: Bug 报告
+description: 报告您发现的 BUG
+title: "[Bug]: "
+type: bug
+body:
+    - type: markdown
+      attributes:
+          value: "# Bug 报告"
+    - type: checkboxes
+      id: bug_check
+      attributes:
+          label: 检查项
+          description: 在报告前，请确认以下内容：
+          options:
+              - label: 此 bug 未被报告过（可以在[这里](https://github.com/TouchController/TouchController/issues?q=is%3Aissue%20type%3ABug)进行搜索）
+                required: true
+              - label: 此 bug 的修复不在 [Pull Requests](https://github.com/TouchController/TouchController/pulls) 中
+                required: true
+              - label: 我已将对应项目更新到最新版本
+                required: true
+    - type: dropdown
+      id: bug_project
+      attributes:
+          label: 项目
+          description: 出现问题的对应项目
+          options:
+              - TouchController
+              - Combine
+              - BlazeRod
+              - ArmorStand
+              - AuthProxy
+              - BlazeSDL
+              - PathFlow
+              - FastMerger
+              - rules_mc
+          default: 0
+      validations:
+          required: true
+    - type: dropdown
+      id: bug_os
+      attributes:
+          label: 操作系统
+          description: 您使用的操作系统，如果选择其它，请在下文中说明
+          options:
+              - Windows
+              - Linux
+              - macOS
+              - Android
+              - iOS
+              - 其它
+          default: 0
+      validations:
+          required: true
+    - type: input
+      id: bug_version
+      attributes:
+          label: 版本
+          description: 发现此 bug 时使用的项目版本，若涉及，还需提供Minecraft 版本、模组加载器名称及其版本
+          placeholder: 版本：vx.x.x；Minecraft版本：x.x.x；模组加载器：***，版本：***
+      validations:
+          required: true
+    - type: textarea
+      id: bug_reproducer
+      attributes:
+          label: 复现流程
+          description: 请简要陈述如何触发这一个 bug
+          placeholder: |
+              1. xxx
+              2. xxx
+              3. xxx
+      validations:
+          required: true
+    - type: upload
+      id: bug_log
+      attributes:
+          label: 日志
+          description: 上传日志（Minecraft 日志一般存在于游戏目录中的 `logs` 目录）。
+          accept: .log,.txt,.gz
+      validations:
+          required: true
+    - type: markdown
+      attributes:
+          value: "### 感谢您对 TouchController 的支持！"
