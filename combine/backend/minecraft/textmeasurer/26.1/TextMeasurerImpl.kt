@@ -24,12 +24,14 @@ object TextMeasurerImpl : TextMeasurer {
         height = textRenderer.wordWrapHeight(text, Int.MAX_VALUE),
     )
 
-    private fun measure(text: FormattedText, maxWidth: Int) = IntSize(
-        width = textRenderer.split(text, maxWidth)
-            .maxOfOrNull { textRenderer.width(it) }
-            ?.coerceIn(0, maxWidth) ?: 0,
-        height = textRenderer.wordWrapHeight(text, maxWidth),
-    )
+    private fun measure(text: FormattedText, maxWidth: Int) = maxWidth.coerceAtLeast(0).let { maxWidth ->
+        IntSize(
+            width = textRenderer.split(text, maxWidth)
+                .maxOfOrNull { textRenderer.width(it) }
+                ?.coerceIn(0, maxWidth) ?: 0,
+            height = textRenderer.wordWrapHeight(text, maxWidth),
+        )
+    }
 
     override fun measure(text: String) = measure(Component.literal(text))
 

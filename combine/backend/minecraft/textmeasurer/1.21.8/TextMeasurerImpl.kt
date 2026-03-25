@@ -23,22 +23,26 @@ object TextMeasurerImpl : TextMeasurer {
         height = textRenderer.wordWrapHeight(text, Int.MAX_VALUE),
     )
 
-    override fun measure(text: String, maxWidth: Int) = IntSize(
-        width = textRenderer.split(Component.literal(text), maxWidth)
-            .maxOfOrNull { textRenderer.width(it) }
-            ?.coerceIn(0, maxWidth) ?: 0,
-        height = textRenderer.wordWrapHeight(text, maxWidth),
-    )
+    override fun measure(text: String, maxWidth: Int) = maxWidth.coerceAtLeast(0).let { maxWidth ->
+        IntSize(
+            width = textRenderer.split(Component.literal(text), maxWidth)
+                .maxOfOrNull { textRenderer.width(it) }
+                ?.coerceIn(0, maxWidth) ?: 0,
+            height = textRenderer.wordWrapHeight(text, maxWidth),
+        )
+    }
 
     override fun measure(text: Text) = IntSize(
         width = textRenderer.split(text.toMinecraft(), Int.MAX_VALUE).maxOfOrNull { textRenderer.width(it) } ?: 0,
         height = textRenderer.wordWrapHeight(text.toMinecraft(), Int.MAX_VALUE),
     )
 
-    override fun measure(text: Text, maxWidth: Int) = IntSize(
-        width = textRenderer.split(text.toMinecraft(), maxWidth)
-            .maxOfOrNull { textRenderer.width(it) }
-            ?.coerceIn(0, maxWidth) ?: 0,
-        height = textRenderer.wordWrapHeight(text.toMinecraft(), maxWidth),
-    )
+    override fun measure(text: Text, maxWidth: Int) = maxWidth.coerceAtLeast(0).let { maxWidth ->
+        IntSize(
+            width = textRenderer.split(text.toMinecraft(), maxWidth)
+                .maxOfOrNull { textRenderer.width(it) }
+                ?.coerceIn(0, maxWidth) ?: 0,
+            height = textRenderer.wordWrapHeight(text.toMinecraft(), maxWidth),
+        )
+    }
 }
