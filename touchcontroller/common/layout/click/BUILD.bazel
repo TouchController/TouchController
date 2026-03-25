@@ -3,6 +3,5 @@ load("//rule:merge_library.bzl", "kt_merge_library")
 kt_merge_library(
     name = "click",
     srcs = glob(["*.kt"]),
-    kotlinc_opts = "//touchcontroller/common:kotlinc_opts",
     visibility = ["//touchcontroller:__subpackages__"],
 )

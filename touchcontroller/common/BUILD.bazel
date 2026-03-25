@@ -1,11 +1,4 @@
-load("@rules_kotlin//kotlin:core.bzl", "kt_kotlinc_options")
 load("//rule:merge_library.bzl", "merge_library_group")
-
-kt_kotlinc_options(
-    name = "kotlinc_opts",
-    visibility = ["//touchcontroller:__subpackages__"],
-    x_optin = ["kotlin.uuid.ExperimentalUuidApi"],
-)
 
 merge_library_group(
     name = "common_runtime_deps",

@@ -3,14 +3,13 @@ load("//rule:merge_library.bzl", "kt_merge_library")
 kt_merge_library(
     name = "model",
     srcs = glob(["*.kt"]),
-    kotlinc_opts = "//touchcontroller/common:kotlinc_opts",
     merge_deps = [
-        "//touchcontroller/common/ui/config/tab/layout/custom/model",
-        "//touchcontroller/common/ui/config/tab/layout/custom/widgets/state",
-        "//touchcontroller/common/ui/model",
         "//touchcontroller/common/config/widget",
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/builtin",
+        "//touchcontroller/common/ui/config/tab/layout/custom/model",
+        "//touchcontroller/common/ui/config/tab/layout/custom/widgets/state",
+        "//touchcontroller/common/ui/model",
         "//touchcontroller/common/util/state",
         "//touchcontroller/resources/texture:texture_set_lib",
     ],

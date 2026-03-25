@@ -1,6 +1,6 @@
 load("@hedron_compile_commands//:refresh_compile_commands.bzl", "refresh_compile_commands")
 load("@rules_java//java:defs.bzl", "java_library", "java_plugin")
-load("@rules_kotlin//kotlin:core.bzl", "define_kt_toolchain", "kt_compiler_plugin")
+load("@rules_kotlin//kotlin:core.bzl", "define_kt_toolchain", "kt_compiler_plugin", "kt_kotlinc_options")
 load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
 
 refresh_compile_commands(
@@ -73,6 +73,12 @@ java_library(
     exports = ["@maven//:info_picocli_picocli"],
 )
 
+kt_kotlinc_options(
+    name = "kotlinc_opts",
+    x_lambdas = "indy",
+    x_optin = ["kotlin.uuid.ExperimentalUuidApi"],
+)
+
 define_kt_toolchain(
     name = "kotlin_toolchain",
     api_version = "2.2",
@@ -83,5 +89,6 @@ define_kt_toolchain(
     }),
     experimental_use_abi_jars = True,
     jvm_target = "21",
+    kotlinc_options = ":kotlinc_opts",
     language_version = "2.2",
 )

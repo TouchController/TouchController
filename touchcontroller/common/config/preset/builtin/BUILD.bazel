@@ -4,7 +4,6 @@ kt_merge_library(
     name = "builtin",
     srcs = glob(["**/*.kt"]),
     actual = True,
-    kotlinc_opts = "//touchcontroller/common:kotlinc_opts",
     merge_deps = [
         "//touchcontroller/common/config/condition",
         "//touchcontroller/common/config/condition/input",

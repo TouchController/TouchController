@@ -3,8 +3,10 @@ load("//rule:merge_library.bzl", "kt_merge_library")
 kt_merge_library(
     name = "presets",
     srcs = glob(["*.kt"]),
-    kotlinc_opts = "//touchcontroller/common:kotlinc_opts",
     merge_deps = [
+        "//touchcontroller/common/config/preset",
+        "//touchcontroller/common/config/preset/builtin/key",
+        "//touchcontroller/common/config/preset/info",
         "//touchcontroller/common/ui/config/tab/layout/custom/model",
         "//touchcontroller/common/ui/config/tab/layout/custom/presets/model",
         "//touchcontroller/common/ui/config/tab/layout/custom/presets/state",
@@ -14,9 +16,6 @@ kt_merge_library(
         "//touchcontroller/common/ui/model",
         "//touchcontroller/common/ui/theme",
         "//touchcontroller/common/ui/widget",
-        "//touchcontroller/common/config/preset",
-        "//touchcontroller/common/config/preset/builtin/key",
-        "//touchcontroller/common/config/preset/info",
         "//touchcontroller/resources/lang:text_binding",
         "//touchcontroller/resources/texture:texture_lib",
     ],

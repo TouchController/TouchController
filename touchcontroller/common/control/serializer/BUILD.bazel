@@ -4,7 +4,6 @@ kt_merge_library(
     name = "serializer",
     srcs = glob(["*.kt"]),
     actual = True,
-    kotlinc_opts = "//touchcontroller/common:kotlinc_opts",
     merge_deps = [
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/widget/boat",
