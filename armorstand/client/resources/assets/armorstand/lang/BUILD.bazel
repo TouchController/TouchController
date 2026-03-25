@@ -1,0 +1,9 @@
+load("//rule:text_resource_jar.bzl", "text_resource_jar")
+
+text_resource_jar(
+    name = "lang",
+    srcs = glob(["*.json"]),
+    format = "json",
+    resource_prefix = "assets/armorstand/lang",
+    visibility = ["//armorstand:__subpackages__"],
+)

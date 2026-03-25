@@ -39,6 +39,7 @@ kt_merge_library(
         "//armorstand/game:access_transformer",
         "//armorstand/main:main_resources",
         "//armorstand/client:client_resources",
+        "//armorstand/client/resources/assets/armorstand/lang",
     ],
     resource_strip_prefix = "armorstand/neoforge/resources",
     resources = glob(
@@ -54,8 +55,8 @@ kt_merge_library(
         "//game/1.21.8:game_client_neoforge",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
         "@neoforge_1_21_8//:net_neoforged_bus",
-        "@neoforge_1_21_8//:net_neoforged_mergetool",
         "@neoforge_1_21_8//:net_neoforged_fancymodloader_loader",
+        "@neoforge_1_21_8//:net_neoforged_mergetool",
     ],
 )
 

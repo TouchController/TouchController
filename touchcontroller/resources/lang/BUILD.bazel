@@ -1,5 +1,4 @@
-load("//rule:jar.bzl", "jar")
-load("//rule/touchcontroller:generate_legacy_text.bzl", "generate_legacy_text")
+load("//rule:text_resource_jar.bzl", "text_resource_jar")
 load("//rule/touchcontroller:text_binding.bzl", "kt_text_binding_lib")
 
 kt_text_binding_lib(
@@ -10,21 +9,18 @@ kt_text_binding_lib(
     visibility = ["//touchcontroller:__subpackages__"],
 )
 
-generate_legacy_text(
-    name = "legacy_text",
-    deps = glob(["*.json"]),
-)
-
-jar(
+text_resource_jar(
     name = "lang",
+    srcs = glob(["*.json"]),
+    format = "json",
     resource_prefix = "assets/touchcontroller/lang",
-    resources = glob(["*.json"]),
     visibility = ["//touchcontroller:__subpackages__"],
 )
 
-jar(
+text_resource_jar(
     name = "lang_legacy",
+    srcs = glob(["*.json"]),
+    format = "lang",
     resource_prefix = "assets/touchcontroller/lang",
-    resources = [":legacy_text"],
     visibility = ["//touchcontroller:__subpackages__"],
 )

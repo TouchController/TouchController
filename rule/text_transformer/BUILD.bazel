@@ -1,0 +1,13 @@
+load("@rules_java//java:defs.bzl", "java_binary")
+
+java_binary(
+    name = "text_transformer",
+    srcs = ["TextTransformer.java"],
+    main_class = "top.fifthlight.fabazel.texttransformer.TextTransformer",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:picocli",
+        "@maven//:com_fasterxml_jackson_core_jackson_core",
+        "@maven//:com_fasterxml_jackson_core_jackson_databind",
+    ],
+)

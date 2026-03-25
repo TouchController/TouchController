@@ -55,6 +55,7 @@ kt_merge_library(
         "//armorstand/game:access_widener",
         "//armorstand/main:main_resources",
         "//armorstand/client:client_resources",
+        "//armorstand/client/resources/assets/armorstand/lang",
     ],
     resource_strip_prefix = "armorstand/fabric/resources",
     resources = glob(
