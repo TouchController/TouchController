@@ -36,7 +36,7 @@
 
 - Added support for mods using Forge input events (like YSM)
 - Added Taiwan traditional chinese translation (LanYun2022)
-- Bet support for LWJGL3 on Forge 1.12.2 (Lessebq)
+- Added better support for LWJGL3 on Forge 1.12.2 (Lessebq)
 
 ## 0.2.1-beta14
 
