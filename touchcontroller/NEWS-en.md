@@ -3,6 +3,7 @@
 ## 0.3.1-alpha06
 
 - Synchronized the sneak trigger in classic extended texture set with classic texture set's trigger, which requires a double tap to sneak
+- Fixed an issue where DPad texture in built-in presets with classic extended texture set turns gray instead of use active texture when pressed
 
 ## 0.3.1-alpha05
 

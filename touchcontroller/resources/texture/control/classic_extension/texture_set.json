@@ -1,5 +1,5 @@
 {
-    "gray_when_active": true,
+    "gray_when_active": false,
     "classic": true,
     "base": "classic"
 }
