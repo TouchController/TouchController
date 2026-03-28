@@ -20,5 +20,9 @@ public class TouchControllerApiExample implements TouchControllerApiEntrypoint {
 
         var playerActionName = api.getTextFactory().literal("Example player action");
         api.registerPlayerAction("touchcontroller-api-example:example", playerActionName, player -> logger.info("Player action triggered"));
+
+        api.registerWidgetTexture(textureBuilder -> textureBuilder.id("touchcontroller-api-example:taichi")
+                .classic("touchcontroller_api_example", "classic_taichi", 18, 18)
+                .newStyle("touchcontroller_api_example", "new_taichi", 22, 22));
     }
 }
