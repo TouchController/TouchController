@@ -1,0 +1,25 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "1.21.10",
+    srcs = glob(["**/*.kt"]),
+    actual = True,
+    merge_deps = [
+        "//touchcontroller/common/ui/widget/raw",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:compose",
+        "//combine/backend/minecraft/identifier/1.21.10",
+        "//combine/backend/minecraft/render/1.21.10",
+        "//combine/core/data",
+        "//combine/core/layout/measure",
+        "//combine/core/modifier",
+        "//combine/core/node",
+        "//combine/core/paint",
+        "//combine/core/widget",
+        "//combine/data",
+        "//game/1.21.10:game_client_named",
+        "@maven//:androidx_compose_runtime_runtime_desktop",
+    ],
+)

@@ -1,0 +1,17 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "1.21.10",
+    srcs = glob(["*.kt"]),
+    merge_deps = [
+        "//touchcontroller/common/gal/key",
+        "//touchcontroller/versions/extension/1.21.10",
+    ],
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//combine/backend/minecraft/text/1.21.10",
+        "//combine/core/data",
+        "//game/1.21.10:game_client_named",
+        "//game/1.21.10:game_client_libraries",
+    ],
+)

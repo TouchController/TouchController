@@ -184,7 +184,7 @@ fabric_versions = {
         "mixin_extras": "0.5.0",
     },
     "1.21.10": {
-        "api": "0.134.1+1.21.10",
+        "api": "0.137.0+1.21.10",
         "loader": "0.17.2",
         "placeholder_api": "2.8.0+1.21.9",
         "modmenu": "16.0.0-rc.1",
