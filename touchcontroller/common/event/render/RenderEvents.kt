@@ -65,6 +65,13 @@ object RenderEvents {
 
         val config = GlobalConfigHolder.config.value
         if (config.status.status == StatusConfig.Status.DISABLED) {
+            touchStateModel.clearPointer()
+            val platform = PlatformProvider.platform
+            if (platform != null) {
+                while (true) {
+                    platform.pollEvent() ?: break
+                }
+            }
             return
         }
 
