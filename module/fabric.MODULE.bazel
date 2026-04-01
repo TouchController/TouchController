@@ -249,7 +249,7 @@ fabric_versions = {
         use_repo(maven, "maven_fabric_%s" % version.replace(".", "_")),
     )
     for version, entry in fabric_versions.items()
-    if entry.get("flavor", "modren") == "modren"
+    if entry.get("flavor", "modern") == "modern"
 ]
 
 [
@@ -276,7 +276,7 @@ fabric_versions = {
         use_repo(maven, "maven_fabric_%s" % version.replace(".", "_")),
     )
     for version, entry in fabric_versions.items()
-    if entry.get("flavor", "modren") == "legacy"
+    if entry.get("flavor", "modern") == "legacy"
 ]
 
 [
@@ -303,5 +303,5 @@ fabric_versions = {
         use_repo(maven, "maven_fabric_%s" % version.replace(".", "_")),
     )
     for version, entry in fabric_versions.items()
-    if entry.get("flavor", "modren") == "babric"
+    if entry.get("flavor", "modern") == "babric"
 ]
