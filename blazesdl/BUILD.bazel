@@ -8,7 +8,7 @@ load(":properties.bzl", "blazesdl_version")
 apply_access_widener(
     name = "game_access_widened",
     srcs = ["resources/blazesdl.classtweaker"],
-    input = "//game/26.1:game_client",
+    input = "//game/26.1.1:game_client",
     neverlink = True,
 )
 
@@ -28,7 +28,7 @@ java_library(
     resources = glob(["resources/**"]) + [":fabric_mod_json"],
     visibility = ["//visibility:public"],
     runtime_deps = [
-        "//game/26.1:game_client",
+        "//game/26.1.1:game_client",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm32",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm64",
@@ -41,7 +41,7 @@ java_library(
     deps = [
         ":game_access_widened",
         "//blazesdl/api",
-        "//game/26.1:game_client_libraries",
+        "//game/26.1.1:game_client_libraries",
         "@maven_blazesdl//:org_lwjgl_lwjgl",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl",
         "@maven_fabric_26_1//:io_github_llamalad7_mixinextras_fabric",
@@ -70,7 +70,7 @@ upload_modrinth(
     name = "upload_modrinth",
     file = ":blazesdl",
     file_name = "blazesdl-%s.jar" % blazesdl_version,
-    game_versions = ["26.1"],
+    game_versions = ["26.1.1"],
     loaders = ["fabric"],
     project_id = "QDgSARKw",
     token_secret_id = "modrinth_token",
@@ -83,8 +83,8 @@ java_binary(
     name = "dev_client",
     srcs = [],
     data = [
-        "//game/26.1:game_client_assets",
-        "//game/26.1:game_client_assets_version",
+        "//game/26.1.1:game_client_assets",
+        "//game/26.1.1:game_client_assets_version",
     ],
     env = {
         "LANG": "en_US.UTF8",
@@ -92,9 +92,9 @@ java_binary(
     jvm_flags = [
         "-Dkotlinx.coroutines.debug=on",
         "-Dfabric.development=true",
-        "-Ddev.launch.version=26.1",
+        "-Ddev.launch.version=26.1.1",
         "-Ddev.launch.type=client",
-        "-Ddev.launch.assetsVersion=$(rlocationpath //game/26.1:game_client_assets_version)",
+        "-Ddev.launch.assetsVersion=$(rlocationpath //game/26.1.1:game_client_assets_version)",
         "-Ddev.launch.mainClass=net.fabricmc.loader.impl.launch.knot.KnotClient",
         "-Xmx4G",
     ] + select({
@@ -103,8 +103,8 @@ java_binary(
     }),
     main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
     runtime_deps = [
-        "//game/26.1:game_client",
-        "//game/26.1:game_client_libraries",
+        "//game/26.1.1:game_client",
+        "//game/26.1.1:game_client_libraries",
         # Classpath separator
         ":blazesdl_unmerged",
         "//rule/dev_launch_wrapper",
