@@ -1,1 +1,1 @@
-blazesdl_version = "0.0.9"
+blazesdl_version = "0.0.10"
