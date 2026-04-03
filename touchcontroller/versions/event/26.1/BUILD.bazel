@@ -3,10 +3,10 @@ load("//rule:merge_library.bzl", "kt_merge_library")
 kt_merge_library(
     name = "26.1",
     srcs = glob(["**/*.kt"]),
-    merge_deps = [
+    visibility = ["//visibility:public"],
+    deps = [
+        "//game/26.1:game_client",
         "//touchcontroller/common/layout/data",
         "//touchcontroller/common/model",
     ],
-    visibility = ["//visibility:public"],
-    deps = ["//game/26.1:game_client"],
 )

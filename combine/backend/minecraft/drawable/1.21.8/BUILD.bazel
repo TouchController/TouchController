@@ -4,14 +4,12 @@ kt_merge_library(
     name = "1.21.8",
     srcs = glob(["*.kt"]),
     actual = True,
-    merge_deps = [
-        "//combine/data",
-        "//combine/style",
-        "//combine/theme/vanilla",
-    ],
     visibility = ["//visibility:public"],
     deps = [
         "//combine/backend/minecraft/game/1.21.8",
         "//combine/backend/minecraft/render/1.21.8",
+        "//combine/data",
+        "//combine/style",
+        "//combine/theme/vanilla",
     ],
 )

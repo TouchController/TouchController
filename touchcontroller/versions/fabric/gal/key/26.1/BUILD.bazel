@@ -5,12 +5,12 @@ kt_merge_library(
     srcs = glob(["*.kt"]),
     actual = True,
     merge_deps = [
-        "//touchcontroller/common/gal/key",
-        "//touchcontroller/versions/mixin/26.1",
         "//touchcontroller/versions/gal/key/26.1",
+        "//touchcontroller/versions/mixin/26.1",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//game/26.1:game_client",
+        "//touchcontroller/common/gal/key",
     ],
 )

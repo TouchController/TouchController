@@ -4,14 +4,12 @@ kt_merge_library(
     name = "1.21.11",
     srcs = glob(["*.kt"]),
     actual = True,
-    merge_deps = [
-        "//combine/core/data",
-        "//combine/item/data",
-    ],
     visibility = ["//visibility:public"],
     deps = [
         "//combine/backend/minecraft/game/1.21.11",
         "//combine/backend/minecraft/identifier/1.21.11",
         "//combine/backend/minecraft/text/1.21.11",
+        "//combine/core/data",
+        "//combine/item/data",
     ],
 )

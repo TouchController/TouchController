@@ -3,11 +3,9 @@ load("//rule:merge_library.bzl", "kt_merge_library")
 kt_merge_library(
     name = "1.21.8",
     srcs = ["KeyCodeMapping.kt"],
-    merge_deps = [
-        "//combine/core/input/key",
-    ],
     visibility = ["//visibility:public"],
     deps = [
+        "//combine/core/input/key",
         "//game/1.21.8:game_client_libraries",
     ],
 )

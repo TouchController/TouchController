@@ -4,12 +4,10 @@ kt_merge_library(
     name = "1.21.11",
     srcs = ["GameDispatcher.kt"],
     actual = True,
-    merge_deps = [
-        "//combine/core/util/dispatcher",
-    ],
     visibility = ["//visibility:public"],
     deps = [
         "//combine/backend/minecraft/game/1.21.11",
+        "//combine/core/util/dispatcher",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
     ],
 )

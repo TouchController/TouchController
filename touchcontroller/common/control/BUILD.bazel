@@ -1,4 +1,4 @@
-load("//rule:merge_library.bzl", "kt_merge_library")
+load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_group")
 
 kt_merge_library(
     name = "control",
@@ -37,5 +37,22 @@ kt_merge_library(
         "//combine/widget",
         "@maven//:androidx_compose_runtime_runtime_annotation_jvm",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
+    ],
+)
+
+merge_library_group(
+    name = "control_group",
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/common/control",
+        "//touchcontroller/common/control/action",
+        "//touchcontroller/common/control/action/provider",
+        "//touchcontroller/common/control/builtin",
+        "//touchcontroller/common/control/property",
+        "//touchcontroller/common/control/serializer",
+        "//touchcontroller/common/control/widget/boat",
+        "//touchcontroller/common/control/widget/custom",
+        "//touchcontroller/common/control/widget/dpad",
+        "//touchcontroller/common/control/widget/joystick",
     ],
 )

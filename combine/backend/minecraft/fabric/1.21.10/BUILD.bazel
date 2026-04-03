@@ -19,10 +19,8 @@ expand_template(
 )
 
 merge_library_jar(
-    name = "fabric_unmapped_merged",
-    manifest_entries = {
-        "Fabric-Loom-Mixin-Remap-Type": "static",
-    },
+    name = "fabric_unmapped",
+    aspects = ["//combine/backend/minecraft/fabric:fabric_unmerged"],
     resources = {
         ":fabric_mod_json": ".",
         "//combine/backend/minecraft/game/1.21.10:access_widener": "combine/backend/minecraft/game/1.21.10",
@@ -30,25 +28,22 @@ merge_library_jar(
     },
     visibility = ["//visibility:public"],
     deps = [
-        "//combine",
         "//combine/backend/minecraft/versions:1.21.10",
     ],
 )
 
 remap_jar(
-    name = "fabric_merged",
+    name = "fabric",
     classpath = ["//game/1.21.10:game_client_named"],
     from_namespace = "named",
-    inputs = [":fabric_unmapped_merged"],
+    inputs = [":fabric_unmapped"],
     mapping = "//game/1.21.10:game_merged_mapping",
     mixin = True,
     to_namespace = "intermediary",
-    visibility = ["//visibility:public"],
 )
 
-fabric_merge_jij(
-    name = "fabric",
-    input = ":fabric_merged",
+alias(
+    name = "1.21.10",
+    actual = ":fabric",
     visibility = ["//visibility:public"],
-    deps = combine_fabric_libraries,
 )

@@ -4,8 +4,8 @@ kt_merge_library(
     name = "26.1",
     srcs = glob(["*.kt"]),
     actual = True,
-    merge_deps = [
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
         "//touchcontroller/common/gal/feature",
     ],
-    visibility = ["//touchcontroller:__subpackages__"],
 )

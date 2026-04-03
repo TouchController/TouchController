@@ -1,4 +1,5 @@
 load("@rules_java//java:defs.bzl", "JavaInfo")
+load("//rule:merge_library.bzl", "MergeLibraryInfo")
 
 def _text_resource_jar_impl(ctx):
     output_jar = ctx.actions.declare_file(ctx.label.name + ".jar")
@@ -68,6 +69,7 @@ def _text_resource_jar_impl(ctx):
             output_jar = output_jar,
             compile_jar = output_jar,
         ),
+        MergeLibraryInfo(merge_jars = depset([output_jar])),
         DefaultInfo(files = depset([output_jar])),
     ]
 

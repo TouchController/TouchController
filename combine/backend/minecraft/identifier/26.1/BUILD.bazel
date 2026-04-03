@@ -3,11 +3,9 @@ load("//rule:merge_library.bzl", "kt_merge_library")
 kt_merge_library(
     name = "26.1",
     srcs = ["Identifier.kt"],
-    merge_deps = [
-        "//combine/core/data",
-    ],
     visibility = ["//visibility:public"],
     deps = [
         "//combine/backend/minecraft/game/26.1",
+        "//combine/core/data",
     ],
 )

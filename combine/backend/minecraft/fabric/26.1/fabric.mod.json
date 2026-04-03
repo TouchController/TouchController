@@ -1,8 +1,8 @@
 {
     "schemaVersion": 1,
-    "id": "combine",
+    "id": "combine-26-1",
     "version": "${version}",
-    "name": "Combine",
+    "name": "Combine 26.1 implementation",
     "description": "${description}",
     "authors": ["fifth_light"],
     "license": "${license}",
@@ -22,6 +22,7 @@
     "accessWidener": "combine.classtweaker",
     "custom": {
         "modmenu": {
+            "parent": "combine",
             "badges": ["library"]
         }
     }

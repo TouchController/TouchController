@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "touchcontroller",
+    "id": "touchcontroller-1-21-10",
     "version": "${version}",
     "name": "TouchController",
     "description": "${description}",

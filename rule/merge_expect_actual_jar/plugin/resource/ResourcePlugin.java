@@ -33,11 +33,12 @@ public class ResourcePlugin implements Plugin {
     private String stripResourcePath(String arg, String filePath) {
         var entryPath = filePath;
         if (currentStrip != null) {
-            if (!entryPath.startsWith(currentStrip)) {
-                throw new IllegalArgumentException("Invalid resource path: " + arg + ", not matching strip: " + currentStrip);
-            }
-            entryPath = entryPath.substring(currentStrip.length());
             entryPath = entryPath.replace('\\', '/');
+            var index = entryPath.indexOf(currentStrip);
+            if (index == -1) {
+                throw new IllegalArgumentException("Invalid resource path: " + entryPath + ", not matching strip: " + currentStrip);
+            }
+            entryPath = entryPath.substring(index + currentStrip.length());
             if (entryPath.startsWith("/")) {
                 entryPath = entryPath.substring(1);
             }

@@ -1,0 +1,64 @@
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("//combine:properties.bzl", "combine_fabric_libraries", "combine_version")
+load("//rule:merge_library.bzl", "merge_library_jar")
+load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
+load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+
+expand_template(
+    name = "fabric_mod_json",
+    out = "fabric.mod.json",
+    substitutions = {
+        "${version}": touchcontroller_version,
+        "${license}": touchcontroller_license,
+        "${home_page}": touchcontroller_homepage,
+        "${sources_page}": touchcontroller_source,
+        "${issue_tracker}": touchcontroller_issue_tracker,
+        "${description}": touchcontroller_description,
+        "${combine_version}": combine_version,
+        '"mod_authors_array"': json.encode(touchcontroller_authors),
+        '"mod_contributors_array"': json.encode(touchcontroller_contributors),
+    },
+    template = "resources/fabric.mod.json",
+)
+
+merge_library_jar(
+    name = "fabric_unmerged",
+    aspect = True,
+    aspect_class = "top.fifthlight.touchcontroller.AspectProvider",
+    resources = {
+        ":fabric_mod_json": "touchcontroller/fabric",
+    },
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/common",
+        "//touchcontroller/resources/lang",
+        "//touchcontroller/resources/texture:icon_jar",
+        "//touchcontroller/resources/texture:vanilla_pack",
+    ],
+)
+
+fabric_merge_jij(
+    name = "fabric",
+    input = ":fabric_unmerged",
+    visibility = ["//visibility:public"],
+    deps = {
+        "//touchcontroller/api": "touchcontroller-api:=",
+        "//combine/theme/blackstone:vanilla_lib": "combine-theme-blackstone:=",
+        "//combine/backend/minecraft/fabric:fabric_unmerged": "combine:=",
+        "//combine/backend/minecraft/fabric/1.21.10": "combine-1-21-10:=",
+        "//combine/backend/minecraft/fabric/1.21.11": "combine-1-21-11:=",
+        "//combine/backend/minecraft/fabric/26.1": "combine-26.1:=",
+        "//touchcontroller/versions/fabric/1.21.10": "touchcontroller-1-21-10:=",
+        "//touchcontroller/versions/fabric/1.21.11": "touchcontroller-1-21-11:=",
+        "//touchcontroller/versions/fabric/26.1": "touchcontroller-26.1:=",
+        "@maven//:androidx_compose_runtime_runtime_saveable_desktop": "androidx_compose_runtime_runtime_saveable_desktop:1.10.2",
+        "@maven//:androidx_savedstate_savedstate_desktop": "androidx_savedstate_savedstate_desktop:1.3.2",
+        "@maven//:androidx_savedstate_savedstate_compose_desktop": "androidx_savedstate_savedstate_compose_desktop:1.3.2",
+        "@maven//:androidx_lifecycle_lifecycle_common_jvm": "androidx_lifecycle_lifecycle_common_jvm:2.9.4",
+        "@maven//:androidx_lifecycle_lifecycle_runtime_compose_desktop": "androidx_lifecycle_lifecycle_runtime_compose_desktop:2.9.4",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm": "org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm:0.4.0",
+        "@maven//:cafe_adriel_voyager_voyager_core_desktop": "cafe_adriel_voyager_voyager_core_desktop:1.1.0-beta03",
+        "@maven//:cafe_adriel_voyager_voyager_navigator_desktop": "cafe_adriel_voyager_voyager_navigator_desktop:1.1.0-beta03",
+        "@maven//:cafe_adriel_voyager_voyager_screenmodel_desktop": "cafe_adriel_voyager_voyager_screenmodel_desktop:1.1.0-beta03",
+    } | combine_fabric_libraries,
+)

@@ -1,21 +1,5 @@
 load("//rule:merge_library.bzl", "merge_library_group")
 
-common_deps = [
-    "//combine/core/data",
-    "//combine/core/input/key",
-    "//combine/core/input/pointer",
-    "//combine/core/input/text",
-    "//combine/core/node",
-    "//combine/core/paint",
-    "//combine/core/screen",
-    "//combine/core/sound",
-    "//combine/data",
-    "//combine/item/data",
-    "//combine/item/paint",
-    "//combine/style",
-    "//combine/theme/vanilla",
-]
-
 merge_library_group(
     name = "1.21.8",
     visibility = ["//visibility:public"],
@@ -32,7 +16,7 @@ merge_library_group(
         "//combine/backend/minecraft/text/1.21.8",
         "//combine/backend/minecraft/textbuilder/1.21.8",
         "//combine/backend/minecraft/textmeasurer/1.21.8",
-    ] + common_deps,
+    ],
 )
 
 merge_library_group(
@@ -51,7 +35,7 @@ merge_library_group(
         "//combine/backend/minecraft/text/1.21.10",
         "//combine/backend/minecraft/textbuilder/1.21.10",
         "//combine/backend/minecraft/textmeasurer/1.21.10",
-    ] + common_deps,
+    ],
 )
 
 merge_library_group(
@@ -70,7 +54,7 @@ merge_library_group(
         "//combine/backend/minecraft/text/1.21.11",
         "//combine/backend/minecraft/textbuilder/1.21.11",
         "//combine/backend/minecraft/textmeasurer/1.21.11",
-    ] + common_deps,
+    ],
 )
 
 merge_library_group(
@@ -89,5 +73,5 @@ merge_library_group(
         "//combine/backend/minecraft/text/26.1",
         "//combine/backend/minecraft/textbuilder/26.1",
         "//combine/backend/minecraft/textmeasurer/26.1",
-    ] + common_deps,
+    ],
 )

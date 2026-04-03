@@ -7,7 +7,7 @@ load("@rules_kotlin//kotlin:jvm.bzl", _kt_jvm_library = "kt_jvm_library")
 load("@rules_kotlin//src/main/starlark/core/compile:common.bzl", _KtJvmInfo = "KtJvmInfo")
 load("//rule:merge_jar.bzl", "merge_jar_action")
 
-def _merge_library_info_init(*, merge_jars = [], merge_source_jars = [], deps = []):
+def _merge_library_info_init(*, merge_jars = depset([]), merge_source_jars = depset([]), deps = []):
     if type(merge_jars) != "depset":
         fail("merge_jars must be type of depset, but it is %s" % type(merge_jars))
     if type(merge_source_jars) != "depset":

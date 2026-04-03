@@ -4,9 +4,6 @@ kt_merge_library(
     name = "1.21.10",
     srcs = glob(["**/*.kt"]),
     actual = True,
-    merge_deps = [
-        "//touchcontroller/common/ui/widget/raw",
-    ],
     visibility = ["//visibility:public"],
     deps = [
         "//:compose",
@@ -20,6 +17,7 @@ kt_merge_library(
         "//combine/core/widget",
         "//combine/data",
         "//game/1.21.10:game_client_named",
+        "//touchcontroller/common/ui/widget/raw",
         "@maven//:androidx_compose_runtime_runtime_desktop",
     ],
 )

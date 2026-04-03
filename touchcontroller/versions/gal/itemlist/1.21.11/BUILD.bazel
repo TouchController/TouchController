@@ -5,8 +5,6 @@ kt_merge_library(
     srcs = glob(["*.kt"]),
     actual = True,
     merge_deps = [
-        "//touchcontroller/common/config/item",
-        "//touchcontroller/common/gal/itemlist",
         "//touchcontroller/versions/gal/item/1.21.11",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
@@ -14,6 +12,8 @@ kt_merge_library(
         "//combine/backend/minecraft/item/1.21.11",
         "//game/1.21.11:game_client_libraries",
         "//game/1.21.11:game_client_named",
+        "//touchcontroller/common/config/item",
+        "//touchcontroller/common/gal/itemlist",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],
 )

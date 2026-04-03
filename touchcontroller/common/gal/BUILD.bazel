@@ -1,0 +1,24 @@
+load("//rule:merge_library.bzl", "merge_library_group")
+
+merge_library_group(
+    name = "gal",
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/common/gal/action",
+        "//touchcontroller/common/gal/chat",
+        "//touchcontroller/common/gal/config",
+        "//touchcontroller/common/gal/creativetab",
+        "//touchcontroller/common/gal/entity",
+        "//touchcontroller/common/gal/feature",
+        "//touchcontroller/common/gal/gameconfig",
+        "//touchcontroller/common/gal/gamestate",
+        "//touchcontroller/common/gal/item",
+        "//touchcontroller/common/gal/itemlist",
+        "//touchcontroller/common/gal/key",
+        "//touchcontroller/common/gal/library",
+        "//touchcontroller/common/gal/paint",
+        "//touchcontroller/common/gal/player",
+        "//touchcontroller/common/gal/view",
+        "//touchcontroller/common/gal/window",
+    ],
+)

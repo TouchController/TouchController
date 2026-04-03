@@ -4,12 +4,10 @@ kt_merge_library(
     name = "1.21.11",
     srcs = glob(["*.kt"]),
     actual = True,
-    merge_deps = [
-        "//touchcontroller/buildinfo",
-        "//touchcontroller/common/gal/config",
-    ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
+        "//touchcontroller/buildinfo",
+        "//touchcontroller/common/gal/config",
         "@maven_fabric_1_21_11//:net_fabricmc_fabric_loader",
     ],
 )

@@ -82,7 +82,7 @@ kt_kotlinc_options(
 define_kt_toolchain(
     name = "kotlin_toolchain",
     api_version = "2.2",
-    #experimental_report_unused_deps = "error",
+    experimental_report_unused_deps = "error",
     experimental_strict_kotlin_deps = select({
         "@platforms//os:windows": "off",
         "//conditions:default": "error",

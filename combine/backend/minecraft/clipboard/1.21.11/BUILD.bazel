@@ -3,11 +3,9 @@ load("//rule:merge_library.bzl", "kt_merge_library")
 kt_merge_library(
     name = "1.21.11",
     srcs = ["ClipboardHandlerImpl.kt"],
-    merge_deps = [
-        "//combine/core/input/text",
-    ],
     visibility = ["//visibility:public"],
     deps = [
         "//combine/backend/minecraft/game/1.21.11",
+        "//combine/core/input/text",
     ],
 )

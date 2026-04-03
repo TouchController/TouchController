@@ -1,10 +1,9 @@
 load("@rules_java//java:java_binary.bzl", "java_binary")
 load("//combine:properties.bzl", "combine_fabric_libraries", "combine_version")
 load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_jar")
-load("//rule:upload_modrinth.bzl", "modrinth_dependency", "upload_modrinth")
 load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
 load("//rule/fabric:mod_json_jar.bzl", "fabric_mod_json_jar")
-load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_fabric_libraries", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
 fabric_mod_json_jar(
     name = "fabric_mod_json",
@@ -31,28 +30,12 @@ kt_merge_library(
     ]),
     actual = True,
     merge_deps = [
-        "//touchcontroller/buildinfo",
-        "//touchcontroller/common/api",
-        "//touchcontroller/common/config",
-        "//touchcontroller/common/config/data",
-        "//touchcontroller/common/config/holder",
-        "//touchcontroller/common/event/block",
-        "//touchcontroller/common/event/connection",
-        "//touchcontroller/common/event/key",
-        "//touchcontroller/common/event/render",
-        "//touchcontroller/common/event/tick",
-        "//touchcontroller/common/event/window",
-        "//touchcontroller/common/gal/key",
-        "//touchcontroller/common/layout/data",
-        "//touchcontroller/common/model",
-        "//touchcontroller/common/ui/config/screen",
         "//touchcontroller/versions/extension/26.1",
         "//touchcontroller/versions/fabric/gal/key/26.1",
         "//touchcontroller/versions/gal/gameconfig/26.1",
         "//touchcontroller/versions/gal/key/26.1",
     ],
     merge_runtime_deps = [
-        "//touchcontroller/common:common_runtime_deps",
         "//touchcontroller/resources/texture:vanilla_lib",
         "//touchcontroller/versions/fabric/gal/26.1",
         "//touchcontroller/versions/gal/26.1",
@@ -61,8 +44,6 @@ kt_merge_library(
     ],
     resource_jars = [
         ":fabric_mod_json",
-        "//touchcontroller/resources/texture:vanilla_pack",
-        "//touchcontroller/resources/lang",
         "//touchcontroller/resources/texture:icon_jar",
     ],
     resource_strip_prefix = "touchcontroller/versions/fabric/26.1/resources",
@@ -81,6 +62,21 @@ kt_merge_library(
         "//game/26.1:game_client",
         "//game/26.1:game_client_libraries",
         "//touchcontroller/api",
+        "//touchcontroller/buildinfo",
+        "//touchcontroller/common/api",
+        "//touchcontroller/common/config",
+        "//touchcontroller/common/config/data",
+        "//touchcontroller/common/config/holder",
+        "//touchcontroller/common/event/block",
+        "//touchcontroller/common/event/connection",
+        "//touchcontroller/common/event/key",
+        "//touchcontroller/common/event/render",
+        "//touchcontroller/common/event/tick",
+        "//touchcontroller/common/event/window",
+        "//touchcontroller/common/gal/key",
+        "//touchcontroller/common/layout/data",
+        "//touchcontroller/common/model",
+        "//touchcontroller/common/ui/config/screen",
         "@maven_fabric_26_1//:com_terraformersmc_modmenu",
         "@maven_fabric_26_1//:io_github_llamalad7_mixinextras_fabric",
         "@maven_fabric_26_1//:net_fabricmc_fabric_api_fabric_api",
@@ -94,22 +90,15 @@ kt_merge_library(
 )
 
 merge_library_jar(
-    name = "fabric_merged",
-    deps = [":fabric_unmerged"],
-)
-
-fabric_merge_jij(
     name = "fabric",
-    input = ":fabric_merged",
-    visibility = ["//visibility:public"],
-    deps = {
-        "//combine/backend/minecraft/fabric/26.1:fabric_merged": "combine:=",
-    } | touchcontroller_fabric_libraries | combine_fabric_libraries,
+    aspects = ["//touchcontroller/fabric:fabric_unmerged"],
+    deps = [":fabric_unmerged"],
 )
 
 alias(
     name = "26.1",
     actual = "fabric",
+    visibility = ["//touchcontroller:__subpackages__"],
 )
 
 java_binary(
@@ -146,45 +135,5 @@ java_binary(
         "@maven_fabric_26_1//:net_fabricmc_fabric_language_kotlin",
         "@maven_fabric_26_1//:net_fabricmc_fabric_loader",
         "@maven_fabric_26_1//:net_fabricmc_sponge_mixin",
-    ],
-)
-
-modrinth_dependency(
-    name = "fabric_api",
-    dependency_type = "required",
-    project_id = "P7dR8mSH",
-    version_id = "bzzYBd3m",
-)
-
-modrinth_dependency(
-    name = "fabric_language_kotlin",
-    dependency_type = "required",
-    project_id = "Ha28R6CL",
-    version_id = "ViT4gucI",
-)
-
-modrinth_dependency(
-    name = "modmenu",
-    dependency_type = "optional",
-    project_id = "mOgUt4GM",
-    version_id = "XIDyVLo7",
-)
-
-upload_modrinth(
-    name = "upload_modrinth",
-    changelog = "//touchcontroller:update_log",
-    file = ":fabric",
-    file_name = "TouchController-%s+fabric-%s.jar" % (touchcontroller_version, "26.1"),
-    game_versions = ["26.1"],
-    loaders = ["fabric"],
-    project_id = "U7KwGAnT",
-    token_secret_id = "modrinth_token",
-    version_id = "%s+fabric-%s" % (touchcontroller_version, "26.1"),
-    version_name = touchcontroller_version,
-    version_type = "alpha",
-    deps = [
-        ":fabric_api",
-        ":fabric_language_kotlin",
-        ":modmenu",
     ],
 )

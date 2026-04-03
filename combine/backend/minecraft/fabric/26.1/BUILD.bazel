@@ -18,23 +18,20 @@ expand_template(
 )
 
 merge_library_jar(
-    name = "fabric_merged",
+    name = "fabric",
+    aspects = ["//combine/backend/minecraft/fabric:fabric_unmerged"],
     resources = {
         ":fabric_mod_json": ".",
         "//combine/backend/minecraft/game/26.1:access_widener": "combine/backend/minecraft/game/26.1",
         "//combine/resources:icon": ".",
     },
-    visibility = ["//visibility:public"],
     deps = [
-        "//combine",
         "//combine/backend/minecraft/versions:26.1",
-        "//combine/item",
     ],
 )
 
-fabric_merge_jij(
-    name = "fabric",
-    input = ":fabric_merged",
+alias(
+    name = "26.1",
+    actual = ":fabric",
     visibility = ["//visibility:public"],
-    deps = combine_fabric_libraries,
 )

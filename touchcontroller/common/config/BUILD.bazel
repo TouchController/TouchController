@@ -1,4 +1,4 @@
-load("//rule:merge_library.bzl", "kt_merge_library")
+load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_group")
 
 kt_merge_library(
     name = "config",
@@ -14,5 +14,25 @@ kt_merge_library(
     deps = [
         "//:kotlin_serialization",
         "//combine/core/paint",
+    ],
+)
+
+merge_library_group(
+    name = "config_group",
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/common/config",
+        "//touchcontroller/common/config/condition",
+        "//touchcontroller/common/config/condition/input",
+        "//touchcontroller/common/config/data",
+        "//touchcontroller/common/config/holder",
+        "//touchcontroller/common/config/item",
+        "//touchcontroller/common/config/layout",
+        "//touchcontroller/common/config/platform",
+        "//touchcontroller/common/config/preset",
+        "//touchcontroller/common/config/preset/builtin",
+        "//touchcontroller/common/config/preset/builtin/key",
+        "//touchcontroller/common/config/preset/info",
+        "//touchcontroller/common/config/widget",
     ],
 )

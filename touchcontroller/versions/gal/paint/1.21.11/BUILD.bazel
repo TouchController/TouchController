@@ -4,18 +4,16 @@ kt_merge_library(
     name = "1.21.11",
     srcs = glob(["*.kt"]),
     actual = True,
-    merge_deps = [
-        "//touchcontroller/buildinfo",
-        "//touchcontroller/common/gal/paint",
-    ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//combine/backend/minecraft/identifier/1.21.11",
         "//combine/backend/minecraft/render/1.21.11",
-        "//combine/core/paint",
         "//combine/core/data",
+        "//combine/core/paint",
         "//combine/data",
-        "//game/1.21.11:game_client_named",
         "//game/1.21.11:game_client_libraries",
+        "//game/1.21.11:game_client_named",
+        "//touchcontroller/buildinfo",
+        "//touchcontroller/common/gal/paint",
     ],
 )

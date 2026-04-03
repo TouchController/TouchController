@@ -1,7 +1,7 @@
 """Rules for Minecraft-specific build targets."""
 
-load("@rules_java//java/common:java_info.bzl", "JavaInfo")
-load("//rule:merge_library.bzl", "kt_merge_library")
+load("@rules_java//java:defs.bzl", "JavaInfo")
+load("//rule:merge_library.bzl", "MergeLibraryInfo", "kt_merge_library")
 load("//rule/combine:texture.bzl", "TextureLibraryInfo")
 
 def _texture_to_arg(texture):
@@ -104,6 +104,7 @@ def _vanilla_pack_impl(ctx):
 
     return [
         DefaultInfo(files = depset([output_file])),
+        MergeLibraryInfo(merge_jars = depset([output_file])),
         VanillaPackInfo(
             namespace = ctx.attr.namespace,
             texture_lib = texture_info,

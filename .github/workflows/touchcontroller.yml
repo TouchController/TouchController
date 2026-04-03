@@ -10,7 +10,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest ]
-        game-version: [ "1.21.10", "1.21.11", "26.1" ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,9 +29,9 @@ jobs:
       - name: Setup Bazel
         uses: bazel-contrib/setup-bazel@0.14.0
       - name: Build
-        run: bazel build --verbose_failures --config=opt //touchcontroller/versions/fabric/${{ matrix.game-version }}
+        run: bazel build --verbose_failures --config=opt //touchcontroller/fabric
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: artifacts-${{ matrix.os }}-${{ matrix.game-version }}
-          path: bazel-bin/touchcontroller/versions/fabric/${{ matrix.game-version }}/fabric.jar
+          name: artifacts-${{ matrix.os }}
+          path: bazel-bin/touchcontroller/fabric/fabric.jar

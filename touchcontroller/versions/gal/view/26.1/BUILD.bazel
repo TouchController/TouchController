@@ -5,7 +5,6 @@ kt_merge_library(
     srcs = glob(["*.kt"]),
     actual = True,
     merge_deps = [
-        "//touchcontroller/common/gal/view",
         "//touchcontroller/versions/extension/26.1",
         "//touchcontroller/versions/gal/entity/26.1",
     ],
@@ -13,5 +12,6 @@ kt_merge_library(
     deps = [
         "//game/26.1:game_client",
         "//game/26.1:game_client_libraries",
+        "//touchcontroller/common/gal/view",
     ],
 )

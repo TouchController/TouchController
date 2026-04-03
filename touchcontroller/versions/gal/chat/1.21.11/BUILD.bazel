@@ -5,15 +5,15 @@ kt_merge_library(
     srcs = glob(["*.kt"]),
     actual = True,
     merge_deps = [
-        "//touchcontroller/common/gal/chat",
         "//touchcontroller/versions/extension/1.21.11",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//combine/backend/minecraft/text/1.21.11",
         "//combine/core/data",
-        "//game/1.21.11:game_client_named",
-        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
         "//game/1.21.11:game_client_libraries",
+        "//game/1.21.11:game_client_named",
+        "//touchcontroller/common/gal/chat",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],
 )

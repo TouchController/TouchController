@@ -1,8 +1,8 @@
 {
     "schemaVersion": 1,
-    "id": "combine",
+    "id": "combine-1-21-8",
     "version": "${version}",
-    "name": "Combine",
+    "name": "Combine 1.21.8 implementation",
     "description": "${description}",
     "authors": ["fifth_light"],
     "license": "${license}",
@@ -22,6 +22,7 @@
     "accessWidener": "combine.accesswidener",
     "custom": {
         "modmenu": {
+            "parent": "combine",
             "badges": ["library"]
         }
     }

@@ -1,0 +1,45 @@
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("//combine:properties.bzl", "combine_description", "combine_fabric_libraries", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
+load("//rule:merge_library.bzl", "merge_library_jar")
+load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
+
+expand_template(
+    name = "fabric_mod_json",
+    out = "fabric.mod.json",
+    substitutions = {
+        "${version}": combine_version,
+        "${license}": combine_license,
+        "${description}": combine_description,
+        "${home_page}": combine_home_page,
+        "${sources_page}": combine_sources_page,
+        "${issue_tracker}": combine_issue_tracker,
+    },
+    template = "resources/fabric.mod.json",
+)
+
+merge_library_jar(
+    name = "fabric_unmerged",
+    aspect = True,
+    aspect_class = "top.fifthlight.combine.AspectProvider",
+    resources = {
+        ":fabric_mod_json": "combine/backend/minecraft/fabric",
+        "//combine/resources:icon": ".",
+    },
+    visibility = ["//visibility:public"],
+    deps = [
+        "//combine",
+        "//combine/item",
+    ],
+)
+
+fabric_merge_jij(
+    name = "fabric",
+    input = ":fabric_unmerged",
+    visibility = ["//visibility:public"],
+    deps = {
+        "//combine/backend/minecraft/fabric/1.21.8": "combine-1-21-8:=",
+        "//combine/backend/minecraft/fabric/1.21.10": "combine-1-21-10:=",
+        "//combine/backend/minecraft/fabric/1.21.11": "combine-1-21-11:=",
+        "//combine/backend/minecraft/fabric/26.1": "combine-26.1:=",
+    } | combine_fabric_libraries,
+)

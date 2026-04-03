@@ -11,6 +11,11 @@ kt_merge_library(
         "//combine/backend/minecraft/render/26.1",
         "//combine/backend/minecraft/sound/26.1",
         "//combine/backend/minecraft/text/26.1",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:compose",
+        "//combine/backend/minecraft/game/26.1",
         "//combine/core/data",
         "//combine/core/input/key",
         "//combine/core/input/pointer",
@@ -19,11 +24,6 @@ kt_merge_library(
         "//combine/core/screen",
         "//combine/core/sound",
         "//combine/data",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        "//:compose",
-        "//combine/backend/minecraft/game/26.1",
         "//game/26.1:game_client_libraries",
     ],
 )

@@ -4,11 +4,9 @@ kt_merge_library(
     name = "1.21.10",
     srcs = glob(["*.kt"]),
     actual = True,
-    merge_deps = [
-        "//touchcontroller/common/gal/gamestate",
-    ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//game/1.21.10:game_client_named",
+        "//touchcontroller/common/gal/gamestate",
     ],
 )
