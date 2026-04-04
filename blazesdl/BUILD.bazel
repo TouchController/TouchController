@@ -70,7 +70,10 @@ upload_modrinth(
     name = "upload_modrinth",
     file = ":blazesdl",
     file_name = "blazesdl-%s.jar" % blazesdl_version,
-    game_versions = ["26.1.1"],
+    game_versions = [
+        "26.1",
+        "26.1.1",
+    ],
     loaders = ["fabric"],
     project_id = "QDgSARKw",
     token_secret_id = "modrinth_token",
