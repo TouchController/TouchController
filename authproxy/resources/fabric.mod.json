@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "authproxy",
-	"version": "${version}",
+	"version": "0.0.2",
 	"name": "Authproxy",
 	"description": "Make authlib use your proxy.",
 	"authors": ["fifth_light"],
