@@ -20,6 +20,10 @@ import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
 import top.fifthlight.touchcontroller.common.config.preset.builtin.key.BuiltinPresetKey
 import top.fifthlight.touchcontroller.common.control.*
 import top.fifthlight.touchcontroller.common.control.builtin.BuiltinWidgets
+import top.fifthlight.touchcontroller.common.control.builtin.BuiltinWidgets.dpadDismountButton
+import top.fifthlight.touchcontroller.common.control.builtin.BuiltinWidgets.dpadJumpButton
+import top.fifthlight.touchcontroller.common.control.builtin.BuiltinWidgets.dpadJumpButtonWithoutLocking
+import top.fifthlight.touchcontroller.common.control.builtin.BuiltinWidgets.dpadSneakButton
 import top.fifthlight.touchcontroller.common.control.widget.boat.BoatButton
 import top.fifthlight.touchcontroller.common.control.widget.boat.BoatButtonSide
 import top.fifthlight.touchcontroller.common.control.widget.dpad.DPad
@@ -73,21 +77,19 @@ data class BuiltinLayers private constructor(
         )
     }
 
-    private val widgets = BuiltinWidgets[textureSet]
-
     val controlLayer = LayoutLayer(
         name = "Control",
         conditions = layerConditionsOf(),
         widgets = persistentListOf(
-            widgets.pause.copy(
+            BuiltinWidgets.pause[textureSet].cloneBase(
                 align = Align.CENTER_TOP,
                 offset = IntOffset(-9, 0),
             ),
-            widgets.chat.copy(
+            BuiltinWidgets.chat[textureSet].cloneBase(
                 align = Align.CENTER_TOP,
                 offset = IntOffset(9, 0),
             ),
-            widgets.inventory,
+            BuiltinWidgets.inventory[textureSet],
         )
     )
 
@@ -95,15 +97,15 @@ data class BuiltinLayers private constructor(
         name = "Control",
         conditions = layerConditionsOf(),
         widgets = persistentListOf(
-            widgets.pause.copy(
+            BuiltinWidgets.pause[textureSet].cloneBase(
                 align = Align.CENTER_TOP,
                 offset = IntOffset(-9, 0),
             ),
-            widgets.vanillaChat.copy(
+            BuiltinWidgets.vanillaChat[textureSet].cloneBase(
                 align = Align.CENTER_TOP,
                 offset = IntOffset(9, 0),
             ),
-            widgets.inventory,
+            BuiltinWidgets.inventory[textureSet],
         )
     )
 
@@ -111,23 +113,23 @@ data class BuiltinLayers private constructor(
         name = "Interaction",
         conditions = LayerConditions(),
         widgets = persistentListOf(
-            widgets.attack.copy(
+            BuiltinWidgets.attack[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(86, 70),
             ),
-            widgets.use.copy(
+            BuiltinWidgets.use[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 37),
             ),
         )
     )
 
-    val sprintRightButton = widgets.sprint.copy(
+    val sprintRightButton = BuiltinWidgets.sprint[textureSet].cloneBase(
         align = Align.RIGHT_BOTTOM,
         offset = IntOffset(42, 131),
     )
 
-    val sprintRightTopButton = widgets.sprint.copy(
+    val sprintRightTopButton = BuiltinWidgets.sprint[textureSet].cloneBase(
         align = Align.RIGHT_TOP,
         offset = IntOffset(42, 44),
     )
@@ -143,9 +145,9 @@ data class BuiltinLayers private constructor(
             DPad.create(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
-                extraButton = widgets.dpadSneakButton,
+                extraButton = textureSet.dpadSneakButton(),
             ),
-            widgets.jump.copy(
+            BuiltinWidgets.jump[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(42, 68),
             ),
@@ -154,9 +156,9 @@ data class BuiltinLayers private constructor(
             DPad.create(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
-                extraButton = widgets.dpadJumpButton,
+                extraButton = textureSet.dpadJumpButton(),
             ),
-            widgets.sneak.copy(
+            BuiltinWidgets.sneak[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(42, 68),
             ),
@@ -166,11 +168,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
             ),
-            widgets.jump.copy(
+            BuiltinWidgets.jump[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 165),
             ),
-            widgets.sneak.copy(
+            BuiltinWidgets.sneak[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 102),
             ),
@@ -180,11 +182,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
             ),
-            widgets.jump.copy(
+            BuiltinWidgets.jump[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 165),
             ),
-            widgets.sneak.copy(
+            BuiltinWidgets.sneak[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 102),
             ),
@@ -194,11 +196,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(29, 32),
             ),
-            widgets.jump.copy(
+            BuiltinWidgets.jump[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 165),
             ),
-            widgets.sneak.copy(
+            BuiltinWidgets.sneak[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 102),
             ),
@@ -218,11 +220,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
             ),
-            widgets.ascendSwimming.copy(
+            BuiltinWidgets.ascendSwimming[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(42, 68),
             ),
-            widgets.descendSwimming.copy(
+            BuiltinWidgets.descendSwimming[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(42, 18),
             )
@@ -232,11 +234,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
             ),
-            widgets.ascendSwimming.copy(
+            BuiltinWidgets.ascendSwimming[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 165),
             ),
-            widgets.descendSwimming.copy(
+            BuiltinWidgets.descendSwimming[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 102),
             )
@@ -246,11 +248,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(29, 32),
             ),
-            widgets.ascendSwimming.copy(
+            BuiltinWidgets.ascendSwimming[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 165),
             ),
-            widgets.descendSwimming.copy(
+            BuiltinWidgets.descendSwimming[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 102),
             )
@@ -268,11 +270,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
             ),
-            widgets.ascendFlying.copy(
+            BuiltinWidgets.ascendFlying[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(42, 68),
             ),
-            widgets.descendFlying.copy(
+            BuiltinWidgets.descendFlying[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(42, 18),
             )
@@ -282,11 +284,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
             ),
-            widgets.ascendFlying.copy(
+            BuiltinWidgets.ascendFlying[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 164),
             ),
-            widgets.descendFlying.copy(
+            BuiltinWidgets.descendFlying[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 102),
             )
@@ -296,11 +298,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(29, 32),
             ),
-            widgets.ascendFlying.copy(
+            BuiltinWidgets.ascendFlying[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 165),
             ),
-            widgets.descendFlying.copy(
+            BuiltinWidgets.descendFlying[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 102),
             ),
@@ -314,21 +316,21 @@ data class BuiltinLayers private constructor(
                 RidingEntityLayerConditionKey(minecart) to LayerConditions.Value.REQUIRE,
             ),
             dpadNormal = persistentListOf(
-                widgets.forward.copy(
+                BuiltinWidgets.forward[textureSet].cloneBase(
                     align = Align.LEFT_BOTTOM,
                     offset = IntOffset(59, 111),
                 ),
-                widgets.dismount.copy(
+                BuiltinWidgets.dismount[textureSet].cloneBase(
                     align = Align.RIGHT_BOTTOM,
                     offset = IntOffset(42, 68),
                 ),
             ),
             dpadSwap = persistentListOf(
-                widgets.forward.copy(
+                BuiltinWidgets.forward[textureSet].cloneBase(
                     align = Align.LEFT_BOTTOM,
                     offset = IntOffset(59, 111)
                 ),
-                widgets.dismount.copy(
+                BuiltinWidgets.dismount[textureSet].cloneBase(
                     align = Align.LEFT_BOTTOM,
                     offset = IntOffset(59, 63),
                 ),
@@ -338,7 +340,7 @@ data class BuiltinLayers private constructor(
                     align = Align.LEFT_BOTTOM,
                     offset = IntOffset(29, 32),
                 ),
-                widgets.dismount.copy(
+                BuiltinWidgets.dismount[textureSet].cloneBase(
                     align = Align.RIGHT_BOTTOM,
                     offset = IntOffset(22, 165),
                 ),
@@ -367,7 +369,7 @@ data class BuiltinLayers private constructor(
                     offset = IntOffset(16, 16),
                     side = BoatButtonSide.RIGHT,
                 ),
-                widgets.dismount.copy(
+                BuiltinWidgets.dismount[textureSet].cloneBase(
                     align = Align.CENTER_BOTTOM,
                     offset = IntOffset(0, 24),
                 ),
@@ -377,7 +379,7 @@ data class BuiltinLayers private constructor(
                     align = Align.LEFT_BOTTOM,
                     offset = IntOffset(29, 32),
                 ),
-                widgets.dismount.copy(
+                BuiltinWidgets.dismount[textureSet].cloneBase(
                     align = Align.RIGHT_BOTTOM,
                     offset = IntOffset(22, 165),
                 ),
@@ -406,9 +408,9 @@ data class BuiltinLayers private constructor(
             DPad.create(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
-                extraButton = widgets.dpadDismountButton,
+                extraButton = textureSet.dpadDismountButton(),
             ),
-            widgets.jumpHorse.copy(
+            BuiltinWidgets.jumpHorse[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(42, 68),
             ),
@@ -417,9 +419,9 @@ data class BuiltinLayers private constructor(
             DPad.create(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
-                extraButton = widgets.dpadJumpButtonWithoutLocking,
+                extraButton = textureSet.dpadJumpButtonWithoutLocking(),
             ),
-            widgets.dismount.copy(
+            BuiltinWidgets.dismount[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(42, 68),
             ),
@@ -429,11 +431,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(12, 16),
             ),
-            widgets.jumpHorse.copy(
+            BuiltinWidgets.jumpHorse[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 165),
             ),
-            widgets.dismount.copy(
+            BuiltinWidgets.dismount[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 102),
             ),
@@ -443,11 +445,11 @@ data class BuiltinLayers private constructor(
                 align = Align.LEFT_BOTTOM,
                 offset = IntOffset(29, 32),
             ),
-            widgets.jumpHorse.copy(
+            BuiltinWidgets.jumpHorse[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 165),
             ),
-            widgets.dismount.copy(
+            BuiltinWidgets.dismount[textureSet].cloneBase(
                 align = Align.RIGHT_BOTTOM,
                 offset = IntOffset(22, 102),
             ),

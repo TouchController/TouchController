@@ -22,7 +22,7 @@ class WidgetsTabModel(
     val uiState = combineStates(tabState, WidgetPresetManager.presets) { tabState, presets ->
         WidgetsTabState(
             listContent = when (tabState.listState) {
-                WidgetsTabState.ListState.BUILTIN -> WidgetsTabState.ListContent.BuiltIn(builtIn = BuiltinWidgets[tabState.newWidgetParams.textureSet])
+                WidgetsTabState.ListState.BUILTIN -> WidgetsTabState.ListContent.BuiltIn(textureSet = tabState.newWidgetParams.textureSet)
                 WidgetsTabState.ListState.CUSTOM -> WidgetsTabState.ListContent.Custom(widgets = presets)
             },
             tabState = tabState,

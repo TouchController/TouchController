@@ -339,6 +339,23 @@
     "touchcontroller.texture_set.new_regression.name": "New regression",
     "touchcontroller.texture_set.classic_extension.name": "Classic extended",
 
+    "touchcontroller.widget.sneak_button.name": "Sneak button",
+    "touchcontroller.widget.jump_button.name": "Jump button",
+    "touchcontroller.widget.pause_button.name": "Pause button",
+    "touchcontroller.widget.chat_button.name": "Chat button",
+    "touchcontroller.widget.vanilla_chat_button.name": "Vanilla chat button",
+    "touchcontroller.widget.ascend_button.name": "Ascend button",
+    "touchcontroller.widget.descend_button.name": "Descend button",
+    "touchcontroller.widget.sprint_button.name": "Sprint button",
+    "touchcontroller.widget.use_button.name": "Use button",
+    "touchcontroller.widget.attack_button.name": "Attack button",
+    "touchcontroller.widget.inventory_button.name": "Inventory button",
+    "touchcontroller.widget.perspective_switch_button.name": "Perspective switch button",
+    "touchcontroller.widget.screenshot_button.name": "Screenshot button",
+    "touchcontroller.widget.hide_hud_button.name": "Hide HUD Button",
+    "touchcontroller.widget.player_list_button.name": "Player list button",
+    "touchcontroller.widget.forward_button.name": "Forward button",
+
     "touchcontroller.widget.dpad.name": "D-Pad",
     "touchcontroller.widget.dpad.property.texture_set": "Texture set",
     "touchcontroller.widget.dpad.property.size": "Button size: %s%%",
@@ -357,8 +374,6 @@
     "touchcontroller.widget.dpad.property.extra_button.active_texture.type": "Texture",
     "touchcontroller.widget.dpad.property.extra_button.swipe_locking.key_binding": "Key binding",
     "touchcontroller.widget.dpad.property.show_backward_button": "Show backwards-left/-right buttons",
-    "touchcontroller.widget.sneak_button.name": "Sneak button",
-    "touchcontroller.widget.jump_button.name": "Jump button",
 
     "touchcontroller.widget.joystick.name": "Virtual joystick",
     "touchcontroller.widget.joystick.property.texture_set": "Texture set",
@@ -367,36 +382,12 @@
     "touchcontroller.widget.joystick.property.trigger_sprint": "Trigger sprint",
     "touchcontroller.widget.joystick.property.increase_opacity_when_active": "Increase opacity when active",
 
-    "touchcontroller.widget.pause_button.name": "Pause button",
-
-    "touchcontroller.widget.chat_button.name": "Chat button",
-
-    "touchcontroller.widget.ascend_button.name": "Ascend button",
-
-    "touchcontroller.widget.descend_button.name": "Descend button",
-
-    "touchcontroller.widget.sprint_button.name": "Sprint button",
-
     "touchcontroller.widget.boat_button.name": "Boat button",
     "touchcontroller.widget.boat_button.property.texture_set": "Texture set",
     "touchcontroller.widget.boat_button.property.size": "Button size: %s%%",
     "touchcontroller.widget.boat_button.property.side": "Side",
     "touchcontroller.widget.boat_button.property.side.left": "Left",
     "touchcontroller.widget.boat_button.property.side.right": "Right",
-
-    "touchcontroller.widget.use_button.name": "Use button",
-
-    "touchcontroller.widget.attack_button.name": "Attack button",
-
-    "touchcontroller.widget.inventory_button.name": "Inventory button",
-
-    "touchcontroller.widget.perspective_switch_button.name": "Perspective switch button",
-
-    "touchcontroller.widget.screenshot_button.name": "Screenshot button",
-
-    "touchcontroller.widget.hide_hud_button.name": "Hide HUD Button",
-
-    "touchcontroller.widget.player_list_button.name": "Player list button",
 
     "touchcontroller.widget.custom_button.name": "Custom button",
     "touchcontroller.widget.custom_button.center_text": "Text",

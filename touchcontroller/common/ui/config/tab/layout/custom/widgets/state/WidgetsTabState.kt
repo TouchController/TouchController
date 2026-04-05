@@ -7,6 +7,7 @@ package top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.widget
 
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import top.fifthlight.touchcontroller.assets.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
@@ -57,29 +58,26 @@ data class WidgetsTabState(
     }
 
     sealed class ListContent {
-        data class BuiltIn(private val builtIn: BuiltinWidgets) : ListContent() {
-            val heroes: PersistentList<ControllerWidget> = persistentListOf(
-                builtIn.dpad,
-                Joystick(),
-            )
-            val widgets = persistentListOf(
-                builtIn.jump,
-                builtIn.sneak,
-                builtIn.ascendFlying,
-                builtIn.descendFlying,
-                builtIn.sprint,
-                builtIn.attack,
-                builtIn.use,
-                BoatButton(),
-                builtIn.inventory,
-                builtIn.pause,
-                builtIn.chat,
-                builtIn.hideHud,
-                builtIn.switchPerspective,
-                builtIn.playerList,
-                builtIn.screenshot,
-                builtIn.custom,
-            )
+        data class BuiltIn(private val textureSet: TextureSet) : ListContent() {
+            val heroes: PersistentList<ControllerWidget>
+            val widgets: PersistentList<ControllerWidget>
+            init {
+                val heroes = mutableListOf<ControllerWidget>()
+                val widgets = mutableListOf<ControllerWidget>()
+                BuiltinWidgets.registry.forEach {
+                    if (it.hidden?.invoke(textureSet) == true) {
+                        return@forEach
+                    }
+                    val widget = it[textureSet]
+                    if (it.hero) {
+                        heroes.add(widget)
+                    } else {
+                        widgets.add(widget)
+                    }
+                }
+                this.heroes = heroes.toPersistentList()
+                this.widgets = widgets.toPersistentList()
+            }
         }
 
         data class Custom(

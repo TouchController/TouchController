@@ -164,7 +164,7 @@ interface KeyBindingHandler {
 
     fun mapDefaultType(type: DefaultKeyBindingType) = getState(type).id
 
-    companion object Empty : KeyBindingHandler {
+    object Empty : KeyBindingHandler {
         override fun getState(type: DefaultKeyBindingType) = KeyBindingState.Empty
         override fun getState(id: String): KeyBindingState? = null
         override fun getAllStates(): Map<String, KeyBindingState> = mapOf()

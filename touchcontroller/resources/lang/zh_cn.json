@@ -337,6 +337,8 @@
     "touchcontroller.widget.ascend_button.name": "上升按钮",
     "touchcontroller.widget.descend_button.name": "下降按钮",
     "touchcontroller.widget.sprint_button.name": "疾跑按钮",
+    "touchcontroller.widget.vanilla_chat_button.name": "原版聊天按钮",
+    "touchcontroller.widget.forward_button.name": "前进按钮",
     "touchcontroller.widget.boat_button.name": "划船按钮",
     "touchcontroller.widget.boat_button.property.texture_set": "图集",
     "touchcontroller.widget.boat_button.property.size": "按键大小: %s%%",
