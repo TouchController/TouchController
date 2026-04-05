@@ -13,7 +13,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import top.fifthlight.combine.data.Identifier
-import top.fifthlight.combine.data.TextFactoryFactory
+import top.fifthlight.combine.data.Text
+import top.fifthlight.combine.data.TextFactory
 import top.fifthlight.combine.modifier.Modifier
 import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntSize
@@ -42,12 +43,17 @@ abstract class ControllerWidget {
         data class Translatable(val identifier: Identifier) : Name()
 
         @Serializable
+        @SerialName("translatableString")
+        data class TranslatableString(val identifier: String) : Name()
+
+        @Serializable
         @SerialName("literal")
         data class Literal(val string: String) : Name()
 
         fun getText() = when (this) {
-            is Translatable -> textFactory.of(identifier)
-            is Literal -> textFactory.literal(string)
+            is Translatable -> Text.translatable(identifier)
+            is TranslatableString -> TextFactory.of(identifier)
+            is Literal -> Text.literal(string)
         }
 
         fun asString() = getText().string
@@ -71,29 +77,27 @@ abstract class ControllerWidget {
     }
 
     companion object {
-        private val textFactory = TextFactoryFactory.of()
-
         val properties = persistentListOf<Property<ControllerWidget, *>>(
             NameProperty(
                 getValue = { it.name },
                 setValue = { config, value ->
                     config.cloneBase(name = value)
                 },
-                name = textFactory.of(Texts.WIDGET_GENERAL_PROPERTY_NAME),
+                name = Text.translatable(Texts.WIDGET_GENERAL_PROPERTY_NAME),
             ),
             BooleanProperty(
                 getValue = { it.lockMoving },
                 setValue = { config, value ->
                     config.cloneBase(lockMoving = value)
                 },
-                name = textFactory.of(Texts.WIDGET_GENERAL_PROPERTY_LOCK_MOVING),
+                name = Text.translatable(Texts.WIDGET_GENERAL_PROPERTY_LOCK_MOVING),
             ),
             AnchorProperty(),
             FloatProperty(
                 getValue = { it.opacity },
                 setValue = { config, value -> config.cloneBase(opacity = value) },
                 messageFormatter = { opacity ->
-                    textFactory.format(
+                    Text.format(
                         Texts.WIDGET_GENERAL_PROPERTY_OPACITY,
                         kotlin.math.round(opacity * 100f).toInt().toString()
                     )

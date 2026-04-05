@@ -16,13 +16,22 @@ public class TouchControllerApiExample implements TouchControllerApiEntrypoint {
     @Override
     public void preTouchControllerInitialize(TouchControllerApi api) {
         var gameActionName = api.getTextFactory().literal("Example game action");
-        api.registerGameAction("touchcontroller-api-example:example", gameActionName, () -> logger.info("Game action triggered"));
+        var gameAction = api.registerGameAction("touchcontroller-api-example:example", gameActionName, () -> logger.info("Game action triggered"));
 
         var playerActionName = api.getTextFactory().literal("Example player action");
-        api.registerPlayerAction("touchcontroller-api-example:example", playerActionName, player -> logger.info("Player action triggered"));
+        var playerAction = api.registerPlayerAction("touchcontroller-api-example:example", playerActionName, player -> logger.info("Player action triggered"));
 
-        api.registerWidgetTexture(textureBuilder -> textureBuilder.id("touchcontroller-api-example:taichi")
+        var texture = api.registerWidgetTexture(textureBuilder -> textureBuilder.id("touchcontroller-api-example:taichi")
                 .classic("touchcontroller_api_example", "classic_taichi", 18, 18)
                 .newStyle("touchcontroller_api_example", "new_taichi", 22, 22));
+
+        api.registerBuiltInWidget(widgetBuilder -> widgetBuilder.id("touchcontroller-api-example:taichi")
+                .name(api.getTextFactory().literal("Taichi"))
+                .down(api.getWidgetTriggerActionProvider().gameAction(gameAction))
+                .release(api.getWidgetTriggerActionProvider().playerAction(playerAction))
+                .normalTexture(texture)
+                .activeTexture(texture)
+                .activeGray()
+        );
     }
 }

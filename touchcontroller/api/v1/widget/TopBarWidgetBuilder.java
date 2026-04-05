@@ -14,9 +14,7 @@ public interface TopBarWidgetBuilder {
 
     TopBarWidgetBuilder name(Text name);
 
-    TopBarWidgetBuilder normalTexture(WidgetTexture texture, boolean gray);
-
-    TopBarWidgetBuilder activeTexture(WidgetTexture texture, boolean gray);
+    TopBarWidgetBuilder normalTexture(WidgetTexture texture);
 
     TopBarWidgetBuilder down(WidgetTriggerAction action);
 

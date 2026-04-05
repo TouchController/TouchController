@@ -14,9 +14,11 @@ public interface BuiltInWidgetBuilder {
 
     BuiltInWidgetBuilder name(Text name);
 
-    BuiltInWidgetBuilder normalTexture(WidgetTexture texture, boolean gray);
+    BuiltInWidgetBuilder normalTexture(WidgetTexture texture);
 
-    BuiltInWidgetBuilder activeTexture(WidgetTexture texture, boolean gray);
+    BuiltInWidgetBuilder activeTexture(WidgetTexture texture);
+
+    BuiltInWidgetBuilder activeGray();
 
     BuiltInWidgetBuilder down(WidgetTriggerAction action);
 

@@ -9,9 +9,9 @@ import top.fifthlight.touchcontroller.api.v1.text.TextFactory
 import top.fifthlight.combine.data.TextFactory as CombineTextFactory
 
 object ApiTextFactory : TextFactory {
-    override fun literal(text: String) = ApiText(CombineTextFactory.literal(text))
+    override fun literal(text: String) = ApiText.Literal(text)
 
-    override fun translatable(id: String) = ApiText(CombineTextFactory.of(id))
+    override fun translatable(id: String) = ApiText.Translatable(id)
 
-    override fun format(id: String, vararg args: Any) = ApiText(CombineTextFactory.format(id, *args))
+    override fun format(id: String, vararg args: Any) = ApiText.Raw(CombineTextFactory.format(id, *args))
 }
