@@ -16,7 +16,7 @@
     "environment": "client",
     "depends": {
         "java": ">=21",
-        "minecraft": ["1.21.10", "1.21.11", "26.1"],
+        "minecraft": ["1.21.10", "1.21.11", "26.1", "26.1.1"],
         "combine": "^${combine_version}",
         "fabric-language-kotlin": "*"
     },
