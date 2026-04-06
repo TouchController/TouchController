@@ -1,4 +1,11 @@
-# TouchController NEWS - User visible changes.
+# TouchController NEWS - User visible changes
+
+## 0.3.1-alpha07
+
+- Added support for 26.1.1
+- Refactored packing logic, now Fabric Loader only needs one JAR for all game versions
+- Added top bar customize functionality for builtin presets
+- Added missing cursor icons for 1.21.10
 
 ## 0.3.1-alpha06
 
@@ -159,5 +166,3 @@
 - Fixed aiming issues with items such as buckets and boats
 - Added forward button for minecarts and adjusted the default layout accordingly
 - Fixed the bug that items couldn't be dropped
-
-
