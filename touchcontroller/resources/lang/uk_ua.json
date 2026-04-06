@@ -64,11 +64,11 @@
     "touchcontroller.screen.manage_control_preset.sprint.none": "Нічого",
     "touchcontroller.screen.manage_control_preset.sprint.right_top": "Правий верхній край",
     "touchcontroller.screen.manage_control_preset.sprint.right": "Правий бік",
-  "touchcontroller.screen.manage_control_preset.customize_top_bar": "",
-  "touchcontroller.screen.top_bar_customize.title": "",
-  "touchcontroller.screen.top_bar_customize.no_widget_selected": "",
-  "touchcontroller.screen.top_bar_customize.no_more_widget_to_add": "",
-  "touchcontroller.screen.top_bar_customize.list_add": "Додати +",
+    "touchcontroller.screen.manage_control_preset.customize_top_bar": "",
+    "touchcontroller.screen.top_bar_customize.title": "",
+    "touchcontroller.screen.top_bar_customize.no_widget_selected": "",
+    "touchcontroller.screen.top_bar_customize.no_more_widget_to_add": "",
+    "touchcontroller.screen.top_bar_customize.list_add": "Додати +",
     "touchcontroller.screen.config.layout.custom_control_layout": "Користувацький макет керування",
     "touchcontroller.screen.custom_control_layout.title": "Користувацький макет",
     "touchcontroller.screen.custom_control_layout.switch.message": "Ви бажаєте використовувати користувацький режим макета? Налаштування в попередньому режимі буде видалено!",
@@ -406,5 +406,7 @@
     "touchcontroller.screen.custom_control_layout.layers.conditions.selecting_entity_item": "",
     "touchcontroller.platform.ios": "",
     "touchcontroller.screen.config.status.platform": "",
-    "touchcontroller.screen.config.platform.blazesdl.vibration_strength.title": ""
+    "touchcontroller.screen.config.platform.blazesdl.vibration_strength.title": "",
+    "touchcontroller.widget.forward_button.name": "",
+    "touchcontroller.widget.vanilla_chat_button.name": ""
 }
