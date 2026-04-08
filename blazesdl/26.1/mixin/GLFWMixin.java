@@ -6,7 +6,10 @@
 package top.fifthlight.blazesdl.mixin;
 
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.sdl.*;
+import org.lwjgl.sdl.SDLClipboard;
+import org.lwjgl.sdl.SDLKeyboard;
+import org.lwjgl.sdl.SDLKeycode;
+import org.lwjgl.sdl.SDLScancode;
 import org.lwjgl.system.NativeType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;

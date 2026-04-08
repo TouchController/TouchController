@@ -1,0 +1,45 @@
+classTweaker v1 official
+extendable class com/mojang/blaze3d/platform/Window
+accessible field com/mojang/blaze3d/platform/Window LOGGER Lorg/slf4j/Logger;
+accessible field com/mojang/blaze3d/platform/Window screenManager Lcom/mojang/blaze3d/platform/ScreenManager;
+accessible field com/mojang/blaze3d/platform/Window preferredFullscreenVideoMode Ljava/util/Optional;
+accessible field com/mojang/blaze3d/platform/Window fullscreen Z
+accessible field com/mojang/blaze3d/platform/Window handle J
+accessible field com/mojang/blaze3d/platform/Window windowedX I
+accessible field com/mojang/blaze3d/platform/Window windowedY I
+accessible field com/mojang/blaze3d/platform/Window windowedWidth I
+accessible field com/mojang/blaze3d/platform/Window windowedHeight I
+accessible field com/mojang/blaze3d/platform/Window x I
+accessible field com/mojang/blaze3d/platform/Window y I
+accessible field com/mojang/blaze3d/platform/Window width I
+accessible field com/mojang/blaze3d/platform/Window height I
+
+extendable method com/mojang/blaze3d/platform/Window setBootErrorCallback ()V
+extendable method com/mojang/blaze3d/platform/Window setMode ()V
+
+extendable class com/mojang/blaze3d/platform/Monitor
+accessible field com/mojang/blaze3d/platform/Monitor videoModes Ljava/util/List;
+accessible field com/mojang/blaze3d/platform/Monitor currentMode Lcom/mojang/blaze3d/platform/VideoMode;
+accessible field com/mojang/blaze3d/platform/Monitor monitor J
+accessible field com/mojang/blaze3d/platform/Monitor x I
+accessible field com/mojang/blaze3d/platform/Monitor y I
+
+extendable class com/mojang/blaze3d/platform/VideoMode
+
+accessible field com/mojang/blaze3d/platform/ScreenManager LOGGER Lorg/slf4j/Logger;
+accessible field com/mojang/blaze3d/platform/ScreenManager monitors Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+accessible field com/mojang/blaze3d/platform/ScreenManager monitorCreator Lcom/mojang/blaze3d/platform/MonitorCreator;
+extendable method com/mojang/blaze3d/platform/ScreenManager onMonitorChange (JI)V
+
+accessible field com/mojang/blaze3d/opengl/GlBackend LOGGER Lorg/slf4j/Logger;
+accessible field com/mojang/blaze3d/opengl/GlBackend VERSION_MAJOR I
+accessible field com/mojang/blaze3d/opengl/GlBackend VERSION_MINOR I
+
+accessible method com/mojang/blaze3d/opengl/GlDevice <init> (JLcom/mojang/blaze3d/shaders/ShaderSource;Lcom/mojang/blaze3d/shaders/GpuDebugOptions;)V
+accessible field com/mojang/blaze3d/opengl/GlDevice windowHandle J
+
+accessible field net/minecraft/client/gui/components/EditBox preeditOverlay Lnet/minecraft/client/gui/components/IMEPreeditOverlay;
+
+extendable method com/mojang/blaze3d/platform/TextInputManager setIMEInputMode (Z)V
+extendable method com/mojang/blaze3d/platform/TextInputManager getIMEStatus ()Z
+accessible field com/mojang/blaze3d/platform/TextInputManager textInputEnabled Z

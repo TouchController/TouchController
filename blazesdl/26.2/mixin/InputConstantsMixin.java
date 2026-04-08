@@ -9,10 +9,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.*;
-import org.lwjgl.sdl.SDLKeyboard;
-import org.lwjgl.sdl.SDLKeycode;
 import org.lwjgl.sdl.SDLMouse;
-import org.lwjgl.sdl.SDLScancode;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.fifthlight.blazesdl.EventCallback;
-import top.fifthlight.blazesdl.SDLKeyMapping;
 import top.fifthlight.blazesdl.SDLUtil;
 import top.fifthlight.blazesdl.SDLWindow;
 
@@ -50,7 +46,7 @@ public abstract class InputConstantsMixin {
 
     @Redirect(method = "grabOrReleaseMouse", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSetCursorPos(JDD)V"))
     private static void redirectSetCursorPos(long handle, double xpos, double ypos) {
-        // SDL_SetWindowRelativeMouseMode will do this for us
+        SDLMouse.SDL_WarpMouseInWindow(handle, (float) xpos, (float) ypos);
     }
 
     @Redirect(method = "grabOrReleaseMouse", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSetInputMode(JII)V"))

@@ -6,12 +6,13 @@
 package top.fifthlight.blazesdl;
 
 import com.mojang.blaze3d.platform.Window;
-import java.nio.ByteBuffer;
 import org.jspecify.annotations.Nullable;
 import org.lwjgl.sdl.SDLKeyboard;
 import org.lwjgl.sdl.SDLVideo;
 import org.lwjgl.sdl.SDL_Rect;
 import org.lwjgl.system.MemoryStack;
+
+import java.nio.ByteBuffer;
 
 public class SDLUtil {
     public static final boolean IS_WAYLAND = "wayland".equalsIgnoreCase(SDLVideo.SDL_GetCurrentVideoDriver());

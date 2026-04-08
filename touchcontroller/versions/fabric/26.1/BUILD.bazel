@@ -131,7 +131,7 @@ java_binary(
         "//game/26.1:game_client_libraries",
         # Classpath separator
         ":fabric_unmerged",
-        "//blazesdl:blazesdl_unmerged",
+        "//blazesdl/26.1:blazesdl_unmerged",
         "//combine",
         "//combine/backend/minecraft/versions:26.1",
         "//combine/backend/minecraft/fabric/26.1:meta_jar",

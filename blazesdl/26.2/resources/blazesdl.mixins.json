@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "package": "top.fifthlight.blazesdl.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "Blaze3DMixin",
+    "CursorTypeMixin",
+    "EditBoxMixin",
+    "GLFWMixin",
+    "InputConstantsMixin",
+    "MinecraftMixin",
+    "MultiLineEditBoxMixin",
+    "NativeLibrariesBootstrapMixin",
+    "PreferredGraphicsApiMixin",
+    "RenderSystemMixin",
+    "ScreenManagerMixin",
+    "VulkanBackendMixin",
+    "VulkanInstanceMixin",
+    "VulkanPhysicalDeviceMixin",
+    "VulkanSurfaceMixin",
+    "WindowMixin"
+  ]
+}

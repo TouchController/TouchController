@@ -1,0 +1,135 @@
+load("@//rule:upload_modrinth.bzl", "modrinth_dependency", "upload_modrinth")
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("@rules_java//java:defs.bzl", "java_binary", "java_library")
+load("//blazesdl:properties.bzl", "blazesdl_26_1_version")
+load("//rule:apply_access_widener.bzl", "apply_access_widener")
+load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
+
+apply_access_widener(
+    name = "game_access_widened",
+    srcs = ["resources/blazesdl.classtweaker"],
+    input = "//game/26.1.1:game_client",
+    neverlink = True,
+)
+
+copy_file(
+    name = "icon",
+    src = "//blazesdl:icon",
+    out = "resources/assets/blazesdl/icon.png",
+)
+
+expand_template(
+    name = "fabric_mod_json",
+    out = "resources/fabric.mod.json",
+    substitutions = {
+        "${version}": blazesdl_26_1_version,
+    },
+    template = "fabric.mod.json",
+)
+
+java_library(
+    name = "blazesdl_unmerged",
+    srcs = glob(["**/*.java"]),
+    resource_strip_prefix = "blazesdl/26.1/resources",
+    resources = glob(["resources/**"]) + [
+        ":fabric_mod_json",
+        ":icon",
+    ],
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        "//game/26.1.1:game_client",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm32",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm64",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_macos",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_macos_arm64",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_arm64",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_x86",
+    ],
+    deps = [
+        ":game_access_widened",
+        "//blazesdl/api",
+        "//game/26.1.1:game_client_libraries",
+        "@maven_blazesdl//:org_lwjgl_lwjgl",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl",
+        "@maven_fabric_26_1//:io_github_llamalad7_mixinextras_fabric",
+        "@maven_fabric_26_1//:net_fabricmc_sponge_mixin",
+    ],
+)
+
+fabric_merge_jij(
+    name = "blazesdl",
+    input = ":blazesdl_unmerged",
+    deps = {
+        "//blazesdl/api": "blazesdl-api:=",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl": "org_lwjgl_lwjgl_sdl:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows": "org_lwjgl_lwjgl_sdl_natives_windows:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_x86": "org_lwjgl_lwjgl_sdl_natives_windows_x86:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_arm64": "org_lwjgl_lwjgl_sdl_natives_windows_arm64:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm32": "org_lwjgl_lwjgl_sdl_natives_linux_arm32:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm64": "org_lwjgl_lwjgl_sdl_natives_linux_arm64:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux": "org_lwjgl_lwjgl_sdl_natives_linux:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_macos": "org_lwjgl_lwjgl_sdl_natives_macos:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_macos_arm64": "org_lwjgl_lwjgl_sdl_natives_macos_arm64:3.4.1",
+    },
+)
+
+alias(
+    name = "26.1",
+    actual = ":blazesdl",
+)
+
+upload_modrinth(
+    name = "upload_modrinth",
+    file = ":blazesdl",
+    file_name = "blazesdl-%s.jar" % blazesdl_26_1_version,
+    game_versions = [
+        "26.1",
+        "26.1.1",
+    ],
+    loaders = ["fabric"],
+    project_id = "QDgSARKw",
+    token_secret_id = "modrinth_token",
+    version_id = blazesdl_26_1_version,
+    version_name = blazesdl_26_1_version,
+    version_type = "alpha",
+)
+
+java_binary(
+    name = "dev_client",
+    srcs = [],
+    data = [
+        "//game/26.1.1:game_client_assets",
+        "//game/26.1.1:game_client_assets_version",
+    ],
+    env = {
+        "LANG": "en_US.UTF8",
+    },
+    jvm_flags = [
+        "-Dkotlinx.coroutines.debug=on",
+        "-Dfabric.development=true",
+        "-Ddev.launch.version=26.1.1",
+        "-Ddev.launch.type=client",
+        "-Ddev.launch.assetsVersion=$(rlocationpath //game/26.1.1:game_client_assets_version)",
+        "-Ddev.launch.mainClass=net.fabricmc.loader.impl.launch.knot.KnotClient",
+        "-Xmx4G",
+    ] + select({
+        "@platforms//os:macos": ["-XstartOnFirstThread"],
+        "//conditions:default": [],
+    }),
+    main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
+    runtime_deps = [
+        "//game/26.1.1:game_client",
+        "//game/26.1.1:game_client_libraries",
+        # Classpath separator
+        ":blazesdl_unmerged",
+        "//rule/dev_launch_wrapper",
+        "@maven_fabric_26_1//:net_fabricmc_fabric_api_fabric_api",
+        "@maven_fabric_26_1//:com_terraformersmc_modmenu",
+        "@maven_fabric_26_1//:io_github_llamalad7_mixinextras_fabric",
+        "@maven_fabric_26_1//:net_fabricmc_fabric_loader",
+        "@maven_fabric_26_1//:net_fabricmc_sponge_mixin",
+    ],
+)

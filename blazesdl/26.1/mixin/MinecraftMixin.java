@@ -10,8 +10,6 @@ import com.mojang.blaze3d.platform.DisplayData;
 import com.mojang.blaze3d.platform.TextInputManager;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.platform.WindowEventHandler;
-import com.mojang.blaze3d.shaders.GpuDebugOptions;
-import com.mojang.blaze3d.shaders.ShaderSource;
 import com.mojang.blaze3d.systems.BackendCreationException;
 import com.mojang.blaze3d.systems.GpuBackend;
 import net.minecraft.client.Minecraft;

@@ -6,14 +6,15 @@
 package top.fifthlight.blazesdl;
 
 import com.mojang.blaze3d.platform.*;
-import com.mojang.blaze3d.shaders.GpuDebugOptions;
-import com.mojang.blaze3d.shaders.ShaderSource;
 import com.mojang.blaze3d.systems.BackendCreationException;
 import com.mojang.blaze3d.systems.GpuBackend;
 import net.minecraft.server.packs.PackResources;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
-import org.lwjgl.sdl.*;
+import org.lwjgl.sdl.SDLPixels;
+import org.lwjgl.sdl.SDLSurface;
+import org.lwjgl.sdl.SDLVideo;
+import org.lwjgl.sdl.SDL_Surface;
 import org.lwjgl.system.JNI;
 
 import java.io.IOException;

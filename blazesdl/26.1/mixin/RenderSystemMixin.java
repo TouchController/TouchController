@@ -7,9 +7,6 @@ package top.fifthlight.blazesdl.mixin;
 
 import com.mojang.blaze3d.platform.BackendOptions;
 import com.mojang.blaze3d.systems.RenderSystem;
-
-import java.util.function.LongSupplier;
-
 import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallbackI;
@@ -23,10 +20,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.fifthlight.blazesdl.*;
-import top.fifthlight.blazesdl.BlazeSDL;
 import top.fifthlight.blazesdl.SDLError;
-import top.fifthlight.blazesdl.BlazeSDLAPIImpl;
-import top.fifthlight.blazesdl.api.BlazeSDLAPI;
+
+import java.util.function.LongSupplier;
 
 @Mixin(RenderSystem.class)
 public class RenderSystemMixin {

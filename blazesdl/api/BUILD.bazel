@@ -1,12 +1,12 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("@rules_java//java:defs.bzl", "java_library")
-load("//blazesdl:properties.bzl", "blazesdl_version")
+load("//blazesdl:properties.bzl", "blazesdl_api_version")
 
 expand_template(
     name = "fabric_mod_json",
     out = "fabric.mod.json",
     substitutions = {
-        "${version}": blazesdl_version,
+        "${version}": blazesdl_api_version,
     },
     template = "resources/fabric.mod.json",
 )

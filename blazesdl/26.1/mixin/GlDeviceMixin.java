@@ -14,7 +14,6 @@ import org.lwjgl.sdl.SDLVideo;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import top.fifthlight.blazesdl.SDLError;
 import top.fifthlight.blazesdl.SDLGlDevice;
 
 @Mixin(GlDevice.class)
@@ -29,7 +28,7 @@ public abstract class GlDeviceMixin {
     }
 
     @WrapOperation(
-        method = "<init>", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwMakeContextCurrent(J)V"))
+            method = "<init>", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwMakeContextCurrent(J)V"))
     private void wrapMakeContextCurrent(long window, Operation<Void> operation) {
         var sdlDevice = blazesdl$getSdlDevice();
         if (sdlDevice != null) {
@@ -41,7 +40,7 @@ public abstract class GlDeviceMixin {
     }
 
     @WrapOperation(
-        method = "<init>", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSetWindowSizeLimits(JIIII)V"))
+            method = "<init>", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSetWindowSizeLimits(JIIII)V"))
     private void wrapSetWindowSizeLimits(long window, int minw, int minh, int maxw, int maxh, Operation<Void> operation) {
         var sdlDevice = blazesdl$getSdlDevice();
         if (sdlDevice != null) {
@@ -57,7 +56,7 @@ public abstract class GlDeviceMixin {
     }
 
     @WrapOperation(
-        method = "setVsync", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSwapInterval(I)V"))
+            method = "setVsync", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSwapInterval(I)V"))
     private void wrapSwapInterval(int interval, Operation<Void> operation) {
         if (blazesdl$getSdlDevice() != null) {
             SDLVideo.SDL_GL_SetSwapInterval(interval);
@@ -67,7 +66,7 @@ public abstract class GlDeviceMixin {
     }
 
     @WrapOperation(
-        method = "presentFrame", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSwapBuffers(J)V"))
+            method = "presentFrame", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSwapBuffers(J)V"))
     private void wrapSwapBuffers(long window, Operation<Void> operation) {
         if (blazesdl$getSdlDevice() != null) {
             SDLVideo.SDL_GL_SwapWindow(window);
@@ -77,7 +76,7 @@ public abstract class GlDeviceMixin {
     }
 
     @WrapOperation(method = "getImplementationInformation",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwGetCurrentContext()J"))
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwGetCurrentContext()J"))
     private long wrapGetCurrentContext(Operation<Long> operation) {
         if (blazesdl$getSdlDevice() != null) {
             return SDLVideo.SDL_GL_GetCurrentContext();
