@@ -1,6 +1,5 @@
 {
     "modmenu.descriptionTranslation.touchcontroller": "Bring controlling style of bedrock version to Java version!",
-
     "touchcontroller.warning.proxy_not_connected": "Warning: No proxy connected. TouchController will be disabled.",
     "touchcontroller.warning.proxy_not_connected_android": "You are using Android, but message proxy of the launcher is not enabled. If your launcher supports TouchController, please enable it; otherwise you should switch a launcher supports TouchController.",
     "touchcontroller.warning.proxy_not_connected_linux": "TouchController failed to load. Possible reasons: failed to load TouchController's dynamic library; you are using X11, but TouchController only supports Wayland for now. Check game log for details.",
@@ -11,44 +10,34 @@
     "touchcontroller.warning.development_version.title": "Warning",
     "touchcontroller.warning.development_version.message": "You are using a development version of TouchController, expect severe bug or uncompleted features! Report have problems you found on GitHub.",
     "touchcontroller.warning.development_version.ok": "I know",
-
     "touchcontroller.platform.proxy": "Legacy UDP",
     "touchcontroller.platform.android": "Android",
     "touchcontroller.platform.win32": "Win32",
     "touchcontroller.platform.wayland": "Wayland",
     "touchcontroller.platform.ios": "iOS",
     "touchcontroller.platform.blazesdl": "BlazeSDL",
-
     "touchcontroller.back": "< %s",
-
     "touchcontroller.screen.chat.title": "Chat and commands",
     "touchcontroller.screen.chat.exit": "Exit",
     "touchcontroller.screen.chat.settings.ok": "Ok",
     "touchcontroller.screen.chat.settings.reset": "Reset",
     "touchcontroller.screen.chat.settings.line_spacing": "Line spacing",
     "touchcontroller.screen.chat.settings.text_color": "Text color",
-
     "touchcontroller.screen.import_builtin_preset": "Import built-in presets",
     "touchcontroller.screen.import_builtin_preset.finish": "Finish",
-
     "touchcontroller.screen.texture_coordinate_select": "Select texture",
-
-    "touchcontroller.screen.config": "Touch Settings...",
+    "touchcontroller.screen.config": "Touch Settings…",
     "touchcontroller.screen.config.title": "Touch Settings",
-
     "touchcontroller.screen.config.percent": "%s: %s%%",
     "touchcontroller.screen.config.value": "%s：%s",
-
     "touchcontroller.screen.config.reset": "Reset",
     "touchcontroller.screen.config.undo": "Undo",
     "touchcontroller.screen.config.cancel": "Cancel",
-
     "touchcontroller.screen.config.reset.title": "What config do you want to reset?",
     "touchcontroller.screen.config.reset.current_tab": "Current tab",
     "touchcontroller.screen.config.reset.layout_settings": "Layout settings",
     "touchcontroller.screen.config.reset.all_settings": "All settings",
     "touchcontroller.screen.config.reset.cancel": "Cancel",
-
     "touchcontroller.screen.config.status.title": "Status",
     "touchcontroller.screen.config.status.platform": "Current platform: %s",
     "touchcontroller.screen.config.status.platform.unavailable": "Unavailable",
@@ -64,22 +53,18 @@
     "touchcontroller.screen.config.status.status.only_view.aiming_by_crosshair.description": "Disable TouchController's layers and widgets. Only interacting with crosshair is enabled.",
     "touchcontroller.screen.config.status.status.disable.title": "Disable",
     "touchcontroller.screen.config.status.status.disable.description": "Disable all of TouchController's functionalities.",
-
     "touchcontroller.screen.config.system.title": "System",
-
     "touchcontroller.screen.config.platform.title": "Platform",
     "touchcontroller.screen.config.platform.blazesdl.vibration_strength.title": "Vibration strength",
     "touchcontroller.screen.config.platform.blazesdl.vibration_strength.description": "Set vibration strength when breaking blocks ",
     "touchcontroller.screen.config.platform.blazesdl.vibration_length.title": "Vibration length",
     "touchcontroller.screen.config.platform.blazesdl.vibration_length.description": "Set vibration length when breaking blocks ",
-
     "touchcontroller.screen.config.about.title": "About",
     "touchcontroller.screen.config.about.authors.title": "Authors: ",
     "touchcontroller.screen.config.about.contributors.title": "Contributors: ",
     "touchcontroller.screen.config.about.license.title": "License: ",
     "touchcontroller.screen.config.about.unknown_version": "Unknown version",
     "touchcontroller.screen.config.about.loading": "Loading",
-
     "touchcontroller.screen.config.layout.title": "Layout",
     "touchcontroller.screen.config.layout.manage_control_preset": "Preset mode",
     "touchcontroller.screen.manage_control_preset.title": "Manage presets",
@@ -111,7 +96,6 @@
     "touchcontroller.screen.top_bar_customize.no_widget_selected": "No widget selected",
     "touchcontroller.screen.top_bar_customize.no_more_widget_to_add": "No more widget to add",
     "touchcontroller.screen.top_bar_customize.list_add": "Add +",
-
     "touchcontroller.screen.config.layout.custom_control_layout": "Custom layout",
     "touchcontroller.screen.custom_control_layout.title": "Custom layout",
     "touchcontroller.screen.custom_control_layout.switch.message": "Do you want to use custom mode? Settings in preset mode will be dropped!",
@@ -124,12 +108,10 @@
     "touchcontroller.screen.custom_control_layout.edit_presets": "Edit presets",
     "touchcontroller.screen.custom_control_layout.delete_widget": "Delete widget",
     "touchcontroller.screen.custom_control_layout.paste_widget": "Paste widget",
-
     "touchcontroller.screen.custom_control_layout.properties": "Properties",
     "touchcontroller.screen.custom_control_layout.no_widget_selected": "Select a widget to edit its properties",
     "touchcontroller.screen.custom_control_layout.copy": "Copy widget",
     "touchcontroller.screen.custom_control_layout.cut": "Cut widget",
-
     "touchcontroller.screen.custom_control_layout.widgets": "Widgets",
     "touchcontroller.screen.custom_control_layout.widgets.builtin": "Builtin",
     "touchcontroller.screen.custom_control_layout.widgets.preset": "Preset",
@@ -137,13 +119,12 @@
     "touchcontroller.screen.custom_control_layout.widgets.new_widget.texture_set": "Default texture set for new widgets",
     "touchcontroller.screen.custom_control_layout.widgets.new_widget.save": "Save",
     "touchcontroller.screen.custom_control_layout.widgets.new_widget.cancel": "Cancel",
-    "touchcontroller.screen.custom_control_layout.widgets.widget_preset.empty_tip": "Click save icon in widget properties to add widget as template.",
+    "touchcontroller.screen.custom_control_layout.widgets.widget_preset.empty_tip": "Click save icon in widget properties to add widget as template",
     "touchcontroller.screen.custom_control_layout.widgets.widget_preset.rename": "Rename",
     "touchcontroller.screen.custom_control_layout.widgets.widget_preset.delete": "Delete",
     "touchcontroller.screen.custom_control_layout.widgets.edit_widget_preset.title": "Edit widget preset",
     "touchcontroller.screen.custom_control_layout.widgets.edit_widget_preset.save": "Save",
     "touchcontroller.screen.custom_control_layout.widgets.edit_widget_preset.cancel": "Cancel",
-
     "touchcontroller.screen.custom_control_layout.layers": "Layers",
     "touchcontroller.screen.custom_control_layout.layers.move_up": "Move up",
     "touchcontroller.screen.custom_control_layout.layers.move_down": "Move down",
@@ -170,7 +151,7 @@
     "touchcontroller.screen.custom_control_layout.layers.conditions.selecting_entity_type": "Select Entity",
     "touchcontroller.screen.custom_control_layout.layers.conditions.selecting_entity_item": "Selected %s",
     "touchcontroller.screen.custom_control_layout.layers.delete_layer.1": "Are you sure you want to delete this layer?",
-    "touchcontroller.screen.custom_control_layout.layers.delete_layer.2": " '%s' will be lost forever! (A long time!)",
+    "touchcontroller.screen.custom_control_layout.layers.delete_layer.2": "'%s' will be lost forever! (A long time!)",
     "touchcontroller.screen.custom_control_layout.layers.delete_layer.delete": "Delete",
     "touchcontroller.screen.custom_control_layout.layers.delete_layer.cancel": "Cancel",
     "touchcontroller.screen.layer_editor.create": "Create layer",
@@ -188,7 +169,6 @@
     "touchcontroller.screen.layer_editor.custom_condition.name.placeholder": "Custom layer condition name",
     "touchcontroller.screen.layer_editor.custom_condition.edit.ok": "Ok",
     "touchcontroller.screen.layer_editor.custom_condition.edit.cancel": "Cancel",
-
     "touchcontroller.screen.custom_control_layout.presets": "Presets",
     "touchcontroller.screen.custom_control_layout.presets.move_up": "Move up",
     "touchcontroller.screen.custom_control_layout.presets.move_down": "Move down",
@@ -211,15 +191,13 @@
     "touchcontroller.screen.custom_control_layout.presets.edit_preset.ok": "OK",
     "touchcontroller.screen.custom_control_layout.presets.edit_preset.cancel": "Cancel",
     "touchcontroller.screen.custom_control_layout.presets.delete_preset.1": "Are you sure you want to delete this preset?",
-    "touchcontroller.screen.custom_control_layout.presets.delete_preset.2": " '%s' will be lost forever! (A long time!)",
+    "touchcontroller.screen.custom_control_layout.presets.delete_preset.2": "'%s' will be lost forever! (A long time!)",
     "touchcontroller.screen.custom_control_layout.presets.delete_preset.delete": "Delete",
     "touchcontroller.screen.custom_control_layout.presets.delete_preset.cancel": "Cancel",
     "touchcontroller.screen.custom_control_layout.presets.path": "Preset path",
     "touchcontroller.screen.custom_control_layout.presets.path.ok": "OK",
     "touchcontroller.screen.custom_control_layout.presets.path.get_failed": "Failed to get preset path.",
-
     "touchcontroller.screen.config.general.title": "Global",
-
     "touchcontroller.screen.config.general.regular.title": "Regular",
     "touchcontroller.screen.config.general.regular.disable_mouse_move.title": "Disable mouse movement",
     "touchcontroller.screen.config.general.regular.disable_mouse_move.description": "Disable mouse movement in game. Enable this option when your system maps touch input to mouse input.",
@@ -233,31 +211,27 @@
     "touchcontroller.screen.config.general.regular.vibration.description": "Provide haptic feedback when breaking blocks. Only support on Android for now.",
     "touchcontroller.screen.config.general.regular.quick_hand_swap.title": "Quick hand swap",
     "touchcontroller.screen.config.general.regular.quick_hand_swap.description": "Swap hand on double-clicking an item slot in hot bar.",
-
     "touchcontroller.screen.config.general.control.title": "Control",
     "touchcontroller.screen.config.general.control.view_movement_sensitivity.title": "View movement sensitivity",
-    "touchcontroller.screen.config.general.control.view_movement_sensitivity.description": "Set the angle of view direction changed when scroll the whole screen horizontally",
+    "touchcontroller.screen.config.general.control.view_movement_sensitivity.description": "Set the angle of view direction changed when scroll the whole screen horizontally.",
     "touchcontroller.screen.config.general.control.view_hold_detect_threshold.title": "Hold-detect threshold",
     "touchcontroller.screen.config.general.control.view_hold_detect_threshold.description": "Set the distance threshold of determining whether a pointer is moving or a long click.",
     "touchcontroller.screen.config.general.control.view_hold_detect_ticks.title": "Hold-detect time",
     "touchcontroller.screen.config.general.control.view_hold_detect_ticks.description": "Set the minimum pressing time of determining whether a pointer is a long click.",
     "touchcontroller.screen.config.general.control.creative_break_hold_ticks.title": "Creative mode break hold time",
     "touchcontroller.screen.config.general.control.creative_break_hold_ticks.description": "Set the minimum pressing time of breaking blocks in creative mode.",
-
     "touchcontroller.screen.config.general.touch_ring.title": "Touch ring",
     "touchcontroller.screen.config.general.touch_ring.radius.title": "Radius",
     "touchcontroller.screen.config.general.touch_ring.radius.description": "Radius of the touch ring.",
     "touchcontroller.screen.config.general.touch_ring.border_width.title": "Border width",
-    "touchcontroller.screen.config.general.touch_ring.border_width.description": "Border width of the touch ring",
+    "touchcontroller.screen.config.general.touch_ring.border_width.description": "Border width of the touch ring.",
     "touchcontroller.screen.config.general.touch_ring.initial_progress.title": "Initial progress",
     "touchcontroller.screen.config.general.touch_ring.initial_progress.description": "Initial progress when breaking blocks.",
-
     "touchcontroller.screen.config.general.debug.title": "Debug",
     "touchcontroller.screen.config.general.debug.show_pointers.title": "Show pointers",
     "touchcontroller.screen.config.general.debug.show_pointers.description": "Show all pointers in game.",
     "touchcontroller.screen.config.general.debug.enable_touch_emulation.title": "Enable touch emulation",
     "touchcontroller.screen.config.general.debug.enable_touch_emulation.description": "Emulate mouse input as touch input.",
-
     "touchcontroller.screen.config.item.title": "Item",
     "touchcontroller.screen.config.item.usable_items.title": "Long-click to use items",
     "touchcontroller.screen.config.item.show_crosshair_items.title": "Items which show crosshair when holding",
@@ -269,7 +243,6 @@
     "touchcontroller.screen.config.item.component.title": "Components",
     "touchcontroller.screen.config.item.component.description": "Configure by item stack components.",
     "touchcontroller.screen.config.item.edit.title": "Edit",
-
     "touchcontroller.screen.item_list.title": "Item list",
     "touchcontroller.screen.item_list.warning_not_in_game": "Enter the game first to choose items",
     "touchcontroller.screen.item_list.content": "Item list content",
@@ -279,20 +252,17 @@
     "touchcontroller.screen.item_list.rei_items": "REI item list",
     "touchcontroller.screen.item_list.emi_items": "EMI item list",
     "touchcontroller.screen.item_list.vanilla_inventory": "Vanilla item list",
-    "touchcontroller.screen.item_list.search_placeholder": "Search...",
+    "touchcontroller.screen.item_list.search_placeholder": "Search…",
     "touchcontroller.screen.item_list.no_tab_selected": "No tab selected",
     "touchcontroller.screen.item_list.inventory.main": "Inventory",
     "touchcontroller.screen.item_list.inventory.armor": "Equipment",
     "touchcontroller.screen.item_list.inventory.offhand": "Offhand",
-
     "touchcontroller.screen.component_list.title": "Component list",
     "touchcontroller.screen.component_list.warning_not_in_game": "Enter the game first to choose component",
-    "touchcontroller.screen.component_list.search_placeholder": "Search...",
+    "touchcontroller.screen.component_list.search_placeholder": "Search…",
     "touchcontroller.screen.component_list.remove": "Remove >",
     "touchcontroller.screen.component_list.add": "Add +",
-
     "touchcontroller.screen.license.title": "License",
-
     "touchcontroller.widget.texture.type.empty": "Empty",
     "touchcontroller.widget.texture.type.fill": "Fill",
     "touchcontroller.widget.texture.type.fixed": "Fixed size texture",
@@ -324,7 +294,6 @@
     "touchcontroller.empty_texture.empty_5_active": "GUI button active",
     "touchcontroller.texture_coordinate.edit": "Edit",
     "touchcontroller.texture_coordinate.texture_set": "Texture set",
-
     "touchcontroller.widget.general.property.name": "Name",
     "touchcontroller.widget.general.property.lock_moving": "Lock moving",
     "touchcontroller.widget.general.property.anchor.name": "Anchor",
@@ -342,7 +311,6 @@
     "touchcontroller.texture_set.classic.name": "Classic",
     "touchcontroller.texture_set.new_regression.name": "New regression",
     "touchcontroller.texture_set.classic_extension.name": "Classic extended",
-
     "touchcontroller.widget.sneak_button.name": "Sneak button",
     "touchcontroller.widget.jump_button.name": "Jump button",
     "touchcontroller.widget.pause_button.name": "Pause button",
@@ -359,7 +327,6 @@
     "touchcontroller.widget.hide_hud_button.name": "Hide HUD Button",
     "touchcontroller.widget.player_list_button.name": "Player list button",
     "touchcontroller.widget.forward_button.name": "Forward button",
-
     "touchcontroller.widget.dpad.name": "D-Pad",
     "touchcontroller.widget.dpad.property.texture_set": "Texture set",
     "touchcontroller.widget.dpad.property.size": "Button size: %s%%",
@@ -378,21 +345,18 @@
     "touchcontroller.widget.dpad.property.extra_button.active_texture.type": "Texture",
     "touchcontroller.widget.dpad.property.extra_button.swipe_locking.key_binding": "Key binding",
     "touchcontroller.widget.dpad.property.show_backward_button": "Show backwards-left/-right buttons",
-
     "touchcontroller.widget.joystick.name": "Virtual joystick",
     "touchcontroller.widget.joystick.property.texture_set": "Texture set",
     "touchcontroller.widget.joystick.property.size": "Panel size: %s%%",
     "touchcontroller.widget.joystick.property.stick_size": "Stick size: %s%%",
     "touchcontroller.widget.joystick.property.trigger_sprint": "Trigger sprint",
     "touchcontroller.widget.joystick.property.increase_opacity_when_active": "Increase opacity when active",
-
     "touchcontroller.widget.boat_button.name": "Boat button",
     "touchcontroller.widget.boat_button.property.texture_set": "Texture set",
     "touchcontroller.widget.boat_button.property.size": "Button size: %s%%",
     "touchcontroller.widget.boat_button.property.side": "Side",
     "touchcontroller.widget.boat_button.property.side.left": "Left",
     "touchcontroller.widget.boat_button.property.side.right": "Right",
-
     "touchcontroller.widget.custom_button.name": "Custom button",
     "touchcontroller.widget.custom_button.center_text": "Text",
     "touchcontroller.widget.custom_button.text_color": "Text color",
@@ -401,7 +365,6 @@
     "touchcontroller.widget.custom_button.swipe_trigger": "Swipe trigger",
     "touchcontroller.widget.custom_button.grab_trigger": "Grab trigger",
     "touchcontroller.widget.custom_button.move_view": "Follow view",
-
     "touchcontroller.widget.key_binding.unknown": "Unknown",
     "touchcontroller.widget.key_binding.empty": "Empty",
     "touchcontroller.widget.key_binding.select.title": "Select key binding",
