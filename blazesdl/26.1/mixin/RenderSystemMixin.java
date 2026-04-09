@@ -257,6 +257,20 @@ public class RenderSystemMixin {
                                     windowIdToHandle(event.button().windowID()), event.wheel().x(), event.wheel().y());
                         }
                     }
+
+                    case SDLEvents.SDL_EVENT_DROP_FILE -> {
+                        var callback = EventCallback.onDropCallback;
+                        if (callback != null) {
+                            var drop = event.drop();
+                            var dataAddress = MemoryUtil.memGetAddress(drop.address() + SDL_DropEvent.DATA);
+                            if (dataAddress == 0L) {
+                                continue;
+                            }
+                            var buffer = stack.mallocPointer(1);
+                            buffer.put(0, dataAddress);
+                            callback.invoke(windowIdToHandle(drop.windowID()), 1, buffer.address());
+                        }
+                    }
                 }
             }
         }

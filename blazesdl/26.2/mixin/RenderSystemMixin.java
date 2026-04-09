@@ -76,7 +76,7 @@ public class RenderSystemMixin {
                         var callback = EventCallback.onWindowMove;
                         var windowHandle = windowIdToHandle(event.window().windowID());
                         if (windowHandle == 0L) {
-                            return;
+                            continue;
                         }
                         if (callback != null) {
                             callback.invoke(windowHandle, event.window().data1(),
@@ -86,7 +86,7 @@ public class RenderSystemMixin {
                     case SDLEvents.SDL_EVENT_WINDOW_RESIZED -> {
                         var windowHandle = windowIdToHandle(event.window().windowID());
                         if (windowHandle == 0L) {
-                            return;
+                            continue;
                         }
                         var windowCallback = EventCallback.onWindowResize;
                         if (windowCallback != null) {
@@ -96,7 +96,7 @@ public class RenderSystemMixin {
                     case SDLEvents.SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED -> {
                         var windowHandle = windowIdToHandle(event.window().windowID());
                         if (windowHandle == 0L) {
-                            return;
+                            continue;
                         }
                         var framebufferCallback = EventCallback.onFramebufferResize;
                         if (framebufferCallback != null) {
@@ -112,7 +112,7 @@ public class RenderSystemMixin {
                     case SDLEvents.SDL_EVENT_WINDOW_FOCUS_GAINED, SDLEvents.SDL_EVENT_WINDOW_FOCUS_LOST -> {
                         var windowHandle = windowIdToHandle(event.window().windowID());
                         if (windowHandle == 0L) {
-                            return;
+                            continue;
                         }
                         var callback = EventCallback.onWindowFocus;
                         if (callback != null) {
@@ -128,7 +128,7 @@ public class RenderSystemMixin {
                             var key = event.key();
                             var windowHandle = windowIdToHandle(key.windowID());
                             if (windowHandle == 0L) {
-                                return;
+                                continue;
                             }
                             int action;
                             if (eventType == SDLEvents.SDL_EVENT_KEY_DOWN) {
@@ -151,7 +151,7 @@ public class RenderSystemMixin {
                             var text = event.text();
                             var windowHandle = windowIdToHandle(text.windowID());
                             if (windowHandle == 0L) {
-                                return;
+                                continue;
                             }
                             var textStr = text.textString();
                             if (textStr != null) {
@@ -168,7 +168,7 @@ public class RenderSystemMixin {
                         var edit = event.edit();
                         var windowHandle = windowIdToHandle(edit.windowID());
                         if (windowHandle == 0L) {
-                            return;
+                            continue;
                         }
                         var textString = edit.textString();
                         if (textString == null || textString.isEmpty()) {
@@ -243,7 +243,7 @@ public class RenderSystemMixin {
                             var motion = event.motion();
                             var windowHandle = windowIdToHandle(motion.windowID());
                             if (windowHandle == 0L) {
-                                return;
+                                continue;
                             }
                             SDLUtil.realMouseX = motion.x();
                             SDLUtil.realMouseY = motion.y();
@@ -265,7 +265,7 @@ public class RenderSystemMixin {
                             var button = event.button();
                             var windowHandle = windowIdToHandle(button.windowID());
                             if (windowHandle == 0L) {
-                                return;
+                                continue;
                             }
                             int sdlButton = button.button();
                             var buttonId = switch (sdlButton) {
@@ -285,9 +285,27 @@ public class RenderSystemMixin {
                             var wheel = event.wheel();
                             var windowHandle = windowIdToHandle(wheel.windowID());
                             if (windowHandle == 0L) {
-                                return;
+                                continue;
                             }
                             callback.invoke(windowHandle, wheel.x(), wheel.y());
+                        }
+                    }
+
+                    case SDLEvents.SDL_EVENT_DROP_FILE -> {
+                        var callback = EventCallback.onDropCallback;
+                        if (callback != null) {
+                            var drop = event.drop();
+                            var windowHandle = windowIdToHandle(drop.windowID());
+                            if (windowHandle == 0L) {
+                                continue;
+                            }
+                            var dataAddress = MemoryUtil.memGetAddress(drop.address() + SDL_DropEvent.DATA);
+                            if (dataAddress == 0L) {
+                                continue;
+                            }
+                            var buffer = stack.mallocPointer(1);
+                            buffer.put(0, dataAddress);
+                            callback.invoke(windowHandle, 1, buffer.address());
                         }
                     }
                 }

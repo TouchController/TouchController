@@ -26,5 +26,5 @@ public class EventCallback {
     public static GLFWCursorPosCallbackI onMoveCallback;
     public static GLFWMouseButtonCallbackI onPressCallback;
     public static GLFWScrollCallbackI onScrollCallback;
-    public static GLFWDropCallbackI onDropCallback; // TODO
+    public static GLFWDropCallbackI onDropCallback;
 }
