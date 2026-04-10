@@ -5,7 +5,10 @@
 
 package top.fifthlight.blazesdl.mixin;
 
+import org.jspecify.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWErrorCallbackI;
 import org.lwjgl.sdl.SDLClipboard;
 import org.lwjgl.sdl.SDLKeyboard;
 import org.lwjgl.sdl.SDLKeycode;
@@ -56,6 +59,11 @@ public abstract class GLFWMixin {
             return -1;
         }
         return scan;
+    }
+
+    @Overwrite
+    public static @Nullable GLFWErrorCallback glfwSetErrorCallback(@Nullable GLFWErrorCallbackI cbfun) {
+        return null;
     }
 
     @Overwrite

@@ -5,7 +5,6 @@
 
 package top.fifthlight.blazesdl.mixin;
 
-import com.mojang.blaze3d.platform.BackendOptions;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.GLFW;
@@ -26,13 +25,11 @@ import java.util.function.LongSupplier;
 
 @Mixin(RenderSystem.class)
 public class RenderSystemMixin {
-    @Redirect(method = "initBackendSystem", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/GLX;_initGlfw(Lcom/mojang/blaze3d/platform/BackendOptions;)Ljava/util/function/LongSupplier;"))
-    private static LongSupplier redirectInitGlfw(BackendOptions options) {
+    @Redirect(method = "initBackendSystem", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/GLX;_initGlfw()Ljava/util/function/LongSupplier;"))
+    private static LongSupplier redirectInitGlfw() {
         if (SDLInit.SDL_WasInit(SDLInit.SDL_INIT_VIDEO) == 0) {
             SDLInit.SDL_Init(SDLInit.SDL_INIT_VIDEO);
         }
-
-        SDLWindow.useExclusiveFullscreen = options.exclusiveFullScreen();
 
         final var freq = SDLTimer.SDL_GetPerformanceFrequency();
         var multiplier = 1_000_000_000.0 / freq;

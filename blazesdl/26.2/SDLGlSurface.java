@@ -2,7 +2,6 @@ package top.fifthlight.blazesdl;
 
 import com.mojang.blaze3d.opengl.GlSurface;
 import com.mojang.blaze3d.systems.GpuSurface;
-import com.mojang.blaze3d.systems.SurfaceException;
 import org.lwjgl.sdl.SDLVideo;
 
 public class SDLGlSurface extends GlSurface {
@@ -14,8 +13,8 @@ public class SDLGlSurface extends GlSurface {
     }
 
     @Override
-    public void configure(GpuSurface.Configuration config) throws SurfaceException {
-        SDLVideo.SDL_GL_SetSwapInterval(config.vsync() ? 1 : 0);
+    public void configure(GpuSurface.Configuration config) {
+        SDLVideo.SDL_GL_SetSwapInterval(config.presentMode() == GpuSurface.PresentMode.FIFO ? 1 : 0);
     }
 
     @Override

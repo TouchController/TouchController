@@ -5139,7 +5139,7 @@
     "@@rules_mc+//:extensions.bzl%minecraft": {
       "general": {
         "bzlTransitiveDigest": "Epfd8fTLCsK7vmUjvyawn/rXPsVm6VVMar99EO1RiBA=",
-        "usagesDigest": "YOKW1XXk60WxrzcWpVx+G9qbpOoR/+02xt0q7E2T//U=",
+        "usagesDigest": "ZFxRG+umDJuU18S8Fii9Fr1iOAd28nzKnvB8CViXFh4=",
         "recordedInputs": [
           "REPO_MAPPING:rules_mc+,bazel_tools bazel_tools"
         ],
@@ -5968,19 +5968,19 @@
               "downloaded_file_path": "server.jar"
             }
           },
-          "minecraft_26_2-snapshot-1_client": {
+          "minecraft_26_2-snapshot-2_client": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/9bbe51129f60dd895f2a143c3eacc22ca148ba81/client.jar",
-              "integrity": "sha1-m75REp9g3YlfKhQ8PqzCLKFIuoE=",
+              "url": "https://piston-data.mojang.com/v1/objects/9578fe329bdf486d5f99896749a5f85c94d93b6a/client.jar",
+              "integrity": "sha1-lXj+MpvfSG1fmYlnSaX4XJTZO2o=",
               "downloaded_file_path": "client.jar"
             }
           },
-          "minecraft_26_2-snapshot-1_server": {
+          "minecraft_26_2-snapshot-2_server": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/3a540367d1b89155e253556ac855031da4ba090a/server.jar",
-              "integrity": "sha1-OlQDZ9G4kVXiU1VqyFUDHaS6CQo=",
+              "url": "https://piston-data.mojang.com/v1/objects/e6cefea7bf62cb0cc044794d7ebfe8ea5ee672a3/server.jar",
+              "integrity": "sha1-5s7+p79iywzARHlNfr/o6l7mcqM=",
               "downloaded_file_path": "server.jar"
             }
           },
@@ -11013,7 +11013,7 @@
                   "client#file",
                   "server#file"
                 ],
-                "26.2-snapshot-1": [
+                "26.2-snapshot-2": [
                   "client#file",
                   "server#file"
                 ]
@@ -13396,7 +13396,7 @@
                   "org.lwjgl:lwjgl:3.4.1:natives-windows-x86",
                   "org.slf4j:slf4j-api:2.0.17"
                 ],
-                "26.2-snapshot-1": [
+                "26.2-snapshot-2": [
                   "at.yawk.lz4:lz4-java:1.10.1",
                   "ca.weblite:java-objc-bridge:1.1",
                   "com.azure:azure-json:1.4.0",
@@ -17083,18 +17083,18 @@
                 "1.17": "f425401a00adf0112fde624ee80c66333530f8a1",
                 "1.18": "d31a2e85ae149dd1b1a7070b22cb8887892fda6c",
                 "1.19": "a9c8b05a8082a65678beda6dfa2b8f21fa627bce",
-                "5": "f3a61d09ab776cd7f2caa104702102d1e61d1385",
-                "12": "d28c31f7fcccb8953b67d9c6a3e213f1b14361e5",
-                "16": "e9a004de19dd05f2da22c4477d7a70dc0ec8317f",
-                "17": "476e5347910fde3aa785539335426dc61b873957",
-                "18": "e18c0567edd9ab351c35392c12d29776041deb08",
-                "19": "66408588d753637db46d8eeff2337784ff794139",
-                "24": "1844539979943a2dd794d359de78acf145ac9c2a",
-                "26": "db7773c4edb5cba4f10ac670c21656c377671dcc",
-                "27": "1c7664f3e99f9fc16d232d451d5fa08b81ec3cda",
-                "29": "eceac3cc1d625ec08f109ca0a67829d7ef49361f",
-                "30": "9cab977ba76deb72fad9995b02f25cf3326eedd0",
-                "31": "5bab296761dcb7ab20f250d663a97373914b40f9"
+                "5": "e4ef9bc581951628e6bcedb8759e7dcb0406ceb3",
+                "12": "6d6e5e15cb2af39972c33c20538c1c7e20f4ba7c",
+                "16": "6d9d7fb183a3bb12899b2cd0dfd575db28e5d571",
+                "17": "8d3b27f99b0221a9fdb9ea632cd60920a839ab36",
+                "18": "87e537afc03bac765ce69874f5ceb928bcec0a46",
+                "19": "c77b2fcddab5b229caad0f7d3bc41684db7a4f23",
+                "24": "43ff61dacc1e8e75ee59ea7cdaa004da16291530",
+                "26": "701e1434285a1f88beacf24ac7ba2ba82df9c281",
+                "27": "bed25a1843e4e581c675bd4f008490e3cdc4c6f4",
+                "29": "69bfc43bb212ba9ad4dd611da8e910eaf414134a",
+                "30": "77755c06f803fbc30617870e64fa70df435bc09d",
+                "31": "a2d1b3489709444f6890d8b29d00fe4cf78dc3ed"
               },
               "asset_urls": {
                 "pre-1.6": "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json",
@@ -17107,18 +17107,18 @@
                 "1.17": "https://piston-meta.mojang.com/v1/packages/f425401a00adf0112fde624ee80c66333530f8a1/1.17.json",
                 "1.18": "https://piston-meta.mojang.com/v1/packages/d31a2e85ae149dd1b1a7070b22cb8887892fda6c/1.18.json",
                 "1.19": "https://piston-meta.mojang.com/v1/packages/a9c8b05a8082a65678beda6dfa2b8f21fa627bce/1.19.json",
-                "5": "https://piston-meta.mojang.com/v1/packages/f3a61d09ab776cd7f2caa104702102d1e61d1385/5.json",
-                "12": "https://piston-meta.mojang.com/v1/packages/d28c31f7fcccb8953b67d9c6a3e213f1b14361e5/12.json",
-                "16": "https://piston-meta.mojang.com/v1/packages/e9a004de19dd05f2da22c4477d7a70dc0ec8317f/16.json",
-                "17": "https://piston-meta.mojang.com/v1/packages/476e5347910fde3aa785539335426dc61b873957/17.json",
-                "18": "https://piston-meta.mojang.com/v1/packages/e18c0567edd9ab351c35392c12d29776041deb08/18.json",
-                "19": "https://piston-meta.mojang.com/v1/packages/66408588d753637db46d8eeff2337784ff794139/19.json",
-                "24": "https://piston-meta.mojang.com/v1/packages/1844539979943a2dd794d359de78acf145ac9c2a/24.json",
-                "26": "https://piston-meta.mojang.com/v1/packages/db7773c4edb5cba4f10ac670c21656c377671dcc/26.json",
-                "27": "https://piston-meta.mojang.com/v1/packages/1c7664f3e99f9fc16d232d451d5fa08b81ec3cda/27.json",
-                "29": "https://piston-meta.mojang.com/v1/packages/eceac3cc1d625ec08f109ca0a67829d7ef49361f/29.json",
-                "30": "https://piston-meta.mojang.com/v1/packages/9cab977ba76deb72fad9995b02f25cf3326eedd0/30.json",
-                "31": "https://piston-meta.mojang.com/v1/packages/5bab296761dcb7ab20f250d663a97373914b40f9/31.json"
+                "5": "https://piston-meta.mojang.com/v1/packages/e4ef9bc581951628e6bcedb8759e7dcb0406ceb3/5.json",
+                "12": "https://piston-meta.mojang.com/v1/packages/6d6e5e15cb2af39972c33c20538c1c7e20f4ba7c/12.json",
+                "16": "https://piston-meta.mojang.com/v1/packages/6d9d7fb183a3bb12899b2cd0dfd575db28e5d571/16.json",
+                "17": "https://piston-meta.mojang.com/v1/packages/8d3b27f99b0221a9fdb9ea632cd60920a839ab36/17.json",
+                "18": "https://piston-meta.mojang.com/v1/packages/87e537afc03bac765ce69874f5ceb928bcec0a46/18.json",
+                "19": "https://piston-meta.mojang.com/v1/packages/c77b2fcddab5b229caad0f7d3bc41684db7a4f23/19.json",
+                "24": "https://piston-meta.mojang.com/v1/packages/43ff61dacc1e8e75ee59ea7cdaa004da16291530/24.json",
+                "26": "https://piston-meta.mojang.com/v1/packages/701e1434285a1f88beacf24ac7ba2ba82df9c281/26.json",
+                "27": "https://piston-meta.mojang.com/v1/packages/bed25a1843e4e581c675bd4f008490e3cdc4c6f4/27.json",
+                "29": "https://piston-meta.mojang.com/v1/packages/69bfc43bb212ba9ad4dd611da8e910eaf414134a/29.json",
+                "30": "https://piston-meta.mojang.com/v1/packages/77755c06f803fbc30617870e64fa70df435bc09d/30.json",
+                "31": "https://piston-meta.mojang.com/v1/packages/a2d1b3489709444f6890d8b29d00fe4cf78dc3ed/31.json"
               },
               "version_assets": {
                 "b1.7.3": "pre-1.6",
@@ -17152,7 +17152,7 @@
                 "26.1": "30",
                 "26.1.1": "30",
                 "26.1.2-rc-1": "30",
-                "26.2-snapshot-1": "31"
+                "26.2-snapshot-2": "31"
               }
             }
           }

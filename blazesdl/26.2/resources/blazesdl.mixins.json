@@ -9,6 +9,7 @@
     "Blaze3DMixin",
     "CursorTypeMixin",
     "EditBoxMixin",
+    "GLDeviceMixin",
     "GLFWMixin",
     "InputConstantsMixin",
     "MinecraftMixin",

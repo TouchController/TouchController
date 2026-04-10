@@ -96,6 +96,11 @@ public abstract class WindowMixin {
         SDLVideo.SDL_DestroyWindow(window);
     }
 
+    @Redirect(method = "close", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/Callbacks;glfwFreeCallbacks(J)V"))
+    private void onGlfwFreeCallbacks(long window) {
+        // no-op
+    }
+
     @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSetFramebufferSizeCallback(JLorg/lwjgl/glfw/GLFWFramebufferSizeCallbackI;)Lorg/lwjgl/glfw/GLFWFramebufferSizeCallback;"))
     private GLFWFramebufferSizeCallback onSetFramebufferSizeCallback(long window, GLFWFramebufferSizeCallbackI cbfun) {
         EventCallback.onFramebufferResize = cbfun;
@@ -132,7 +137,7 @@ public abstract class WindowMixin {
         return null;
     }
 
-    @Inject(method = "getPlatform", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwGetPlatform()I"), cancellable = true)
+    @Inject(method = "getPlatform", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/GLX;getGlfwPlatform()I"), cancellable = true)
     private static void overrideGetPlatform(CallbackInfoReturnable<String> cir) {
         cir.setReturnValue(SDLPlatform.SDL_GetPlatform());
     }

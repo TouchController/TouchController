@@ -128,6 +128,20 @@ public class SDLWindow extends Window {
         }
     }
 
+    @SuppressWarnings("resource")
+    @Override
+    public int getRefreshRate() {
+        var monitor = SDLVideo.SDL_GetDisplayForWindow(this.handle);
+        if (monitor == 0L) {
+            throw SDLError.handleError("SDL_GetDisplayForWindow");
+        }
+        var videoMode = SDLVideo.SDL_GetCurrentDisplayMode(monitor);
+        if (videoMode == null) {
+            throw SDLError.handleError("SDL_GetCurrentDisplayMode");
+        }
+        return Math.round(videoMode.refresh_rate());
+    }
+
     @Override
     protected void setMode() {
         var wasFullscreen = (SDLVideo.SDL_GetWindowFlags(this.handle) & SDLVideo.SDL_WINDOW_FULLSCREEN) != 0;

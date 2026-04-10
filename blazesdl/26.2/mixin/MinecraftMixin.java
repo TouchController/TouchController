@@ -45,6 +45,16 @@ public abstract class MinecraftMixin {
         return new SDLTextInputManager((SDLWindow) window);
     }
 
+    @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwDefaultWindowHints()V"))
+    private void defaultWindowHints() {
+        // no-op
+    }
+
+    @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwWindowHint(II)V"))
+    private void windowHint(int hint, int value) {
+        SDLWindow.useExclusiveFullscreen = value != 0;
+    }
+
     @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwShowWindow(J)V"))
     private void showWindow(long handle) {
         if (!SDLVideo.SDL_ShowWindow(handle)) {
