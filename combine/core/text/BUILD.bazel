@@ -1,0 +1,12 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "text",
+    srcs = glob(["*.kt"]),
+    expect = True,
+    merge_deps = [
+        "//combine/core/data",
+        "//combine/data",
+    ],
+    visibility = ["//visibility:public"],
+)

@@ -27,7 +27,7 @@ import top.fifthlight.combine.modifier.placement.minHeight
 import top.fifthlight.combine.modifier.pointer.clickable
 import top.fifthlight.combine.node.LocalInputHandler
 import top.fifthlight.combine.paint.Colors
-import top.fifthlight.combine.paint.TextMeasurer
+import top.fifthlight.combine.text.TextMeasurer
 import top.fifthlight.combine.theme.LocalTheme
 import top.fifthlight.combine.ui.style.DrawableSet
 import top.fifthlight.combine.widget.Canvas

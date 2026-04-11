@@ -13,18 +13,13 @@ import kotlinx.serialization.Serializable
 import top.fifthlight.combine.data.Text
 import top.fifthlight.combine.paint.Color
 import top.fifthlight.combine.paint.Colors
-import top.fifthlight.combine.paint.TextMeasurer
-import top.fifthlight.combine.paint.TextMeasurerFactory
+import top.fifthlight.combine.text.TextMeasurer
 import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntPadding
 import top.fifthlight.data.IntRect
 import top.fifthlight.data.IntSize
 import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.common.control.BooleanProperty
-import top.fifthlight.touchcontroller.common.control.ButtonTriggerProperty
-import top.fifthlight.touchcontroller.common.control.ColorProperty
-import top.fifthlight.touchcontroller.common.control.ControllerWidget
-import top.fifthlight.touchcontroller.common.control.StringProperty
+import top.fifthlight.touchcontroller.common.control.*
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.align.Align
@@ -53,8 +48,6 @@ data class CustomWidget(
     override val lockMoving: Boolean = false,
 ) : ControllerWidget() {
     companion object {
-        private val textMeasurer: TextMeasurer = TextMeasurerFactory.of()
-
         @Suppress("UNCHECKED_CAST")
         private val _properties = properties + persistentListOf<Property<CustomWidget, *>>(
             BooleanProperty(
@@ -119,7 +112,7 @@ data class CustomWidget(
         get() = _properties
 
     private fun ButtonTexture.getSize(): Pair<IntSize, IntOffset> {
-        fun measureCenterText() = centerText?.takeIf { it.isNotEmpty() }?.let(textMeasurer::measure) ?: IntSize.ZERO
+        fun measureCenterText() = centerText?.takeIf { it.isNotEmpty() }?.let(TextMeasurer::measure) ?: IntSize.ZERO
         return when (val texture = this) {
             is ButtonTexture.Empty -> {
                 val textSize = measureCenterText()

@@ -11,7 +11,7 @@ import top.fifthlight.combine.layout.measure.MeasureScope
 import top.fifthlight.combine.modifier.Modifier
 import top.fifthlight.combine.paint.Color
 import top.fifthlight.combine.paint.Colors
-import top.fifthlight.combine.paint.TextMeasurer
+import top.fifthlight.combine.text.TextMeasurer
 import top.fifthlight.data.IntOffset
 
 @Composable

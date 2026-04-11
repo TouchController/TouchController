@@ -2,6 +2,7 @@ package top.fifthlight.combine.paint
 
 import top.fifthlight.combine.data.Text
 import top.fifthlight.combine.input.pointer.PointerIcon
+import top.fifthlight.combine.text.TextMeasurer
 import top.fifthlight.data.*
 import kotlin.math.max
 import kotlin.math.min
@@ -138,8 +139,7 @@ fun Canvas.drawCenteredText(
     text: String,
     color: Color,
 ) {
-    val textMeasurer: TextMeasurer = TextMeasurerFactory.of()
-    val size = textMeasurer.measure(text)
+    val size = TextMeasurer.measure(text)
     drawText(offset - size / 2, text, color)
 }
 
@@ -148,7 +148,6 @@ fun Canvas.drawCenteredText(
     text: Text,
     color: Color,
 ) {
-    val textMeasurer: TextMeasurer = TextMeasurerFactory.of()
-    val size = textMeasurer.measure(text)
+    val size = TextMeasurer.measure(text)
     drawText(offset - size / 2, text, color)
 }

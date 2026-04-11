@@ -9,7 +9,7 @@ kt_merge_library(
         "//combine/backend/minecraft/game/1.21.11",
         "//combine/backend/minecraft/text/1.21.11",
         "//combine/core/data",
-        "//combine/core/paint",
+        "//combine/core/text",
         "//combine/data",
     ],
 )

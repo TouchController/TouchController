@@ -13,6 +13,7 @@ kt_merge_library(
         "//combine/core/node",
         "//combine/core/paint",
         "//combine/core/screen",
+        "//combine/core/text",
         "//combine/core/widget/layout",
         "//combine/data",
     ],

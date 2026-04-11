@@ -1,4 +1,4 @@
-package top.fifthlight.combine.paint
+package top.fifthlight.combine.text
 
 import top.fifthlight.combine.data.Text
 import top.fifthlight.data.IntSize
@@ -15,5 +15,5 @@ interface TextMeasurer {
         fun of(): TextMeasurer
     }
 
-    companion object: TextMeasurer by TextMeasurerFactory.of()
+    companion object : TextMeasurer by TextMeasurerFactory.of()
 }

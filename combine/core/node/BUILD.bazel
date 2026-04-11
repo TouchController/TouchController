@@ -13,6 +13,7 @@ kt_merge_library(
         "//combine/core/layout/measure",
         "//combine/core/modifier",
         "//combine/core/paint",
+        "//combine/core/text",
         "//combine/data",
     ],
     visibility = ["//visibility:public"],

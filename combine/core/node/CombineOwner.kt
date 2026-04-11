@@ -16,7 +16,6 @@ import top.fifthlight.combine.input.text.InputHandler
 import top.fifthlight.combine.input.text.TextInputReceiver
 import top.fifthlight.combine.layout.constraints.Constraints
 import top.fifthlight.combine.paint.Canvas
-import top.fifthlight.combine.paint.TextMeasurer
 import top.fifthlight.data.IntSize
 import top.fifthlight.data.Offset
 import kotlin.coroutines.CoroutineContext

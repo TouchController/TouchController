@@ -25,6 +25,7 @@ kt_merge_library(
         "//combine/core/paint",
         "//combine/core/screen",
         "//combine/core/sound",
+        "//combine/core/text",
         "//combine/core/widget",
         "//combine/core/widget/layout",
         "//combine/data",
