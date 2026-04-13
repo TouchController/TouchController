@@ -53,7 +53,8 @@ fun ItemGrid(
         modifier = modifier
             .clickableWithOffset { position ->
                 val size = calculateSize(stacks.size, width)
-                val gridPosition = position.toIntOffset() / gridSize
+                val gridPosition =
+                    (position.toIntOffset() / gridSize).takeIf { it.x < size.width } ?: return@clickableWithOffset
                 val index = gridPosition.y * size.width + gridPosition.x
                 val (item, stack) = stacks.getOrNull(index) ?: return@clickableWithOffset
                 onStackClicked(item, stack)
