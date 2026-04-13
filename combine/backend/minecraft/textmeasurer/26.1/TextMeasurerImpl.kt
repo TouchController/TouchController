@@ -1,6 +1,7 @@
 package top.fifthlight.combine.backend.minecraft.textmeasurer.v26_1
 
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.Font
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
 import top.fifthlight.combine.backend.minecraft.text.v26_1.toMinecraft
@@ -16,20 +17,19 @@ object TextMeasurerImpl : TextMeasurer {
     @ActualConstructor
     fun of(): TextMeasurer = TextMeasurerImpl
 
-    private val client = Minecraft.getInstance()
-    private val textRenderer = client.font
+    val font: Font = Minecraft.getInstance().font
 
     private fun measure(text: FormattedText) = IntSize(
-        width = textRenderer.split(text, Int.MAX_VALUE).maxOfOrNull { textRenderer.width(it) } ?: 0,
-        height = textRenderer.wordWrapHeight(text, Int.MAX_VALUE),
+        width = font.split(text, Int.MAX_VALUE).maxOfOrNull { font.width(it) } ?: 0,
+        height = font.wordWrapHeight(text, Int.MAX_VALUE),
     )
 
     private fun measure(text: FormattedText, maxWidth: Int) = maxWidth.coerceAtLeast(0).let { maxWidth ->
         IntSize(
-            width = textRenderer.split(text, maxWidth)
-                .maxOfOrNull { textRenderer.width(it) }
+            width = font.split(text, maxWidth)
+                .maxOfOrNull { font.width(it) }
                 ?.coerceIn(0, maxWidth) ?: 0,
-            height = textRenderer.wordWrapHeight(text, maxWidth),
+            height = font.wordWrapHeight(text, maxWidth),
         )
     }
 

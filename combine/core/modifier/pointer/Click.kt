@@ -23,9 +23,9 @@ sealed class ClickInteraction : Interaction {
     data object Active : ClickInteraction()
 }
 
-class ClickState internal constructor(
-    internal var pressed: Boolean = false,
-    internal var entered: Boolean = false,
+class ClickState(
+    var pressed: Boolean = false,
+    var entered: Boolean = false,
 )
 
 @Composable

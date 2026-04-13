@@ -19,69 +19,65 @@ fun BaseText(
     text: Text,
     modifier: Modifier = Modifier,
     color: Color = Colors.WHITE,
-) {
-    Layout(
-        modifier = modifier,
-        measurePolicy = object : MeasurePolicy {
-            override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
-                val measureResult = if (constraints.maxWidth == Int.MAX_VALUE) {
-                    TextMeasurer.measure(text)
-                } else {
-                    TextMeasurer.measure(text, constraints.maxWidth)
-                }
-                return layout(measureResult.width, measureResult.height) {}
+) = Layout(
+    modifier = modifier,
+    measurePolicy = object : MeasurePolicy {
+        override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
+            val measureResult = if (constraints.maxWidth == Int.MAX_VALUE) {
+                TextMeasurer.measure(text)
+            } else {
+                TextMeasurer.measure(text, constraints.maxWidth)
             }
-
-            override fun MeasureScope.minIntrinsicWidth(measurables: List<Measurable>, height: Int): Int =
-                TextMeasurer.measure(text).width
-
-            override fun MeasureScope.minIntrinsicHeight(measurables: List<Measurable>, width: Int): Int =
-                TextMeasurer.measure(text, width).height
-
-            override fun MeasureScope.maxIntrinsicWidth(measurables: List<Measurable>, height: Int): Int =
-                TextMeasurer.measure(text).width
-
-            override fun MeasureScope.maxIntrinsicHeight(measurables: List<Measurable>, width: Int): Int =
-                TextMeasurer.measure(text, width).height
-        },
-        renderer = { canvas, node ->
-            canvas.drawText(IntOffset.ZERO, node.width, text, color)
+            return layout(measureResult.width, measureResult.height) {}
         }
-    )
-}
+
+        override fun MeasureScope.minIntrinsicWidth(measurables: List<Measurable>, height: Int): Int =
+            TextMeasurer.measure(text).width
+
+        override fun MeasureScope.minIntrinsicHeight(measurables: List<Measurable>, width: Int): Int =
+            TextMeasurer.measure(text, width).height
+
+        override fun MeasureScope.maxIntrinsicWidth(measurables: List<Measurable>, height: Int): Int =
+            TextMeasurer.measure(text).width
+
+        override fun MeasureScope.maxIntrinsicHeight(measurables: List<Measurable>, width: Int): Int =
+            TextMeasurer.measure(text, width).height
+    },
+    renderer = { canvas, node ->
+        canvas.drawText(IntOffset.ZERO, node.width, text, color)
+    }
+)
 
 @Composable
 fun BaseText(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Colors.WHITE,
-) {
-    Layout(
-        modifier = modifier,
-        measurePolicy = object : MeasurePolicy {
-            override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
-                val measureResult = if (constraints.maxWidth == Int.MAX_VALUE) {
-                    TextMeasurer.measure(text)
-                } else {
-                    TextMeasurer.measure(text, constraints.maxWidth)
-                }
-                return layout(measureResult.width, measureResult.height) {}
+) = Layout(
+    modifier = modifier,
+    measurePolicy = object : MeasurePolicy {
+        override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
+            val measureResult = if (constraints.maxWidth == Int.MAX_VALUE) {
+                TextMeasurer.measure(text)
+            } else {
+                TextMeasurer.measure(text, constraints.maxWidth)
             }
-
-            override fun MeasureScope.minIntrinsicWidth(measurables: List<Measurable>, height: Int): Int =
-                TextMeasurer.measure(text).width
-
-            override fun MeasureScope.minIntrinsicHeight(measurables: List<Measurable>, width: Int): Int =
-                TextMeasurer.measure(text, width).height
-
-            override fun MeasureScope.maxIntrinsicWidth(measurables: List<Measurable>, height: Int): Int =
-                TextMeasurer.measure(text).width
-
-            override fun MeasureScope.maxIntrinsicHeight(measurables: List<Measurable>, width: Int): Int =
-                TextMeasurer.measure(text, width).height
-        },
-        renderer = { canvas, node ->
-            canvas.drawText(IntOffset.ZERO, node.width, text, color)
+            return layout(measureResult.width, measureResult.height) {}
         }
-    )
-}
+
+        override fun MeasureScope.minIntrinsicWidth(measurables: List<Measurable>, height: Int): Int =
+            TextMeasurer.measure(text).width
+
+        override fun MeasureScope.minIntrinsicHeight(measurables: List<Measurable>, width: Int): Int =
+            TextMeasurer.measure(text, width).height
+
+        override fun MeasureScope.maxIntrinsicWidth(measurables: List<Measurable>, height: Int): Int =
+            TextMeasurer.measure(text).width
+
+        override fun MeasureScope.maxIntrinsicHeight(measurables: List<Measurable>, width: Int): Int =
+            TextMeasurer.measure(text, width).height
+    },
+    renderer = { canvas, node ->
+        canvas.drawText(IntOffset.ZERO, node.width, text, color)
+    }
+)

@@ -16,20 +16,18 @@ fun Text(
     modifier: Modifier = Modifier,
     color: Color = LocalColorTheme.current.foreground,
     textStyle: TextStyle = LocalTextStyle.current,
-) {
-    if (textStyle.haveStyle) {
-        BaseText(
-            text = TextFactory.build { style(textStyle) { append(text) } },
-            modifier = modifier,
-            color = color,
-        )
-    } else {
-        BaseText(
-            text = text,
-            modifier = modifier,
-            color = color,
-        )
-    }
+) = if (textStyle.haveStyle) {
+    BaseText(
+        text = TextFactory.build { style(textStyle) { append(text) } },
+        modifier = modifier,
+        color = color,
+    )
+} else {
+    BaseText(
+        text = text,
+        modifier = modifier,
+        color = color,
+    )
 }
 
 @Composable
@@ -38,18 +36,16 @@ fun Text(
     modifier: Modifier = Modifier,
     color: Color = LocalColorTheme.current.foreground,
     textStyle: TextStyle = LocalTextStyle.current,
-) {
-    if (textStyle.haveStyle) {
-        BaseText(
-            text = text.style(textStyle),
-            modifier = modifier,
-            color = color,
-        )
-    } else {
-        BaseText(
-            text = text,
-            modifier = modifier,
-            color = color,
-        )
-    }
+) = if (textStyle.haveStyle) {
+    BaseText(
+        text = text.style(textStyle),
+        modifier = modifier,
+        color = color,
+    )
+} else {
+    BaseText(
+        text = text,
+        modifier = modifier,
+        color = color,
+    )
 }

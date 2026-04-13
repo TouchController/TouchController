@@ -26,6 +26,7 @@ merge_library_group(
         "//combine/core/paint",
         "//combine/core/screen",
         "//combine/core/sound",
+        "//combine/core/text",
         "//combine/core/util/dispatcher",
         "//combine/core/util/math",
         "//combine/core/widget",

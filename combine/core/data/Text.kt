@@ -1,7 +1,6 @@
 package top.fifthlight.combine.data
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.staticCompositionLocalOf
 import top.fifthlight.mergetools.api.ExpectFactory
 
 enum class TextColor {
@@ -29,8 +28,7 @@ data class TextStyle(
     val italic: Boolean = false,
     val color: TextColor? = null,
 ) {
-    val haveStyle: Boolean
-        get() = bold || underline || italic || color != null
+    val haveStyle = bold || underline || italic || color != null
 
     companion object {
         val default = TextStyle()

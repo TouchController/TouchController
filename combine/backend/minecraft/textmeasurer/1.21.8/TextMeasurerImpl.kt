@@ -1,6 +1,7 @@
 package top.fifthlight.combine.backend.minecraft.textmeasurer.v1_21_8
 
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.Font
 import net.minecraft.network.chat.Component
 import top.fifthlight.combine.backend.minecraft.text.v1_21_8.toMinecraft
 import top.fifthlight.combine.data.Text
@@ -15,34 +16,33 @@ object TextMeasurerImpl : TextMeasurer {
     @ActualConstructor
     fun of(): TextMeasurer = TextMeasurerImpl
 
-    private val client = Minecraft.getInstance()
-    private val textRenderer = client.font
+    val font: Font = Minecraft.getInstance().font
 
     override fun measure(text: String) = IntSize(
-        width = textRenderer.split(Component.literal(text), Int.MAX_VALUE).maxOfOrNull { textRenderer.width(it) } ?: 0,
-        height = textRenderer.wordWrapHeight(text, Int.MAX_VALUE),
+        width = font.split(Component.literal(text), Int.MAX_VALUE).maxOfOrNull { font.width(it) } ?: 0,
+        height = font.wordWrapHeight(text, Int.MAX_VALUE),
     )
 
     override fun measure(text: String, maxWidth: Int) = maxWidth.coerceAtLeast(0).let { maxWidth ->
         IntSize(
-            width = textRenderer.split(Component.literal(text), maxWidth)
-                .maxOfOrNull { textRenderer.width(it) }
+            width = font.split(Component.literal(text), maxWidth)
+                .maxOfOrNull { font.width(it) }
                 ?.coerceIn(0, maxWidth) ?: 0,
-            height = textRenderer.wordWrapHeight(text, maxWidth),
+            height = font.wordWrapHeight(text, maxWidth),
         )
     }
 
     override fun measure(text: Text) = IntSize(
-        width = textRenderer.split(text.toMinecraft(), Int.MAX_VALUE).maxOfOrNull { textRenderer.width(it) } ?: 0,
-        height = textRenderer.wordWrapHeight(text.toMinecraft(), Int.MAX_VALUE),
+        width = font.split(text.toMinecraft(), Int.MAX_VALUE).maxOfOrNull { font.width(it) } ?: 0,
+        height = font.wordWrapHeight(text.toMinecraft(), Int.MAX_VALUE),
     )
 
     override fun measure(text: Text, maxWidth: Int) = maxWidth.coerceAtLeast(0).let { maxWidth ->
         IntSize(
-            width = textRenderer.split(text.toMinecraft(), maxWidth)
-                .maxOfOrNull { textRenderer.width(it) }
+            width = font.split(text.toMinecraft(), maxWidth)
+                .maxOfOrNull { font.width(it) }
                 ?.coerceIn(0, maxWidth) ?: 0,
-            height = textRenderer.wordWrapHeight(text.toMinecraft(), maxWidth),
+            height = font.wordWrapHeight(text.toMinecraft(), maxWidth),
         )
     }
 }
