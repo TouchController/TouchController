@@ -1,5 +1,13 @@
 # TouchController NEWS - User visible changes
 
+## 0.3.1-alpha09
+
+- Added spear into long press to use items
+- Fixed HUD overlay sorting, so widgets are no longer under pumpkin head and powder snow overlay
+- Fixed text layout in about tab
+- Fixed behavior when clicking outside item grid
+- Added support for clicking text in chat
+
 ## 0.3.1-alpha08
 
 - Fixed crash when saving top bar config

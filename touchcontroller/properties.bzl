@@ -1,5 +1,5 @@
 "Common properties in TouchController"
-touchcontroller_version = "0.3.1-alpha08"
+touchcontroller_version = "0.3.1-alpha09"
 touchcontroller_state = "alpha"
 touchcontroller_description = "Bring controlling style of bedrock version to Java version!"
 touchcontroller_license = "LGPL-3.0-or-later"
