@@ -83,3 +83,24 @@ merge_library_group(
         "//combine/backend/minecraft/textmeasurer/26.1",
     ],
 )
+
+merge_library_group(
+    name = "26.2",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//combine/backend/minecraft/clipboard/26.2",
+        "//combine/backend/minecraft/dispatcher/26.2",
+        "//combine/backend/minecraft/drawable/26.2",
+        "//combine/backend/minecraft/hittest/26.2",
+        "//combine/backend/minecraft/identifier/26.2",
+        "//combine/backend/minecraft/input/26.2",
+        "//combine/backend/minecraft/item/26.2",
+        "//combine/backend/minecraft/keycode/26.2",
+        "//combine/backend/minecraft/render/26.2",
+        "//combine/backend/minecraft/screen/26.2",
+        "//combine/backend/minecraft/sound/26.2",
+        "//combine/backend/minecraft/text/26.2",
+        "//combine/backend/minecraft/textbuilder/26.2",
+        "//combine/backend/minecraft/textmeasurer/26.2",
+    ],
+)

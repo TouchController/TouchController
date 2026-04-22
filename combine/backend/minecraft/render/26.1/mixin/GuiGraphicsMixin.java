@@ -42,7 +42,7 @@ public abstract class GuiGraphicsMixin implements SubmittableGuiGraphics, Sprite
     }
 
     @Override
-    public TextureAtlasSprite combine$getSprite(Identifier Identifier) {
-        return guiSprites.getSprite(Identifier);
+    public TextureAtlasSprite combine$getSprite(Identifier identifier) {
+        return guiSprites.getSprite(identifier);
     }
 }

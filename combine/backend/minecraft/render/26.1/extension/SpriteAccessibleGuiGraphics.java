@@ -4,5 +4,5 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.Identifier;
 
 public interface SpriteAccessibleGuiGraphics {
-    TextureAtlasSprite combine$getSprite(Identifier Identifier);
+    TextureAtlasSprite combine$getSprite(Identifier identifier);
 }

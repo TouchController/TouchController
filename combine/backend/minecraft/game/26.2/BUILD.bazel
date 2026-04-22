@@ -1,0 +1,28 @@
+load("//rule:apply_access_widener.bzl", "apply_access_widener")
+load("//rule/neoforge:convert_access_widener.bzl", "convert_access_widener")
+
+apply_access_widener(
+    name = "26.2",
+    srcs = ["combine.classtweaker"],
+    input = "//game/26.2:game_client",
+    neverlink = True,
+    visibility = ["//visibility:public"],
+)
+
+convert_access_widener(
+    name = "access_transformer_file",
+    src = "combine.classtweaker",
+    output_name = "access_transformer.cfg",
+)
+
+alias(
+    name = "access_transformer",
+    actual = ":access_transformer_file",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "access_widener",
+    actual = "combine.classtweaker",
+    visibility = ["//visibility:public"],
+)

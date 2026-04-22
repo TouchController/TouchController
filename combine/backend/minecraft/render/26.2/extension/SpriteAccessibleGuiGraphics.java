@@ -1,4 +1,4 @@
-package top.fifthlight.combine.backend.minecraft.render.v1_21_11.extension;
+package top.fifthlight.combine.backend.minecraft.render.v26_2.extension;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.Identifier;

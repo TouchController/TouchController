@@ -13,6 +13,7 @@ import top.fifthlight.combine.input.pointer.PointerEvent
 import top.fifthlight.combine.input.pointer.PointerEventReceiver
 import top.fifthlight.combine.input.pointer.PointerEventType
 import top.fifthlight.combine.input.text.InputHandler
+import top.fifthlight.combine.input.text.InputHandlerFactory
 import top.fifthlight.combine.input.text.TextInputReceiver
 import top.fifthlight.combine.layout.constraints.Constraints
 import top.fifthlight.combine.paint.Canvas
@@ -23,7 +24,7 @@ import kotlin.coroutines.CoroutineContext
 val LocalCombineOwner: ProvidableCompositionLocal<CombineOwner> =
     staticCompositionLocalOf { error("No CombineOwner in context") }
 val LocalInputHandler: ProvidableCompositionLocal<InputHandler?> =
-    staticCompositionLocalOf { null }
+    staticCompositionLocalOf { InputHandlerFactory.ofDefault() }
 val LocalScreenSize: ProvidableCompositionLocal<IntSize> =
     staticCompositionLocalOf { error("No ScreenSize in context") }
 
