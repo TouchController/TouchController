@@ -11,6 +11,7 @@ import com.mojang.blaze3d.shaders.ShaderSource;
 import com.mojang.blaze3d.systems.BackendCreationException;
 import com.mojang.blaze3d.systems.GpuDevice;
 import org.jspecify.annotations.NonNull;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.sdl.SDLVideo;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -36,6 +37,8 @@ public class SDLGlBackend extends GlBackend {
 
     @Override
     public @NonNull GpuDevice createDevice(long window, @NonNull ShaderSource defaultShaderSource, @NonNull GpuDebugOptions debugOptions) {
+        GL.create(SDLVideo::SDL_GL_GetProcAddress);
+
         var context = SDLVideo.SDL_GL_CreateContext(window);
         if (context == 0L) {
             SDLUtil.throwAny(handleError("SDL_GL_CreateContext"));
