@@ -7,6 +7,7 @@ import net.fabricmc.tinyremapper.OutputConsumerPath;
 import net.fabricmc.tinyremapper.TinyRemapper;
 import net.fabricmc.tinyremapper.extension.mixin.MixinExtension;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import top.fifthlight.bazel.worker.api.Worker;
 
 import java.io.IOException;
@@ -68,7 +69,7 @@ public class TinyRemapperWorker extends Worker implements AutoCloseable {
     }
 
     @Override
-    protected int handleRequest(@NonNull PrintWriter out, @NonNull Path sandboxDir, String... args) {
+    protected int handleRequest(@NonNull PrintWriter out, @Nullable Path sandboxDir, String... args) {
         try {
             List<String> parameters = new ArrayList<>();
             List<String> arguments = new ArrayList<>();
@@ -117,13 +118,13 @@ public class TinyRemapperWorker extends Worker implements AutoCloseable {
 
             var inputJar = arguments.get(0);
             var outputJar = arguments.get(1);
-            var mappingPath = sandboxDir.resolve(Paths.get(arguments.get(2)));
+            var mappingPath = sandboxDir != null ? sandboxDir.resolve(Paths.get(arguments.get(2))) : Paths.get(arguments.get(2));
             var fromNamespace = arguments.get(3);
             var toNamespace = arguments.get(4);
 
             var classpath = arguments.subList(5, arguments.size())
                     .stream()
-                    .map(first -> sandboxDir.resolve(sandboxDir.resolve(Paths.get(first))))
+                    .map(first -> sandboxDir != null ? sandboxDir.resolve(Paths.get(first)) : Paths.get(first))
                     .toList();
 
             if (accessWidenerSourceNamespace == null || accessWidenerSourceNamespace.isEmpty()) {
@@ -158,7 +159,7 @@ public class TinyRemapperWorker extends Worker implements AutoCloseable {
 
             var remapper = builder.build();
 
-            var input = sandboxDir.resolve(Paths.get(inputJar));
+            var input = sandboxDir != null ? sandboxDir.resolve(Paths.get(inputJar)) : Paths.get(inputJar);
             var outputTempFs = Jimfs.newFileSystem(Configuration.unix());
             var outputTempRoot = outputTempFs.getPath("/");
             try {
@@ -192,7 +193,7 @@ public class TinyRemapperWorker extends Worker implements AutoCloseable {
                 remapper.finish();
             }
 
-            try (var outputJarStream = new JarOutputStream(Files.newOutputStream(sandboxDir.resolve(Paths.get(outputJar))));
+            try (var outputJarStream = new JarOutputStream(Files.newOutputStream(sandboxDir != null ? sandboxDir.resolve(Paths.get(outputJar)) : Paths.get(outputJar)));
                  var outputFilePaths = Files.walk(outputTempRoot)) {
                 outputFilePaths
                         .sorted()

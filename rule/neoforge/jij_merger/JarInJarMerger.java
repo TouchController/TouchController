@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import top.fifthlight.bazel.worker.api.Worker;
 
 import java.io.ByteArrayOutputStream;
@@ -57,9 +58,9 @@ public class JarInJarMerger extends Worker {
     }
 
     @Override
-    protected int handleRequest(@NonNull PrintWriter out, @NonNull Path sandboxDir, @NonNull String... args) throws Exception {
-        var inputJar = sandboxDir.resolve(Path.of(args[0]));
-        var outputJar = sandboxDir.resolve(Path.of(args[1]));
+    protected int handleRequest(@NonNull PrintWriter out, @Nullable Path sandboxDir, @NonNull String... args) throws Exception {
+        var inputJar = sandboxDir != null ? sandboxDir.resolve(Path.of(args[0])) : Path.of(args[0]);
+        var outputJar = sandboxDir != null ? sandboxDir.resolve(Path.of(args[1])) : Path.of(args[1]);
         if (args.length % 2 != 0) {
             out.println("Bad arguments length: " + args.length);
             return 1;
@@ -68,7 +69,7 @@ public class JarInJarMerger extends Worker {
         var jarEntries = new ArrayList<JijEntry>();
         for (var i = 2; i < args.length; i += 2) {
             var descriptionStr = args[i];
-            var filePath = sandboxDir.resolve(Path.of(args[i + 1]));
+            var filePath = sandboxDir != null ? sandboxDir.resolve(Path.of(args[i + 1])) : Path.of(args[i + 1]);
             var matcher = DESCRIPTION_PATTERN.matcher(descriptionStr);
             if (!matcher.matches()) {
                 out.println("Bad description: " + descriptionStr);

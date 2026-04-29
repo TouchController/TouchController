@@ -16,7 +16,7 @@ fun main(vararg args: String) = AccessWidenerExtractor.run(*args)
 object AccessWidenerExtractor : Worker() {
     override fun handleRequest(
         out: PrintWriter,
-        sandboxDir: Path,
+        sandboxDir: Path?,
         args: Array<String>,
     ): Int {
         try {
@@ -25,7 +25,7 @@ object AccessWidenerExtractor : Worker() {
                 return 1
             }
 
-            val outputPath = sandboxDir.resolve(Path.of(args[0]))
+            val outputPath = sandboxDir?.resolve(Path.of(args[0])) ?: Path.of(args[0])
             val format = Json {
                 ignoreUnknownKeys = true
             }
@@ -33,7 +33,7 @@ object AccessWidenerExtractor : Worker() {
             for (index in 1 until args.size) {
                 val arg = args[index]
                 try {
-                    val jarPath = sandboxDir.resolve(Path.of(arg))
+                    val jarPath = sandboxDir?.resolve(Path.of(arg)) ?: Path.of(arg)
                     JarFile(jarPath.toFile(), false).use { jarFile ->
                         val jsonEntry = jarFile.getJarEntry("fabric.mod.json") ?: continue
                         val json = jarFile.getInputStream(jsonEntry).reader()

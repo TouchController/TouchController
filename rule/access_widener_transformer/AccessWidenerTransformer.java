@@ -3,7 +3,9 @@ package top.fifthlight.fabazel.accesswidenertransformer;
 import net.fabricmc.classtweaker.api.ClassTweaker;
 import net.fabricmc.classtweaker.api.ClassTweakerReader;
 import net.fabricmc.classtweaker.classvisitor.AccessWidenerClassVisitor;
-import org.jspecify.annotations.NonNull;import org.objectweb.asm.ClassReader;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import top.fifthlight.bazel.worker.api.Worker;
@@ -33,20 +35,20 @@ public class AccessWidenerTransformer extends Worker {
     }
 
     @Override
-    protected int handleRequest(@NonNull PrintWriter out, @NonNull Path sandboxDir, String... args) {
+    protected int handleRequest(@NonNull PrintWriter out, @Nullable Path sandboxDir, String... args) {
         try {
             if (args.length < 2) {
                 out.println("Usage: AccessWidenerTransformer <input> <output> [accessWidenerFiles...]");
                 return 1;
             }
 
-            var inputFile = sandboxDir.resolve(Path.of(args[0]));
-            var outputFile = sandboxDir.resolve(Path.of(args[1]));
+            var inputFile = sandboxDir != null ? sandboxDir.resolve(Path.of(args[0])) : Path.of(args[0]);
+            var outputFile = sandboxDir != null ? sandboxDir.resolve(Path.of(args[1])) : Path.of(args[1]);
 
             var accessWidener = ClassTweaker.newInstance();
             var accessWidenerReader = ClassTweakerReader.create(accessWidener);
             for (var i = 2; i < args.length; i++) {
-                var srcFile = sandboxDir.resolve(Path.of(args[i]));
+                var srcFile = sandboxDir != null ? sandboxDir.resolve(Path.of(args[i])) : Path.of(args[i]);
                 try (var reader = Files.newBufferedReader(srcFile)) {
                     accessWidenerReader.read(reader, null);
                 }

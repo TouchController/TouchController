@@ -1,5 +1,6 @@
 package top.fifthlight.mergetools.merger;
 
+import org.jspecify.annotations.Nullable;
 import top.fifthlight.mergetools.merger.api.MergeEntry;
 import top.fifthlight.mergetools.merger.api.Plugin;
 import top.fifthlight.mergetools.merger.impl.PreprocessEnvironmentImpl;
@@ -11,7 +12,10 @@ import java.nio.file.attribute.FileTime;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
-import java.util.jar.*;
+import java.util.jar.Attributes;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -45,52 +49,15 @@ public class ExpectActualMerger implements AutoCloseable {
         }
     }
 
-    private PreprocessEnvironmentImpl preprocess(Path sandboxPath, String[] args) throws Exception {
-        var environment = new PreprocessEnvironmentImpl(sandboxPath, args);
-
-        outputPath = sandboxPath.resolve(Path.of(environment.readNextArg()));
-
-        while (environment.hasNextArg()) {
-            var arg = environment.readNextArg();
-
-            var processedArg = false;
-            for (var plugin : plugins) {
-                processedArg = plugin.processArg(arg, environment);
-                if (processedArg) {
-                    break;
-                }
+    public static void process(@Nullable Path sandboxDir, String[] args) throws Exception {
+        try (var instance = new ExpectActualMerger();) {
+            var environment = instance.preprocess(sandboxDir, args);
+            for (var plugin : instance.plugins) {
+                plugin.preSorting(environment.getMergeEntries(), environment.getManifestEntries());
             }
-            if (processedArg) {
-                continue;
-            }
-
-            var inputPath = environment.resolvePath(Path.of(arg));
-            var jarFile = new JarFile(inputPath.toFile());
-            jarFiles.add(jarFile);
-
-            var enumerator = jarFile.entries();
-            JarEntry jarEntry;
-            while (enumerator.hasMoreElements()) {
-                jarEntry = enumerator.nextElement();
-                if (jarEntry.isDirectory()) {
-                    continue;
-                }
-
-                var processedEntry = false;
-                for (var plugin : plugins) {
-                    processedEntry = plugin.processJarEntry(jarFile, jarEntry, environment);
-                    if (processedEntry) {
-                        break;
-                    }
-                }
-                if (processedEntry) {
-                    continue;
-                }
-
-                environment.putMergeEntry(jarEntry.getName(), new JarItem(jarFile, jarEntry));
-            }
+            var outputEntries = instance.sort(environment.getMergeEntries());
+            instance.writeJar(outputEntries, environment);
         }
-        return environment;
     }
 
     private List<Map.Entry<String, MergeEntry>> sort(Map<String, MergeEntry> mergeEntries) {
@@ -133,14 +100,51 @@ public class ExpectActualMerger implements AutoCloseable {
         }
     }
 
-    public static void process(Path sandboxDir, String[] args) throws Exception {
-        try (var instance = new ExpectActualMerger();) {
-            var environment = instance.preprocess(sandboxDir, args);
-            for (var plugin : instance.plugins) {
-                plugin.preSorting(environment.getMergeEntries(), environment.getManifestEntries());
+    private PreprocessEnvironmentImpl preprocess(@Nullable Path sandboxPath, String[] args) throws Exception {
+        var environment = new PreprocessEnvironmentImpl(sandboxPath, args);
+
+        outputPath = sandboxPath != null ? sandboxPath.resolve(Path.of(environment.readNextArg())) : Path.of(environment.readNextArg());
+
+        while (environment.hasNextArg()) {
+            var arg = environment.readNextArg();
+
+            var processedArg = false;
+            for (var plugin : plugins) {
+                processedArg = plugin.processArg(arg, environment);
+                if (processedArg) {
+                    break;
+                }
             }
-            var outputEntries = instance.sort(environment.getMergeEntries());
-            instance.writeJar(outputEntries, environment);
+            if (processedArg) {
+                continue;
+            }
+
+            var inputPath = environment.resolvePath(Path.of(arg));
+            var jarFile = new JarFile(inputPath.toFile());
+            jarFiles.add(jarFile);
+
+            var enumerator = jarFile.entries();
+            JarEntry jarEntry;
+            while (enumerator.hasMoreElements()) {
+                jarEntry = enumerator.nextElement();
+                if (jarEntry.isDirectory()) {
+                    continue;
+                }
+
+                var processedEntry = false;
+                for (var plugin : plugins) {
+                    processedEntry = plugin.processJarEntry(jarFile, jarEntry, environment);
+                    if (processedEntry) {
+                        break;
+                    }
+                }
+                if (processedEntry) {
+                    continue;
+                }
+
+                environment.putMergeEntry(jarEntry.getName(), new JarItem(jarFile, jarEntry));
+            }
         }
+        return environment;
     }
 }

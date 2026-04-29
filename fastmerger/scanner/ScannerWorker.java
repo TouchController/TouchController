@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import picocli.CommandLine;
 import top.fifthlight.bazel.worker.api.Worker;
 import top.fifthlight.fastmerger.bindeps.BindepsConstants;
@@ -20,7 +21,8 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.jar.Manifest;
 
-import static picocli.CommandLine.*;
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Parameters;
 
 public class ScannerWorker extends Worker {
     private static class Environment {
@@ -340,6 +342,15 @@ public class ScannerWorker extends Worker {
         }
     }
 
+    @Override
+    protected int handleRequest(@NonNull PrintWriter out, @Nullable Path sandboxDir, String... args) {
+        var wrapper = new Handler(sandboxDir);
+        var commandLine = new CommandLine(wrapper);
+        commandLine.setOut(out);
+        commandLine.setErr(out);
+        return commandLine.execute(args);
+    }
+
     @Command(name = "scanner", mixinStandardHelpOptions = true)
     private static class Handler implements Callable<Integer> {
         @Parameters(index = "0", description = "JAR file to be scanned")
@@ -348,29 +359,20 @@ public class ScannerWorker extends Worker {
         @Parameters(index = "1", description = "Output binary dependencies file")
         Path outputFile;
 
-        private final Path sandboxDir;
+        private final @Nullable Path sandboxDir;
 
-        public Handler(Path sandboxDir) {
+        public Handler(@Nullable Path sandboxDir) {
             this.sandboxDir = sandboxDir;
         }
 
         @Override
         public Integer call() throws Exception {
-            var inputPath = sandboxDir.resolve(inputFile);
-            var outputPath = sandboxDir.resolve(outputFile);
+            var inputPath = sandboxDir != null ? sandboxDir.resolve(inputFile) : inputFile;
+            var outputPath = sandboxDir != null ? sandboxDir.resolve(outputFile) : outputFile;
             var environment = new Environment(inputPath, outputPath);
             environment.scan();
             return 0;
         }
-    }
-
-    @Override
-    protected int handleRequest(@NonNull PrintWriter out, @NonNull Path sandboxDir, String... args) {
-        var wrapper = new Handler(sandboxDir);
-        var commandLine = new CommandLine(wrapper);
-        commandLine.setOut(out);
-        commandLine.setErr(out);
-        return commandLine.execute(args);
     }
 
     public static void main(String[] args) throws Exception {

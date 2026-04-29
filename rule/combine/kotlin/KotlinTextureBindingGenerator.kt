@@ -86,7 +86,7 @@ private class Generator : CliktCommand() {
 fun main(vararg args: String) = object : Worker() {
     override fun handleRequest(
         out: PrintWriter,
-        sandboxDir: Path,
+        sandboxDir: Path?,
         vararg args: String
     ): Int {
         CommandLineParser.parseAndRun(Generator(), args.toList()) { command ->

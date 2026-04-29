@@ -6,7 +6,9 @@ import net.fabricmc.classtweaker.visitors.ClassTweakerRemapperVisitor;
 import net.fabricmc.mappingio.extras.MappingTreeRemapper;
 import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
-import org.jspecify.annotations.NonNull;import top.fifthlight.bazel.worker.api.Worker;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+import top.fifthlight.bazel.worker.api.Worker;
 
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -18,16 +20,16 @@ public class AccessWidenerRemapper extends Worker {
     }
 
     @Override
-    protected int handleRequest(@NonNull PrintWriter out, @NonNull Path sandboxDir, String... args) {
+    protected int handleRequest(@NonNull PrintWriter out, @Nullable Path sandboxDir, String... args) {
         try {
             if (args.length < 5) {
                 out.println("Usage: AccessWidenerRemapper <input> <output> <mapping> <fromNamespace> <toNamespace>");
                 return 1;
             }
 
-            var inputFile = sandboxDir.resolve(Path.of(args[0]));
-            var outputFile = sandboxDir.resolve(Path.of(args[1]));
-            var mappingFile = sandboxDir.resolve(Path.of(args[2]));
+            var inputFile = sandboxDir != null ? sandboxDir.resolve(Path.of(args[0])) : Path.of(args[0]);
+            var outputFile = sandboxDir != null ? sandboxDir.resolve(Path.of(args[1])) : Path.of(args[1]);
+            var mappingFile = sandboxDir != null ? sandboxDir.resolve(Path.of(args[2])) : Path.of(args[2]);
             var fromNamespace = args[3];
             var toNamespace = args[4];
 

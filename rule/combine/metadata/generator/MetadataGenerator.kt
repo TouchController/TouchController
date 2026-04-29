@@ -16,13 +16,13 @@ object MetadataGeneratorWorker : Worker() {
 
     override fun handleRequest(
         out: PrintWriter,
-        sandboxDir: Path,
+        sandboxDir: Path?,
         args: Array<String>,
     ): Int {
         val mode = args[0]
         val (options, arguments) = args.partition { it.startsWith("--") }
-        val inputFile = sandboxDir.resolve(Path.of(arguments[1]))
-        val outputFile = sandboxDir.resolve(Path.of(arguments[2]))
+        val inputFile = sandboxDir?.resolve(Path.of(arguments[1])) ?: Path.of(arguments[1])
+        val outputFile = sandboxDir?.resolve(Path.of(arguments[2])) ?: Path.of(arguments[2])
         val image = ImageIO.read(inputFile.toFile())
         val imageSize = IntSize(image.width, image.height)
         when (mode) {
@@ -39,7 +39,7 @@ object MetadataGeneratorWorker : Worker() {
                 val ninePatch = NinePatch(image)
                 val croppedImage = image.getSubimage(1, 1, image.width - 2, image.height - 2)
                 val (compressedNinePatch, compressedImage) = compressNinePatch(ninePatch, croppedImage)
-                val compressedOutputFile = sandboxDir.resolve(Path.of(arguments[3]))
+                val compressedOutputFile = sandboxDir?.resolve(Path.of(arguments[3])) ?: Path.of(arguments[3])
                 val metadata = NinePatchMetadata(
                     size = imageSize - 2,
                     ninePatch = compressedNinePatch,

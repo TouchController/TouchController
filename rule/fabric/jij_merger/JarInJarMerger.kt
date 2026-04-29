@@ -26,16 +26,16 @@ private fun JarEntry.clearTime() {
 fun main(args: Array<String>) = object : Worker() {
     override fun handleRequest(
         out: PrintWriter,
-        sandboxDir: Path,
+        sandboxDir: Path?,
         vararg args: String
     ): Int {
-        val inputJar = sandboxDir.resolve(Path.of(args[0]))
-        val outputJar = sandboxDir.resolve(Path.of(args[1]))
+        val inputJar = sandboxDir?.resolve(Path.of(args[0])) ?: Path.of(args[0])
+        val outputJar = sandboxDir?.resolve(Path.of(args[1])) ?: Path.of(args[1])
         val entries = args.slice(2 until args.size)
             .chunked(2)
             .map { (name, filePath) ->
                 val (name, version) = name.split(":")
-                Triple(name, version.takeIf { it != "=" }, sandboxDir.resolve(Path.of(filePath)))
+                Triple(name, version.takeIf { it != "=" }, sandboxDir?.resolve(Path.of(filePath)) ?: Path.of(filePath))
             }
 
         JarOutputStream(outputJar.outputStream()).use { output ->

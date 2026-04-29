@@ -7,5 +7,6 @@ java_library(
     deps = [
         "//rule/merge_expect_actual_jar/api",
         "@maven//:org_jetbrains_annotations",
+        "@maven//:org_jspecify_jspecify",
     ],
 )

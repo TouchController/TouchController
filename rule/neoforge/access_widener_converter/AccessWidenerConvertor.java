@@ -4,7 +4,9 @@ import net.fabricmc.classtweaker.api.ClassTweakerReader;
 import net.fabricmc.classtweaker.api.visitor.AccessWidenerVisitor;
 import net.fabricmc.classtweaker.api.visitor.ClassTweakerVisitor;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;import top.fifthlight.bazel.worker.api.Worker;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+import top.fifthlight.bazel.worker.api.Worker;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -85,15 +87,15 @@ public class AccessWidenerConvertor extends Worker {
     }
 
     @Override
-    protected int handleRequest(@NonNull PrintWriter out, @NonNull Path sandboxDir, String... args) {
+    protected int handleRequest(@NonNull PrintWriter out, @Nullable Path sandboxDir, String... args) {
         try {
             if (args.length < 2) {
                 out.println("Usage: AccessWidenerConvertor <input> <output>");
                 return 1;
             }
 
-            var inputFile = sandboxDir.resolve(Path.of(args[0]));
-            var outputFile = sandboxDir.resolve(Path.of(args[1]));
+            var inputFile = sandboxDir != null ? sandboxDir.resolve(Path.of(args[0])) : Path.of(args[0]);
+            var outputFile = sandboxDir != null ? sandboxDir.resolve(Path.of(args[1])) : Path.of(args[1]);
 
             try (var writer = Files.newBufferedWriter(outputFile); var accessTransformerWriter = new AccessTransformerWriter(writer)) {
                 var accessWidenerReader = ClassTweakerReader.create(accessTransformerWriter);

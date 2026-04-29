@@ -51,7 +51,7 @@ private data class Texture(
 fun main(vararg args: String) = object : Worker() {
     override fun handleRequest(
         out: PrintWriter,
-        sandboxDir: Path,
+        sandboxDir: Path?,
         vararg args: String
     ): Int {
         if (args.size < 4) {
@@ -61,8 +61,8 @@ fun main(vararg args: String) = object : Worker() {
 
         val namespace = args[0]
         val prefix = args[1]
-        val outputJar = sandboxDir.resolve(Path.of(args[2]))
-        val outputMetadata = sandboxDir.resolve(Path.of(args[3]))
+        val outputJar = sandboxDir?.resolve(Path.of(args[2])) ?: Path.of(args[2])
+        val outputMetadata = sandboxDir?.resolve(Path.of(args[3])) ?: Path.of(args[3])
 
         var atlasWidth = 512
         var atlasHeight = 512
@@ -86,8 +86,8 @@ fun main(vararg args: String) = object : Worker() {
                 }
 
                 val identifier = args[i + 1]
-                val pngFile = sandboxDir.resolve(Path.of(args[i + 2]))
-                val manifestFile = sandboxDir.resolve(Path.of(args[i + 3]))
+                val pngFile = sandboxDir?.resolve(Path.of(args[i + 2])) ?: Path.of(args[i + 2])
+                val manifestFile = sandboxDir?.resolve(Path.of(args[i + 3])) ?: Path.of(args[i + 3])
 
                 when (val type = args[i]) {
                     "--width" -> {

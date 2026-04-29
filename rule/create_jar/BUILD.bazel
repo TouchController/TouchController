@@ -6,6 +6,9 @@ java_binary(
     jvm_flags = ["-Duser.timezone=UTC"],
     main_class = "top.fifthlight.fabazel.jarcreator.JarCreator",
     visibility = ["//visibility:public"],
+    deps = [
+        "@maven//:org_jspecify_jspecify",
+    ],
 )
 
 java_binary(

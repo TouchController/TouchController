@@ -108,7 +108,7 @@ private fun run(
 fun main(vararg args: String) = object : Worker() {
     override fun handleRequest(
         out: PrintWriter,
-        sandboxDir: Path,
+        sandboxDir: Path?,
         vararg args: String
     ): Int {
         var output: Path? = null
@@ -125,7 +125,7 @@ fun main(vararg args: String) = object : Worker() {
         fun nextArg() = args[i++]
         while (i in args.indices) {
             when (val arg = nextArg()) {
-                "--output" -> output = sandboxDir.resolve(Path.of(nextArg()))
+                "--output" -> output = sandboxDir?.resolve(Path.of(nextArg())) ?: Path.of(nextArg())
                 "--package" -> packageName = nextArg()
                 "--class_name" -> className = nextArg()
                 "--texture_package" -> texturePackage = nextArg()

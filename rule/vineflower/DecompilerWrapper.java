@@ -1,5 +1,18 @@
 package top.fifthlight.fabazel.decompiler;
 
+import net.fabricmc.fernflower.api.IFabricJavadocProvider;
+import net.fabricmc.loom.decompilers.vineflower.TinyJavadocProvider;
+import org.jetbrains.java.decompiler.main.Fernflower;
+import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
+import org.jetbrains.java.decompiler.main.extern.IResultSaver;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
+import top.fifthlight.bazel.worker.api.Worker;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,19 +29,17 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
-import net.fabricmc.fernflower.api.IFabricJavadocProvider;
-import net.fabricmc.loom.decompilers.vineflower.TinyJavadocProvider;
-import org.jetbrains.java.decompiler.main.Fernflower;
-import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
-import org.jetbrains.java.decompiler.main.extern.IResultSaver;
-import org.jspecify.annotations.NonNull;
-import picocli.CommandLine;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
-import top.fifthlight.bazel.worker.api.Worker;
 
 public class DecompilerWrapper extends Worker {
+    @Override
+    protected int handleRequest(@NonNull PrintWriter out, @Nullable Path sandboxDir, String... args) {
+        var wrapper = new Handler(sandboxDir, out);
+        var commandLine = new CommandLine(wrapper);
+        commandLine.setOut(out);
+        commandLine.setErr(out);
+        return commandLine.execute(args);
+    }
+
     @Command(name = "decompiler", mixinStandardHelpOptions = true)
     public static class Handler implements Callable<Integer> {
         private static final long DOS_EPOCH = 315532800000L;
@@ -40,10 +51,10 @@ public class DecompilerWrapper extends Worker {
             entry.setTimeLocal(LocalDateTime.ofEpochSecond(DOS_EPOCH / 1000, 0, ZoneOffset.UTC));
         }
 
-        private final Path sandboxPath;
+        private final @Nullable Path sandboxPath;
         private final PrintWriter out;
 
-        public Handler(Path sandboxPath, PrintWriter out) {
+        public Handler(@Nullable Path sandboxPath, PrintWriter out) {
             this.sandboxPath = sandboxPath;
             this.out = out;
         }
@@ -97,14 +108,16 @@ public class DecompilerWrapper extends Worker {
                     String.valueOf(Math.min(4, Runtime.getRuntime().availableProcessors())),
                     IFernflowerPreferences.INDENT_STRING, "\t"));
                 if (mappings != null) {
+                    var mappingsFile = sandboxPath != null ? new File(sandboxPath.toFile(), mappings.toString()) : mappings;
                     options.put(IFabricJavadocProvider.PROPERTY_NAME,
-                        new TinyJavadocProvider(new File(sandboxPath.toFile(), mappings.toString())));
+                            new TinyJavadocProvider(mappingsFile));
                 }
 
                 try (var saver = new InMemorySaver()) {
                     var vineFlower = new Fernflower(saver, options, new PrintWriterLogger(out));
                     for (var inputFile : inputFiles) {
-                        vineFlower.addSource(new File(sandboxPath.toFile(), inputFile.toString()));
+                        var sourceFile = sandboxPath != null ? new File(sandboxPath.toFile(), inputFile.toString()) : inputFile;
+                        vineFlower.addSource(sourceFile);
                     }
                     try {
                         vineFlower.decompileContext();
@@ -113,7 +126,7 @@ public class DecompilerWrapper extends Worker {
                     }
 
                     try (var jos =
-                             new JarOutputStream(Files.newOutputStream(sandboxPath.resolve(outputFile.toPath())))) {
+                                 new JarOutputStream(Files.newOutputStream(sandboxPath != null ? sandboxPath.resolve(outputFile.toPath()) : outputFile.toPath()))) {
                         saver.classes.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEachOrdered(entry -> {
                             var newEntry = new JarEntry(entry.getKey());
                             setJarEntryTime(newEntry);
@@ -133,15 +146,6 @@ public class DecompilerWrapper extends Worker {
                 return 1;
             }
         }
-    }
-
-    @Override
-    protected int handleRequest(@NonNull PrintWriter out, @NonNull Path sandboxDir, String... args) {
-        var wrapper = new Handler(sandboxDir, out);
-        var commandLine = new CommandLine(wrapper);
-        commandLine.setOut(out);
-        commandLine.setErr(out);
-        return commandLine.execute(args);
     }
 
     public static void main(String[] args) throws Exception {

@@ -3,6 +3,7 @@ package top.fifthlight.fabazel.mappingmerger;
 import net.fabricmc.mappingio.format.tiny.Tiny2FileWriter;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import top.fifthlight.bazel.worker.api.Worker;
 import top.fifthlight.fabazel.mappingmerger.context.InputEntry;
 import top.fifthlight.fabazel.mappingmerger.context.MappingFormat;
@@ -117,7 +118,7 @@ public class MappingMerger extends Worker {
     }
 
     @Override
-    protected int handleRequest(@NonNull PrintWriter out, @NonNull Path sandboxDir, String... args) {
+    protected int handleRequest(@NonNull PrintWriter out, @Nullable Path sandboxDir, String... args) {
         try {
             var context = new CliContext();
             var enterOperation = false;
@@ -175,7 +176,7 @@ public class MappingMerger extends Worker {
                             if (argIndex >= args.length - 1) {
                                 throw new IllegalArgumentException("No value for argument: " + arg);
                             }
-                            context.setOutputPath(sandboxDir.resolve(Path.of(args[argIndex + 1])));
+                            context.setOutputPath(sandboxDir != null ? sandboxDir.resolve(Path.of(args[argIndex + 1])) : Path.of(args[argIndex + 1]));
                             argIndex++;
                             break;
                         case "":
@@ -194,7 +195,7 @@ public class MappingMerger extends Worker {
                     var value = arg.substring(equalsIndex + 1);
                     switch (key) {
                         case "path":
-                            context.setMappingPath(sandboxDir.resolve(Path.of(value)));
+                            context.setMappingPath(sandboxDir != null ? sandboxDir.resolve(Path.of(value)) : Path.of(value));
                             break;
                         case "name":
                             context.setMappingName(value);

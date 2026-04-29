@@ -1,5 +1,7 @@
 package top.fifthlight.fabazel.jarcreator;
 
+import org.jspecify.annotations.Nullable;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,13 +26,13 @@ public class JarCreator {
         entry.setTimeLocal(LocalDateTime.ofEpochSecond(DOS_EPOCH / 1000, 0, ZoneOffset.UTC));
     }
 
-    private final Path sandboxDir;
+    private final @Nullable Path sandboxDir;
 
-    public JarCreator(Path sandboxDir) {
+    public JarCreator(@Nullable Path sandboxDir) {
         this.sandboxDir = sandboxDir;
     }
 
-    public static void run(PrintWriter out, Path sandboxDir, String... args) throws Exception {
+    public static void run(PrintWriter out, @Nullable Path sandboxDir, String... args) throws Exception {
         if (args.length < 1) {
             out.println("Usage: JarCreator <output-jar> [options]");
             out.println("Options:");
@@ -59,14 +61,14 @@ public class JarCreator {
                     if (entries.containsKey(entryPath)) {
                         throw new IllegalArgumentException("Duplicate entry: " + entryPath);
                     }
-                    entries.put(entryPath, sandboxDir.resolve(Path.of(args[++i])));
+                    entries.put(entryPath, sandboxDir != null ? sandboxDir.resolve(Path.of(args[++i])) : Path.of(args[++i]));
                 }
 
                 case "--output" -> {
                     if (i + 1 >= args.length) {
                         throw new IllegalArgumentException("Missing arguments for --output");
                     }
-                    outputPath = sandboxDir.resolve(Path.of(args[++i]));
+                    outputPath = sandboxDir != null ? sandboxDir.resolve(Path.of(args[++i])) : Path.of(args[++i]);
                 }
 
                 default -> throw new IllegalArgumentException("Unknown argument: " + arg);

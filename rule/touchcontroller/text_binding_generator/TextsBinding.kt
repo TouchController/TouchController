@@ -11,11 +11,11 @@ import kotlin.io.path.writeText
 fun main(vararg args: String) = object : Worker() {
     override fun handleRequest(
         out: PrintWriter,
-        sandboxDir: Path,
+        sandboxDir: Path?,
         vararg args: String
     ): Int {
-        val languageFile = sandboxDir.resolve(Path.of(args[0]))
-        val outputFile = sandboxDir.resolve(Path.of(args[1]))
+        val languageFile = sandboxDir?.resolve(Path.of(args[0])) ?: Path.of(args[0])
+        val outputFile = sandboxDir?.resolve(Path.of(args[1])) ?: Path.of(args[1])
         val className = args[2]
         val packageName = args[3]
         val map: Map<String, String> = Json.decodeFromString(languageFile.readText())

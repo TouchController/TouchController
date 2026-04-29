@@ -278,7 +278,7 @@ private fun run(
 fun main(vararg args: String) = object : Worker() {
     override fun handleRequest(
         out: PrintWriter,
-        sandboxDir: Path,
+        sandboxDir: Path?,
         vararg args: String
     ): Int {
         var output: Path? = null
@@ -312,7 +312,7 @@ fun main(vararg args: String) = object : Worker() {
         fun nextArg() = args[i++]
         while (i in args.indices) {
             when (val arg = nextArg()) {
-                "--output" -> output = sandboxDir.resolve(Path.of(nextArg()))
+                "--output" -> output = sandboxDir?.resolve(Path.of(nextArg())) ?: Path.of(nextArg())
                 "--package" -> packageName = nextArg()
                 "--texture_set_class_name" -> textureSetClassName = nextArg()
                 "--texture_item_class_name" -> textureItemClassName = nextArg()
@@ -322,7 +322,7 @@ fun main(vararg args: String) = object : Worker() {
                 "--text_class" -> textClass = nextArg()
                 "--set" -> {
                     flushCurrentSet()
-                    currentSet = Pair(nextArg(), sandboxDir.resolve(Path.of(nextArg())))
+                    currentSet = Pair(nextArg(), sandboxDir?.resolve(Path.of(nextArg())) ?: Path.of(nextArg()))
                 }
 
                 "--texture" -> {

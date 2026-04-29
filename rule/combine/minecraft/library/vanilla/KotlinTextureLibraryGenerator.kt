@@ -13,7 +13,7 @@ import kotlin.io.path.writeText
 fun main(vararg args: String) = object : Worker() {
     override fun handleRequest(
         out: PrintWriter,
-        sandboxDir: Path,
+        sandboxDir: Path?,
         vararg args: String
     ): Int {
         if (args.size < 2) {
@@ -21,7 +21,7 @@ fun main(vararg args: String) = object : Worker() {
             return 1
         }
 
-        val outputFile = sandboxDir.resolve(Path.of(args[0]))
+        val outputFile = sandboxDir?.resolve(Path.of(args[0])) ?: Path.of(args[0])
         val packageName = args[1]
         val className = args[2]
         val prefix = args[3]
@@ -55,7 +55,9 @@ fun main(vararg args: String) = object : Worker() {
             val identifier = args[i + 1]
             when (val type = args[i]) {
                 "--texture" -> {
-                    val metadata = Json.decodeFromString<Metadata>(sandboxDir.resolve(Path.of(args[i + 3])).readText())
+                    val metadata = Json.decodeFromString<Metadata>(
+                        (sandboxDir?.resolve(Path.of(args[i + 3])) ?: Path.of(args[i + 3])).readText()
+                    )
                     if (metadata.background) {
                         classSpecBuilder.addProperty(
                             PropertySpec.builder(
@@ -87,7 +89,9 @@ fun main(vararg args: String) = object : Worker() {
                 }
 
                 "--ninepatch" -> {
-                    val metadata = Json.decodeFromString<NinePatchMetadata>(sandboxDir.resolve(Path.of(args[i + 3])).readText())
+                    val metadata = Json.decodeFromString<NinePatchMetadata>(
+                        (sandboxDir?.resolve(Path.of(args[i + 3])) ?: Path.of(args[i + 3])).readText()
+                    )
                     classSpecBuilder.addProperty(
                         PropertySpec
                             .builder(identifier, ClassName("top.fifthlight.combine.paint", "Texture"))
