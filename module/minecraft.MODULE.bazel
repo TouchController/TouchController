@@ -32,7 +32,7 @@ game_versions = {
     "26.1": {},
     "26.1.1": {},
     "26.1.2": {},
-    "26.2-snapshot-4": {},
+    "26.2-snapshot-5": {},
 }
 
 minecraft = use_extension("@rules_mc//:extensions.bzl", "minecraft")
