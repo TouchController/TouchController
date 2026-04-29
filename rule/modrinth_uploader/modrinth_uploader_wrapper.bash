@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # A wrapper script to call the Java side modrinth uploader.
 

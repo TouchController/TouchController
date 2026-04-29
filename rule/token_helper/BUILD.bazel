@@ -9,6 +9,7 @@ java_library(
     deps = [
         "//rule/token_helper/wincred",
         "@maven//:de_swiesend_secret_service",
+        "@maven//:org_merlyn_oss_jkeychain",
         "@maven//:org_slf4j_slf4j_api",
     ],
 )

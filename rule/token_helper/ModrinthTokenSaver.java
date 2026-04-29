@@ -30,10 +30,10 @@ public class ModrinthTokenSaver {
                         return;
                     }
 
-                    var tokenBackend = TokenBackend.getDefault();
                     try {
+                        var tokenBackend = TokenBackend.getDefault();
                         tokenBackend.saveToken(tokenId, tokenSecret);
-                    } catch (IOException ex) {
+                    } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
 

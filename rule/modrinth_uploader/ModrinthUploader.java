@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ModrinthUploader {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws Exception {
         var root = (Logger) LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
         root.setLevel(Level.INFO);
 

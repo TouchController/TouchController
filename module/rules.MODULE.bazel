@@ -16,6 +16,7 @@ maven.install(
         "de.swiesend:secret-service:2.0.1-alpha",
         "ch.qos.logback:logback-classic:1.5.23",
         "com.github.mizosoft.methanol:methanol:1.9.0",
+        "org.merlyn.oss:jkeychain:1.2.0",
         "net.java.dev.jna:jna:5.18.1",
         "net.java.dev.jna:jna-platform:5.18.1",
         "com.palantir.javapoet:javapoet:0.9.0",

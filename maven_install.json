@@ -82,6 +82,7 @@
     "org.lwjgl:lwjgl": 997026004,
     "org.lwjgl:lwjgl-assimp": -471123399,
     "org.lwjgl:lwjgl-stb": 930993265,
+    "org.merlyn.oss:jkeychain": 1361673587,
     "org.mini2Dx:universal-tween-engine": -1680509135,
     "org.ow2.asm:asm": 1206815935,
     "org.ow2.asm:asm-commons": 1607605466,
@@ -478,6 +479,8 @@
     "org.lwjgl:lwjgl:jar:natives-windows-arm64": 2082658450,
     "org.lwjgl:lwjgl:jar:natives-windows-x86": 475986010,
     "org.lwjgl:lwjgl:jar:sources": 161361585,
+    "org.merlyn.oss:jkeychain": 1863571663,
+    "org.merlyn.oss:jkeychain:jar:sources": 1868801248,
     "org.mini2Dx:universal-tween-engine": 1116945180,
     "org.mini2Dx:universal-tween-engine:jar:sources": -459254387,
     "org.opentest4j.reporting:open-test-reporting-tooling-spi": -1905362971,
@@ -1815,6 +1818,13 @@
         "sources": "578be191a8a4dd270b4d53d7e8486d71628124b7332e873612b3e252d0a0983f"
       },
       "version": "3.3.3"
+    },
+    "org.merlyn.oss:jkeychain": {
+      "shasums": {
+        "jar": "7a71f9865e73ae61d7f1d887a35f67c13fc25ff206276e1e782fee811a341c7a",
+        "sources": "02d71815e7ae05c86c468a9965ef9559514d293fc3ffd1544bd1c1716a640017"
+      },
+      "version": "1.2.0"
     },
     "org.mini2Dx:universal-tween-engine": {
       "shasums": {
@@ -5704,6 +5714,9 @@
     "org.lwjgl:lwjgl-stb": [
       "org.lwjgl.stb"
     ],
+    "org.merlyn.oss:jkeychain": [
+      "pt.davidafsilva.apple"
+    ],
     "org.mini2Dx:universal-tween-engine": [
       "aurelienribon.tweenengine",
       "aurelienribon.tweenengine.equations",
@@ -6189,6 +6202,8 @@
       "org.lwjgl:lwjgl:jar:natives-windows-arm64",
       "org.lwjgl:lwjgl:jar:natives-windows-x86",
       "org.lwjgl:lwjgl:jar:sources",
+      "org.merlyn.oss:jkeychain",
+      "org.merlyn.oss:jkeychain:jar:sources",
       "org.mini2Dx:universal-tween-engine",
       "org.mini2Dx:universal-tween-engine:jar:sources",
       "org.opentest4j.reporting:open-test-reporting-tooling-spi",
@@ -6605,6 +6620,8 @@
       "org.lwjgl:lwjgl:jar:natives-windows-arm64",
       "org.lwjgl:lwjgl:jar:natives-windows-x86",
       "org.lwjgl:lwjgl:jar:sources",
+      "org.merlyn.oss:jkeychain",
+      "org.merlyn.oss:jkeychain:jar:sources",
       "org.mini2Dx:universal-tween-engine",
       "org.mini2Dx:universal-tween-engine:jar:sources",
       "org.opentest4j.reporting:open-test-reporting-tooling-spi",
@@ -7021,6 +7038,8 @@
       "org.lwjgl:lwjgl:jar:natives-windows-arm64",
       "org.lwjgl:lwjgl:jar:natives-windows-x86",
       "org.lwjgl:lwjgl:jar:sources",
+      "org.merlyn.oss:jkeychain",
+      "org.merlyn.oss:jkeychain:jar:sources",
       "org.mini2Dx:universal-tween-engine",
       "org.mini2Dx:universal-tween-engine:jar:sources",
       "org.opentest4j.reporting:open-test-reporting-tooling-spi",
@@ -7437,6 +7456,8 @@
       "org.lwjgl:lwjgl:jar:natives-windows-arm64",
       "org.lwjgl:lwjgl:jar:natives-windows-x86",
       "org.lwjgl:lwjgl:jar:sources",
+      "org.merlyn.oss:jkeychain",
+      "org.merlyn.oss:jkeychain:jar:sources",
       "org.mini2Dx:universal-tween-engine",
       "org.mini2Dx:universal-tween-engine:jar:sources",
       "org.opentest4j.reporting:open-test-reporting-tooling-spi",
