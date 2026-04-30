@@ -18,6 +18,10 @@ public abstract class NativeLibrariesBootstrapMixin {
 
     @Redirect(method = "loadLibraries", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/NativeLibrariesBootstrap;loadLibrary(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/lang/Runnable;)V", ordinal = 1))
     private static void redirectLoadGlfw(Supplier<String> debugCapture, String name, Runnable loader) {
-        loadLibrary(debugCapture, "GLFW", () -> Objects.requireNonNull(SDL.getLibrary(), "SDl"));
+        if ("GLFW".equals(name)) {
+            loadLibrary(debugCapture, "GLFW", () -> Objects.requireNonNull(SDL.getLibrary(), "SDL"));
+        } else {
+            loadLibrary(debugCapture, name, loader);
+        }
     }
 }
