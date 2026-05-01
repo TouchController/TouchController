@@ -1,0 +1,103 @@
+load("@rules_java//java:java_binary.bzl", "java_binary")
+load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_jar")
+load("//rule:remap_jar.bzl", "remap_jar")
+
+kt_merge_library(
+    name = "widget_factory_unmerged",
+    srcs = glob(["*.kt"]),
+    resource_strip_prefix = "combine/example/widget_factory/versions/1.21.8/resources",
+    resources = glob(["resources/**"]),
+    runtime_deps = [
+        "//combine/theme/blackstone:blackstone_common",
+        "//combine/theme/blackstone:blackstone_vanilla",
+        "//combine/theme/oreui:oreui_common",
+        "//combine/theme/oreui:oreui_vanilla",
+    ],
+    deps = [
+        "//:compose",
+        "//combine/backend/minecraft/game/1.21.8",
+        "//combine/core/data",
+        "//combine/core/layout",
+        "//combine/core/modifier",
+        "//combine/core/modifier/drawing",
+        "//combine/core/modifier/placement",
+        "//combine/core/modifier/scroll",
+        "//combine/core/paint",
+        "//combine/core/screen",
+        "//combine/core/widget/layout",
+        "//combine/data",
+        "//combine/example/versions/1.21.8:remapped_deps",
+        "//combine/example/widget_factory/common",
+        "//combine/style",
+        "//combine/theme/base",
+        "//combine/theme/blackstone",
+        "//combine/theme/oreui",
+        "//combine/theme/vanilla",
+        "//combine/widget",
+        "//game/1.21.8:game_client_libraries",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
+        "@maven_fabric_1_21_8//:net_fabricmc_fabric_loader",
+    ],
+)
+
+merge_library_jar(
+    name = "widget_factory_unmapped",
+    deps = [
+        ":widget_factory_unmerged",
+        "//combine/example/widget_factory/common",
+    ],
+)
+
+remap_jar(
+    name = "widget_factory",
+    classpath = ["//combine/example/versions/1.21.8:remapped_deps"],
+    from_namespace = "named",
+    inputs = [":widget_factory_unmapped"],
+    mapping = "//game/1.21.8:game_merged_mapping",
+    to_namespace = "intermediary",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "1.21.8",
+    actual = ":widget_factory",
+    visibility = ["//visibility:public"],
+)
+
+java_binary(
+    name = "dev_client",
+    srcs = [],
+    data = [
+        "//game/1.21.8:game_client_assets",
+        "//game/1.21.8:game_client_assets_version",
+    ],
+    env = {
+        "LANG": "en_US.UTF8",
+    },
+    jvm_flags = [
+        "-Dfabric.development=true",
+        "-Ddev.launch.version=1.21.8",
+        "-Ddev.launch.type=client",
+        "-Ddev.launch.assetsVersion=$(rlocationpath //game/1.21.8:game_client_assets_version)",
+        "-Ddev.launch.mainClass=net.fabricmc.loader.impl.launch.knot.KnotClient",
+        "-Xmx4G",
+    ] + select({
+        "@platforms//os:macos": ["-XstartOnFirstThread"],
+        "//conditions:default": [],
+    }),
+    main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
+    runtime_deps = [
+        ":widget_factory_unmerged",
+        "//combine/backend/minecraft/fabric:meta_jar",
+        "//combine/backend/minecraft/fabric/1.21.8:meta_jar",
+        "//combine/backend/minecraft/versions:1.21.8",
+        "//game/1.21.8:game_client_libraries",
+        "//game/1.21.8:game_client_named",
+        "//game/1.21.8:game_mapping_jar",
+        "//rule/dev_launch_wrapper",
+        "@maven_fabric_1_21_8//:io_github_llamalad7_mixinextras_fabric",
+        "@maven_fabric_1_21_8//:net_fabricmc_fabric_language_kotlin",
+        "@maven_fabric_1_21_8//:net_fabricmc_fabric_loader",
+        "@maven_fabric_1_21_8//:net_fabricmc_sponge_mixin",
+    ],
+)

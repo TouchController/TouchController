@@ -1,12 +1,11 @@
 load("@rules_java//java:java_binary.bzl", "java_binary")
-load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
+load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_jar")
 
-kt_jvm_library(
-    name = "widget_factory",
+kt_merge_library(
+    name = "widget_factory_unmerged",
     srcs = glob(["*.kt"]),
-    resource_strip_prefix = "combine/example/widget_factory/resources",
+    resource_strip_prefix = "combine/example/widget_factory/versions/26.2/resources",
     resources = glob(["resources/**"]),
-    visibility = ["//visibility:public"],
     runtime_deps = [
         "//combine/theme/blackstone:blackstone_common",
         "//combine/theme/blackstone:blackstone_vanilla",
@@ -26,6 +25,7 @@ kt_jvm_library(
         "//combine/core/screen",
         "//combine/core/widget/layout",
         "//combine/data",
+        "//combine/example/widget_factory/common",
         "//combine/style",
         "//combine/theme/base",
         "//combine/theme/blackstone",
@@ -40,6 +40,21 @@ kt_jvm_library(
         "@maven_fabric_26_2//:net_fabricmc_fabric_api_fabric_lifecycle_events_v1",
         "@maven_fabric_26_2//:net_fabricmc_fabric_loader",
     ],
+)
+
+merge_library_jar(
+    name = "widget_factory",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":widget_factory_unmerged",
+        "//combine/example/widget_factory/common",
+    ],
+)
+
+alias(
+    name = "26.2",
+    actual = ":widget_factory",
+    visibility = ["//visibility:public"],
 )
 
 java_binary(
@@ -65,14 +80,13 @@ java_binary(
     }),
     main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
     runtime_deps = [
-        "//game/26.2:game_client",
-        "//game/26.2:game_client_libraries",
-        # Classpath separator
-        ":widget_factory",
+        ":widget_factory_unmerged",
         "//blazesdl/26.2:blazesdl_unmerged",
-        "//combine/backend/minecraft/versions:26.2",
         "//combine/backend/minecraft/fabric/26.2",
         "//combine/backend/minecraft/fabric:meta_jar",
+        "//combine/backend/minecraft/versions:26.2",
+        "//game/26.2:game_client",
+        "//game/26.2:game_client_libraries",
         "//rule/dev_launch_wrapper",
         "@maven_fabric_26_2//:io_github_llamalad7_mixinextras_fabric",
         "@maven_fabric_26_2//:net_fabricmc_fabric_language_kotlin",

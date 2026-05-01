@@ -1,0 +1,21 @@
+load("//rule:apply_access_widener.bzl", "apply_access_widener")
+load("//rule:extract_access_widener.bzl", "extract_access_widener")
+load("//rule:remap_jar.bzl", "remap_jar")
+
+remap_jar(
+    name = "remapped_deps",
+    classpath = [
+        "//game/1.21.11:game_client_intermediary",
+    ],
+    from_namespace = "intermediary",
+    inputs = [
+        "@maven_fabric_1_21_11//:net_fabricmc_fabric_api_fabric_api",
+        "@maven_fabric_1_21_11//:com_terraformersmc_modmenu",
+    ],
+    mapping = "//game/1.21.11:game_merged_mapping",
+    mixin = True,
+    remap_transitive_deps = True,
+    remove_jar_in_jar = True,
+    to_namespace = "named",
+    visibility = ["//combine/example:__subpackages__"],
+)

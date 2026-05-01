@@ -1,0 +1,19 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "common",
+    srcs = glob(["*.kt"]),
+    visibility = ["//combine/example/hello_world:__subpackages__"],
+    deps = [
+        "//:compose",
+        "//combine/core/data",
+        "//combine/core/layout",
+        "//combine/core/modifier",
+        "//combine/core/modifier/placement",
+        "//combine/core/widget/layout",
+        "//combine/data",
+        "//combine/theme/base",
+        "//combine/theme/vanilla",
+        "//combine/widget",
+    ],
+)

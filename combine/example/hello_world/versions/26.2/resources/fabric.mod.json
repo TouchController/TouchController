@@ -1,20 +1,18 @@
 {
     "schemaVersion": 1,
-    "id": "combine-widget-factory",
+    "id": "combine-hello-world-26-2",
     "version": "1.0.0",
-    "name": "Combine Widget Factory",
-    "description": "Showcase all Combine GUI widgets with different themes.",
-    "authors": [
-        "fifth_light"
-    ],
+    "name": "Combine hello world",
+    "description": "Hello world, combine!",
+    "authors": ["fifth_light"],
     "license": "Apache-2.0",
     "environment": "client",
     "entrypoints": {
         "client": [
-            "top.fifthlight.combine.example.widgetfactory.WidgetFactoryMod"
+            "top.fifthlight.combine.example.helloworld.v26_2.HelloWorldMod"
         ],
         "modmenu": [
-            "top.fifthlight.combine.example.widgetfactory.WidgetFactoryMod"
+            "top.fifthlight.combine.example.helloworld.v26_2.HelloWorldMod"
         ]
     },
     "depends": {

@@ -1,0 +1,27 @@
+{
+    "schemaVersion": 1,
+    "id": "combine-widget-factory-26-1",
+    "version": "1.0.0",
+    "name": "Combine Widget Factory",
+    "description": "Showcase all Combine GUI widgets with different themes.",
+    "authors": [
+        "fifth_light"
+    ],
+    "license": "Apache-2.0",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "top.fifthlight.combine.example.widgetfactory.v26_1.WidgetFactoryMod"
+        ],
+        "modmenu": [
+            "top.fifthlight.combine.example.widgetfactory.v26_1.WidgetFactoryMod"
+        ]
+    },
+    "depends": {
+        "combine": "*",
+        "minecraft": "~26.1-",
+        "java": ">=25",
+        "fabric-api": "*",
+        "fabric-language-kotlin": "*"
+    }
+}

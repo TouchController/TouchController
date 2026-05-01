@@ -1,0 +1,27 @@
+{
+    "schemaVersion": 1,
+    "id": "combine-hello-world-1-21-11",
+    "version": "1.0.0",
+    "name": "Combine hello world",
+    "description": "Hello world, combine!",
+    "authors": [
+        "fifth_light"
+    ],
+    "license": "Apache-2.0",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "top.fifthlight.combine.example.helloworld.v1_21_11.HelloWorldMod"
+        ],
+        "modmenu": [
+            "top.fifthlight.combine.example.helloworld.v1_21_11.HelloWorldMod"
+        ]
+    },
+    "depends": {
+        "combine": "*",
+        "minecraft": "1.21.11",
+        "java": ">=21",
+        "fabric-api": "*",
+        "fabric-language-kotlin": "*"
+    }
+}

@@ -1,0 +1,32 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "common",
+    srcs = glob(["*.kt"]),
+    visibility = ["//combine/example/widget_factory:__subpackages__"],
+    runtime_deps = [
+        "//combine/theme/blackstone:blackstone_common",
+        "//combine/theme/blackstone:blackstone_vanilla",
+        "//combine/theme/oreui:oreui_common",
+        "//combine/theme/oreui:oreui_vanilla",
+    ],
+    deps = [
+        "//:compose",
+        "//combine/core/data",
+        "//combine/core/layout",
+        "//combine/core/modifier",
+        "//combine/core/modifier/drawing",
+        "//combine/core/modifier/placement",
+        "//combine/core/modifier/scroll",
+        "//combine/core/paint",
+        "//combine/core/widget/layout",
+        "//combine/data",
+        "//combine/style",
+        "//combine/theme/base",
+        "//combine/theme/blackstone",
+        "//combine/theme/oreui",
+        "//combine/theme/vanilla",
+        "//combine/widget",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
+    ],
+)
