@@ -16,17 +16,17 @@ import top.fifthlight.blazesdl.SDLVulkanBackend;
 public class PreferredGraphicsApiMixin {
     @SuppressWarnings("LoggerInitializedWithForeignClass")
     @Unique
-    private static final Logger LOGGER = LoggerFactory.getLogger(PreferredGraphicsApi.class);
+    private static final Logger blazesdl$LOGGER = LoggerFactory.getLogger(PreferredGraphicsApi.class);
 
     @Redirect(method = "getBackendsToTry", at = @At(value = "NEW", target = "Lcom/mojang/blaze3d/opengl/GlBackend;"))
     private GlBackend replaceGlBackend() {
-        LOGGER.info("BlazeSDL: Replacing GlBackend to SDLGlBackend!");
+        blazesdl$LOGGER.info("BlazeSDL: Replacing GlBackend to SDLGlBackend!");
         return new SDLGlBackend();
     }
 
     @Redirect(method = "getBackendsToTry", at = @At(value = "NEW", target = "Lcom/mojang/blaze3d/vulkan/VulkanBackend;"))
     private VulkanBackend replaceVulkanBackend() {
-        LOGGER.info("BlazeSDL: Replacing VulkanBackend to SDLVulkanBackend!");
+        blazesdl$LOGGER.info("BlazeSDL: Replacing VulkanBackend to SDLVulkanBackend!");
         return new SDLVulkanBackend();
     }
 }

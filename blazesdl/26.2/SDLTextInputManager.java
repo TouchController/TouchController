@@ -30,9 +30,26 @@ public class SDLTextInputManager extends TextInputManager {
         }
     }
 
+    private boolean windowFocused;
+
     @Override
-    protected boolean getIMEStatus() {
-        // SDL doesn't care whether IME is enabled
-        return true;
+    public void tick() {
+        var focused = window.handle() == SDLKeyboard.SDL_GetKeyboardFocus();
+        if (windowFocused != focused) {
+            windowFocused = focused;
+            onTextInputFocusChange(textInputEnabled);
+        }
+    }
+
+    @Override
+    public void startTextInput() {
+        this.textInputEnabled = true;
+        this.setIMEInputMode(true);
+    }
+
+    @Override
+    public void stopTextInput() {
+        this.textInputEnabled = false;
+        this.setIMEInputMode(false);
     }
 }

@@ -295,7 +295,10 @@ def _game_version_impl(
                 "-Ddev.launch.legacyAssets=%s" % ("true" if client_legacy_assets else "false"),
                 "-Ddev.launch.legacyHome=%s" % ("true" if client_legacy else "false"),
                 "-Xmx4G",
-            ] + (["-Ddev.launch.nativeManifest=$(rlocationpath %s)" % client_native_manifest] if client_native_manifest else []),
+            ] + select({
+                "@platforms//os:macos": ["-XstartOnFirstThread"],
+                "//conditions:default": [],
+            }) + (["-Ddev.launch.nativeManifest=$(rlocationpath %s)" % client_native_manifest] if client_native_manifest else []),
             main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
             runtime_deps = [
                 client,

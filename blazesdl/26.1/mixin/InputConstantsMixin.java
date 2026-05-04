@@ -46,7 +46,7 @@ public abstract class InputConstantsMixin {
 
     @Redirect(method = "grabOrReleaseMouse", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSetCursorPos(JDD)V"))
     private static void redirectSetCursorPos(long handle, double xpos, double ypos) {
-        // SDL_SetWindowRelativeMouseMode will do this for us
+        SDLMouse.SDL_WarpMouseInWindow(handle, (float) xpos, (float) ypos);
     }
 
     @Redirect(method = "grabOrReleaseMouse", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSetInputMode(JII)V"))

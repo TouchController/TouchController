@@ -6,15 +6,16 @@
 package top.fifthlight.blazesdl.mixin;
 
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.sdl.SDLClipboard;
-import org.lwjgl.sdl.SDLKeyboard;
-import org.lwjgl.sdl.SDLKeycode;
-import org.lwjgl.sdl.SDLScancode;
+import org.lwjgl.sdl.*;
+import org.lwjgl.system.MemoryUtil;
 import org.lwjgl.system.NativeType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Unique;
 import top.fifthlight.blazesdl.SDLKeyMapping;
 import top.fifthlight.blazesdl.SDLUtil;
+
+import java.nio.ByteBuffer;
 
 @SuppressWarnings("OverwriteAuthorRequired")
 @Mixin(GLFW.class)
@@ -58,9 +59,67 @@ public abstract class GLFWMixin {
         return scan;
     }
 
+    @Unique
+    private static long blazesdl$glfwErrorCallback;
+
+    @Overwrite
+    public static int glfwGetMouseButton(long window, int button) {
+        var state = SDLMouse.SDL_GetMouseState(null, null);
+        var buttonMask = switch (button) {
+            case GLFW.GLFW_MOUSE_BUTTON_LEFT -> SDLMouse.SDL_BUTTON_LMASK;
+            case GLFW.GLFW_MOUSE_BUTTON_MIDDLE -> SDLMouse.SDL_BUTTON_MMASK;
+            case GLFW.GLFW_MOUSE_BUTTON_RIGHT -> SDLMouse.SDL_BUTTON_RMASK;
+            case GLFW.GLFW_MOUSE_BUTTON_4 -> SDLMouse.SDL_BUTTON_X1MASK;
+            case GLFW.GLFW_MOUSE_BUTTON_5 -> SDLMouse.SDL_BUTTON_X2MASK;
+            default -> 1 << button;
+        };
+        return (state & buttonMask) != 0 ? GLFW.GLFW_PRESS : GLFW.GLFW_RELEASE;
+    }
+
+    @Overwrite
+    public static void glfwSetCursorPos(long window, double xpos, double ypos) {
+        SDLMouse.SDL_WarpMouseInWindow(window, (float) xpos, (float) ypos);
+    }
+
+    @Overwrite
+    public static void nglfwGetCursorPos(long window, long xpos, long ypos) {
+        if (SDLUtil.isMouseGrabbed) {
+            if (xpos != 0L) {
+                MemoryUtil.memPutDouble(xpos, SDLUtil.virtualMouseX);
+            }
+            if (ypos != 0L) {
+                MemoryUtil.memPutDouble(ypos, SDLUtil.virtualMouseY);
+            }
+        } else {
+            if (xpos != 0L) {
+                MemoryUtil.memPutDouble(xpos, SDLUtil.realMouseX);
+            }
+            if (ypos != 0L) {
+                MemoryUtil.memPutDouble(ypos, SDLUtil.realMouseY);
+            }
+        }
+    }
+
+    @Overwrite
+    public static long nglfwSetErrorCallback(long cbfun) {
+        var previous = blazesdl$glfwErrorCallback;
+        blazesdl$glfwErrorCallback = cbfun;
+        return previous;
+    }
+
     @Overwrite
     public static String glfwGetClipboardString(@NativeType("GLFWwindow *") long window) {
         return SDLClipboard.SDL_GetClipboardText();
+    }
+
+    @Overwrite
+    public static void nglfwSetClipboardString(long window, long string) {
+        SDLClipboard.nSDL_SetClipboardText(string);
+    }
+
+    @Overwrite
+    public static void glfwSetClipboardString(long window, ByteBuffer string) {
+        SDLClipboard.SDL_SetClipboardText(string);
     }
 
     @Overwrite
