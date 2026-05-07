@@ -1,8 +1,7 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
-load("//combine:properties.bzl", "combine_description", "combine_fabric_libraries", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
+load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
 load("//rule:jar.bzl", "jar")
 load("//rule:merge_library.bzl", "merge_library_jar")
-load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
 
 expand_template(
     name = "fabric_mod_json",

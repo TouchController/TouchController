@@ -1,8 +1,7 @@
 load("@rules_java//java:java_binary.bzl", "java_binary")
-load("//combine:properties.bzl", "combine_fabric_libraries", "combine_version")
+load("//combine:properties.bzl", "combine_version")
 load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_jar")
 load("//rule:remap_jar.bzl", "remap_jar")
-load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
 load("//rule/fabric:mod_json_jar.bzl", "fabric_mod_json_jar")
 load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
