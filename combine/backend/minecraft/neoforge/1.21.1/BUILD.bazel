@@ -1,12 +1,10 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
-load("//rule:jar.bzl", "jar")
 load("//rule:merge_library.bzl", "merge_library_jar")
-load("//rule:remap_jar.bzl", "remap_jar")
 
 expand_template(
-    name = "fabric_mod_json",
-    out = "expanded/fabric.mod.json",
+    name = "neoforge_mods_toml",
+    out = "META-INF/neoforge.mods.toml",
     substitutions = {
         "${version}": combine_version,
         "${license}": combine_license,
@@ -15,44 +13,26 @@ expand_template(
         "${sources_page}": combine_sources_page,
         "${issue_tracker}": combine_issue_tracker,
     },
-    template = "fabric.mod.json",
-)
-
-jar(
-    name = "meta_jar",
-    resources = [
-        ":fabric_mod_json",
-        "//combine/backend/minecraft/game/1.21.10:access_widener",
-    ],
-    visibility = ["//visibility:public"],
+    template = "neoforge.mods.toml",
 )
 
 merge_library_jar(
-    name = "fabric_unmapped",
-    aspect_impl_package_suffix = "fabric.v1_21_10",
+    name = "neoforge",
+    aspect_impl_package_suffix = "neoforge.v1_21_1",
     aspects = ["//combine/backend/minecraft:minecraft_unmerged"],
     resources = {
         "//combine/resources:icon": ".",
+        ":neoforge_mods_toml": "combine/backend/minecraft/neoforge/1.21.1",
+        "//combine/backend/minecraft/game/1.21.1:access_transformer": ".",
     },
     visibility = ["//visibility:public"],
     deps = [
-        ":meta_jar",
-        "//combine/backend/minecraft/versions:1.21.10",
+        "//combine/backend/minecraft/versions:1.21.1",
     ],
 )
 
-remap_jar(
-    name = "fabric",
-    classpath = ["//game/1.21.10:game_client_named"],
-    from_namespace = "named",
-    inputs = [":fabric_unmapped"],
-    mapping = "//game/1.21.10:game_merged_mapping",
-    mixin = True,
-    to_namespace = "intermediary",
-)
-
 alias(
-    name = "1.21.10",
-    actual = ":fabric",
+    name = "1.21.1",
+    actual = ":neoforge",
     visibility = ["//visibility:public"],
 )

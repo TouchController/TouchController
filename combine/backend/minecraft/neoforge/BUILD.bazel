@@ -1,0 +1,35 @@
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_unified_deps", "combine_unified_neoforge", "combine_version")
+load("//rule:unified_jar.bzl", "unified_jar")
+
+expand_template(
+    name = "neoforge_mod_toml",
+    out = "META-INF/neoforge.mods.toml",
+    substitutions = {
+        "${version}": combine_version,
+        "${license}": combine_license,
+        "${description}": combine_description,
+        "${home_page}": combine_home_page,
+        "${sources_page}": combine_sources_page,
+        "${issue_tracker}": combine_issue_tracker,
+    },
+    template = "resources/neoforge.mods.toml",
+    visibility = ["//combine/backend/minecraft:__pkg__"],
+)
+
+unified_jar(
+    name = "neoforge",
+    neoforge_deps = {
+        "combine-common": "common",
+        "combine-neoforge-1-21-1": "1.21.1",
+    } | combine_unified_neoforge,
+    neoforge_mod_toml = ":neoforge_mod_toml",
+    resources = {
+        "//combine/resources:icon": ".",
+    },
+    visibility = ["//visibility:public"],
+    deps = {
+        "combine-common": "//combine/backend/minecraft:minecraft_unmerged",
+        "combine-neoforge-1-21-1": "//combine/backend/minecraft/neoforge/1.21.1",
+    } | combine_unified_deps,
+)

@@ -1,0 +1,47 @@
+load("//combine:properties.bzl", "combine_unified_deps", "combine_unified_fabric", "combine_unified_neoforge")
+load("//rule:merge_library.bzl", "merge_library_jar")
+load("//rule:unified_jar.bzl", "unified_jar")
+
+merge_library_jar(
+    name = "minecraft_unmerged",
+    aspect = True,
+    aspect_class = "top.fifthlight.combine.AspectProvider",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//combine",
+        "//combine/item",
+    ],
+)
+
+unified_jar(
+    name = "minecraft",
+    fabric_deps = {
+        "combine-common": "=",
+        "combine-fabric-1-21-1": "=",
+        "combine-fabric-1-21-8": "=",
+        "combine-fabric-1-21-10": "=",
+        "combine-fabric-1-21-11": "=",
+        "combine-fabric-26-1": "=",
+        "combine-fabric-26-2": "=",
+    } | combine_unified_fabric,
+    fabric_mod_json = "//combine/backend/minecraft/fabric:fabric_mod_json",
+    neoforge_deps = {
+        "combine-common": "common",
+        "combine-neoforge-1-21-1": "1.21.1",
+    } | combine_unified_neoforge,
+    neoforge_mod_toml = "//combine/backend/minecraft/neoforge:neoforge_mod_toml",
+    resources = {
+        "//combine/resources:icon": ".",
+    },
+    visibility = ["//visibility:public"],
+    deps = {
+        "combine-common": ":minecraft_unmerged",
+        "combine-fabric-1-21-1": "//combine/backend/minecraft/fabric/1.21.1",
+        "combine-fabric-1-21-8": "//combine/backend/minecraft/fabric/1.21.8",
+        "combine-fabric-1-21-10": "//combine/backend/minecraft/fabric/1.21.10",
+        "combine-fabric-1-21-11": "//combine/backend/minecraft/fabric/1.21.11",
+        "combine-fabric-26-1": "//combine/backend/minecraft/fabric/26.1",
+        "combine-fabric-26-2": "//combine/backend/minecraft/fabric/26.2",
+        "combine-neoforge-1-21-1": "//combine/backend/minecraft/neoforge/1.21.1",
+    } | combine_unified_deps,
+)

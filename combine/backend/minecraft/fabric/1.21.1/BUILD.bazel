@@ -30,7 +30,7 @@ jar(
 merge_library_jar(
     name = "fabric_unmapped",
     aspect_impl_package_suffix = "fabric.v1_21_1",
-    aspects = ["//combine/backend/minecraft/fabric:fabric_unmerged"],
+    aspects = ["//combine/backend/minecraft:minecraft_unmerged"],
     resources = {
         "//combine/resources:icon": ".",
     },
