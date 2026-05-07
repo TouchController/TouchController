@@ -35,7 +35,6 @@ def _text_resource_jar_impl(ctx):
         transformed_files.append(output_file)
 
     jar_args = ctx.actions.args()
-    jar_args.add("--output")
     jar_args.add(text_jar)
 
     for output_file in transformed_files:
@@ -44,7 +43,7 @@ def _text_resource_jar_impl(ctx):
         else:
             jar_entry_path = output_file.basename
 
-        jar_args.add("--entry")
+        jar_args.add("--resource-path")
         jar_args.add(jar_entry_path)
         jar_args.add(output_file)
 
@@ -119,7 +118,7 @@ text_resource_jar = rule(
             cfg = "exec",
         ),
         "_create_jar_executable": attr.label(
-            default = Label("@//rule/create_jar:create_jar_worker"),
+            default = Label("@//rule/mergetool:core"),
             executable = True,
             cfg = "exec",
         ),

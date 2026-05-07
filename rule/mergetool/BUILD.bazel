@@ -39,6 +39,36 @@ java_binary(
     ],
 )
 
+java_binary(
+    name = "fabric_jij",
+    jvm_flags = ["-Duser.timezone=UTC"],
+    main_class = "top.fifthlight.mergetools.merger.MergeToolWorker",
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        ":mergetool",
+        "//rule/mergetool/plugin/fabric_jij",
+        "//rule/mergetool/plugin/jar_in_jar",
+        "//rule/mergetool/plugin/manifest",
+        "//rule/mergetool/plugin/resource",
+        "//rule/mergetool/plugin/services",
+    ],
+)
+
+java_binary(
+    name = "neoforge_jij",
+    jvm_flags = ["-Duser.timezone=UTC"],
+    main_class = "top.fifthlight.mergetools.merger.MergeToolWorker",
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        ":mergetool",
+        "//rule/mergetool/plugin/jar_in_jar",
+        "//rule/mergetool/plugin/manifest",
+        "//rule/mergetool/plugin/neoforge_jij",
+        "//rule/mergetool/plugin/resource",
+        "//rule/mergetool/plugin/services",
+    ],
+)
+
 jar(
     name = "empty_jar",
     visibility = ["//visibility:public"],

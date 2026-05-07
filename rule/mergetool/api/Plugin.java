@@ -17,7 +17,7 @@ public interface Plugin extends AutoCloseable {
         return false;
     }
 
-    default void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries) {}
+    default void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries, AttributeEnvironment environment) {}
 
     @Override
     default void close() {}

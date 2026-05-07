@@ -50,10 +50,10 @@ public class MergeTool implements AutoCloseable {
     }
 
     public static void process(@Nullable Path sandboxDir, String[] args) throws Exception {
-        try (var instance = new MergeTool();) {
+        try (var instance = new MergeTool()) {
             var environment = instance.preprocess(sandboxDir, args);
             for (var plugin : instance.plugins) {
-                plugin.preSorting(environment.getMergeEntries(), environment.getManifestEntries());
+                plugin.preSorting(environment.getMergeEntries(), environment.getManifestEntries(), environment);
             }
             var outputEntries = instance.sort(environment.getMergeEntries());
             instance.writeJar(outputEntries, environment);

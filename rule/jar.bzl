@@ -9,8 +9,19 @@ def _impl(ctx):
     strip_prefix = ctx.attr.resource_strip_prefix
 
     args = ctx.actions.args()
-    args.add("--output")
     args.add(output_jar)
+
+    args.add("--resource-strip")
+    args.add(strip_prefix)
+
+    if ctx.attr.resource_prefix:
+        args.add("--resource-prefix")
+        args.add(ctx.attr.resource_prefix)
+
+    for from_name, to_name in ctx.attr.resource_rename.items():
+        args.add("--resource-rename")
+        args.add(from_name)
+        args.add(to_name)
 
     input_file_depsets = []
     for label in ctx.attr.resources:
@@ -18,25 +29,7 @@ def _impl(ctx):
         input_file_depsets.append(label.files)
 
         for file in sorted(files.to_list(), key = lambda f: f.path):
-            dirname = file.dirname
-
-            if strip_prefix == ".":
-                dirname = ""
-            elif dirname.startswith(strip_prefix):
-                dirname = dirname.removeprefix(strip_prefix)
-            dirname = ctx.attr.resource_prefix + "/" + dirname
-            if dirname.endswith("/"):
-                dirname = dirname[:-1]
-            if dirname.startswith("/"):
-                dirname = dirname[1:]
-
-            basename = ctx.attr.resource_rename.get(file.basename, file.basename)
-            jar_entry_path = basename
-            if dirname:
-                jar_entry_path = dirname + "/" + jar_entry_path
-
-            args.add("--entry")
-            args.add(jar_entry_path)
+            args.add("--resource")
             args.add(file)
 
     args.use_param_file("@%s", use_always = True)
@@ -78,7 +71,7 @@ jar = rule(
         "resource_strip_prefix": attr.string(
             mandatory = False,
             default = ".",
-            doc = "Strip prefix from resource paths",
+            doc = "Strip prefix from resource paths; '.' means keep basename only",
         ),
         "resource_rename": attr.string_dict(
             mandatory = False,
@@ -91,7 +84,7 @@ jar = rule(
             doc = "Prefix to add to resource paths",
         ),
         "_create_jar_executable": attr.label(
-            default = Label("@//rule/create_jar:create_jar_worker"),
+            default = Label("@//rule/mergetool:core"),
             executable = True,
             cfg = "exec",
         ),

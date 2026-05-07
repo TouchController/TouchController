@@ -1,6 +1,7 @@
 package top.fifthlight.mergetools.merger.plugin.expectactual;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import top.fifthlight.mergetools.merger.api.AttributeEnvironment;
 import top.fifthlight.mergetools.merger.api.MergeEntry;
 import top.fifthlight.mergetools.merger.api.Plugin;
 import top.fifthlight.mergetools.merger.api.PreprocessEnvironment;
@@ -109,7 +110,7 @@ public class ExpectActualPlugin implements Plugin, ExpectActualPluginContext {
     }
 
     @Override
-    public void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries) {
+    public void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries, AttributeEnvironment environment) {
         if (aspectMode) {
             preSortingAspectJar(mergeEntries);
         } else {
@@ -216,8 +217,7 @@ public class ExpectActualPlugin implements Plugin, ExpectActualPluginContext {
             if (mergeEntries.containsKey(servicesPath)) {
                 throw new IllegalStateException("ServiceLoader file for " + aspectProviderFqn + " already exists");
             }
-            var implInternalName = aspectProviderFqn + "Impl";
-            mergeEntries.put(servicesPath, new ServiceLoaderRegistrationEntry(implInternalName));
+            mergeEntries.put(servicesPath, new ServiceLoaderRegistrationEntry(aspectProviderFqn + "Impl"));
         }
 
         // Step 4: Process internal expect/actual (same as original behavior)

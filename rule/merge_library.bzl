@@ -218,12 +218,11 @@ kt_merge_library = rule(
 )
 
 def _path_to_name(path):
-    return ["--strip", path.dirname, "--resource", path.path]
+    return ["--resource-strip", path.dirname, "--resource", path.path]
 
 def _merge_library_jar_impl(ctx):
     if ctx.attr.aspect and not ctx.attr.aspect_class:
         fail("aspect_class is required when aspect is True")
-
     output_jar = ctx.actions.declare_file(ctx.label.name + ".jar")
 
     merged_deps_depset = depset(transitive = [dep[MergeLibraryInfo].transitive_merge_jars for dep in ctx.attr.deps])
@@ -240,7 +239,6 @@ def _merge_library_jar_impl(ctx):
     aspect_jar_files = [dep[AspectJarInfo].jar for dep in ctx.attr.aspects]
     for jar in aspect_jar_files:
         args.add("--aspect", jar.path)
-
     args.add_all(merged_deps)
     resource_files = []
     for resource in ctx.attr.resources.keys():
@@ -252,7 +250,7 @@ def _merge_library_jar_impl(ctx):
                 fail("Resource label without resource: " + str(resource.label))
             args.add_all(files, map_each = _path_to_name)
         else:
-            args.add("--strip", strip)
+            args.add("--resource-strip", strip)
             if len(files) == 0:
                 fail("Resource label without resource: " + str(resource.label))
             args.add_all(files, before_each = "--resource")

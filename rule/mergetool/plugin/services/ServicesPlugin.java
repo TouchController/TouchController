@@ -1,5 +1,6 @@
 package top.fifthlight.mergetools.merger.plugin.services;
 
+import top.fifthlight.mergetools.merger.api.AttributeEnvironment;
 import top.fifthlight.mergetools.merger.api.MergeEntry;
 import top.fifthlight.mergetools.merger.api.Plugin;
 import top.fifthlight.mergetools.merger.api.PreprocessEnvironment;
@@ -49,7 +50,7 @@ public class ServicesPlugin implements Plugin {
     }
 
     @Override
-    public void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries) {
+    public void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries, AttributeEnvironment environment) {
         for (var entry : serviceImplementations.entrySet()) {
             var serviceName = entry.getKey();
             var mergedContent = String.join("\n", entry.getValue()) + "\n";

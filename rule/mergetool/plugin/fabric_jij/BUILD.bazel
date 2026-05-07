@@ -1,0 +1,16 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+java_library(
+    name = "fabric_jij",
+    srcs = glob(["*.java"]),
+    resource_strip_prefix = "rule/mergetool/plugin/fabric_jij/resources",
+    resources = glob(["resources/**"]),
+    visibility = ["//rule/mergetool:__pkg__"],
+    deps = [
+        "//rule/mergetool/api",
+        "//rule/mergetool/plugin/jar_in_jar",
+        "@maven//:com_fasterxml_jackson_core_jackson_annotations",
+        "@maven//:com_fasterxml_jackson_core_jackson_core",
+        "@maven//:com_fasterxml_jackson_core_jackson_databind",
+    ],
+)

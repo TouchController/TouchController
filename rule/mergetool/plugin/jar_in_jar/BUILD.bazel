@@ -1,0 +1,12 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+java_library(
+    name = "jar_in_jar",
+    srcs = glob(["*.java"]),
+    resource_strip_prefix = "rule/mergetool/plugin/jar_in_jar/resources",
+    resources = glob(["resources/**"]),
+    visibility = ["//rule/mergetool:__subpackages__"],
+    deps = [
+        "//rule/mergetool/api",
+    ],
+)

@@ -14,7 +14,7 @@ def merge_jar_action(actions, executable, output_jar, jars = depset(), resources
     for resource, strip in resources.items():
         files = resource.files.to_list()
         resource_files = resource_files + files
-        args.add("--strip")
+        args.add("--resource-strip")
         args.add(strip)
         if len(files) == 0:
             fail("Resource label without resource: " + str(resource.label))

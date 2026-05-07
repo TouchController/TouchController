@@ -9,20 +9,34 @@ def do_merge_fabric_jij(ctx, input_jar, output_jar, deps, executable, label):
         ctx: The rule context.
         input_jar: The input JAR file to merge into.
         output_jar: The output JAR file path.
-        deps: Dictionary of dependency labels to their JAR names.
+        deps: Dictionary of dependency labels to their JAR name:version.
         executable: The merge tool executable.
         label: The label for progress messages.
     """
     args = ctx.actions.args()
-    args.add(input_jar)
     args.add(output_jar)
+    args.add(input_jar)
+
+    args.add("--jij-base-path")
+    args.add("META-INF/jars/")
+
     dep_files = []
     for dep in deps.keys():
         name = deps[dep]
         jar = dep.files.to_list()[0]
         dep_files.append(jar)
-        args.add(name)
+
+        parts = name.split(":", 1)
+        modid = parts[0]
+        version = parts[1] if len(parts) > 1 else "="
+
+        args.add("--jar-in-jar")
+        args.add(modid)
         args.add(jar)
+
+        args.add("--jij-fabric")
+        args.add(modid)
+        args.add(version)
 
     args.use_param_file("@%s")
     args.set_param_file_format("multiline")
@@ -71,7 +85,7 @@ fabric_merge_jij = rule(
             doc = "JARs to be merged as jar-in-jar",
         ),
         "_jij_merger_executable": attr.label(
-            default = Label("@//rule/fabric/jij_merger"),
+            default = Label("@//rule/mergetool:fabric_jij"),
             executable = True,
             cfg = "exec",
         ),

@@ -15,7 +15,6 @@ public class AspectProviderImplEntry implements MergeEntry {
     private final ExpectActualPluginContext context;
     private final String aspectProviderDescriptor;
     private final AspectData aspectData;
-
     public AspectProviderImplEntry(ExpectActualPluginContext context, String aspectProviderDescriptor, AspectData aspectData) {
         this.context = context;
         this.aspectProviderDescriptor = aspectProviderDescriptor;

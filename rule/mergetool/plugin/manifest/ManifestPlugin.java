@@ -1,5 +1,6 @@
 package top.fifthlight.mergetools.merger.plugin.manifest;
 
+import top.fifthlight.mergetools.merger.api.AttributeEnvironment;
 import top.fifthlight.mergetools.merger.api.MergeEntry;
 import top.fifthlight.mergetools.merger.api.Plugin;
 import top.fifthlight.mergetools.merger.api.PreprocessEnvironment;
@@ -31,8 +32,8 @@ public class ManifestPlugin implements Plugin {
         }
     }
 
-    private List<ManifestEntry> jarManifestEntries = new ArrayList<>();
-    private Map<String, String> argManifestEntries = new HashMap<>();
+    private final List<ManifestEntry> jarManifestEntries = new ArrayList<>();
+    private final Map<String, String> argManifestEntries = new HashMap<>();
 
     @Override
     public boolean processArg(String arg, PreprocessEnvironment environment) {
@@ -72,7 +73,7 @@ public class ManifestPlugin implements Plugin {
     }
 
     @Override
-    public void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries) {
+    public void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries, AttributeEnvironment environment) {
         switch (manifestMode) {
             case IGNORE_ALL -> {
             }
