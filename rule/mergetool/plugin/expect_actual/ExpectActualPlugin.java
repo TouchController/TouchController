@@ -147,15 +147,17 @@ public class ExpectActualPlugin implements Plugin, ExpectActualPluginContext {
                     throw new IllegalStateException("Aspect expect not satisfied: " + fqn);
                 }
             }
-            var aspectProviderFqn = ExpectActualUtils.internalNameToFqn(ExpectActualUtils.descriptorNameToInternalName(aspectData.aspectProviderInterface()));
-            var implInternalName = aspectProviderFqn + "Impl";
-            mergeEntries.put(implInternalName + ".class", new AspectProviderImplEntry(this, aspectData.aspectProviderInterface(), aspectData, ExpectActualUtils.fqnToInternalName(implInternalName)));
+            var aspectProviderInternalName = ExpectActualUtils.descriptorNameToInternalName(aspectData.aspectProviderInterface());
+            var aspectProviderFqn = ExpectActualUtils.internalNameToFqn(aspectProviderInternalName);
+            var implInternalName = computeImplInternalName(aspectProviderInternalName);
+            mergeEntries.put(implInternalName + ".class", new AspectProviderImplEntry(this, aspectData.aspectProviderInterface(), aspectData, implInternalName));
 
             var servicesPath = "META-INF/services/" + aspectProviderFqn;
             if (mergeEntries.containsKey(servicesPath)) {
                 throw new IllegalStateException("ServiceLoader file for " + aspectProviderFqn + " already exists");
             }
-            mergeEntries.put(servicesPath, new ServiceLoaderRegistrationEntry(implInternalName));
+            var implFqn = computeImplFqn(aspectProviderInternalName);
+            mergeEntries.put(servicesPath, new ServiceLoaderRegistrationEntry(implFqn));
         }
 
         // Step 2: Separate satisfied and unresolved expects
