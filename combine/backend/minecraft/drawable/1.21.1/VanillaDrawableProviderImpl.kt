@@ -18,19 +18,19 @@ object VanillaDrawableProviderImpl : VanillaDrawableProvider {
     override val buttonDrawableSet = DrawableSet(
         normal = TextureImpl(
             resourceLocation = ResourceLocation.withDefaultNamespace("widget/button"),
-            sprite = false,
+            sprite = true,
             size = IntSize(150, 20),
             padding = IntPadding(2),
         ),
         focus = TextureImpl(
             resourceLocation = ResourceLocation.withDefaultNamespace("widget/button_highlighted"),
-            sprite = false,
+            sprite = true,
             size = IntSize(150, 20),
             padding = IntPadding(2),
         ),
         disabled = TextureImpl(
             resourceLocation = ResourceLocation.withDefaultNamespace("widget/button_disabled"),
-            sprite = false,
+            sprite = true,
             size = IntSize(150, 20),
             padding = IntPadding(2),
         ),
