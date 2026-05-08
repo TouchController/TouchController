@@ -15,9 +15,6 @@ description="${description}"
 [[mixins]]
 config="combine.mixins.render.json"
 
-[[accessTransformers]]
-file="combine.accesstransformer.cfg"
-
 [[dependencies.combine_1_21_1]]
 modId="minecraft"
 type="required"

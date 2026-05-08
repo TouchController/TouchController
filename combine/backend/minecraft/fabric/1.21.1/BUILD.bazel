@@ -22,7 +22,6 @@ jar(
     name = "meta_jar",
     resources = [
         ":fabric_mod_json",
-        "//combine/backend/minecraft/game/1.21.1:access_widener",
     ],
     visibility = ["//visibility:public"],
 )

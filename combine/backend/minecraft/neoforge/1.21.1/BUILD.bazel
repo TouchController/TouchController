@@ -23,7 +23,6 @@ merge_library_jar(
     resources = {
         "//combine/resources:icon": ".",
         ":neoforge_mods_toml": "combine/backend/minecraft/neoforge/1.21.1",
-        "//combine/backend/minecraft/game/1.21.1:access_transformer": ".",
     },
     visibility = ["//visibility:public"],
     deps = [

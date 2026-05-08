@@ -23,7 +23,6 @@
         "java": ">=21",
         "fabric-language-kotlin": "*"
     },
-    "accessWidener": "combine.accesswidener",
     "custom": {
         "modmenu": {
             "parent": "combine",
