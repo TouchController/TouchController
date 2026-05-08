@@ -20,8 +20,8 @@ expand_template(
 unified_jar(
     name = "neoforge",
     neoforge_deps = {
-        "combine-common": "common",
-        "combine-neoforge-1-21-1": "1.21.1",
+        "combine-common": ["common"],
+        "combine-neoforge-1-21-1": ["1.21.1"],
     } | combine_unified_neoforge,
     neoforge_mod_toml = ":neoforge_mod_toml",
     resources = {

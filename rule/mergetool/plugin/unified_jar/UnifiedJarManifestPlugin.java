@@ -10,15 +10,13 @@ import top.fifthlight.multijar.common.MultiJarManifest;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class UnifiedJarManifestPlugin implements Plugin {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    private final LinkedHashMap<String, String> neoforgeGroups = new LinkedHashMap<>();
-    private final LinkedHashMap<String, String> forgeGroups = new LinkedHashMap<>();
+    private final LinkedHashMap<String, HashSet<String>> neoforgeGroups = new LinkedHashMap<>();
+    private final LinkedHashMap<String, HashSet<String>> forgeGroups = new LinkedHashMap<>();
 
     @Override
     public int priority() {
@@ -31,13 +29,13 @@ public class UnifiedJarManifestPlugin implements Plugin {
             case "--unified-neoforge" -> {
                 var modid = environment.readNextArg();
                 var mcGroup = environment.readNextArg();
-                neoforgeGroups.put(modid, mcGroup);
+                neoforgeGroups.computeIfAbsent(modid, k -> new HashSet<>()).add(mcGroup);
                 yield true;
             }
             case "--unified-forge" -> {
                 var modid = environment.readNextArg();
                 var mcGroup = environment.readNextArg();
-                forgeGroups.put(modid, mcGroup);
+                forgeGroups.computeIfAbsent(modid, k -> new HashSet<>()).add(mcGroup);
                 yield true;
             }
             default -> false;
@@ -57,12 +55,13 @@ public class UnifiedJarManifestPlugin implements Plugin {
     }
 
     private void writeManifest(Map<String, MergeEntry> mergeEntries, String manifestPath,
-                               LinkedHashMap<String, String> groups, JarInJarPlugin.JiJContext context) {
-        var groupMap = new LinkedHashMap<String, java.util.List<String>>();
+                               LinkedHashMap<String, HashSet<String>> groups, JarInJarPlugin.JiJContext context) {
+        var groupMap = new LinkedHashMap<String, List<String>>();
         for (var entry : groups.entrySet()) {
             var modid = entry.getKey();
-            var mcGroup = entry.getValue();
-            groupMap.computeIfAbsent(mcGroup, k -> new ArrayList<>()).add(modid);
+            for (var mcGroup : entry.getValue()) {
+                groupMap.computeIfAbsent(mcGroup, k -> new ArrayList<>()).add(modid);
+            }
         }
 
         var json = MAPPER.createObjectNode();

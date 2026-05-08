@@ -18,7 +18,7 @@ combine_unified_deps = {
     "org_mini2dx_universal_tween_engine": "@maven//:org_mini2Dx_universal_tween_engine",
 }
 
-combine_unified_neoforge = {modid: "common" for modid in combine_unified_deps.keys()}
+combine_unified_neoforge = {modid: ["common"] for modid in combine_unified_deps.keys()}
 
 combine_unified_fabric = {
     "androidx_compose_runtime_runtime_desktop": "1.10.2",

@@ -51,17 +51,19 @@ def _unified_jar_impl(ctx):
         args.add(key)
         args.add(value)
 
-    # neoforge_deps: modid -> mcver (for UnifiedJarManifestPlugin)
-    for key, value in ctx.attr.neoforge_deps.items():
-        args.add("--unified-neoforge")
-        args.add(key)
-        args.add(value)
+    # neoforge_deps: modid -> list of mcvers (for UnifiedJarManifestPlugin)
+    for key, values in ctx.attr.neoforge_deps.items():
+        for value in values:
+            args.add("--unified-neoforge")
+            args.add(key)
+            args.add(value)
 
-    # forge_deps: modid -> mcver (for UnifiedJarManifestPlugin)
-    for key, value in ctx.attr.forge_deps.items():
-        args.add("--unified-forge")
-        args.add(key)
-        args.add(value)
+    # forge_deps: modid -> list of mcvers (for UnifiedJarManifestPlugin)
+    for key, values in ctx.attr.forge_deps.items():
+        for value in values:
+            args.add("--unified-forge")
+            args.add(key)
+            args.add(value)
 
     resource_files = []
     for resource, strip in ctx.attr.resources.items():
@@ -103,13 +105,13 @@ unified_jar = rule(
             default = {},
             doc = "Fabric entries: modid -> version",
         ),
-        "neoforge_deps": attr.string_dict(
+        "neoforge_deps": attr.string_list_dict(
             default = {},
-            doc = "NeoForge entries: modid -> MC version or 'common'",
+            doc = "NeoForge entries: modid -> list of MC versions (e.g. ['common'] or ['1.21.1', '1.21.4'])",
         ),
-        "forge_deps": attr.string_dict(
+        "forge_deps": attr.string_list_dict(
             default = {},
-            doc = "Forge entries: modid -> MC version or 'common'",
+            doc = "Forge entries: modid -> list of MC versions (e.g. ['common'] or ['1.21.1', '1.21.4'])",
         ),
         "fabric_mod_json": attr.label(
             allow_single_file = [".json"],
