@@ -1,28 +1,12 @@
-load("//rule:apply_access_widener.bzl", "apply_access_widener")
-load("//rule/neoforge:convert_access_widener.bzl", "convert_access_widener")
+load("//game:game.bzl", "game_version")
 
-apply_access_widener(
-    name = "26.2",
-    srcs = ["combine.classtweaker"],
-    input = "//game/26.2:game_client",
-    neverlink = True,
-    visibility = ["//visibility:public"],
-)
-
-convert_access_widener(
-    name = "access_transformer_file",
-    src = "combine.classtweaker",
-    output_name = "access_transformer.cfg",
-)
-
-alias(
-    name = "access_transformer",
-    actual = ":access_transformer_file",
-    visibility = ["//visibility:public"],
-)
-
-alias(
-    name = "access_widener",
-    actual = "combine.classtweaker",
+game_version(
+    name = "game",
+    client = "@minecraft//26.2-snapshot-6:client",
+    client_assets = "@minecraft_assets//:assets_26.2-snapshot-6",
+    client_assets_version = "@minecraft_assets//:version_26.2-snapshot-6",
+    client_libraries = "@minecraft//26.2-snapshot-6:client_libraries",
+    server = "@minecraft//26.2-snapshot-6:server",
+    version = "26.2-snapshot-6",
     visibility = ["//visibility:public"],
 )
