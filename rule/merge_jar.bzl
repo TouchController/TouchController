@@ -2,8 +2,12 @@
 
 load("@rules_java//java:defs.bzl", "JavaInfo", "java_common")
 
-def merge_jar_action(actions, executable, output_jar, jars = depset(), resources = {}):
+def merge_jar_action(actions, executable, output_jar, jars = depset(), resources = {}, plugins = []):
     args = actions.args()
+
+    for plugin in plugins:
+        args.add("--plugin")
+        args.add(plugin)
 
     args.add(output_jar)
 
@@ -54,6 +58,7 @@ def _merge_jar_impl(ctx):
         output_jar,
         merged_deps.full_compile_jars,
         ctx.attr.resources,
+        plugins = ["manifest", "services", "resource"],
     )
 
     return [
@@ -79,7 +84,7 @@ merge_jar = rule(
             doc = "Resource to be merged, with perfix to strip",
         ),
         "_merge_jar_executable": attr.label(
-            default = "@//rule/mergetool:core",
+            default = "@//rule/mergetool:merger",
             executable = True,
             cfg = "exec",
         ),

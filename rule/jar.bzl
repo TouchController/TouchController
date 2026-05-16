@@ -9,6 +9,7 @@ def _impl(ctx):
     strip_prefix = ctx.attr.resource_strip_prefix
 
     args = ctx.actions.args()
+    args.add("--plugin", "resource")
     args.add(output_jar)
 
     args.add("--resource-strip")
@@ -84,7 +85,7 @@ jar = rule(
             doc = "Prefix to add to resource paths",
         ),
         "_create_jar_executable": attr.label(
-            default = Label("@//rule/mergetool:core"),
+            default = Label("@//rule/mergetool:merger"),
             executable = True,
             cfg = "exec",
         ),

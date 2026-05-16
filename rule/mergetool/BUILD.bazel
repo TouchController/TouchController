@@ -13,75 +13,20 @@ java_library(
 )
 
 java_binary(
-    name = "core",
-    jvm_flags = ["-Duser.timezone=UTC"],
-    main_class = "top.fifthlight.mergetools.merger.MergeToolWorker",
-    visibility = ["//visibility:public"],
-    runtime_deps = [
-        ":mergetool",
-        "//rule/mergetool/plugin/manifest",
-        "//rule/mergetool/plugin/resource",
-        "//rule/mergetool/plugin/services",
-    ],
-)
-
-java_binary(
-    name = "expect_actual",
+    name = "merger",
     jvm_flags = ["-Duser.timezone=UTC"],
     main_class = "top.fifthlight.mergetools.merger.MergeToolWorker",
     visibility = ["//visibility:public"],
     runtime_deps = [
         ":mergetool",
         "//rule/mergetool/plugin/expect_actual",
-        "//rule/mergetool/plugin/manifest",
-        "//rule/mergetool/plugin/resource",
-        "//rule/mergetool/plugin/services",
-    ],
-)
-
-java_binary(
-    name = "unified_jar",
-    jvm_flags = ["-Duser.timezone=UTC"],
-    main_class = "top.fifthlight.mergetools.merger.MergeToolWorker",
-    visibility = ["//visibility:public"],
-    runtime_deps = [
-        ":mergetool",
         "//rule/mergetool/plugin/fabric_jij",
-        "//rule/mergetool/plugin/jar_in_jar",
-        "//rule/mergetool/plugin/manifest",
-        "//rule/mergetool/plugin/resource",
-        "//rule/mergetool/plugin/services",
-        "//rule/mergetool/plugin/unified_jar",
-    ],
-)
-
-java_binary(
-    name = "fabric_jij",
-    jvm_flags = ["-Duser.timezone=UTC"],
-    main_class = "top.fifthlight.mergetools.merger.MergeToolWorker",
-    visibility = ["//visibility:public"],
-    runtime_deps = [
-        ":mergetool",
-        "//rule/mergetool/plugin/fabric_jij",
-        "//rule/mergetool/plugin/jar_in_jar",
-        "//rule/mergetool/plugin/manifest",
-        "//rule/mergetool/plugin/resource",
-        "//rule/mergetool/plugin/services",
-    ],
-)
-
-java_binary(
-    name = "neoforge_jij",
-    jvm_flags = ["-Duser.timezone=UTC"],
-    main_class = "top.fifthlight.mergetools.merger.MergeToolWorker",
-    visibility = ["//visibility:public"],
-    runtime_deps = [
-        ":mergetool",
         "//rule/mergetool/plugin/jar_in_jar",
         "//rule/mergetool/plugin/manifest",
         "//rule/mergetool/plugin/neoforge_jij",
         "//rule/mergetool/plugin/resource",
         "//rule/mergetool/plugin/services",
+        "//rule/mergetool/plugin/unified_jar",
     ],
 )
 

@@ -6,6 +6,12 @@ def _unified_jar_impl(ctx):
     output_jar = ctx.actions.declare_file(ctx.label.name + ".jar")
 
     args = ctx.actions.args()
+    args.add("--plugin", "manifest")
+    args.add("--plugin", "services")
+    args.add("--plugin", "resource")
+    args.add("--plugin", "jar_in_jar")
+    args.add("--plugin", "fabric_jij")
+    args.add("--plugin", "unified_jar")
     args.add(output_jar)
 
     input_files = []
@@ -137,7 +143,7 @@ unified_jar = rule(
             default = "//multijar",
         ),
         "_merger": attr.label(
-            default = Label("@//rule/mergetool:unified_jar"),
+            default = Label("@//rule/mergetool:merger"),
             executable = True,
             cfg = "exec",
         ),

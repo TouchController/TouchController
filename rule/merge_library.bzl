@@ -232,6 +232,10 @@ def _merge_library_jar_impl(ctx):
     merged_srcs_depset = depset(transitive = [dep[MergeLibraryInfo].transitive_merge_source_jars for dep in ctx.attr.deps])
 
     args = ctx.actions.args()
+    args.add("--plugin", "manifest")
+    args.add("--plugin", "services")
+    args.add("--plugin", "resource")
+    args.add("--plugin", "expect_actual")
     args.add(output_jar)
 
     if ctx.attr.aspect:
@@ -292,6 +296,7 @@ def _merge_library_jar_impl(ctx):
         ctx.executable._mergetool_executable,
         ctx.outputs.sources_jar,
         merged_srcs_depset,
+        plugins = ["manifest", "services"],
     )
 
     return [
@@ -324,7 +329,7 @@ _merge_library_jar = rule(
         ),
         "sources_jar": attr.output(),
         "_mergetool_executable": attr.label(
-            default = Label("@//rule/mergetool:expect_actual"),
+            default = Label("@//rule/mergetool:merger"),
             executable = True,
             cfg = "exec",
         ),

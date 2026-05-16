@@ -3,6 +3,7 @@ package top.fifthlight.mergetools.merger;
 import org.jspecify.annotations.Nullable;
 import top.fifthlight.mergetools.merger.api.MergeEntry;
 import top.fifthlight.mergetools.merger.api.Plugin;
+import top.fifthlight.mergetools.merger.api.PluginProvider;
 import top.fifthlight.mergetools.merger.impl.PreprocessEnvironmentImpl;
 
 import java.io.OutputStream;
@@ -12,10 +13,12 @@ import java.nio.file.attribute.FileTime;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
+import java.util.function.Function;
 import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -29,16 +32,45 @@ public class MergeTool implements AutoCloseable {
         entry.setTimeLocal(LocalDateTime.ofEpochSecond(DOS_EPOCH / 1000, 0, ZoneOffset.UTC));
     }
 
+    private static final Map<String, PluginProvider> PROVIDERS = ServiceLoader.load(PluginProvider.class)
+            .stream()
+            .map(ServiceLoader.Provider::get)
+            .collect(Collectors.toMap(PluginProvider::name, Function.identity()));
+
     private MergeTool() {
     }
 
     private final ArrayList<JarFile> jarFiles = new ArrayList<>();
     private Path outputPath;
-    private final List<Plugin> plugins = ServiceLoader.load(Plugin.class)
-            .stream()
-            .map(ServiceLoader.Provider::get)
-            .sorted(Comparator.comparingInt(Plugin::priority))
-            .toList();
+    private List<Plugin> plugins = List.of();
+
+    public static void process(@Nullable Path sandboxDir, String[] args) throws Exception {
+        var plugins = new ArrayList<Plugin>();
+        var remaining = new ArrayList<String>();
+        var i = 0;
+        while (i < args.length) {
+            if ("--plugin".equals(args[i]) && i + 1 < args.length) {
+                var provider = PROVIDERS.get(args[i + 1]);
+                if (provider == null) {
+                    throw new IllegalArgumentException("Unknown plugin: " + args[i + 1]);
+                }
+                plugins.add(provider.create());
+                i += 2;
+            } else {
+                remaining.addAll(Arrays.asList(args).subList(i, args.length));
+                break;
+            }
+        }
+        try (var instance = new MergeTool()) {
+            instance.setPlugins(plugins);
+            var environment = instance.preprocess(sandboxDir, remaining.toArray(new String[0]));
+            for (var plugin : instance.plugins) {
+                plugin.preSorting(environment.getMergeEntries(), environment.getManifestEntries(), environment);
+            }
+            var outputEntries = instance.sort(environment.getMergeEntries());
+            instance.writeJar(outputEntries, environment);
+        }
+    }
 
     private record JarItem(JarFile jarFile, JarEntry entry) implements MergeEntry {
         @Override
@@ -49,15 +81,9 @@ public class MergeTool implements AutoCloseable {
         }
     }
 
-    public static void process(@Nullable Path sandboxDir, String[] args) throws Exception {
-        try (var instance = new MergeTool()) {
-            var environment = instance.preprocess(sandboxDir, args);
-            for (var plugin : instance.plugins) {
-                plugin.preSorting(environment.getMergeEntries(), environment.getManifestEntries(), environment);
-            }
-            var outputEntries = instance.sort(environment.getMergeEntries());
-            instance.writeJar(outputEntries, environment);
-        }
+    private void setPlugins(List<Plugin> plugins) {
+        plugins.sort(Comparator.comparingInt(Plugin::priority));
+        this.plugins = plugins;
     }
 
     private List<Map.Entry<String, MergeEntry>> sort(Map<String, MergeEntry> mergeEntries) {

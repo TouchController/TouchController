@@ -14,6 +14,11 @@ def do_merge_neoforge_jij(ctx, input_jar, output_jar, deps, executable, label):
         label: The label for progress messages.
     """
     args = ctx.actions.args()
+    args.add("--plugin", "manifest")
+    args.add("--plugin", "services")
+    args.add("--plugin", "resource")
+    args.add("--plugin", "jar_in_jar")
+    args.add("--plugin", "neoforge_jij")
     args.add(output_jar)
     args.add(input_jar)
 
@@ -88,7 +93,7 @@ neoforge_merge_jij = rule(
             doc = "JARs to be merged as jar-in-jar",
         ),
         "_jij_merger_executable": attr.label(
-            default = Label("@//rule/mergetool:neoforge_jij"),
+            default = Label("@//rule/mergetool:merger"),
             executable = True,
             cfg = "exec",
         ),

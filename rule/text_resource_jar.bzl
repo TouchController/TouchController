@@ -35,6 +35,7 @@ def _text_resource_jar_impl(ctx):
         transformed_files.append(output_file)
 
     jar_args = ctx.actions.args()
+    jar_args.add("--plugin", "resource")
     jar_args.add(text_jar)
 
     for output_file in transformed_files:
@@ -72,6 +73,7 @@ def _text_resource_jar_impl(ctx):
         output_jar,
         depset([text_jar], transitive = [merged_resource_jars.full_compile_jars]),
         ctx.attr.resources,
+        plugins = ["manifest", "services", "resource"],
     )
 
     return [
@@ -118,12 +120,12 @@ text_resource_jar = rule(
             cfg = "exec",
         ),
         "_create_jar_executable": attr.label(
-            default = Label("@//rule/mergetool:core"),
+            default = Label("@//rule/mergetool:merger"),
             executable = True,
             cfg = "exec",
         ),
         "_merge_jar_executable": attr.label(
-            default = "@//rule/mergetool:core",
+            default = "@//rule/mergetool:merger",
             executable = True,
             cfg = "exec",
         ),

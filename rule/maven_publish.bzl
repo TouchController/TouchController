@@ -62,6 +62,7 @@ def _maven_publish_impl(ctx):
             ctx.executable._merge_jar_executable,
             main_jar,
             main_jars_depset,
+            plugins = ["manifest", "services"],
         )
         artifact_specs[":jar"] = main_jar.short_path
         input_files.append(main_jar)
@@ -75,6 +76,7 @@ def _maven_publish_impl(ctx):
                 ctx.executable._merge_jar_executable,
                 source_jar,
                 depset(source_jars),
+                plugins = ["manifest", "services"],
             )
             artifact_specs["sources:jar"] = source_jar.short_path
             input_files.append(source_jar)
@@ -266,7 +268,7 @@ maven_publish = rule(
             default = "@platforms//os:windows",
         ),
         "_merge_jar_executable": attr.label(
-            default = "@//rule/mergetool:core",
+            default = "@//rule/mergetool:merger",
             executable = True,
             cfg = "exec",
         ),
