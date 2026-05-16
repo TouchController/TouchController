@@ -110,9 +110,9 @@ jobs:
             --version-name "${mod_version}" \
             --version-id "${mod_version}+fabric" \
             --version-type "${mod_state}" \
-            --changelog release/bazel-bin/touchcontroller/update_log.md \
+            --changelog "$(realpath release/bazel-bin/touchcontroller/update_log.md)" \
             --file-name "TouchController-${mod_version}+fabric.jar" \
-            --file-path release/bazel-bin/touchcontroller/fabric/fabric.jar \
+            "$(realpath release/bazel-bin/touchcontroller/fabric/fabric.jar) \
             $(jq -cr .touchcontroller_fabric_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
             --dependency --dependency-project-id P7dR8mSH --dependency-type required \
             --dependency --dependency-project-id Ha28R6CL --dependency-type required \
@@ -163,9 +163,9 @@ jobs:
             --version-name "${mod_version}" \
             --version-id "${mod_version}+fabric" \
             --version-type "${mod_state}" \
-            --changelog release/bazel-bin/touchcontroller/update_log.md \
+            --changelog "$(realpath release/bazel-bin/touchcontroller/update_log.md)" \
             --file-name "TouchController-${mod_version}+fabric.jar" \
-            --file-path release/bazel-bin/touchcontroller/fabric/fabric.jar \
+            "$(realpath release/bazel-bin/touchcontroller/fabric/fabric.jar)" \
             $(jq -cr .touchcontroller_fabric_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
             --dependency --dependency-project-id P7dR8mSH --dependency-type required \
             --dependency --dependency-project-id Ha28R6CL --dependency-type required \
