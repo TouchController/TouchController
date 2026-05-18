@@ -8,7 +8,7 @@ package top.fifthlight.touchcontroller.common.gal.action
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.data.TextFactoryFactory
 import top.fifthlight.mergetools.api.ExpectFactory
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 
 interface GameAction {
     fun openChatScreen()

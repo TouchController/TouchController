@@ -27,8 +27,8 @@ import top.fifthlight.combine.core.widget.layout.Row
 import top.fifthlight.combine.item.data.ItemStackFactory
 import top.fifthlight.combine.item.widget.Item
 import top.fifthlight.combine.widget.ui.*
-import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.config.condition.*
 import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
 import top.fifthlight.touchcontroller.common.config.preset.LayoutPreset

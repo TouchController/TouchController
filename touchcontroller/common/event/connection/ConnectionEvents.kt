@@ -6,7 +6,7 @@
 package top.fifthlight.touchcontroller.common.event.connection
 
 import top.fifthlight.combine.core.data.Text
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.data.StatusConfig
 import top.fifthlight.touchcontroller.common.config.holder.GlobalConfigHolder
 import top.fifthlight.touchcontroller.common.gal.action.GameAction

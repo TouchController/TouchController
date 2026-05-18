@@ -21,8 +21,8 @@ import top.fifthlight.combine.widget.ui.Button
 import top.fifthlight.combine.widget.ui.Icon
 import top.fifthlight.combine.widget.ui.IconButton
 import top.fifthlight.combine.widget.ui.Text
-import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.tab.CustomTab
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.tab.LocalCustomTabContext

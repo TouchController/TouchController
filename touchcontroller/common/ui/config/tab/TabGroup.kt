@@ -8,7 +8,7 @@ package top.fifthlight.touchcontroller.common.ui.config.tab
 import androidx.compose.runtime.Composable
 import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.combine.core.data.Text
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 
 sealed class TabGroup(
     val titleId: Identifier

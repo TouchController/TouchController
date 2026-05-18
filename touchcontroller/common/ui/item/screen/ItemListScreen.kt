@@ -26,8 +26,8 @@ import top.fifthlight.combine.item.widget.Item
 import top.fifthlight.combine.widget.ui.Icon
 import top.fifthlight.combine.widget.ui.IconButton
 import top.fifthlight.combine.widget.ui.Text
-import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.gal.gamestate.GameState
 import top.fifthlight.touchcontroller.common.ui.item.model.ItemListScreenModel
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme

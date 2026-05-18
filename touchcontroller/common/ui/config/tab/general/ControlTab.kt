@@ -15,7 +15,7 @@ import top.fifthlight.combine.core.modifier.placement.fillMaxSize
 import top.fifthlight.combine.core.modifier.placement.padding
 import top.fifthlight.combine.core.modifier.scroll.verticalScroll
 import top.fifthlight.combine.core.widget.layout.Column
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.data.ControlConfig
 import top.fifthlight.touchcontroller.common.ui.config.model.LocalConfigScreenModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.Tab

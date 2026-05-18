@@ -12,7 +12,7 @@ import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.combine.core.screen.LocalCloseHandler
 import top.fifthlight.combine.widget.ui.Text
 import top.fifthlight.combine.widget.ui.TextButton
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 
 @Composable
 fun BackButton(

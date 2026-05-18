@@ -5,7 +5,7 @@ load("//touchcontroller:properties.bzl", "touchcontroller_homepage", "touchcontr
 
 kt_text_binding_lib(
     name = "text_binding",
-    package_name = "top.fifthlight.touchcontroller.assets",
+    package_name = "top.fifthlight.touchcontroller.assets.lang",
     class_name = "Texts",
     input = "en_us.json",
     visibility = ["//touchcontroller:__subpackages__"],

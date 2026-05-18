@@ -29,8 +29,8 @@ import top.fifthlight.combine.core.widget.layout.Row
 import top.fifthlight.combine.widget.ui.*
 import top.fifthlight.mergetools.api.ActualConstructor
 import top.fifthlight.mergetools.api.ActualImpl
-import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.control.action.provider.ChatScreenProvider
 import top.fifthlight.touchcontroller.common.gal.chat.ChatMessageProvider
 import top.fifthlight.touchcontroller.common.gal.chat.ChatMessageProviderFactory

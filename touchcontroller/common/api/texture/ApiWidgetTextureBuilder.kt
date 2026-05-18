@@ -4,7 +4,7 @@ import top.fifthlight.combine.core.paint.Texture
 import top.fifthlight.combine.core.paint.TextureFactory
 import top.fifthlight.data.IntPadding
 import top.fifthlight.touchcontroller.api.v1.widget.WidgetTextureBuilder
-import top.fifthlight.touchcontroller.assets.BuiltInTextureSets
+import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.assets.TextureItems
 
 class ApiWidgetTextureBuilder : WidgetTextureBuilder {

@@ -30,7 +30,7 @@ texture_group(
 texture_lib(
     name = "texture",
     class_name = "Textures",
-    package = "top.fifthlight.touchcontroller.assets",
+    package = "top.fifthlight.touchcontroller.assets.texture",
     prefix = "ui",
     deps = [
         ":texture_group",
@@ -61,7 +61,7 @@ expand_template(
 merge_library_jar(
     name = "texture_common",
     aspect = True,
-    aspect_class = "top.fifthlight.touchcontroller.assets.AspectProvider",
+    aspect_class = "top.fifthlight.touchcontroller.assets.texture.AspectProvider",
     resources = {":fabric_mod_json": "."},
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
@@ -75,9 +75,9 @@ kt_control_texture_set_lib(
     control_group = "//touchcontroller/resources/texture/control",
     kt_text_binding_lib = "//touchcontroller/resources/lang:text_binding",
     kt_texture_lib = ":texture_lib",
-    package = "top.fifthlight.touchcontroller.assets",
+    package = "top.fifthlight.touchcontroller.assets.texture.set",
     text_binding_class_name = "Texts",
-    text_binding_package = "top.fifthlight.touchcontroller.assets",
+    text_binding_package = "top.fifthlight.touchcontroller.assets.lang",
     texture_items_class_name = "BuiltInTextureItems",
     texture_lib = ":texture",
     texture_sets_class_name = "BuiltInTextureSets",
@@ -90,9 +90,9 @@ kt_empty_texture_lib(
     empty_texture_group = "//touchcontroller/resources/texture/empty",
     kt_text_binding_lib = "//touchcontroller/resources/lang:text_binding",
     kt_texture_lib = ":texture_lib",
-    package = "top.fifthlight.touchcontroller.assets",
+    package = "top.fifthlight.touchcontroller.assets.texture.empty",
     text_binding_class_name = "Texts",
-    text_binding_package = "top.fifthlight.touchcontroller.assets",
+    text_binding_package = "top.fifthlight.touchcontroller.assets.lang",
     texture_lib = ":texture",
     visibility = ["//touchcontroller:__subpackages__"],
 )
@@ -108,6 +108,7 @@ kt_vanilla_lib(
     name = "vanilla_lib",
     dep = ":texture_lib",
     pack = ":vanilla_pack",
+    package = "top.fifthlight.touchcontroller.assets.texture.vanilla",
     resource_jars = [
         ":icon_jar",
         ":vanilla_pack",
@@ -154,6 +155,7 @@ kt_atlas_lib(
     name = "atlas_lib",
     dep = ":texture_lib",
     pack = ":atlas_pack",
+    package = "top.fifthlight.touchcontroller.assets.texture.atlas",
     resource_jars = [
         ":icon_jar",
         ":atlas_pack",

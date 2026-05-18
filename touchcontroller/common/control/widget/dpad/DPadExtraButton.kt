@@ -8,8 +8,8 @@ package top.fifthlight.touchcontroller.common.control.widget.dpad
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Identifier
-import top.fifthlight.touchcontroller.assets.BuiltInTextureItems
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 

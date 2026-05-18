@@ -18,8 +18,8 @@ import top.fifthlight.combine.widget.ui.DropdownItemList
 import top.fifthlight.combine.widget.ui.Select
 import top.fifthlight.combine.widget.ui.SelectIcon
 import top.fifthlight.combine.widget.ui.Text
-import top.fifthlight.touchcontroller.assets.EmptyTexture
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.empty.EmptyTexture
 import top.fifthlight.touchcontroller.common.control.*
 
 fun <Config : ControllerWidget, Value> ControllerWidget.Property<Config, Value>.buttonTextureProperty(

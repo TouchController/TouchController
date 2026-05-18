@@ -17,7 +17,7 @@ import top.fifthlight.combine.theme.blackstone.BlackstoneTextures
 import top.fifthlight.combine.theme.blackstone.BlackstoneTheme
 import top.fifthlight.combine.ui.style.ColorTheme
 import top.fifthlight.combine.ui.style.DrawableSet
-import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.input.InputManager
 
 val LocalTouchControllerTheme = staticCompositionLocalOf { TouchControllerTheme() }

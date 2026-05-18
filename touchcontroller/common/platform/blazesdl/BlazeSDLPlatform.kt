@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory
 import top.fifthlight.blazesdl.api.BlazeSDLAPI
 import top.fifthlight.blazesdl.api.BlazeSDLEventHandler
 import top.fifthlight.combine.core.data.Text
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.platform.PlatformConfigProvider
 import top.fifthlight.touchcontroller.common.platform.Platform
 import top.fifthlight.touchcontroller.proxy.message.AddPointerMessage

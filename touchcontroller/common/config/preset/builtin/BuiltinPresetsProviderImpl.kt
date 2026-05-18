@@ -8,7 +8,7 @@ package top.fifthlight.touchcontroller.common.config.preset.builtin
 import kotlinx.collections.immutable.toPersistentList
 import top.fifthlight.mergetools.api.ActualConstructor
 import top.fifthlight.mergetools.api.ActualImpl
-import top.fifthlight.touchcontroller.assets.BuiltInTextureItems
+import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
 import top.fifthlight.touchcontroller.common.config.layout.controllerLayoutOf
 import top.fifthlight.touchcontroller.common.config.preset.LayoutPreset
 import top.fifthlight.touchcontroller.common.config.preset.builtin.key.BuiltinPresetKey

@@ -6,14 +6,11 @@
 package top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.widgets.state
 
 import kotlinx.collections.immutable.PersistentList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
-import top.fifthlight.touchcontroller.assets.BuiltInTextureSets
+import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.builtin.BuiltinWidgets
-import top.fifthlight.touchcontroller.common.control.widget.boat.BoatButton
-import top.fifthlight.touchcontroller.common.control.widget.joystick.Joystick
 
 data class WidgetsTabState(
     val listContent: ListContent,

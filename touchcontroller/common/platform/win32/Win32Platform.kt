@@ -7,7 +7,7 @@ package top.fifthlight.touchcontroller.common.platform.win32
 
 import org.slf4j.LoggerFactory
 import top.fifthlight.combine.core.data.Text
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.gal.window.NativeWindow
 import top.fifthlight.touchcontroller.common.platform.Platform
 import top.fifthlight.touchcontroller.proxy.message.MessageDecodeException

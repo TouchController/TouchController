@@ -8,10 +8,10 @@ package top.fifthlight.touchcontroller.common.control.builtin
 import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntPadding
-import top.fifthlight.touchcontroller.assets.BuiltInTextureItems
-import top.fifthlight.touchcontroller.assets.BuiltInTextureSets
-import top.fifthlight.touchcontroller.assets.EmptyTexture
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.empty.EmptyTexture
+import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
+import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.assets.TextureItem
 import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.ControllerWidget

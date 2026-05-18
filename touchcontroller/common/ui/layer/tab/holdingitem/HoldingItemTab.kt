@@ -8,8 +8,8 @@ package top.fifthlight.touchcontroller.common.ui.layer.tab.holdingitem
 import androidx.compose.runtime.Composable
 import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.combine.widget.ui.Icon
-import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.config.condition.HoldingItemLayerConditionKey
 import top.fifthlight.touchcontroller.common.ui.item.screen.ItemChooser
 import top.fifthlight.touchcontroller.common.ui.layer.tab.LayerConditionTab

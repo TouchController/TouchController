@@ -14,7 +14,7 @@ import top.fifthlight.combine.core.modifier.placement.fillMaxWidth
 import top.fifthlight.combine.core.modifier.placement.padding
 import top.fifthlight.combine.core.modifier.scroll.verticalScroll
 import top.fifthlight.combine.widget.ui.Text
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.about.License
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.widget.Scaffold

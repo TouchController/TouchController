@@ -13,9 +13,9 @@ import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.data.*
-import top.fifthlight.touchcontroller.assets.BuiltInTextureItems
-import top.fifthlight.touchcontroller.assets.BuiltInTextureSets
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
+import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.BooleanProperty
 import top.fifthlight.touchcontroller.common.control.ControllerWidget

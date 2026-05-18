@@ -19,8 +19,8 @@ import top.fifthlight.combine.core.modifier.scroll.verticalScroll
 import top.fifthlight.combine.core.widget.layout.Column
 import top.fifthlight.combine.core.widget.layout.Row
 import top.fifthlight.combine.widget.ui.*
-import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.config.condition.CustomLayerConditionKey
 import top.fifthlight.touchcontroller.common.ui.layer.tab.LayerConditionTab
 import top.fifthlight.touchcontroller.common.ui.layer.tab.LocalLayerConditionTabContext

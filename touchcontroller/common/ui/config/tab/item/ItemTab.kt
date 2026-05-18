@@ -21,7 +21,7 @@ import top.fifthlight.combine.core.widget.layout.Column
 import top.fifthlight.combine.widget.ui.Button
 import top.fifthlight.combine.widget.ui.Switch
 import top.fifthlight.combine.widget.ui.Text
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.item.ItemList
 import top.fifthlight.touchcontroller.common.gal.item.ItemSubclassProvider
 import top.fifthlight.touchcontroller.common.gal.itemlist.DefaultItemListProvider

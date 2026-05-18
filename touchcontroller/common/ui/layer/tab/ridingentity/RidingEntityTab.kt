@@ -10,8 +10,8 @@ import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.combine.core.modifier.drawing.border
 import top.fifthlight.combine.widget.ui.Icon
-import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.config.condition.RidingEntityLayerConditionKey
 import top.fifthlight.touchcontroller.common.ui.entitypicker.EntityPicker
 import top.fifthlight.touchcontroller.common.ui.layer.tab.LayerConditionTab

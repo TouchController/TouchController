@@ -14,7 +14,7 @@ import top.fifthlight.combine.core.modifier.placement.fillMaxSize
 import top.fifthlight.combine.core.widget.layout.Box
 import top.fifthlight.combine.item.data.Item
 import top.fifthlight.combine.widget.ui.Text
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.gal.gamestate.GameState
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.TouchControllerNavigator

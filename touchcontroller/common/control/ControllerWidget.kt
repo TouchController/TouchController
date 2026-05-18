@@ -18,7 +18,7 @@ import top.fifthlight.combine.core.data.TextFactory
 import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntSize
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.preset.info.PresetControlInfo
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.align.Align

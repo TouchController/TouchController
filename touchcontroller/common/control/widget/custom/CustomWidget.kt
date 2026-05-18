@@ -18,7 +18,7 @@ import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntPadding
 import top.fifthlight.data.IntRect
 import top.fifthlight.data.IntSize
-import top.fifthlight.touchcontroller.assets.Texts
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.control.*
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.layout.Context

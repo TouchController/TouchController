@@ -30,8 +30,8 @@ import top.fifthlight.combine.widget.ui.*
 import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntPadding
 import top.fifthlight.data.IntSize
-import top.fifthlight.touchcontroller.assets.Texts
-import top.fifthlight.touchcontroller.assets.Textures
+import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.assets.TextureItems
 import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.assets.TextureSets
