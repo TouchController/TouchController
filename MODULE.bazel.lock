@@ -574,9 +574,9 @@
     "//repo:modrinth.bzl%modrinth": {
       "general": {
         "bzlTransitiveDigest": "7bZrnPYnPzta1OzmNYpMz2NpOj4U6Id4+3tkJvF+K+c=",
-        "usagesDigest": "c3FRxP62obdnUseiROjVE9xIwHs8z9xp5Qexck6Ypas=",
+        "usagesDigest": "4RWMKMarx0JMBHInLheWiINUWMFaPBRTgGqIXr879rQ=",
         "recordedInputs": [
-          "FILE:@@//modrinth_lock.json 6ec16646a2cf59b26c427a8d3e5d73468001b2465d696e88ccf262d00236ae30"
+          "FILE:@@//modrinth_lock.json 9904919b1763d5ef96c6183c1b7b20f7a13fc5e8bbd253ccb31229e4b34c6c3f"
         ],
         "generatedRepoSpecs": {
           "sodium_fabric_1_21": {
@@ -723,6 +723,18 @@
               "primary_file": "iris-neoforge-1.9.6+mc1.21.10.jar"
             }
           },
+          "kotlinforforge_neoforge_1_21_11": {
+            "repoRuleId": "@@//repo:modrinth.bzl%_modrinth_repo",
+            "attributes": {
+              "sha512": {
+                "kotlinforforge-6.2.0-all.jar": "552e5525e4606b451095b51bedbf0863d55fbd83b047bfedee9318aa28935d606987c905c1943116f612e5a9bd5faabc67241d96ad2d9307927be6c8fb670e65"
+              },
+              "urls": {
+                "kotlinforforge-6.2.0-all.jar": "https://cdn.modrinth.com/data/ordsPcFz/versions/K2lpyV17/kotlinforforge-6.2.0-all.jar"
+              },
+              "primary_file": "kotlinforforge-6.2.0-all.jar"
+            }
+          },
           "makeup_ultra_fast": {
             "repoRuleId": "@@//repo:modrinth.bzl%_modrinth_repo",
             "attributes": {
@@ -751,6 +763,7 @@
                 "xA5cxBvz",
                 "r1MZ1Bpv",
                 "QwsZwykw",
+                "K2lpyV17",
                 "jIWDGbU5"
               ],
               "sha512": {
@@ -766,6 +779,7 @@
                 "xA5cxBvz#iris-neoforge-1.9.1+mc1.21.7.jar": "0ca98f413477fca40d74af42a51ddbc85c884abe9987dda6648a0f9a8b19dc99551cf243a45c8770316368b8d63495a6c7582d23ba499d7e2e50c92fee4454af",
                 "r1MZ1Bpv#iris-fabric-1.9.6+mc1.21.9.jar": "1bbe1101a0fed2b8c0cd537c0e37a8dd56ce3f35ac8d5fecc7cd73256b3c8bd13fa84de3f36070159918d46744d753474a775ca12c7326af602be2a6377429d4",
                 "QwsZwykw#iris-neoforge-1.9.6+mc1.21.10.jar": "bef87ab163633796d9dd0536c53738444b5904fb78968db5f7a24a35420703740e4e22e133e7942d96986b87a766ff65db49c6bfc07953a0b17ca5a28cc98f8c",
+                "K2lpyV17#kotlinforforge-6.2.0-all.jar": "552e5525e4606b451095b51bedbf0863d55fbd83b047bfedee9318aa28935d606987c905c1943116f612e5a9bd5faabc67241d96ad2d9307927be6c8fb670e65",
                 "jIWDGbU5#MakeUp-UltraFast-9.2.zip": "5a7d1a0947052941a2304f46d5056b6cdf379ffc20202c01d4f8e18d11c2a0bd18c6f208c63c84b5feac12bbf09726c948e44d68a6c68523bba01aae96989838"
               },
               "primary_file": {
@@ -781,6 +795,7 @@
                 "xA5cxBvz": "iris-neoforge-1.9.1+mc1.21.7.jar",
                 "r1MZ1Bpv": "iris-fabric-1.9.6+mc1.21.9.jar",
                 "QwsZwykw": "iris-neoforge-1.9.6+mc1.21.10.jar",
+                "K2lpyV17": "kotlinforforge-6.2.0-all.jar",
                 "jIWDGbU5": "MakeUp-UltraFast-9.2.zip"
               },
               "pin_file": "@@//:modrinth_lock.json"
@@ -791,8 +806,8 @@
     },
     "//repo:neoforge.bzl%neoforge": {
       "general": {
-        "bzlTransitiveDigest": "bpH3EZBcjunpuraZu9Y0BuB6KG0jS7Rdv4++I5mm2Yk=",
-        "usagesDigest": "5gFeg6dQMtXcs1CyycF0doTPRjJzNPkPzvL1E9t4/o4=",
+        "bzlTransitiveDigest": "JVcPuIAMM8NgmMtklALREEP+Qf44zM0XEPifeNP2+SE=",
+        "usagesDigest": "hXPYWO2bbBbmvSH5AAd0VZ9pZqBwdkDWwGbKnY7+4Wc=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
@@ -831,7 +846,8 @@
               "userdev_sha256": "310a469650ae7600a5ec3c331f390d4b9357a89aa807e521e4f8f6e6e79ce6f5",
               "universal_sha256": "8daece39153538aaefcedd7edb936c06f1f04de2f157bed07b89fac1c399e7bb",
               "sources_sha256": "01c3e270d51c94059118f8c255ca0b19cece2b37515a5765c8cac154225d6898",
-              "joined_patched_sources": "@@+neoform+mcp_1_14_4_20190829_143755//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+mcp_1_14_4_20190829_143755//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+mcp_1_14_4_20190829_143755//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "forge_1_15_2_31_2_57": {
@@ -843,7 +859,8 @@
               "userdev_sha256": "bfef6d74e733a0c9ec694857b962374ad3773eadf28d66a0247d2c5e0f9bb7a9",
               "universal_sha256": "415329285fca582800582f5e40d807ea6d3ba14f5d7fa7d8595f35b79b2e8c79",
               "sources_sha256": "b7b83f46f3dc0aaa5b61764a863a94fe917e5b016dc83b5607fee70512b1b107",
-              "joined_patched_sources": "@@+neoform+mcp_1_15_2_20200515_085601//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+mcp_1_15_2_20200515_085601//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+mcp_1_15_2_20200515_085601//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "forge_1_16_5_36_2_34": {
@@ -855,7 +872,8 @@
               "userdev_sha256": "7fdf58513f2cff7a5c3007e0dd0ee36fb4dc40a0c68c18f86d9799b0ea382c1f",
               "universal_sha256": "56d2b1501c74638f07162904e61b6bdd5312f27a3ad1f1f72d40b3818ce08ed7",
               "sources_sha256": "a1c8999617d792843c879c04e49f8658c299e5a423b4f44468f8f70961a68104",
-              "joined_patched_sources": "@@+neoform+mcp_1_16_5_20210115_111550//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+mcp_1_16_5_20210115_111550//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+mcp_1_16_5_20210115_111550//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "forge_1_17_1_37_1_1": {
@@ -867,7 +885,8 @@
               "userdev_sha256": "ab630a994b26e5a7938b5700da7a79aa0e8cb933c101d026feb9a355014bfe0c",
               "universal_sha256": "2cc032ae95d60f03e62be4929f3ecd66354e6ed135fa3cf676ced2b2f7910a6d",
               "sources_sha256": "58a7ed4c531ac8965bcded899116821e19ac02ec1aabec8942f5fe5aef9da6b8",
-              "joined_patched_sources": "@@+neoform+mcp_1_17_1_20210706_113038//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+mcp_1_17_1_20210706_113038//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+mcp_1_17_1_20210706_113038//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "forge_1_18_1_39_0_0": {
@@ -879,7 +898,8 @@
               "userdev_sha256": "8d44d9b2d7542728370dbd6578bec2786ee7d853079af98ad8192acfad540aa1",
               "universal_sha256": "525eee8863ffeb7d2f5a1dd8457ea48301606bacbedd912df07509fca265d8ad",
               "sources_sha256": "e4bf42b6facc245bb0bb6025362d46a1c5935e640288ecc1883424ebeb7d2310",
-              "joined_patched_sources": "@@+neoform+mcp_1_18_1_20211210_034407//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+mcp_1_18_1_20211210_034407//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+mcp_1_18_1_20211210_034407//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "forge_1_18_2_40_3_12": {
@@ -891,7 +911,8 @@
               "userdev_sha256": "20d72b0c2847a99aadace09b00f7f3958526008a907bc19da16751de64a96e80",
               "universal_sha256": "d699e54a6a7bbe31efb40d39c21cc2425dc0648590350bcc85a39943ff729da0",
               "sources_sha256": "a5d888d75586cfc229c20752cc521d8e011fd2693d4e7114578698520f912872",
-              "joined_patched_sources": "@@+neoform+mcp_1_18_2_20220404_173914//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+mcp_1_18_2_20220404_173914//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+mcp_1_18_2_20220404_173914//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "forge_1_19_2_43_5_2": {
@@ -903,7 +924,8 @@
               "userdev_sha256": "79118c93b51771351c1add1979a7594734adc5f79300553de9c125d2aed54cc2",
               "universal_sha256": "c3c92daf8669bf2329af90da3d79f909976e90c728e1a896131ad273cf4b7077",
               "sources_sha256": "30435d534a4d66ddfdf056f6e0d2e48cb548fd447914f50f2306d03e4ecb81fe",
-              "joined_patched_sources": "@@+neoform+mcp_1_19_2_20220805_130853//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+mcp_1_19_2_20220805_130853//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+mcp_1_19_2_20220805_130853//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "forge_1_20_1_47_1_47": {
@@ -915,7 +937,8 @@
               "userdev_sha256": "33d84a704fcef300b37696d2f0a8beb69f4f398d879db1f48425a30e49406a4d",
               "universal_sha256": "56e31f331e70597f791227dd368670c634ece32691a7ff1b0df1acf89c676adb",
               "sources_sha256": "f67acaa73376b148a7b6c359c90aa4585b37bea75752086d8fda0c43c996fecc",
-              "joined_patched_sources": "@@+neoform+mcp_1_20_1_20230612_114412//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+mcp_1_20_1_20230612_114412//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+mcp_1_20_1_20230612_114412//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_20_4_251": {
@@ -927,7 +950,8 @@
               "userdev_sha256": "405cbfd509d283aeb58b224691844ef735f737c3a71d0ff1a38ff1773d39650f",
               "universal_sha256": "54accb2e09fd75590e5896fcde24b3b7f0068d35fd4bc2437f619988fec649d7",
               "sources_sha256": "198df8b25fa20c988459d127ca1f6d3b0c464620009dea2f96a953d22da80612",
-              "joined_patched_sources": "@@+neoform+neoform_1_20_4_20240627_114801//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_20_4_20240627_114801//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_20_4_20240627_114801//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_20_6_139": {
@@ -939,7 +963,8 @@
               "userdev_sha256": "fbc6bdfb3328e2d4f68dfae8ee57e31211fab81e4ca55078ab85d272dfb67bc4",
               "universal_sha256": "2214ce9640ff694de7f0c8c9eb354439003ae69e33bc7c80139ffd324c5b8a04",
               "sources_sha256": "73e1367eae1b7ec6e8d58bdca4f70906d906d427d536070b2a27756fca13db7f",
-              "joined_patched_sources": "@@+neoform+neoform_1_20_6_20240627_102356//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_20_6_20240627_102356//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_20_6_20240627_102356//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_0_167": {
@@ -951,7 +976,8 @@
               "userdev_sha256": "12d1d7536c33a20ab8cd115f23d39842c18206de556cbb15145e3b0ad83ee9bb",
               "universal_sha256": "9c68c9c2c8bb8314fde3f1a3cf890ff4ab74b804561ae6998a4b9308397725a5",
               "sources_sha256": "b5beeac99bf131dd309aaa46e24635bf049618feaff90e5cb83863ce2cf40f6a",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_20240613_152323//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_20240613_152323//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_20240613_152323//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_1_218": {
@@ -963,7 +989,8 @@
               "userdev_sha256": "08610e4b6a65b5049e52704b4c0182133bc54dd94514ec49c680120801a6aa0d",
               "universal_sha256": "0a7e482f83762b79d42aa0a907f82413b70b178c69237c88c505436b2913fcf2",
               "sources_sha256": "0585399bfe575190f38ce57d33f6e4898384412aacb148c5e59f30c58b7cd783",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_1_20240808_144430//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_1_20240808_144430//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_1_20240808_144430//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_3_91": {
@@ -975,7 +1002,8 @@
               "userdev_sha256": "6a65c90884bf829b8b03f1f72383a01b3abba25e7a4f3d09abda5c7b92dcc158",
               "universal_sha256": "d7b9add03e134e0c44e220bcbeb1f2b50642e250350f1d858e4584d7ee0cf9e0",
               "sources_sha256": "bcf6000577e3452768529be3bb247894998518cacfa344a9f4e6b05edf96e12d",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_3_20241023_131943//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_3_20241023_131943//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_3_20241023_131943//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_4_148": {
@@ -987,7 +1015,8 @@
               "userdev_sha256": "538c401fa062ab3b0ed5e06c125f9009f23fa5585eb728f9c3a2f55e4ddd0674",
               "universal_sha256": "cb6b62a7aa28a0bd35dc896f8c3887e946c16c7109042d8e6082df076926e895",
               "sources_sha256": "d7ec5488c77056aa70fb13546675e00c92d3232e486dc6ac224e3e1f730fbfbb",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_4_20241203_161809//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_4_20241203_161809//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_4_20241203_161809//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_5_95": {
@@ -999,7 +1028,8 @@
               "userdev_sha256": "1e5888723c757f36584186df84e231904866ffd16ec8c74680289c0a5fc9ffb6",
               "universal_sha256": "be89e5fc27235ebe3ed25312290d9900a67ea5f2d9edc8f1008c55c8ee3ecdb8",
               "sources_sha256": "ff9d28d640cfcd7f896dd44e4e7d132cdbbf7305ce44117d4aadecbb2c9172a7",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_5_20250325_162830//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_5_20250325_162830//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_5_20250325_162830//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_6_20_beta": {
@@ -1011,7 +1041,8 @@
               "userdev_sha256": "646bf46e7cdbd20dc91d7ba5e181270bbe44b9e1571edf3ff3a85573e98f594f",
               "universal_sha256": "250dfe6b489b32c388427bb37a9883d06d679d26e71986055bbd0a5d26047b63",
               "sources_sha256": "9df12009da9c8fcba87667aa906d88cacd809f37a7d391c58d08c2921bb9cf51",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_6_20250617_151856//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_6_20250617_151856//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_6_20250617_151856//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_7_25_beta": {
@@ -1023,7 +1054,8 @@
               "userdev_sha256": "10b4970427d9a3f080469c4b5e63fffad3b58339dd54ca43662e4bcce9335637",
               "universal_sha256": "44935718e180f5ef2dfcc79a8628a9b506cdd1b99e9fbab96cf0ce641609df65",
               "sources_sha256": "a15431b6cdcd5305833757c0fb14f3df9d35768c455add88a18f068a72efcc3c",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_7_20250711_194848//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_7_20250711_194848//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_7_20250711_194848//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_8_36": {
@@ -1035,7 +1067,8 @@
               "userdev_sha256": "051b0561fe0725fb953336c363f82540c80a2f4e86cdd17023b7ecc0842a6012",
               "universal_sha256": "758961d98cab1104ad281d5d0574e06a154e8ce94b19c71c2b460c4dc89eb405",
               "sources_sha256": "4abf052591e38c1c84504f2ae4b741387a303deb04b459f4fa2fe4ae17bf1764",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_8_20250717_133445//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_8_20250717_133445//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_8_20250717_133445//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_9_16_beta": {
@@ -1047,7 +1080,8 @@
               "userdev_sha256": "6cf0698ef09fdf96fd33e413dc5a147bfc2a73c1b49ef2553cc5607edde25695",
               "universal_sha256": "7e74d4b2016bd10fd9b1ddd53695acf6f271e1c9c1e9923afb59cf69ebb06051",
               "sources_sha256": "4c08ad08adcc08aea8cccfba26f36e64efcc4ffe4e3a690aac7a51ba7f305fb3",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_9_20250930_151910//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_9_20250930_151910//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_9_20250930_151910//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_10_64": {
@@ -1059,7 +1093,8 @@
               "userdev_sha256": "5ef969c95fb13fecbbf43641565cd871c6d92436cf7c28baa480219b26e7364c",
               "universal_sha256": "51dc4f8418cc0c067df2524bc220edef56097f475f60527d550992bed90a2b57",
               "sources_sha256": "d52d822668b8cb1bfcf2e75c31eacc90b1935e1865d3aa0e720eed9c1b4e49b9",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_10_20251010_172816//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_10_20251010_172816//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_10_20251010_172816//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_21_11_13_beta": {
@@ -1071,7 +1106,8 @@
               "userdev_sha256": "1f26a8c8a28407a92b1369d5187c71246a5994ed4fb06db6a5bee3cf0c573aa8",
               "universal_sha256": "c8bed692fd007fb2bd7b5f2f3d8e29d17d06dbbb7821278775d22ff90a7a16dc",
               "sources_sha256": "ea49161d24f0704a8a9bcaf6ba91d5d9cfeb40d2f05c07d28504886151a868d1",
-              "joined_patched_sources": "@@+neoform+neoform_1_21_11_20251209_172050//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_1_21_11_20251209_172050//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_1_21_11_20251209_172050//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_26_1_0_1_beta": {
@@ -1083,7 +1119,8 @@
               "userdev_sha256": "33642495ea49dbfb2be303b8c5519c4adba1020896e42d7b4469c96df27c8c5c",
               "universal_sha256": "5702b53423c06d56fabfc3bf2e4fb6dae047d5da31f6167206e59ac018239a09",
               "sources_sha256": "d0201737c3ed5af2b26a542ba30e150b544d0d10366814dbf7633539a9e3b0f3",
-              "joined_patched_sources": "@@+neoform+neoform_26_1_1//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_26_1_1//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_26_1_1//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "neoforge_26_1_1_0_beta": {
@@ -1095,7 +1132,8 @@
               "userdev_sha256": "9ee243ad73f0672f708a0d48afca0a60cf24d3b8b761cc10bd6b4d086baec605",
               "universal_sha256": "b097ae99e61770096ae611686f78ea4a8b6203ae37b410d7964c87c3124ac407",
               "sources_sha256": "ae5329fc04d977b735d77d9d13d7d6bb411e83bed6b1997ebd71d541a47a1d85",
-              "joined_patched_sources": "@@+neoform+neoform_26_1_1_1//tasks/joined_patch:joined_patch"
+              "joined_patched_sources": "@@+neoform+neoform_26_1_1_1//tasks/joined_patch:joined_patch",
+              "joined_strip_client": "@@+neoform+neoform_26_1_1_1//tasks/joined_strip_client:joined_strip_client"
             }
           },
           "forge_org_ow2_asm_asm_6_2": {
@@ -4008,7 +4046,7 @@
     },
     "//repo:neoform.bzl%neoform": {
       "general": {
-        "bzlTransitiveDigest": "obMEoiYYgguNjlbH7b+kUKU4Wc2ZX82NqgmtwKFIKZE=",
+        "bzlTransitiveDigest": "jwCL1keq3z6Cgyjv4yaRzjVwrS5WnpBdbTkoYbKtHLU=",
         "usagesDigest": "PrdOsXbbECQOiFmQ8IRUtRqUlfQoRUrhjkR9wEPmXtE=",
         "recordedInputs": [
           "REPO_MAPPING:, ",

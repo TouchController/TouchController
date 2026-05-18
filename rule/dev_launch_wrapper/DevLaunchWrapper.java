@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @AutoBazelRepository
 public class DevLaunchWrapper {
     private static final String version = System.getProperty("dev.launch.version", null);
+    private static final String neoFormVersion = System.getProperty("dev.launch.neoFormVersion", null);
     private static final String type = System.getProperty("dev.launch.type", "client");
     private static final String assetsPath = System.getProperty("dev.launch.assetsPath", null);
     private static final String assetsVersion = System.getProperty("dev.launch.assetsVersion", null);
@@ -167,6 +168,14 @@ public class DevLaunchWrapper {
         if (version != null) {
             argsList.add("--version");
             argsList.add(version);
+        }
+        if (neoFormVersion != null) {
+            if (version != null) {
+                argsList.add("--fml.mcVersion");
+                argsList.add(version);
+            }
+            argsList.add("--fml.neoFormVersion");
+            argsList.add(neoFormVersion);
         }
 
         String assetsPath = DevLaunchWrapper.assetsPath;
