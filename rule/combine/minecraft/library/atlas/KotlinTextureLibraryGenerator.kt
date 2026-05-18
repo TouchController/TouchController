@@ -34,17 +34,103 @@ fun main(vararg args: String) = object : Worker() {
         sandboxDir: Path?,
         vararg args: String
     ): Int {
-        if (args.size < 6) {
-            out.println("Usage: KotlinTextureLibraryGenerator <output_file> <package> <class_name> <prefix> <namespace> <atlas_metadata> [--texture <identifier> <png file> <manifest json>]...")
-            return 1
+        var outputFile: Path? = null
+        var packageName: String? = null
+        var className: String? = null
+        var prefix: String? = null
+        var namespace: String? = null
+        var atlasMetadataPath: Path? = null
+        var outputPackage: String? = null
+
+        data class TextureEntry(
+            val identifier: String,
+            val metadataPath: Path,
+        )
+
+        val textures = mutableListOf<TextureEntry>()
+
+        var i = 0
+        while (i < args.size) {
+            when (args[i]) {
+                "--output" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --output"); return 1
+                    }
+                    outputFile = sandboxDir?.resolve(Path.of(args[i])) ?: Path.of(args[i])
+                }
+
+                "--package" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --package"); return 1
+                    }
+                    packageName = args[i]
+                }
+
+                "--class-name" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --class-name"); return 1
+                    }
+                    className = args[i]
+                }
+
+                "--prefix" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --prefix"); return 1
+                    }
+                    prefix = args[i]
+                }
+
+                "--namespace" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --namespace"); return 1
+                    }
+                    namespace = args[i]
+                }
+
+                "--atlas-metadata" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --atlas-metadata"); return 1
+                    }
+                    val raw = args[i]
+                    atlasMetadataPath = sandboxDir?.resolve(Path.of(raw)) ?: Path.of(raw)
+                }
+
+                "--output-package" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --output-package"); return 1
+                    }
+                    outputPackage = args[i]
+                }
+
+                "--texture" -> {
+                    if (i + 4 > args.size) {
+                        out.println("Incomplete --texture entry"); return 1
+                    }
+                    val identifier = args[i + 1]
+                    var metadataPath = Path.of(args[i + 3])
+                    if (sandboxDir != null) {
+                        metadataPath = sandboxDir.resolve(metadataPath)
+                    }
+                    textures.add(TextureEntry(identifier, metadataPath))
+                    i += 3
+                }
+
+                else -> {
+                    out.println("Unknown argument: ${args[i]}")
+                    return 1
+                }
+            }
+            i++
         }
 
-        val outputFile = sandboxDir?.resolve(Path.of(args[0])) ?: Path.of(args[0])
-        val packageName = args[1]
-        val className = args[2]
-        val prefix = args[3]
-        val namespace = args[4]
-        val atlasMetadataPath = sandboxDir?.resolve(Path.of(args[5])) ?: Path.of(args[5])
+        requireNotNull(outputFile) { "--output required" }
+        requireNotNull(packageName) { "--package required" }
+        requireNotNull(className) { "--class-name required" }
+        requireNotNull(prefix) { "--prefix required" }
+        requireNotNull(namespace) { "--namespace required" }
+        requireNotNull(atlasMetadataPath) { "--atlas-metadata required" }
+
+        val resolvedOutputPackage = outputPackage ?: packageName
 
         val atlasMetadata = Json.decodeFromString<AtlasMetadata>(atlasMetadataPath.readText())
 
@@ -124,45 +210,24 @@ fun main(vararg args: String) = object : Worker() {
             classSpecBuilder.addProperty(propertySpec)
         }
 
-        var i = 6
-        while (i < args.size) {
-            if (args.size - i < 4) {
-                out.println("Bad texture entry")
-                return 1
-            }
-
-            when (args[i]) {
-                "--texture" -> {
-                    val identifier = args[i + 1]
-                    var metadataPath = Path.of(args[i + 3])
-                    if (sandboxDir != null) {
-                        metadataPath = sandboxDir.resolve(metadataPath)
-                    }
-                    val metadata = Json.decodeFromString<Metadata>(metadataPath.readText())
-                    classSpecBuilder.addProperty(
-                        PropertySpec.builder(
-                            identifier,
-                            ClassName("top.fifthlight.combine.core.paint", "BackgroundTexture")
-                        ).addModifiers(KModifier.OVERRIDE).initializer(
-                            "BackgroundTextureFactory.create(%S, %S, %L, %L)",
-                            namespace,
-                            "textures/gui/$prefix/$identifier.png",
-                            metadata.size.width,
-                            metadata.size.height,
-                        ).build()
-                    )
-                    i += 4
-                }
-
-                else -> {
-                    out.println("Bad entry: ${args[i]}")
-                    return 1
-                }
-            }
+        for (texture in textures) {
+            val metadata = Json.decodeFromString<Metadata>(texture.metadataPath.readText())
+            classSpecBuilder.addProperty(
+                PropertySpec.builder(
+                    texture.identifier,
+                    ClassName("top.fifthlight.combine.core.paint", "BackgroundTexture")
+                ).addModifiers(KModifier.OVERRIDE).initializer(
+                    "BackgroundTextureFactory.create(%S, %S, %L, %L)",
+                    namespace,
+                    "textures/gui/$prefix/${texture.identifier}.png",
+                    metadata.size.width,
+                    metadata.size.height,
+                ).build()
+            )
         }
 
         val file = FileSpec
-            .builder(packageName, className)
+            .builder(resolvedOutputPackage, className)
             .addAnnotation(
                 AnnotationSpec
                     .builder(Suppress::class)

@@ -137,11 +137,13 @@ def _kt_vanilla_source_impl(ctx):
     output_file = ctx.actions.declare_file(ctx.attr.name + ".kt")
 
     args = ctx.actions.args()
-    args.add(output_file.path)
-    args.add(texture_info.package)
-    args.add(texture_info.class_name)
-    args.add(texture_info.prefix)
-    args.add(pack_info.namespace)
+    args.add("--output", output_file.path)
+    args.add("--package", texture_info.package)
+    args.add("--class-name", texture_info.class_name)
+    args.add("--prefix", texture_info.prefix)
+    args.add("--namespace", pack_info.namespace)
+    if ctx.attr.package:
+        args.add("--output-package", ctx.attr.package)
     args.add_all(texture_info.textures, map_each = _texture_to_arg)
     args.add_all(texture_info.ninepatch_textures, map_each = _nine_patch_texture_to_arg)
 
@@ -164,6 +166,10 @@ _kt_vanilla_source = rule(
             providers = [VanillaPackInfo],
             mandatory = True,
         ),
+        "package": attr.string(
+            mandatory = False,
+            doc = "Override output package for the generated impl class (default: same as interface package)",
+        ),
         "_generator_bin": attr.label(
             default = Label("//rule/combine/minecraft/library/vanilla"),
             cfg = "exec",
@@ -172,11 +178,12 @@ _kt_vanilla_source = rule(
     },
 )
 
-def _kt_vanilla_lib_impl(name, visibility, pack, dep, resources, resource_strip_prefix, resource_jars):
+def _kt_vanilla_lib_impl(name, visibility, pack, dep, resources, resource_strip_prefix, resource_jars, package = ""):
     source_lib = name + "_source"
     _kt_vanilla_source(
         name = source_lib,
         pack = pack,
+        package = package,
         tags = ["manual"],
     )
 
@@ -223,6 +230,10 @@ kt_vanilla_lib = macro(
             default = [],
             doc = "Resource JARs to be merged into the output JAR.",
         ),
+        "package": attr.string(
+            mandatory = False,
+            doc = "Override output package for the generated impl class (default: same as interface package)",
+        ),
     },
 )
 
@@ -237,12 +248,14 @@ def _kt_atlas_source_impl(ctx):
     background_textures = [t for t in texture_info.textures if t.background]
 
     args = ctx.actions.args()
-    args.add(output_file.path)
-    args.add(texture_info.package)
-    args.add(texture_info.class_name)
-    args.add(texture_info.prefix)
-    args.add(pack_info.namespace)
-    args.add(pack_info.atlas_metadata)
+    args.add("--output", output_file.path)
+    args.add("--package", texture_info.package)
+    args.add("--class-name", texture_info.class_name)
+    args.add("--prefix", texture_info.prefix)
+    args.add("--namespace", pack_info.namespace)
+    args.add("--atlas-metadata", pack_info.atlas_metadata)
+    if ctx.attr.package:
+        args.add("--output-package", ctx.attr.package)
     args.add_all(background_textures, map_each = _background_texture_to_arg)
 
     args.use_param_file("@%s")
@@ -264,6 +277,10 @@ _kt_atlas_source = rule(
             providers = [AtlasPackInfo],
             mandatory = True,
         ),
+        "package": attr.string(
+            mandatory = False,
+            doc = "Override output package for the generated impl class (default: same as interface package)",
+        ),
         "_generator_bin": attr.label(
             default = Label("//rule/combine/minecraft/library/atlas"),
             cfg = "exec",
@@ -272,11 +289,12 @@ _kt_atlas_source = rule(
     },
 )
 
-def _kt_atlas_lib_impl(name, visibility, pack, dep, resources, resource_strip_prefix, resource_jars):
+def _kt_atlas_lib_impl(name, visibility, pack, dep, resources, resource_strip_prefix, resource_jars, package = ""):
     source_lib = name + "_source"
     _kt_atlas_source(
         name = source_lib,
         pack = pack,
+        package = package,
         tags = ["manual"],
     )
 
@@ -324,6 +342,10 @@ kt_atlas_lib = macro(
             allow_files = [".jar"],
             default = [],
             doc = "Resource JARs to be merged into the output JAR.",
+        ),
+        "package": attr.string(
+            mandatory = False,
+            doc = "Override output package for the generated impl class (default: same as interface package)",
         ),
     },
 )

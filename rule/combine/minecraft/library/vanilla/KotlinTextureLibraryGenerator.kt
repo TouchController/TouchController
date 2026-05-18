@@ -16,16 +16,107 @@ fun main(vararg args: String) = object : Worker() {
         sandboxDir: Path?,
         vararg args: String
     ): Int {
-        if (args.size < 2) {
-            out.println("Usage: KotlinTextureLibraryGenerator <output_file> <package name> <class name> <prefix> <namespace> [--texture <identifier> <png file> <manifest json>] [--ninepatch <identifier> <png file> <manifest json>]...")
-            return 1
+        var outputFile: Path? = null
+        var packageName: String? = null
+        var className: String? = null
+        var prefix: String? = null
+        var namespace: String? = null
+        var outputPackage: String? = null
+
+        data class TextureEntry(
+            val identifier: String,
+            val metadataPath: Path,
+        )
+
+        val textures = mutableListOf<TextureEntry>()
+        val ninePatchTextures = mutableListOf<TextureEntry>()
+
+        var i = 0
+        while (i < args.size) {
+            when (args[i]) {
+                "--output" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --output"); return 1
+                    }
+                    outputFile = sandboxDir?.resolve(Path.of(args[i])) ?: Path.of(args[i])
+                }
+
+                "--package" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --package"); return 1
+                    }
+                    packageName = args[i]
+                }
+
+                "--class-name" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --class-name"); return 1
+                    }
+                    className = args[i]
+                }
+
+                "--prefix" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --prefix"); return 1
+                    }
+                    prefix = args[i]
+                }
+
+                "--namespace" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --namespace"); return 1
+                    }
+                    namespace = args[i]
+                }
+
+                "--output-package" -> {
+                    if (++i >= args.size) {
+                        out.println("Missing value for --output-package"); return 1
+                    }
+                    outputPackage = args[i]
+                }
+
+                "--texture" -> {
+                    if (i + 4 > args.size) {
+                        out.println("Incomplete --texture entry"); return 1
+                    }
+                    val identifier = args[i + 1]
+                    var metadataPath = Path.of(args[i + 3])
+                    if (sandboxDir != null) {
+                        metadataPath = sandboxDir.resolve(metadataPath)
+                    }
+                    textures.add(TextureEntry(identifier, metadataPath))
+                    i += 3
+                }
+
+                "--ninepatch" -> {
+                    if (i + 4 > args.size) {
+                        out.println("Incomplete --ninepatch entry"); return 1
+                    }
+                    val identifier = args[i + 1]
+                    var metadataPath = Path.of(args[i + 3])
+                    if (sandboxDir != null) {
+                        metadataPath = sandboxDir.resolve(metadataPath)
+                    }
+                    ninePatchTextures.add(TextureEntry(identifier, metadataPath))
+                    i += 3
+                }
+
+                else -> {
+                    out.println("Unknown argument: ${args[i]}")
+                    return 1
+                }
+            }
+            i++
         }
 
-        val outputFile = sandboxDir?.resolve(Path.of(args[0])) ?: Path.of(args[0])
-        val packageName = args[1]
-        val className = args[2]
-        val prefix = args[3]
-        val namespace = args[4]
+        requireNotNull(outputFile) { "--output required" }
+        requireNotNull(packageName) { "--package required" }
+        requireNotNull(className) { "--class-name required" }
+        requireNotNull(prefix) { "--prefix required" }
+        requireNotNull(namespace) { "--namespace required" }
+
+        val resolvedOutputPackage = outputPackage ?: packageName
 
         val classSpecBuilder = TypeSpec.objectBuilder(className + "Impl")
             .addSuperinterface(ClassName(packageName, className))
@@ -45,86 +136,60 @@ fun main(vararg args: String) = object : Worker() {
                     .build()
             )
 
-        var i = 5
-        while (i < args.size) {
-            if (args.size - i < 4) {
-                out.println("Bad texture entry")
-                return 1
-            }
-
-            val identifier = args[i + 1]
-            when (val type = args[i]) {
-                "--texture" -> {
-                    var metadataPath = Path.of(args[i + 3])
-                    if (sandboxDir != null) {
-                        metadataPath = sandboxDir.resolve(metadataPath)
-                    }
-                    val metadata = Json.decodeFromString<Metadata>(metadataPath.readText())
-                    if (metadata.background) {
-                        classSpecBuilder.addProperty(
-                            PropertySpec.builder(
-                                identifier,
-                                ClassName("top.fifthlight.combine.core.paint", "BackgroundTexture")
-                            ).addModifiers(KModifier.OVERRIDE).initializer(
-                                "BackgroundTextureFactory.create(%S, %S, %L, %L)",
-                                namespace,
-                                "textures/gui/$prefix/$identifier.png",
-                                metadata.size.width,
-                                metadata.size.height,
-                            ).build()
-                        )
-                    } else {
-                        classSpecBuilder.addProperty(
-                            PropertySpec.builder(
-                                identifier,
-                                ClassName("top.fifthlight.combine.core.paint", "Texture")
-                            ).addModifiers(KModifier.OVERRIDE).initializer(
-                                "TextureFactory.createSprite(%S, %S, %L, %L, IntPadding.ZERO)",
-                                namespace,
-                                "$prefix/$identifier",
-                                metadata.size.width,
-                                metadata.size.height,
-                            ).build()
-                        )
-                    }
-                    i += 4
-                }
-
-                "--ninepatch" -> {
-                    var metadataPath = Path.of(args[i + 3])
-                    if (sandboxDir != null) {
-                        metadataPath = sandboxDir.resolve(metadataPath)
-                    }
-                    val metadata = Json.decodeFromString<NinePatchMetadata>(metadataPath.readText())
-                    classSpecBuilder.addProperty(
-                        PropertySpec
-                            .builder(identifier, ClassName("top.fifthlight.combine.core.paint", "Texture"))
-                            .addModifiers(KModifier.OVERRIDE)
-                            .initializer(
-                                "TextureFactory.createSprite(%S, %S, %L, %L, IntPadding(%L, %L, %L, %L))",
-                                namespace,
-                                "$prefix/$identifier",
-                                metadata.size.width,
-                                metadata.size.height,
-                                metadata.ninePatch.padding.left,
-                                metadata.ninePatch.padding.top,
-                                metadata.ninePatch.padding.right,
-                                metadata.ninePatch.padding.bottom,
-                            )
-                            .build()
-                    )
-                    i += 4
-                }
-
-                else -> {
-                    out.println("Bad entry: $type")
-                    return 1
-                }
+        for (texture in textures) {
+            val metadata = Json.decodeFromString<Metadata>(texture.metadataPath.readText())
+            if (metadata.background) {
+                classSpecBuilder.addProperty(
+                    PropertySpec.builder(
+                        texture.identifier,
+                        ClassName("top.fifthlight.combine.core.paint", "BackgroundTexture")
+                    ).addModifiers(KModifier.OVERRIDE).initializer(
+                        "BackgroundTextureFactory.create(%S, %S, %L, %L)",
+                        namespace,
+                        "textures/gui/$prefix/${texture.identifier}.png",
+                        metadata.size.width,
+                        metadata.size.height,
+                    ).build()
+                )
+            } else {
+                classSpecBuilder.addProperty(
+                    PropertySpec.builder(
+                        texture.identifier,
+                        ClassName("top.fifthlight.combine.core.paint", "Texture")
+                    ).addModifiers(KModifier.OVERRIDE).initializer(
+                        "TextureFactory.createSprite(%S, %S, %L, %L, IntPadding.ZERO)",
+                        namespace,
+                        "$prefix/${texture.identifier}",
+                        metadata.size.width,
+                        metadata.size.height,
+                    ).build()
+                )
             }
         }
 
+        for (ninePatch in ninePatchTextures) {
+            val metadata = Json.decodeFromString<NinePatchMetadata>(ninePatch.metadataPath.readText())
+            classSpecBuilder.addProperty(
+                PropertySpec
+                    .builder(ninePatch.identifier, ClassName("top.fifthlight.combine.core.paint", "Texture"))
+                    .addModifiers(KModifier.OVERRIDE)
+                    .initializer(
+                        "TextureFactory.createSprite(%S, %S, %L, %L, IntPadding(%L, %L, %L, %L))",
+                        namespace,
+                        "$prefix/${ninePatch.identifier}",
+                        metadata.size.width,
+                        metadata.size.height,
+                        metadata.ninePatch.padding.left,
+                        metadata.ninePatch.padding.top,
+                        metadata.ninePatch.padding.right,
+                        metadata.ninePatch.padding.bottom,
+                    )
+                    .build()
+            )
+        }
+
         val file = FileSpec
-            .builder(packageName, className)
+            .builder(resolvedOutputPackage, className)
             .addAnnotation(
                 AnnotationSpec
                     .builder(Suppress::class)
