@@ -1,0 +1,157 @@
+load("@rules_java//java:java_binary.bzl", "java_binary")
+load("//combine:properties.bzl", "combine_version")
+load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_jar")
+load("//rule/neoforge:merge_jij.bzl", "neoforge_merge_jij")
+load("//rule/neoforge:mod_toml_jar.bzl", "neoforge_mod_toml_jar")
+load("//touchcontroller:properties.bzl", "touchcontroller_api_version", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+
+neoforge_mod_toml_jar(
+    name = "neoforge_mod_toml",
+    src = "resources/neoforge.mods.toml",
+    resource_strip_prefix = "touchcontroller/versions/neoforge/1.21.11",
+    substitutions = {
+        "${version}": touchcontroller_version,
+        "${license}": touchcontroller_license,
+        "${home_page}": touchcontroller_homepage,
+        "${sources_page}": touchcontroller_source,
+        "${issue_tracker}": touchcontroller_issue_tracker,
+        "${description}": touchcontroller_description,
+        "${combine_version}": combine_version,
+        "${mod_authors}": ", ".join(touchcontroller_authors),
+        "${mod_contributors}": ", ".join(touchcontroller_contributors),
+    },
+)
+
+kt_merge_library(
+    name = "neoforge_unmerged",
+    srcs = glob(
+        include = [
+            "**/*.kt",
+            "**/*.java",
+        ],
+    ),
+    merge_deps = [
+        "//touchcontroller/versions/extension/1.21.11",
+        "//touchcontroller/versions/gal/gameconfig/1.21.11",
+        "//touchcontroller/versions/gal/key/1.21.11",
+        "//touchcontroller/versions/neoforge/gal/config/1.21.11",
+        "//touchcontroller/versions/neoforge/gal/key/1.21.11",
+    ],
+    merge_runtime_deps = [
+        "//touchcontroller/versions/gal/1.21.11",
+        "//touchcontroller/versions/mixin/1.21.11",
+        "//touchcontroller/versions/neoforge/gal/1.21.11",
+    ],
+    resource_jars = [
+        ":neoforge_mod_toml",
+        "//touchcontroller/resources/texture:icon_jar",
+    ],
+    resource_strip_prefix = "touchcontroller/versions/neoforge/1.21.11/resources",
+    resources = glob(
+        include = ["resources/**"],
+        exclude = ["resources/neoforge.mods.toml"],
+    ),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//game/1.21.11:game_client_libraries",
+        "//game/1.21.11:game_client_neoforge",
+        # Classpath separator
+        "//combine/backend/minecraft/identifier/1.21.11",
+        "//combine/backend/minecraft/render/1.21.11",
+        "//combine/core/data",
+        "//touchcontroller/api",
+        "//touchcontroller/buildinfo",
+        "//touchcontroller/common/api",
+        "//touchcontroller/common/config",
+        "//touchcontroller/common/config/data",
+        "//touchcontroller/common/config/holder",
+        "//touchcontroller/common/event/block",
+        "//touchcontroller/common/event/connection",
+        "//touchcontroller/common/event/key",
+        "//touchcontroller/common/event/render",
+        "//touchcontroller/common/event/tick",
+        "//touchcontroller/common/event/window",
+        "//touchcontroller/common/gal/key",
+        "//touchcontroller/common/layout/data",
+        "//touchcontroller/common/model",
+        "//touchcontroller/common/ui/config/screen",
+        "@neoforge_1_21_11//:net_fabricmc_sponge_mixin",
+        "@neoforge_1_21_11//:net_neoforged_bus",
+        "@neoforge_1_21_11//:net_neoforged_fancymodloader_loader",
+        "@neoforge_1_21_11//:io_github_llamalad7_mixinextras_neoforge",
+    ],
+)
+
+merge_library_jar(
+    name = "neoforge",
+    aspect_impl_package_suffix = "neoforge.v1_21_11",
+    aspects = ["//touchcontroller/neoforge:neoforge_unmerged"],
+    deps = [":neoforge_unmerged"],
+)
+
+alias(
+    name = "1.21.11",
+    actual = "neoforge",
+    visibility = ["//touchcontroller:__subpackages__"],
+)
+
+neoforge_merge_jij(
+    name = "neoforge_merged",
+    input = ":neoforge",
+    deps = {
+        "@maven//:androidx_compose_runtime_runtime_saveable_desktop": "androidx.compose.runtime:runtime-saveable-desktop:1.10.0:LIBRARY",
+        "@maven//:androidx_savedstate_savedstate_desktop": "androidx.savedstate:savedstate-desktop:1.3.3:LIBRARY",
+        "@maven//:androidx_savedstate_savedstate_compose_desktop": "androidx.savedstate:savedstate-compose-desktop:1.3.3:LIBRARY",
+        "@maven//:androidx_lifecycle_lifecycle_common_jvm": "androidx.lifecycle:lifecycle-common-jvm:2.9.4:LIBRARY",
+        "@maven//:androidx_lifecycle_lifecycle_runtime_compose_desktop": "androidx.lifecycle:lifecycle-runtime-compose-desktop:2.9.4:LIBRARY",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm": "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.4.0:LIBRARY",
+        "@maven//:cafe_adriel_voyager_voyager_core_desktop": "cafe.adriel.voyager:voyager-core-desktop:1.1.0-beta03:LIBRARY",
+        "@maven//:cafe_adriel_voyager_voyager_navigator_desktop": "cafe.adriel.voyager:voyager-navigator-desktop:1.1.0-beta03:LIBRARY",
+        "@maven//:cafe_adriel_voyager_voyager_screenmodel_desktop": "cafe.adriel.voyager:voyager-screenmodel-desktop:1.1.0-beta03:LIBRARY",
+        "//combine/theme/blackstone:blackstone_common": "top.fifthlight.combine:combine-theme-blackstone:%s:" % combine_version,
+        "//combine/theme/blackstone:blackstone_vanilla": "top.fifthlight.combine:combine-theme-blackstone-vanilla:%s:" % combine_version,
+        "//touchcontroller/resources/lang": "top.fifthlight.touchcontroller:touchcontroller-lang-modern:%s:" % touchcontroller_version,
+        "//touchcontroller/resources/texture:texture_common": "top.fifthlight.touchcontroller:touchcontroller-texture:%s:" % touchcontroller_version,
+        "//touchcontroller/resources/texture:texture_vanilla": "top.fifthlight.touchcontroller:touchcontroller-texture-vanilla:%s:" % touchcontroller_version,
+        "//touchcontroller/api": "top.fifthlight.touchcontroller:api:%s:" % touchcontroller_api_version,
+        "//touchcontroller/neoforge:neoforge_unmerged": "top.fifthlight.touchcontroller:neoforge:%s:" % touchcontroller_version,
+    },
+)
+
+java_binary(
+    name = "dev_client",
+    srcs = [],
+    data = [
+        "//game/1.21.11:game_client_assets",
+        "//game/1.21.11:game_client_assets_version",
+    ],
+    env = {
+        "LANG": "en_US.UTF8",
+    },
+    jvm_flags = [
+        "-Ddev.launch.version=1.21.11",
+        "-Ddev.launch.neoFormVersion=1.21.11-20251209.172050",
+        "-Ddev.launch.type=client",
+        "-Ddev.launch.assetsVersion=$(rlocationpath //game/1.21.11:game_client_assets_version)",
+        "-Ddev.launch.mainClass=net.neoforged.fml.startup.Client",
+        "-Xmx4G",
+        "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
+        "--add-exports=jdk.naming.dns/com.sun.jndi.dns=java.naming",
+    ] + select({
+        "@platforms//os:macos": ["-XstartOnFirstThread"],
+        "//conditions:default": [],
+    }),
+    main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
+    runtime_deps = [
+        "//game/1.21.11:game_client_neoforge",
+        "//game/1.21.11:game_client_libraries",
+        "//game/1.21.11:game_kotlinforforge",
+        # Classpath separator
+        "//game/1.21.11:game_mapping_jar",
+        ":neoforge_merged",
+        "//rule/dev_launch_wrapper",
+        "@neoforge_1_21_11//:neoforge_deps",
+        "//combine/backend/minecraft",
+        "@maven//:org_jetbrains_kotlin_kotlin_reflect",
+    ],
+)

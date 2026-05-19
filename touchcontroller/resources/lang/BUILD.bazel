@@ -1,7 +1,8 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//rule:text_resource_jar.bzl", "text_resource_jar")
+load("//rule/neoforge:mod_toml_jar.bzl", "neoforge_mod_toml_jar")
 load("//rule/touchcontroller:text_binding.bzl", "kt_text_binding_lib")
-load("//touchcontroller:properties.bzl", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_language_authors", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+load("//touchcontroller:properties.bzl", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_language_authors", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
 kt_text_binding_lib(
     name = "text_binding",
@@ -9,6 +10,22 @@ kt_text_binding_lib(
     class_name = "Texts",
     input = "en_us.json",
     visibility = ["//touchcontroller:__subpackages__"],
+)
+
+neoforge_mod_toml_jar(
+    name = "neoforge_mod_toml",
+    src = "resources/META-INF/neoforge.mods.toml",
+    resource_strip_prefix = "touchcontroller/resources/lang",
+    substitutions = {
+        "${version}": touchcontroller_version,
+        "${license}": touchcontroller_license,
+        "${home_page}": touchcontroller_homepage,
+        "${sources_page}": touchcontroller_source,
+        "${issue_tracker}": touchcontroller_issue_tracker,
+        "${name}": "TouchController Languages",
+        "${description}": "Language files for TouchController.",
+        "${authors}": ", ".join(touchcontroller_language_authors),
+    },
 )
 
 expand_template(
@@ -30,6 +47,7 @@ text_resource_jar(
     srcs = glob(["*.json"]),
     format = "json",
     resource_jars = [
+        ":neoforge_mod_toml",
         "//touchcontroller/resources/texture:icon_jar",
     ],
     resource_prefix = "assets/touchcontroller/lang",

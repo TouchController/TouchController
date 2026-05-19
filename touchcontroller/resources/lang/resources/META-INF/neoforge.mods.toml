@@ -1,0 +1,11 @@
+license="${license}"
+issueTrackerURL="${issue_tracker}"
+
+[[mods]]
+modId="touchcontroller_lang_modern"
+version="${version}"
+displayName="${name}"
+displayURL="${home_page}"
+logoFile="assets/touchcontroller/textures/icon.png"
+authors="${authors}"
+description='''${description}'''
