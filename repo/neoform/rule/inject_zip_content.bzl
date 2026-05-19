@@ -2,7 +2,10 @@ load("@//repo/neoform:java_source_info.bzl", "JavaSourceInfo")
 load("@rules_java//java:defs.bzl", "JavaInfo")
 
 def _inject_zip_content_impl(ctx):
-    input_extension = ctx.file.input.extension
+    if ctx.attr.extension:
+        input_extension = ctx.attr.extension
+    else:
+        input_extension = ctx.file.input.extension
     output_jar = ctx.actions.declare_file(ctx.label.name + "." + input_extension)
 
     input_deps = []
@@ -46,6 +49,10 @@ inject_zip_content = rule(
         "deps": attr.label_list(
             doc = "The dependencies to inject into the zip file",
             allow_files = True,
+        ),
+        "extension": attr.string(
+            doc = "Output file's extension",
+            mandatory = False,
         ),
         "_inject_jar_tool": attr.label(
             default = Label("//repo/neoform/rule/inject_zip_content"),
