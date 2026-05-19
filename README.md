@@ -73,7 +73,7 @@ A mod for Minecraft：Java Edition, replacing window management library to SDL3.
 
 License: LGPL-3.0-or-later
 
-[GitHub](https://github.com/TouchController/TouchController/tree/master/blazesdl) | [Modrinth](https://modrinth.com/project/QDgSARKw)
+[GitHub](https://github.com/TouchController/TouchController/tree/master/blazesdl) | [Modrinth](https://modrinth.com/project/QDgSARKw) | [MCMOD](https://www.mcmod.cn/class/25913.html)
 
 ---
 
