@@ -153,17 +153,27 @@ def _neoforge_repo_impl(rctx):
         '    input = ":recompile",',
         '    deps = [":neoforge_universal"],',
         ")",
-        "",
-        "strip_resources_file(",
-        '    name = "strip_resources",',
-        '    src = "%s",' % rctx.attr.joined_strip_client,
-        ")",
+    ]
+
+    if rctx.attr.joined_strip_client != None:
+        build_file_contents += [
+            "",
+            "strip_resources_file(",
+            '    name = "strip_resources",',
+            '    src = "%s",' % rctx.attr.joined_strip_client,
+            ")",
+        ]
+
+    build_file_contents += [
         "",
         "jar_import(",
         '    name = "neoforge",',
         '    jar = ":compiled_with_neoforge",',
         '    srcjar = ":sources_with_neoforge",',
-        '    runtime_deps = [":strip_resources"],',
+    ]
+    if rctx.attr.joined_strip_client != None:
+        build_file_contents.append('    runtime_deps = [":strip_resources"],')
+    build_file_contents += [
         ")",
         "",
         "java_merge(",
@@ -221,7 +231,9 @@ _neoforge_repo = repository_rule(
         ),
         "joined_strip_client": attr.label(
             doc = "Strip client task from NeoForm pipeline, providing SplitResourceInfo",
-            mandatory = True,
+            allow_single_file = True,
+            mandatory = False,
+            default = None,
         ),
     },
 )
@@ -297,8 +309,10 @@ version = tag_class(
             mandatory = True,
         ),
         "joined_strip_client": attr.label(
-            doc = "Strip client task from NeoForm pipeline, providing SplitResourceInfo",
-            mandatory = True,
+            doc = "Strip client task from NeoForm pipeline, providing SplitResourceInfo. May be None for NeoForm spec v6+ where strip is handled by preProcessJar.",
+            allow_single_file = True,
+            mandatory = False,
+            default = None,
         ),
     },
 )
@@ -381,17 +395,19 @@ def _neoforge_impl(mctx):
         )
 
         repo_name = "%s_%s" % (repository_prefix, _convert_maven_coordinate(version_name))
-        _neoforge_repo(
-            name = repo_name,
-            version = version_name,
-            java_target = version_java_target,
-            legacy = version_legacy,
-            userdev_sha256 = version_userdev_sha256,
-            universal_sha256 = version["universal_sha256"],
-            sources_sha256 = version["sources_sha256"],
-            joined_patched_sources = version["joined_patched_sources"],
-            joined_strip_client = version["joined_strip_client"],
-        )
+        repo_kwargs = {
+            "name": repo_name,
+            "version": version_name,
+            "java_target": version_java_target,
+            "legacy": version_legacy,
+            "userdev_sha256": version_userdev_sha256,
+            "universal_sha256": version["universal_sha256"],
+            "sources_sha256": version["sources_sha256"],
+            "joined_patched_sources": version["joined_patched_sources"],
+        }
+        if version.get("joined_strip_client") != None:
+            repo_kwargs["joined_strip_client"] = version["joined_strip_client"]
+        _neoforge_repo(**repo_kwargs)
 
         config_data = json.decode(mctx.read("%s/config.json" % output_prefix))
         for library in config_data["libraries"]:

@@ -312,7 +312,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
         neoforge.version(
             java_target = data["java_target"],
             joined_patched_sources = "@neoform_%s//tasks/joined_patch" % version.replace(".", "_"),
-            joined_strip_client = "@neoform_%s//tasks/joined_strip_client" % version.replace(".", "_"),
+            joined_strip_client = "@neoform_%s//tasks/joined_strip_client" % version.replace(".", "_") if "mapping" not in data else None,
             sources_sha256 = data["neoforge_sources_sha256"],
             universal_sha256 = data["neoforge_universal_sha256"],
             userdev_sha256 = data["neoforge_userdev_sha256"],
