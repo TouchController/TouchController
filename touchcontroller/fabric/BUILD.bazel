@@ -1,5 +1,6 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
-load("//combine:properties.bzl", "combine_fabric_libraries", "combine_version")
+load("//combine:libraries.bzl", "combine_fabric_libraries")
+load("//combine:properties.bzl", "combine_version")
 load("//rule:merge_library.bzl", "merge_library_jar")
 load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
 load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_fabric_game_versions", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")

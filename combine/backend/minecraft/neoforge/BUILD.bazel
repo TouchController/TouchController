@@ -1,5 +1,6 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
-load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_unified_deps", "combine_unified_neoforge", "combine_version")
+load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_neoforge")
+load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
 load("//rule:unified_jar.bzl", "unified_jar")
 
 expand_template(

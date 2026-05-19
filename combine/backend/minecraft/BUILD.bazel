@@ -1,4 +1,4 @@
-load("//combine:properties.bzl", "combine_unified_deps", "combine_unified_fabric", "combine_unified_neoforge")
+load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_fabric", "combine_unified_neoforge")
 load("//rule:merge_library.bzl", "merge_library_jar")
 load("//rule:unified_jar.bzl", "unified_jar")
 
