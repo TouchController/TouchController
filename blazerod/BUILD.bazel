@@ -28,7 +28,6 @@ java_library(
 fabric_mod_json_jar(
     name = "fabric_mod_json",
     src = "resources/fabric.mod.json",
-    resource_strip_prefix = "blazerod",
     substitutions = {
         "${version}": blazerod_version,
     },
@@ -37,7 +36,6 @@ fabric_mod_json_jar(
 neoforge_mod_toml_jar(
     name = "neoforge_mod_toml",
     src = "resources/META-INF/neoforge.mods.toml",
-    resource_strip_prefix = "blazerod",
     substitutions = {
         "${version}": blazerod_version,
         "${license}": license,

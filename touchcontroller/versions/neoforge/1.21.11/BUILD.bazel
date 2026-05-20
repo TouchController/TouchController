@@ -8,7 +8,6 @@ load("//touchcontroller:properties.bzl", "touchcontroller_api_version", "touchco
 neoforge_mod_toml_jar(
     name = "neoforge_mod_toml",
     src = "resources/neoforge.mods.toml",
-    resource_strip_prefix = "touchcontroller/versions/neoforge/1.21.11",
     substitutions = {
         "${version}": touchcontroller_version,
         "${license}": touchcontroller_license,

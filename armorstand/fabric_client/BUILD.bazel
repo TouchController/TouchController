@@ -23,7 +23,6 @@ remap_jar(
 fabric_mod_json_jar(
     name = "fabric_mod_json",
     src = "resources/fabric.mod.json",
-    resource_strip_prefix = "armorstand/fabric_client",
     substitutions = {
         "${version}": armorstand_version,
         "${license}": license,

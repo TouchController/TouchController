@@ -20,7 +20,6 @@ remap_jar(
 fabric_mod_json_jar(
     name = "fabric_mod_json",
     src = "resources/fabric.mod.json",
-    resource_strip_prefix = "blazerod/render/versions/1.21.8/fabric",
     substitutions = {
         "${version}": blazerod_version,
         "${license}": license,

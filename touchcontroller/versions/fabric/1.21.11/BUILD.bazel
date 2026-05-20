@@ -8,7 +8,6 @@ load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontro
 fabric_mod_json_jar(
     name = "fabric_mod_json",
     src = "resources/fabric.mod.json",
-    resource_strip_prefix = "touchcontroller/versions/fabric/1.21.11",
     substitutions = {
         "${version}": touchcontroller_version,
         "${license}": touchcontroller_license,

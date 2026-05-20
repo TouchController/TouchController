@@ -1,20 +1,19 @@
 """Rules for generating fabric.mod.json JAR files."""
 
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
-load("@rules_java//java:defs.bzl", "java_library")
+load("//rule:jar.bzl", "jar")
 
-def _fabric_mod_json_jar_impl(name, visibility, src, resource_strip_prefix, substitutions):
+def _fabric_mod_json_jar_impl(name, visibility, src, substitutions):
     expand_template(
         name = name + "_expanded",
         template = src,
         substitutions = substitutions,
         out = name + "/fabric.mod.json",
     )
-    java_library(
+    jar(
         name = name,
         visibility = visibility,
-        resources = [name + "_expanded"],
-        resource_strip_prefix = resource_strip_prefix + "/" + name,
+        resource_paths = {":" + name + "_expanded": "fabric.mod.json"},
     )
 
 fabric_mod_json_jar = macro(
@@ -24,11 +23,9 @@ fabric_mod_json_jar = macro(
             allow_single_file = [".json"],
             doc = "Input fabric.mod.json file",
         ),
-        "resource_strip_prefix": attr.string(
-            mandatory = True,
-        ),
         "substitutions": attr.string_dict(
-            mandatory = True,
+            mandatory = False,
+            default = {},
             doc = "A dictionary mapping strings to their substitutions.",
         ),
     },

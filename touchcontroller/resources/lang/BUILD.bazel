@@ -15,7 +15,6 @@ kt_text_binding_lib(
 neoforge_mod_toml_jar(
     name = "neoforge_mod_toml",
     src = "resources/META-INF/neoforge.mods.toml",
-    resource_strip_prefix = "touchcontroller/resources/lang",
     substitutions = {
         "${version}": touchcontroller_version,
         "${license}": touchcontroller_license,
