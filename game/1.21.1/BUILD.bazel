@@ -9,6 +9,7 @@ game_version(
     client_mappings = "@minecraft//1.21.1:client_mappings",
     client_parchment = "@parchment_1_21_1//:json",
     intermediary = "@maven_fabric_1_21_1//:net_fabricmc_intermediary_v2",
+    kotlinforforge = "@kotlinforforge_neoforge_1_21_1//:primary",
     neoforge = "@neoforge_1_21_1//:neoforge",
     server = "@minecraft//1.21.1:server",
     version = "1.21.1",

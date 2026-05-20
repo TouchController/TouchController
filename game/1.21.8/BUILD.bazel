@@ -10,6 +10,7 @@ game_version(
     client_parchment = "@parchment_1_21_8//:json",
     intermediary = "@maven_fabric_1_21_8//:net_fabricmc_intermediary_v2",
     iris_intermediary = "@iris_fabric_1_21_6//:primary",
+    kotlinforforge = "@kotlinforforge_neoforge_1_21_8//:primary",
     neoforge = "@neoforge_1_21_8//:neoforge",
     server = "@minecraft//1.21.8:server",
     sodium_intermediary = "@sodium_fabric_1_21_6//:primary",

@@ -3,7 +3,11 @@
 modrinth = use_extension("//repo:modrinth.bzl", "modrinth")
 
 kotlinforforge_versions = {
+    "neoforge_1_21_1": "NrSebcsG",
+    "neoforge_1_21_8": "pp2cY80Q",
+    "neoforge_1_21_10": "K2lpyV17",
     "neoforge_1_21_11": "K2lpyV17",
+    "neoforge_26_1": "K2lpyV17",
 }
 
 [

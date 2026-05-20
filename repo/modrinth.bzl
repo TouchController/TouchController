@@ -155,26 +155,38 @@ def _modrinth_impl(mctx):
                 pin_file = pin.pin_file
 
         for version in module.tags.version:
-            if version in versions:
+            if version.name in versions:
                 item = versions[version.name]
                 if item.version_id != version.version_id:
-                    fail("Found different version id declared for name %s" % version)
+                    fail("Found different version id declared for name %s" % version.name)
             else:
                 versions[version.name] = struct(
                     version_id = version.version_id,
                 )
 
     pin_data = json.decode(mctx.read(pin_file)) if pin_file else None
+
     version_items = {}
+    downloaded_versions = {}
     for name, entry in versions.items():
-        pinned_data = pin_data.get(entry.version_id)
+        pinned_data = pin_data.get(entry.version_id) if pin_data else None
         if pinned_data == None and pin_data != None:
             print("Pin file is provided, but it don't contains data for version %s. Please repin your modrinth data by running `bazel run @modrinth_pin//:pin`." % entry.version_id)
-        file = "versions/%s.json" % entry.version_id
-        guard = _download_version_json(mctx, entry.version_id, file)
+
+        if entry.version_id not in downloaded_versions:
+            file = "versions/%s.json" % entry.version_id
+            guard = _download_version_json(mctx, entry.version_id, file)
+            downloaded_versions[entry.version_id] = struct(
+                file = file,
+                guard = guard,
+            )
+        else:
+            file = downloaded_versions[entry.version_id].file
+            guard = downloaded_versions[entry.version_id].guard
+
         if pinned_data:
-            version_items[entry.version_id] = {
-                "name": name,
+            version_items[name] = {
+                "version_id": entry.version_id,
                 "pinned": True,
                 "file": file,
                 "guard": guard,
@@ -182,8 +194,8 @@ def _modrinth_impl(mctx):
                 "primary_file": pinned_data["primary"],
             }
         else:
-            version_items[entry.version_id] = {
-                "name": name,
+            version_items[name] = {
+                "version_id": entry.version_id,
                 "pinned": False,
                 "file": file,
                 "guard": guard,
@@ -200,21 +212,21 @@ def _modrinth_impl(mctx):
 
     sha512_dict = {}
     primary_file = {}
-    for version, item in version_items.items():
+    for name, item in version_items.items():
         _modrinth_repo(
-            name = item["name"],
+            name = name,
             sha512 = item["sha512"],
             urls = item["urls"],
             primary_file = item["primary_file"],
         )
         for filename, sha512 in item["sha512"].items():
-            sha512_dict[version + "#" + filename] = sha512
-        primary_file[version] = item["primary_file"]
+            sha512_dict[item["version_id"] + "#" + filename] = sha512
+        primary_file[item["version_id"]] = item["primary_file"]
 
     if pin_file:
         _modrinth_pin(
             name = "modrinth_pin",
-            version_ids = version_items.keys(),
+            version_ids = [item["version_id"] for item in version_items.values()],
             sha512 = sha512_dict,
             primary_file = primary_file,
             pin_file = pin_file,

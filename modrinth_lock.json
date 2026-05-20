@@ -11,6 +11,12 @@
 			"sodium-fabric-0.6.13+mc1.21.6.jar": "ee97e3df07a6f734bc8a0f77c1f1de7f47bed09cf682f048ceb12675c51b70ba727b11fcacbb7b10cc9f79b283dd71a39751312b5c70568aa3ac9471407174db"
 		}
 	},
+	"NrSebcsG": {
+		"primary": "kotlinforforge-5.11.0-all.jar",
+		"sha512": {
+			"kotlinforforge-5.11.0-all.jar": "b32faa6d616511aff4f8b32197877c53b9f8bee103884ec37c632b5d017bb59a498ec971b68d8d94787043b0c5be666a330b61d285033c341bff83ac28a90992"
+		}
+	},
 	"Pb3OXVqC": {
 		"primary": "sodium-neoforge-0.6.13+mc1.21.1.jar",
 		"sha512": {
@@ -51,6 +57,12 @@
 		"primary": "iris-neoforge-1.8.8+mc1.21.1.jar",
 		"sha512": {
 			"iris-neoforge-1.8.8+mc1.21.1.jar": "0d3741374b145f51fa993c4fa6ddad7ee9479ec2a0635c2c71efd11d91b3d7bc450705e3ac8fc66d92508334146000212c61c5a67c718cf6df62c0903b043a3a"
+		}
+	},
+	"pp2cY80Q": {
+		"primary": "kotlinforforge-5.10.0-all.jar",
+		"sha512": {
+			"kotlinforforge-5.10.0-all.jar": "0c7a23c6b8017c9a24694bc6c0dbcb3d9b4ec630ae2ff965c0ee478ca881ad70f4755388678430b0175c3abe18c66fcbc25ed9be6f600bcdc083743eaecbfc35"
 		}
 	},
 	"r1MZ1Bpv": {

@@ -573,10 +573,10 @@
     },
     "//repo:modrinth.bzl%modrinth": {
       "general": {
-        "bzlTransitiveDigest": "7bZrnPYnPzta1OzmNYpMz2NpOj4U6Id4+3tkJvF+K+c=",
-        "usagesDigest": "4RWMKMarx0JMBHInLheWiINUWMFaPBRTgGqIXr879rQ=",
+        "bzlTransitiveDigest": "Pk7MBRYAkIH44dgAesNkdCs8cImxYWh/m0QPJslOz3I=",
+        "usagesDigest": "LB2yfjoaQnByoIrqo9f9KyAgccJr2ymCtgteBThdavk=",
         "recordedInputs": [
-          "FILE:@@//modrinth_lock.json 9904919b1763d5ef96c6183c1b7b20f7a13fc5e8bbd253ccb31229e4b34c6c3f"
+          "FILE:@@//modrinth_lock.json 52055f83624af4fcb5e20b0f4aea4ec005c8ae12c4dd21b4bfc4e5ae42a5f65b"
         ],
         "generatedRepoSpecs": {
           "sodium_fabric_1_21": {
@@ -723,7 +723,55 @@
               "primary_file": "iris-neoforge-1.9.6+mc1.21.10.jar"
             }
           },
+          "kotlinforforge_neoforge_1_21_1": {
+            "repoRuleId": "@@//repo:modrinth.bzl%_modrinth_repo",
+            "attributes": {
+              "sha512": {
+                "kotlinforforge-5.11.0-all.jar": "b32faa6d616511aff4f8b32197877c53b9f8bee103884ec37c632b5d017bb59a498ec971b68d8d94787043b0c5be666a330b61d285033c341bff83ac28a90992"
+              },
+              "urls": {
+                "kotlinforforge-5.11.0-all.jar": "https://cdn.modrinth.com/data/ordsPcFz/versions/NrSebcsG/kotlinforforge-5.11.0-all.jar"
+              },
+              "primary_file": "kotlinforforge-5.11.0-all.jar"
+            }
+          },
+          "kotlinforforge_neoforge_1_21_8": {
+            "repoRuleId": "@@//repo:modrinth.bzl%_modrinth_repo",
+            "attributes": {
+              "sha512": {
+                "kotlinforforge-5.10.0-all.jar": "0c7a23c6b8017c9a24694bc6c0dbcb3d9b4ec630ae2ff965c0ee478ca881ad70f4755388678430b0175c3abe18c66fcbc25ed9be6f600bcdc083743eaecbfc35"
+              },
+              "urls": {
+                "kotlinforforge-5.10.0-all.jar": "https://cdn.modrinth.com/data/ordsPcFz/versions/pp2cY80Q/kotlinforforge-5.10.0-all.jar"
+              },
+              "primary_file": "kotlinforforge-5.10.0-all.jar"
+            }
+          },
+          "kotlinforforge_neoforge_1_21_10": {
+            "repoRuleId": "@@//repo:modrinth.bzl%_modrinth_repo",
+            "attributes": {
+              "sha512": {
+                "kotlinforforge-6.2.0-all.jar": "552e5525e4606b451095b51bedbf0863d55fbd83b047bfedee9318aa28935d606987c905c1943116f612e5a9bd5faabc67241d96ad2d9307927be6c8fb670e65"
+              },
+              "urls": {
+                "kotlinforforge-6.2.0-all.jar": "https://cdn.modrinth.com/data/ordsPcFz/versions/K2lpyV17/kotlinforforge-6.2.0-all.jar"
+              },
+              "primary_file": "kotlinforforge-6.2.0-all.jar"
+            }
+          },
           "kotlinforforge_neoforge_1_21_11": {
+            "repoRuleId": "@@//repo:modrinth.bzl%_modrinth_repo",
+            "attributes": {
+              "sha512": {
+                "kotlinforforge-6.2.0-all.jar": "552e5525e4606b451095b51bedbf0863d55fbd83b047bfedee9318aa28935d606987c905c1943116f612e5a9bd5faabc67241d96ad2d9307927be6c8fb670e65"
+              },
+              "urls": {
+                "kotlinforforge-6.2.0-all.jar": "https://cdn.modrinth.com/data/ordsPcFz/versions/K2lpyV17/kotlinforforge-6.2.0-all.jar"
+              },
+              "primary_file": "kotlinforforge-6.2.0-all.jar"
+            }
+          },
+          "kotlinforforge_neoforge_26_1": {
             "repoRuleId": "@@//repo:modrinth.bzl%_modrinth_repo",
             "attributes": {
               "sha512": {
@@ -763,6 +811,10 @@
                 "xA5cxBvz",
                 "r1MZ1Bpv",
                 "QwsZwykw",
+                "NrSebcsG",
+                "pp2cY80Q",
+                "K2lpyV17",
+                "K2lpyV17",
                 "K2lpyV17",
                 "jIWDGbU5"
               ],
@@ -779,6 +831,8 @@
                 "xA5cxBvz#iris-neoforge-1.9.1+mc1.21.7.jar": "0ca98f413477fca40d74af42a51ddbc85c884abe9987dda6648a0f9a8b19dc99551cf243a45c8770316368b8d63495a6c7582d23ba499d7e2e50c92fee4454af",
                 "r1MZ1Bpv#iris-fabric-1.9.6+mc1.21.9.jar": "1bbe1101a0fed2b8c0cd537c0e37a8dd56ce3f35ac8d5fecc7cd73256b3c8bd13fa84de3f36070159918d46744d753474a775ca12c7326af602be2a6377429d4",
                 "QwsZwykw#iris-neoforge-1.9.6+mc1.21.10.jar": "bef87ab163633796d9dd0536c53738444b5904fb78968db5f7a24a35420703740e4e22e133e7942d96986b87a766ff65db49c6bfc07953a0b17ca5a28cc98f8c",
+                "NrSebcsG#kotlinforforge-5.11.0-all.jar": "b32faa6d616511aff4f8b32197877c53b9f8bee103884ec37c632b5d017bb59a498ec971b68d8d94787043b0c5be666a330b61d285033c341bff83ac28a90992",
+                "pp2cY80Q#kotlinforforge-5.10.0-all.jar": "0c7a23c6b8017c9a24694bc6c0dbcb3d9b4ec630ae2ff965c0ee478ca881ad70f4755388678430b0175c3abe18c66fcbc25ed9be6f600bcdc083743eaecbfc35",
                 "K2lpyV17#kotlinforforge-6.2.0-all.jar": "552e5525e4606b451095b51bedbf0863d55fbd83b047bfedee9318aa28935d606987c905c1943116f612e5a9bd5faabc67241d96ad2d9307927be6c8fb670e65",
                 "jIWDGbU5#MakeUp-UltraFast-9.2.zip": "5a7d1a0947052941a2304f46d5056b6cdf379ffc20202c01d4f8e18d11c2a0bd18c6f208c63c84b5feac12bbf09726c948e44d68a6c68523bba01aae96989838"
               },
@@ -795,6 +849,8 @@
                 "xA5cxBvz": "iris-neoforge-1.9.1+mc1.21.7.jar",
                 "r1MZ1Bpv": "iris-fabric-1.9.6+mc1.21.9.jar",
                 "QwsZwykw": "iris-neoforge-1.9.6+mc1.21.10.jar",
+                "NrSebcsG": "kotlinforforge-5.11.0-all.jar",
+                "pp2cY80Q": "kotlinforforge-5.10.0-all.jar",
                 "K2lpyV17": "kotlinforforge-6.2.0-all.jar",
                 "jIWDGbU5": "MakeUp-UltraFast-9.2.zip"
               },
@@ -806,7 +862,7 @@
     },
     "//repo:neoforge.bzl%neoforge": {
       "general": {
-        "bzlTransitiveDigest": "PCDIqhEH748gJ2w1jCq5ZuGnh+pBKQy+wG5wduOlf4I=",
+        "bzlTransitiveDigest": "X94z98DTCjHmZrTUj7QAKrPZpLu6xh18OzgyDJPomyQ=",
         "usagesDigest": "ZDkmrBsZ6TD7YgCWANA7v8CRfJLNxztRv6GIPiGDqeI=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
