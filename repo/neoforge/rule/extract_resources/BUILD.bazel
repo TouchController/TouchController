@@ -1,0 +1,8 @@
+load("@rules_java//java:defs.bzl", "java_binary")
+
+java_binary(
+    name = "extract_resources",
+    srcs = ["ExtractResources.java"],
+    main_class = "ExtractResources",
+    visibility = ["//visibility:public"],
+)

@@ -86,6 +86,7 @@ def _neoforge_repo_impl(rctx):
         'load("@//repo/neoform/rule:inject_zip_content.bzl", "inject_zip_content")',
         'load("@//repo/neoform/rule:jar_import.bzl", "jar_import")',
         'load("@//repo/neoform/rule:split_resources.bzl", "strip_resources_file")',
+        'load("@//repo/neoforge/rule:extract_resources.bzl", "extract_resources")',
         'load("@rules_java//java:defs.bzl", "java_library", "java_import")',
         "",
         "alias(",
@@ -175,8 +176,16 @@ def _neoforge_repo_impl(rctx):
         build_file_contents += [
             "",
             "strip_resources_file(",
-            '    name = "strip_resources",',
+            '    name = "resources_jar",',
             '    src = "%s",' % rctx.attr.joined_strip_client,
+            ")",
+        ]
+    else:
+        build_file_contents += [
+            "",
+            "extract_resources(",
+            '    name = "resources_jar",',
+            '    src = ":transform_sources",',
             ")",
         ]
 
@@ -186,10 +195,7 @@ def _neoforge_repo_impl(rctx):
         '    name = "neoforge",',
         '    jar = ":compiled_with_neoforge",',
         '    srcjar = ":sources_with_neoforge",',
-    ]
-    if rctx.attr.joined_strip_client != None:
-        build_file_contents.append('    runtime_deps = [":strip_resources"],')
-    build_file_contents += [
+        '    runtime_deps = [":resources_jar"],',
         ")",
         "",
         "java_merge(",
