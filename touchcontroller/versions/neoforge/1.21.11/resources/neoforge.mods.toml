@@ -1,5 +1,3 @@
-modLoader="javafml"
-loaderVersion="[4,)"
 license="${license}"
 issueTrackerURL="${issue_tracker}"
 
