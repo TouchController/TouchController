@@ -28,7 +28,10 @@ unified_jar(
     neoforge_deps = {
         "combine-common": ["common"],
         "combine-neoforge-1-21-1": ["1.21.1"],
+        "combine-neoforge-1-21-8": ["1.21.8"],
+        "combine-neoforge-1-21-10": ["1.21.10"],
         "combine-neoforge-1-21-11": ["1.21.11"],
+        "combine-neoforge-26-1": ["26.1"],
     } | combine_unified_neoforge,
     neoforge_mod_toml = "//combine/backend/minecraft/neoforge:neoforge_mod_toml",
     resources = {
@@ -44,6 +47,9 @@ unified_jar(
         "combine-fabric-26-1": "//combine/backend/minecraft/fabric/26.1",
         "combine-fabric-26-2": "//combine/backend/minecraft/fabric/26.2",
         "combine-neoforge-1-21-1": "//combine/backend/minecraft/neoforge/1.21.1",
+        "combine-neoforge-1-21-8": "//combine/backend/minecraft/neoforge/1.21.8",
+        "combine-neoforge-1-21-10": "//combine/backend/minecraft/neoforge/1.21.10",
         "combine-neoforge-1-21-11": "//combine/backend/minecraft/neoforge/1.21.11",
+        "combine-neoforge-26-1": "//combine/backend/minecraft/neoforge/26.1",
     } | combine_unified_deps,
 )
