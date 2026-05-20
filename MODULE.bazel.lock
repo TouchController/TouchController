@@ -806,8 +806,8 @@
     },
     "//repo:neoforge.bzl%neoforge": {
       "general": {
-        "bzlTransitiveDigest": "DiKRgiuMuYC+jX52Xn40rEbeL8no3YoHCY5Soc8YA6Y=",
-        "usagesDigest": "9eQBI/No7UR/5l+g4n9UoY+qo72NHMu9UgUDqbF94ME=",
+        "bzlTransitiveDigest": "PCDIqhEH748gJ2w1jCq5ZuGnh+pBKQy+wG5wduOlf4I=",
+        "usagesDigest": "buO23ZuxxbKQ3Y3EwSSwt8n6pXaCZVsEQfTNiJkyQS0=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
@@ -835,6 +835,25 @@
           "REPO_MAPPING:,neoform_26_1 +neoform+neoform_26_1_1",
           "REPO_MAPPING:,neoform_26_1_1 +neoform+neoform_26_1_1_1",
           "REPO_MAPPING:,neoform_26_1_2 +neoform+neoform_26_1_2_1",
+          "REPO_MAPPING:,rules_java rules_java+",
+          "REPO_MAPPING:bazel_features+,bazel_features_globals bazel_features++version_extension+bazel_features_globals",
+          "REPO_MAPPING:bazel_features+,bazel_features_version bazel_features++version_extension+bazel_features_version",
+          "REPO_MAPPING:protobuf+,bazel_skylib bazel_skylib+",
+          "REPO_MAPPING:protobuf+,proto_bazel_features bazel_features+",
+          "REPO_MAPPING:protobuf+,rules_java rules_java+",
+          "REPO_MAPPING:rules_cc+,bazel_skylib bazel_skylib+",
+          "REPO_MAPPING:rules_cc+,bazel_tools bazel_tools",
+          "REPO_MAPPING:rules_cc+,cc_compatibility_proxy rules_cc++compatibility_proxy+cc_compatibility_proxy",
+          "REPO_MAPPING:rules_cc+,platforms platforms",
+          "REPO_MAPPING:rules_cc+,rules_cc rules_cc+",
+          "REPO_MAPPING:rules_cc++compatibility_proxy+cc_compatibility_proxy,rules_cc rules_cc+",
+          "REPO_MAPPING:rules_java+,bazel_features bazel_features+",
+          "REPO_MAPPING:rules_java+,bazel_skylib bazel_skylib+",
+          "REPO_MAPPING:rules_java+,bazel_tools bazel_tools",
+          "REPO_MAPPING:rules_java+,com_google_protobuf protobuf+",
+          "REPO_MAPPING:rules_java+,compatibility_proxy rules_java++compatibility_proxy+compatibility_proxy",
+          "REPO_MAPPING:rules_java+,rules_cc rules_cc+",
+          "REPO_MAPPING:rules_java++compatibility_proxy+compatibility_proxy,rules_java rules_java+",
           "FILE:@@//neoforge_pin.txt 153ef8c08c229aa806254cb0e7d7ccc3bbe9507ac2f6188692850e54f2ae60fc"
         ],
         "generatedRepoSpecs": {
@@ -847,8 +866,7 @@
               "userdev_sha256": "310a469650ae7600a5ec3c331f390d4b9357a89aa807e521e4f8f6e6e79ce6f5",
               "universal_sha256": "8daece39153538aaefcedd7edb936c06f1f04de2f157bed07b89fac1c399e7bb",
               "sources_sha256": "01c3e270d51c94059118f8c255ca0b19cece2b37515a5765c8cac154225d6898",
-              "joined_patched_sources": "@@+neoform+mcp_1_14_4_20190829_143755//tasks/joined_patch:joined_patch",
-              "joined_strip_client": "@@+neoform+mcp_1_14_4_20190829_143755//tasks/joined_strip_client:joined_strip_client"
+              "joined_patched_sources": "@@+neoform+mcp_1_14_4_20190829_143755//tasks/joined_patch:joined_patch"
             }
           },
           "forge_1_15_2_31_2_57": {
@@ -860,8 +878,7 @@
               "userdev_sha256": "bfef6d74e733a0c9ec694857b962374ad3773eadf28d66a0247d2c5e0f9bb7a9",
               "universal_sha256": "415329285fca582800582f5e40d807ea6d3ba14f5d7fa7d8595f35b79b2e8c79",
               "sources_sha256": "b7b83f46f3dc0aaa5b61764a863a94fe917e5b016dc83b5607fee70512b1b107",
-              "joined_patched_sources": "@@+neoform+mcp_1_15_2_20200515_085601//tasks/joined_patch:joined_patch",
-              "joined_strip_client": "@@+neoform+mcp_1_15_2_20200515_085601//tasks/joined_strip_client:joined_strip_client"
+              "joined_patched_sources": "@@+neoform+mcp_1_15_2_20200515_085601//tasks/joined_patch:joined_patch"
             }
           },
           "forge_1_16_5_36_2_34": {
@@ -873,8 +890,7 @@
               "userdev_sha256": "7fdf58513f2cff7a5c3007e0dd0ee36fb4dc40a0c68c18f86d9799b0ea382c1f",
               "universal_sha256": "56d2b1501c74638f07162904e61b6bdd5312f27a3ad1f1f72d40b3818ce08ed7",
               "sources_sha256": "a1c8999617d792843c879c04e49f8658c299e5a423b4f44468f8f70961a68104",
-              "joined_patched_sources": "@@+neoform+mcp_1_16_5_20210115_111550//tasks/joined_patch:joined_patch",
-              "joined_strip_client": "@@+neoform+mcp_1_16_5_20210115_111550//tasks/joined_strip_client:joined_strip_client"
+              "joined_patched_sources": "@@+neoform+mcp_1_16_5_20210115_111550//tasks/joined_patch:joined_patch"
             }
           },
           "forge_1_17_1_37_1_1": {
@@ -4069,11 +4085,19 @@
     },
     "//repo:neoform.bzl%neoform": {
       "general": {
-        "bzlTransitiveDigest": "jwCL1keq3z6Cgyjv4yaRzjVwrS5WnpBdbTkoYbKtHLU=",
-        "usagesDigest": "jyFAS2Cq6AEubo6oyve10Hxi/+bdQzeFvFF5Tf8+Xcc=",
+        "bzlTransitiveDigest": "qeXP4w3yb7iZ5XuNzHoVEXjDySjxd2X4uq9C1ywZ0Og=",
+        "usagesDigest": "JUZQIiN/X6JV2jrXwtmTsdec+vg6UKGmTOB+vK0PiBI=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
+          "REPO_MAPPING:,forge_1_14_4 +neoforge+forge_1_14_4_28_2_28",
+          "REPO_MAPPING:,forge_1_15_2 +neoforge+forge_1_15_2_31_2_57",
+          "REPO_MAPPING:,forge_1_16_5 +neoforge+forge_1_16_5_36_2_34",
+          "REPO_MAPPING:,forge_1_17_1 +neoforge+forge_1_17_1_37_1_1",
+          "REPO_MAPPING:,forge_1_18_1 +neoforge+forge_1_18_1_39_0_0",
+          "REPO_MAPPING:,forge_1_18_2 +neoforge+forge_1_18_2_40_3_12",
+          "REPO_MAPPING:,forge_1_19_2 +neoforge+forge_1_19_2_43_5_2",
+          "REPO_MAPPING:,forge_1_20_1 +neoforge+forge_1_20_1_47_1_47",
           "REPO_MAPPING:,minecraft rules_mc++minecraft+minecraft",
           "REPO_MAPPING:,rules_java rules_java+",
           "REPO_MAPPING:bazel_features+,bazel_features_globals bazel_features++version_extension+bazel_features_globals",
@@ -4108,6 +4132,8 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.14.4:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.14.4:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.14.4:client_libraries",
+              "sas_data": "@@+neoforge+forge_1_14_4_28_2_28//:sas",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4122,6 +4148,8 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.15.2:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.15.2:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.15.2:client_libraries",
+              "sas_data": "@@+neoforge+forge_1_15_2_31_2_57//:sas",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4136,6 +4164,8 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.16.5:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.16.5:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.16.5:client_libraries",
+              "sas_data": "@@+neoforge+forge_1_16_5_36_2_34//:sas",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4150,6 +4180,18 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.17.1:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.17.1:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.17.1:client_libraries",
+              "sas_data": "@@+neoforge+forge_1_17_1_37_1_1//:sas",
+              "strip_deny_patterns": [
+                "com/mojang/(authlib|bridge|brigadier|datafixers|serialization|util)/.*",
+                "com/google/.*",
+                "joptsimple/.*",
+                "com/sun/.*",
+                "oshi/.*",
+                "io/.*",
+                "it/.*",
+                "javax/.*",
+                "org/.*"
+              ],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4164,6 +4206,8 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.18.1:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.18.1:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.18.1:client_libraries",
+              "sas_data": "@@+neoforge+forge_1_18_1_39_0_0//:sas",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4178,6 +4222,8 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.18.2:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.18.2:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.18.2:client_libraries",
+              "sas_data": "@@+neoforge+forge_1_18_2_40_3_12//:sas",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4192,6 +4238,8 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.19.2:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.19.2:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.19.2:client_libraries",
+              "sas_data": "@@+neoforge+forge_1_19_2_43_5_2//:sas",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4206,6 +4254,8 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.20.1:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.20.1:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.20.1:client_libraries",
+              "sas_data": "@@+neoforge+forge_1_20_1_47_1_47//:sas",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4220,6 +4270,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.20.4:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.20.4:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.20.4:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4234,6 +4285,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.20.6:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.20.6:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.20.6:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4248,6 +4300,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4262,6 +4315,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.1:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.1:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.1:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4276,6 +4330,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.3:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.3:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.3:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4290,6 +4345,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.4:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.4:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.4:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4304,6 +4360,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.5:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.5:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.5:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4318,6 +4375,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.6:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.6:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.6:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4332,6 +4390,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.7:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.7:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.7:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4346,6 +4405,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.8:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.8:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.8:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4360,6 +4420,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.9:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.9:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.9:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4374,6 +4435,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.10:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.10:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.10:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4388,6 +4450,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//1.21.11:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//1.21.11:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//1.21.11:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4402,6 +4465,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//26.1:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//26.1:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//26.1:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4416,6 +4480,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//26.1.1:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//26.1.1:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//26.1.1:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
@@ -4430,6 +4495,7 @@
               "client_mapping": "@@rules_mc++minecraft+minecraft//26.1.2:client_mappings",
               "server_mapping": "@@rules_mc++minecraft+minecraft//26.1.2:server_mappings",
               "client_libraries": "@@rules_mc++minecraft+minecraft//26.1.2:client_libraries",
+              "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
           },

@@ -3,13 +3,9 @@
 load("@//private:maven_coordinate.bzl", _convert_maven_coordinate = "convert_maven_coordinate", _convert_maven_coordinate_to_repo = "convert_maven_coordinate_to_repo", _convert_maven_coordinate_to_url = "convert_maven_coordinate_to_url")
 load("@//private:pin_file.bzl", _parse_pin_file = "parse_pin_file")
 load("@//private:snake_case.bzl", _camel_case_to_snake_case = "camel_case_to_snake_case")
+load("@//repo/neoform:definitions.bzl", _default_function_special = "default_function_special", _function_specials = "function_specials", _names = "names", _output_placeholder_map = "output_placeholder_map", _placeholder_config = "placeholder_config", _step_handlers = "step_handlers")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_jar")
 load("@rules_java//java:defs.bzl", "JavaInfo")
-
-_neoforge_repository_url = "https://maven.neoforged.net/releases"
-_minecraftforge_repository_url = "https://maven.minecraftforge.net/releases"
-_config_link = "%s/net/neoforged/neoform/%s/neoform-%s.zip"
-_config_link_legacy = "%s/de/oceanlabs/mcp/mcp_config/%s/mcp_config-%s.zip"
 
 def _parse_version_info(rctx):
     """Extract information from context"""
@@ -17,22 +13,21 @@ def _parse_version_info(rctx):
     version_sha256 = rctx.attr.sha256
     version_legacy = rctx.attr.legacy
 
-    repository_url = _minecraftforge_repository_url if version_legacy else _neoforge_repository_url
-    repository_prefix = "mcp" if version_legacy else "neoform"
+    names = _names[version_legacy]
 
     return struct(
         version = version_name,
         sha256 = version_sha256,
         legacy = version_legacy,
-        repository_url = repository_url,
-        repository_prefix = repository_prefix,
+        repository_url = names.url,
+        repository_prefix = names.prefix,
     )
 
 def _download_and_extract_config(rctx, version_info):
     """Download and extract NeoForm"""
     neoform_zip = "neoform.zip"
     output_prefix = "neoform/%s" % version_info.version
-    config_link = _config_link_legacy if version_info.legacy else _config_link
+    config_link = _names[version_info.legacy].config
 
     rctx.report_progress("Downloading NeoForm JAR %s" % version_info.version)
     rctx.download(
@@ -159,27 +154,21 @@ def _generate_function_build_file(rctx, version_info, java_target, function_name
         for flag in function["jvmargs"]:
             jvm_flags.append('"%s"' % flag)
 
+    spec = _function_specials.get(function_name, _default_function_special)
+    main_class = spec.main_class_override or main_class
+    runtime_deps = ['"@%s//jar"' % _convert_maven_coordinate_to_repo(version_info.repository_prefix, entry) for entry in classpath]
+    runtime_deps.extend(spec.extra_runtime_deps)
+
     function_build = [
         'load("@//repo/neoform:java_version_binary.bzl", "java_%s_binary")' % java_target,
         "",
         "java_%s_binary(" % java_target,
         '    name = "%s",' % function_name,
         '    visibility = ["//visibility:public"],',
-        '    main_class = "DecompilerWrapper",',
-        "    runtime_deps = [",
-        "        %s," % ", \n".join(['"@%s//jar"' % _convert_maven_coordinate_to_repo(version_info.repository_prefix, entry) for entry in classpath]),
-        '        "@//repo/neoform/rule/decompiler_wrapper",',
-        "    ],",
-        "    jvm_flags = [%s]," % ", ".join(jvm_flags),
-        ")",
-    ] if function_name == "decompile" else [
-        'load("@//repo/neoform:java_version_binary.bzl", "java_%s_binary")' % java_target,
-        "",
-        "java_%s_binary(" % java_target,
-        '    name = "%s",' % function_name,
-        '    visibility = ["//visibility:public"],',
         '    main_class = "%s",' % main_class,
-        "    runtime_deps = [%s]," % ", ".join(['"@%s//jar"' % _convert_maven_coordinate_to_repo(version_info.repository_prefix, entry) for entry in classpath]),
+        "    runtime_deps = [",
+        "        %s," % ",\n        ".join(runtime_deps),
+        "    ],",
         "    jvm_flags = [%s]," % ", ".join(jvm_flags),
         ")",
     ]
@@ -249,51 +238,14 @@ def _parse_function_arguments(args):
 
     return arg_entries, placeholder_types, output_entries
 
-def _generate_jar_list_args_code(function_name, placeholder_types, jar_output):
-    result_code = []
-    jar_list_placeholder_info = {}
-
-    for name, type in placeholder_types.items():
-        if type != "jar_list":
-            continue
-        input_depsets_name = "input_%s_depsets" % name
-        input_files_name = "input_%s_files" % name
-        input_paths_name = "input_%s_paths" % name
-        input_paths_path_name = "input_%s_paths_path" % name
-        input_paths_file_name = "input_%s_paths_path_file" % name
-
-        result_code.append('    %s = "_neoform_%s/" + ctx.label.name + "_%s_libraries.txt"' % (input_paths_path_name, function_name, name))
-        result_code.append("    %s = []" % input_depsets_name)
-        result_code.append("    for attr in ctx.attr.%s:" % name)
-        result_code.append("        %s.append(attr[JavaInfo].full_compile_jars)" % input_depsets_name)
-        result_code.append("    %s = depset(transitive = %s).to_list()" % (input_files_name, input_depsets_name))
-        if jar_output:
-            result_code.append("    input_libraries += %s" % input_files_name)
-        result_code.append("    %s = []" % input_paths_name)
-        result_code.append("    for file in %s:" % input_files_name)
-        result_code.append('        %s.append("-e=" + file.path)' % input_paths_name)
-        result_code.append("    %s = ctx.actions.declare_file(%s)" % (input_paths_file_name, input_paths_path_name))
-        result_code.append("    ctx.actions.write(")
-        result_code.append("        output = %s," % input_paths_file_name)
-        result_code.append('        content = "\\n".join(%s),' % input_paths_name)
-        result_code.append("    )")
-        result_code.append("    action_inputs += %s" % input_files_name)
-        result_code.append("    action_inputs += [%s]" % input_paths_file_name)
-
-        jar_list_placeholder_info[name] = struct(
-            paths_file = input_paths_file_name,
-            files = input_files_name,
-        )
-
-    return jar_list_placeholder_info, result_code
-
-def _generate_function_impl(function_name, impl_name, jar_output, main_class, arg_entries, placeholder_types, output_entries):
-    output_extension = ".jar" if jar_output else ".tsrg"
+def _generate_function_impl(function_name, impl_name, output_type, main_class, arg_entries, placeholder_types, output_entries, context):
+    output_extension = ".%s" % output_type
     rule_impl = []
 
-    if jar_output:
+    if output_type == "jar":
         rule_impl.append('load("@//repo/neoform:java_source_info.bzl", "JavaSourceInfo")')
 
+    # 1. output_file + log files
     rule_impl += [
         "def %s(ctx):" % impl_name,
         '    output_file = ctx.actions.declare_file("_neoform_%s/" + ctx.label.name + "%s")' % (function_name, output_extension),
@@ -302,26 +254,42 @@ def _generate_function_impl(function_name, impl_name, jar_output, main_class, ar
     for entry in output_entries:
         rule_impl.append('    %s_file = ctx.actions.declare_file("_neoform_%s/" + ctx.label.name + "_%s")' % (entry.name, function_name, entry.name))
 
+    # 2. input_deps / input_libraries (if jar output)
+    if output_type == "jar":
+        rule_impl.append("    input_deps = []")
+        rule_impl.append("    input_libraries = []")
+
+    # 3. var_decl phase
+    for name, type in placeholder_types.items():
+        config = _placeholder_config.get(type)
+        if config and config.var_decl:
+            rule_impl += config.var_decl(function_name, name, output_type)
+
+    # 4. args / action_inputs separator
     rule_impl += [
         "    args = ctx.actions.args()",
         "",
         "    action_inputs = []",
     ]
 
-    if jar_output:
-        rule_impl.append("    input_deps = []")
-        rule_impl.append("    input_libraries = []")
+    # 5. JavaSourceInfo check (if jar output and "input" placeholder exists)
+    if output_type == "jar":
         if "input" in placeholder_types:
             rule_impl.append("    if JavaSourceInfo in ctx.attr.input:")
             rule_impl.append("        input_deps.append(ctx.attr.input[JavaSourceInfo])")
 
-    if function_name == "decompile":
-        rule_impl.append('    args.add("%s")' % main_class)
-        rule_impl.append("    args.add(output_file.path)")
+    # 6. before_template_args
+    spec = _function_specials.get(function_name, _default_function_special)
+    if spec.before_template_args:
+        rule_impl += spec.before_template_args(main_class, context)
 
-    jar_list_placeholder_info, jar_list_code = _generate_jar_list_args_code(function_name, placeholder_types, jar_output)
-    rule_impl += jar_list_code
+    # 7. action_input phase
+    for name, type in placeholder_types.items():
+        config = _placeholder_config.get(type)
+        if config and config.action_input:
+            rule_impl += config.action_input(name)
 
+    # 8. arg assembly
     for entry in arg_entries:
         arg_template = entry.arg
         parts = []
@@ -334,17 +302,8 @@ def _generate_function_impl(function_name, impl_name, jar_output, main_class, ar
                 if start > last_end:
                     parts.append('"%s"' % arg_template[last_end:start])
 
-                if replacement.type == "file":
-                    parts.append("ctx.file.%s" % replacement.name)
-                    rule_impl.append("    action_inputs.append(ctx.file.%s)" % replacement.name)
-                elif replacement.type == "output":
-                    parts.append("output_file.path")
-                elif replacement.type == "log":
-                    parts.append("%s_file.path" % replacement.name)
-                elif replacement.type == "string":
-                    parts.append("ctx.attr.%s" % replacement.name)
-                elif replacement.type == "jar_list":
-                    parts.append("%s.path" % jar_list_placeholder_info[replacement.name].paths_file)
+                config = _placeholder_config[replacement.type]
+                parts.append(config.arg(replacement.name, None))
 
                 last_end = start + len(placeholder.placeholder)
 
@@ -356,6 +315,7 @@ def _generate_function_impl(function_name, impl_name, jar_output, main_class, ar
         else:
             rule_impl.append("    args.add(" + " + ".join(parts) + ")")
 
+    # 9. ctx.actions.run + return
     rule_impl.append("    ")
     rule_impl.append("    ctx.actions.run(")
     rule_impl.append("        inputs = action_inputs,")
@@ -374,7 +334,7 @@ def _generate_function_impl(function_name, impl_name, jar_output, main_class, ar
     rule_impl.append("        DefaultInfo(files = depset([")
     rule_impl.append("            output_file,")
     rule_impl.append("        ])),")
-    if jar_output:
+    if output_type == "jar":
         rule_impl.append("        JavaSourceInfo(")
         rule_impl.append("            source_jar = output_file,")
         rule_impl.append("            deps = input_deps,")
@@ -384,7 +344,7 @@ def _generate_function_impl(function_name, impl_name, jar_output, main_class, ar
 
     return "\n".join(rule_impl)
 
-def _generate_function_definition(data_paths, function_name, rule_impl_name, jar_output, placeholder_types):
+def _generate_function_definition(data_paths, function_name, rule_impl_name, output_type, placeholder_types, context):
     rule_def = [
         "%s = rule(" % function_name,
         "    implementation = %s," % rule_impl_name,
@@ -392,27 +352,13 @@ def _generate_function_definition(data_paths, function_name, rule_impl_name, jar
     ]
 
     for placeholder_name, placeholder_type in placeholder_types.items():
-        if placeholder_type == "file":
-            rule_def.append('        "%s": attr.label(' % placeholder_name)
-            if placeholder_name in data_paths:
-                rule_def.append('            default = "//:%s",' % placeholder_name)
-            else:
-                rule_def.append("            mandatory = True,")
-            if jar_output:
-                rule_def.append("            providers = [[], [JavaSourceInfo]],")
-            rule_def.append("            allow_single_file = True,")
-            rule_def.append("        ),")
-        elif placeholder_type == "string":
-            rule_def.append('        "%s": attr.string(' % placeholder_name)
-            rule_def.append("            mandatory = True,")
-            rule_def.append("        ),")
-        elif placeholder_type == "jar_list":
-            rule_def.append('        "%s": attr.label_list(' % placeholder_name)
-            rule_def.append("            mandatory = True,")
-            rule_def.append("            providers = [JavaInfo],")
-            rule_def.append("        ),")
-        elif placeholder_type != "output" and placeholder_type != "log":
-            fail("Unsupported argument type: %s" % placeholder_type)
+        config = _placeholder_config.get(placeholder_type)
+        if config and config.attr:
+            rule_def.extend(config.attr(placeholder_name, data_paths, output_type))
+
+    spec = _function_specials.get(function_name, _default_function_special)
+    if spec.extra_attrs:
+        rule_def.extend(spec.extra_attrs(context))
 
     rule_def.append('        "_%s_bin": attr.label(' % function_name)
     rule_def.append('            default = "//functions/%s",' % function_name)
@@ -424,7 +370,7 @@ def _generate_function_definition(data_paths, function_name, rule_impl_name, jar
 
     return "\n".join(rule_def)
 
-def _generate_function(rctx, version_info, java_target, data_paths, function_name, function, function_jar):
+def _generate_function(rctx, version_info, java_target, data_paths, function_name, function, function_jar, context):
     classpath = function["classpath"] if "classpath" in function else []
     if "version" in function:
         classpath.append(function["version"])
@@ -436,9 +382,10 @@ def _generate_function(rctx, version_info, java_target, data_paths, function_nam
 
     arg_entries, placeholder_types, output_entries = _parse_function_arguments(function.get("args", []))
     rule_impl_name = "_%s_impl" % function_name
-    jar_output = function_name != "mergeMappings"
-    rule_impl = _generate_function_impl(function_name, rule_impl_name, jar_output, main_class, arg_entries, placeholder_types, output_entries)
-    rule_def = _generate_function_definition(data_paths, function_name, rule_impl_name, jar_output, placeholder_types)
+    spec = _function_specials.get(function_name, _default_function_special)
+    output_type = spec.output_type
+    rule_impl = _generate_function_impl(function_name, rule_impl_name, output_type, main_class, arg_entries, placeholder_types, output_entries, context)
+    rule_def = _generate_function_definition(data_paths, function_name, rule_impl_name, output_type, placeholder_types, context)
 
     header = 'load("@rules_java//java:defs.bzl", "JavaInfo")'
 
@@ -451,50 +398,29 @@ def _convert_task_name(side, name):
     return "%s_%s" % (side, _camel_case_to_snake_case(name))
 
 def _generate_task_build_file(rctx, version_info, config_data, task_name, side_name, step, step_type):
+    spec = config_data.get("spec", None)
     task_def = ['package(default_visibility = ["//visibility:public"])']
 
-    if step_type == "strip":
-        task_def.append('load("@//repo/neoform/rule:split_resources.bzl", strip = "split_resources")')
-    elif step_type == "inject":
-        task_def.append('load("@//repo/neoform/rule:inject_zip_content.bzl", inject = "inject_zip_content")')
-    elif step_type == "patch":
-        task_def.append('load("@//repo/neoform/rule:patch_zip_content.bzl", patch = "patch_zip_content")')
+    handler = _step_handlers.get(step_type)
+    if handler:
+        task_def.append(handler.load_line(spec))
+        task_def.append("")
+        task_def.append("%s(" % step_type)
+        task_def.append('    name = "%s",' % task_name)
+        handler.build(task_def, struct(
+            rctx = rctx,
+            version_info = version_info,
+            config_data = config_data,
+            task_name = task_name,
+            side_name = side_name,
+            step = step,
+            spec = spec,
+        ))
     else:
         task_def.append('load("//functions:%s.bzl", "%s")' % (step_type, step_type))
-
-    task_def.append("")
-    task_def.append("%s(" % step_type)
-    task_def.append('    name = "%s",' % task_name)
-
-    if step_type == "inject":
-        task_def.append('    deps = ["//:inject"],')
-    elif step_type == "patch":
-        patches = config_data["data"]["patches"]
-        if type(patches) == type(""):
-            task_def.append('    prefix = "%s",' % patches)
-            task_def.append('    patches = "//:neoform",')
-        elif type(patches) == type({}):
-            task_def.append('    prefix = "%s",' % patches[side_name])
-            task_def.append('    patches = "//:neoform",')
-        else:
-            fail("Bad patch type: %s" % type(patches))
-    elif step_type == "strip":
-        name = step.get("name", step_type)
-        if name == "stripClient":
-            task_def.append("    generate_manifest = True,")
-            task_def.append('    dist_id = "client",')
-            task_def.append('    other_dist_id = "server",')
-            if "strip" in config_data["steps"]["server"]:
-                task_def.append('    other_dist_jar = "//tasks/server_extract_server",')
-            else:
-                task_def.append('    other_dist_jar = "%s",' % rctx.attr.server_jar)
-            task_def.append('    mappings = "//tasks/client_merge_mappings",')
-        elif name == "stripServer":
-            task_def.append("    generate_manifest = True,")
-            task_def.append('    dist_id = "server",')
-            task_def.append('    other_dist_id = "client",')
-            task_def.append('    other_dist_jar = "%s",' % rctx.attr.client_jar)
-            task_def.append('    mappings = "//tasks/server_merge_mappings",')
+        task_def.append("")
+        task_def.append("%s(" % step_type)
+        task_def.append('    name = "%s",' % task_name)
 
     for item_key in step:
         if item_key == "type" or item_key == "name":
@@ -503,25 +429,15 @@ def _generate_task_build_file(rctx, version_info, config_data, task_name, side_n
         item_value = step[item_key]
         if item_value.startswith("{") and item_value.endswith("Output}"):
             output_task = item_value[1:-7]
-            if output_task == "downloadClient":
-                task_def.append('    %s = "%s",' % (item_key, rctx.attr.client_jar))
-            elif output_task == "downloadServer":
-                task_def.append('    %s = "%s",' % (item_key, rctx.attr.server_jar))
-            elif output_task == "downloadClientMappings":
-                task_def.append('    %s = "%s",' % (item_key, rctx.attr.client_mapping))
-            elif output_task == "downloadServerMappings":
-                task_def.append('    %s = "%s",' % (item_key, rctx.attr.server_mapping))
-            elif output_task == "listLibraries":
-                sided_libraries = ['"@%s//jar"' % _convert_maven_coordinate_to_repo(version_info.repository_prefix, library) for library in config_data["libraries"][side_name]]
-                sided_libraries = ", ".join(sided_libraries)
-                if side_name == "client":
-                    task_def.append('    %s = ["%s", %s],' % (item_key, rctx.attr.client_libraries, sided_libraries))
-                elif side_name == "server":
-                    task_def.append("    %s = [%s]," % (item_key, sided_libraries))
-                elif side_name == "joined":
-                    task_def.append('    %s = ["%s", %s],' % (item_key, rctx.attr.client_libraries, sided_libraries))
-                else:
-                    fail("Unsupported side when listing libraries: %s" % side_name)
+            resolver = _output_placeholder_map.get(output_task)
+            if resolver:
+                task_def.append(resolver(struct(
+                    rctx = rctx,
+                    item_key = item_key,
+                    side_name = side_name,
+                    version_info = version_info,
+                    config_data = config_data,
+                )))
             else:
                 output_task_name = _convert_task_name(side_name, output_task)
                 task_def.append('    %s = "//tasks/%s",' % (item_key, output_task_name))
@@ -560,9 +476,13 @@ def _neoform_repo_impl(rctx):
 
     java_target = config_data.get("java_target", "8")
 
+    context = struct(
+        sas_data = rctx.attr.sas_data,
+    )
+
     rctx.file("functions/BUILD.bazel", "")
     for function_name, function in config_data["functions"].items():
-        _generate_function(rctx, version_info, java_target, data_paths, function_name, function, function_jars[function_name])
+        _generate_function(rctx, version_info, java_target, data_paths, function_name, function, function_jars[function_name], context)
 
     _generate_steps(rctx, version_info, config_data)
 
@@ -610,6 +530,17 @@ _neoform_repo = repository_rule(
             doc = "Client libraries",
             mandatory = True,
             providers = [JavaInfo],
+        ),
+        "sas_data": attr.label(
+            doc = "SAS (Side Annotation Stripper) data filegroup",
+            mandatory = False,
+            default = None,
+        ),
+        "strip_deny_patterns": attr.string_list(
+            doc = "Additional deny regex patterns for the split_resources strip step (spec=2). " +
+                  "Needed for <=1.17.1 where server jars contain shaded third-party deps.",
+            mandatory = False,
+            default = [],
         ),
         "pin_file": attr.label(
             doc = "Pin file",
@@ -697,6 +628,17 @@ version = tag_class(
             mandatory = True,
             providers = [JavaInfo],
         ),
+        "sas_data": attr.label(
+            doc = "SAS (Side Annotation Stripper) data filegroup",
+            mandatory = False,
+            default = None,
+        ),
+        "strip_deny_patterns": attr.string_list(
+            doc = "Additional deny regex patterns for the split_resources strip step (spec=2). " +
+                  "Needed for <=1.17.1 where server jars contain shaded third-party deps.",
+            mandatory = False,
+            default = [],
+        ),
     },
 )
 
@@ -735,6 +677,10 @@ def _neoform_impl(mctx):
                     fail("NeoForm version %s already exists with a different legacy flag" % version.version)
                 elif versions[version.version].client_libraries != version.client_libraries:
                     fail("NeoForm version %s already exists with a different client libraries" % version.version)
+                elif versions[version.version].sas_data != version.sas_data:
+                    fail("NeoForm version %s already exists with a different sas_data" % version.version)
+                elif versions[version.version].strip_deny_patterns != version.strip_deny_patterns:
+                    fail("NeoForm version %s already exists with a different strip_deny_patterns" % version.version)
             else:
                 versions[version.version] = {
                     "version": version.version,
@@ -745,6 +691,8 @@ def _neoform_impl(mctx):
                     "client_mapping": version.client_mapping,
                     "server_mapping": version.server_mapping,
                     "client_libraries": version.client_libraries,
+                    "sas_data": version.sas_data,
+                    "strip_deny_patterns": version.strip_deny_patterns,
                 }
     versions = versions.values()
 
@@ -764,12 +712,11 @@ def _neoform_impl(mctx):
         version_sha256 = version["sha256"]
         output_prefix = "neoform/%s" % version_name
 
-        config_link = _config_link_legacy if version_legacy else _config_link
-        repository_url = _minecraftforge_repository_url if version_legacy else _neoforge_repository_url
+        names = _names[version_legacy]
 
         mctx.report_progress("Downloading NeoForm JAR %s" % version_name)
         mctx.download_and_extract(
-            url = config_link % (repository_url, version_name, version_name),
+            url = names.config % (names.url, version_name, version_name),
             type = "zip",
             sha256 = version_sha256,
             output = output_prefix,
@@ -786,7 +733,7 @@ def _neoform_impl(mctx):
             for library in config_data["libraries"][libraries_side]:
                 append_library(library, version_legacy)
 
-        repo_name = ("mcp_%s" if version_legacy else "neoform_%s") % _convert_maven_coordinate(version_name)
+        repo_name = names.repo_fmt % _convert_maven_coordinate(version_name)
         _neoform_repo(
             name = repo_name,
             version = version_name,
@@ -797,6 +744,8 @@ def _neoform_impl(mctx):
             client_mapping = version["client_mapping"],
             server_mapping = version["server_mapping"],
             client_libraries = version["client_libraries"],
+            sas_data = version.get("sas_data"),
+            strip_deny_patterns = version.get("strip_deny_patterns", []),
             pin_file = pin_file,
         )
 
@@ -806,21 +755,17 @@ def _neoform_impl(mctx):
     for library in libraries:
         coordinate = library["coordinate"]
         legacy = library["legacy"]
-        repository_url = _minecraftforge_repository_url if legacy else _neoforge_repository_url
-        repository_prefix = "mcp" if legacy else "neoform"
+        names = _names[legacy]
         http_jar(
-            name = _convert_maven_coordinate_to_repo(repository_prefix, coordinate),
-            url = _convert_maven_coordinate_to_url(repository_url, coordinate),
-            sha256 = pin_content.get(_convert_maven_coordinate_to_url(repository_url, coordinate), None),
+            name = _convert_maven_coordinate_to_repo(names.prefix, coordinate),
+            url = _convert_maven_coordinate_to_url(names.url, coordinate),
+            sha256 = pin_content.get(_convert_maven_coordinate_to_url(names.url, coordinate), None),
         )
 
     neoform_pin(
         name = "neoform_pin",
         urls = [
-            _convert_maven_coordinate_to_url(
-                _minecraftforge_repository_url if library["legacy"] else _neoforge_repository_url,
-                library["coordinate"],
-            )
+            _convert_maven_coordinate_to_url(_names[library["legacy"]].url, library["coordinate"])
             for library in libraries
         ],
         pin_file = pin_file,

@@ -1,0 +1,8 @@
+load("@//repo/neoform:java_version_binary.bzl", "java_8_binary")
+
+java_8_binary(
+    name = "sas",
+    main_class = "net.minecraftforge.mergetool.ConsoleMerger",
+    visibility = ["//visibility:public"],
+    runtime_deps = ["@maven//:net_minecraftforge_mergetool_fatjar"],
+)

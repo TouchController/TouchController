@@ -2,6 +2,7 @@
 
 load("@//private:maven_coordinate.bzl", _convert_maven_coordinate = "convert_maven_coordinate", _convert_maven_coordinate_to_repo = "convert_maven_coordinate_to_repo", _convert_maven_coordinate_to_url = "convert_maven_coordinate_to_url")
 load("@//private:pin_file.bzl", _parse_pin_file = "parse_pin_file")
+load("@//repo/neoform/rule:split_resources.bzl", "SplitResourceInfo")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_jar")
 
 _neoforge_repository_url = "https://maven.neoforged.net/releases"
@@ -73,6 +74,8 @@ def _neoforge_repo_impl(rctx):
     if type(access_transformers) == type([]):
         access_transformers = access_transformers[0]
 
+    sass_files = config_data.get("sass", [])
+
     build_file_contents = [
         'package(default_visibility = ["//visibility:public"])',
         'load("@//repo/neoforge/rule:java_source_transform.bzl", "java_source_transform")',
@@ -100,6 +103,19 @@ def _neoforge_repo_impl(rctx):
         '    name = "neoforge_sources",',
         '    actual = "%s",' % neoforge_sources_zip,
         ")",
+    ]
+
+    if sass_files:
+        sass_srcs = ['"%s/%s"' % (output_prefix, f) for f in sass_files]
+        build_file_contents += [
+            "",
+            "filegroup(",
+            '    name = "sas",',
+            '    srcs = [%s],' % ", ".join(sass_srcs),
+            ")",
+        ]
+
+    build_file_contents += [
         "",
         "patch_zip_content(",
         '    name = "add_neoforge_patches",',
@@ -231,7 +247,7 @@ _neoforge_repo = repository_rule(
         ),
         "joined_strip_client": attr.label(
             doc = "Strip client task from NeoForm pipeline, providing SplitResourceInfo",
-            allow_single_file = True,
+            providers = [SplitResourceInfo],
             mandatory = False,
             default = None,
         ),
@@ -310,7 +326,7 @@ version = tag_class(
         ),
         "joined_strip_client": attr.label(
             doc = "Strip client task from NeoForm pipeline, providing SplitResourceInfo. May be None for NeoForm spec v6+ where strip is handled by preProcessJar.",
-            allow_single_file = True,
+            providers = [SplitResourceInfo],
             mandatory = False,
             default = None,
         ),

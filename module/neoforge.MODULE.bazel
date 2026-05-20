@@ -6,12 +6,14 @@ maven.install(
         "net.neoforged:srgutils:1.0.10",
         "io.codechicken:DiffPatch:2.1.0.42:all",
         "net.neoforged.jst:jst-cli-bundle:2.0.7",
+        "net.minecraftforge:mergetool:1.1.7:fatjar",
     ],
 )
 
 lexforge_versions = {
     "1.14.4": {
         "java_target": 8,
+        "mojmap": False,
         "mcp_version": "1.14.4-20190829.143755",
         "mcp_sha256": "49d0b7818ccf385a57feda19fbd88b1fb4bd97c95d98e7044d9cb4c735e37820",
         "forge_version": "1.14.4-28.2.28",
@@ -21,6 +23,7 @@ lexforge_versions = {
     },
     "1.15.2": {
         "java_target": 8,
+        "mojmap": False,
         "mcp_version": "1.15.2-20200515.085601",
         "mcp_sha256": "17a1898f6a91ae61cc9a044fbec19e33f49b8a02e37e624fa762de156422a665",
         "forge_version": "1.15.2-31.2.57",
@@ -30,6 +33,7 @@ lexforge_versions = {
     },
     "1.16.5": {
         "java_target": 8,
+        "mojmap": False,
         "mcp_version": "1.16.5-20210115.111550",
         "mcp_sha256": "80216a0f4ae79d81a5e11ceccaa97582a1f6a2cf079b7703b88a99a26547b342",
         "forge_version": "1.16.5-36.2.34",
@@ -45,6 +49,17 @@ lexforge_versions = {
         "forge_userdev_sha256": "ab630a994b26e5a7938b5700da7a79aa0e8cb933c101d026feb9a355014bfe0c",
         "forge_sources_sha256": "58a7ed4c531ac8965bcded899116821e19ac02ec1aabec8942f5fe5aef9da6b8",
         "forge_universal_sha256": "2cc032ae95d60f03e62be4929f3ecd66354e6ed135fa3cf676ced2b2f7910a6d",
+        "strip_deny_patterns": [
+            "com/mojang/(authlib|bridge|brigadier|datafixers|serialization|util)/.*",
+            "com/google/.*",
+            "joptsimple/.*",
+            "com/sun/.*",
+            "oshi/.*",
+            "io/.*",
+            "it/.*",
+            "javax/.*",
+            "org/.*",
+        ],
     },
     "1.18.1": {
         "java_target": 17,
@@ -247,17 +262,21 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
             client_jar = "@minecraft//%s:client" % (data["version"] if "version" in data else version),
             client_libraries = "@minecraft//%s:client_libraries" % (data["version"] if "version" in data else version),
             legacy = True,
+            sas_data = "@forge_%s//:sas" % version.replace(".", "_"),
             server_jar = "@minecraft//%s:server" % (data["version"] if "version" in data else version),
             sha256 = data["mcp_sha256"],
+            strip_deny_patterns = data.get("strip_deny_patterns", []),
             version = data["mcp_version"],
         ) if "mapping" in data and data["mapping"] else neoform.version(
             client_jar = "@minecraft//%s:client" % (data["version"] if "version" in data else version),
             client_libraries = "@minecraft//%s:client_libraries" % (data["version"] if "version" in data else version),
             client_mapping = "@minecraft//%s:client_mappings" % (data["version"] if "version" in data else version),
             legacy = True,
+            sas_data = "@forge_%s//:sas" % version.replace(".", "_"),
             server_jar = "@minecraft//%s:server" % (data["version"] if "version" in data else version),
             server_mapping = "@minecraft//%s:server_mappings" % (data["version"] if "version" in data else version),
             sha256 = data["mcp_sha256"],
+            strip_deny_patterns = data.get("strip_deny_patterns", []),
             version = data["mcp_version"],
         ),
         use_repo(
@@ -269,7 +288,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
         neoforge.version(
             java_target = data["java_target"],
             joined_patched_sources = "@mcp_%s//tasks/joined_patch" % version.replace(".", "_"),
-            joined_strip_client = "@mcp_%s//tasks/joined_strip_client" % version.replace(".", "_"),
+            joined_strip_client = "@mcp_%s//tasks/joined_strip_client" % version.replace(".", "_") if data.get("mojmap", True) else None,
             legacy = True,
             sources_sha256 = data["forge_sources_sha256"],
             universal_sha256 = data["forge_universal_sha256"],
@@ -330,7 +349,8 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
 
 neoform.pin(pin_file = "//:neoform_pin.txt")
 
-neoforge.pin(pin_file = "//:neoforge_pin.txt")
 use_repo(neoforge, "neoforge_pin")
+
+neoforge.pin(pin_file = "//:neoforge_pin.txt")
 
 use_repo(neoform, "neoform_pin")

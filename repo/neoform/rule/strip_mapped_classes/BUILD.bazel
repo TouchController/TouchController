@@ -1,0 +1,8 @@
+load("@rules_java//java:defs.bzl", "java_binary")
+
+java_binary(
+    name = "strip_mapped_classes",
+    srcs = ["StripMappedClasses.java"],
+    main_class = "net.neoforged.neoform.runtime.tools.StripMappedClasses",
+    visibility = ["//visibility:public"],
+)

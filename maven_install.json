@@ -38,6 +38,7 @@
     "net.fabricmc:tiny-remapper": -281970715,
     "net.java.dev.jna:jna": 929040997,
     "net.java.dev.jna:jna-platform": 1235639073,
+    "net.minecraftforge:mergetool": 115837290,
     "net.neoforged.jst:jst-cli-bundle": -472756363,
     "net.neoforged:srgutils": 1377417195,
     "org.anarres:jcpp": 1560666087,
@@ -239,6 +240,10 @@
     "net.java.dev.jna:jna:jar:sources": 611335905,
     "net.jcip:jcip-annotations": 99629700,
     "net.jcip:jcip-annotations:jar:sources": -1052079946,
+    "net.minecraftforge:mergetool:jar:fatjar": -439315731,
+    "net.minecraftforge:mergetool:jar:sources": -1072082124,
+    "net.minecraftforge:srgutils": -1108003306,
+    "net.minecraftforge:srgutils:jar:sources": -304209562,
     "net.neoforged.jst:jst-cli-bundle": -1159234106,
     "net.neoforged.jst:jst-cli-bundle:jar:sources": -1011690206,
     "net.neoforged:srgutils": 461674511,
@@ -1036,6 +1041,20 @@
         "sources": "e3ad6ae439e3cf8a25372de838efaa1a95f8ef9b5053d5d94fafe89c8c09814e"
       },
       "version": "1.0"
+    },
+    "net.minecraftforge:mergetool": {
+      "shasums": {
+        "fatjar": "2fbb74386cc9f9f4e816d2b5167ed9274c0864eae532d658e34587b2a47857e8",
+        "sources": "690ec23ea08f47496710e0f6cb5315b750dbc2f218aa8c721b7060717e99f532"
+      },
+      "version": "1.1.7"
+    },
+    "net.minecraftforge:srgutils": {
+      "shasums": {
+        "jar": "f6bdebb7fae108329acddfc812f237c7f6328a98e3f282a105edfc161d0215e3",
+        "sources": "5f818da28bc414632c0f944667ce4c7aa0e9e0bf8b1c8ee96eef71fd009eccf0"
+      },
+      "version": "0.4.15"
     },
     "net.neoforged.jst:jst-cli-bundle": {
       "shasums": {
@@ -2123,6 +2142,13 @@
     ],
     "net.java.dev.jna:jna-platform": [
       "net.java.dev.jna:jna"
+    ],
+    "net.minecraftforge:mergetool:jar:fatjar": [
+      "net.minecraftforge:srgutils",
+      "net.sf.jopt-simple:jopt-simple",
+      "org.ow2.asm:asm",
+      "org.ow2.asm:asm-tree",
+      "org.ow2.asm:asm-util"
     ],
     "org.anarres:jcpp": [
       "com.github.zafarkhaja:java-semver",
@@ -3583,6 +3609,24 @@
     ],
     "net.jcip:jcip-annotations": [
       "net.jcip.annotations"
+    ],
+    "net.minecraftforge:mergetool:jar:fatjar": [
+      "cpw.mods.fml.relauncher",
+      "joptsimple",
+      "joptsimple.internal",
+      "joptsimple.util",
+      "net.minecraftforge.api.distmarker",
+      "net.minecraftforge.fml.relauncher",
+      "net.minecraftforge.mergetool",
+      "net.minecraftforge.srgutils",
+      "org.objectweb.asm",
+      "org.objectweb.asm.signature",
+      "org.objectweb.asm.tree",
+      "org.objectweb.asm.tree.analysis",
+      "org.objectweb.asm.util"
+    ],
+    "net.minecraftforge:srgutils": [
+      "net.minecraftforge.srgutils"
     ],
     "net.neoforged.jst:jst-cli-bundle": [
       "_COROUTINE",
@@ -5950,6 +5994,10 @@
       "net.java.dev.jna:jna:jar:sources",
       "net.jcip:jcip-annotations",
       "net.jcip:jcip-annotations:jar:sources",
+      "net.minecraftforge:mergetool:jar:fatjar",
+      "net.minecraftforge:mergetool:jar:sources",
+      "net.minecraftforge:srgutils",
+      "net.minecraftforge:srgutils:jar:sources",
       "net.neoforged.jst:jst-cli-bundle",
       "net.neoforged.jst:jst-cli-bundle:jar:sources",
       "net.neoforged:srgutils",
@@ -6366,6 +6414,10 @@
       "net.java.dev.jna:jna:jar:sources",
       "net.jcip:jcip-annotations",
       "net.jcip:jcip-annotations:jar:sources",
+      "net.minecraftforge:mergetool:jar:fatjar",
+      "net.minecraftforge:mergetool:jar:sources",
+      "net.minecraftforge:srgutils",
+      "net.minecraftforge:srgutils:jar:sources",
       "net.neoforged.jst:jst-cli-bundle",
       "net.neoforged.jst:jst-cli-bundle:jar:sources",
       "net.neoforged:srgutils",
@@ -6782,6 +6834,10 @@
       "net.java.dev.jna:jna:jar:sources",
       "net.jcip:jcip-annotations",
       "net.jcip:jcip-annotations:jar:sources",
+      "net.minecraftforge:mergetool:jar:fatjar",
+      "net.minecraftforge:mergetool:jar:sources",
+      "net.minecraftforge:srgutils",
+      "net.minecraftforge:srgutils:jar:sources",
       "net.neoforged.jst:jst-cli-bundle",
       "net.neoforged.jst:jst-cli-bundle:jar:sources",
       "net.neoforged:srgutils",
@@ -7198,6 +7254,10 @@
       "net.java.dev.jna:jna:jar:sources",
       "net.jcip:jcip-annotations",
       "net.jcip:jcip-annotations:jar:sources",
+      "net.minecraftforge:mergetool:jar:fatjar",
+      "net.minecraftforge:mergetool:jar:sources",
+      "net.minecraftforge:srgutils",
+      "net.minecraftforge:srgutils:jar:sources",
       "net.neoforged.jst:jst-cli-bundle",
       "net.neoforged.jst:jst-cli-bundle:jar:sources",
       "net.neoforged:srgutils",

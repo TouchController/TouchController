@@ -16,6 +16,7 @@ import java.util.zip.ZipOutputStream;
  * Jar) file. <br> Standalone CLI tool version.
  */
 public class InjectZipContent {
+    private static final String PACKAGE_INFO_TEMPLATE = "package-info-template.java";
     /**
      * Base interface for injection sources
      */
@@ -37,6 +38,7 @@ public class InjectZipContent {
 
             Files.walk(directory, FileVisitOption.FOLLOW_LINKS)
                 .filter(path -> !Files.isDirectory(path))
+                .filter(path -> !path.getFileName().toString().equals(PACKAGE_INFO_TEMPLATE))
                 .forEach(path -> {
                     try {
                         var relativePath = directory.relativize(path).toString().replace('\\', '/');
@@ -76,6 +78,9 @@ public class InjectZipContent {
 
                 while ((entry = zis.getNextEntry()) != null) {
                     if (entry.isDirectory()) {
+                        continue;
+                    }
+                    if (entry.getName().endsWith("/" + PACKAGE_INFO_TEMPLATE) || entry.getName().equals(PACKAGE_INFO_TEMPLATE)) {
                         continue;
                     }
 
@@ -149,9 +154,8 @@ public class InjectZipContent {
      * template-file found in any one of the inject directories.
      */
     private String findPackageInfoTemplate(List<InjectSource> injectedSources) throws IOException {
-        // Try to find a package-info-template.java
         for (var injectedSource : injectedSources) {
-            var content = injectedSource.tryReadFile("package-info-template.java");
+            var content = injectedSource.tryReadFile(PACKAGE_INFO_TEMPLATE);
             if (content != null) {
                 return new String(content, StandardCharsets.UTF_8);
             }
