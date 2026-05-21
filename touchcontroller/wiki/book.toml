@@ -4,6 +4,6 @@ title = "TouchControllerWiki"
 language = "cmn-hans-cn"
 
 [output.html]
-git-repository-url = "https://github.com/TouchController/TouchController-Monorepo/tree/master/touchcontroller/wiki"
+git-repository-url = "https://github.com/TouchController/TouchController/tree/master/touchcontroller"
 additional-js = ["footer.js"]
 additional-css = ["footer.css"]
