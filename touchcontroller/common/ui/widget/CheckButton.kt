@@ -8,7 +8,7 @@ package top.fifthlight.touchcontroller.common.ui.widget
 import androidx.compose.runtime.Composable
 import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.combine.core.widget.layout.BoxScope
-import top.fifthlight.combine.ui.style.ColorTheme
+import top.fifthlight.combine.ui.style.ColorThemeSet
 import top.fifthlight.combine.ui.style.DrawableSet
 import top.fifthlight.combine.widget.ui.Button
 import top.fifthlight.data.IntPadding
@@ -21,8 +21,8 @@ data class CheckButtonDrawables(
 )
 
 data class CheckButtonColors(
-    val unchecked: ColorTheme,
-    val checked: ColorTheme,
+    val unchecked: ColorThemeSet,
+    val checked: ColorThemeSet,
 )
 
 @Composable
@@ -124,7 +124,7 @@ fun CheckButton(
     } else {
         drawableSet.unchecked
     },
-    colorTheme = if (checked) {
+    colorThemeSet = if (checked) {
         colors.checked
     } else {
         colors.unchecked

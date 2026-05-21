@@ -1,7 +1,12 @@
 package top.fifthlight.combine.theme.blackstone
 
+import top.fifthlight.combine.core.paint.Color
+import top.fifthlight.combine.core.paint.ColorDrawable
+import top.fifthlight.combine.core.paint.Colors
+import top.fifthlight.combine.core.paint.Drawable
 import top.fifthlight.combine.theme.Theme
 import top.fifthlight.combine.ui.style.ColorTheme
+import top.fifthlight.combine.ui.style.ColorThemeSet
 import top.fifthlight.combine.ui.style.DrawableSet
 import top.fifthlight.combine.ui.style.TextureSet
 
@@ -25,6 +30,14 @@ val BlackstoneTheme = run {
                 hover = BlackstoneTextures.widget_button_button_warning_hover,
                 active = BlackstoneTextures.widget_button_button_active,
                 disabled = BlackstoneTextures.widget_button_button_disabled,
+            ),
+
+            textButton = DrawableSet(
+                normal = Drawable.Empty,
+                focus = ColorDrawable(Color(0x55FFFFFFu)),
+                hover = ColorDrawable(Color(0x55FFFFFFu)),
+                active = ColorDrawable(Color(0xFF228207u)),
+                disabled = ColorDrawable(Color(0xFF323335u)),
             ),
 
             uncheckedCheckBox = DrawableSet(
@@ -163,9 +176,23 @@ val BlackstoneTheme = run {
             itemGridBackground = BlackstoneTextures.background_backpack,
         ),
         colors = Theme.Colors(
-            button = ColorTheme.light,
-            guideButton = ColorTheme.dark,
-            warningButton = ColorTheme.dark,
+            button = ColorThemeSet(
+                normal = ColorTheme.light,
+                disabled = ColorTheme.light.copy(foreground = Colors.SECONDARY_WHITE),
+            ),
+            guideButton = ColorThemeSet(
+                normal = ColorTheme.dark,
+                disabled = ColorTheme.dark.copy(foreground = Colors.SECONDARY_WHITE),
+            ),
+            warningButton = ColorThemeSet(
+                normal = ColorTheme.dark,
+                disabled = ColorTheme.dark.copy(foreground = Colors.SECONDARY_WHITE),
+            ),
+
+            textButton = ColorThemeSet(
+                normal = ColorTheme.dark,
+                disabled = ColorTheme.dark.copy(foreground = Colors.SECONDARY_WHITE),
+            ),
         ),
     )
 }

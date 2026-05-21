@@ -1,6 +1,7 @@
 package top.fifthlight.combine.widget.ui
 
 import androidx.compose.runtime.*
+import top.fifthlight.combine.core.data.plus
 import top.fifthlight.combine.core.input.interaction.MutableInteractionSource
 import top.fifthlight.combine.core.layout.Alignment
 import top.fifthlight.combine.core.modifier.Modifier
@@ -12,9 +13,7 @@ import top.fifthlight.combine.core.paint.Drawable
 import top.fifthlight.combine.core.widget.layout.Row
 import top.fifthlight.combine.core.widget.layout.RowScope
 import top.fifthlight.combine.theme.LocalTheme
-import top.fifthlight.combine.ui.style.ColorTheme
-import top.fifthlight.combine.ui.style.DrawableSet
-import top.fifthlight.combine.ui.style.LocalColorTheme
+import top.fifthlight.combine.ui.style.*
 import top.fifthlight.data.IntRect
 
 data class SelectDrawableSet(
@@ -57,7 +56,8 @@ fun SelectIcon(
 fun Select(
     modifier: Modifier = Modifier,
     drawableSet: SelectDrawableSet = SelectDrawableSet.current,
-    colorTheme: ColorTheme? = null,
+    colorThemeSet: ColorThemeSet = LocalTheme.current.colors.select,
+    textStyleSet: TextStyleSet = LocalTheme.current.textStyles.select,
     expanded: Boolean = false,
     onExpandedChanged: (Boolean) -> Unit,
     dropDownContent: @Composable DropdownMenuScope.() -> Unit,
@@ -66,9 +66,10 @@ fun Select(
     val interactionSource = remember { MutableInteractionSource() }
     val state by widgetState(interactionSource)
     val menuTexture = drawableSet.menuBox.getByState(state)
+    val colorTheme = colorThemeSet.getByState(state)
+    val textTheme = textStyleSet.getByState(state) + LocalTextStyle.current
 
     var anchor by remember { mutableStateOf(IntRect.ZERO) }
-    val colorTheme = colorTheme ?: ColorTheme.light
 
     Row(
         modifier = Modifier
@@ -81,6 +82,7 @@ fun Select(
     ) {
         CompositionLocalProvider(
             LocalColorTheme provides colorTheme,
+            LocalTextStyle provides textTheme,
             LocalWidgetState provides state,
         ) {
             content()
@@ -94,7 +96,8 @@ fun Select(
         onDismissRequest = { onExpandedChanged(false) }
     ) {
         CompositionLocalProvider(
-            LocalColorTheme provides colorTheme
+            LocalColorTheme provides colorTheme,
+            LocalTextStyle provides textTheme,
         ) {
             dropDownContent()
         }

@@ -1,13 +1,12 @@
 package top.fifthlight.combine.theme.oreui
 
+import top.fifthlight.combine.core.data.TextStyle
 import top.fifthlight.combine.core.paint.Canvas
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.combine.core.paint.Colors
 import top.fifthlight.combine.core.paint.Drawable
 import top.fifthlight.combine.theme.Theme
-import top.fifthlight.combine.ui.style.ColorTheme
-import top.fifthlight.combine.ui.style.DrawableSet
-import top.fifthlight.combine.ui.style.TextureSet
+import top.fifthlight.combine.ui.style.*
 import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntPadding
 import top.fifthlight.data.IntRect
@@ -46,6 +45,8 @@ private data class OutlineDrawable(
         )
     }
 }
+
+private val disabledButtonTextColor = Color(0xFF484848u)
 
 val OreUITheme = run {
     Theme(
@@ -107,7 +108,33 @@ val OreUITheme = run {
             itemGridBackground = OreUITextures.background_backpack,
         ),
         colors = Theme.Colors(
-            button = ColorTheme.light,
+            button = ColorThemeSet(
+                normal = ColorTheme.light.copy(
+                    foreground = Color(0xFF1E1E1Eu),
+                ),
+                disabled = ColorTheme.light.copy(
+                    foreground = disabledButtonTextColor,
+                ),
+            ),
+            guideButton = ColorThemeSet(
+                normal = ColorTheme.dark,
+                disabled = ColorTheme.dark.copy(
+                    foreground = disabledButtonTextColor,
+                ),
+            ),
+            warningButton = ColorThemeSet(
+                normal = ColorTheme.dark,
+                disabled = ColorTheme.dark.copy(
+                    foreground = disabledButtonTextColor,
+                ),
+            ),
+        ),
+        textStyles = Theme.TextStyles(
+            guideButton = TextStyleSet(
+                normal = TextStyle(
+                    bold = true,
+                )
+            ),
         ),
     )
 }

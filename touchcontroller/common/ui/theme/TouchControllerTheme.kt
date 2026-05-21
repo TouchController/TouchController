@@ -10,12 +10,14 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import top.fifthlight.combine.core.node.LocalInputHandler
 import top.fifthlight.combine.core.paint.BackgroundTexture
+import top.fifthlight.combine.core.paint.Colors
 import top.fifthlight.combine.core.paint.Drawable
 import top.fifthlight.combine.theme.LocalTheme
 import top.fifthlight.combine.theme.Theme
 import top.fifthlight.combine.theme.blackstone.BlackstoneTextures
 import top.fifthlight.combine.theme.blackstone.BlackstoneTheme
 import top.fifthlight.combine.ui.style.ColorTheme
+import top.fifthlight.combine.ui.style.ColorThemeSet
 import top.fifthlight.combine.ui.style.DrawableSet
 import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.input.InputManager
@@ -37,15 +39,21 @@ data class TouchControllerTheme(
         active = BlackstoneTextures.widget_tab_tab_active,
         disabled = BlackstoneTextures.widget_tab_tab_disabled,
     ),
-    val tabButtonColorsUnchecked: ColorTheme = ColorTheme.dark,
-    val tabButtonDrawablesChecked: DrawableSet =DrawableSet(
+    val tabButtonColorsUnchecked: ColorThemeSet = ColorThemeSet(
+        normal = ColorTheme.dark,
+        disabled = ColorTheme.dark.copy(foreground = Colors.SECONDARY_WHITE),
+    ),
+    val tabButtonDrawablesChecked: DrawableSet = DrawableSet(
         normal = BlackstoneTextures.widget_tab_tab_presslock,
         focus = BlackstoneTextures.widget_tab_tab_presslock_hover,
         hover = BlackstoneTextures.widget_tab_tab_presslock_hover,
         active = BlackstoneTextures.widget_tab_tab_active,
         disabled = BlackstoneTextures.widget_tab_tab_disabled,
     ),
-    val tabButtonColorsChecked: ColorTheme = ColorTheme.light,
+    val tabButtonColorsChecked: ColorThemeSet = ColorThemeSet(
+        normal = ColorTheme.light,
+        disabled = ColorTheme.light.copy(foreground = Colors.SECONDARY_WHITE),
+    ),
 
     val listButtonDrawablesUnchecked: DrawableSet = DrawableSet(
         normal = BlackstoneTextures.widget_list_list,
@@ -54,7 +62,10 @@ data class TouchControllerTheme(
         active = BlackstoneTextures.widget_list_list_active,
         disabled = BlackstoneTextures.widget_list_list_disabled,
     ),
-    val listButtonColorsUnchecked: ColorTheme = ColorTheme.dark,
+    val listButtonColorsUnchecked: ColorThemeSet = ColorThemeSet(
+        normal = ColorTheme.dark,
+        disabled = ColorTheme.dark.copy(foreground = Colors.SECONDARY_WHITE),
+    ),
     val listButtonDrawablesChecked: DrawableSet = DrawableSet(
         normal = BlackstoneTextures.widget_list_list_presslock,
         focus = BlackstoneTextures.widget_list_list_presslock_hover,
@@ -62,7 +73,10 @@ data class TouchControllerTheme(
         active = BlackstoneTextures.widget_list_list_active,
         disabled = BlackstoneTextures.widget_list_list_disabled,
     ),
-    val listButtonColorsChecked: ColorTheme = ColorTheme.light,
+    val listButtonColorsChecked: ColorThemeSet = ColorThemeSet(
+        normal = ColorTheme.light,
+        disabled = ColorTheme.light.copy(foreground = Colors.SECONDARY_WHITE),
+    ),
 
     val checkButtonDrawablesUnchecked: DrawableSet = DrawableSet(
         normal = BlackstoneTextures.widget_button_button,
@@ -70,14 +84,20 @@ data class TouchControllerTheme(
         focus = BlackstoneTextures.widget_button_button_hover,
         active = BlackstoneTextures.widget_button_button_active,
     ),
-    val checkButtonColorsUnchecked: ColorTheme = ColorTheme.light,
+    val checkButtonColorsUnchecked: ColorThemeSet = ColorThemeSet(
+        normal = ColorTheme.light,
+        disabled = ColorTheme.light.copy(foreground = Colors.SECONDARY_WHITE),
+    ),
     val checkButtonDrawablesChecked: DrawableSet = DrawableSet(
         normal = BlackstoneTextures.widget_button_button_presslock,
         hover = BlackstoneTextures.widget_button_button_presslock_hover,
         focus = BlackstoneTextures.widget_button_button_presslock_hover,
         active = BlackstoneTextures.widget_button_button_presslock_active,
     ),
-    val checkButtonColorsChecked: ColorTheme = ColorTheme.light,
+    val checkButtonColorsChecked: ColorThemeSet = ColorThemeSet(
+        normal = ColorTheme.light,
+        disabled = ColorTheme.light.copy(foreground = Colors.SECONDARY_WHITE),
+    ),
 
     val base: Theme = BlackstoneTheme,
 ) {

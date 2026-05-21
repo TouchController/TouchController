@@ -5,7 +5,7 @@ import androidx.compose.runtime.NonSkippableComposable
 import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.combine.core.widget.layout.BoxScope
 import top.fifthlight.combine.theme.LocalTheme
-import top.fifthlight.combine.ui.style.ColorTheme
+import top.fifthlight.combine.ui.style.ColorThemeSet
 import top.fifthlight.combine.ui.style.DrawableSet
 import top.fifthlight.data.IntPadding
 import top.fifthlight.data.IntSize
@@ -21,7 +21,7 @@ fun IconButton(
     } else {
         LocalTheme.current.drawables.iconButton
     },
-    colorTheme: ColorTheme = LocalTheme.current.colors.button,
+    colorThemeSet: ColorThemeSet = LocalTheme.current.colors.button,
     minSize: IntSize = IntSize(0, 0),
     padding: IntPadding = IntPadding(1),
     enabled: Boolean = true,
@@ -32,7 +32,7 @@ fun IconButton(
     modifier = modifier,
     focusable = focusable,
     drawableSet = drawableSet,
-    colorTheme = colorTheme,
+    colorThemeSet = colorThemeSet,
     minSize = minSize,
     padding = padding,
     enabled = enabled,

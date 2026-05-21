@@ -7,7 +7,7 @@ import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.combine.core.widget.layout.Row
 import top.fifthlight.combine.core.widget.layout.RowScope
 import top.fifthlight.combine.theme.LocalTheme
-import top.fifthlight.combine.ui.style.ColorTheme
+import top.fifthlight.combine.ui.style.ColorThemeSet
 import top.fifthlight.combine.ui.style.DrawableSet
 import top.fifthlight.data.IntSize
 
@@ -16,7 +16,7 @@ fun CheckBoxButton(
     modifier: Modifier = Modifier,
     drawableSet: DrawableSet = LocalTheme.current.drawables.checkBoxButton,
     checkBoxDrawableSet: CheckBoxDrawableSet = CheckBoxDrawableSet.current,
-    colorTheme: ColorTheme = LocalTheme.current.colors.button,
+    colorThemeSet: ColorThemeSet = LocalTheme.current.colors.button,
     minSize: IntSize = IntSize(48, 20),
     enabled: Boolean = true,
     checked: Boolean = false,
@@ -26,7 +26,7 @@ fun CheckBoxButton(
 ) = Button(
     modifier = modifier,
     drawableSet = drawableSet,
-    colorTheme = colorTheme,
+    colorThemeSet = colorThemeSet,
     minSize = minSize,
     enabled = enabled,
     onClick = onClick,

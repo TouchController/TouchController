@@ -19,6 +19,7 @@ combine_theme(
     vanilla_package = "top.fifthlight.combine.theme.oreui.vanilla",
     visibility = ["//visibility:public"],
     deps = [
+        "//combine/core/data",
         "//combine/data",
     ],
 )

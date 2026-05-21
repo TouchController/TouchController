@@ -5,9 +5,7 @@ import top.fifthlight.combine.core.input.interaction.InteractionSource
 import top.fifthlight.combine.core.modifier.focus.FocusInteraction
 import top.fifthlight.combine.core.modifier.pointer.ClickInteraction
 import top.fifthlight.combine.core.modifier.pointer.DragInteraction
-import top.fifthlight.combine.ui.style.ColorSet
-import top.fifthlight.combine.ui.style.DrawableSet
-import top.fifthlight.combine.ui.style.TextureSet
+import top.fifthlight.combine.ui.style.StyleSet
 
 val LocalWidgetState = staticCompositionLocalOf { WidgetState.NORMAL }
 
@@ -24,29 +22,7 @@ enum class WidgetState(val priority: Int) : Comparable<WidgetState> {
     }
 }
 
-fun DrawableSet.getByState(state: WidgetState, enabled: Boolean = true) = if (enabled) {
-    when (state) {
-        WidgetState.NORMAL -> normal
-        WidgetState.HOVER -> hover
-        WidgetState.ACTIVE -> active
-        WidgetState.FOCUS -> focus
-    }
-} else {
-    this.disabled
-}
-
-fun TextureSet.getByState(state: WidgetState, enabled: Boolean = true) = if (enabled) {
-    when (state) {
-        WidgetState.NORMAL -> normal
-        WidgetState.HOVER -> hover
-        WidgetState.ACTIVE -> active
-        WidgetState.FOCUS -> focus
-    }
-} else {
-    this.disabled
-}
-
-fun ColorSet.getByState(state: WidgetState, enabled: Boolean = true) = if (enabled) {
+fun <T> StyleSet<T>.getByState(state: WidgetState, enabled: Boolean = true) = if (enabled) {
     when (state) {
         WidgetState.NORMAL -> normal
         WidgetState.HOVER -> hover

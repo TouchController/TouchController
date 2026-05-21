@@ -35,6 +35,13 @@ data class TextStyle(
     }
 }
 
+operator fun TextStyle.plus(other: TextStyle) = copy(
+    bold = bold || other.bold,
+    underline = underline || other.underline,
+    italic = italic || other.italic,
+    color = color ?: other.color,
+)
+
 interface TextBuilder {
     fun bold(bold: Boolean = true, block: TextBuilder.() -> Unit)
     fun underline(underline: Boolean = true, block: TextBuilder.() -> Unit)
