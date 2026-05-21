@@ -8,6 +8,7 @@ kt_merge_library(
     deps = [
         "//combine/backend/minecraft/game/1.21.11",
         "//combine/backend/minecraft/render/1.21.11",
+        "//combine/core/paint",
         "//combine/data",
         "//combine/style",
         "//combine/theme/vanilla",
