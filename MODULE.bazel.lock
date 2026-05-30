@@ -5394,7 +5394,7 @@
     "@@rules_mc+//:extensions.bzl%minecraft": {
       "general": {
         "bzlTransitiveDigest": "JORE55QXdJ2BLGPka8Jyrbuv+WCHUhu1+f3lcBzVL0I=",
-        "usagesDigest": "0uNDJLmuLlO2ZmaZ2z/3hymdPva5N0UXwDnq16TkGBI=",
+        "usagesDigest": "A7+VvZbUZf2JTu6mpWZGSZkU1FvPoAU70di1pl0sCsk=",
         "recordedInputs": [
           "REPO_MAPPING:rules_mc+,bazel_tools bazel_tools"
         ],
@@ -6223,19 +6223,19 @@
               "downloaded_file_path": "server.jar"
             }
           },
-          "minecraft_26_2-snapshot-7_client": {
+          "minecraft_26_2-pre-2_client": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/8a35666eb5c6d625dd90662bdb7259ec67aaf26f/client.jar",
-              "integrity": "sha1-ijVmbrXG1iXdkGYr23JZ7Geq8m8=",
+              "url": "https://piston-data.mojang.com/v1/objects/b54b78348ced53071e4506b798845e9ec65bf5a4/client.jar",
+              "integrity": "sha1-tUt4NIztUwceRQa3mIRensZb9aQ=",
               "downloaded_file_path": "client.jar"
             }
           },
-          "minecraft_26_2-snapshot-7_server": {
+          "minecraft_26_2-pre-2_server": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/64ec8e321dc8b1608ecf7b4a33cf12d328595641/server.jar",
-              "integrity": "sha1-ZOyOMh3IsWCOz3tKM88S0yhZVkE=",
+              "url": "https://piston-data.mojang.com/v1/objects/b7c0d39bf9d7897dba2f9f725957224e74d89a0f/server.jar",
+              "integrity": "sha1-t8DTm/nXiX26L59yWVciTnTYmg8=",
               "downloaded_file_path": "server.jar"
             }
           },
@@ -10907,12 +10907,44 @@
               "path": "org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-natives-windows-x86.jar"
             }
           },
-          "minecraft_com_mojang_authlib_7_0_72_default": {
+          "minecraft_com_google_code_gson_gson_2_14_0_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
-              "url": "https://libraries.minecraft.net/com/mojang/authlib/7.0.72/authlib-7.0.72.jar",
-              "sha1": "9a13a92cf8b0a00b8dd32600aade72b89d5ed15a",
-              "path": "com/mojang/authlib/7.0.72/authlib-7.0.72.jar"
+              "url": "https://libraries.minecraft.net/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
+              "sha1": "efc0e34ede4e3204eaefb84a00e55e8c86634382",
+              "path": "com/google/code/gson/gson/2.14.0/gson-2.14.0.jar"
+            }
+          },
+          "minecraft_com_google_guava_guava_33_6_0_jre_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar",
+              "sha1": "c376b13067cc99a5774403530953f7b05a91e218",
+              "path": "com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar"
+            }
+          },
+          "minecraft_com_ibm_icu_icu4j_78_3_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/ibm/icu/icu4j/78.3/icu4j-78.3.jar",
+              "sha1": "6a851a53bb1f25689fc418dcc8935b0d93580adf",
+              "path": "com/ibm/icu/icu4j/78.3/icu4j-78.3.jar"
+            }
+          },
+          "minecraft_com_microsoft_azure_msal4j_1_24_1_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/microsoft/azure/msal4j/1.24.1/msal4j-1.24.1.jar",
+              "sha1": "c233f2d047b9755f7041adf21a858c680e4c9242",
+              "path": "com/microsoft/azure/msal4j/1.24.1/msal4j-1.24.1.jar"
+            }
+          },
+          "minecraft_com_mojang_authlib_8_0_73_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/mojang/authlib/8.0.73/authlib-8.0.73.jar",
+              "sha1": "292f6a2ee493612178fcfbe68d73f8bfb9385d2b",
+              "path": "com/mojang/authlib/8.0.73/authlib-8.0.73.jar"
             }
           },
           "minecraft_com_mojang_datafixerupper_10_0_21_default": {
@@ -10923,6 +10955,14 @@
               "path": "com/mojang/datafixerupper/10.0.21/datafixerupper-10.0.21.jar"
             }
           },
+          "minecraft_com_mojang_logging_1_7_12_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/mojang/logging/1.7.12/logging-1.7.12.jar",
+              "sha1": "351cea64a5233361327d8d54c44277041beed97f",
+              "path": "com/mojang/logging/1.7.12/logging-1.7.12.jar"
+            }
+          },
           "minecraft_com_mojang_text2speech_1_19_12_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
@@ -10931,60 +10971,164 @@
               "path": "com/mojang/text2speech/1.19.12/text2speech-1.19.12.jar"
             }
           },
-          "minecraft_dev_onvoid_webrtc_webrtc_java_0_14_0_default": {
+          "minecraft_commons_codec_commons_codec_1_22_0_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
-              "url": "https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0.jar",
-              "sha1": "52c7b44ba257efcb920740444cde57a4dace622e",
-              "path": "dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0.jar"
+              "url": "https://libraries.minecraft.net/commons-codec/commons-codec/1.22.0/commons-codec-1.22.0.jar",
+              "sha1": "6b3eb4beb7058c2a638f5f17bcb388649fd339dd",
+              "path": "commons-codec/commons-codec/1.22.0/commons-codec-1.22.0.jar"
             }
           },
-          "minecraft_dev_onvoid_webrtc_webrtc_java_0_14_0_linux_aarch32_default": {
+          "minecraft_io_netty_netty_buffer_4_2_13_Final_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
-              "url": "https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-aarch32.jar",
-              "sha1": "b58f4f1a42eef82841304f1e00ad7c3803dc0af3",
-              "path": "dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-aarch32.jar"
+              "url": "https://libraries.minecraft.net/io/netty/netty-buffer/4.2.13.Final/netty-buffer-4.2.13.Final.jar",
+              "sha1": "177025483d7565afaf4f820139d409bdc0cd7000",
+              "path": "io/netty/netty-buffer/4.2.13.Final/netty-buffer-4.2.13.Final.jar"
             }
           },
-          "minecraft_dev_onvoid_webrtc_webrtc_java_0_14_0_linux_aarch64_default": {
+          "minecraft_io_netty_netty_codec_base_4_2_13_Final_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
-              "url": "https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-aarch64.jar",
-              "sha1": "fee7e97c57fe82dcc95ce0d71b082c80f569b508",
-              "path": "dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-aarch64.jar"
+              "url": "https://libraries.minecraft.net/io/netty/netty-codec-base/4.2.13.Final/netty-codec-base-4.2.13.Final.jar",
+              "sha1": "a4476639056149914d7a145ce0bb9f86bb7e3f49",
+              "path": "io/netty/netty-codec-base/4.2.13.Final/netty-codec-base-4.2.13.Final.jar"
             }
           },
-          "minecraft_dev_onvoid_webrtc_webrtc_java_0_14_0_linux_x86_64_default": {
+          "minecraft_io_netty_netty_codec_compression_4_2_13_Final_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
-              "url": "https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-x86_64.jar",
-              "sha1": "1138d7c9d4be59216de7bfd720753044610b3143",
-              "path": "dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-x86_64.jar"
+              "url": "https://libraries.minecraft.net/io/netty/netty-codec-compression/4.2.13.Final/netty-codec-compression-4.2.13.Final.jar",
+              "sha1": "c2a1fc65daf1a3d5467db37b6e0ce42bbb5b98a8",
+              "path": "io/netty/netty-codec-compression/4.2.13.Final/netty-codec-compression-4.2.13.Final.jar"
             }
           },
-          "minecraft_dev_onvoid_webrtc_webrtc_java_0_14_0_macos_aarch64_default": {
+          "minecraft_io_netty_netty_codec_http_4_2_13_Final_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
-              "url": "https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-macos-aarch64.jar",
-              "sha1": "af44674c348f234fa1499a74595d09133ada218f",
-              "path": "dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-macos-aarch64.jar"
+              "url": "https://libraries.minecraft.net/io/netty/netty-codec-http/4.2.13.Final/netty-codec-http-4.2.13.Final.jar",
+              "sha1": "196f0b6d0779a7a23be4a8bff362741ff0282ce8",
+              "path": "io/netty/netty-codec-http/4.2.13.Final/netty-codec-http-4.2.13.Final.jar"
             }
           },
-          "minecraft_dev_onvoid_webrtc_webrtc_java_0_14_0_macos_x86_64_default": {
+          "minecraft_io_netty_netty_common_4_2_13_Final_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
-              "url": "https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-macos-x86_64.jar",
-              "sha1": "03c22bbf9e617007405060c74b7ce60a54abf747",
-              "path": "dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-macos-x86_64.jar"
+              "url": "https://libraries.minecraft.net/io/netty/netty-common/4.2.13.Final/netty-common-4.2.13.Final.jar",
+              "sha1": "f91909ed1b9280cd46d8b0ee260ebff40e1c73d8",
+              "path": "io/netty/netty-common/4.2.13.Final/netty-common-4.2.13.Final.jar"
             }
           },
-          "minecraft_dev_onvoid_webrtc_webrtc_java_0_14_0_windows_x86_64_default": {
+          "minecraft_io_netty_netty_handler_4_2_13_Final_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
-              "url": "https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-windows-x86_64.jar",
-              "sha1": "e7bc2183ece16289bae04095ca9930399df8f82c",
-              "path": "dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-windows-x86_64.jar"
+              "url": "https://libraries.minecraft.net/io/netty/netty-handler/4.2.13.Final/netty-handler-4.2.13.Final.jar",
+              "sha1": "920eb7284d62152dfc5cb8ef0f9e0deb47ed5635",
+              "path": "io/netty/netty-handler/4.2.13.Final/netty-handler-4.2.13.Final.jar"
+            }
+          },
+          "minecraft_io_netty_netty_resolver_4_2_13_Final_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/io/netty/netty-resolver/4.2.13.Final/netty-resolver-4.2.13.Final.jar",
+              "sha1": "c68d861f923020f82fea2c99d5921d8142b5c012",
+              "path": "io/netty/netty-resolver/4.2.13.Final/netty-resolver-4.2.13.Final.jar"
+            }
+          },
+          "minecraft_io_netty_netty_transport_classes_epoll_4_2_13_Final_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/io/netty/netty-transport-classes-epoll/4.2.13.Final/netty-transport-classes-epoll-4.2.13.Final.jar",
+              "sha1": "afd19f8ba23aeb6e8db675a4e9642e3cbc0b90c4",
+              "path": "io/netty/netty-transport-classes-epoll/4.2.13.Final/netty-transport-classes-epoll-4.2.13.Final.jar"
+            }
+          },
+          "minecraft_io_netty_netty_transport_classes_kqueue_4_2_13_Final_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/io/netty/netty-transport-classes-kqueue/4.2.13.Final/netty-transport-classes-kqueue-4.2.13.Final.jar",
+              "sha1": "3bc69154c356b57279cbb6a50998a3158b4a9bec",
+              "path": "io/netty/netty-transport-classes-kqueue/4.2.13.Final/netty-transport-classes-kqueue-4.2.13.Final.jar"
+            }
+          },
+          "minecraft_io_netty_netty_transport_native_epoll_4_2_13_Final_linux_aarch_64_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-epoll/4.2.13.Final/netty-transport-native-epoll-4.2.13.Final-linux-aarch_64.jar",
+              "sha1": "eebb86f112e04b9733ae3cc8b427cf7f345157fe",
+              "path": "io/netty/netty-transport-native-epoll/4.2.13.Final/netty-transport-native-epoll-4.2.13.Final-linux-aarch_64.jar"
+            }
+          },
+          "minecraft_io_netty_netty_transport_native_epoll_4_2_13_Final_linux_x86_64_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-epoll/4.2.13.Final/netty-transport-native-epoll-4.2.13.Final-linux-x86_64.jar",
+              "sha1": "c70d4ce6fb2feac68d3c9c3d72e44eb362cc6c80",
+              "path": "io/netty/netty-transport-native-epoll/4.2.13.Final/netty-transport-native-epoll-4.2.13.Final-linux-x86_64.jar"
+            }
+          },
+          "minecraft_io_netty_netty_transport_native_kqueue_4_2_13_Final_osx_aarch_64_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-kqueue/4.2.13.Final/netty-transport-native-kqueue-4.2.13.Final-osx-aarch_64.jar",
+              "sha1": "67b47e1512ce10f339dfcd81c3769cbc1f732d9a",
+              "path": "io/netty/netty-transport-native-kqueue/4.2.13.Final/netty-transport-native-kqueue-4.2.13.Final-osx-aarch_64.jar"
+            }
+          },
+          "minecraft_io_netty_netty_transport_native_kqueue_4_2_13_Final_osx_x86_64_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-kqueue/4.2.13.Final/netty-transport-native-kqueue-4.2.13.Final-osx-x86_64.jar",
+              "sha1": "edb4a850bd7212d3a228b1f4cd7e2d2babdd146b",
+              "path": "io/netty/netty-transport-native-kqueue/4.2.13.Final/netty-transport-native-kqueue-4.2.13.Final-osx-x86_64.jar"
+            }
+          },
+          "minecraft_io_netty_netty_transport_native_unix_common_4_2_13_Final_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-unix-common/4.2.13.Final/netty-transport-native-unix-common-4.2.13.Final.jar",
+              "sha1": "79d5e686999a84552d9b7bbb9589e5b853113bda",
+              "path": "io/netty/netty-transport-native-unix-common/4.2.13.Final/netty-transport-native-unix-common-4.2.13.Final.jar"
+            }
+          },
+          "minecraft_io_netty_netty_transport_4_2_13_Final_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/io/netty/netty-transport/4.2.13.Final/netty-transport-4.2.13.Final.jar",
+              "sha1": "acec47f1ff71785e090e019920f787e0f7d164e3",
+              "path": "io/netty/netty-transport/4.2.13.Final/netty-transport-4.2.13.Final.jar"
+            }
+          },
+          "minecraft_org_apache_commons_commons_lang3_3_20_0_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar",
+              "sha1": "65897b3e5731220962e659e001904af3c3cbeba9",
+              "path": "org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar"
+            }
+          },
+          "minecraft_org_apache_logging_log4j_log4j_api_2_26_0_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-api/2.26.0/log4j-api-2.26.0.jar",
+              "sha1": "ad52af0ecf054a7e3f275a2e180ee06d9c490951",
+              "path": "org/apache/logging/log4j/log4j-api/2.26.0/log4j-api-2.26.0.jar"
+            }
+          },
+          "minecraft_org_apache_logging_log4j_log4j_core_2_26_0_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-core/2.26.0/log4j-core-2.26.0.jar",
+              "sha1": "d267ca60b27ddb075e0b4e75e7875859717bf85f",
+              "path": "org/apache/logging/log4j/log4j-core/2.26.0/log4j-core-2.26.0.jar"
+            }
+          },
+          "minecraft_org_apache_logging_log4j_log4j_slf4j2_impl_2_26_0_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-slf4j2-impl/2.26.0/log4j-slf4j2-impl-2.26.0.jar",
+              "sha1": "668c0f0e813d83f00a7182533aa658ec7e7a0a0d",
+              "path": "org/apache/logging/log4j/log4j-slf4j2-impl/2.26.0/log4j-slf4j2-impl-2.26.0.jar"
             }
           },
           "minecraft_org_lwjgl_lwjgl_shaderc_3_4_1_default": {
@@ -11179,6 +11323,14 @@
               "path": "org/lwjgl/lwjgl-vulkan/3.4.1/lwjgl-vulkan-3.4.1-natives-macos-arm64.jar"
             }
           },
+          "minecraft_org_lwjgl_lwjgl_3_4_1_unsafe_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar",
+              "sha1": "129e06a04f93992cb2a45172435b21fc4b60dd7d",
+              "path": "org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar"
+            }
+          },
           "minecraft": {
             "repoRuleId": "@@rules_mc+//private/repo:repo.bzl%minecraft_repo",
             "attributes": {
@@ -11348,7 +11500,7 @@
                   "client#file",
                   "server#file"
                 ],
-                "26.2-snapshot-7": [
+                "26.2-pre-2": [
                   "client#file",
                   "server#file"
                 ]
@@ -13731,17 +13883,17 @@
                   "org.lwjgl:lwjgl:3.4.1:natives-windows-x86",
                   "org.slf4j:slf4j-api:2.0.17"
                 ],
-                "26.2-snapshot-7": [
+                "26.2-pre-2": [
                   "at.yawk.lz4:lz4-java:1.10.1",
                   "ca.weblite:java-objc-bridge:1.1",
                   "com.azure:azure-json:1.4.0",
                   "com.github.oshi:oshi-core:6.9.0",
-                  "com.google.code.gson:gson:2.13.2",
+                  "com.google.code.gson:gson:2.14.0",
                   "com.google.guava:failureaccess:1.0.3",
-                  "com.google.guava:guava:33.5.0-jre",
-                  "com.ibm.icu:icu4j:77.1",
-                  "com.microsoft.azure:msal4j:1.23.1",
-                  "com.mojang:authlib:7.0.72",
+                  "com.google.guava:guava:33.6.0-jre",
+                  "com.ibm.icu:icu4j:78.3",
+                  "com.microsoft.azure:msal4j:1.24.1",
+                  "com.mojang:authlib:8.0.73",
                   "com.mojang:blocklist:1.0.10",
                   "com.mojang:brigadier:1.3.10",
                   "com.mojang:datafixerupper:10.0.21",
@@ -13750,42 +13902,35 @@
                   "com.mojang:jtracy:1.0.37:natives-macos",
                   "com.mojang:jtracy:1.0.37:natives-macos-arm64",
                   "com.mojang:jtracy:1.0.37:natives-windows",
-                  "com.mojang:logging:1.6.11",
+                  "com.mojang:logging:1.7.12",
                   "com.mojang:patchy:2.2.10",
                   "com.mojang:text2speech:1.19.12",
-                  "commons-codec:commons-codec:1.19.0",
+                  "commons-codec:commons-codec:1.22.0",
                   "commons-io:commons-io:2.20.0",
-                  "dev.onvoid.webrtc:webrtc-java:0.14.0",
-                  "dev.onvoid.webrtc:webrtc-java:0.14.0:linux-aarch32",
-                  "dev.onvoid.webrtc:webrtc-java:0.14.0:linux-aarch64",
-                  "dev.onvoid.webrtc:webrtc-java:0.14.0:linux-x86_64",
-                  "dev.onvoid.webrtc:webrtc-java:0.14.0:macos-aarch64",
-                  "dev.onvoid.webrtc:webrtc-java:0.14.0:macos-x86_64",
-                  "dev.onvoid.webrtc:webrtc-java:0.14.0:windows-x86_64",
-                  "io.netty:netty-buffer:4.2.7.Final",
-                  "io.netty:netty-codec-base:4.2.7.Final",
-                  "io.netty:netty-codec-compression:4.2.7.Final",
-                  "io.netty:netty-codec-http:4.2.7.Final",
-                  "io.netty:netty-common:4.2.7.Final",
-                  "io.netty:netty-handler:4.2.7.Final",
-                  "io.netty:netty-resolver:4.2.7.Final",
-                  "io.netty:netty-transport-classes-epoll:4.2.7.Final",
-                  "io.netty:netty-transport-classes-kqueue:4.2.7.Final",
-                  "io.netty:netty-transport-native-epoll:4.2.7.Final:linux-aarch_64",
-                  "io.netty:netty-transport-native-epoll:4.2.7.Final:linux-x86_64",
-                  "io.netty:netty-transport-native-kqueue:4.2.7.Final:osx-aarch_64",
-                  "io.netty:netty-transport-native-kqueue:4.2.7.Final:osx-x86_64",
-                  "io.netty:netty-transport-native-unix-common:4.2.7.Final",
-                  "io.netty:netty-transport:4.2.7.Final",
+                  "io.netty:netty-buffer:4.2.13.Final",
+                  "io.netty:netty-codec-base:4.2.13.Final",
+                  "io.netty:netty-codec-compression:4.2.13.Final",
+                  "io.netty:netty-codec-http:4.2.13.Final",
+                  "io.netty:netty-common:4.2.13.Final",
+                  "io.netty:netty-handler:4.2.13.Final",
+                  "io.netty:netty-resolver:4.2.13.Final",
+                  "io.netty:netty-transport-classes-epoll:4.2.13.Final",
+                  "io.netty:netty-transport-classes-kqueue:4.2.13.Final",
+                  "io.netty:netty-transport-native-epoll:4.2.13.Final:linux-aarch_64",
+                  "io.netty:netty-transport-native-epoll:4.2.13.Final:linux-x86_64",
+                  "io.netty:netty-transport-native-kqueue:4.2.13.Final:osx-aarch_64",
+                  "io.netty:netty-transport-native-kqueue:4.2.13.Final:osx-x86_64",
+                  "io.netty:netty-transport-native-unix-common:4.2.13.Final",
+                  "io.netty:netty-transport:4.2.13.Final",
                   "it.unimi.dsi:fastutil:8.5.18",
                   "net.java.dev.jna:jna-platform:5.17.0",
                   "net.java.dev.jna:jna:5.17.0",
                   "net.sf.jopt-simple:jopt-simple:5.0.4",
                   "org.apache.commons:commons-compress:1.28.0",
-                  "org.apache.commons:commons-lang3:3.19.0",
-                  "org.apache.logging.log4j:log4j-api:2.25.2",
-                  "org.apache.logging.log4j:log4j-core:2.25.2",
-                  "org.apache.logging.log4j:log4j-slf4j2-impl:2.25.2",
+                  "org.apache.commons:commons-lang3:3.20.0",
+                  "org.apache.logging.log4j:log4j-api:2.26.0",
+                  "org.apache.logging.log4j:log4j-core:2.26.0",
+                  "org.apache.logging.log4j:log4j-slf4j2-impl:2.26.0",
                   "org.jcraft:jorbis:0.0.17",
                   "org.joml:joml:1.10.8",
                   "org.jspecify:jspecify:1.0.0",
@@ -13862,13 +14007,13 @@
                   "org.lwjgl:lwjgl-vulkan:3.4.1",
                   "org.lwjgl:lwjgl-vulkan:3.4.1:natives-macos",
                   "org.lwjgl:lwjgl-vulkan:3.4.1:natives-macos-arm64",
-                  "org.lwjgl:lwjgl:3.4.1",
                   "org.lwjgl:lwjgl:3.4.1:natives-linux",
                   "org.lwjgl:lwjgl:3.4.1:natives-macos",
                   "org.lwjgl:lwjgl:3.4.1:natives-macos-arm64",
                   "org.lwjgl:lwjgl:3.4.1:natives-windows",
                   "org.lwjgl:lwjgl:3.4.1:natives-windows-arm64",
                   "org.lwjgl:lwjgl:3.4.1:natives-windows-x86",
+                  "org.lwjgl:lwjgl:3.4.1:unsafe",
                   "org.slf4j:slf4j-api:2.0.17"
                 ]
               },
@@ -15549,35 +15694,89 @@
                 "org.lwjgl:lwjgl:3.4.1:natives-windows-x86": [
                   "default#struct(path = \"org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-natives-windows-x86.jar\", sha1 = \"65de43bd52507e108a58247c0da57a50ce3ee6f6\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-natives-windows-x86.jar\")"
                 ],
-                "com.mojang:authlib:7.0.72": [
-                  "default#struct(path = \"com/mojang/authlib/7.0.72/authlib-7.0.72.jar\", sha1 = \"9a13a92cf8b0a00b8dd32600aade72b89d5ed15a\", url = \"https://libraries.minecraft.net/com/mojang/authlib/7.0.72/authlib-7.0.72.jar\")"
+                "com.google.code.gson:gson:2.14.0": [
+                  "default#struct(path = \"com/google/code/gson/gson/2.14.0/gson-2.14.0.jar\", sha1 = \"efc0e34ede4e3204eaefb84a00e55e8c86634382\", url = \"https://libraries.minecraft.net/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar\")"
+                ],
+                "com.google.guava:guava:33.6.0-jre": [
+                  "default#struct(path = \"com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar\", sha1 = \"c376b13067cc99a5774403530953f7b05a91e218\", url = \"https://libraries.minecraft.net/com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar\")"
+                ],
+                "com.ibm.icu:icu4j:78.3": [
+                  "default#struct(path = \"com/ibm/icu/icu4j/78.3/icu4j-78.3.jar\", sha1 = \"6a851a53bb1f25689fc418dcc8935b0d93580adf\", url = \"https://libraries.minecraft.net/com/ibm/icu/icu4j/78.3/icu4j-78.3.jar\")"
+                ],
+                "com.microsoft.azure:msal4j:1.24.1": [
+                  "default#struct(path = \"com/microsoft/azure/msal4j/1.24.1/msal4j-1.24.1.jar\", sha1 = \"c233f2d047b9755f7041adf21a858c680e4c9242\", url = \"https://libraries.minecraft.net/com/microsoft/azure/msal4j/1.24.1/msal4j-1.24.1.jar\")"
+                ],
+                "com.mojang:authlib:8.0.73": [
+                  "default#struct(path = \"com/mojang/authlib/8.0.73/authlib-8.0.73.jar\", sha1 = \"292f6a2ee493612178fcfbe68d73f8bfb9385d2b\", url = \"https://libraries.minecraft.net/com/mojang/authlib/8.0.73/authlib-8.0.73.jar\")"
                 ],
                 "com.mojang:datafixerupper:10.0.21": [
                   "default#struct(path = \"com/mojang/datafixerupper/10.0.21/datafixerupper-10.0.21.jar\", sha1 = \"b6b2ae770c02e0c1eb90f9985b151e9085a38d0b\", url = \"https://libraries.minecraft.net/com/mojang/datafixerupper/10.0.21/datafixerupper-10.0.21.jar\")"
                 ],
+                "com.mojang:logging:1.7.12": [
+                  "default#struct(path = \"com/mojang/logging/1.7.12/logging-1.7.12.jar\", sha1 = \"351cea64a5233361327d8d54c44277041beed97f\", url = \"https://libraries.minecraft.net/com/mojang/logging/1.7.12/logging-1.7.12.jar\")"
+                ],
                 "com.mojang:text2speech:1.19.12": [
                   "default#struct(path = \"com/mojang/text2speech/1.19.12/text2speech-1.19.12.jar\", sha1 = \"2e517a75c79d34d32de2b5d68422150836c2133e\", url = \"https://libraries.minecraft.net/com/mojang/text2speech/1.19.12/text2speech-1.19.12.jar\")"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0": [
-                  "default#struct(path = \"dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0.jar\", sha1 = \"52c7b44ba257efcb920740444cde57a4dace622e\", url = \"https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0.jar\")"
+                "commons-codec:commons-codec:1.22.0": [
+                  "default#struct(path = \"commons-codec/commons-codec/1.22.0/commons-codec-1.22.0.jar\", sha1 = \"6b3eb4beb7058c2a638f5f17bcb388649fd339dd\", url = \"https://libraries.minecraft.net/commons-codec/commons-codec/1.22.0/commons-codec-1.22.0.jar\")"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:linux-aarch32": [
-                  "default#struct(path = \"dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-aarch32.jar\", sha1 = \"b58f4f1a42eef82841304f1e00ad7c3803dc0af3\", url = \"https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-aarch32.jar\")"
+                "io.netty:netty-buffer:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-buffer/4.2.13.Final/netty-buffer-4.2.13.Final.jar\", sha1 = \"177025483d7565afaf4f820139d409bdc0cd7000\", url = \"https://libraries.minecraft.net/io/netty/netty-buffer/4.2.13.Final/netty-buffer-4.2.13.Final.jar\")"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:linux-aarch64": [
-                  "default#struct(path = \"dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-aarch64.jar\", sha1 = \"fee7e97c57fe82dcc95ce0d71b082c80f569b508\", url = \"https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-aarch64.jar\")"
+                "io.netty:netty-codec-base:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-codec-base/4.2.13.Final/netty-codec-base-4.2.13.Final.jar\", sha1 = \"a4476639056149914d7a145ce0bb9f86bb7e3f49\", url = \"https://libraries.minecraft.net/io/netty/netty-codec-base/4.2.13.Final/netty-codec-base-4.2.13.Final.jar\")"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:linux-x86_64": [
-                  "default#struct(path = \"dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-x86_64.jar\", sha1 = \"1138d7c9d4be59216de7bfd720753044610b3143\", url = \"https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-linux-x86_64.jar\")"
+                "io.netty:netty-codec-compression:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-codec-compression/4.2.13.Final/netty-codec-compression-4.2.13.Final.jar\", sha1 = \"c2a1fc65daf1a3d5467db37b6e0ce42bbb5b98a8\", url = \"https://libraries.minecraft.net/io/netty/netty-codec-compression/4.2.13.Final/netty-codec-compression-4.2.13.Final.jar\")"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:macos-aarch64": [
-                  "default#struct(path = \"dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-macos-aarch64.jar\", sha1 = \"af44674c348f234fa1499a74595d09133ada218f\", url = \"https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-macos-aarch64.jar\")"
+                "io.netty:netty-codec-http:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-codec-http/4.2.13.Final/netty-codec-http-4.2.13.Final.jar\", sha1 = \"196f0b6d0779a7a23be4a8bff362741ff0282ce8\", url = \"https://libraries.minecraft.net/io/netty/netty-codec-http/4.2.13.Final/netty-codec-http-4.2.13.Final.jar\")"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:macos-x86_64": [
-                  "default#struct(path = \"dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-macos-x86_64.jar\", sha1 = \"03c22bbf9e617007405060c74b7ce60a54abf747\", url = \"https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-macos-x86_64.jar\")"
+                "io.netty:netty-common:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-common/4.2.13.Final/netty-common-4.2.13.Final.jar\", sha1 = \"f91909ed1b9280cd46d8b0ee260ebff40e1c73d8\", url = \"https://libraries.minecraft.net/io/netty/netty-common/4.2.13.Final/netty-common-4.2.13.Final.jar\")"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:windows-x86_64": [
-                  "default#struct(path = \"dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-windows-x86_64.jar\", sha1 = \"e7bc2183ece16289bae04095ca9930399df8f82c\", url = \"https://libraries.minecraft.net/dev/onvoid/webrtc/webrtc-java/0.14.0/webrtc-java-0.14.0-windows-x86_64.jar\")"
+                "io.netty:netty-handler:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-handler/4.2.13.Final/netty-handler-4.2.13.Final.jar\", sha1 = \"920eb7284d62152dfc5cb8ef0f9e0deb47ed5635\", url = \"https://libraries.minecraft.net/io/netty/netty-handler/4.2.13.Final/netty-handler-4.2.13.Final.jar\")"
+                ],
+                "io.netty:netty-resolver:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-resolver/4.2.13.Final/netty-resolver-4.2.13.Final.jar\", sha1 = \"c68d861f923020f82fea2c99d5921d8142b5c012\", url = \"https://libraries.minecraft.net/io/netty/netty-resolver/4.2.13.Final/netty-resolver-4.2.13.Final.jar\")"
+                ],
+                "io.netty:netty-transport-classes-epoll:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-transport-classes-epoll/4.2.13.Final/netty-transport-classes-epoll-4.2.13.Final.jar\", sha1 = \"afd19f8ba23aeb6e8db675a4e9642e3cbc0b90c4\", url = \"https://libraries.minecraft.net/io/netty/netty-transport-classes-epoll/4.2.13.Final/netty-transport-classes-epoll-4.2.13.Final.jar\")"
+                ],
+                "io.netty:netty-transport-classes-kqueue:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-transport-classes-kqueue/4.2.13.Final/netty-transport-classes-kqueue-4.2.13.Final.jar\", sha1 = \"3bc69154c356b57279cbb6a50998a3158b4a9bec\", url = \"https://libraries.minecraft.net/io/netty/netty-transport-classes-kqueue/4.2.13.Final/netty-transport-classes-kqueue-4.2.13.Final.jar\")"
+                ],
+                "io.netty:netty-transport-native-epoll:4.2.13.Final:linux-aarch_64": [
+                  "default#struct(path = \"io/netty/netty-transport-native-epoll/4.2.13.Final/netty-transport-native-epoll-4.2.13.Final-linux-aarch_64.jar\", sha1 = \"eebb86f112e04b9733ae3cc8b427cf7f345157fe\", url = \"https://libraries.minecraft.net/io/netty/netty-transport-native-epoll/4.2.13.Final/netty-transport-native-epoll-4.2.13.Final-linux-aarch_64.jar\")"
+                ],
+                "io.netty:netty-transport-native-epoll:4.2.13.Final:linux-x86_64": [
+                  "default#struct(path = \"io/netty/netty-transport-native-epoll/4.2.13.Final/netty-transport-native-epoll-4.2.13.Final-linux-x86_64.jar\", sha1 = \"c70d4ce6fb2feac68d3c9c3d72e44eb362cc6c80\", url = \"https://libraries.minecraft.net/io/netty/netty-transport-native-epoll/4.2.13.Final/netty-transport-native-epoll-4.2.13.Final-linux-x86_64.jar\")"
+                ],
+                "io.netty:netty-transport-native-kqueue:4.2.13.Final:osx-aarch_64": [
+                  "default#struct(path = \"io/netty/netty-transport-native-kqueue/4.2.13.Final/netty-transport-native-kqueue-4.2.13.Final-osx-aarch_64.jar\", sha1 = \"67b47e1512ce10f339dfcd81c3769cbc1f732d9a\", url = \"https://libraries.minecraft.net/io/netty/netty-transport-native-kqueue/4.2.13.Final/netty-transport-native-kqueue-4.2.13.Final-osx-aarch_64.jar\")"
+                ],
+                "io.netty:netty-transport-native-kqueue:4.2.13.Final:osx-x86_64": [
+                  "default#struct(path = \"io/netty/netty-transport-native-kqueue/4.2.13.Final/netty-transport-native-kqueue-4.2.13.Final-osx-x86_64.jar\", sha1 = \"edb4a850bd7212d3a228b1f4cd7e2d2babdd146b\", url = \"https://libraries.minecraft.net/io/netty/netty-transport-native-kqueue/4.2.13.Final/netty-transport-native-kqueue-4.2.13.Final-osx-x86_64.jar\")"
+                ],
+                "io.netty:netty-transport-native-unix-common:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-transport-native-unix-common/4.2.13.Final/netty-transport-native-unix-common-4.2.13.Final.jar\", sha1 = \"79d5e686999a84552d9b7bbb9589e5b853113bda\", url = \"https://libraries.minecraft.net/io/netty/netty-transport-native-unix-common/4.2.13.Final/netty-transport-native-unix-common-4.2.13.Final.jar\")"
+                ],
+                "io.netty:netty-transport:4.2.13.Final": [
+                  "default#struct(path = \"io/netty/netty-transport/4.2.13.Final/netty-transport-4.2.13.Final.jar\", sha1 = \"acec47f1ff71785e090e019920f787e0f7d164e3\", url = \"https://libraries.minecraft.net/io/netty/netty-transport/4.2.13.Final/netty-transport-4.2.13.Final.jar\")"
+                ],
+                "org.apache.commons:commons-lang3:3.20.0": [
+                  "default#struct(path = \"org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar\", sha1 = \"65897b3e5731220962e659e001904af3c3cbeba9\", url = \"https://libraries.minecraft.net/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar\")"
+                ],
+                "org.apache.logging.log4j:log4j-api:2.26.0": [
+                  "default#struct(path = \"org/apache/logging/log4j/log4j-api/2.26.0/log4j-api-2.26.0.jar\", sha1 = \"ad52af0ecf054a7e3f275a2e180ee06d9c490951\", url = \"https://libraries.minecraft.net/org/apache/logging/log4j/log4j-api/2.26.0/log4j-api-2.26.0.jar\")"
+                ],
+                "org.apache.logging.log4j:log4j-core:2.26.0": [
+                  "default#struct(path = \"org/apache/logging/log4j/log4j-core/2.26.0/log4j-core-2.26.0.jar\", sha1 = \"d267ca60b27ddb075e0b4e75e7875859717bf85f\", url = \"https://libraries.minecraft.net/org/apache/logging/log4j/log4j-core/2.26.0/log4j-core-2.26.0.jar\")"
+                ],
+                "org.apache.logging.log4j:log4j-slf4j2-impl:2.26.0": [
+                  "default#struct(path = \"org/apache/logging/log4j/log4j-slf4j2-impl/2.26.0/log4j-slf4j2-impl-2.26.0.jar\", sha1 = \"668c0f0e813d83f00a7182533aa658ec7e7a0a0d\", url = \"https://libraries.minecraft.net/org/apache/logging/log4j/log4j-slf4j2-impl/2.26.0/log4j-slf4j2-impl-2.26.0.jar\")"
                 ],
                 "org.lwjgl:lwjgl-shaderc:3.4.1": [
                   "default#struct(path = \"org/lwjgl/lwjgl-shaderc/3.4.1/lwjgl-shaderc-3.4.1.jar\", sha1 = \"5c02c88f0d879529014c78463b76f43fdecfd272\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-shaderc/3.4.1/lwjgl-shaderc-3.4.1.jar\")"
@@ -15650,6 +15849,9 @@
                 ],
                 "org.lwjgl:lwjgl-vulkan:3.4.1:natives-macos-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-vulkan/3.4.1/lwjgl-vulkan-3.4.1-natives-macos-arm64.jar\", sha1 = \"2c933bf617cb8a174af26585efda4778b59e6d44\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-vulkan/3.4.1/lwjgl-vulkan-3.4.1-natives-macos-arm64.jar\")"
+                ],
+                "org.lwjgl:lwjgl:3.4.1:unsafe": [
+                  "default#struct(path = \"org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar\", sha1 = \"129e06a04f93992cb2a45172435b21fc4b60dd7d\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar\")"
                 ]
               },
               "library_platforms": {
@@ -17334,35 +17536,89 @@
                 "org.lwjgl:lwjgl:3.4.1:natives-windows-x86": [
                   "windows#default"
                 ],
-                "com.mojang:authlib:7.0.72": [
+                "com.google.code.gson:gson:2.14.0": [
+                  "common#default"
+                ],
+                "com.google.guava:guava:33.6.0-jre": [
+                  "common#default"
+                ],
+                "com.ibm.icu:icu4j:78.3": [
+                  "common#default"
+                ],
+                "com.microsoft.azure:msal4j:1.24.1": [
+                  "common#default"
+                ],
+                "com.mojang:authlib:8.0.73": [
                   "common#default"
                 ],
                 "com.mojang:datafixerupper:10.0.21": [
                   "common#default"
                 ],
+                "com.mojang:logging:1.7.12": [
+                  "common#default"
+                ],
                 "com.mojang:text2speech:1.19.12": [
                   "common#default"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0": [
+                "commons-codec:commons-codec:1.22.0": [
                   "common#default"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:linux-aarch32": [
+                "io.netty:netty-buffer:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-codec-base:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-codec-compression:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-codec-http:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-common:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-handler:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-resolver:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-transport-classes-epoll:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-transport-classes-kqueue:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-transport-native-epoll:4.2.13.Final:linux-aarch_64": [
                   "linux#default"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:linux-aarch64": [
+                "io.netty:netty-transport-native-epoll:4.2.13.Final:linux-x86_64": [
                   "linux#default"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:linux-x86_64": [
-                  "linux#default"
-                ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:macos-aarch64": [
+                "io.netty:netty-transport-native-kqueue:4.2.13.Final:osx-aarch_64": [
                   "osx#default"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:macos-x86_64": [
+                "io.netty:netty-transport-native-kqueue:4.2.13.Final:osx-x86_64": [
                   "osx#default"
                 ],
-                "dev.onvoid.webrtc:webrtc-java:0.14.0:windows-x86_64": [
-                  "windows#default"
+                "io.netty:netty-transport-native-unix-common:4.2.13.Final": [
+                  "common#default"
+                ],
+                "io.netty:netty-transport:4.2.13.Final": [
+                  "common#default"
+                ],
+                "org.apache.commons:commons-lang3:3.20.0": [
+                  "common#default"
+                ],
+                "org.apache.logging.log4j:log4j-api:2.26.0": [
+                  "common#default"
+                ],
+                "org.apache.logging.log4j:log4j-core:2.26.0": [
+                  "common#default"
+                ],
+                "org.apache.logging.log4j:log4j-slf4j2-impl:2.26.0": [
+                  "common#default"
                 ],
                 "org.lwjgl:lwjgl-shaderc:3.4.1": [
                   "common#default"
@@ -17435,6 +17691,9 @@
                 ],
                 "org.lwjgl:lwjgl-vulkan:3.4.1:natives-macos-arm64": [
                   "osx#default"
+                ],
+                "org.lwjgl:lwjgl:3.4.1:unsafe": [
+                  "common#default"
                 ]
               },
               "library_extracts": {
@@ -17485,18 +17744,18 @@
                 "1.17": "f425401a00adf0112fde624ee80c66333530f8a1",
                 "1.18": "d31a2e85ae149dd1b1a7070b22cb8887892fda6c",
                 "1.19": "a9c8b05a8082a65678beda6dfa2b8f21fa627bce",
-                "5": "a0898a5ff1ffaa6ae37a85977c7ff6a14cd96483",
-                "12": "ccc5971b3a0da00484a54ca6615038f9cddec2dc",
-                "16": "58e97505e282eda435e4ad8eea0fa9c4d9be503b",
-                "17": "90d06ea9a02cad948892cbf5bc4d1fa5b01f596c",
-                "18": "73387dde8a5a22c0eb00b87d0843ecec845e518f",
-                "19": "30bc8c2040e2963f938cfe2c8921764aa2d841d9",
-                "24": "bb5899a60e4bb36f42bb7e4ede023644ae8af411",
-                "26": "6432cedf9862a6fa335cec2b74307ed83425bd2f",
-                "27": "8a9ec7a7bee7c2a2c614dd112729ece0828acdf1",
-                "29": "e3c08e311e0826eb9373f902fa7997b43d0067d0",
-                "30": "9672f7185226f6be5662bccd8b685c4dc0abdf3c",
-                "31": "b9058b7cb138b3778d3fb5b0ffadf31328295afa"
+                "5": "5a68a9794e5ad2280313c5024ce226d42edc278d",
+                "12": "8379b9dd77a7ea2f72f498fadeb0f3156c791a38",
+                "16": "42aec930b21de6beaca2f35ae5b168027ba90d30",
+                "17": "818f68d092986c6933366762f435889884c36a52",
+                "18": "cb0e5e5a5516b0ccececee2ed2404b4a4bdde7a8",
+                "19": "86387e16cfca7ce584afa4f71f9675661dd64381",
+                "24": "9f4002eac17cd3058ee38b6d7d25a046e2ddd56c",
+                "26": "9246b1598a4119b0726b4e3fe1404d3ebab03733",
+                "27": "89f833cb61015f933152dfd9f67073425a6df537",
+                "29": "d2564f12f5ddfffbb9902b3c45af92709f373d60",
+                "30": "2866ab0411f8507bf88d81513a08956a2474403f",
+                "32": "1e10f2104f3b79b72a23ec961505bb3cbf249955"
               },
               "asset_urls": {
                 "pre-1.6": "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json",
@@ -17509,18 +17768,18 @@
                 "1.17": "https://piston-meta.mojang.com/v1/packages/f425401a00adf0112fde624ee80c66333530f8a1/1.17.json",
                 "1.18": "https://piston-meta.mojang.com/v1/packages/d31a2e85ae149dd1b1a7070b22cb8887892fda6c/1.18.json",
                 "1.19": "https://piston-meta.mojang.com/v1/packages/a9c8b05a8082a65678beda6dfa2b8f21fa627bce/1.19.json",
-                "5": "https://piston-meta.mojang.com/v1/packages/a0898a5ff1ffaa6ae37a85977c7ff6a14cd96483/5.json",
-                "12": "https://piston-meta.mojang.com/v1/packages/ccc5971b3a0da00484a54ca6615038f9cddec2dc/12.json",
-                "16": "https://piston-meta.mojang.com/v1/packages/58e97505e282eda435e4ad8eea0fa9c4d9be503b/16.json",
-                "17": "https://piston-meta.mojang.com/v1/packages/90d06ea9a02cad948892cbf5bc4d1fa5b01f596c/17.json",
-                "18": "https://piston-meta.mojang.com/v1/packages/73387dde8a5a22c0eb00b87d0843ecec845e518f/18.json",
-                "19": "https://piston-meta.mojang.com/v1/packages/30bc8c2040e2963f938cfe2c8921764aa2d841d9/19.json",
-                "24": "https://piston-meta.mojang.com/v1/packages/bb5899a60e4bb36f42bb7e4ede023644ae8af411/24.json",
-                "26": "https://piston-meta.mojang.com/v1/packages/6432cedf9862a6fa335cec2b74307ed83425bd2f/26.json",
-                "27": "https://piston-meta.mojang.com/v1/packages/8a9ec7a7bee7c2a2c614dd112729ece0828acdf1/27.json",
-                "29": "https://piston-meta.mojang.com/v1/packages/e3c08e311e0826eb9373f902fa7997b43d0067d0/29.json",
-                "30": "https://piston-meta.mojang.com/v1/packages/9672f7185226f6be5662bccd8b685c4dc0abdf3c/30.json",
-                "31": "https://piston-meta.mojang.com/v1/packages/b9058b7cb138b3778d3fb5b0ffadf31328295afa/31.json"
+                "5": "https://piston-meta.mojang.com/v1/packages/5a68a9794e5ad2280313c5024ce226d42edc278d/5.json",
+                "12": "https://piston-meta.mojang.com/v1/packages/8379b9dd77a7ea2f72f498fadeb0f3156c791a38/12.json",
+                "16": "https://piston-meta.mojang.com/v1/packages/42aec930b21de6beaca2f35ae5b168027ba90d30/16.json",
+                "17": "https://piston-meta.mojang.com/v1/packages/818f68d092986c6933366762f435889884c36a52/17.json",
+                "18": "https://piston-meta.mojang.com/v1/packages/cb0e5e5a5516b0ccececee2ed2404b4a4bdde7a8/18.json",
+                "19": "https://piston-meta.mojang.com/v1/packages/86387e16cfca7ce584afa4f71f9675661dd64381/19.json",
+                "24": "https://piston-meta.mojang.com/v1/packages/9f4002eac17cd3058ee38b6d7d25a046e2ddd56c/24.json",
+                "26": "https://piston-meta.mojang.com/v1/packages/9246b1598a4119b0726b4e3fe1404d3ebab03733/26.json",
+                "27": "https://piston-meta.mojang.com/v1/packages/89f833cb61015f933152dfd9f67073425a6df537/27.json",
+                "29": "https://piston-meta.mojang.com/v1/packages/d2564f12f5ddfffbb9902b3c45af92709f373d60/29.json",
+                "30": "https://piston-meta.mojang.com/v1/packages/2866ab0411f8507bf88d81513a08956a2474403f/30.json",
+                "32": "https://piston-meta.mojang.com/v1/packages/1e10f2104f3b79b72a23ec961505bb3cbf249955/32.json"
               },
               "version_assets": {
                 "b1.7.3": "pre-1.6",
@@ -17554,7 +17813,7 @@
                 "26.1": "30",
                 "26.1.1": "30",
                 "26.1.2": "30",
-                "26.2-snapshot-7": "31"
+                "26.2-pre-2": "32"
               }
             }
           }

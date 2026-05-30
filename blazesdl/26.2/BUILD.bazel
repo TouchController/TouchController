@@ -86,7 +86,7 @@ upload_modrinth(
     file = ":blazesdl",
     file_name = "blazesdl-%s.jar" % blazesdl_26_2_version,
     game_versions = [
-        "26.2-snapshot-7",
+        "26.2-pre-2",
     ],
     loaders = ["fabric"],
     project_id = "QDgSARKw",
@@ -109,7 +109,7 @@ java_binary(
     jvm_flags = [
         "-Dkotlinx.coroutines.debug=on",
         "-Dfabric.development=true",
-        "-Ddev.launch.version=26.2-snapshot-7",
+        "-Ddev.launch.version=26.2-pre-2",
         "-Ddev.launch.type=client",
         "-Ddev.launch.assetsVersion=$(rlocationpath //game/26.2:game_client_assets_version)",
         "-Ddev.launch.mainClass=net.fabricmc.loader.impl.launch.knot.KnotClient",
@@ -129,5 +129,6 @@ java_binary(
         "@maven_fabric_26_2//:io_github_llamalad7_mixinextras_fabric",
         "@maven_fabric_26_2//:net_fabricmc_fabric_loader",
         "@maven_fabric_26_2//:net_fabricmc_sponge_mixin",
+        "@maven_fabric_26_2//:com_terraformersmc_modmenu",
     ],
 )

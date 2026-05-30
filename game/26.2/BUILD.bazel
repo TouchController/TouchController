@@ -2,11 +2,11 @@ load("//game:game.bzl", "game_version")
 
 game_version(
     name = "game",
-    client = "@minecraft//26.2-snapshot-7:client",
-    client_assets = "@minecraft_assets//:assets_26.2-snapshot-7",
-    client_assets_version = "@minecraft_assets//:version_26.2-snapshot-7",
-    client_libraries = "@minecraft//26.2-snapshot-7:client_libraries",
-    server = "@minecraft//26.2-snapshot-7:server",
-    version = "26.2-snapshot-7",
+    client = "@minecraft//26.2-pre-2:client",
+    client_assets = "@minecraft_assets//:assets_26.2-pre-2",
+    client_assets_version = "@minecraft_assets//:version_26.2-pre-2",
+    client_libraries = "@minecraft//26.2-pre-2:client_libraries",
+    server = "@minecraft//26.2-pre-2:server",
+    version = "26.2-pre-2",
     visibility = ["//visibility:public"],
 )

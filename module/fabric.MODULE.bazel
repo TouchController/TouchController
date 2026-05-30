@@ -232,11 +232,12 @@ fabric_versions = {
     },
     "26.2": {
         "intermediary": False,
-        "api": "0.148.3+26.2",
-        "loader": "0.18.4",
-        "modmenu": "18.0.0-alpha.8",
-        "mixin": "0.17.0+mixin.0.8.7",
-        "mixin_extras": "0.5.0",
+        "api": "0.150.1+26.2",
+        # modmenu declared 0.19.2
+        "loader": "0.19.2",
+        "modmenu": "20.0.0-alpha.1",
+        "mixin": "0.17.2+mixin.0.8.7",
+        "mixin_extras": "0.5.4",
     },
 }
 
