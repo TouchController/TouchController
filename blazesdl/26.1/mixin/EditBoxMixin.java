@@ -5,7 +5,6 @@
 
 package top.fifthlight.blazesdl.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
@@ -18,8 +17,7 @@ import top.fifthlight.blazesdl.SDLUtil;
 @Mixin(EditBox.class)
 public class EditBoxMixin {
     @Inject(method = "extractWidgetRenderState", at = @At(value = "TAIL"))
-    private void updateTextPos(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci,
-                               @Local(name = "cursorX") int cursorX) {
+    private void updateTextPos(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci) {
         var editBox = (EditBox) (Object) this;
         if (!editBox.isVisible()) {
             return;
@@ -30,7 +28,7 @@ public class EditBoxMixin {
         if (editBox.preeditOverlay == null) {
             var window = Minecraft.getInstance().getWindow();
             SDLUtil.updateTextInputAreaScaled(window, editBox.getX(), editBox.getY(), editBox.getWidth(),
-                    editBox.getHeight(), cursorX - editBox.getX());
+                    editBox.getHeight(), 0);
         }
     }
 }
