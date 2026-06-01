@@ -4,7 +4,7 @@ load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("@rules_java//java:defs.bzl", "java_binary", "java_library")
 load("//blazesdl:properties.bzl", "blazesdl_26_1_version", "blazesdl_api_version")
 load("//rule:apply_access_widener.bzl", "apply_access_widener")
-load("//rule:unified_jij.bzl", "unified_jij")
+load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
 load("//rule/neoforge:convert_access_widener.bzl", "convert_access_widener")
 
 apply_access_widener(
@@ -70,28 +70,30 @@ java_library(
         ":game_access_widened",
         "//blazesdl/api",
         "//game/26.1.2:game_client_libraries",
+        "@maven//:org_jetbrains_annotations",
         "@maven_blazesdl//:org_lwjgl_lwjgl",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl",
         "@maven_fabric_26_1//:io_github_llamalad7_mixinextras_fabric",
         "@maven_fabric_26_1//:net_fabricmc_sponge_mixin",
         "@neoforge_26_1//:net_neoforged_fancymodloader_loader",
+        "@neoforge_26_1//:org_apache_maven_maven_artifact",
     ],
 )
 
-unified_jij(
+fabric_merge_jij(
     name = "blazesdl",
     input = ":blazesdl_unmerged",
     deps = {
-        "//blazesdl/api": "top.fifthlight.blazesdl:blazesdl-api:%s:=" % blazesdl_api_version,
-        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl": "org.lwjgl:lwjgl-sdl:3.4.1:GAMELIBRARY",
-        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows": "org.lwjgl:lwjgl-sdl-natives-windows:3.4.1:GAMELIBRARY",
-        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_x86": "org.lwjgl:lwjgl-sdl-natives-windows-x86:3.4.1:GAMELIBRARY",
-        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_arm64": "org.lwjgl:lwjgl-sdl-natives-windows-arm64:3.4.1:GAMELIBRARY",
-        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm32": "org.lwjgl:lwjgl-sdl-natives-linux-arm32:3.4.1:GAMELIBRARY",
-        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm64": "org.lwjgl:lwjgl-sdl-natives-linux-arm64:3.4.1:GAMELIBRARY",
-        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux": "org.lwjgl:lwjgl-sdl-natives-linux:3.4.1:GAMELIBRARY",
-        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_macos": "org.lwjgl:lwjgl-sdl-natives-macos:3.4.1:GAMELIBRARY",
-        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_macos_arm64": "org.lwjgl:lwjgl-sdl-natives-macos-arm64:3.4.1:GAMELIBRARY",
+        "//blazesdl/api": "blazesdl-api:=",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl": "org_lwjgl_lwjgl_sdl:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows": "org_lwjgl_lwjgl_sdl_natives_windows:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_x86": "org_lwjgl_lwjgl_sdl_natives_windows_x86:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_arm64": "org_lwjgl_lwjgl_sdl_natives_windows_arm64:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm32": "org_lwjgl_lwjgl_sdl_natives_linux_arm32:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm64": "org_lwjgl_lwjgl_sdl_natives_linux_arm64:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux": "org_lwjgl_lwjgl_sdl_natives_linux:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_macos": "org_lwjgl_lwjgl_sdl_natives_macos:3.4.1",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_macos_arm64": "org_lwjgl_lwjgl_sdl_natives_macos_arm64:3.4.1",
     },
 )
 
@@ -109,7 +111,10 @@ upload_modrinth(
         "26.1.1",
         "26.1.2",
     ],
-    loaders = ["fabric"],
+    loaders = [
+        "fabric",
+        "neoforge",
+    ],
     project_id = "QDgSARKw",
     token_secret_id = "modrinth_token",
     version_id = blazesdl_26_1_version,
@@ -179,7 +184,7 @@ java_binary(
     }),
     main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
     runtime_deps = [
-        ":blazesdl_unmerged",
+        ":blazesdl",
         "//game/26.1:game_client_libraries",
         "//game/26.1:game_client_neoforge",
         "//rule/dev_launch_wrapper",
