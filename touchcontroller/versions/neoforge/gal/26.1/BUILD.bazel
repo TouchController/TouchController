@@ -1,0 +1,10 @@
+load("//rule:merge_library.bzl", "merge_library_group")
+
+merge_library_group(
+    name = "26.1",
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/versions/neoforge/gal/config/26.1",
+        "//touchcontroller/versions/neoforge/gal/key/26.1",
+    ],
+)

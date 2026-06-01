@@ -1,0 +1,17 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "26.1",
+    srcs = glob(["*.kt"]),
+    actual = True,
+    merge_deps = [
+        "//touchcontroller/versions/gal/key/26.1",
+        "//touchcontroller/versions/mixin/26.1",
+    ],
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//game/26.1:game_client_libraries",
+        "//game/26.1:game_client_neoforge",
+        "//touchcontroller/common/gal/key",
+    ],
+)

@@ -21,7 +21,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.level.BlockEvent
 import org.slf4j.LoggerFactory
-import top.fifthlight.combine.backend.minecraft.render.v1_21_11.CanvasImpl
+import top.fifthlight.combine.backend.minecraft.render.v26_1.CanvasImpl
 import top.fifthlight.touchcontroller.common.config.data.StatusConfig
 import top.fifthlight.touchcontroller.common.config.holder.GlobalConfigHolder
 import top.fifthlight.touchcontroller.common.event.block.BlockBreakEvents
@@ -32,9 +32,9 @@ import top.fifthlight.touchcontroller.common.event.window.WindowEvents
 import top.fifthlight.touchcontroller.common.model.ControllerHudModel
 import top.fifthlight.touchcontroller.common.model.TouchControllerLoadStatus
 import top.fifthlight.touchcontroller.common.ui.config.screen.getConfigScreen
-import top.fifthlight.touchcontroller.gal.gameconfig.v1_21_11.GameConfigEditorImpl
+import top.fifthlight.touchcontroller.gal.gameconfig.v26_1.GameConfigEditorImpl
 
-@Mod("touchcontroller_1_21_11")
+@Mod("touchcontroller_26_1")
 class TouchController(modEventBus: IEventBus, private val container: ModContainer) {
     private val logger = LoggerFactory.getLogger(TouchController::class.java)
 

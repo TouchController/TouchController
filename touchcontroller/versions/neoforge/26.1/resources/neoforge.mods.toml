@@ -1,0 +1,63 @@
+license = "${license}"
+issueTrackerURL = "${issue_tracker}"
+
+[[mods]]
+modId = "touchcontroller_26_1"
+version = "${version}"
+displayName = "TouchController"
+displayURL = "${home_page}"
+logoFile = "assets/touchcontroller/textures/icon.png"
+authors = "${mod_authors}"
+credits = "${mod_contributors}"
+description = "${description}"
+
+[[mixins]]
+config = "touchcontroller.mixins.json"
+
+[[mixins]]
+config = "touchcontroller.mixins.neoforge.json"
+
+[[dependencies.touchcontroller_26_1]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[26.1, 26.2)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_1]]
+modId = "neoforge"
+mandatory = true
+versionRange = "[26.1.0,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_1]]
+modId = "combine"
+mandatory = true
+versionRange = "[${combine_version},]"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_1]]
+modId = "kotlinforforge"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_1]]
+modId = "touchcontroller"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_1]]
+modId = "touchcontroller_texture_vanilla"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_1]]
+modId = "touchcontroller_lang_modern"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"

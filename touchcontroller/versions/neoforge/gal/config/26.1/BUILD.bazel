@@ -1,0 +1,13 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "26.1",
+    srcs = glob(["*.kt"]),
+    actual = True,
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/buildinfo",
+        "//touchcontroller/common/gal/config",
+        "@neoforge_26_1//:net_neoforged_fancymodloader_loader",
+    ],
+)
