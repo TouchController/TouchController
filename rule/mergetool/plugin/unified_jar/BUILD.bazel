@@ -10,8 +10,5 @@ java_library(
         "//multijar/common",
         "//rule/mergetool/api",
         "//rule/mergetool/plugin/jar_in_jar",
-        "@maven//:com_fasterxml_jackson_core_jackson_annotations",
-        "@maven//:com_fasterxml_jackson_core_jackson_core",
-        "@maven//:com_fasterxml_jackson_core_jackson_databind",
     ],
 )

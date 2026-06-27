@@ -1,9 +1,7 @@
 package top.fifthlight.multijar.neov10;
 
 import net.neoforged.fml.jarcontents.JarContents;
-import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.fml.util.ClasspathResourceUtils;
 import net.neoforged.neoforgespi.language.IModInfo;
 import net.neoforged.neoforgespi.locating.IDependencyLocator;
 import net.neoforged.neoforgespi.locating.IDiscoveryPipeline;
@@ -36,7 +34,7 @@ public class NeoV10Locator implements IDependencyLocator {
         IModFile.class.getMethod("getModInfos");
         IModInfo.class.getMethod("getModId");
         IModInfo.class.getMethod("getVersion");
-        JarContents.class.getMethod("ofPath", Path.class);
+        JarContents.class.getMethod("ofPaths", Collection.class);
         JarContents.class.getMethod("findFile", String.class);
         IDiscoveryPipeline.class.getMethod("readModFile", JarContents.class, ModFileDiscoveryAttributes.class);
         IDiscoveryPipeline.class.getMethod("addModFile", IModFile.class);
@@ -60,50 +58,16 @@ public class NeoV10Locator implements IDependencyLocator {
             return;
         }
         var minecraftVersionStr = minecraftInfo.get().getVersion().toString();
-        var gameDirectory = FMLPaths.GAMEDIR.get();
 
-        LOGGER.info("MultiJar loader on Minecraft {} in directory {}", minecraftVersionStr, gameDirectory);
+        LOGGER.info("MultiJar loader on Minecraft {}", minecraftVersionStr);
 
-        if (!FMLEnvironment.isProduction()) {
-            for (var path : ClasspathResourceUtils.findFileSystemRootsOfFileOnClasspath(
-                    MultiJarManifest.NEOFORGE_MANIFEST_PATH)) {
-                if (!Files.isRegularFile(path)) continue;
-                try (var contents = JarContents.ofPath(path)) {
-                    processJar(contents, minecraftVersionStr, pipeline);
-                } catch (IOException e) {
-                    LOGGER.warn("Failed to read mod {} in classpath", path);
-                }
+        try {
+            var jarPath = Path.of(NeoV10Locator.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            try (var content = JarContents.ofPath(jarPath)) {
+                processJar(content, minecraftVersionStr, pipeline);
             }
-        }
-
-        var modsDir = gameDirectory.resolve(FMLPaths.MODSDIR.relative()).toAbsolutePath().normalize();
-        if (!Files.exists(modsDir)) {
-            return;
-        }
-
-        List<Path> jarFiles;
-        try (var files = Files.list(modsDir)) {
-            jarFiles = files
-                    .filter(p -> p.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".jar"))
-                    .sorted(Comparator.comparing(p -> p.getFileName().toString().toLowerCase(Locale.ROOT)))
-                    .toList();
-        } catch (IOException e) {
-            LOGGER.warn("Failed to list mods directory {}", modsDir, e);
-            return;
-        }
-
-        for (var path : jarFiles) {
-            if (!Files.isRegularFile(path)) continue;
-            try {
-                if (Files.size(path) == 0) continue;
-            } catch (IOException ignored) {
-            }
-
-            try (var contents = JarContents.ofPath(path)) {
-                processJar(contents, minecraftVersionStr, pipeline);
-            } catch (IOException e) {
-                LOGGER.warn("Failed to read mod {}", path);
-            }
+        } catch (Exception ex) {
+            throw new RuntimeException("Failed to open mod JAR", ex);
         }
     }
 
@@ -123,45 +87,50 @@ public class NeoV10Locator implements IDependencyLocator {
 
         LOGGER.info("Loading mod {}", contents.getPrimaryPath());
 
-        var jars = manifest.jars(minecraftVersionStr);
-        for (var jar : jars) {
-            var jij = contents.findFile(jar);
-            if (jij.isEmpty()) {
-                LOGGER.warn("Failed to find jar {} for mod {}", jar, contents.getPrimaryPath());
-                continue;
-            }
-            LOGGER.info("Loading jar {} for mod {}", jar, contents.getPrimaryPath());
-
-            var jijCacheDir = FMLPaths.JIJ_CACHEDIR.get();
-            Path tempFile;
-            try {
-                tempFile = Files.createTempFile(jijCacheDir, "_jij", ".tmp");
-            } catch (IOException e) {
-                LOGGER.error("Failed to create temp file in {}: {}", jijCacheDir, e);
-                continue;
-            }
-
-            var filename = jar.substring(jar.lastIndexOf('/') + 1);
-            Path finalPath;
-            try {
-                var checksum = extractEmbeddedJarFile(contents, jar, tempFile);
-                finalPath = jijCacheDir.resolve(checksum + "/" + filename);
-                if (!Files.isRegularFile(finalPath)) {
-                    moveExtractedFileIntoPlace(tempFile, finalPath);
+        var items = manifest.items(minecraftVersionStr);
+        item:
+        for (var item : items) {
+            var jijPaths = new ArrayList<Path>();
+            for (var path : item.jarPaths()) {
+                var jij = contents.findFile(path);
+                if (jij.isEmpty()) {
+                    LOGGER.warn("Failed to find jar {} for mod {}", path, contents.getPrimaryPath());
+                    continue item;
                 }
-            } finally {
+
+                var jijCacheDir = FMLPaths.JIJ_CACHEDIR.get();
+                Path tempFile;
                 try {
-                    Files.deleteIfExists(tempFile);
+                    tempFile = Files.createTempFile(jijCacheDir, "_jij", ".tmp");
                 } catch (IOException e) {
-                    LOGGER.error("Failed to remove temp file {}: {}", tempFile, e);
+                    LOGGER.error("Failed to create temp file in {}: {}", jijCacheDir, e);
+                    continue item;
                 }
+
+                var filename = path.substring(path.lastIndexOf('/') + 1);
+                Path finalPath;
+                try {
+                    var checksum = extractEmbeddedJarFile(contents, path, tempFile);
+                    finalPath = jijCacheDir.resolve(checksum + "/" + filename);
+                    if (!Files.isRegularFile(finalPath)) {
+                        moveExtractedFileIntoPlace(tempFile, finalPath);
+                    }
+                } finally {
+                    try {
+                        Files.deleteIfExists(tempFile);
+                    } catch (IOException e) {
+                        LOGGER.error("Failed to remove temp file {}: {}", tempFile, e);
+                    }
+                }
+                jijPaths.add(finalPath);
             }
+            LOGGER.info("Loading jar {} for mod {}", jijPaths, contents.getPrimaryPath());
 
             JarContents jijContents;
             try {
-                jijContents = JarContents.ofPath(finalPath);
+                jijContents = JarContents.ofPaths(jijPaths);
             } catch (IOException e) {
-                LOGGER.error("Failed to read JiJ file {} from mod {} to {}", jar, contents.getPrimaryPath(), finalPath, e);
+                LOGGER.error("Failed to read JiJ file {}", jijPaths, e);
                 continue;
             }
             var jijModFile = pipeline.readModFile(jijContents, attributes);

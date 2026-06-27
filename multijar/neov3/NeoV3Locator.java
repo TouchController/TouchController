@@ -19,9 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class NeoV3Locator implements IDependencyLocator {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeoV3Locator.class);
@@ -35,7 +33,7 @@ public class NeoV3Locator implements IDependencyLocator {
         IModFile.class.getMethod("getModInfos");
         IModInfo.class.getMethod("getModId");
         IModInfo.class.getMethod("getVersion");
-        JarContents.class.getMethod("of", Path.class);
+        JarContents.class.getMethod("of", Collection.class);
         JarContents.class.getMethod("findFile", String.class);
         IDiscoveryPipeline.class.getMethod("readModFile", JarContents.class, ModFileDiscoveryAttributes.class);
         IDiscoveryPipeline.class.getMethod("addModFile", IModFile.class);
@@ -71,16 +69,20 @@ public class NeoV3Locator implements IDependencyLocator {
 
         LOGGER.info("Loading mod {}", contents.getPrimaryPath());
 
-        var jars = manifest.jars(minecraftVersionStr);
-        for (var jar : jars) {
-            var jij = contents.findFile(jar);
-            if (jij.isEmpty()) {
-                LOGGER.warn("Failed to find jar {} for mod {}", jar, contents.getPrimaryPath());
-                continue;
+        var items = manifest.items(minecraftVersionStr);
+        item:
+        for (var item : items) {
+            var jijPaths = new ArrayList<Path>();
+            for (var path : item.jarPaths()) {
+                var jij = contents.findFile(path);
+                if (jij.isEmpty()) {
+                    LOGGER.warn("Failed to find item {} for mod {}", item, contents.getPrimaryPath());
+                    continue item;
+                }
+                jijPaths.add(Path.of(jij.get()));
             }
-            var jijPath = Path.of(jij.get());
-            LOGGER.info("Loading jar {} for mod {}", jijPath, contents.getPrimaryPath());
-            var jijModFile = pipeline.readModFile(JarContents.of(jijPath), attributes);
+            LOGGER.info("Loading item {} for mod {}", jijPaths, contents.getPrimaryPath());
+            var jijModFile = pipeline.readModFile(JarContents.of(jijPaths), attributes);
             pipeline.addModFile(jijModFile);
         }
     }

@@ -69,6 +69,12 @@ def _unified_jar_impl(ctx):
             args.add(key)
             args.add(value)
 
+    # merge_deps: modid -> modid (for UnifiedJarManifestPlugin)
+    for key, value in ctx.attr.merge_deps.items():
+        args.add("--merge-deps")
+        args.add(key)
+        args.add(value)
+
     resource_files = []
     for resource, strip in ctx.attr.resources.items():
         args.add("--resource-strip", strip)
@@ -110,6 +116,10 @@ unified_jar = rule(
         "neoforge_deps": attr.string_list_dict(
             default = {},
             doc = "NeoForge entries: modid -> list of MC versions (e.g. ['common'] or ['1.21.1', '1.21.4'])",
+        ),
+        "merge_deps": attr.string_dict(
+            default = {},
+            doc = "Merge JAR entries on NeoForge/Forge: modid -> modid",
         ),
         "forge_deps": attr.string_list_dict(
             default = {},

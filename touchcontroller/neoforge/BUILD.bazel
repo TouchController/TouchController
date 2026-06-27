@@ -3,7 +3,7 @@ load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_neoforge")
 load("//combine:properties.bzl", "combine_version")
 load("//rule:unified_jar.bzl", "unified_jar")
-load("//touchcontroller:libraries.bzl", "touchcontroller_common_deps", "touchcontroller_neoforge_config", "touchcontroller_neoforge_deps", "touchcontroller_unified_deps", "touchcontroller_unified_neoforge")
+load("//touchcontroller:libraries.bzl", "touchcontroller_common_deps", "touchcontroller_merge_deps", "touchcontroller_neoforge_config", "touchcontroller_neoforge_deps", "touchcontroller_unified_deps", "touchcontroller_unified_neoforge")
 load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
 expand_template(
@@ -36,11 +36,10 @@ copy_file(
 
 unified_jar(
     name = "neoforge",
+    merge_deps = touchcontroller_merge_deps,
     neoforge_deps = touchcontroller_neoforge_config | combine_unified_neoforge | touchcontroller_unified_neoforge,
     neoforge_mod_toml = ":neoforge_mod_toml",
-    resources = {
-        ":icon": "touchcontroller/neoforge",
-    },
+    resources = {":icon": "touchcontroller/neoforge"},
     visibility = ["//visibility:public"],
     deps = touchcontroller_common_deps | touchcontroller_neoforge_deps | combine_unified_deps | touchcontroller_unified_deps,
 )
