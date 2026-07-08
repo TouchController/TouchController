@@ -381,7 +381,7 @@
   "moduleExtensions": {
     "//repo:llvm_mingw.bzl%llvm_mingw": {
       "general": {
-        "bzlTransitiveDigest": "JuARQ9nevK0XZrDDlUagtolYaCbX846zP7XZj9hih9U=",
+        "bzlTransitiveDigest": "qH0DPu/+VPRjxbsPLWY0z1XLwiLsgfU4V700YqmNT6g=",
         "usagesDigest": "b8OL6GfORfKohZWDPDQuP1fWk7QYC0Sgy87Ha7S0o8I=",
         "recordedInputs": [
           "REPO_MAPPING:,platforms platforms"

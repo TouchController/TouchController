@@ -1,8 +1,6 @@
 "Module extension to download and configure LLVM-MinGW toolchains"
 
 def _llvm_mingw_files_impl(rctx):
-    files_repo_path = rctx.path("")
-
     rctx.download_and_extract(
         url = rctx.attr.url,
         sha256 = rctx.attr.sha256,
@@ -48,7 +46,7 @@ filegroup(
             "    use_wrapper = %s," % rctx.attr.use_wrapper,
             '    binary_extension = "%s",' % rctx.attr.binary_extension,
             '    target_cpu_name = "%s",' % name,
-            '    execroot = "%s",' % files_repo_path,
+            '    execroot = "external/%s",' % rctx.name,
             '    visibility = ["//visibility:public"],',
             ")",
         ]

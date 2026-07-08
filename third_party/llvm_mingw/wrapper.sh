@@ -1,8 +1,6 @@
 #!/bin/bash -e
 export PATH="/usr/bin:/sbin:/bin:$PATH"
-self_path="$(realpath "$0")"
-wrapper_path="$(dirname "$self_path")"
-toolchain_path="$(realpath "$wrapper_path"/..)"
+wrapper_path="$(dirname "$0")"
 
 new_args=()
 for arg in "$@"; do
@@ -13,4 +11,4 @@ for arg in "$@"; do
     fi
 done
 
-exec "$toolchain_path/bin/%{REAL_TOOL}" "${new_args[@]}"
+exec "$wrapper_path/../bin/%{REAL_TOOL}" "${new_args[@]}"

@@ -80,6 +80,7 @@ def _impl(ctx):
                                 "-D__DATE__=\"redacted\"",
                                 "-D__TIMESTAMP__=\"redacted\"",
                                 "-D__TIME__=\"redacted\"",
+                                "-no-canonical-prefixes",
                             ],
                         ),
                     ]),
@@ -121,10 +122,11 @@ def _impl(ctx):
     return cc_common.create_cc_toolchain_config_info(
         ctx = ctx,
         features = features,
+        builtin_sysroot = ctx.attr.execroot,
         cxx_builtin_include_directories = [
-            "%s/include" % ctx.attr.execroot,
-            "%s/%s/include" % (ctx.attr.execroot, ctx.attr.triple),
-            "%s/lib/clang/22/include" % ctx.attr.execroot,
+            "%sysroot%/include",
+            "%sysroot%/" + ctx.attr.triple + "/include",
+            "%sysroot%/lib/clang/22/include",
         ],
         toolchain_identifier = "llvm-mingw",
         host_system_name = "local",
