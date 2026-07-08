@@ -1,0 +1,22 @@
+<idea-plugin>
+    <id>fifthlight.bazel.aspect.bcr</id>
+    <name>Bazel Aspect BCR</name>
+    <version>0.0.1</version>
+    <vendor>fifth_light</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.bazel</depends>
+
+    <extensionPoints>
+        <extensionPoint
+            dynamic="true"
+            interface="top.fifthlight.intellij.bazelaspectbcr.AspectArgumentInjector"
+            qualifiedName="top.fifthlight.bazelaspectbcr.aspectArgumentInjector"/>
+    </extensionPoints>
+
+    <extensions defaultExtensionNs="org.jetbrains.bazel">
+        <bazelProcessLauncherProvider
+            implementation="top.fifthlight.intellij.bazelaspectbcr.BcrAspectLauncherProvider"
+            order="first"/>
+    </extensions>
+</idea-plugin>

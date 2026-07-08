@@ -1,0 +1,15 @@
+load("@rules_java//java:java_import.bzl", "java_import")
+
+package(default_visibility = ["//visibility:public"])
+
+java_import(
+    name = "intellij_bazel",
+    jars = glob([
+        "lib/*.jar",
+        "lib/modules/*.jar",
+    ]),
+    deps = [
+        "@intellij//:java",
+        "@intellij//:sdk",
+    ],
+)

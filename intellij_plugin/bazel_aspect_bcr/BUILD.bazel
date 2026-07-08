@@ -1,0 +1,19 @@
+load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_jar")
+
+kt_merge_library(
+    name = "bazel_aspect_bcr_unmerged",
+    srcs = glob(["*.kt"]),
+    kotlinc_opts = "//intellij_plugin:kotlinc_opts",
+    resource_strip_prefix = "intellij_plugin/bazel_aspect_bcr/resources",
+    resources = glob(["resources/**"]),
+    deps = [
+        "@intellij//:sdk",
+        "@intellij_bazel",
+    ],
+)
+
+merge_library_jar(
+    name = "bazel_aspect_bcr",
+    visibility = ["//intellij_plugin:__subpackages__"],
+    deps = [":bazel_aspect_bcr_unmerged"],
+)

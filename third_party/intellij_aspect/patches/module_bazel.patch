@@ -1,0 +1,68 @@
+--- a/MODULE.bazel
++++ b/MODULE.bazel
+@@ -1,50 +1,21 @@
+-module(name = "intellij_aspect_sdk")
++module(name = "intellij_aspect")
+
+-bazel_dep(name = "bazel_skylib", version = "1.9.0")
+-bazel_dep(name = "rules_pkg", version = "1.2.0")
+-bazel_dep(name = "protobuf", version = "35.1")
+-bazel_dep(name = "rules_jvm_external", version = "7.0")
+-bazel_dep(name = "aspect_rules_lint", version = "2.7.2")
+-bazel_dep(name = "buildifier_prebuilt", version = "8.5.1.2")
+-bazel_dep(name = "bazel_jar_jar", version = "0.1.15")
+-
+-# dependencies to rule sets used by the aspect
+-bazel_dep(name = "rules_cc", version = "0.2.20")
+-bazel_dep(name = "rules_python", version = "2.1.0")
+-bazel_dep(name = "rules_java", version = "9.6.1")
+-bazel_dep(name = "rules_kotlin", version = "2.4.0")
++bazel_dep(name = "rules_cc", version = "0.1.1", max_compatibility_level = 1)
++bazel_dep(name = "rules_python", version = "1.4.0", max_compatibility_level = 1)
++bazel_dep(name = "rules_java", version = "8.16.1", max_compatibility_level = 1)
++bazel_dep(name = "rules_kotlin", version = "2.2.0", max_compatibility_level = 1)
++bazel_dep(name = "rules_scala", version = "7.1.6", max_compatibility_level = 7)
++bazel_dep(name = "rules_go", version = "0.59.0", max_compatibility_level = 0)
++bazel_dep(name = "protobuf", version = "34.1", max_compatibility_level = 1)
+
+-# dependencies to test projects for the aspect
+-bazel_dep(name = "abseil-cpp", version = "20260526.0")
+-
+-maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+-maven.install(
+-    artifacts = [
+-        "junit:junit:4.13.2",
+-        "com.google.truth:truth:1.4.4",
+-        "com.google.code.gson:gson:2.10.1",
+-        "com.google.errorprone:error_prone_annotations:2.23.0",
+-        "com.google.guava:guava:33.0.0-jre",
+-        "com.fasterxml.jackson.core:jackson-databind:2.20.1",
+-        "org.jetbrains.kotlinx:kotlinx-cli-jvm:0.3.6",
+-        "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2",
+-        "com.pinterest.ktlint:ktlint-cli:1.8.0",
+-    ],
+-    known_contributing_modules = [
+-        "bazel_worker_java",
+-        "intellij_aspect",
+-        "protobuf",
+-    ],
+-)
+-use_repo(maven, "maven")
++# rules_pkg needed by private build rules
++bazel_dep(name = "rules_pkg", version = "1.2.0")
+
+-bazel_registry = use_extension("//private:extension.bzl", "bazel_registry")
+-bazel_registry.bazelisk(version = "1.25.0")
+-bazel_registry.bcr(
+-    commit = "f5f475876c85e465d118d72e2b70eea1bc47bc5c",
+-    sha256 = "bc3fedac197524e8dbaaf1a2dbae8bf3cd46dcb1eaccc05536a2c37b5054e966",
+-)
+-use_repo(bazel_registry, "bazel_env", "bazelisk", "bcr_archive")
++# As "rules_proto" is unsupported and superseded by "protobuf", the module `rules_proto_info.bzl`
++# is only for materialized deployment to support repositories that are late with transitioning to
++# "protobuf".
++# Therefore, we do *not* add the dependency of "rules_proto" which would be
++# bazel_dep(name = "rules_proto", version = "7.1.0", max_compatibility_level = 1)
+
+ config = use_extension("//config:extension.bzl", "config")
+ use_repo(config, "intellij_config")

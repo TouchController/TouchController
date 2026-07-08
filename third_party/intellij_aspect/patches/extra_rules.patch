@@ -1,0 +1,11 @@
+--- a/intellij/aspect.bzl
++++ b/intellij/aspect.bzl
+@@ -106,7 +106,7 @@ def _merge_target_info(builder, target, ctx):
+     # generate the target key based on the information currently accumulated by the builder
+     key = intellij_info_builder.build_target_key(builder, target, ctx)
+ 
+-    is_standard_rule = intellij_provider.has_module(target) or target in EXTRA_RULES
++    is_standard_rule = intellij_provider.has_module(target) or ctx.rule.kind in EXTRA_RULES
+ 
+     # write the ide info to file and add the generated file to the appropriate output group
+     intellij_info_builder.append_ide_infos(builder, [ide_info.write(target, ctx, key, info, is_standard_rule)])
