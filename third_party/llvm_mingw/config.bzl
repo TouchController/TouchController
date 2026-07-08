@@ -122,11 +122,10 @@ def _impl(ctx):
     return cc_common.create_cc_toolchain_config_info(
         ctx = ctx,
         features = features,
-        builtin_sysroot = ctx.attr.execroot,
         cxx_builtin_include_directories = [
-            "%sysroot%/include",
-            "%sysroot%/" + ctx.attr.triple + "/include",
-            "%sysroot%/lib/clang/22/include",
+            ctx.attr.execroot + "/include",
+            ctx.attr.execroot + "/" + ctx.attr.triple + "/include",
+            ctx.attr.execroot + "/lib/clang/22/include",
         ],
         toolchain_identifier = "llvm-mingw",
         host_system_name = "local",
