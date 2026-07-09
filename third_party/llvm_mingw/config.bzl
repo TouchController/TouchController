@@ -1,6 +1,6 @@
 """Configuration for LLVM-MinGW toolchain."""
 
-load("@rules_cc//cc:action_names.bzl", "ALL_CC_LINK_ACTION_NAMES", "ALL_CPP_COMPILE_ACTION_NAMES")
+load("@rules_cc//cc:action_names.bzl", "ALL_CC_COMPILE_ACTION_NAMES", "ALL_CC_LINK_ACTION_NAMES")
 load("@rules_cc//cc:cc_toolchain_config_lib.bzl", "artifact_name_pattern", "feature", "flag_group", "flag_set", "tool_path", "with_feature_set")
 load("@rules_cc//cc:defs.bzl", "CcToolchainConfigInfo")
 load("@rules_cc//cc/common:cc_common.bzl", "cc_common")
@@ -70,7 +70,7 @@ def _impl(ctx):
             enabled = True,
             flag_sets = [
                 flag_set(
-                    actions = ALL_CPP_COMPILE_ACTION_NAMES,
+                    actions = ALL_CC_COMPILE_ACTION_NAMES,
                     flag_groups = ([
                         flag_group(
                             flags = [
@@ -100,7 +100,7 @@ def _impl(ctx):
                     ]),
                 ),
                 flag_set(
-                    actions = ALL_CPP_COMPILE_ACTION_NAMES,
+                    actions = ALL_CC_COMPILE_ACTION_NAMES,
                     flag_groups = ([
                         flag_group(
                             flags = ["-O2", "-g"],
