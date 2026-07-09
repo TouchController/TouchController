@@ -18,7 +18,8 @@ steps:
     settings:
       hosts:
         from_secret: RSYNC_HOST
-      port: 22
+      port:
+        from_secret: RSYNC_PORT
       source: book/
       target: /
       user: tcwiki
