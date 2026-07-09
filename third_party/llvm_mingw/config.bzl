@@ -74,6 +74,18 @@ def _impl(ctx):
                     flag_groups = ([
                         flag_group(
                             flags = [
+                                "-isystem",
+                                ctx.attr.execroot + "/" + ctx.attr.triple + "/include/c++/v1",
+                                "-isystem",
+                                ctx.attr.execroot + "/lib/clang/22/include",
+                                "-isystem",
+                                ctx.attr.execroot + "/" + ctx.attr.triple + "/include",
+                                "-isystem",
+                                ctx.attr.execroot + "/include",
+                            ],
+                        ),
+                        flag_group(
+                            flags = [
                                 "-gcodeview",
                                 # Reproducibility
                                 "-Wno-builtin-macro-redefined",
