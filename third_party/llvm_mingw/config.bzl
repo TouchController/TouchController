@@ -75,13 +75,15 @@ def _impl(ctx):
                         flag_group(
                             flags = [
                                 "-isystem",
+                                ctx.attr.execroot + "/include/c++/v1",
+                                "-isystem",
                                 ctx.attr.execroot + "/" + ctx.attr.triple + "/include/c++/v1",
                                 "-isystem",
-                                ctx.attr.execroot + "/lib/clang/22/include",
+                                ctx.attr.execroot + "/include",
                                 "-isystem",
                                 ctx.attr.execroot + "/" + ctx.attr.triple + "/include",
                                 "-isystem",
-                                ctx.attr.execroot + "/include",
+                                ctx.attr.execroot + "/lib/clang/22/include",
                             ],
                         ),
                         flag_group(
@@ -135,9 +137,11 @@ def _impl(ctx):
         ctx = ctx,
         features = features,
         cxx_builtin_include_directories = [
-            ctx.attr.execroot + "/include",
-            ctx.attr.execroot + "/" + ctx.attr.triple + "/include",
-            ctx.attr.execroot + "/lib/clang/22/include",
+            "%workspace%/" + ctx.attr.execroot + "/include/c++/v1",
+            "%workspace%/" + ctx.attr.execroot + "/" + ctx.attr.triple + "/include/c++/v1",
+            "%workspace%/" + ctx.attr.execroot + "/include",
+            "%workspace%/" + ctx.attr.execroot + "/" + ctx.attr.triple + "/include",
+            "%workspace%/" + ctx.attr.execroot + "/lib/clang/22/include",
         ],
         toolchain_identifier = "llvm-mingw",
         host_system_name = "local",
