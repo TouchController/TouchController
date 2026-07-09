@@ -28,6 +28,8 @@ jobs:
           ndk-version: r28b
       - name: Setup Bazel
         uses: bazel-contrib/setup-bazel@0.19.0
+        with:
+          repository-cache: MODULE.bazel.lock
       - name: Setup Remote Cache
         uses: ./.github/actions/setup-bazel-cache
         with:
