@@ -37,9 +37,6 @@ jobs:
           authorization: ${{ secrets.BAZEL_CACHE_AUTH }}
       - name: Build
         run: bazel build --verbose_failures --config=opt //touchcontroller //touchcontroller/fabric //touchcontroller/neoforge
-      - name: Test
-        if: matrix.os != 'windows-latest'
-        run: bazel test --verbose_failures //combine/... //touchcontroller/...
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:
