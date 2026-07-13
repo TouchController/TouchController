@@ -6092,7 +6092,7 @@
     "@@rules_mc+//:extensions.bzl%minecraft": {
       "general": {
         "bzlTransitiveDigest": "JORE55QXdJ2BLGPka8Jyrbuv+WCHUhu1+f3lcBzVL0I=",
-        "usagesDigest": "4PAjAxjZgxSN/B9oC9srBcLx/NuhezaKax58c0zMU78=",
+        "usagesDigest": "6p9a8ZrhcxTNHR1guNXiRaKoo0sAnkttnrMrPQSFZxw=",
         "recordedInputs": [
           "REPO_MAPPING:rules_mc+,bazel_tools bazel_tools"
         ],
@@ -6985,19 +6985,19 @@
               "downloaded_file_path": "server.jar"
             }
           },
-          "minecraft_26_3-snapshot-1_client": {
+          "minecraft_26_3-snapshot-3_client": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/f7dbd08cc7462705fc48dd687e64534811edbbf1/client.jar",
-              "integrity": "sha1-99vQjMdGJwX8SN1ofmRTSBHtu/E=",
+              "url": "https://piston-data.mojang.com/v1/objects/50383a4ce84352142b77b10fff8122e3103db661/client.jar",
+              "integrity": "sha1-UDg6TOhDUhQrd7EP/4Ei4xA9tmE=",
               "downloaded_file_path": "client.jar"
             }
           },
-          "minecraft_26_3-snapshot-1_server": {
+          "minecraft_26_3-snapshot-3_server": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/4d9ebd8b9dc87345ab770ceaf43fbeaeab05903f/server.jar",
-              "integrity": "sha1-TZ69i53Ic0Wrdwzq9D++rqsFkD8=",
+              "url": "https://piston-data.mojang.com/v1/objects/6cd1e711f62dc45497df6f390a9e83ba6191be41/server.jar",
+              "integrity": "sha1-bNHnEfYtxFSX3285Cp6DumGRvkE=",
               "downloaded_file_path": "server.jar"
             }
           },
@@ -12093,6 +12093,14 @@
               "path": "org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar"
             }
           },
+          "minecraft_com_mojang_authlib_10_0_76_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/mojang/authlib/10.0.76/authlib-10.0.76.jar",
+              "sha1": "c47995657c2a278b8d2e584115b1d745f051d53a",
+              "path": "com/mojang/authlib/10.0.76/authlib-10.0.76.jar"
+            }
+          },
           "minecraft": {
             "repoRuleId": "@@rules_mc+//private/repo:repo.bzl%minecraft_repo",
             "attributes": {
@@ -12276,7 +12284,7 @@
                   "client#file",
                   "server#file"
                 ],
-                "26.3-snapshot-1": [
+                "26.3-snapshot-3": [
                   "client#file",
                   "server#file"
                 ]
@@ -15015,7 +15023,7 @@
                   "org.lwjgl:lwjgl:3.4.1:unsafe",
                   "org.slf4j:slf4j-api:2.0.17"
                 ],
-                "26.3-snapshot-1": [
+                "26.3-snapshot-3": [
                   "at.yawk.lz4:lz4-java:1.10.1",
                   "ca.weblite:java-objc-bridge:1.1",
                   "com.azure:azure-json:1.4.0",
@@ -15025,7 +15033,7 @@
                   "com.google.guava:guava:33.6.0-jre",
                   "com.ibm.icu:icu4j:78.3",
                   "com.microsoft.azure:msal4j:1.24.1",
-                  "com.mojang:authlib:9.0.75",
+                  "com.mojang:authlib:10.0.76",
                   "com.mojang:blocklist:1.0.10",
                   "com.mojang:brigadier:1.3.10",
                   "com.mojang:datafixerupper:10.0.21",
@@ -16984,6 +16992,9 @@
                 ],
                 "org.lwjgl:lwjgl:3.4.1:unsafe": [
                   "default#struct(path = \"org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar\", sha1 = \"129e06a04f93992cb2a45172435b21fc4b60dd7d\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar\")"
+                ],
+                "com.mojang:authlib:10.0.76": [
+                  "default#struct(path = \"com/mojang/authlib/10.0.76/authlib-10.0.76.jar\", sha1 = \"c47995657c2a278b8d2e584115b1d745f051d53a\", url = \"https://libraries.minecraft.net/com/mojang/authlib/10.0.76/authlib-10.0.76.jar\")"
                 ]
               },
               "library_platforms": {
@@ -18826,6 +18837,9 @@
                 ],
                 "org.lwjgl:lwjgl:3.4.1:unsafe": [
                   "common#default"
+                ],
+                "com.mojang:authlib:10.0.76": [
+                  "common#default"
                 ]
               },
               "library_extracts": {
@@ -18876,19 +18890,19 @@
                 "1.17": "f425401a00adf0112fde624ee80c66333530f8a1",
                 "1.18": "d31a2e85ae149dd1b1a7070b22cb8887892fda6c",
                 "1.19": "a9c8b05a8082a65678beda6dfa2b8f21fa627bce",
-                "5": "9d9dba4b72abfdfeae2e2d40cb9a925a5cac5ade",
-                "12": "4d54c22737ce1e3f5d296bb1f2d05e9b3c3ca310",
-                "16": "994337f4a4cb52f7abe3fef96fd6f2f049333496",
-                "17": "f82ad3343d086a4d89b7533cc552e19294b6ea8f",
-                "18": "2116187c98bcbc30ee43740f2f25f8a55c61d3c0",
-                "19": "657b931a013f651de0a3f7946313ab2aa00cdd0b",
-                "24": "25109da65468286f6897978f83d799894e5ab260",
-                "26": "aff456016a4b9d3966898a78cb2364cd452df0b0",
-                "27": "8ec6db72c2150b4c942bfee53d7ad1c221f555b7",
-                "29": "eeea3c7beb6bb466a7a1b19f4ddcacff48e72afd",
-                "30": "6f0ecbc7a59c7c3708e3df6a0784e8c1cd2ad7c7",
-                "32": "41c4bb3e7eda322c3e7272f9149f9e367e825962",
-                "33": "07ce63a9679cf32ec80eb8b37bf2cdcd67456284"
+                "5": "feb477f106c261e70359207c37e48cc8e27b913c",
+                "12": "3f60c142bfd046fff6565ad840bd33bd2cfdb1d4",
+                "16": "076b35a7a5f1cfc205b20797dbce64aef9c7f21c",
+                "17": "63a8198cacdc21ca940567d5a292e7849f4e2b5c",
+                "18": "58ebde26bf4ed678fdeb79589a20be72ef7c1ac2",
+                "19": "3547afced4ebd0e21a81463b6109403a9ac6e032",
+                "24": "23ae7a110a00d749152c4bc9c2c84dbbb440dc98",
+                "26": "204ca6570d6c3a994d18a170398b35c31da6b94d",
+                "27": "081f169349aef933e94e3307df948d00737f13d7",
+                "29": "fc013c2caf15e67fc4ebbb60cf7a7855d7b1f3fa",
+                "30": "05c28829f3390b6aee15856d1182cf4b1c910a0f",
+                "32": "49da57a9512de46382d2fe4b68af047fea7a16f9",
+                "33": "8bd5fd17b9faca6626a3af63a578ba4751037d78"
               },
               "asset_urls": {
                 "pre-1.6": "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json",
@@ -18901,19 +18915,19 @@
                 "1.17": "https://piston-meta.mojang.com/v1/packages/f425401a00adf0112fde624ee80c66333530f8a1/1.17.json",
                 "1.18": "https://piston-meta.mojang.com/v1/packages/d31a2e85ae149dd1b1a7070b22cb8887892fda6c/1.18.json",
                 "1.19": "https://piston-meta.mojang.com/v1/packages/a9c8b05a8082a65678beda6dfa2b8f21fa627bce/1.19.json",
-                "5": "https://piston-meta.mojang.com/v1/packages/9d9dba4b72abfdfeae2e2d40cb9a925a5cac5ade/5.json",
-                "12": "https://piston-meta.mojang.com/v1/packages/4d54c22737ce1e3f5d296bb1f2d05e9b3c3ca310/12.json",
-                "16": "https://piston-meta.mojang.com/v1/packages/994337f4a4cb52f7abe3fef96fd6f2f049333496/16.json",
-                "17": "https://piston-meta.mojang.com/v1/packages/f82ad3343d086a4d89b7533cc552e19294b6ea8f/17.json",
-                "18": "https://piston-meta.mojang.com/v1/packages/2116187c98bcbc30ee43740f2f25f8a55c61d3c0/18.json",
-                "19": "https://piston-meta.mojang.com/v1/packages/657b931a013f651de0a3f7946313ab2aa00cdd0b/19.json",
-                "24": "https://piston-meta.mojang.com/v1/packages/25109da65468286f6897978f83d799894e5ab260/24.json",
-                "26": "https://piston-meta.mojang.com/v1/packages/aff456016a4b9d3966898a78cb2364cd452df0b0/26.json",
-                "27": "https://piston-meta.mojang.com/v1/packages/8ec6db72c2150b4c942bfee53d7ad1c221f555b7/27.json",
-                "29": "https://piston-meta.mojang.com/v1/packages/eeea3c7beb6bb466a7a1b19f4ddcacff48e72afd/29.json",
-                "30": "https://piston-meta.mojang.com/v1/packages/6f0ecbc7a59c7c3708e3df6a0784e8c1cd2ad7c7/30.json",
-                "32": "https://piston-meta.mojang.com/v1/packages/41c4bb3e7eda322c3e7272f9149f9e367e825962/32.json",
-                "33": "https://piston-meta.mojang.com/v1/packages/07ce63a9679cf32ec80eb8b37bf2cdcd67456284/33.json"
+                "5": "https://piston-meta.mojang.com/v1/packages/feb477f106c261e70359207c37e48cc8e27b913c/5.json",
+                "12": "https://piston-meta.mojang.com/v1/packages/3f60c142bfd046fff6565ad840bd33bd2cfdb1d4/12.json",
+                "16": "https://piston-meta.mojang.com/v1/packages/076b35a7a5f1cfc205b20797dbce64aef9c7f21c/16.json",
+                "17": "https://piston-meta.mojang.com/v1/packages/63a8198cacdc21ca940567d5a292e7849f4e2b5c/17.json",
+                "18": "https://piston-meta.mojang.com/v1/packages/58ebde26bf4ed678fdeb79589a20be72ef7c1ac2/18.json",
+                "19": "https://piston-meta.mojang.com/v1/packages/3547afced4ebd0e21a81463b6109403a9ac6e032/19.json",
+                "24": "https://piston-meta.mojang.com/v1/packages/23ae7a110a00d749152c4bc9c2c84dbbb440dc98/24.json",
+                "26": "https://piston-meta.mojang.com/v1/packages/204ca6570d6c3a994d18a170398b35c31da6b94d/26.json",
+                "27": "https://piston-meta.mojang.com/v1/packages/081f169349aef933e94e3307df948d00737f13d7/27.json",
+                "29": "https://piston-meta.mojang.com/v1/packages/fc013c2caf15e67fc4ebbb60cf7a7855d7b1f3fa/29.json",
+                "30": "https://piston-meta.mojang.com/v1/packages/05c28829f3390b6aee15856d1182cf4b1c910a0f/30.json",
+                "32": "https://piston-meta.mojang.com/v1/packages/49da57a9512de46382d2fe4b68af047fea7a16f9/32.json",
+                "33": "https://piston-meta.mojang.com/v1/packages/8bd5fd17b9faca6626a3af63a578ba4751037d78/33.json"
               },
               "version_assets": {
                 "b1.7.3": "pre-1.6",
@@ -18950,7 +18964,7 @@
                 "26w14a": "30",
                 "26.1.2": "30",
                 "26.2": "32",
-                "26.3-snapshot-1": "33"
+                "26.3-snapshot-3": "33"
               }
             }
           }

@@ -255,7 +255,7 @@ fabric_versions = {
     },
     "26.3": {
         "intermediary": False,
-        "api": "0.153.1+26.3",
+        "api": "0.154.3+26.3",
         "loader": "0.19.3",
         "mixin": "0.17.3+mixin.0.8.7",
         "mixin_extras": "0.5.4",
