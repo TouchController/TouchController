@@ -2,6 +2,7 @@ package top.fifthlight.combine.backend.minecraft.render.v26_2
 
 import com.mojang.blaze3d.platform.cursor.CursorType
 import com.mojang.blaze3d.platform.cursor.CursorTypes
+import it.unimi.dsi.fastutil.booleans.BooleanArrayList
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphicsExtractor
@@ -20,40 +21,50 @@ import top.fifthlight.combine.item.data.ItemStack
 import top.fifthlight.combine.item.paint.ItemCanvas
 import top.fifthlight.data.*
 
-class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
+class CanvasImpl(graphics: GuiGraphicsExtractor) : ItemCanvas {
     private fun GuiGraphicsExtractor.addGuiElement(guiElementRenderState: GuiElementRenderState) =
         (this as SubmittableGuiGraphics).`combine$addGuiElement`(guiElementRenderState)
 
     private fun GuiGraphicsExtractor.peekScissorStack() =
         (this as SubmittableGuiGraphics).`combine$peekScissorStack`()
 
+    private val graphics = graphics
+        get() =
+            field
     val client: Minecraft
         get() = Minecraft.getInstance()
     private val font: Font
         get() = client.font
 
+    private val disableRenderingStack = BooleanArrayList(64)
+    private val disableRendering
+        get() = disableRenderingStack.isNotEmpty() && disableRenderingStack.getBoolean(disableRenderingStack.size - 1)
+
+    val guiGraphics: GuiGraphicsExtractor?
+        get() = graphics.takeIf { !disableRendering }
+
     override fun pushState() {
-        guiGraphics.pose().pushMatrix()
+        graphics.pose().pushMatrix()
     }
 
     override fun popState() {
-        guiGraphics.pose().popMatrix()
+        graphics.pose().popMatrix()
     }
 
     override fun translate(x: Int, y: Int) {
-        guiGraphics.pose().translate(x.toFloat(), y.toFloat())
+        graphics.pose().translate(x.toFloat(), y.toFloat())
     }
 
     override fun translate(x: Float, y: Float) {
-        guiGraphics.pose().translate(x, y)
+        graphics.pose().translate(x, y)
     }
 
     override fun rotate(degrees: Float) {
-        guiGraphics.pose().rotate(Math.toRadians(degrees.toDouble()).toFloat())
+        graphics.pose().rotate(Math.toRadians(degrees.toDouble()).toFloat())
     }
 
     override fun scale(x: Float, y: Float) {
-        guiGraphics.pose().scale(x, y)
+        graphics.pose().scale(x, y)
     }
 
     override fun fillRect(
@@ -61,7 +72,10 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
         size: IntSize,
         color: Color,
     ) {
-        guiGraphics.fill(offset.x, offset.y, offset.x + size.width, offset.y + size.height, color.value)
+        if (disableRendering) {
+            return
+        }
+        graphics.fill(offset.x, offset.y, offset.x + size.width, offset.y + size.height, color.value)
     }
 
     override fun fillGradientRect(
@@ -72,11 +86,14 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
         rightTopColor: Color,
         rightBottomColor: Color,
     ) {
-        guiGraphics.addGuiElement(
+        if (disableRendering) {
+            return
+        }
+        graphics.addGuiElement(
             GradientRectangleRenderState(
                 pipeline = RenderPipelines.GUI,
                 textureSetup = TextureSetup.noTexture(),
-                pose = Matrix3x2f(guiGraphics.pose()),
+                pose = Matrix3x2f(graphics.pose()),
                 x0 = offset.x,
                 y0 = offset.y,
                 x1 = offset.x + size.width,
@@ -85,7 +102,7 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
                 leftBottomColor = leftBottomColor,
                 rightTopColor = rightTopColor,
                 rightBottomColor = rightBottomColor,
-                screenRectangle = guiGraphics.peekScissorStack(),
+                screenRectangle = graphics.peekScissorStack(),
             )
         )
     }
@@ -95,7 +112,10 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
         size: IntSize,
         color: Color,
     ) {
-        guiGraphics.outline(offset.x, offset.y, size.width, size.height, color.value)
+        if (disableRendering) {
+            return
+        }
+        graphics.outline(offset.x, offset.y, size.width, size.height, color.value)
     }
 
     override fun drawText(
@@ -103,7 +123,10 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
         text: String,
         color: Color,
     ) {
-        guiGraphics.text(font, text, offset.x, offset.y, color.value, false)
+        if (disableRendering) {
+            return
+        }
+        graphics.text(font, text, offset.x, offset.y, color.value, false)
     }
 
     override fun drawText(
@@ -112,7 +135,10 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
         text: String,
         color: Color,
     ) {
-        guiGraphics.textWithWordWrap(font, Component.literal(text), offset.x, offset.y, width, color.value, false)
+        if (disableRendering) {
+            return
+        }
+        graphics.textWithWordWrap(font, Component.literal(text), offset.x, offset.y, width, color.value, false)
     }
 
     override fun drawText(
@@ -120,7 +146,10 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
         text: Text,
         color: Color,
     ) {
-        guiGraphics.text(font, text.toMinecraft(), offset.x, offset.y, color.value, false)
+        if (disableRendering) {
+            return
+        }
+        graphics.text(font, text.toMinecraft(), offset.x, offset.y, color.value, false)
     }
 
     override fun drawText(
@@ -129,16 +158,21 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
         text: Text,
         color: Color,
     ) {
-        guiGraphics.textWithWordWrap(font, text.toMinecraft(), offset.x, offset.y, width, color.value, false)
+        if (disableRendering) {
+            return
+        }
+        graphics.textWithWordWrap(font, text.toMinecraft(), offset.x, offset.y, width, color.value, false)
     }
 
     override fun pushClip(absoluteArea: IntRect, relativeArea: IntRect) {
-        // TODO: size cannot be 0
-        guiGraphics.enableScissor(relativeArea.left, relativeArea.top, relativeArea.right, relativeArea.bottom)
+        graphics.enableScissor(relativeArea.left, relativeArea.top, relativeArea.right, relativeArea.bottom)
+        val lastScissorItem = graphics.peekScissorStack()
+        disableRenderingStack.push(lastScissorItem.width <= 0 || lastScissorItem.height <= 0)
     }
 
     override fun popClip() {
-        guiGraphics.disableScissor()
+        graphics.disableScissor()
+        disableRenderingStack.popBoolean()
     }
 
     override fun drawItemStack(
@@ -146,10 +180,13 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
         size: IntSize,
         stack: ItemStack,
     ) {
+        if (disableRendering) {
+            return
+        }
         val minecraftStack = stack.toVanilla()
         pushState()
-        guiGraphics.pose().scale(size.width.toFloat() / 16f, size.height.toFloat() / 16f)
-        guiGraphics.item(minecraftStack, offset.x, offset.y)
+        graphics.pose().scale(size.width.toFloat() / 16f, size.height.toFloat() / 16f)
+        graphics.item(minecraftStack, offset.x, offset.y)
         popState()
     }
 
@@ -166,6 +203,6 @@ class CanvasImpl(val guiGraphics: GuiGraphicsExtractor) : ItemCanvas {
     }
 
     override fun requestPointerIcon(pointer: PointerIcon) {
-        guiGraphics.requestCursor(mapPointer(pointer))
+        graphics.requestCursor(mapPointer(pointer))
     }
 }

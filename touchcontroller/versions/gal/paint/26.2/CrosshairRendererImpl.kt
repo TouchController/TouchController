@@ -115,7 +115,7 @@ object CrosshairRendererImpl : CrosshairRenderer {
 
     override fun renderOuter(canvas: Canvas, radius: Int, outerRadius: Int) {
         val drawContext = (canvas as CanvasImpl).guiGraphics
-        drawContext.addGuiElement(
+        drawContext?.addGuiElement(
             CrosshairOuterGuiElementRenderState(
                 pose = Matrix3x2f(drawContext.pose()),
                 radius = radius,
@@ -126,6 +126,6 @@ object CrosshairRendererImpl : CrosshairRenderer {
 
     override fun renderInner(canvas: Canvas, radius: Int, outerRadius: Int, initialProgress: Float, progress: Float) {
         val drawContext = (canvas as CanvasImpl).guiGraphics
-        drawContext.addGuiElement(CrosshairInnerGuiElementRenderState(Matrix3x2f(drawContext.pose()), radius, progress))
+        drawContext?.addGuiElement(CrosshairInnerGuiElementRenderState(Matrix3x2f(drawContext.pose()), radius, progress))
     }
 }
