@@ -74,6 +74,38 @@ if ! command -v xcodebuild >/dev/null 2>&1; then
   exit 1
 fi
 
+# -----------------------------------------------------------------------------
+# 检测 JDK include 路径（提供 jni.h 头文件）
+# ios.c 通过 ios.h #include <jni.h>，需要 JDK 提供的头文件路径
+# -----------------------------------------------------------------------------
+if [ -z "${JAVA_HOME:-}" ] || [ ! -d "${JAVA_HOME}/include" ]; then
+  # macOS 使用 /usr/libexec/java_home 查找默认 JDK
+  if command -v /usr/libexec/java_home >/dev/null 2>&1; then
+    JAVA_HOME="$(/usr/libexec/java_home 2>/dev/null || true)"
+    export JAVA_HOME
+  fi
+fi
+
+if [ -z "${JAVA_HOME:-}" ] || [ ! -d "${JAVA_HOME}/include" ]; then
+  echo "错误：未找到 JDK（需要 jni.h 头文件）。请安装 JDK 或设置 JAVA_HOME 环境变量。" >&2
+  echo "      macOS 上可通过 brew install --cask temurin 安装。" >&2
+  exit 1
+fi
+
+JNI_INCLUDE_DIR="${JAVA_HOME}/include"
+JNI_INCLUDE_OS_DIR="${JAVA_HOME}/include/darwin"
+if [ ! -f "${JNI_INCLUDE_DIR}/jni.h" ]; then
+  echo "错误：${JNI_INCLUDE_DIR}/jni.h 不存在，JDK 安装异常。" >&2
+  exit 1
+fi
+if [ ! -d "${JNI_INCLUDE_OS_DIR}" ]; then
+  echo "错误：${JNI_INCLUDE_OS_DIR} 不存在，JDK 安装异常（macOS 应有 darwin 子目录）。" >&2
+  exit 1
+fi
+
+echo "===> Using JAVA_HOME: ${JAVA_HOME}"
+echo "===> jni.h path:       ${JNI_INCLUDE_DIR}/jni.h"
+
 # 获取 iOS 设备 SDK 路径
 IOS_SDK_PATH="$(xcrun --sdk iphoneos --show-sdk-path)"
 SIM_SDK_PATH="$(xcrun --sdk iphonesimulator --show-sdk-path)"
@@ -89,7 +121,8 @@ mkdir -p "${BUILD_DIR}/headers"
 
 # 通用编译选项
 # -I. 包含仓库根，使 ios.c 能通过 "touchcontroller/proxy/server/util/ringbuffer/ring_buffer.h" 路径找到头文件
-COMMON_CFLAGS="-O2 -fPIC -c -I."
+# -I${JNI_INCLUDE_DIR} -I${JNI_INCLUDE_OS_DIR} 提供 jni.h 及其平台相关头文件
+COMMON_CFLAGS="-O2 -fPIC -c -I. -I${JNI_INCLUDE_DIR} -I${JNI_INCLUDE_OS_DIR}"
 
 # -----------------------------------------------------------------------------
 # 第 1 步：编译 iOS 设备目标 (arm64)

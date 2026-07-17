@@ -36,6 +36,13 @@ jobs:
           sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
           xcodebuild -version || true
 
+      - name: Set up JDK
+        # jni.h 由 JDK 提供，编译 ios.c 时需要 $JAVA_HOME/include/jni.h 和 $JAVA_HOME/include/darwin/jni_md.h
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
