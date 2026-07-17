@@ -1,8 +1,7 @@
 name: Build TouchController iOS XCFramework
 
 # 构建 iOS 原生库的 XCFramework 包（arm64 设备 + arm64/x86_64 模拟器）
-# 产物供 Amethyst iOS Remastered 启动器集成使用：
-#   cp -r TouchController.xcframework <Amethyst>/Natives/TouchController/
+# 产物供 iOS 端启动器启动器集成使用
 on:
   pull_request:
     paths:
@@ -18,7 +17,6 @@ on:
       - '.github/workflows/touchcontroller-ios-xcframework.yml'
   workflow_dispatch:
 
-# 并发控制：同一分支/PR 新的推送会取消仍在排队或运行的旧构建
 concurrency:
   group: ios-xcframework-${{ github.ref }}
   cancel-in-progress: true
@@ -30,8 +28,6 @@ jobs:
 
     steps:
       - name: Select Xcode 15.4
-        # 与 Amethyst iOS Remastered 启动器保持一致的构建环境
-        # 详见 Amethyst-iOS-MyRemastered/.github/workflows/development.yml
         run: |
           sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
           xcodebuild -version || true
@@ -48,10 +44,6 @@ jobs:
 
       - name: Build XCFramework
         # 执行仓库内 build_xcframework.sh 脚本
-        # 脚本会以仓库根为工作目录，编译 ios.c + ring_buffer.c 为：
-        #   - libproxy_server_ios.a (arm64 设备)
-        #   - libproxy_server_ios_simulator.a (arm64 + x86_64 模拟器，lipo 合并)
-        # 然后用 xcodebuild -create-xcframework 打包为 TouchController.xcframework/
         run: |
           chmod +x touchcontroller/proxy/server/ios/build_xcframework.sh
           bash touchcontroller/proxy/server/ios/build_xcframework.sh
@@ -59,15 +51,15 @@ jobs:
       - name: Verify XCFramework structure
         # 验证 XCFramework 结构完整
         run: |
-          echo "===> XCFramework 结构："
+          echo "XCFramework:"
           find TouchController.xcframework -type f | sort
 
           echo ""
-          echo "===> 验证设备库架构 (arm64)："
+          echo "For iPhone (arm64):"
           lipo -info TouchController.xcframework/ios-arm64/libproxy_server_ios.a
 
           echo ""
-          echo "===> 验证模拟器库架构 (arm64 + x86_64)："
+          echo "For Simulator (arm64+x86_64):"
           lipo -info TouchController.xcframework/ios-arm64_x86_64-simulator/libproxy_server_ios_simulator.a
 
       - name: Upload XCFramework artifact
