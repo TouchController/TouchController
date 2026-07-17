@@ -29,9 +29,10 @@ set -e
 
 # 切换到脚本所在目录的仓库根目录
 # 脚本路径：touchcontroller/proxy/server/ios/build_xcframework.sh
-# 仓库根：  touchcontroller/proxy/server/ios/ -> ../../.. 即仓库根
+# 从 ios/ 目录回退到仓库根需要 4 级 .. ：
+#   ios/ -> server/ -> proxy/ -> touchcontroller/ -> <repo_root>
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../../../.." && pwd)"
 cd "${REPO_ROOT}"
 
 # 源文件（仓库根相对路径）
