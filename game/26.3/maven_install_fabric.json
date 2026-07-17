@@ -6,7 +6,7 @@
     "net.fabricmc:fabric-language-kotlin": -61944167,
     "net.fabricmc:fabric-loader": 297773192,
     "net.fabricmc:sponge-mixin": 1820496474,
-    "repositories": 1218591450
+    "repositories": 240222214
   },
   "__RESOLVED_ARTIFACTS_HASH": {
     "io.github.llamalad7:mixinextras-fabric": -787520331,
@@ -1944,7 +1944,7 @@
       "org.ow2.asm:asm-util:jar:sources",
       "org.ow2.asm:asm:jar:sources"
     ],
-    "https://maven.terraformersmc.com/": [
+    "https://maven.terraformersmc.com/releases/": [
       "io.github.llamalad7:mixinextras-fabric",
       "io.github.llamalad7:mixinextras-fabric:jar:sources",
       "net.fabricmc.fabric-api:fabric-api",
@@ -2082,7 +2082,7 @@
       "org.ow2.asm:asm-util:jar:sources",
       "org.ow2.asm:asm:jar:sources"
     ],
-    "https://maven.nucleoid.xyz/": [
+    "https://maven.nucleoid.xyz/releases/": [
       "io.github.llamalad7:mixinextras-fabric",
       "io.github.llamalad7:mixinextras-fabric:jar:sources",
       "net.fabricmc.fabric-api:fabric-api",

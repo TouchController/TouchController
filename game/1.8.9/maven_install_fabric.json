@@ -8,7 +8,7 @@
     "net.legacyfabric.legacy-fabric-api:legacy-fabric-api": 978159483,
     "net.legacyfabric:intermediary": 1018256280,
     "net.legacyfabric:yarn": 19107148,
-    "repositories": -1681971641
+    "repositories": -1824074270
   },
   "__RESOLVED_ARTIFACTS_HASH": {
     "com.google.code.gson:gson": 2014220752,
@@ -1392,7 +1392,7 @@
     ]
   },
   "repositories": {
-    "https://maven.legacyfabric.net/": [
+    "https://repo.legacyfabric.net/legacyfabric/": [
       "com.google.code.gson:gson",
       "com.google.code.gson:gson:jar:sources",
       "com.google.guava:guava",

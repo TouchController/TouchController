@@ -7,7 +7,7 @@
     "net.fabricmc:fabric-loader": -861132213,
     "net.fabricmc:intermediary": 710529514,
     "net.fabricmc:sponge-mixin": 1140236030,
-    "repositories": 1218591450
+    "repositories": 240222214
   },
   "__RESOLVED_ARTIFACTS_HASH": {
     "com.google.code.gson:gson": 2014220752,
@@ -1611,7 +1611,7 @@
       "org.jetbrains:annotations",
       "org.jetbrains:annotations:jar:sources"
     ],
-    "https://maven.terraformersmc.com/": [
+    "https://maven.terraformersmc.com/releases/": [
       "com.google.code.gson:gson",
       "com.google.code.gson:gson:jar:sources",
       "com.google.guava:guava",
@@ -1734,7 +1734,7 @@
       "org.jetbrains:annotations",
       "org.jetbrains:annotations:jar:sources"
     ],
-    "https://maven.nucleoid.xyz/": [
+    "https://maven.nucleoid.xyz/releases/": [
       "com.google.code.gson:gson",
       "com.google.code.gson:gson:jar:sources",
       "com.google.guava:guava",
