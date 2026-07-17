@@ -1,0 +1,87 @@
+name: Build TouchController iOS XCFramework
+
+# 构建 iOS 原生库的 XCFramework 包（arm64 设备 + arm64/x86_64 模拟器）
+# 产物供 Amethyst iOS Remastered 启动器集成使用：
+#   cp -r TouchController.xcframework <Amethyst>/Natives/TouchController/
+on:
+  pull_request:
+    paths:
+      - 'touchcontroller/proxy/server/ios/**'
+      - 'touchcontroller/proxy/server/util/ringbuffer/**'
+      - '.github/workflows/touchcontroller-ios-xcframework.yml'
+  push:
+    branches:
+      - master
+    paths:
+      - 'touchcontroller/proxy/server/ios/**'
+      - 'touchcontroller/proxy/server/util/ringbuffer/**'
+      - '.github/workflows/touchcontroller-ios-xcframework.yml'
+  workflow_dispatch:
+
+# 并发控制：同一分支/PR 新的推送会取消仍在排队或运行的旧构建
+concurrency:
+  group: ios-xcframework-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build iOS XCFramework
+    runs-on: macos-14
+
+    steps:
+      - name: Select Xcode 15.4
+        # 与 Amethyst iOS Remastered 启动器保持一致的构建环境
+        # 详见 Amethyst-iOS-MyRemastered/.github/workflows/development.yml
+        run: |
+          sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+          xcodebuild -version || true
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build XCFramework
+        # 执行仓库内 build_xcframework.sh 脚本
+        # 脚本会以仓库根为工作目录，编译 ios.c + ring_buffer.c 为：
+        #   - libproxy_server_ios.a (arm64 设备)
+        #   - libproxy_server_ios_simulator.a (arm64 + x86_64 模拟器，lipo 合并)
+        # 然后用 xcodebuild -create-xcframework 打包为 TouchController.xcframework/
+        run: |
+          chmod +x touchcontroller/proxy/server/ios/build_xcframework.sh
+          bash touchcontroller/proxy/server/ios/build_xcframework.sh
+
+      - name: Verify XCFramework structure
+        # 验证 XCFramework 结构完整
+        run: |
+          echo "===> XCFramework 结构："
+          find TouchController.xcframework -type f | sort
+
+          echo ""
+          echo "===> 验证设备库架构 (arm64)："
+          lipo -info TouchController.xcframework/ios-arm64/libproxy_server_ios.a
+
+          echo ""
+          echo "===> 验证模拟器库架构 (arm64 + x86_64)："
+          lipo -info TouchController.xcframework/ios-arm64_x86_64-simulator/libproxy_server_ios_simulator.a
+
+      - name: Upload XCFramework artifact
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: TouchController.xcframework
+          path: TouchController.xcframework/
+
+      - name: Upload device static library
+        # 单独上传设备静态库，方便开发者直接集成（不使用 XCFramework 时）
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: libproxy_server_ios.a
+          path: build/ios_xcframework/libproxy_server_ios.a
+
+      - name: Upload simulator static library
+        # 单独上传模拟器静态库（已 lipo 合并）
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: libproxy_server_ios_simulator.a
+          path: build/ios_xcframework/libproxy_server_ios_simulator.a

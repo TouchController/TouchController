@@ -106,6 +106,26 @@ platform(
     visibility = ["//visibility:public"],
 )
 
+# iOS 平台定义：用于交叉编译 TouchController iOS 原生库
+# 详见 spec: touchcontroller-ios-native-lib
+platform(
+    name = "ios_arm64",
+    constraint_values = [
+        "@platforms//os:ios",
+        "@platforms//cpu:aarch64",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+platform(
+    name = "ios_x86_64",
+    constraint_values = [
+        "@platforms//os:ios",
+        "@platforms//cpu:x86_64",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 constraint_value(
     name = "windows",
     constraint_setting = ":os",
