@@ -44,6 +44,12 @@ jobs:
       - name: Setup Bazel
         uses: bazel-contrib/setup-bazel@0.19.0
 
+      - name: Setup Bazel Mirror
+        uses: ./.github/actions/setup-bazel-cache
+        with:
+          downloader_cfg: ${{ vars.BAZEL_DOWNLOADER_CONFIG }}
+          netrc: ${{ secrets.BAZEL_NETRC }}
+
       - name: Build
         run: bazel build --verbose_failures --config=opt --jobs=2 //touchcontroller:update_log //touchcontroller //touchcontroller/fabric //touchcontroller/neoforge
 
@@ -98,6 +104,12 @@ jobs:
 
       - name: Setup Bazel
         uses: bazel-contrib/setup-bazel@0.19.0
+
+      - name: Setup Bazel Mirror
+        uses: ./.github/actions/setup-bazel-cache
+        with:
+          downloader_cfg: ${{ vars.BAZEL_DOWNLOADER_CONFIG }}
+          netrc: ${{ secrets.BAZEL_NETRC }}
 
       - name: Publish to Modrinth
         shell: bash

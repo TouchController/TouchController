@@ -36,6 +36,8 @@ jobs:
         with:
           host: ${{ vars.BAZEL_CACHE_HOST }}
           authorization: ${{ secrets.BAZEL_CACHE_AUTH }}
+          downloader_cfg: ${{ vars.BAZEL_DOWNLOADER_CONFIG }}
+          netrc: ${{ secrets.BAZEL_NETRC }}
       - name: Build
         run: |
           bazel build --verbose_failures //blazesdl/${{ matrix.game-version }}
