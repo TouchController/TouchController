@@ -140,7 +140,7 @@ data class TextureImpl(
         tint: Color,
         srcRect: Rect,
     ) {
-        val guiGraphics = (canvas as CanvasImpl).guiGraphics
+        val guiGraphics = (canvas as CanvasImpl).guiGraphics ?: return
         val client = Minecraft.getInstance()
         if (sprite) {
             val sprite = guiGraphics.getSprite(identifier)
@@ -191,7 +191,7 @@ data class TextureImpl(
         dstRect: IntRect,
         tint: Color,
     ) {
-        val guiGraphics = (canvas as CanvasImpl).guiGraphics
+        val guiGraphics = (canvas as CanvasImpl).guiGraphics ?: return
         if (sprite) {
             guiGraphics.blitSprite(
                 RenderPipelines.GUI_TEXTURED,
@@ -245,7 +245,7 @@ data class BackgroundTextureImpl(
         tint: Color,
         scale: Float,
     ) {
-        val guiGraphics = (canvas as CanvasImpl).guiGraphics
+        val guiGraphics = (canvas as CanvasImpl).guiGraphics ?: return
         val texture = canvas.client.textureManager.getTexture(identifier)
         guiGraphics.submitElement(
             BlitRenderState(

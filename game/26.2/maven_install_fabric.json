@@ -7,7 +7,7 @@
     "net.fabricmc:fabric-language-kotlin": -61944167,
     "net.fabricmc:fabric-loader": 2105227655,
     "net.fabricmc:sponge-mixin": 1609145561,
-    "repositories": 1218591450
+    "repositories": 240222214
   },
   "__RESOLVED_ARTIFACTS_HASH": {
     "com.terraformersmc:modmenu": 1461328353,
@@ -2003,7 +2003,7 @@
       "org.ow2.asm:asm-util:jar:sources",
       "org.ow2.asm:asm:jar:sources"
     ],
-    "https://maven.terraformersmc.com/": [
+    "https://maven.terraformersmc.com/releases/": [
       "com.terraformersmc:modmenu",
       "com.terraformersmc:modmenu:jar:sources",
       "io.github.llamalad7:mixinextras-fabric",
@@ -2145,7 +2145,7 @@
       "org.ow2.asm:asm-util:jar:sources",
       "org.ow2.asm:asm:jar:sources"
     ],
-    "https://maven.nucleoid.xyz/": [
+    "https://maven.nucleoid.xyz/releases/": [
       "com.terraformersmc:modmenu",
       "com.terraformersmc:modmenu:jar:sources",
       "io.github.llamalad7:mixinextras-fabric",

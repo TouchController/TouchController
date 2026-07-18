@@ -2,8 +2,15 @@ name: 'Setup Bazel Remote Cache'
 
 inputs:
   host:
-    required: true
+    required: false
+    default: ''
   authorization:
+    required: false
+    default: ''
+  downloader_cfg:
+    required: false
+    default: ''
+  netrc:
     required: false
     default: ''
 
@@ -12,14 +19,33 @@ runs:
   steps:
     - name: Setup Bazel Remote Cache
       shell: bash
+      env:
+        NETRC_CONTENT: ${{ inputs.netrc }}
+        DOWNLOADER_CFG_CONTENT: ${{ inputs.downloader_cfg }}
       run: |
         CACHE_RC="${{ runner.temp }}/bazel_cache.bazelrc"
+        DOWNLOADER_CFG="${{ runner.temp }}/downloader.cfg"
+        NETRC_FILE="${{ runner.temp }}/netrc"
+
+        if [ -n "$NETRC_CONTENT" ]; then
+          printf '%s\n' "$NETRC_CONTENT" > "$NETRC_FILE"
+          chmod 600 "$NETRC_FILE"
+          echo "NETRC=$NETRC_FILE" >> "$GITHUB_ENV"
+        fi
+
         {
-          echo "build --remote_cache=${{ inputs.host }}"
-          if [ -n "${{ inputs.authorization }}" ]; then
-            echo "build --remote_header=Authorization=\"${{ inputs.authorization }}\""
+          if [ -n "${{ inputs.host }}" ]; then
+            echo "build --remote_cache=${{ inputs.host }}"
+            if [ -n "${{ inputs.authorization }}" ]; then
+              echo "build --remote_header=Authorization=\"${{ inputs.authorization }}\""
+            fi
+          fi
+          if [ -n "$DOWNLOADER_CFG_CONTENT" ]; then
+            printf '%s\n' "$DOWNLOADER_CFG_CONTENT" > "$DOWNLOADER_CFG"
+            echo "common --downloader_config=$DOWNLOADER_CFG"
           fi
         } > "$CACHE_RC"
+
         if [ -n "$BAZELRC" ]; then
           echo "BAZELRC=$BAZELRC,$CACHE_RC" >> "$GITHUB_ENV"
         else
