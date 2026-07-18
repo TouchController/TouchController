@@ -42,7 +42,7 @@ runs:
           fi
           if [ -n "$DOWNLOADER_CFG_CONTENT" ]; then
             printf '%s\n' "$DOWNLOADER_CFG_CONTENT" > "$DOWNLOADER_CFG"
-            echo "common --downloader_config=$DOWNLOADER_CFG"
+            echo "common --downloader_config=$(realpath "$DOWNLOADER_CFG")"
           fi
         } > "$CACHE_RC"
 
