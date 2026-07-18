@@ -1,6 +1,6 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
-load("@rules_java//java:defs.bzl", "java_library")
 load("//blazesdl:properties.bzl", "blazesdl_api_version")
+load("//rule:maven_publish.bzl", "java_export")
 
 expand_template(
     name = "fabric_mod_json",
@@ -20,9 +20,10 @@ expand_template(
     template = "resources/neoforge.mods.toml",
 )
 
-java_library(
+java_export(
     name = "api",
     srcs = glob(["**/*.java"]),
+    coordinates = "top.fifthlight.blazesdl:blazesdl-api:%s" % blazesdl_api_version,
     resource_strip_prefix = "blazesdl/api",
     resources = [
         ":fabric_mod_json",
