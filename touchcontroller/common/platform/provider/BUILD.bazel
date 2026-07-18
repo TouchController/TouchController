@@ -22,7 +22,6 @@ kt_merge_library(
         ":proxy_server_windows",
         ":proxy_server_windows_legacy",
         ":proxy_server_android",
-        ":proxy_server_ios",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
@@ -99,18 +98,4 @@ cc_jni_library(
         ],
     }),
     deps = ["//touchcontroller/proxy/server/android"],
-)
-
-cc_jni_library(
-    name = "proxy_server_ios",
-    platforms = select({
-        "//:config_release": [
-            "@//platforms:ios_arm64",
-            "@//platforms:ios_x86_64",
-        ],
-        "//conditions:default": [
-            "@//platforms:ios_arm64",
-        ],
-    }),
-    deps = ["//touchcontroller/proxy/server/ios"],
 )
