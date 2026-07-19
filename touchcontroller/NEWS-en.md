@@ -1,5 +1,11 @@
 # TouchController NEWS - User visible changes
 
+## 0.3.1-alpha13
+
+- Fixed crashes caused by zero size scissor area on 26.2
+- Only display alpha version warning dialog on first open of config screen
+- Added support for NeoForge 26.2
+
 ## 0.3.1-alpha12
 
 - Added support for Fabric 26.2
