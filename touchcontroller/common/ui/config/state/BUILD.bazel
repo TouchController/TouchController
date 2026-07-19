@@ -6,7 +6,6 @@ kt_merge_library(
     javac_opts = "//touchcontroller:javac_opts_jvm_8",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     merge_deps = [
-        "//touchcontroller/buildinfo",
         "//touchcontroller/common/config",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
