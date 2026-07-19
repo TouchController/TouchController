@@ -34,6 +34,7 @@ touchcontroller_neoforge_game_versions = [
     "26.1",
     "26.1.1",
     "26.1.2",
+    "26.2",
 ]
 touchcontroller_fabric_game_versions = [
     "1.21.1",

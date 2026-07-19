@@ -44,7 +44,7 @@ public abstract class KeyBindingMixin implements ClickableKeyBinding {
         return false;
     }
 
-    @WrapOperation(method = "forAllKeyMappings", at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V"))
+    @WrapOperation(method = "forAllKeyMappings(Lcom/mojang/blaze3d/platform/InputConstants$Key;Ljava/util/function/Consumer;Z)V", at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V"))
     private static <T> void forAllKeyMappings(Consumer<T> instance, T keyMapping, Operation<Void> original) {
         var configHolder = GlobalConfigHolder.INSTANCE;
         var config = configHolder.getConfig().getValue();
