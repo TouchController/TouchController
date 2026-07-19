@@ -23,7 +23,11 @@ class IosPlatform(socketPath: String) : LargeMessageWrappedPlatform() {
         get() = true
 
     private val handle = Transport.new(socketPath)
-    private val readBuffer = ByteArray(128)
+    // 缓冲区大小必须为 256 字节，与 AndroidPlatform.kt 一致：
+    // LargeMessage 编码后最大为 4B type + 1B length + 1B end + 240B payload = 246 字节，
+    // 128 字节缓冲区会触发 ios_transport_receive_core 的"缓冲区不足"分支，
+    // 导致 LargeMessage 分片被截断、剩余字节永久丢失，文本输入功能损坏。
+    private val readBuffer = ByteArray(256)
 
     override fun pollSmallEvent(): ProxyMessage? {
         val receivedLength = Transport.receive(handle, readBuffer)

@@ -26,6 +26,11 @@ typedef struct ios_transport {
     volatile int running;        // 运行标志（1=运行中，0=请求停止）
     volatile int failed;         // 错误标志（1=工作线程发生错误）
     int is_server;               // 是否服务器模式（1=服务器，0=客户端）
+    // 待处理消息：当 receive 调用时缓冲区不足（message->size > buffer_length），
+    // 消息会被暂存在此字段，下一次 receive 调用会优先使用它。
+    // 这避免了"静默截断并丢弃"的 bug（参考 Android 的 SetByteArrayRegion 会抛异常）。
+    // 返回值约定：>0=接收字节数，0=无消息，-1=错误（transport failed），-2=缓冲区不足
+    struct message* pending_message;
 } ios_transport_t;
 
 // ===== JNI API（供 Mod 通过 JVM JNI 调用）=====

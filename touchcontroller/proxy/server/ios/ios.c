@@ -282,6 +282,8 @@ static ios_transport_t* ios_transport_create(const char* path) {
     transport->running = 1;
     transport->failed = 0;
     transport->is_server = 0;
+    // 初始化 pending_message 为 NULL：用于缓冲区不足时暂存消息
+    transport->pending_message = NULL;
 
     int mutex_read_inited = 0;
     int mutex_write_inited = 0;
@@ -405,21 +407,49 @@ cleanup:
 }
 
 // 接收消息（核心函数）
-// 返回值：>0=接收字节数，0=无消息，-1=错误
+// 返回值约定：
+//   >0 = 接收字节数（已写入 buffer）
+//    0 = 无消息可读
+//   -1 = 错误（transport->failed）
+//   -2 = 缓冲区不足（消息已暂存到 pending_message，下次调用需更大缓冲区）
+// 使用 pending_message 字段暂存超限消息，避免静默截断并丢弃的 bug。
+// 参考 Android 实现：SetByteArrayRegion 在缓冲区不足时会抛 ArrayIndexOutOfBoundsException，
+// 而不是截断数据。
 static int ios_transport_receive_core(ios_transport_t* transport, void* buffer, int buffer_length) {
     if (transport->failed) return -1;
 
+    // 优先处理上一次因缓冲区不足而暂存的消息
+    if (transport->pending_message != NULL) {
+        message_t* msg = transport->pending_message;
+        if ((int)msg->size > buffer_length) {
+            // 缓冲区仍然不足，保留消息，等待下次调用
+            return -2;
+        }
+        // 缓冲区足够，复制并释放暂存消息
+        memcpy(buffer, msg->data, msg->size);
+        int copy_len = (int)msg->size;
+        free_message(msg);
+        transport->pending_message = NULL;
+        return copy_len;
+    }
+
+    // 从 ring_buffer 取出新消息
     pthread_mutex_lock(&transport->read_mutex);
     message_t* message = ring_buffer_dequeue(transport->read_buffer);
     pthread_mutex_unlock(&transport->read_mutex);
 
     if (message == NULL) return 0;
 
-    // 复制消息到 buffer（最多 buffer_length 字节，防止溢出）
-    int copy_len = message->size;
-    if (copy_len > buffer_length) copy_len = buffer_length;
-    memcpy(buffer, message->data, copy_len);
+    // 检查消息大小是否超过缓冲区
+    if ((int)message->size > buffer_length) {
+        // 缓冲区不足：暂存消息到 pending_message，下次调用优先处理
+        transport->pending_message = message;
+        return -2;
+    }
 
+    // 缓冲区足够，复制并释放消息
+    memcpy(buffer, message->data, message->size);
+    int copy_len = (int)message->size;
     free_message(message);
     return copy_len;
 }
@@ -489,6 +519,12 @@ static void ios_transport_destroy(ios_transport_t* transport) {
     message_t* msg;
     while ((msg = ring_buffer_dequeue(transport->read_buffer))) free_message(msg);
     while ((msg = ring_buffer_dequeue(transport->write_buffer))) free_message(msg);
+
+    // 释放因缓冲区不足而暂存的 pending_message
+    if (transport->pending_message != NULL) {
+        free_message(transport->pending_message);
+        transport->pending_message = NULL;
+    }
 
     // 销毁 ring buffer
     if (transport->read_buffer) ring_buffer_free(transport->read_buffer);
@@ -563,6 +599,13 @@ JNIEXPORT jint JNICALL Java_top_fifthlight_touchcontroller_common_platform_ios_T
     // mode=0：复制回 Java 数组并释放 native buffer
     (*env)->ReleaseByteArrayElements(env, buffer, native_buffer, 0);
 
+    if (ret == -2) {
+        // 缓冲区不足：消息已暂存在 pending_message，不抛异常
+        // 返回 0 让 Kotlin 端视为"无消息"，下一帧会再次调用 receive 重试
+        // （IosPlatform.kt 的 readBuffer 已为 256 字节，正常情况下不会触发此分支；
+        //  此处理仅作为安全网，防止异常情况下抛出 Java 异常导致 Mod 崩溃）
+        return 0;
+    }
     if (ret < 0) {
         throw_exception(env, "Transport thread failed");
         return 0;
