@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class SDLWindow extends Window {
-    public static long windowCreateHint = 0;
+    public static long windowCreateFlags = 0;
 
     public SDLWindow(WindowEventHandler windowEventHandler,
                      DisplayData displayData,

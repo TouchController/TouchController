@@ -28,7 +28,7 @@ public class SDLGlBackend extends GlBackend {
 
     @Override
     public void setWindowHints() {
-        SDLWindow.windowCreateHint = SDLVideo.SDL_WINDOW_OPENGL;
+        SDLWindow.windowCreateFlags = SDLVideo.SDL_WINDOW_OPENGL;
         SDLVideo.SDL_GL_SetAttribute(SDLVideo.SDL_GL_CONTEXT_MAJOR_VERSION, VERSION_MAJOR);
         SDLVideo.SDL_GL_SetAttribute(SDLVideo.SDL_GL_CONTEXT_MINOR_VERSION, VERSION_MINOR);
         SDLVideo.SDL_GL_SetAttribute(SDLVideo.SDL_GL_CONTEXT_PROFILE_MASK, SDLVideo.SDL_GL_CONTEXT_PROFILE_CORE);

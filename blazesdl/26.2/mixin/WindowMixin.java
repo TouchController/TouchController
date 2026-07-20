@@ -32,7 +32,7 @@ public abstract class WindowMixin {
 
         backend.setWindowHints();
 
-        var flag = SDLWindow.windowCreateHint;
+        var flag = SDLWindow.windowCreateFlags;
         flag |= SDLVideo.SDL_WINDOW_RESIZABLE;
         flag |= SDLVideo.SDL_WINDOW_HIGH_PIXEL_DENSITY;
         flag |= SDLVideo.SDL_WINDOW_HIDDEN;

@@ -6,6 +6,7 @@
 package top.fifthlight.blazesdl.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallbackI;
@@ -30,13 +31,22 @@ public class RenderSystemMixin {
 
     @Redirect(method = "initBackendSystem", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/GLX;_initGlfw()Ljava/util/function/LongSupplier;"))
     private static LongSupplier redirectInitGlfw() {
+        SDLInit.SDL_SetAppMetadataProperty(SDLInit.SDL_PROP_APP_METADATA_NAME_STRING, "Minecraft");
+        SDLInit.SDL_SetAppMetadataProperty(SDLInit.SDL_PROP_APP_METADATA_VERSION_STRING, SharedConstants.getCurrentVersion().name());
+        SDLInit.SDL_SetAppMetadataProperty(SDLInit.SDL_PROP_APP_METADATA_IDENTIFIER_STRING, "com.mojang.minecraft");
+        SDLInit.SDL_SetAppMetadataProperty(SDLInit.SDL_PROP_APP_METADATA_CREATOR_STRING, "Mojang Studios");
+        SDLInit.SDL_SetAppMetadataProperty(SDLInit.SDL_PROP_APP_METADATA_COPYRIGHT_STRING, "Copyright Mojang AB.");
+        SDLInit.SDL_SetAppMetadataProperty(SDLInit.SDL_PROP_APP_METADATA_URL_STRING, "https://www.minecraft.net");
+        SDLInit.SDL_SetAppMetadataProperty(SDLInit.SDL_PROP_APP_METADATA_TYPE_STRING, "game");
+        SDLHints.SDL_SetHint(SDLHints.SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES, "1");
+        SDLHints.SDL_SetHint(SDLHints.SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
+        SDLHints.SDL_SetHint(SDLHints.SDL_HINT_IME_IMPLEMENTED_UI, "composition");
+
         if (SDLInit.SDL_WasInit(SDLInit.SDL_INIT_VIDEO) == 0) {
             SDLInit.SDL_Init(SDLInit.SDL_INIT_VIDEO);
         }
 
-        final var freq = SDLTimer.SDL_GetPerformanceFrequency();
-        var multiplier = 1_000_000_000.0 / freq;
-        return () -> (long) (SDLTimer.SDL_GetPerformanceCounter() * multiplier);
+        return SDLTimer::SDL_GetTicksNS;
     }
 
     @Inject(method = "setErrorCallback", at = @At(value = "HEAD"), cancellable = true)

@@ -6,6 +6,6 @@ import org.lwjgl.sdl.SDLVideo;
 public class SDLVulkanBackend extends VulkanBackend {
     @Override
     public void setWindowHints() {
-        SDLWindow.windowCreateHint = SDLVideo.SDL_WINDOW_VULKAN;
+        SDLWindow.windowCreateFlags = SDLVideo.SDL_WINDOW_VULKAN;
     }
 }
