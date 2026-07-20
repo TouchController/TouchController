@@ -120,7 +120,7 @@ upload_modrinth(
     token_secret_id = "modrinth_token",
     version_id = blazesdl_26_1_version,
     version_name = blazesdl_26_1_version,
-    version_type = "alpha",
+    version_type = "release",
 )
 
 java_binary(
