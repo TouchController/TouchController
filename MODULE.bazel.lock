@@ -609,9 +609,9 @@
     "//repo:modrinth.bzl%modrinth": {
       "general": {
         "bzlTransitiveDigest": "Pk7MBRYAkIH44dgAesNkdCs8cImxYWh/m0QPJslOz3I=",
-        "usagesDigest": "g2nI+jj1OPEe2XR1YT/gqvUXg2qy9xxxRagp3+VI4eM=",
+        "usagesDigest": "rGNcQ9+deMBpUYEh7Ycvgz9u8NrYpcpmVzddVCuIHgs=",
         "recordedInputs": [
-          "FILE:@@//modrinth_lock.json 52055f83624af4fcb5e20b0f4aea4ec005c8ae12c4dd21b4bfc4e5ae42a5f65b"
+          "FILE:@@//modrinth_lock.json b5b5dfac8416acda08716ba164e4646a31c7f26e19ba9dfc04439fdc5d11818d"
         ],
         "generatedRepoSpecs": {
           "sodium_fabric_1_21": {
@@ -842,6 +842,18 @@
               "primary_file": "kotlinforforge-6.2.0-all.jar"
             }
           },
+          "kotlinforforge_neoforge_26_2": {
+            "repoRuleId": "@@//repo:modrinth.bzl%_modrinth_repo",
+            "attributes": {
+              "sha512": {
+                "kotlinforforge-6.3.0-all.jar": "0092fc7b4db1e35e53e7ddb5e7b4fa1dc5654c9100cdb298ad1b802308a470e75da21019d25774e643ff43bb79e9fb11d03170321504e0e471b4c36c00fad339"
+              },
+              "urls": {
+                "kotlinforforge-6.3.0-all.jar": "https://cdn.modrinth.com/data/ordsPcFz/versions/WSKgpZoB/kotlinforforge-6.3.0-all.jar"
+              },
+              "primary_file": "kotlinforforge-6.3.0-all.jar"
+            }
+          },
           "makeup_ultra_fast": {
             "repoRuleId": "@@//repo:modrinth.bzl%_modrinth_repo",
             "attributes": {
@@ -877,6 +889,7 @@
                 "K2lpyV17",
                 "K2lpyV17",
                 "K2lpyV17",
+                "WSKgpZoB",
                 "jIWDGbU5"
               ],
               "sha512": {
@@ -895,6 +908,7 @@
                 "NrSebcsG#kotlinforforge-5.11.0-all.jar": "b32faa6d616511aff4f8b32197877c53b9f8bee103884ec37c632b5d017bb59a498ec971b68d8d94787043b0c5be666a330b61d285033c341bff83ac28a90992",
                 "pp2cY80Q#kotlinforforge-5.10.0-all.jar": "0c7a23c6b8017c9a24694bc6c0dbcb3d9b4ec630ae2ff965c0ee478ca881ad70f4755388678430b0175c3abe18c66fcbc25ed9be6f600bcdc083743eaecbfc35",
                 "K2lpyV17#kotlinforforge-6.2.0-all.jar": "552e5525e4606b451095b51bedbf0863d55fbd83b047bfedee9318aa28935d606987c905c1943116f612e5a9bd5faabc67241d96ad2d9307927be6c8fb670e65",
+                "WSKgpZoB#kotlinforforge-6.3.0-all.jar": "0092fc7b4db1e35e53e7ddb5e7b4fa1dc5654c9100cdb298ad1b802308a470e75da21019d25774e643ff43bb79e9fb11d03170321504e0e471b4c36c00fad339",
                 "jIWDGbU5#MakeUp-UltraFast-9.2.zip": "5a7d1a0947052941a2304f46d5056b6cdf379ffc20202c01d4f8e18d11c2a0bd18c6f208c63c84b5feac12bbf09726c948e44d68a6c68523bba01aae96989838"
               },
               "primary_file": {
@@ -913,6 +927,7 @@
                 "NrSebcsG": "kotlinforforge-5.11.0-all.jar",
                 "pp2cY80Q": "kotlinforforge-5.10.0-all.jar",
                 "K2lpyV17": "kotlinforforge-6.2.0-all.jar",
+                "WSKgpZoB": "kotlinforforge-6.3.0-all.jar",
                 "jIWDGbU5": "MakeUp-UltraFast-9.2.zip"
               },
               "pin_file": "@@//:modrinth_lock.json"
@@ -924,7 +939,7 @@
     "//repo:neoforge.bzl%neoforge": {
       "general": {
         "bzlTransitiveDigest": "281ibwcBF6F8Y/ne/ZDW21cQP5/CErWmFDIQIkVrhr8=",
-        "usagesDigest": "LXfXYy+DRK9efyVEMoe0oUQBJRDlpnQtewEafnpPlR8=",
+        "usagesDigest": "WiRQ/wa72wY60U4+vWE1vpcIWo2p/U25gJYfprGCJwY=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
@@ -953,7 +968,7 @@
           "REPO_MAPPING:,neoform_26_1 +neoform+neoform_26_1_1",
           "REPO_MAPPING:,neoform_26_1_1 +neoform+neoform_26_1_1_1",
           "REPO_MAPPING:,neoform_26_1_2 +neoform+neoform_26_1_2_1",
-          "REPO_MAPPING:,neoform_26_2 +neoform+neoform_26_2_1",
+          "REPO_MAPPING:,neoform_26_2 +neoform+neoform_26_2_2",
           "REPO_MAPPING:,rules_java rules_java+",
           "REPO_MAPPING:bazel_features+,bazel_features_globals bazel_features++version_extension+bazel_features_globals",
           "REPO_MAPPING:bazel_features+,bazel_features_version bazel_features++version_extension+bazel_features_version",
@@ -973,7 +988,7 @@
           "REPO_MAPPING:rules_java+,compatibility_proxy rules_java++compatibility_proxy+compatibility_proxy",
           "REPO_MAPPING:rules_java+,rules_cc rules_cc+",
           "REPO_MAPPING:rules_java++compatibility_proxy+compatibility_proxy,rules_java rules_java+",
-          "FILE:@@//neoforge_pin.txt 58e92deffe098ee6a3e630eb4f05cd1a9f05bf6f51707ba4c711f31de47ccafb"
+          "FILE:@@//neoforge_pin.txt be126f2f36a50b9c9e494f5a0fa0e30e4c2a4a349e4e362d18728cbe667c8a27"
         ],
         "generatedRepoSpecs": {
           "forge_1_14_4_28_2_26": {
@@ -1295,16 +1310,16 @@
               "joined_patched_sources": "@@+neoform+neoform_26_1_2_1//tasks/joined_patch:joined_patch"
             }
           },
-          "neoforge_26_2_0_6_beta": {
+          "neoforge_26_2_0_25_beta": {
             "repoRuleId": "@@//repo:neoforge.bzl%_neoforge_repo",
             "attributes": {
-              "version": "26.2.0.6-beta",
+              "version": "26.2.0.25-beta",
               "java_target": 25,
               "legacy": false,
-              "userdev_sha256": "00974443de5815e649614a7f34849196b6fca966bcb6da7b900d7503ea8f8953",
-              "universal_sha256": "2266f2fd71ad358bd3c7f0d7cec941fcfedc1d0bb5cd6e79556c1ad6566286c4",
-              "sources_sha256": "fb005a36c20e3f2c9450c3069273106dd53e980440840858292999023059a273",
-              "joined_patched_sources": "@@+neoform+neoform_26_2_1//tasks/joined_patch:joined_patch"
+              "userdev_sha256": "aba11b1a438b3e8c8b78438d11e9afc35cfb360037fce8caaca3d6a201d575c1",
+              "universal_sha256": "95dc533d5ee6a8d56b428723e972b46731b72c508567e3921f9df53f74f2d7eb",
+              "sources_sha256": "0016ca38837eebbae695869c705839246b49a3c1bab0204332b870b1ddb2add2",
+              "joined_patched_sources": "@@+neoform+neoform_26_2_2//tasks/joined_patch:joined_patch"
             }
           },
           "forge_org_ow2_asm_asm_6_2": {
@@ -4795,7 +4810,7 @@
     "//repo:neoform.bzl%neoform": {
       "general": {
         "bzlTransitiveDigest": "dmMPbAIN8FUuQ7aA1DDi9kCNsTfP0dpLSNrKCAgB/5A=",
-        "usagesDigest": "xRvRkij5vw+5d28S1a2Gdm8kpzlghvcoZSeuYK3PHRQ=",
+        "usagesDigest": "KbyNE4p1xg1nCYVZ7kPbGHtNCvKtTHsRnyPIjpfv1JY=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
@@ -5201,12 +5216,12 @@
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
-          "neoform_26_2_1": {
+          "neoform_26_2_2": {
             "repoRuleId": "@@//repo:neoform.bzl%_neoform_repo",
             "attributes": {
-              "version": "26.2-1",
+              "version": "26.2-2",
               "legacy": false,
-              "sha256": "3f5696f47aaa6605621dc1ed44c764a4af8059a11817b073446aef64a42b1d26",
+              "sha256": "09fd01e2371a94c78bc4d0d28645ab88206fcef395795182cee841765ebd5a63",
               "client_jar": "@@rules_mc++minecraft+minecraft//26.2:client",
               "server_jar": "@@rules_mc++minecraft+minecraft//26.2:server",
               "client_libraries": "@@rules_mc++minecraft+minecraft//26.2:client_libraries",

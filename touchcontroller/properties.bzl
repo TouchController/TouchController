@@ -1,5 +1,5 @@
 "Common properties in TouchController"
-touchcontroller_version = "0.3.1-alpha12"
+touchcontroller_version = "0.3.1-alpha13"
 touchcontroller_state = "alpha"
 touchcontroller_description = "Bring controlling style of bedrock version to Java version!"
 touchcontroller_license = "LGPL-3.0-or-later"
@@ -34,6 +34,7 @@ touchcontroller_neoforge_game_versions = [
     "26.1",
     "26.1.1",
     "26.1.2",
+    "26.2",
 ]
 touchcontroller_fabric_game_versions = [
     "1.21.1",

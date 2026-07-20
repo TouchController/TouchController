@@ -142,6 +142,7 @@ java_binary(
     runtime_deps = [
         "//game/26.2:game_client_neoforge",
         "//game/26.2:game_client_libraries",
+        "//game/26.2:game_kotlinforforge",
         "//blazesdl/26.2",
         # Classpath separator
         ":neoforge_merged",

@@ -35,6 +35,12 @@
 			"iris-neoforge-1.9.6+mc1.21.10.jar": "bef87ab163633796d9dd0536c53738444b5904fb78968db5f7a24a35420703740e4e22e133e7942d96986b87a766ff65db49c6bfc07953a0b17ca5a28cc98f8c"
 		}
 	},
+	"WSKgpZoB": {
+		"primary": "kotlinforforge-6.3.0-all.jar",
+		"sha512": {
+			"kotlinforforge-6.3.0-all.jar": "0092fc7b4db1e35e53e7ddb5e7b4fa1dc5654c9100cdb298ad1b802308a470e75da21019d25774e643ff43bb79e9fb11d03170321504e0e471b4c36c00fad339"
+		}
+	},
 	"ihzX2Dvy": {
 		"primary": "sodium-neoforge-0.6.13+mc1.21.6.jar",
 		"sha512": {
