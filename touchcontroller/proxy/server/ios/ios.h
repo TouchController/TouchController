@@ -12,24 +12,21 @@ extern "C" {
 #endif
 
 // iOS transport 内部结构
-// 使用文件系统路径 Unix 域套接字实现启动器与 Mod 之间的双向通信
+// 同进程双端内存队列实现：iOS 上启动器与 Mod 在同一进程内，无需 socket 跨进程通信。
+// 数据流方向：
+//   - Mod → 启动器：Mod 调用 Transport.send()（JNI）入队到 to_launcher_queue；
+//                  启动器调用 touchcontroller_ios_receive()（C API）出队。
+//   - 启动器 → Mod：启动器调用 touchcontroller_ios_send()（C API）入队到 to_mod_queue；
+//                  Mod 调用 Transport.receive()（JNI）出队。
 typedef struct ios_transport {
-    int socket_fd;               // 已连接的 socket（accept 或 connect 后获得）
-    int listen_fd;               // listen socket（仅服务器模式使用，accept 后关闭）
-    int pipe_read_fd;            // pipe 读端（替代 Linux eventfd，用于唤醒工作线程）
-    int pipe_write_fd;           // pipe 写端（发送端写入以唤醒工作线程）
-    ring_buffer_t* read_buffer;  // 接收消息队列（工作线程入队，调用方出队）
-    ring_buffer_t* write_buffer; // 发送消息队列（调用方入队，工作线程出队）
-    pthread_mutex_t read_mutex;  // 保护 read_buffer 的互斥锁
-    pthread_mutex_t write_mutex; // 保护 write_buffer 的互斥锁
-    pthread_t worker_thread;     // 工作线程（负责 socket 读写）
-    volatile int running;        // 运行标志（1=运行中，0=请求停止）
-    volatile int failed;         // 错误标志（1=工作线程发生错误）
-    int is_server;               // 是否服务器模式（1=服务器，0=客户端）
-    // 待处理消息：当 receive 调用时缓冲区不足（message->size > buffer_length），
-    // 消息会被暂存在此字段，下一次 receive 调用会优先使用它。
-    // 这避免了"静默截断并丢弃"的 bug（参考 Android 的 SetByteArrayRegion 会抛异常）。
-    // 返回值约定：>0=接收字节数，0=无消息，-1=错误（transport failed），-2=缓冲区不足
+    ring_buffer_t* to_launcher_queue;   // Mod → 启动器（Mod send 入队，启动器 receive 出队）
+    ring_buffer_t* to_mod_queue;        // 启动器 → Mod（启动器 send 入队，Mod receive 出队）
+    pthread_mutex_t to_launcher_mutex;  // 保护 to_launcher_queue 的互斥锁
+    pthread_mutex_t to_mod_mutex;       // 保护 to_mod_queue 的互斥锁
+    // 缓冲区不足处理：启动器 receive 时若发现消息 size > buffer_length，
+    // 暂存到 pending_message，下次 receive 优先使用。
+    // 仅在 to_launcher_queue 方向（启动器 receive）使用。
+    // 返回值约定：>0=接收字节数，0=无消息，-1=错误，-2=缓冲区不足
     struct message* pending_message;
 } ios_transport_t;
 
@@ -43,13 +40,13 @@ JNIEXPORT jlong JNICALL Java_top_fifthlight_touchcontroller_common_platform_ios_
                                                                                                jclass clazz,
                                                                                                jstring path);
 
-// receive: 从 read_buffer 取出一条消息写入 buffer，返回字节数（0=无消息，负值=错误）
+// receive: 从 to_mod_queue 取出一条消息写入 buffer，返回字节数（0=无消息，负值=错误）
 JNIEXPORT jint JNICALL Java_top_fifthlight_touchcontroller_common_platform_ios_Transport_receive(JNIEnv* env,
                                                                                                   jclass clazz,
                                                                                                   jlong handle,
                                                                                                   jbyteArray buffer);
 
-// send: 将 buffer[off, off+len) 作为消息入队到 write_buffer
+// send: 将 buffer[off, off+len) 作为消息入队到 to_launcher_queue
 JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_ios_Transport_send(JNIEnv* env,
                                                                                                jclass clazz,
                                                                                                jlong handle,
