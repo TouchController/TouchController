@@ -19,6 +19,14 @@ typedef struct message {
     uint8_t* data;
 } message_t;
 
+// 全局共享 transport（同进程单例）
+// iOS 上 Mod 与启动器运行在同一进程内，两者各自调用 new() 必须返回同一个
+// transport 指针，否则会创建两套独立的 ring_buffer 队列，消息无法跨实例传递。
+// 使用引用计数管理生命周期：destroy 仅减少引用，归零时真正释放资源。
+static ios_transport_t* g_shared_transport = NULL;
+static pthread_mutex_t g_init_mutex = PTHREAD_MUTEX_INITIALIZER;
+static int g_ref_count = 0;
+
 // 释放消息
 static void free_message(message_t* msg) {
     if (msg) {
@@ -38,11 +46,9 @@ static void throw_npe(JNIEnv* env, const char* msg) {
 
 // ===== 内部核心函数 =====
 
-// 创建 transport
-// path 参数仅保留兼容性（同进程内存队列无需 socket 文件路径）
-static ios_transport_t* ios_transport_create(const char* path) {
-    (void)path;  // 显式忽略 path 参数
-
+// 首次分配并初始化 transport（仅在 g_shared_transport 为 NULL 时调用）
+// 返回值：成功返回 transport 指针，失败返回 NULL
+static ios_transport_t* ios_transport_alloc(void) {
     ios_transport_t* transport = malloc(sizeof(ios_transport_t));
     if (transport == NULL) return NULL;
 
@@ -81,6 +87,34 @@ cleanup:
     if (transport->to_launcher_queue) ring_buffer_free(transport->to_launcher_queue);
     free(transport);
     return NULL;
+}
+
+// 创建 transport（同进程单例）
+// path 参数仅保留兼容性（同进程内存队列无需 socket 文件路径）
+// 多次调用返回同一个 transport 指针，并增加引用计数；
+// 对应的 destroy 调用仅减少引用计数，归零时才真正释放资源
+static ios_transport_t* ios_transport_create(const char* path) {
+    (void)path;  // 显式忽略 path 参数
+
+    pthread_mutex_lock(&g_init_mutex);
+    if (g_shared_transport != NULL) {
+        // 已存在共享实例，增加引用计数并返回
+        g_ref_count++;
+        pthread_mutex_unlock(&g_init_mutex);
+        return g_shared_transport;
+    }
+
+    // 首次创建
+    ios_transport_t* transport = ios_transport_alloc();
+    if (transport == NULL) {
+        pthread_mutex_unlock(&g_init_mutex);
+        return NULL;
+    }
+
+    g_shared_transport = transport;
+    g_ref_count = 1;
+    pthread_mutex_unlock(&g_init_mutex);
+    return transport;
 }
 
 // 发送消息（核心函数）
@@ -174,8 +208,29 @@ static int ios_transport_receive_core(ios_transport_t* transport,
 }
 
 // 销毁 transport（核心函数）
+// 采用引用计数：减少引用，归零时才真正释放资源
+// 这样 Mod 端和启动器端各自 destroy 时不会相互影响
 static void ios_transport_destroy(ios_transport_t* transport) {
     if (transport == NULL) return;
+
+    // 非共享实例不应出现，但安全起见直接返回
+    pthread_mutex_lock(&g_init_mutex);
+    if (transport != g_shared_transport) {
+        pthread_mutex_unlock(&g_init_mutex);
+        return;
+    }
+
+    // 减少引用计数
+    g_ref_count--;
+    if (g_ref_count > 0) {
+        // 仍有其他引用，保留实例
+        pthread_mutex_unlock(&g_init_mutex);
+        return;
+    }
+
+    // 引用计数归零，真正销毁
+    g_shared_transport = NULL;
+    pthread_mutex_unlock(&g_init_mutex);
 
     // 清理 to_launcher_queue 中的剩余消息
     if (transport->to_launcher_queue) {
