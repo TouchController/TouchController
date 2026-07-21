@@ -1,0 +1,18 @@
+load("//rule:merge_library.bzl", "java_merge_library")
+
+java_merge_library(
+    name = "maven385",
+    srcs = [
+        "MavenVersionFactory.java",
+        "MavenVersionItem.java",
+        "MavenVersionRange.java",
+    ],
+    javacopts = ["--release=8"],
+    merge_deps = [
+        "//multijar/common",
+    ],
+    visibility = ["//multijar:__subpackages__"],
+    deps = [
+        "@neoforge_1_21_1//:org_apache_maven_maven_artifact",
+    ],
+)

@@ -57,8 +57,8 @@ unified_jar(
     fabric_deps = touchcontroller_fabric_config | combine_unified_fabric | touchcontroller_unified_fabric,
     fabric_mod_json = "//touchcontroller/fabric:fabric_mod_json",
     merge_deps = touchcontroller_merge_deps,
-    neoforge_deps = touchcontroller_neoforge_config | combine_unified_neoforge | touchcontroller_unified_neoforge,
     neoforge_mod_toml = "//touchcontroller/neoforge:neoforge_mod_toml",
+    neoforge_rules = touchcontroller_neoforge_config | combine_unified_neoforge | touchcontroller_unified_neoforge,
     resources = {":icon": "touchcontroller"},
     deps = touchcontroller_fabric_deps | touchcontroller_common_deps | touchcontroller_neoforge_deps | combine_unified_deps | touchcontroller_unified_deps,
 )

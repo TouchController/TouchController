@@ -12,7 +12,12 @@ import net.neoforged.neoforgespi.locating.IModFile;
 import net.neoforged.neoforgespi.locating.ModFileDiscoveryAttributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import top.fifthlight.multijar.common.ComparableMultiJarManifest;
+import top.fifthlight.multijar.common.JarItem;
 import top.fifthlight.multijar.common.MultiJarManifest;
+import top.fifthlight.multijar.common.maven385.MavenVersionFactory;
+import top.fifthlight.multijar.common.maven385.MavenVersionItem;
+import top.fifthlight.multijar.common.maven385.MavenVersionRange;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Function;
 
 public class NeoV3Locator implements IDependencyLocator {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeoV3Locator.class);
@@ -43,23 +49,20 @@ public class NeoV3Locator implements IDependencyLocator {
         attributes = ModFileDiscoveryAttributes.DEFAULT.withDependencyLocator(this);
     }
 
-    private static Optional<IModInfo> findModInfo(List<IModFile> loadedMods, String modId) {
-        return loadedMods.stream()
-                .flatMap(file -> file.getModInfos().stream())
-                .filter(info -> Objects.equals(info.getModId(), modId))
-                .findFirst();
-    }
-
-    private void processJar(JarContents contents, String minecraftVersionStr, IDiscoveryPipeline pipeline) throws IOException {
+    private void processJar(
+            JarContents contents,
+            Function<String, Optional<MavenVersionItem>> modVersionProvider,
+            IDiscoveryPipeline pipeline
+    ) throws IOException {
         var manifestUri = contents.findFile(MultiJarManifest.NEOFORGE_MANIFEST_PATH);
         if (manifestUri.isEmpty()) {
             return;
         }
         var manifestPath = Path.of(manifestUri.get());
 
-        MultiJarManifest manifest;
+        ComparableMultiJarManifest<MavenVersionItem, MavenVersionRange> manifest;
         try (var reader = Files.newBufferedReader(manifestPath)) {
-            manifest = MultiJarManifest.fromJson(reader);
+            manifest = ComparableMultiJarManifest.fromJson(reader, MavenVersionFactory.INSTANCE);
         } catch (FileNotFoundException | NoSuchFileException e) {
             return;
         } catch (Exception e) {
@@ -69,9 +72,8 @@ public class NeoV3Locator implements IDependencyLocator {
 
         LOGGER.info("Loading mod {}", contents.getPrimaryPath());
 
-        var items = manifest.items(minecraftVersionStr);
         item:
-        for (var item : items) {
+        for (JarItem item : manifest.items(modVersionProvider)) {
             var jijPaths = new ArrayList<Path>();
             for (var path : item.jarPaths()) {
                 var jij = contents.findFile(path);
@@ -89,22 +91,29 @@ public class NeoV3Locator implements IDependencyLocator {
 
     @Override
     public void scanMods(List<IModFile> loadedMods, IDiscoveryPipeline pipeline) {
-        var minecraftInfo = findModInfo(loadedMods, "minecraft");
-        if (minecraftInfo.isEmpty()) {
+        var modVersions = new HashMap<String, MavenVersionItem>();
+        for (var modFile : loadedMods) {
+            for (var modInfo : modFile.getModInfos()) {
+                modVersions.put(modInfo.getModId(), new MavenVersionItem(modInfo.getVersion()));
+            }
+        }
+        Function<String, Optional<MavenVersionItem>> modVersionProvider = modid -> Optional.ofNullable(modVersions.get(modid));
+
+        var minecraftVersion = modVersions.get("minecraft");
+        if (minecraftVersion == null) {
             LOGGER.error("Could not find minecraft mod!");
             return;
         }
-        var minecraftVersionStr = minecraftInfo.get().getVersion().toString();
-        var gameDirectory = FMLPaths.GAMEDIR.get();
 
-        LOGGER.info("MultiJar loader on Minecraft {} in directory {}", minecraftVersionStr, gameDirectory);
+        var gameDirectory = FMLPaths.GAMEDIR.get();
+        LOGGER.info("MultiJar loader on Minecraft {} in directory {}", minecraftVersion, gameDirectory);
 
         if (!FMLEnvironment.production) {
             for (var path : DevEnvUtils.findFileSystemRootsOfFileOnClasspath(
                     MultiJarManifest.NEOFORGE_MANIFEST_PATH)) {
                 if (!Files.isRegularFile(path)) continue;
                 try (var contents = JarContents.of(path)) {
-                    processJar(contents, minecraftVersionStr, pipeline);
+                    processJar(contents, modVersionProvider, pipeline);
                 } catch (IOException e) {
                     LOGGER.warn("Failed to read mod {} in classpath", path);
                 }
@@ -126,7 +135,7 @@ public class NeoV3Locator implements IDependencyLocator {
                 } catch (IOException ignored) {}
 
                 try (var contents = JarContents.of(path)) {
-                    processJar(contents, minecraftVersionStr, pipeline);
+                    processJar(contents, modVersionProvider, pipeline);
                 } catch (IOException e) {
                     LOGGER.warn("Failed to read mod {}", path);
                 }

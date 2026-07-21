@@ -9,7 +9,12 @@ import net.neoforged.neoforgespi.locating.IModFile;
 import net.neoforged.neoforgespi.locating.ModFileDiscoveryAttributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import top.fifthlight.multijar.common.ComparableMultiJarManifest;
+import top.fifthlight.multijar.common.JarItem;
 import top.fifthlight.multijar.common.MultiJarManifest;
+import top.fifthlight.multijar.common.maven385.MavenVersionFactory;
+import top.fifthlight.multijar.common.maven385.MavenVersionItem;
+import top.fifthlight.multijar.common.maven385.MavenVersionRange;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +28,7 @@ import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.function.Function;
 
 public class NeoV10Locator implements IDependencyLocator {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeoV10Locator.class);
@@ -43,43 +49,47 @@ public class NeoV10Locator implements IDependencyLocator {
         attributes = ModFileDiscoveryAttributes.DEFAULT.withDependencyLocator(this);
     }
 
-    private static Optional<IModInfo> findModInfo(List<IModFile> loadedMods, String modId) {
-        return loadedMods.stream()
-                .flatMap(file -> file.getModInfos().stream())
-                .filter(info -> Objects.equals(info.getModId(), modId))
-                .findFirst();
-    }
-
     @Override
     public void scanMods(List<IModFile> loadedMods, IDiscoveryPipeline pipeline) {
-        var minecraftInfo = findModInfo(loadedMods, "minecraft");
-        if (minecraftInfo.isEmpty()) {
+        var modVersions = new HashMap<String, MavenVersionItem>();
+        for (var modFile : loadedMods) {
+            for (var modInfo : modFile.getModInfos()) {
+                modVersions.put(modInfo.getModId(), new MavenVersionItem(modInfo.getVersion()));
+            }
+        }
+        Function<String, Optional<MavenVersionItem>> modVersionProvider = modid -> Optional.ofNullable(modVersions.get(modid));
+
+        var minecraftVersion = modVersions.get("minecraft");
+        if (minecraftVersion == null) {
             LOGGER.error("Could not find minecraft mod!");
             return;
         }
-        var minecraftVersionStr = minecraftInfo.get().getVersion().toString();
 
-        LOGGER.info("MultiJar loader on Minecraft {}", minecraftVersionStr);
+        LOGGER.info("MultiJar loader on Minecraft {}", minecraftVersion);
 
         try {
             var jarPath = Path.of(NeoV10Locator.class.getProtectionDomain().getCodeSource().getLocation().toURI());
             try (var content = JarContents.ofPath(jarPath)) {
-                processJar(content, minecraftVersionStr, pipeline);
+                processJar(content, modVersionProvider, pipeline);
             }
         } catch (Exception ex) {
             throw new RuntimeException("Failed to open mod JAR", ex);
         }
     }
 
-    private void processJar(JarContents contents, String minecraftVersionStr, IDiscoveryPipeline pipeline) throws IOException {
+    private void processJar(
+            JarContents contents,
+            Function<String, Optional<MavenVersionItem>> modVersionProvider,
+            IDiscoveryPipeline pipeline
+    ) throws IOException {
         var manifestStream = contents.openFile(MultiJarManifest.NEOFORGE_MANIFEST_PATH);
         if (manifestStream == null) {
             return;
         }
 
-        MultiJarManifest manifest;
+        ComparableMultiJarManifest<MavenVersionItem, MavenVersionRange> manifest;
         try (var reader = new BufferedReader(new InputStreamReader(manifestStream))) {
-            manifest = MultiJarManifest.fromJson(reader);
+            manifest = ComparableMultiJarManifest.fromJson(reader, MavenVersionFactory.INSTANCE);
         } catch (Exception e) {
             LOGGER.warn("Failed to parse loader manifest for mod {}", contents.getPrimaryPath(), e);
             return;
@@ -87,9 +97,8 @@ public class NeoV10Locator implements IDependencyLocator {
 
         LOGGER.info("Loading mod {}", contents.getPrimaryPath());
 
-        var items = manifest.items(minecraftVersionStr);
         item:
-        for (var item : items) {
+        for (JarItem item : manifest.items(modVersionProvider)) {
             var jijPaths = new ArrayList<Path>();
             for (var path : item.jarPaths()) {
                 var jij = contents.findFile(path);

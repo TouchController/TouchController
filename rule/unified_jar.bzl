@@ -55,19 +55,17 @@ def _unified_jar_impl(ctx):
         args.add(key)
         args.add(value)
 
-    # neoforge_deps: modid -> list of mcvers (for UnifiedJarManifestPlugin)
-    for key, values in ctx.attr.neoforge_deps.items():
-        for value in values:
-            args.add("--unified-neoforge")
-            args.add(key)
-            args.add(value)
+    # neoforge_rules: modid -> condition spec string (for UnifiedJarManifestPlugin)
+    for key, value in ctx.attr.neoforge_rules.items():
+        args.add("--unified-neoforge-rule")
+        args.add(key)
+        args.add(value)
 
-    # forge_deps: modid -> list of mcvers (for UnifiedJarManifestPlugin)
-    for key, values in ctx.attr.forge_deps.items():
-        for value in values:
-            args.add("--unified-forge")
-            args.add(key)
-            args.add(value)
+    # forge_rules: modid -> condition spec string (for UnifiedJarManifestPlugin)
+    for key, value in ctx.attr.forge_rules.items():
+        args.add("--unified-forge-rule")
+        args.add(key)
+        args.add(value)
 
     # merge_deps: modid -> modid (for UnifiedJarManifestPlugin)
     for key, value in ctx.attr.merge_deps.items():
@@ -113,17 +111,17 @@ unified_jar = rule(
             default = {},
             doc = "Fabric entries: modid -> version",
         ),
-        "neoforge_deps": attr.string_list_dict(
+        "neoforge_rules": attr.string_dict(
             default = {},
-            doc = "NeoForge entries: modid -> list of MC versions (e.g. ['common'] or ['1.21.1', '1.21.4'])",
+            doc = "NeoForge rules: modid -> condition spec string (e.g. 'minecraft: +[26.1,26.2)' or '' for always)",
         ),
         "merge_deps": attr.string_dict(
             default = {},
             doc = "Merge JAR entries on NeoForge/Forge: modid -> modid",
         ),
-        "forge_deps": attr.string_list_dict(
+        "forge_rules": attr.string_dict(
             default = {},
-            doc = "Forge entries: modid -> list of MC versions (e.g. ['common'] or ['1.21.1', '1.21.4'])",
+            doc = "Forge rules: modid -> condition spec string (e.g. 'minecraft: +[26.1,26.2)' or '' for always)",
         ),
         "fabric_mod_json": attr.label(
             allow_single_file = [".json"],

@@ -20,15 +20,15 @@ expand_template(
 
 unified_jar(
     name = "neoforge",
-    neoforge_deps = {
-        "combine-common": ["common"],
-        "combine-neoforge-1-21-1": ["1.21.1"],
-        "combine-neoforge-1-21-8": ["1.21.8"],
-        "combine-neoforge-1-21-10": ["1.21.10"],
-        "combine-neoforge-1-21-11": ["1.21.11"],
-        "combine-26-1": ["26.1"],
-    } | combine_unified_neoforge,
     neoforge_mod_toml = ":neoforge_mod_toml",
+    neoforge_rules = {
+        "combine-common": "",
+        "combine-neoforge-1-21-1": "minecraft: +[1.21.1]",
+        "combine-neoforge-1-21-8": "minecraft: +[1.21.8]",
+        "combine-neoforge-1-21-10": "minecraft: +[1.21.10]",
+        "combine-neoforge-1-21-11": "minecraft: +[1.21.11]",
+        "combine-26-1": "minecraft: +[26.1]",
+    } | combine_unified_neoforge,
     resources = {
         "//combine/resources:icon": ".",
     },

@@ -62,7 +62,7 @@ merge_jar(
 
 unified_jar(
     name = "combine_neoforge_libraries",
-    neoforge_deps = combine_unified_neoforge,
+    neoforge_rules = combine_unified_neoforge,
     visibility = ["//visibility:public"],
     deps = combine_unified_deps,
 )
@@ -79,20 +79,16 @@ unified_jar(
         "combine-fabric-1-21-11": "=",
     } | combine_unified_fabric,
     fabric_mod_json = "//combine/backend/minecraft/fabric:fabric_mod_json",
-    neoforge_deps = {
-        "combine-common": ["common"],
-        "combine-neoforge-1-21-1": ["1.21.1"],
-        "combine-neoforge-1-21-8": ["1.21.8"],
-        "combine-neoforge-1-21-10": ["1.21.10"],
-        "combine-neoforge-1-21-11": ["1.21.11"],
-        "combine-26-1": [
-            "26.1",
-            "26.1.1",
-            "26.1.2",
-        ],
-        "combine-26-2": ["26.2"],
-    } | combine_unified_neoforge,
     neoforge_mod_toml = "//combine/backend/minecraft/neoforge:neoforge_mod_toml",
+    neoforge_rules = {
+        "combine-common": "",
+        "combine-neoforge-1-21-1": "minecraft: +[1.21.1]",
+        "combine-neoforge-1-21-8": "minecraft: +[1.21.8]",
+        "combine-neoforge-1-21-10": "minecraft: +[1.21.10]",
+        "combine-neoforge-1-21-11": "minecraft: +[1.21.11]",
+        "combine-26-1": "minecraft: +[26.1,26.2)",
+        "combine-26-2": "minecraft: +[26.2]",
+    } | combine_unified_neoforge,
     resources = {
         "//combine/resources:icon": ".",
     },

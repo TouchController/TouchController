@@ -19,7 +19,7 @@ touchcontroller_fabric_libraries = {lib.label: (lib.name + ":" + lib.version) fo
 touchcontroller_neoforge_libraries = {lib.label: (lib.coordinate + ":LIBRARY") for lib in _libraries}
 touchcontroller_merge_deps = {lib.name: lib.merge_dep for lib in _libraries if lib.merge_dep}
 touchcontroller_unified_deps = {lib.name: lib.label for lib in _libraries}
-touchcontroller_unified_neoforge = {lib.name: ["common"] for lib in _libraries}
+touchcontroller_unified_neoforge = {lib.name: "" for lib in _libraries}
 touchcontroller_unified_fabric = {lib.name: lib.version for lib in _libraries}
 
 touchcontroller_common_deps = {
@@ -52,62 +52,29 @@ touchcontroller_neoforge_deps = {
 }
 
 touchcontroller_neoforge_config = {
-    "combine-common": ["common"],
-    "combine-neoforge-1-21-1": ["1.21.1"],
-    "combine-neoforge-1-21-10": ["1.21.10"],
-    "combine-neoforge-1-21-11": ["1.21.11"],
-    "combine-26-1": [
-        "26.1",
-        "26.1.1",
-        "26.1.2",
-    ],
-    "combine-26-2": ["26.2"],
-    "combine-theme-blackstone": ["common"],
-    "combine-theme-blackstone-atlas": ["1.21.1"],
-    "combine-theme-blackstone-vanilla": [
-        "1.21.10",
-        "1.21.11",
-        "26.1",
-        "26.1.1",
-        "26.1.2",
-        "26.2",
-    ],
-    "touchcontroller-api": ["common"],
-    "touchcontroller-common": ["common"],
-    "touchcontroller-lang-modern": [
-        "1.21.1",
-        "1.21.10",
-        "1.21.11",
-        "26.1",
-        "26.1.1",
-        "26.1.2",
-        "26.2",
-    ],
-    "touchcontroller-texture": ["common"],
-    "touchcontroller-texture-atlas": ["1.21.1"],
-    "touchcontroller-texture-vanilla": [
-        "1.21.10",
-        "1.21.11",
-        "26.1",
-        "26.1.1",
-        "26.1.2",
-        "26.2",
-    ],
-    "touchcontroller-1-21-1-neoforge": ["1.21.1"],
-    "touchcontroller-1-21-10-neoforge": ["1.21.10"],
-    "touchcontroller-1-21-11-neoforge": ["1.21.11"],
-    "touchcontroller-26-1": [
-        "26.1",
-        "26.1.1",
-        "26.1.2",
-    ],
-    "touchcontroller-26-2": ["26.2"],
-    "touchcontroller-26-1-neoforge": [
-        "26.1",
-        "26.1.1",
-    ],
-    "touchcontroller-26-1-2-neoforge": ["26.1.2"],
-    "touchcontroller-26-2-neoforge": ["26.2"],
+    "combine-common": "",
+    "combine-neoforge-1-21-1": "minecraft: +[1.21.1]",
+    "combine-neoforge-1-21-10": "minecraft: +[1.21.10]",
+    "combine-neoforge-1-21-11": "minecraft: +[1.21.11]",
+    "combine-26-1": "minecraft: +[26.1,26.2)",
+    "combine-26-2": "minecraft: +[26.2]",
+    "combine-theme-blackstone": "",
+    "combine-theme-blackstone-atlas": "minecraft: +(,1.21.1]",
+    "combine-theme-blackstone-vanilla": "minecraft: +(1.21.1,)",
+    "touchcontroller-api": "",
+    "touchcontroller-common": "",
+    "touchcontroller-lang-modern": "minecraft: +[1.13,)",
+    "touchcontroller-texture": "",
+    "touchcontroller-texture-atlas": "minecraft: +[1.21.1]",
+    "touchcontroller-texture-vanilla": "minecraft: +[1.21.10,26.2]",
+    "touchcontroller-1-21-1-neoforge": "minecraft: +[1.21.1]",
+    "touchcontroller-1-21-10-neoforge": "minecraft: +[1.21.10]",
+    "touchcontroller-1-21-11-neoforge": "minecraft: +[1.21.11]",
+    "touchcontroller-26-1": "minecraft: +[26.1,26.2)",
+    "touchcontroller-26-2": "minecraft: +[26.2]",
+    "touchcontroller-26-1-neoforge": "minecraft: +[26.1,26.1.2)",
+    "touchcontroller-26-1-2-neoforge": "minecraft: +[26.1.2]",
+    "touchcontroller-26-2-neoforge": "minecraft: +[26.2]",
 }
 
 touchcontroller_fabric_deps = {

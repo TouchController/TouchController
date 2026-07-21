@@ -105,17 +105,17 @@ alias(
 unified_jar(
     name = "neoforge_merged",
     merge_deps = touchcontroller_merge_deps,
-    neoforge_deps = combine_unified_neoforge | touchcontroller_unified_neoforge | {
-        "combine-common": ["common"],
-        "combine-theme-blackstone": ["common"],
-        "combine-theme-blackstone-atlas": ["1.21.1"],
-        "combine-neoforge-1-21-1": ["1.21.1"],
-        "touchcontroller-1-21-1-neoforge": ["1.21.1"],
-        "touchcontroller-api": ["common"],
-        "touchcontroller-common": ["common"],
-        "touchcontroller-lang-modern": ["1.21.1"],
-        "touchcontroller-texture": ["common"],
-        "touchcontroller-texture-atlas": ["1.21.1"],
+    neoforge_rules = combine_unified_neoforge | touchcontroller_unified_neoforge | {
+        "combine-common": "",
+        "combine-theme-blackstone": "",
+        "combine-theme-blackstone-atlas": "minecraft: +[1.21.1]",
+        "combine-neoforge-1-21-1": "minecraft: +[1.21.1]",
+        "touchcontroller-1-21-1-neoforge": "minecraft: +[1.21.1]",
+        "touchcontroller-api": "",
+        "touchcontroller-common": "",
+        "touchcontroller-lang-modern": "minecraft: +[1.21.1]",
+        "touchcontroller-texture": "",
+        "touchcontroller-texture-atlas": "minecraft: +[1.21.1]",
     },
     deps = combine_unified_deps | touchcontroller_unified_deps | {
         "combine-common": "//combine/backend/minecraft:minecraft_common_standalone",

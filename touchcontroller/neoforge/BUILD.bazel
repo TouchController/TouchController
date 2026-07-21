@@ -37,8 +37,8 @@ copy_file(
 unified_jar(
     name = "neoforge",
     merge_deps = touchcontroller_merge_deps,
-    neoforge_deps = touchcontroller_neoforge_config | combine_unified_neoforge | touchcontroller_unified_neoforge,
     neoforge_mod_toml = ":neoforge_mod_toml",
+    neoforge_rules = touchcontroller_neoforge_config | combine_unified_neoforge | touchcontroller_unified_neoforge,
     resources = {":icon": "touchcontroller/neoforge"},
     visibility = ["//visibility:public"],
     deps = touchcontroller_common_deps | touchcontroller_neoforge_deps | combine_unified_deps | touchcontroller_unified_deps,

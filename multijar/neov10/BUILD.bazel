@@ -9,6 +9,7 @@ java_merge_library(
     javacopts = ["--release=21"],
     merge_deps = [
         "//multijar/common",
+        "//multijar/common/maven385",
     ],
     resource_strip_prefix = "multijar/neov10/resources",
     resources = glob(["resources/**"]),

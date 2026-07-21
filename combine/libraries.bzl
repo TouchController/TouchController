@@ -17,5 +17,5 @@ _libraries = [
 combine_libraries = [lib.label for lib in _libraries]
 combine_fabric_libraries = {lib.label: (lib.name + ":" + lib.version) for lib in _libraries}
 combine_unified_deps = {lib.name: lib.label for lib in _libraries}
-combine_unified_neoforge = {lib.name: ["common"] for lib in _libraries}
+combine_unified_neoforge = {lib.name: "" for lib in _libraries}
 combine_unified_fabric = {lib.name: lib.version for lib in _libraries}
