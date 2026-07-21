@@ -30,11 +30,6 @@ public abstract class GlDeviceMixin {
         SDLVideo.SDL_SetWindowMaximumSize(window, sdlMaxW, sdlMaxH);
     }
 
-    @Redirect(method = "setVsync", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSwapInterval(I)V"))
-    private void swapInterval(int interval) {
-        SDLVideo.SDL_GL_SetSwapInterval(interval);
-    }
-
     @Redirect(method = "presentFrame", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSwapBuffers(J)V"))
     private void swapBuffers(long window) {
         SDLVideo.SDL_GL_SwapWindow(window);

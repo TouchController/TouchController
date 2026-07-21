@@ -12,6 +12,8 @@ import org.lwjgl.system.NativeType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import top.fifthlight.blazesdl.SDLKeyMapping;
 import top.fifthlight.blazesdl.SDLUtil;
 
@@ -125,5 +127,10 @@ public abstract class GLFWMixin {
     @Overwrite
     public static void glfwSetClipboardString(@NativeType("GLFWwindow *") long window, CharSequence string) {
         SDLClipboard.SDL_SetClipboardText(string);
+    }
+
+    @Overwrite
+    public static void glfwSwapInterval(int interval) {
+        SDLVideo.SDL_GL_SetSwapInterval(interval);
     }
 }
