@@ -23,7 +23,7 @@ class IosPlatform(socketPath: String) : LargeMessageWrappedPlatform() {
         get() = true
 
     private val handle = Transport.new(socketPath)
-    private val readBuffer = ByteArray(128)
+    private val readBuffer = ByteArray(256)
 
     override fun pollSmallEvent(): ProxyMessage? {
         val receivedLength = Transport.receive(handle, readBuffer)
