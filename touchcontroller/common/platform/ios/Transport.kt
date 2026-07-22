@@ -9,13 +9,9 @@ object Transport {
     @JvmStatic
     private external fun init()
     @JvmStatic
-    external fun new(path: String): Long
+    external fun receive(buffer: ByteArray): Int
     @JvmStatic
-    external fun receive(handle: Long, buffer: ByteArray): Int
-    @JvmStatic
-    external fun send(handle: Long, buffer: ByteArray, off: Int, len: Int)
-    @JvmStatic
-    external fun destroy(handle: Long)
+    external fun send(buffer: ByteArray, off: Int, len: Int)
 
     init {
         // TODO: deal with NeoForge

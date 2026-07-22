@@ -13,7 +13,7 @@ import top.fifthlight.touchcontroller.proxy.message.MessageDecodeException
 import top.fifthlight.touchcontroller.proxy.message.ProxyMessage
 import java.nio.ByteBuffer
 
-class IosPlatform(socketPath: String) : LargeMessageWrappedPlatform() {
+class IosPlatform : LargeMessageWrappedPlatform() {
     private val logger = LoggerFactory.getLogger(IosPlatform::class.java)
 
     override val name: Text
@@ -22,11 +22,10 @@ class IosPlatform(socketPath: String) : LargeMessageWrappedPlatform() {
     override val useDefaultInputHandler: Boolean
         get() = true
 
-    private val handle = Transport.new(socketPath)
     private val readBuffer = ByteArray(256)
 
     override fun pollSmallEvent(): ProxyMessage? {
-        val receivedLength = Transport.receive(handle, readBuffer)
+        val receivedLength = Transport.receive(readBuffer)
         val length = receivedLength.takeIf { it > 0 } ?: return null
         val buffer = ByteBuffer.wrap(readBuffer)
         buffer.limit(length)
@@ -46,6 +45,6 @@ class IosPlatform(socketPath: String) : LargeMessageWrappedPlatform() {
         val buffer = ByteBuffer.allocate(256)
         message.encode(buffer)
         buffer.flip()
-        Transport.send(handle, buffer.array(), buffer.arrayOffset() + buffer.position(), buffer.remaining())
+        Transport.send(buffer.array(), buffer.arrayOffset() + buffer.position(), buffer.remaining())
     }
 }

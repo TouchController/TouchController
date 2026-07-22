@@ -106,6 +106,15 @@ platform(
     visibility = ["//visibility:public"],
 )
 
+platform(
+    name = "ios_arm64",
+    constraint_values = [
+        "@platforms//os:ios",
+        "@platforms//cpu:aarch64",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 constraint_value(
     name = "windows",
     constraint_setting = ":os",

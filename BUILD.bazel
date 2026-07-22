@@ -7,6 +7,7 @@ refresh_compile_commands(
     name = "refresh_compile_commands",
     targets = {
         "//touchcontroller/proxy/server/android": "--platforms=//platforms:android_arm64",
+        "//touchcontroller/proxy/server/ios": "--platforms=//platforms:ios_arm64",
         "//touchcontroller/proxy/server/linux:wayland": "--platforms=//platforms:linux_x86_64",
         "//touchcontroller/proxy/server/windows:lib": "--platforms=//platforms:windows_x86_64",
         "//touchcontroller/proxy/server/windows:lib-legacy": "--platforms=//platforms:windows_x86_64",

@@ -102,17 +102,8 @@ object PlatformProvider {
 
         logger.info("System name: $systemName, system arch: $systemArch")
         if (isIos) {
-            // iOS: native library is statically linked into the launcher app
-            // No need to load it dynamically - JNI symbols are already available
-            val socketPath = System.getenv("TOUCH_CONTROLLER_PROXY_SOCKET")
-            if (socketPath.isNullOrEmpty()) {
-                logger.info("TOUCH_CONTROLLER_PROXY_SOCKET not set")
-                logger.info("Please enable TouchController in launcher settings and restart the game")
-                return null
-            }
-
             return {
-                IosPlatform(socketPath).also { platform ->
+                IosPlatform().also { platform ->
                     platform.resize(PlatformWindowProvider.windowWidth, PlatformWindowProvider.windowHeight)
                 }
             }

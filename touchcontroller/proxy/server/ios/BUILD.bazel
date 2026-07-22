@@ -1,0 +1,15 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "ios",
+    srcs = glob([
+        "*.c",
+        "*.h",
+    ]),
+    target_compatible_with = ["@platforms//os:ios"],
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/proxy/server/util/ringbuffer",
+        "@rules_jni//jni",
+    ],
+)
