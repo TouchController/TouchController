@@ -1,3 +1,4 @@
+load("@rules_apple//apple:apple.bzl", "apple_static_xcframework")
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
@@ -12,4 +13,26 @@ cc_library(
         "//touchcontroller/proxy/server/util/ringbuffer",
         "@rules_jni//jni",
     ],
+)
+
+apple_static_xcframework(
+    name = "ios_framework",
+    bundle_id = "top.fifthlight.touchcontroller.proxy.ios",
+    bundle_name = "touchcontroller_proxy",
+    features = ["exported_symbols"],
+    infoplists = ["Info.plist"],
+    ios = {
+        "simulator": [
+            "arm64",
+            "x86_64",
+        ],
+        "device": [
+            "arm64",
+        ],
+    },
+    minimum_os_versions = {
+        "ios": "14.0",
+    },
+    public_hdrs = ["ios.h"],
+    deps = [":ios"],
 )
