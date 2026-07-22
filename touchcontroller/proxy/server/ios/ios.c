@@ -156,7 +156,9 @@ JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_ios_T
 }
 
 int touchcontroller_ios_receive(void* buf) {
-    assert(queue != NULL);
+    if (queue == NULL) {
+        return -1;
+    }
 
     pthread_mutex_lock(&queue->write_mutex);
     message_t* msg = ring_buffer_dequeue(queue->write_buffer);
@@ -174,7 +176,9 @@ int touchcontroller_ios_receive(void* buf) {
 }
 
 int touchcontroller_ios_send(const void* buf, int len) {
-    assert(queue != NULL);
+    if (queue == NULL) {
+        return -1;
+    }
 
     message_t* msg = malloc(sizeof(message_t));
     if (msg == NULL) {
