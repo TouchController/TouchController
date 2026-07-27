@@ -1,0 +1,14 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "Apache-2.0"
+
+[[mods]]
+modId = "authproxy"
+version = "0.0.3"
+displayName = "AuthProxy"
+logoFile = "icon.png"
+authors = "fifth_light"
+description = "Make authlib use your proxy."
+
+[[mixins]]
+config = "authproxy.mixins.json"
