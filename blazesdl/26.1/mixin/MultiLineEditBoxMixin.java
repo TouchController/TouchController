@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.fifthlight.blazesdl.BlazeSDL;
 import top.fifthlight.blazesdl.SDLUtil;
 
 @Mixin(MultiLineEditBox.class)
@@ -24,6 +25,9 @@ public abstract class MultiLineEditBoxMixin {
 
     @Inject(method = "extractContents", at = @At(value = "TAIL"))
     private void updateTextPos(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci, @Local(name = "cursorX") int cursorX, @Local(name = "hasDrawnCursor") boolean hasDrawnCursor) {
+        if (BlazeSDL.isInputMixinDisabled) {
+            return;
+        }
         var editBox = (MultiLineEditBox) (Object) this;
         if (!editBox.visible) {
             return;

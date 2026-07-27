@@ -74,6 +74,7 @@ java_library(
         "@maven_blazesdl//:org_lwjgl_lwjgl",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl",
         "@maven_fabric_26_2//:io_github_llamalad7_mixinextras_fabric",
+        "@maven_fabric_26_2//:net_fabricmc_fabric_loader",
         "@maven_fabric_26_2//:net_fabricmc_sponge_mixin",
         "@neoforge_26_2//:net_neoforged_fancymodloader_loader",
         "@neoforge_26_2//:org_apache_maven_maven_artifact",

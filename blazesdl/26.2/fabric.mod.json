@@ -9,6 +9,11 @@
     ],
     "license": "LGPL-3.0-or-later",
     "environment": "client",
+    "entrypoints": {
+        "client": [
+            "top.fifthlight.blazesdl.BlazeSDLFabric"
+        ]
+    },
     "mixins": [
         "blazesdl.mixins.json"
     ],
