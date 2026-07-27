@@ -9,7 +9,7 @@ def _split_coordinate(coordinate):
         version = version,
     )
 
-def library(coordinate, merge_dep = None):
+def library(coordinate, merge_dep = None, constraints = None):
     coordinate_info = _split_coordinate(coordinate)
     return struct(
         name = coordinate_info.name,
@@ -17,4 +17,5 @@ def library(coordinate, merge_dep = None):
         version = coordinate_info.version,
         coordinate = coordinate,
         merge_dep = _split_coordinate(merge_dep).name if merge_dep else None,
+        constraints = constraints if constraints else "",
     )

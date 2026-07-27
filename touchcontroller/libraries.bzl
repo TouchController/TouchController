@@ -19,7 +19,7 @@ touchcontroller_fabric_libraries = {lib.label: (lib.name + ":" + lib.version) fo
 touchcontroller_neoforge_libraries = {lib.label: (lib.coordinate + ":LIBRARY") for lib in _libraries}
 touchcontroller_merge_deps = {lib.name: lib.merge_dep for lib in _libraries if lib.merge_dep}
 touchcontroller_unified_deps = {lib.name: lib.label for lib in _libraries}
-touchcontroller_unified_neoforge = {lib.name: "" for lib in _libraries}
+touchcontroller_unified_neoforge = {lib.name: lib.constraints for lib in _libraries}
 touchcontroller_unified_fabric = {lib.name: lib.version for lib in _libraries}
 
 touchcontroller_common_deps = {
