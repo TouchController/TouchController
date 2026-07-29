@@ -13,6 +13,7 @@ public class BlazeSDLFabric implements ClientModInitializer {
     public void onInitializeClient() {
         if (FabricLoader.getInstance().isModLoaded("imblocker")) {
             BlazeSDL.isInputMixinDisabled = true;
+            BlazeSDL.isInputHandlingDisabled = true;
         }
     }
 }

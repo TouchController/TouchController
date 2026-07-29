@@ -18,11 +18,17 @@ public class SDLTextInputManager extends TextInputManager {
 
     @Override
     public void setTextInputArea(int x0, int y0, int x1, int y1) {
+        if (BlazeSDL.isInputHandlingDisabled) {
+            return;
+        }
         SDLUtil.updateTextInputAreaScaled(window, x0, y0, x1 - x0, y1 - y0, 0);
     }
 
     @Override
     protected void setIMEInputMode(boolean value) {
+        if (BlazeSDL.isInputHandlingDisabled) {
+            return;
+        }
         if (value) {
             SDLKeyboard.SDL_StartTextInput(window.handle());
         } else {

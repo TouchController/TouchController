@@ -11,4 +11,5 @@ public class BlazeSDL {
     public static BlazeSDLAPIImpl API = (BlazeSDLAPIImpl) BlazeSDLAPI.getInstance();
 
     public static volatile boolean isInputMixinDisabled = false;
+    public static volatile boolean isInputHandlingDisabled = false;
 }

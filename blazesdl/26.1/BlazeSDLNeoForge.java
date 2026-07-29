@@ -13,6 +13,7 @@ public class BlazeSDLNeoForge {
     public BlazeSDLNeoForge() {
         if (ModList.get().isLoaded("imblocker")) {
             BlazeSDL.isInputMixinDisabled = true;
+            BlazeSDL.isInputHandlingDisabled = true;
         }
     }
 }
