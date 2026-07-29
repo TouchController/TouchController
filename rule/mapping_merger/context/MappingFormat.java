@@ -2,6 +2,7 @@ package top.fifthlight.fabazel.mappingmerger.context;
 
 import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.format.proguard.ProGuardFileReader;
+import net.fabricmc.mappingio.format.srg.TsrgFileReader;
 import net.fabricmc.mappingio.format.tiny.Tiny1FileReader;
 import net.fabricmc.mappingio.format.tiny.Tiny2FileReader;
 
@@ -12,7 +13,8 @@ public enum MappingFormat {
     TINY_FILE("tiny"),
     TINY_2_FILE("tinyv2"),
     PROGUARD_FILE("proguard"),
-    PARCHMENT_JSON("parchment");
+    PARCHMENT_JSON("parchment"),
+    TSRG_FILE("tsrg");
 
     private final String name;
 
@@ -37,6 +39,9 @@ public enum MappingFormat {
                 break;
             case PARCHMENT_JSON:
                 ParchmentFileReader.read(reader, visitor);
+                break;
+            case TSRG_FILE:
+                TsrgFileReader.read(reader, visitor);
                 break;
         }
     }

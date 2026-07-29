@@ -11,7 +11,7 @@ _config_link_legacy = "%s/de/oceanlabs/mcp/mcp_config/%s/mcp_config-%s.zip"
 
 # ── names ──────────────────────────────────────────────────────────────────────
 
-names = {
+legacy_names = {
     True: struct(
         url = _minecraftforge_repository_url,
         prefix = "mcp",
@@ -195,23 +195,23 @@ def _build_strip_step(task_def, ctx):
     name = ctx.step.get("name", "strip")
     if ctx.spec == 1:
         task_def.append('    mappings = "//:mappings",')
-    elif name == "stripClient":
-        task_def.append("    generate_manifest = True,")
-        task_def.append('    dist_id = "client",')
-        task_def.append('    other_dist_id = "server",')
-        if "strip" in ctx.config_data["steps"]["server"]:
-            task_def.append('    other_dist_jar = "//tasks/server_extract_server",')
-        else:
-            task_def.append('    other_dist_jar = "%s",' % ctx.rctx.attr.server_jar)
-        task_def.append('    mappings = "//tasks/client_merge_mappings",')
-    elif name == "stripServer":
-        task_def.append("    generate_manifest = True,")
-        task_def.append('    dist_id = "server",')
-        task_def.append('    other_dist_id = "client",')
-        task_def.append('    other_dist_jar = "%s",' % ctx.rctx.attr.client_jar)
-        task_def.append('    mappings = "//tasks/server_merge_mappings",')
+    else:
+        if name == "stripClient":
+            task_def.append("    generate_manifest = True,")
+            task_def.append('    dist_id = "client",')
+            task_def.append('    other_dist_id = "server",')
+            if "strip" in ctx.config_data["steps"]["server"]:
+                task_def.append('    other_dist_jar = "//tasks/server_extract_server",')
+            else:
+                task_def.append('    other_dist_jar = "%s",' % ctx.rctx.attr.server_jar)
+            task_def.append('    mappings = "//tasks/client_merge_mappings",')
+        elif name == "stripServer":
+            task_def.append("    generate_manifest = True,")
+            task_def.append('    dist_id = "server",')
+            task_def.append('    other_dist_id = "client",')
+            task_def.append('    other_dist_jar = "%s",' % ctx.rctx.attr.client_jar)
+            task_def.append('    mappings = "//tasks/server_merge_mappings",')
 
-    if ctx.spec != 1:
         deny_patterns = getattr(ctx.rctx.attr, "strip_deny_patterns", [])
         if deny_patterns:
             all_patterns = ['"META-INF/.*"'] + ['"%s"' % p for p in deny_patterns]

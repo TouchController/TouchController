@@ -1,14 +1,12 @@
-load("@rules_java//java:defs.bzl", "java_binary")
+load("@rules_java//java:defs.bzl", "java_library")
 
-java_binary(
-    name = "pin_generator",
-    srcs = ["PinGenerator.java"],
-    main_class = "PinGenerator",
-    visibility = ["//visibility:public"],
-)
+exports_files(["PinGenerator.java"])
 
-alias(
-    name = "pin_generator_source",
-    actual = "PinGenerator.java",
-    visibility = ["//visibility:public"],
+java_library(
+    name = "pin",
+    srcs = ["@//repo/neoform/pin_generator:PinGenerator.java"],
+    deps = [
+        "@bazel_tools//tools/java/runfiles",
+        "@maven//:com_google_code_gson_gson",
+    ],
 )

@@ -11,6 +11,12 @@ maven.install(
 )
 
 lexforge_versions = {
+    "1.12.2": {
+        "java_target": 8,
+        "mapping": False,
+        "mcp_version": "1.12.2-20201025.185735",
+        "mcp_sha256": "aa6e618f0a052602f361f7476312dc07569f720c9628ef73cf5539d7765439ce",
+    },
     "1.14.4": {
         "java_target": 8,
         "mapping": False,
@@ -273,6 +279,20 @@ neoforge_versions = {
         "neoforge_sources_sha256": "0016ca38837eebbae695869c705839246b49a3c1bab0204332b870b1ddb2add2",
         "neoforge_universal_sha256": "95dc533d5ee6a8d56b428723e972b46731b72c508567e3921f9df53f74f2d7eb",
     },
+    "26w14a": {
+        "java_target": 25,
+        "version": "26w14a",
+        "mapping": False,
+        "neoform_version": "26w14a-1",
+        "neoform_sha256": "cdee675368012cfbbc041fadb3f3aa4fead79dc3dd490dbeac4cf71256c58e16",
+    },
+    "26.3": {
+        "java_target": 25,
+        "version": "26.3-snapshot-3",
+        "mapping": False,
+        "neoform_version": "26.3-snapshot-3-1",
+        "neoform_sha256": "13551352c2bf7fc7ba4454dcb73fe76e17f850fe5ed7e585e795c3dee8f23d06",
+    },
 }
 
 neoform = use_extension("//repo:neoform.bzl", "neoform")
@@ -286,7 +306,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
             client_libraries = "@minecraft//%s:client_libraries" % (data["version"] if "version" in data else version),
             client_mapping = "@minecraft//%s:client_mappings" % (data["version"] if "version" in data else version),
             legacy = True,
-            sas_data = ("@forge_%s//:sas" % version.replace(".", "_")) if data.get("sas", False) else None,
+            sas_data = ("@forge_%s//:sas" % version.replace(".", "_")) if (data.get("sas", False) and "forge_version" in data) else None,
             server_jar = "@minecraft//%s:server" % (data["version"] if "version" in data else version),
             server_mapping = "@minecraft//%s:server_mappings" % (data["version"] if "version" in data else version),
             sha256 = data["mcp_sha256"],
@@ -296,7 +316,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
             client_jar = "@minecraft//%s:client" % (data["version"] if "version" in data else version),
             client_libraries = "@minecraft//%s:client_libraries" % (data["version"] if "version" in data else version),
             legacy = True,
-            sas_data = ("@forge_%s//:sas" % version.replace(".", "_")) if data.get("sas", False) else None,
+            sas_data = ("@forge_%s//:sas" % version.replace(".", "_")) if (data.get("sas", False) and "forge_version" in data) else None,
             server_jar = "@minecraft//%s:server" % (data["version"] if "version" in data else version),
             sha256 = data["mcp_sha256"],
             strip_deny_patterns = data.get("strip_deny_patterns", []),
@@ -308,6 +328,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
                 ("mcp_%s" % version.replace(".", "_")): ("mcp_%s" % data["mcp_version"].replace(".", "_").replace("-", "_")),
             }
         ),
+    ) + (
         neoforge.version(
             java_target = data["java_target"],
             joined_patched_sources = "@mcp_%s//tasks/joined_patch" % version.replace(".", "_"),
@@ -324,7 +345,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
                 ("forge_%s" % version.replace(".", "_")): ("forge_%s" % data["forge_version"].replace(".", "_").replace("-", "_")),
             }
         ),
-    )
+    ) if "forge_version" in data else ()
     for version, data in lexforge_versions.items()
 ]
 
@@ -351,6 +372,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
                 ("neoform_%s" % version.replace(".", "_")): ("neoform_%s" % data["neoform_version"].replace(".", "_").replace("-", "_")),
             }
         ),
+    ) + (
         neoforge.version(
             java_target = data["java_target"],
             joined_patched_sources = "@neoform_%s//tasks/joined_patch" % version.replace(".", "_"),
@@ -366,7 +388,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
                 ("neoforge_%s" % version.replace(".", "_")): ("neoforge_%s" % data["neoforge_version"].replace(".", "_").replace("-", "_").replace("+", "_")),
             }
         ),
-    )
+    ) if "neoforge_version" in data else ()
     for version, data in neoforge_versions.items()
 ]
 

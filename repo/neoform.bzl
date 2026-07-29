@@ -1,9 +1,9 @@
 """NeoForm repository rule, fetches NeoForm artifact and setup Bazel rules"""
 
 load("@//private:maven_coordinate.bzl", _convert_maven_coordinate = "convert_maven_coordinate", _convert_maven_coordinate_to_repo = "convert_maven_coordinate_to_repo", _convert_maven_coordinate_to_url = "convert_maven_coordinate_to_url")
-load("@//private:pin_file.bzl", _parse_pin_file = "parse_pin_file")
+load("@//private:pin_file.bzl", _parse_pin_file = "parse_pin_file", _pin_file = "pin_file")
 load("@//private:snake_case.bzl", _camel_case_to_snake_case = "camel_case_to_snake_case")
-load("@//repo/neoform:definitions.bzl", _default_function_special = "default_function_special", _function_specials = "function_specials", _names = "names", _output_placeholder_map = "output_placeholder_map", _placeholder_config = "placeholder_config", _step_handlers = "step_handlers")
+load("@//repo/neoform:definitions.bzl", _default_function_special = "default_function_special", _function_specials = "function_specials", _legacy_names = "legacy_names", _output_placeholder_map = "output_placeholder_map", _placeholder_config = "placeholder_config", _step_handlers = "step_handlers")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_jar")
 load("@rules_java//java:defs.bzl", "JavaInfo")
 
@@ -13,7 +13,7 @@ def _parse_version_info(rctx):
     version_sha256 = rctx.attr.sha256
     version_legacy = rctx.attr.legacy
 
-    names = _names[version_legacy]
+    names = _legacy_names[version_legacy]
 
     return struct(
         version = version_name,
@@ -27,7 +27,7 @@ def _download_and_extract_config(rctx, version_info):
     """Download and extract NeoForm"""
     neoform_zip = "neoform.zip"
     output_prefix = "neoform/%s" % version_info.version
-    config_link = _names[version_info.legacy].config
+    config_link = _legacy_names[version_info.legacy].config
 
     rctx.report_progress("Downloading NeoForm JAR %s" % version_info.version)
     rctx.download(
@@ -44,6 +44,13 @@ def _download_and_extract_config(rctx, version_info):
 
     return config_data, output_prefix, neoform_zip
 
+def _normalize_repository_url(repo):
+    """Normalize repository URL: remove trailing / and replace HTTP to HTTPS"""
+    repo = repo.rstrip("/")
+    if repo.lower().startswith("http://"):
+        repo = "https://" + repo[len("http://"):]
+    return repo
+
 def _download_function_jars(rctx, version_info, config_data, pin_content):
     """Download all classpath JAR files"""
     rctx.report_progress("Downloading classpath JARs for functions of NeoForm %s" % version_info.version)
@@ -55,10 +62,12 @@ def _download_function_jars(rctx, version_info, config_data, pin_content):
         def append_classpath(version):
             name = _convert_maven_coordinate(version)
             path = "function_jars/%s/%s.jar" % (function_name, name)
+            normalized_repo = _normalize_repository_url(function.get("repo") or version_info.repository_url)
+            url = _convert_maven_coordinate_to_url(normalized_repo, version)
             token = rctx.download(
-                url = _convert_maven_coordinate_to_url(version_info.repository_url, version),
+                url = url,
                 output = path,
-                sha256 = pin_content.get(_convert_maven_coordinate_to_url(version_info.repository_url, version), ""),
+                sha256 = pin_content.get(url, ""),
                 block = False,
             )
             entries.append(struct(
@@ -374,7 +383,7 @@ def _generate_function(rctx, version_info, java_target, data_paths, function_nam
     classpath = function["classpath"] if "classpath" in function else []
     if "version" in function:
         classpath.append(function["version"])
-    if len(classpath) < 0:
+    if len(classpath) == 0:
         fail("Neoform function %s has no classpath" % function_name)
 
     main_class = _extract_function_classpaths(rctx, function_name, function_jar)
@@ -550,43 +559,7 @@ _neoform_repo = repository_rule(
     },
 )
 
-def _neoform_pin_impl(rctx):
-    url_lines = ['"%s"' % url for url in rctx.attr.urls]
-    pin_target = str(rctx.path(rctx.attr.pin_file)) if rctx.attr.pin_file else "neoform_pin.txt"
-    rctx.template("PinGenerator.java", rctx.attr._pinner_source, {
-        "/*INJECT HERE*/": ", ".join(url_lines),
-        "$PIN_TARGET": pin_target,
-    })
-
-    build_bazel_contents = [
-        'load("@rules_java//java:defs.bzl", "java_binary")',
-        'package(default_visibility = ["//visibility:public"])',
-        "",
-        "java_binary(",
-        '    name = "pin",',
-        '    srcs = ["PinGenerator.java"],',
-        '    main_class = "PinGenerator",',
-        ")",
-    ]
-    rctx.file("BUILD.bazel", "\n".join(build_bazel_contents))
-
-neoform_pin = repository_rule(
-    implementation = _neoform_pin_impl,
-    attrs = {
-        "urls": attr.string_list(
-            doc = "List of URLs to pin",
-        ),
-        "pin_file": attr.label(
-            doc = "Pin file output path",
-            allow_single_file = True,
-            mandatory = False,
-        ),
-        "_pinner_source": attr.label(
-            allow_single_file = [".java"],
-            default = "@//repo/neoform/pin_generator:PinGenerator.java",
-        ),
-    },
-)
+neoform_pin = _pin_file()
 
 version = tag_class(
     attrs = {
@@ -662,112 +635,115 @@ def _neoform_impl(mctx):
             else:
                 pin_file = pin.pin_file
         for version in module.tags.version:
-            if version in versions:
-                if versions[version.version].sha256 != version.sha256:
+            if version.version in versions:
+                existing = versions[version.version]
+                if existing.sha256 != version.sha256:
                     fail("NeoForm version %s already exists with a different SHA-256" % version.version)
-                elif versions[version.version].client_jar != version.client_jar:
+                elif existing.client_jar != version.client_jar:
                     fail("NeoForm version %s already exists with a different client JAR" % version.version)
-                elif versions[version.version].server_jar != version.server_jar:
+                elif existing.server_jar != version.server_jar:
                     fail("NeoForm version %s already exists with a different server JAR" % version.version)
-                elif versions[version.version].client_mapping != version.client_mapping:
+                elif existing.client_mapping != version.client_mapping:
                     fail("NeoForm version %s already exists with a different client mapping" % version.version)
-                elif versions[version.version].server_mapping != version.server_mapping:
+                elif existing.server_mapping != version.server_mapping:
                     fail("NeoForm version %s already exists with a different server mapping" % version.version)
-                elif versions[version.version].legacy != version.legacy:
+                elif existing.legacy != version.legacy:
                     fail("NeoForm version %s already exists with a different legacy flag" % version.version)
-                elif versions[version.version].client_libraries != version.client_libraries:
+                elif existing.client_libraries != version.client_libraries:
                     fail("NeoForm version %s already exists with a different client libraries" % version.version)
-                elif versions[version.version].sas_data != version.sas_data:
+                elif existing.sas_data != version.sas_data:
                     fail("NeoForm version %s already exists with a different sas_data" % version.version)
-                elif versions[version.version].strip_deny_patterns != version.strip_deny_patterns:
+                elif existing.strip_deny_patterns != version.strip_deny_patterns:
                     fail("NeoForm version %s already exists with a different strip_deny_patterns" % version.version)
             else:
-                versions[version.version] = {
-                    "version": version.version,
-                    "sha256": version.sha256,
-                    "legacy": version.legacy,
-                    "client_jar": version.client_jar,
-                    "server_jar": version.server_jar,
-                    "client_mapping": version.client_mapping,
-                    "server_mapping": version.server_mapping,
-                    "client_libraries": version.client_libraries,
-                    "sas_data": version.sas_data,
-                    "strip_deny_patterns": version.strip_deny_patterns,
-                }
+                versions[version.version] = struct(
+                    version = version.version,
+                    sha256 = version.sha256,
+                    legacy = version.legacy,
+                    client_jar = version.client_jar,
+                    server_jar = version.server_jar,
+                    client_mapping = version.client_mapping,
+                    server_mapping = version.server_mapping,
+                    client_libraries = version.client_libraries,
+                    sas_data = version.sas_data,
+                    strip_deny_patterns = version.strip_deny_patterns or [],
+                )
     versions = versions.values()
 
-    libraries = []
+    libraries = {}
 
-    def append_library(coordinate, legacy = False):
-        item = {
-            "coordinate": coordinate,
-            "legacy": legacy,
-        }
-        if item not in libraries:
-            libraries.append(item)
+    def append_library(coordinate, legacy = False, repo = None):
+        identifier = struct(coordinate = coordinate, legacy = legacy)
+        existing = libraries.get(identifier)
+        if not existing or not existing.repo:
+            if repo == None:
+                repo = _legacy_names[legacy].url
+            libraries[identifier] = struct(
+                coordinate = coordinate,
+                legacy = legacy,
+                repo = repo,
+                url = _convert_maven_coordinate_to_url(_normalize_repository_url(repo), coordinate),
+            )
 
     for version in versions:
-        version_name = version["version"]
-        version_legacy = version["legacy"]
-        version_sha256 = version["sha256"]
-        output_prefix = "neoform/%s" % version_name
+        output_prefix = "neoform/%s" % version.version
 
-        names = _names[version_legacy]
+        legacy_names = _legacy_names[version.legacy]
 
-        mctx.report_progress("Downloading NeoForm JAR %s" % version_name)
+        mctx.report_progress("Downloading NeoForm JAR %s" % version.version)
         mctx.download_and_extract(
-            url = names.config % (names.url, version_name, version_name),
+            url = legacy_names.config % (legacy_names.url, version.version, version.version),
             type = "zip",
-            sha256 = version_sha256,
+            sha256 = version.sha256,
             output = output_prefix,
         )
 
         config_data = json.decode(mctx.read("%s/config.json" % output_prefix))
         for function in config_data["functions"].values():
+            function_repo = function.get("repo")
             if "version" in function:
-                append_library(function["version"], version_legacy)
+                append_library(function["version"], version.legacy, function_repo)
             if "classpath" in function:
                 for classpath in function["classpath"]:
-                    append_library(classpath, version_legacy)
+                    append_library(classpath, version.legacy, function_repo)
         for libraries_side in config_data["libraries"]:
             for library in config_data["libraries"][libraries_side]:
-                append_library(library, version_legacy)
+                append_library(library, version.legacy)
 
-        repo_name = names.repo_fmt % _convert_maven_coordinate(version_name)
+        repo_name = legacy_names.repo_fmt % _convert_maven_coordinate(version.version)
         _neoform_repo(
             name = repo_name,
-            version = version_name,
-            legacy = version_legacy,
-            sha256 = version_sha256,
-            client_jar = version["client_jar"],
-            server_jar = version["server_jar"],
-            client_mapping = version["client_mapping"],
-            server_mapping = version["server_mapping"],
-            client_libraries = version["client_libraries"],
-            sas_data = version.get("sas_data"),
-            strip_deny_patterns = version.get("strip_deny_patterns", []),
+            version = version.version,
+            legacy = version.legacy,
+            sha256 = version.sha256,
+            client_jar = version.client_jar,
+            server_jar = version.server_jar,
+            client_mapping = version.client_mapping,
+            server_mapping = version.server_mapping,
+            client_libraries = version.client_libraries,
+            sas_data = version.sas_data,
+            strip_deny_patterns = version.strip_deny_patterns,
             pin_file = pin_file,
         )
 
     pin_content = {}
     if pin_file != None:
         pin_content = _parse_pin_file(mctx.read(pin_file))
-    for library in libraries:
-        coordinate = library["coordinate"]
-        legacy = library["legacy"]
-        names = _names[legacy]
+
+    entries = {}
+    for library in libraries.values():
+        legacy_names = _legacy_names[library.legacy]
+        name = _convert_maven_coordinate_to_repo(legacy_names.prefix, library.coordinate)
         http_jar(
-            name = _convert_maven_coordinate_to_repo(names.prefix, coordinate),
-            url = _convert_maven_coordinate_to_url(names.url, coordinate),
-            sha256 = pin_content.get(_convert_maven_coordinate_to_url(names.url, coordinate), None),
+            name = name,
+            url = library.url,
+            sha256 = pin_content.get(library.url, None),
         )
+        entries["@%s//jar" % name] = library.url
 
     neoform_pin(
         name = "neoform_pin",
-        urls = [
-            _convert_maven_coordinate_to_url(_names[library["legacy"]].url, library["coordinate"])
-            for library in libraries
-        ],
+        entries = entries,
         pin_file = pin_file,
     )
 

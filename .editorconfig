@@ -19,3 +19,9 @@ indent_size = 4
 
 [aboutlibraries.json]
 indent_size = 4
+
+[MODULE.bazel.lock]
+indent_size = 2
+
+[{maven_install.json, maven_install*.json, *_lock.json}]
+indent_size = 2

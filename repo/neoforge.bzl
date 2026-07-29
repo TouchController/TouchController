@@ -1,7 +1,7 @@
 """NeoForge repository rule, fetches NeoForge artifact and setup Bazel rules"""
 
 load("@//private:maven_coordinate.bzl", _convert_maven_coordinate = "convert_maven_coordinate", _convert_maven_coordinate_to_repo = "convert_maven_coordinate_to_repo", _convert_maven_coordinate_to_url = "convert_maven_coordinate_to_url")
-load("@//private:pin_file.bzl", _parse_pin_file = "parse_pin_file")
+load("@//private:pin_file.bzl", _parse_pin_file = "parse_pin_file", _pin_file = "pin_file")
 load("@//repo/neoform/rule:split_resources.bzl", "SplitResourceInfo")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_jar")
 
@@ -296,43 +296,7 @@ _neoforge_repo = repository_rule(
     },
 )
 
-def _neoforge_pin_impl(rctx):
-    url_lines = ['"%s"' % url for url in rctx.attr.urls]
-    pin_target = str(rctx.path(rctx.attr.pin_file)) if rctx.attr.pin_file else "neoforge_pin.txt"
-    rctx.template("PinGenerator.java", rctx.attr._pinner_source, {
-        "/*INJECT HERE*/": ", ".join(url_lines),
-        "$PIN_TARGET": pin_target,
-    })
-
-    build_bazel_contents = [
-        'load("@rules_java//java:defs.bzl", "java_binary")',
-        'package(default_visibility = ["//visibility:public"])',
-        "",
-        "java_binary(",
-        '    name = "pin",',
-        '    srcs = ["PinGenerator.java"],',
-        '    main_class = "PinGenerator",',
-        ")",
-    ]
-    rctx.file("BUILD.bazel", "\n".join(build_bazel_contents))
-
-neoforge_pin = repository_rule(
-    implementation = _neoforge_pin_impl,
-    attrs = {
-        "urls": attr.string_list(
-            doc = "List of URLs to pin",
-        ),
-        "pin_file": attr.label(
-            doc = "Pin file output path",
-            allow_single_file = True,
-            mandatory = False,
-        ),
-        "_pinner_source": attr.label(
-            allow_single_file = [".java"],
-            default = "@//repo/neoform/pin_generator:PinGenerator.java",
-        ),
-    },
-)
+neoforge_pin = _pin_file()
 
 version = tag_class(
     attrs = {
@@ -407,32 +371,33 @@ def _neoforge_impl(mctx):
             else:
                 pin_file = pin.pin_file
         for version in module.tags.version:
-            if version in versions:
-                if versions[version.version].userdev_sha256 != version.userdev_sha256:
+            if version.version in versions:
+                existing = versions[version.version]
+                if existing.userdev_sha256 != version.userdev_sha256:
                     fail("NeoForm version %s already exists with a different userdev SHA-256" % version.version)
-                elif versions[version.version].legacy != version.legacy:
+                elif existing.legacy != version.legacy:
                     fail("NeoForm version %s already exists with a different legacy flag" % version.version)
-                elif versions[version.version].universal_sha256 != version.universal_sha256:
+                elif existing.universal_sha256 != version.universal_sha256:
                     fail("NeoForm version %s already exists with a different universal SHA-256" % version.version)
-                elif versions[version.version].sources_sha256 != version.sources_sha256:
+                elif existing.sources_sha256 != version.sources_sha256:
                     fail("NeoForm version %s already exists with a different sources SHA-256" % version.version)
-                elif versions[version.version].joined_patched_sources != version.joined_patched_sources:
+                elif existing.joined_patched_sources != version.joined_patched_sources:
                     fail("NeoForm version %s already exists with a different joined patched sources" % version.version)
-                elif versions[version.version].joined_strip_client != version.joined_strip_client:
+                elif existing.joined_strip_client != version.joined_strip_client:
                     fail("NeoForm version %s already exists with a different joined strip client" % version.version)
-                elif versions[version.version].java_target != version.java_target:
+                elif existing.java_target != version.java_target:
                     fail("NeoForm version %s already exists with a different java target" % version.version)
             else:
-                versions[version.version] = {
-                    "version": version.version,
-                    "java_target": version.java_target,
-                    "legacy": version.legacy,
-                    "userdev_sha256": version.userdev_sha256,
-                    "universal_sha256": version.universal_sha256,
-                    "sources_sha256": version.sources_sha256,
-                    "joined_patched_sources": version.joined_patched_sources,
-                    "joined_strip_client": version.joined_strip_client,
-                }
+                versions[version.version] = struct(
+                    version = version.version,
+                    java_target = version.java_target,
+                    legacy = version.legacy,
+                    userdev_sha256 = version.userdev_sha256,
+                    universal_sha256 = version.universal_sha256,
+                    sources_sha256 = version.sources_sha256,
+                    joined_patched_sources = version.joined_patched_sources,
+                    joined_strip_client = version.joined_strip_client,
+                )
     versions = versions.values()
 
     libraries = []
@@ -446,48 +411,45 @@ def _neoforge_impl(mctx):
             libraries.append(item)
 
     for version in versions:
-        version_name = version["version"]
-        version_userdev_sha256 = version["userdev_sha256"]
-        version_legacy = version["legacy"]
-        version_java_target = version["java_target"]
-        output_prefix = "neoforge/%s" % version_name
+        output_prefix = "neoforge/%s" % version.version
 
-        config_link = _config_link_legacy if version_legacy else _config_link
-        repository_url = _minecraftforge_repository_url if version_legacy else _neoforge_repository_url
-        repository_prefix = "forge" if version_legacy else "neoforge"
+        config_link = _config_link_legacy if version.legacy else _config_link
+        repository_url = _minecraftforge_repository_url if version.legacy else _neoforge_repository_url
+        repository_prefix = "forge" if version.legacy else "neoforge"
 
-        mctx.report_progress("Downloading NeoForm JAR %s" % version_name)
+        mctx.report_progress("Downloading NeoForm JAR %s" % version.version)
         mctx.download_and_extract(
-            url = config_link % (repository_url, version_name, version_name),
+            url = config_link % (repository_url, version.version, version.version),
             type = "zip",
-            sha256 = version_userdev_sha256,
+            sha256 = version.userdev_sha256,
             output = output_prefix,
         )
 
-        repo_name = "%s_%s" % (repository_prefix, _convert_maven_coordinate(version_name))
+        repo_name = "%s_%s" % (repository_prefix, _convert_maven_coordinate(version.version))
         repo_kwargs = {
             "name": repo_name,
-            "version": version_name,
-            "java_target": version_java_target,
-            "legacy": version_legacy,
-            "userdev_sha256": version_userdev_sha256,
-            "universal_sha256": version["universal_sha256"],
-            "sources_sha256": version["sources_sha256"],
-            "joined_patched_sources": version["joined_patched_sources"],
+            "version": version.version,
+            "java_target": version.java_target,
+            "legacy": version.legacy,
+            "userdev_sha256": version.userdev_sha256,
+            "universal_sha256": version.universal_sha256,
+            "sources_sha256": version.sources_sha256,
+            "joined_patched_sources": version.joined_patched_sources,
         }
-        if version.get("joined_strip_client") != None:
-            repo_kwargs["joined_strip_client"] = version["joined_strip_client"]
+        if version.joined_strip_client:
+            repo_kwargs["joined_strip_client"] = version.joined_strip_client
         _neoforge_repo(**repo_kwargs)
 
         config_data = json.decode(mctx.read("%s/config.json" % output_prefix))
         for library in config_data["libraries"]:
             if library.endswith("@zip"):
                 continue
-            append_library(library, version_legacy)
+            append_library(library, version.legacy)
         for module in config_data.get("modules", []):
-            append_library(module, version_legacy)
+            append_library(module, version.legacy)
 
     pin_content = {}
+    pin_entries = {}
     if pin_file != None:
         pin_content = _parse_pin_file(mctx.read(pin_file))
     for library in libraries:
@@ -495,22 +457,18 @@ def _neoforge_impl(mctx):
         legacy = library["legacy"]
         repository_url = _minecraftforge_repository_url if legacy else _neoforge_repository_url
         repository_prefix = "forge" if legacy else "neoforge"
+        url = _convert_maven_coordinate_to_url_with_repo(repository_url, coordinate)
         http_jar(
             name = _convert_maven_coordinate_to_repo(repository_prefix, coordinate),
-            url = _convert_maven_coordinate_to_url_with_repo(repository_url, coordinate),
-            sha256 = pin_content.get(_convert_maven_coordinate_to_url_with_repo(repository_url, coordinate), None),
+            url = url,
+            sha256 = pin_content.get(url, None),
             downloaded_file_name = _maven_coordinate_to_filename(coordinate),
         )
+        pin_entries["@%s//jar" % _convert_maven_coordinate_to_repo(repository_prefix, coordinate)] = url
 
     neoforge_pin(
         name = "neoforge_pin",
-        urls = [
-            _convert_maven_coordinate_to_url_with_repo(
-                _minecraftforge_repository_url if library["legacy"] else _neoforge_repository_url,
-                library["coordinate"],
-            )
-            for library in libraries
-        ],
+        entries = pin_entries,
         pin_file = pin_file,
     )
 

@@ -76,27 +76,24 @@ def _modrinth_pin_impl(rctx):
             "primary": rctx.attr.primary_file[version_id],
         }
 
-    rctx.file("pin_file.json", json.encode_indent(pin_content) + "\n")
-    rctx.template(
-        "PinGenerator.java",
-        Label("@//repo/modrinth:PinGenerator.java"),
-        substitutions = {
-            "$PIN_SOURCE": str(rctx.path("pin_file.json")),
-            "$PIN_TARGET": str(pin_path),
-        },
-        executable = False,
-    )
+    rctx.file("pin_file.json", json.encode_indent(pin_content, indent = "  ") + "\n")
 
-    # Generate a java_binary to build PinGenerator.java under name `pin`
+    pin_target = str(pin_path)
     rctx.file("BUILD.bazel", content = """
 load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
     name = "pin",
-    srcs = ["PinGenerator.java"],
+    srcs = ["@//repo/modrinth:PinGenerator.java"],
     main_class = "PinGenerator",
+    deps = ["@bazel_tools//tools/java/runfiles"],
+    data = ["pin_file.json"],
+    jvm_flags = [
+        "-Dpin.source=$(rlocationpath :pin_file.json)",
+        "-Dpin.target=%s",
+    ],
 )
-""")
+""" % pin_target)
 
 _modrinth_pin = repository_rule(
     implementation = _modrinth_pin_impl,

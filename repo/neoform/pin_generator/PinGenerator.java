@@ -1,166 +1,72 @@
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.ByteBuffer;
+import com.google.devtools.build.runfiles.AutoBazelRepository;
+import com.google.devtools.build.runfiles.Runfiles;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.Flow;
-import java.util.concurrent.Semaphore;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
+import java.util.Map;
 
+@AutoBazelRepository
 public class PinGenerator {
-    private static final String[] URLS = new String[]{ /*INJECT HERE*/};
-    private static final String PIN_TARGET = "$PIN_TARGET";
-
-    public static void main(String[] args) throws Exception {
-        var outputPath = Path.of(PIN_TARGET).toAbsolutePath();
-        try (var client = HttpClient.newHttpClient();
-             var output = Files.newBufferedWriter(outputPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
-            var semaphore = new Semaphore(4);
-            var futures = Arrays.stream(URLS)
-                    .filter(line -> !line.isEmpty())
-                    .map(url -> {
-                        try {
-                            semaphore.acquire();
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        return downloadAndComputeHash(client, url)
-                                .thenApply(hash -> {
-                                    semaphore.release();
-                                    return new HashEntry(url, hash);
-                                });
-                    })
-                    .toList();
-            var entries = CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new))
-                    .thenApply(v -> futures.stream()
-                            .map(CompletableFuture::join)
-                            // Sort the entries by URL to get deterministic output
-                            .sorted(Comparator.comparing(HashEntry::url))
-                            .collect(Collectors.toList()))
-                    .join();
-            for (var entry : entries) {
-                output.write(entry.url());
-                output.write(" ");
-                output.write(entry.hash());
-                output.newLine();
-            }
-        }
-        System.out.println("Pin generated successfully: " + outputPath);
-    }
-
     private record HashEntry(String url, String hash) {
     }
 
-    private record HasherBodyHandler(String algorithm) implements HttpResponse.BodyHandler<byte[]> {
+    public static void main(String[] args) throws Exception {
+        var runfiles = Runfiles.preload().withSourceRepository(AutoBazelRepository_PinGenerator.NAME);
 
-        @Override
-        public HttpResponse.BodySubscriber<byte[]> apply(HttpResponse.ResponseInfo responseInfo) {
-            return new HasherBodySubscriber(algorithm);
+        var manifestPath = Path.of(runfiles.rlocation(System.getProperty("pin.manifest")));
+        var targetPath = Path.of(System.getProperty("pin.target"));
+
+        Map<String, String> manifest;
+        try (var reader = new InputStreamReader(Files.newInputStream(manifestPath), StandardCharsets.UTF_8)) {
+            manifest = new Gson().fromJson(reader, new TypeToken<Map<String, String>>() {}.getType());
         }
 
-        private static class HasherBodySubscriber implements HttpResponse.BodySubscriber<byte[]> {
+        List<HashEntry> entries = new ArrayList<>();
+        for (var entry : manifest.entrySet()) {
+            var url = entry.getKey();
+            var flagName = entry.getValue();
+            var rpath = System.getProperty(flagName);
+            var file = Path.of(runfiles.rlocation(rpath));
 
-            private MessageDigest digest;
-            private final CompletableFuture<byte[]> future = new CompletableFuture<>();
-            private Flow.Subscription subscription;
-
-            public HasherBodySubscriber(String algorithm) {
-                try {
-                    this.digest = MessageDigest.getInstance(algorithm);
-                } catch (NoSuchAlgorithmException e) {
-                    var exception = new IllegalArgumentException("Unsupported hashing algorithm: " + algorithm, e);
-                    future.completeExceptionally(exception);
+            var digest = MessageDigest.getInstance("SHA-256");
+            try (var input = Files.newInputStream(file)) {
+                byte[] buffer = new byte[1 << 16];
+                int read;
+                while ((read = input.read(buffer)) != -1) {
+                    digest.update(buffer, 0, read);
                 }
             }
-
-            @Override
-            public void onSubscribe(Flow.Subscription subscription) {
-                this.subscription = subscription;
-                this.subscription.request(Long.MAX_VALUE);
+            var hash = digest.digest();
+            var hex = new StringBuilder(hash.length * 2);
+            for (byte value : hash) {
+                hex.append(String.format("%02x", value));
             }
+            entries.add(new HashEntry(url, hex.toString()));
+        }
 
-            @Override
-            public void onNext(List<ByteBuffer> item) {
-                if (digest != null) {
-                    for (var buffer : item) {
-                        digest.update(buffer);
-                    }
-                }
-                subscription.request(1);
-            }
+        entries.sort(Comparator.comparing(HashEntry::url));
 
-            @Override
-            public void onError(Throwable throwable) {
-                future.completeExceptionally(throwable);
-            }
-
-            @Override
-            public void onComplete() {
-                var hash = digest.digest();
-                future.complete(hash);
-            }
-
-            @Override
-            public CompletionStage<byte[]> getBody() {
-                return future;
+        if (targetPath.getParent() != null) {
+            Files.createDirectories(targetPath.getParent());
+        }
+        try (var output = Files.newBufferedWriter(targetPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            for (var entry : entries) {
+                output.write(entry.url);
+                output.write(' ');
+                output.write(entry.hash);
+                output.newLine();
             }
         }
-    }
 
-    private static <T> CompletableFuture<T> retry(Supplier<CompletableFuture<T>> supplier, int attempts) {
-        var cf = supplier.get();
-        for (int i = 0; i < attempts; i++) {
-            cf = cf.exceptionally(t -> supplier.get().join());
-        }
-        return cf;
-    }
-
-    private static CompletableFuture<String> downloadAndComputeHash(HttpClient client, String url) {
-        var sha256Url = url + ".sha256";
-        var request = HttpRequest.newBuilder(URI.create(sha256Url))
-                .GET()
-                .build();
-
-        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenCompose(response -> {
-                    if (response.statusCode() == 200) {
-                        var content = response.body().trim();
-                        var parts = content.split("\\s+");
-                        return CompletableFuture.completedFuture(parts[0]);
-                    } else {
-                        return downloadFileAndComputeHash(client, url);
-                    }
-                })
-                .exceptionally(throwable -> downloadFileAndComputeHash(client, url).join());
-    }
-
-    private static CompletableFuture<String> downloadFileAndComputeHash(HttpClient client, String url) {
-        var request = HttpRequest.newBuilder(URI.create(url))
-                .GET()
-                .build();
-        return retry(() ->
-                client.sendAsync(request, new HasherBodyHandler("SHA-256"))
-                        .thenApply(response -> {
-                            if (response.statusCode() != 200) {
-                                throw new RuntimeException("Failed to download " + url + ", status code: " + response.statusCode());
-                            }
-                            var hash = response.body();
-                            var hexString = new StringBuilder();
-                            for (var b : hash) {
-                                hexString.append(String.format("%02x", b));
-                            }
-                            return hexString.toString();
-                        }), 3);
+        System.err.println("Pin generated successfully: " + targetPath);
     }
 }

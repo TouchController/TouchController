@@ -9,6 +9,7 @@ game_version(
     client_mappings = "@minecraft//1.16.5:client_mappings",
     client_parchment = "@parchment_1_16_5//:json",
     intermediary = "@maven_fabric_1_16_5//:net_fabricmc_intermediary_v2",
+    mcp_mappings_tsrg1 = "@mcp_1_16_5//:mappings",
     neoforge = "@forge_1_16_5//:neoforge",
     server = "@minecraft//1.16.5:server",
     server_legacy = True,

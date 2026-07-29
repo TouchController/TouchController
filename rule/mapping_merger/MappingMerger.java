@@ -10,6 +10,7 @@ import top.fifthlight.fabazel.mappingmerger.context.MappingFormat;
 import top.fifthlight.fabazel.mappingmerger.context.MergeContext;
 import top.fifthlight.fabazel.mappingmerger.operation.ChangeSourceNamespaceOperation;
 import top.fifthlight.fabazel.mappingmerger.operation.CompleteNamespaceOperation;
+import top.fifthlight.fabazel.mappingmerger.operation.DropNamespacesOperation;
 import top.fifthlight.fabazel.mappingmerger.operation.ImportMappingOperation;
 import top.fifthlight.fabazel.mappingmerger.operation.Operation;
 
@@ -161,6 +162,14 @@ public class MappingMerger extends Worker {
                                     namespaceMappings.put(from, to);
                                 }
                                 context.addOperation(new CompleteNamespaceOperation(namespaceMappings));
+                            }
+                            case "dropNamespaces" -> {
+                                var names = operationArg.split(",");
+                                var nsList = new ArrayList<String>();
+                                for (var entry : names) {
+                                    nsList.add(entry.trim());
+                                }
+                                context.addOperation(new DropNamespacesOperation(nsList));
                             }
                             default -> throw new IllegalArgumentException("Bad operation: " + operationName);
                         }

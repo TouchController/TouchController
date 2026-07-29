@@ -1,104 +1,104 @@
 {
-	"K2lpyV17": {
-		"primary": "kotlinforforge-6.2.0-all.jar",
-		"sha512": {
-			"kotlinforforge-6.2.0-all.jar": "552e5525e4606b451095b51bedbf0863d55fbd83b047bfedee9318aa28935d606987c905c1943116f612e5a9bd5faabc67241d96ad2d9307927be6c8fb670e65"
-		}
-	},
-	"ND4ROcMQ": {
-		"primary": "sodium-fabric-0.6.13+mc1.21.6.jar",
-		"sha512": {
-			"sodium-fabric-0.6.13+mc1.21.6.jar": "ee97e3df07a6f734bc8a0f77c1f1de7f47bed09cf682f048ceb12675c51b70ba727b11fcacbb7b10cc9f79b283dd71a39751312b5c70568aa3ac9471407174db"
-		}
-	},
-	"NrSebcsG": {
-		"primary": "kotlinforforge-5.11.0-all.jar",
-		"sha512": {
-			"kotlinforforge-5.11.0-all.jar": "b32faa6d616511aff4f8b32197877c53b9f8bee103884ec37c632b5d017bb59a498ec971b68d8d94787043b0c5be666a330b61d285033c341bff83ac28a90992"
-		}
-	},
-	"Pb3OXVqC": {
-		"primary": "sodium-neoforge-0.6.13+mc1.21.1.jar",
-		"sha512": {
-			"sodium-neoforge-0.6.13+mc1.21.1.jar": "ce58f34d05d96c0a109a5cea23c741f6bdb2e6be31fc087c5989274cefca5f10ba0c08c62083cf554a51f2c7667bf46e4164383f675c844e77633aef2659996b"
-		}
-	},
-	"PdQpfqPZ": {
-		"primary": "sodium-neoforge-0.7.3+mc1.21.10.jar",
-		"sha512": {
-			"sodium-neoforge-0.7.3+mc1.21.10.jar": "26e9ab3d61b06987fad5d2334625bb74e780f4e87588057ab836e9b784b813ad0c1f015ffdf83e50a3a72211a0a06005970ccc0ad9d01d92839bf93567615797"
-		}
-	},
-	"QwsZwykw": {
-		"primary": "iris-neoforge-1.9.6+mc1.21.10.jar",
-		"sha512": {
-			"iris-neoforge-1.9.6+mc1.21.10.jar": "bef87ab163633796d9dd0536c53738444b5904fb78968db5f7a24a35420703740e4e22e133e7942d96986b87a766ff65db49c6bfc07953a0b17ca5a28cc98f8c"
-		}
-	},
-	"WSKgpZoB": {
-		"primary": "kotlinforforge-6.3.0-all.jar",
-		"sha512": {
-			"kotlinforforge-6.3.0-all.jar": "0092fc7b4db1e35e53e7ddb5e7b4fa1dc5654c9100cdb298ad1b802308a470e75da21019d25774e643ff43bb79e9fb11d03170321504e0e471b4c36c00fad339"
-		}
-	},
-	"ihzX2Dvy": {
-		"primary": "sodium-neoforge-0.6.13+mc1.21.6.jar",
-		"sha512": {
-			"sodium-neoforge-0.6.13+mc1.21.6.jar": "c999124b3a60d76a31c45929dd6895f3406e42d61f0155c055b0530d5c02bf6d81a404797ed557a4e05cfee4b46555ec7701fd6d98d281a02595dd2348bb8917"
-		}
-	},
-	"jIWDGbU5": {
-		"primary": "MakeUp-UltraFast-9.2.zip",
-		"sha512": {
-			"MakeUp-UltraFast-9.2.zip": "5a7d1a0947052941a2304f46d5056b6cdf379ffc20202c01d4f8e18d11c2a0bd18c6f208c63c84b5feac12bbf09726c948e44d68a6c68523bba01aae96989838"
-		}
-	},
-	"l77DAK6U": {
-		"primary": "iris-fabric-1.9.1+mc1.21.7.jar",
-		"sha512": {
-			"iris-fabric-1.9.1+mc1.21.7.jar": "eb02e94fbdc78bd8d2bb809819bf5050974c98e7d05c362cfc62bc8fbd75d62583da772dbd1956c43b0ad1e9e850012cb4b304a3e1d4040aaae09a328dbc8355"
-		}
-	},
-	"oXIoDcGE": {
-		"primary": "iris-neoforge-1.8.8+mc1.21.1.jar",
-		"sha512": {
-			"iris-neoforge-1.8.8+mc1.21.1.jar": "0d3741374b145f51fa993c4fa6ddad7ee9479ec2a0635c2c71efd11d91b3d7bc450705e3ac8fc66d92508334146000212c61c5a67c718cf6df62c0903b043a3a"
-		}
-	},
-	"pp2cY80Q": {
-		"primary": "kotlinforforge-5.10.0-all.jar",
-		"sha512": {
-			"kotlinforforge-5.10.0-all.jar": "0c7a23c6b8017c9a24694bc6c0dbcb3d9b4ec630ae2ff965c0ee478ca881ad70f4755388678430b0175c3abe18c66fcbc25ed9be6f600bcdc083743eaecbfc35"
-		}
-	},
-	"r1MZ1Bpv": {
-		"primary": "iris-fabric-1.9.6+mc1.21.9.jar",
-		"sha512": {
-			"iris-fabric-1.9.6+mc1.21.9.jar": "1bbe1101a0fed2b8c0cd537c0e37a8dd56ce3f35ac8d5fecc7cd73256b3c8bd13fa84de3f36070159918d46744d753474a775ca12c7326af602be2a6377429d4"
-		}
-	},
-	"sFfidWgd": {
-		"primary": "sodium-fabric-0.7.3+mc1.21.10.jar",
-		"sha512": {
-			"sodium-fabric-0.7.3+mc1.21.10.jar": "1cccdc75d972f5c176a488dcc84cce7320b608a2d105412f2847245affbf5aa22b1995eda392132453fa6e1a9154ac99a87acaf8d7989b9f1a23ac1059a93daf"
-		}
-	},
-	"u1OEbNKx": {
-		"primary": "sodium-fabric-0.6.13+mc1.21.1.jar",
-		"sha512": {
-			"sodium-fabric-0.6.13+mc1.21.1.jar": "13032e064c554fc8671573dadb07bc70e6ea2f68706c65c086c4feb1d2f664346a3414cbf9d1367b42b8d063a35e40f2f967ef9af31642e1f0093b852161fe91"
-		}
-	},
-	"xA5cxBvz": {
-		"primary": "iris-neoforge-1.9.1+mc1.21.7.jar",
-		"sha512": {
-			"iris-neoforge-1.9.1+mc1.21.7.jar": "0ca98f413477fca40d74af42a51ddbc85c884abe9987dda6648a0f9a8b19dc99551cf243a45c8770316368b8d63495a6c7582d23ba499d7e2e50c92fee4454af"
-		}
-	},
-	"zsoi0dso": {
-		"primary": "iris-fabric-1.8.8+mc1.21.1.jar",
-		"sha512": {
-			"iris-fabric-1.8.8+mc1.21.1.jar": "2e6ba2ffa1e1a6799288245a7e0ac68ee8df1d41b98362189df58f535cae34fa9277801e4136633467341b7dae5be0e5c698011b480b3d91b66d3dd4f7567aa6"
-		}
-	}
+  "K2lpyV17": {
+    "primary": "kotlinforforge-6.2.0-all.jar",
+    "sha512": {
+      "kotlinforforge-6.2.0-all.jar": "552e5525e4606b451095b51bedbf0863d55fbd83b047bfedee9318aa28935d606987c905c1943116f612e5a9bd5faabc67241d96ad2d9307927be6c8fb670e65"
+    }
+  },
+  "ND4ROcMQ": {
+    "primary": "sodium-fabric-0.6.13+mc1.21.6.jar",
+    "sha512": {
+      "sodium-fabric-0.6.13+mc1.21.6.jar": "ee97e3df07a6f734bc8a0f77c1f1de7f47bed09cf682f048ceb12675c51b70ba727b11fcacbb7b10cc9f79b283dd71a39751312b5c70568aa3ac9471407174db"
+    }
+  },
+  "NrSebcsG": {
+    "primary": "kotlinforforge-5.11.0-all.jar",
+    "sha512": {
+      "kotlinforforge-5.11.0-all.jar": "b32faa6d616511aff4f8b32197877c53b9f8bee103884ec37c632b5d017bb59a498ec971b68d8d94787043b0c5be666a330b61d285033c341bff83ac28a90992"
+    }
+  },
+  "Pb3OXVqC": {
+    "primary": "sodium-neoforge-0.6.13+mc1.21.1.jar",
+    "sha512": {
+      "sodium-neoforge-0.6.13+mc1.21.1.jar": "ce58f34d05d96c0a109a5cea23c741f6bdb2e6be31fc087c5989274cefca5f10ba0c08c62083cf554a51f2c7667bf46e4164383f675c844e77633aef2659996b"
+    }
+  },
+  "PdQpfqPZ": {
+    "primary": "sodium-neoforge-0.7.3+mc1.21.10.jar",
+    "sha512": {
+      "sodium-neoforge-0.7.3+mc1.21.10.jar": "26e9ab3d61b06987fad5d2334625bb74e780f4e87588057ab836e9b784b813ad0c1f015ffdf83e50a3a72211a0a06005970ccc0ad9d01d92839bf93567615797"
+    }
+  },
+  "QwsZwykw": {
+    "primary": "iris-neoforge-1.9.6+mc1.21.10.jar",
+    "sha512": {
+      "iris-neoforge-1.9.6+mc1.21.10.jar": "bef87ab163633796d9dd0536c53738444b5904fb78968db5f7a24a35420703740e4e22e133e7942d96986b87a766ff65db49c6bfc07953a0b17ca5a28cc98f8c"
+    }
+  },
+  "WSKgpZoB": {
+    "primary": "kotlinforforge-6.3.0-all.jar",
+    "sha512": {
+      "kotlinforforge-6.3.0-all.jar": "0092fc7b4db1e35e53e7ddb5e7b4fa1dc5654c9100cdb298ad1b802308a470e75da21019d25774e643ff43bb79e9fb11d03170321504e0e471b4c36c00fad339"
+    }
+  },
+  "ihzX2Dvy": {
+    "primary": "sodium-neoforge-0.6.13+mc1.21.6.jar",
+    "sha512": {
+      "sodium-neoforge-0.6.13+mc1.21.6.jar": "c999124b3a60d76a31c45929dd6895f3406e42d61f0155c055b0530d5c02bf6d81a404797ed557a4e05cfee4b46555ec7701fd6d98d281a02595dd2348bb8917"
+    }
+  },
+  "jIWDGbU5": {
+    "primary": "MakeUp-UltraFast-9.2.zip",
+    "sha512": {
+      "MakeUp-UltraFast-9.2.zip": "5a7d1a0947052941a2304f46d5056b6cdf379ffc20202c01d4f8e18d11c2a0bd18c6f208c63c84b5feac12bbf09726c948e44d68a6c68523bba01aae96989838"
+    }
+  },
+  "l77DAK6U": {
+    "primary": "iris-fabric-1.9.1+mc1.21.7.jar",
+    "sha512": {
+      "iris-fabric-1.9.1+mc1.21.7.jar": "eb02e94fbdc78bd8d2bb809819bf5050974c98e7d05c362cfc62bc8fbd75d62583da772dbd1956c43b0ad1e9e850012cb4b304a3e1d4040aaae09a328dbc8355"
+    }
+  },
+  "oXIoDcGE": {
+    "primary": "iris-neoforge-1.8.8+mc1.21.1.jar",
+    "sha512": {
+      "iris-neoforge-1.8.8+mc1.21.1.jar": "0d3741374b145f51fa993c4fa6ddad7ee9479ec2a0635c2c71efd11d91b3d7bc450705e3ac8fc66d92508334146000212c61c5a67c718cf6df62c0903b043a3a"
+    }
+  },
+  "pp2cY80Q": {
+    "primary": "kotlinforforge-5.10.0-all.jar",
+    "sha512": {
+      "kotlinforforge-5.10.0-all.jar": "0c7a23c6b8017c9a24694bc6c0dbcb3d9b4ec630ae2ff965c0ee478ca881ad70f4755388678430b0175c3abe18c66fcbc25ed9be6f600bcdc083743eaecbfc35"
+    }
+  },
+  "r1MZ1Bpv": {
+    "primary": "iris-fabric-1.9.6+mc1.21.9.jar",
+    "sha512": {
+      "iris-fabric-1.9.6+mc1.21.9.jar": "1bbe1101a0fed2b8c0cd537c0e37a8dd56ce3f35ac8d5fecc7cd73256b3c8bd13fa84de3f36070159918d46744d753474a775ca12c7326af602be2a6377429d4"
+    }
+  },
+  "sFfidWgd": {
+    "primary": "sodium-fabric-0.7.3+mc1.21.10.jar",
+    "sha512": {
+      "sodium-fabric-0.7.3+mc1.21.10.jar": "1cccdc75d972f5c176a488dcc84cce7320b608a2d105412f2847245affbf5aa22b1995eda392132453fa6e1a9154ac99a87acaf8d7989b9f1a23ac1059a93daf"
+    }
+  },
+  "u1OEbNKx": {
+    "primary": "sodium-fabric-0.6.13+mc1.21.1.jar",
+    "sha512": {
+      "sodium-fabric-0.6.13+mc1.21.1.jar": "13032e064c554fc8671573dadb07bc70e6ea2f68706c65c086c4feb1d2f664346a3414cbf9d1367b42b8d063a35e40f2f967ef9af31642e1f0093b852161fe91"
+    }
+  },
+  "xA5cxBvz": {
+    "primary": "iris-neoforge-1.9.1+mc1.21.7.jar",
+    "sha512": {
+      "iris-neoforge-1.9.1+mc1.21.7.jar": "0ca98f413477fca40d74af42a51ddbc85c884abe9987dda6648a0f9a8b19dc99551cf243a45c8770316368b8d63495a6c7582d23ba499d7e2e50c92fee4454af"
+    }
+  },
+  "zsoi0dso": {
+    "primary": "iris-fabric-1.8.8+mc1.21.1.jar",
+    "sha512": {
+      "iris-fabric-1.8.8+mc1.21.1.jar": "2e6ba2ffa1e1a6799288245a7e0ac68ee8df1d41b98362189df58f535cae34fa9277801e4136633467341b7dae5be0e5c698011b480b3d91b66d3dd4f7567aa6"
+    }
+  }
 }

@@ -26,6 +26,8 @@ def _game_version_impl(
         server_legacy,
         neoforge,
         intermediary,
+        mcp_mappings_tsrg2,
+        mcp_mappings_tsrg1,
         yarn,
         sodium_intermediary,
         iris_intermediary,
@@ -48,6 +50,8 @@ def _game_version_impl(
     iris_named = name + "_iris_named"
     vanilla_client = name + "_vanilla_client"
     parchment_input = name + "_parchment_input"
+    mcp_tsrg2_input = name + "_mcp_tsrg2_input"
+    mcp_tsrg1_input = name + "_mcp_tsrg1_input"
 
     client_namespace = "client" if split_source_namespace else "official"
     server_namespace = "server" if split_source_namespace else "official"
@@ -101,6 +105,30 @@ def _game_version_impl(
             format = "parchment",
         )
 
+    mcp = mcp_mappings_tsrg2 or mcp_mappings_tsrg1
+    if yarn and mcp:
+        fail("MCP mappings cannot be used with yarn now")
+    if mcp_mappings_tsrg2:
+        merge_mapping_input(
+            name = mcp_tsrg2_input,
+            file = mcp_mappings_tsrg2,
+            format = "tsrg",
+            namespace_mappings = {
+                "obf": "official",
+                "srg": "srg",
+            },
+        )
+    elif mcp_mappings_tsrg1:
+        merge_mapping_input(
+            name = mcp_tsrg1_input,
+            file = mcp_mappings_tsrg1,
+            format = "tsrg",
+            namespace_mappings = {
+                "source": "official",
+                "target": "srg",
+            },
+        )
+
     native.alias(
         name = name + "_client",
         actual = client,
@@ -133,7 +161,7 @@ def _game_version_impl(
         tags = ["manual"],
     )
 
-    if client_mappings or yarn:
+    if client_mappings or yarn or mcp:
         inputs = {}
         if client_mappings:
             inputs["mojmap"] = ":" + named_input
@@ -143,6 +171,10 @@ def _game_version_impl(
             inputs["intermediary"] = ":" + intermediary_input
         if client_parchment:
             inputs["parchment"] = ":" + parchment_input
+        if mcp_mappings_tsrg2:
+            inputs["mcp"] = ":" + mcp_tsrg2_input
+        elif mcp_mappings_tsrg1:
+            inputs["mcp"] = ":" + mcp_tsrg1_input
 
         operations = []
         if client_mappings:
@@ -150,6 +182,11 @@ def _game_version_impl(
             if client_parchment:
                 operations.append(">parchment")
             operations.append("changeSrc(official)")
+            if mcp_mappings_tsrg2 or mcp_mappings_tsrg1:
+                operations.append(">mcp")
+                if mcp_mappings_tsrg2:
+                    # Drop the numeric "id" namespace brought in by MCP tsrg2 mapping
+                    operations.append("dropNamespaces(id)")
             if intermediary:
                 operations.append(">intermediary")
 
@@ -164,6 +201,11 @@ def _game_version_impl(
             operations.append(">yarn")
             operations.append("completeNamespace(named -> intermediary)")
             operations.append("changeSrc(%s)" % client_namespace)
+        elif mcp:
+            operations.append(">mcp")
+            if mcp_mappings_tsrg2:
+                # Drop the numeric "id" namespace brought in by MCP tsrg2 mapping
+                operations.append("dropNamespaces(id)")
 
         merge_mapping(
             name = merged_mapping,
@@ -400,6 +442,18 @@ game_version = macro(
         "intermediary": attr.label(
             mandatory = False,
             doc = "Intermediary mappings",
+            configurable = False,
+        ),
+        "mcp_mappings_tsrg2": attr.label(
+            mandatory = False,
+            allow_single_file = True,
+            doc = "MCP TSrg2 mappings file (tsrg2 obf->srg->id format). Adds the 'srg' namespace.",
+            configurable = False,
+        ),
+        "mcp_mappings_tsrg1": attr.label(
+            mandatory = False,
+            allow_single_file = True,
+            doc = "MCP TSrg1 legacy mappings file (pre-1.17, left->right format). Adds the 'srg' namespace.",
             configurable = False,
         ),
         "yarn": attr.label(
