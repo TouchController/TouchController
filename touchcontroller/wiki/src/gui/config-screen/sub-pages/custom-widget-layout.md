@@ -51,8 +51,8 @@
 - 移动锁定：可以锁定当前控件。
 - 锚点：参见[锚点机制](../../../mechanism/anchor-mechanism.md)
 - 不透明度：一个滑杆
-- 滑动触发：从按下的其他控件滑动到此控件上可以触发此控件。
-- 捕获触发：按下后，手指移开仍继续触发。
+- 滑动触发：从按下的其他控件滑动到此控件上，可以触发此控件的“按住”动作（参见[自定义控件](../../../mechanism/custom-layout/custom-widget.md#触发)）。
+- 捕获触发：按住后，手指移开仍继续触发“按住”动作（参见[自定义控件](../../../mechanism/custom-layout/custom-widget.md#触发)）。
 - 视角跟随：按下后手指可以移动视角。
 
 这些选项的下方为[自定义控件](../../../mechanism/custom-layout/custom-widget.md)的相关设置。
