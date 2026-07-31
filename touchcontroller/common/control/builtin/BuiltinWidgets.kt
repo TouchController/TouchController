@@ -71,7 +71,7 @@ object BuiltinWidgets {
         moveView: Boolean = false,
         action: ButtonTrigger = ButtonTrigger(),
         name: Identifier,
-        align: Align,
+        align: Align = Align.CENTER_CENTER,
         offset: IntOffset = IntOffset.ZERO,
     ) = CustomWidget(
         normalTexture = texture,
@@ -112,7 +112,6 @@ object BuiltinWidgets {
                 press = key(DefaultKeyBindingType.JUMP),
             ),
             name = Texts.WIDGET_JUMP_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -138,7 +137,6 @@ object BuiltinWidgets {
                 press = key(DefaultKeyBindingType.JUMP),
             ),
             name = Texts.WIDGET_JUMP_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -188,7 +186,6 @@ object BuiltinWidgets {
             swipeTrigger = false,
             action = sneakTrigger(),
             name = Texts.WIDGET_SNEAK_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -211,7 +208,6 @@ object BuiltinWidgets {
                 press = key(DefaultKeyBindingType.UP),
             ),
             name = Texts.WIDGET_FORWARD_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -241,7 +237,6 @@ object BuiltinWidgets {
             swipeTrigger = false,
             action = dismountTrigger(),
             name = Texts.WIDGET_SNEAK_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -264,7 +259,6 @@ object BuiltinWidgets {
                 press = key(DefaultKeyBindingType.JUMP),
             ),
             name = Texts.WIDGET_ASCEND_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -278,7 +272,6 @@ object BuiltinWidgets {
                 press = key(DefaultKeyBindingType.SNEAK),
             ),
             name = Texts.WIDGET_DESCEND_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -295,7 +288,6 @@ object BuiltinWidgets {
                 press = key(DefaultKeyBindingType.JUMP),
             ),
             name = Texts.WIDGET_ASCEND_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -312,7 +304,6 @@ object BuiltinWidgets {
                 press = key(DefaultKeyBindingType.SNEAK),
             ),
             name = Texts.WIDGET_DESCEND_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -327,7 +318,6 @@ object BuiltinWidgets {
                 release = WidgetTriggerAction.Player(PlayerActions.stopSprint),
             ),
             name = Texts.WIDGET_SPRINT_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -343,7 +333,6 @@ object BuiltinWidgets {
                 press = key(DefaultKeyBindingType.ATTACK),
             ),
             name = Texts.WIDGET_ATTACK_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -359,7 +348,6 @@ object BuiltinWidgets {
                 press = key(DefaultKeyBindingType.USE),
             ),
             name = Texts.WIDGET_USE_BUTTON_NAME,
-            align = Align.RIGHT_BOTTOM,
         )
     }
 
@@ -495,7 +483,6 @@ object BuiltinWidgets {
             ),
             grayOnClassic = true,
             name = Texts.WIDGET_CUSTOM_BUTTON_NAME,
-            align = Align.CENTER_CENTER,
         )
     }
 }

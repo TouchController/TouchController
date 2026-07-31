@@ -294,10 +294,16 @@ class AnchorProperty<Config : ControllerWidget> : ControllerWidget.Property<Conf
                         ),
                         selected = config.align == anchor,
                         onClick = {
+                            val windowSize = context.editAreaSize
+                            val size = config.size()
                             onConfigChanged(
                                 config.cloneBase(
                                     align = anchor,
-                                    offset = IntOffset.ZERO,
+                                    offset = anchor.offsetAt(
+                                        windowSize,
+                                        size,
+                                        config.align.alignOffset(windowSize, size, config.offset)
+                                    ),
                                 )
                             )
                         }

@@ -306,6 +306,7 @@
     "touchcontroller.widget.general.property.anchor.bottom_left": "左下",
     "touchcontroller.widget.general.property.anchor.bottom_center": "中下",
     "touchcontroller.widget.general.property.anchor.bottom_right": "右下",
+    "touchcontroller.widget.general.property.anchor.auto": "自动锚点",
     "touchcontroller.widget.general.property.opacity": "不透明度: %s%%",
     "touchcontroller.texture_set.new.name": "新样式",
     "touchcontroller.texture_set.classic.name": "经典",

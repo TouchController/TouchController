@@ -35,7 +35,7 @@ object PropertiesTab : CustomTab() {
 
     @Composable
     override fun Content() {
-        val (screenModel, uiState, tabsButton, sideBarAtRight) = LocalCustomTabContext.current
+        val (screenModel, uiState, tabsButton, sideBarAtRight, editAreaSize) = LocalCustomTabContext.current
         SideBarContainer(
             sideBarAtRight = sideBarAtRight,
             tabsButton = tabsButton,
@@ -120,6 +120,7 @@ object PropertiesTab : CustomTab() {
                                 config = selectedWidget,
                                 context = ControllerWidget.Property.ConfigContext(
                                     presetControlInfo = uiState.selectedPreset?.controlInfo,
+                                    editAreaSize = editAreaSize,
                                 ),
                                 onConfigChanged = { screenModel.editWidget(uiState.pageState.selectedWidgetIndex, it) }
                             )

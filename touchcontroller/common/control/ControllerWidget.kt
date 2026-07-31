@@ -31,6 +31,7 @@ abstract class ControllerWidget {
     abstract val id: Uuid
     abstract val name: Name
     abstract val align: Align
+    abstract val autoAlign: Boolean
     abstract val offset: IntOffset
     abstract val opacity: Float
     abstract val lockMoving: Boolean
@@ -64,7 +65,8 @@ abstract class ControllerWidget {
         val setValue: (Config, Value) -> Config,
     ) {
         data class ConfigContext(
-            val presetControlInfo: PresetControlInfo?
+            val presetControlInfo: PresetControlInfo?,
+            val editAreaSize: IntSize,
         )
 
         @Composable
@@ -93,6 +95,13 @@ abstract class ControllerWidget {
                 name = Text.translatable(Texts.WIDGET_GENERAL_PROPERTY_LOCK_MOVING),
             ),
             AnchorProperty(),
+            BooleanProperty(
+                getValue = { it.autoAlign },
+                setValue = { config, value ->
+                    config.cloneBase(autoAlign = value)
+                },
+                name = Text.translatable(Texts.WIDGET_GENERAL_PROPERTY_ANCHOR_AUTO),
+            ),
             FloatProperty(
                 getValue = { it.opacity },
                 setValue = { config, value -> config.cloneBase(opacity = value) },
@@ -117,6 +126,7 @@ abstract class ControllerWidget {
         id: Uuid = this.id,
         name: Name = this.name,
         align: Align = this.align,
+        autoAlign: Boolean = this.autoAlign,
         offset: IntOffset = this.offset,
         opacity: Float = this.opacity,
         lockMoving: Boolean = this.lockMoving,

@@ -21,6 +21,7 @@ kt_merge_library(
         "//combine/core/modifier/placement",
         "//combine/core/paint",
         "//combine/core/widget/layout",
+        "//combine/data",
         "@maven//:cafe_adriel_voyager_voyager_core_desktop",
         "@maven//:cafe_adriel_voyager_voyager_navigator_desktop",
         "@maven//:cafe_adriel_voyager_voyager_screenmodel_desktop",

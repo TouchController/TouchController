@@ -87,4 +87,66 @@ enum class Align(val alignment: Alignment) {
             y = windowSize.height - size.height - offset.y,
         )
     }
+
+    fun offsetAt(windowSize: IntSize, size: IntSize, absolutePos: IntOffset) = when (this) {
+        LEFT_TOP -> absolutePos
+
+        CENTER_TOP -> IntOffset(
+            x = absolutePos.x - (windowSize.width - size.width) / 2,
+            y = absolutePos.y,
+        )
+
+        RIGHT_TOP -> IntOffset(
+            x = windowSize.width - size.width - absolutePos.x,
+            y = absolutePos.y,
+        )
+
+        LEFT_CENTER -> IntOffset(
+            x = absolutePos.x,
+            y = absolutePos.y - (windowSize.height - size.height) / 2,
+        )
+
+        CENTER_CENTER -> absolutePos - (windowSize - size) / 2
+
+        RIGHT_CENTER -> IntOffset(
+            x = windowSize.width - size.width - absolutePos.x,
+            y = absolutePos.y - (windowSize.height - size.height) / 2,
+        )
+
+        LEFT_BOTTOM -> IntOffset(
+            x = absolutePos.x,
+            y = windowSize.height - size.height - absolutePos.y,
+        )
+
+        CENTER_BOTTOM -> IntOffset(
+            x = absolutePos.x - (windowSize.width - size.width) / 2,
+            y = windowSize.height - size.height - absolutePos.y,
+        )
+
+        RIGHT_BOTTOM -> IntOffset(
+            x = windowSize.width - size.width - absolutePos.x,
+            y = windowSize.height - size.height - absolutePos.y,
+        )
+    }
+
+    companion object {
+        fun fromPosition(windowSize: IntSize, size: IntSize, absolutePos: IntOffset): Align {
+            val center = absolutePos + size / 2
+            val leftThird = windowSize.width / 3
+            val rightThird = windowSize.width - leftThird
+            val topThird = windowSize.height / 3
+            val bottomThird = windowSize.height - topThird
+            return when {
+                center.y <= topThird && center.x <= leftThird -> LEFT_TOP
+                center.y <= topThird && center.x >= rightThird -> RIGHT_TOP
+                center.y <= topThird -> CENTER_TOP
+                center.y >= bottomThird && center.x <= leftThird -> LEFT_BOTTOM
+                center.y >= bottomThird && center.x >= rightThird -> RIGHT_BOTTOM
+                center.y >= bottomThird -> CENTER_BOTTOM
+                center.x <= leftThird -> LEFT_CENTER
+                center.x >= rightThird -> RIGHT_CENTER
+                else -> CENTER_CENTER
+            }
+        }
+    }
 }

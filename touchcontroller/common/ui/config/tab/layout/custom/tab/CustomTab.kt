@@ -17,6 +17,7 @@ import top.fifthlight.combine.core.widget.layout.*
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.model.CustomControlLayoutTabModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.state.CustomControlLayoutTabState
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
+import top.fifthlight.data.IntSize
 import top.fifthlight.touchcontroller.common.ui.widget.TitleBox
 
 data class CustomTabContext(
@@ -24,6 +25,7 @@ data class CustomTabContext(
     val uiState: CustomControlLayoutTabState.Enabled,
     val tabsButton: @Composable () -> Unit,
     val sideBarAtRight: Boolean,
+    val editAreaSize: IntSize,
     val parentNavigator: Navigator?,
 )
 

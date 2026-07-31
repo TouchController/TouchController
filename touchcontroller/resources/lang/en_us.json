@@ -307,6 +307,7 @@
     "touchcontroller.widget.general.property.anchor.bottom_left": "Bottom left",
     "touchcontroller.widget.general.property.anchor.bottom_center": "Bottom center",
     "touchcontroller.widget.general.property.anchor.bottom_right": "Bottom right",
+    "touchcontroller.widget.general.property.anchor.auto": "Auto anchor",
     "touchcontroller.widget.general.property.opacity": "Opacity: %s",
     "touchcontroller.texture_set.new.name": "New",
     "touchcontroller.texture_set.classic.name": "Classic",

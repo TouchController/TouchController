@@ -115,7 +115,7 @@ object LayersTab : CustomTab() {
 
     @Composable
     override fun Content() {
-        val (screenModel, uiState, tabsButton, sideBarAtRight, parentNavigator) = LocalCustomTabContext.current
+        val (screenModel, uiState, tabsButton, sideBarAtRight, editAreaSize, parentNavigator) = LocalCustomTabContext.current
         val tabModel = rememberScreenModel { LayersTabModel(screenModel) }
         val tabState by tabModel.uiState.collectAsState()
 

@@ -183,7 +183,7 @@ private fun LayoutEditorPanel(
             val widgetOffset = if (index == selectedWidgetIndex) {
                 val dragIntOffset = dragTotalOffset.toIntOffset()
                 val normalizedOffset = widget.align.normalizeOffset(dragIntOffset)
-                normalizedOffset + widget.offset
+                clampOffset(widget.align, widget.size(), normalizedOffset + widget.offset)
             } else {
                 null
             }
@@ -200,7 +200,14 @@ private fun LayoutEditorPanel(
                         val widgetOffset = widgetOffset ?: return@draggable
                         val widgetSize = widget.size()
                         val clampedOffset = clampOffset(widget.align, widgetSize, widgetOffset)
-                        val newWidget = widget.cloneBase(offset = clampedOffset)
+                        val newWidget = if (widget.autoAlign) {
+                            val absolutePos = widget.align.alignOffset(panelSize, widgetSize, clampedOffset)
+                            val newAlign = Align.fromPosition(
+                                panelSize, widgetSize, absolutePos
+                            )
+                            val newOffset = newAlign.offsetAt(panelSize, widgetSize, absolutePos)
+                            widget.cloneBase(align = newAlign, offset = newOffset)
+                        } else widget.cloneBase(offset = clampedOffset)
                         dragTotalOffset = Offset.ZERO
                         onWidgetChanged(index, newWidget)
                     }
@@ -400,7 +407,7 @@ object CustomControlLayoutTab : Tab() {
                                     val offset =
                                         widget.align.alignOffset(editAreaSize, widget.size(), widget.offset)
                                     val centerOffset = offset + widgetSize / 2
-                                    centerOffset.left < editAreaSize.width / 2
+                                    centerOffset.left <= editAreaSize.width / 2
                                 } != false
                             }
                         }
@@ -419,6 +426,7 @@ object CustomControlLayoutTab : Tab() {
                             uiState = uiState,
                             tabsButton = @Composable { SideBar() },
                             sideBarAtRight = sideBarProgress > .5f,
+                            editAreaSize = anchor.size,
                             parentNavigator = navigator,
                         )
                         if (uiState.pageState.showSideBar || sideBarProgress != .5f) {
