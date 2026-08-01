@@ -21,3 +21,9 @@ type = "required"
 versionRange = "[26.1, 26.2)"
 ordering = "NONE"
 side = "CLIENT"
+
+[[dependencies.blazesdl]]
+modId = "ixeris"
+type = "incompatible"
+versionRange = "[,4.6.2)"
+reason = "Ixeris < 4.6.2 has no SDL support."

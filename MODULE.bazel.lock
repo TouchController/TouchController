@@ -620,7 +620,7 @@
         "bzlTransitiveDigest": "l4xtB5tdV4G03go9gjKKfVXhQXjuSV4EXmdtEARPHlc=",
         "usagesDigest": "rGNcQ9+deMBpUYEh7Ycvgz9u8NrYpcpmVzddVCuIHgs=",
         "recordedInputs": [
-          "FILE:@@//modrinth_lock.json b5b5dfac8416acda08716ba164e4646a31c7f26e19ba9dfc04439fdc5d11818d"
+          "FILE:@@//modrinth_lock.json 99e8dfb2f65c2c7b3ab86a5040fa575840b4ffeb67d1192781f4bab3cf317f6c"
         ],
         "generatedRepoSpecs": {
           "sodium_fabric_1_21": {
