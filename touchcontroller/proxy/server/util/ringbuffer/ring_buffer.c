@@ -1,8 +1,9 @@
 #include "ring_buffer.h"
-#include <stdlib.h>
-#include <string.h>
+
 #include <assert.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 
 ring_buffer_t* ring_buffer_alloc(size_t capacity) {
     assert(capacity != 0);
@@ -25,12 +26,12 @@ ring_buffer_t* ring_buffer_alloc(size_t capacity) {
     return buf;
 }
 
-void ring_buffer_free(ring_buffer_t *buf) {
+void ring_buffer_free(ring_buffer_t* buf) {
     free(buf->queue);
     free(buf);
 }
 
-static int ring_buffer_expand(ring_buffer_t *buf, size_t new_capacity) {
+static int ring_buffer_expand(ring_buffer_t* buf, size_t new_capacity) {
     size_t old_capacity = buf->capacity;
     void** new_queue = realloc(buf->queue, new_capacity * sizeof(void*));
     if (!new_queue) {
@@ -45,9 +46,7 @@ static int ring_buffer_expand(ring_buffer_t *buf, size_t new_capacity) {
         size_t new_head_pos = new_capacity - head_section_size;
 
         // Move data after head to new queue's end
-        memmove(&buf->queue[new_head_pos],
-                &buf->queue[buf->head],
-                head_section_size * sizeof(void*));
+        memmove(&buf->queue[new_head_pos], &buf->queue[buf->head], head_section_size * sizeof(void*));
 
         buf->head = new_head_pos;
     }
@@ -56,10 +55,8 @@ static int ring_buffer_expand(ring_buffer_t *buf, size_t new_capacity) {
     return 0;
 }
 
-int ring_buffer_enqueue(ring_buffer_t *buf, void *data) {
-    size_t used = (buf->tail >= buf->head)
-                  ? (buf->tail - buf->head)
-                  : (buf->capacity - (buf->head - buf->tail));
+int ring_buffer_enqueue(ring_buffer_t* buf, void* data) {
+    size_t used = (buf->tail >= buf->head) ? (buf->tail - buf->head) : (buf->capacity - (buf->head - buf->tail));
     size_t remaining = (buf->capacity - 1) - used;
 
     if (remaining == 0) {
@@ -72,6 +69,18 @@ int ring_buffer_enqueue(ring_buffer_t *buf, void *data) {
         if (ret) {
             return ret;
         }
+    }
+
+    buf->queue[buf->tail++] = data;
+    buf->tail = buf->tail % buf->capacity;
+    return 0;
+}
+
+int ring_buffer_try_enqueue(ring_buffer_t* buf, void* data) {
+    size_t used = (buf->tail >= buf->head) ? (buf->tail - buf->head) : (buf->capacity - (buf->head - buf->tail));
+
+    if (used == buf->capacity - 1) {
+        return -1;
     }
 
     buf->queue[buf->tail++] = data;

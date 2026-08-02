@@ -1,0 +1,12 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "blockingqueue",
+    srcs = ["blocking_queue.c"],
+    hdrs = ["blocking_queue.h"],
+    target_compatible_with = select({
+        "@platforms//os:windows": ["@platforms//:incompatible"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//touchcontroller/proxy/server:__subpackages__"],
+)
