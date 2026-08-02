@@ -63,6 +63,7 @@ def _maven_publish_impl(ctx):
             main_jar,
             main_jars_depset,
             plugins = ["manifest", "services"],
+            manifest_mode = "use-last-by-alphabet",
         )
         artifact_specs[":jar"] = main_jar.short_path
         input_files.append(main_jar)
@@ -77,6 +78,7 @@ def _maven_publish_impl(ctx):
                 source_jar,
                 depset(source_jars),
                 plugins = ["manifest", "services"],
+                manifest_mode = "use-last-by-alphabet",
             )
             artifact_specs["sources:jar"] = source_jar.short_path
             input_files.append(source_jar)

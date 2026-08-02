@@ -74,6 +74,7 @@ def _text_resource_jar_impl(ctx):
         depset([text_jar], transitive = [merged_resource_jars.full_compile_jars]),
         ctx.attr.resources,
         plugins = ["manifest", "services", "resource"],
+        manifest_mode = "use-last-by-alphabet",
     )
 
     return [

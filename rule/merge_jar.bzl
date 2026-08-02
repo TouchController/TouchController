@@ -2,7 +2,7 @@
 
 load("@rules_java//java:defs.bzl", "JavaInfo", "java_common")
 
-def merge_jar_action(actions, executable, output_jar, jars = depset(), resources = {}, plugins = []):
+def merge_jar_action(actions, executable, output_jar, jars = depset(), resources = {}, plugins = [], manifest_mode = None):
     args = actions.args()
 
     for plugin in plugins:
@@ -11,8 +11,9 @@ def merge_jar_action(actions, executable, output_jar, jars = depset(), resources
 
     args.add(output_jar)
 
-    args.add("--manifest-mode")
-    args.add("use-last-by-alphabet")
+    if manifest_mode:
+        args.add("--manifest-mode")
+        args.add(manifest_mode)
 
     resource_files = []
     for resource, strip in resources.items():
@@ -59,6 +60,7 @@ def _merge_jar_impl(ctx):
         merged_deps.full_compile_jars,
         ctx.attr.resources,
         plugins = ["manifest", "services", "resource"],
+        manifest_mode = "use-last-by-alphabet",
     )
 
     return [
@@ -90,4 +92,49 @@ merge_jar = rule(
         ),
     },
     doc = "Merge JARs",
+)
+
+def _merge_zip_impl(ctx):
+    output = ctx.actions.declare_file(ctx.label.name + "." + ctx.attr.extension)
+    merge_jar_action(
+        ctx.actions,
+        ctx.executable._merge_jar_executable,
+        output,
+        jars = depset(ctx.files.srcs),
+        resources = ctx.attr.resources,
+        plugins = ctx.attr.plugins,
+    )
+    return [DefaultInfo(files = depset([output]))]
+
+merge_zip = rule(
+    implementation = _merge_zip_impl,
+    attrs = {
+        "srcs": attr.label_list(
+            mandatory = True,
+            allow_files = True,
+            doc = "Input archives to merge",
+        ),
+        "resources": attr.label_keyed_string_dict(
+            mandatory = False,
+            allow_files = True,
+            default = {},
+            doc = "Resource files to add, with prefix to strip",
+        ),
+        "plugins": attr.string_list(
+            mandatory = False,
+            default = ["resource"],
+            doc = "Mergetool plugins",
+        ),
+        "extension": attr.string(
+            mandatory = False,
+            default = "zip",
+            doc = "Output file extension",
+        ),
+        "_merge_jar_executable": attr.label(
+            default = "@//rule/mergetool:merger",
+            executable = True,
+            cfg = "exec",
+        ),
+    },
+    doc = "Merge ZIP archives",
 )

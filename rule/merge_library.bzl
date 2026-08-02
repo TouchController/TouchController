@@ -296,6 +296,7 @@ def _merge_library_jar_impl(ctx):
         ctx.outputs.sources_jar,
         merged_srcs_depset,
         plugins = ["manifest", "services"],
+        manifest_mode = "use-last-by-alphabet",
     )
 
     return [

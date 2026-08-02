@@ -1,5 +1,6 @@
 load("@rules_kotlin//kotlin:android.bzl", "kt_android_library")
 load("//rule:maven_publish.bzl", "maven_publish")
+load("//rule:merge_jar.bzl", "merge_zip")
 load("//touchcontroller/proxy/client:properties.bzl", "proxy_client_version")
 
 kt_android_library(
@@ -13,9 +14,11 @@ kt_android_library(
     ],
 )
 
-filegroup(
+merge_zip(
     name = "android-aar",
     srcs = ["android.aar"],
+    extension = "aar",
+    resources = {"proguard.txt": ""},
 )
 
 filegroup(
