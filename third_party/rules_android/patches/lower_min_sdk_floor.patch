@@ -1,0 +1,9 @@
+--- a/rules/min_sdk_version.bzl
++++ b/rules/min_sdk_version.bzl
+@@ -25,5 +25,5 @@
+ _SETTING = "//rules/flags:min_sdk_version"
+-_DEPOT_FLOOR = 23
++_DEPOT_FLOOR = 21
+ _MIN_SDK_LEVELS = sorted([_DEPOT_FLOOR, 24])
+ 
+ _ATTRS = dict(

@@ -5,7 +5,7 @@ android_sdk_repository_extension = use_extension("@rules_android//rules/android_
 use_repo(android_sdk_repository_extension, "androidsdk")
 
 android_ndk_repository_extension = use_extension("@rules_android_ndk//:extension.bzl", "android_ndk_repository_extension")
-android_ndk_repository_extension.configure(api_level = 24)
+android_ndk_repository_extension.configure(api_level = 21)
 use_repo(android_ndk_repository_extension, "androidndk")
 
 register_toolchains("@androidsdk//:sdk-toolchain", "@androidsdk//:all")

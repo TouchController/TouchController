@@ -38,6 +38,7 @@ archive_override(
     patch_strip = 1,
     patches = [
         "//third_party/rules_android/patches:maven_pinning.patch",
+        "//third_party/rules_android/patches:lower_min_sdk_floor.patch",
     ],
     strip_prefix = "rules_android-0.7.3",
     url = "https://github.com/bazelbuild/rules_android/releases/download/v0.7.3/rules_android-v0.7.3.tar.gz",

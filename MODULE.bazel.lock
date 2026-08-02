@@ -6042,13 +6042,13 @@
     "@@rules_android_ndk+//:extension.bzl%android_ndk_repository_extension": {
       "general": {
         "bzlTransitiveDigest": "odZWDJ/+Y883hx3/5UkzgnluRDd6buTxcclO0hBrhs0=",
-        "usagesDigest": "U0DrDXPMdB3BeZYp+40asyh5NtHOA2ULbDg7XbMGfrY=",
+        "usagesDigest": "KMs8KXw1voiCCNCkUD+RDeh/V1JshHrmkO2az1qlTfw=",
         "recordedInputs": [],
         "generatedRepoSpecs": {
           "androidndk": {
             "repoRuleId": "@@rules_android_ndk+//:rules.bzl%android_ndk_repository",
             "attributes": {
-              "api_level": 24,
+              "api_level": 21,
               "path": ""
             }
           }
