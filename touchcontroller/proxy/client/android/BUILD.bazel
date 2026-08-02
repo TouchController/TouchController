@@ -1,4 +1,5 @@
 load("@rules_kotlin//kotlin:android.bzl", "kt_android_library")
+load("//rule:jar.bzl", "jar")
 load("//rule:maven_publish.bzl", "maven_publish")
 load("//rule:merge_jar.bzl", "merge_zip")
 load("//touchcontroller/proxy/client:properties.bzl", "proxy_client_version")
@@ -26,11 +27,16 @@ filegroup(
     srcs = ["libandroid-src.jar"],
 )
 
+jar(
+    name = "android-javadoc",
+)
+
 maven_publish(
     name = "android.publish",
     artifacts = {
         "": ":android-aar",
         "sources": ":android-sources",
+        "javadoc": ":android-javadoc",
     },
     coordinates = "top.fifthlight.touchcontroller:proxy-client-android:%s" % proxy_client_version,
     pom_template = "proxy-client-android.pom",
