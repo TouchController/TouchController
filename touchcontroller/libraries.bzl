@@ -94,6 +94,7 @@ touchcontroller_fabric_config = {
     "combine-fabric-1-21-10": "=",
     "combine-fabric-1-21-11": "=",
     "combine-26-1": "=",
+    "combine-26-2": "=",
     "combine-theme-blackstone": "=",
     "combine-theme-blackstone-atlas": "=",
     "combine-theme-blackstone-vanilla": "=",
