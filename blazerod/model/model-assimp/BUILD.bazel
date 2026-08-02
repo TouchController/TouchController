@@ -14,24 +14,6 @@ model_info_jar(
     },
 )
 
-cc_jni_library(
-    name = "assimp_android",
-    platforms = [
-        "@//platforms:android_arm32",
-        "@//platforms:android_arm64",
-        "@//platforms:android_x86_32",
-        "@//platforms:android_x86_64",
-    ],
-    deps = ["@assimp"],
-)
-
-maven_publish(
-    name = "assimp_android.publish",
-    src = ":assimp_android",
-    coordinates = "top.fifthlight.blazerod:model-assimp-android-natives:%s" % blazerod_version,
-    deps = [":assimp_android"],
-)
-
 kt_jvm_export(
     name = "model-assimp",
     srcs = glob(["**/*.kt"]),
@@ -78,7 +60,6 @@ fabric_merge_jij(
         "@maven//:org_lwjgl_lwjgl_assimp_natives_linux": "org_lwjgl_lwjgl_assimp_natives_linux:3.3.3",
         "@maven//:org_lwjgl_lwjgl_assimp_natives_macos": "org_lwjgl_lwjgl_assimp_natives_macos:3.3.3",
         "@maven//:org_lwjgl_lwjgl_assimp_natives_macos_arm64": "org_lwjgl_lwjgl_assimp_natives_macos_arm64:3.3.3",
-        ":assimp_android": "top_fifthlight_blazerod_model_assimp_android_natives:%s" % blazerod_version,
     },
 )
 
