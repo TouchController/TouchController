@@ -80,6 +80,7 @@ static void* worker_thread(void* arg) {
                     if (message_rx == NULL) goto fail;
 
                     message_rx->size = 0;
+                    message_rx->data = NULL;
                 }
 
                 // Read message size
@@ -370,7 +371,7 @@ JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_andro
     if (buffer == NULL) {
         throw_npe(env, "Buffer is null");
         return;
-    }    
+    }
     if (len <= 0 || len > UINT8_MAX) {
         throw_exception(env, "Bad message size");
         return;
@@ -397,6 +398,7 @@ JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_andro
     message->data = malloc(len);
     if (message->data == NULL) {
         throw_exception(env, "Failed to allocate message data");
+        free(message);
         return;
     }
 
