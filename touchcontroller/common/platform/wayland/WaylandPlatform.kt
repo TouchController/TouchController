@@ -14,10 +14,10 @@ import top.fifthlight.touchcontroller.proxy.message.MessageDecodeException
 import top.fifthlight.touchcontroller.proxy.message.ProxyMessage
 import java.nio.ByteBuffer
 
-class WaylandPlatform(window: NativeWindow.Wayland) : Platform {
+class WaylandPlatform(private val window: NativeWindow.Wayland) : Platform {
     private val logger = LoggerFactory.getLogger(WaylandPlatform::class.java)
 
-    init {
+    override fun init() {
         Interface.init(window.displayPointer, window.surfacePointer)
     }
 

@@ -105,5 +105,8 @@ class TouchController : ClientModInitializer {
         ClientPlayerBlockBreakEvents.AFTER.register { _, _, _, _ ->
             BlockBreakEvents.afterBlockBreak()
         }
+        ClientLifecycleEvents.CLIENT_STOPPING.register { _ ->
+            PlatformProvider.platform?.close()
+        }
     }
 }

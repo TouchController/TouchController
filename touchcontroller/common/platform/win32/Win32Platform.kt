@@ -14,10 +14,10 @@ import top.fifthlight.touchcontroller.proxy.message.MessageDecodeException
 import top.fifthlight.touchcontroller.proxy.message.ProxyMessage
 import java.nio.ByteBuffer
 
-class Win32Platform(window: NativeWindow.Win32) : Platform {
+class Win32Platform(private val window: NativeWindow.Win32) : Platform {
     private val logger = LoggerFactory.getLogger(Win32Platform::class.java)
 
-    init {
+    override fun init() {
         Interface.init(window.handle)
     }
 

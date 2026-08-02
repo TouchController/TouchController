@@ -74,6 +74,7 @@ kt_merge_library(
         "//touchcontroller/common/gal/key",
         "//touchcontroller/common/layout/data",
         "//touchcontroller/common/model",
+        "//touchcontroller/common/platform",
         "//touchcontroller/common/platform/provider",
         "//touchcontroller/common/ui/config/screen",
         "//touchcontroller/versions/extension/26.1",

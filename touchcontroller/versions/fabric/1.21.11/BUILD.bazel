@@ -94,6 +94,7 @@ kt_merge_library(
         "//touchcontroller/common/gal/key",
         "//touchcontroller/common/layout/data",
         "//touchcontroller/common/model",
+        "//touchcontroller/common/platform",
         "//touchcontroller/common/platform/provider",
         "//touchcontroller/common/ui/config/screen",
         "@maven_fabric_1_21_11//:io_github_llamalad7_mixinextras_fabric",

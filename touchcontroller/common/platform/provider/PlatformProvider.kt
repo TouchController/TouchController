@@ -5,8 +5,6 @@
 
 package top.fifthlight.touchcontroller.common.platform.provider
 
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import org.slf4j.LoggerFactory
 import top.fifthlight.blazesdl.api.BlazeSDLAPI
 import top.fifthlight.touchcontroller.common.gal.window.PlatformWindowProvider
@@ -85,7 +83,7 @@ object PlatformProvider {
             }
         }
 
-    private fun loadPlatform(): (() -> Platform)? {
+    internal fun loadPlatform(): (() -> Platform)? {
         if (hasBlazeSDL) {
             BlazeSDLAPI.getInstance()?.let { api ->
                 return@loadPlatform { BlazeSDLPlatform(api) }
@@ -96,8 +94,7 @@ object PlatformProvider {
         if (socketPort != null) {
             logger.warn("TOUCH_CONTROLLER_PROXY set, use legacy UDP transport")
             val proxy = localhostLauncherSocketProxyServer(socketPort) ?: return null
-            @OptIn(DelicateCoroutinesApi::class)
-            return { ProxyPlatform(GlobalScope, proxy) }
+            return { ProxyPlatform(proxy) }
         }
 
         logger.info("System name: $systemName, system arch: $systemArch")
@@ -177,6 +174,6 @@ object PlatformProvider {
             return
         }
         platformLoaded = true
-        platform = platformProvider?.invoke()
+        platform = platformProvider?.invoke().also { it?.init() }
     }
 }

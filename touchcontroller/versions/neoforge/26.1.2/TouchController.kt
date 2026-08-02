@@ -18,6 +18,7 @@ import net.neoforged.fml.common.Mod
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.neoforge.client.event.*
 import net.neoforged.neoforge.client.event.lifecycle.ClientStartedEvent
+import net.neoforged.neoforge.client.event.lifecycle.ClientStoppingEvent
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers
 import net.neoforged.neoforge.client.settings.KeyModifier
@@ -129,6 +130,12 @@ class TouchController(modEventBus: IEventBus, private val container: ModContaine
         @SubscribeEvent
         private fun blockBroken(event: BreakBlockEvent) {
             BlockBreakEvents.afterBlockBreak()
+        }
+
+        @JvmStatic
+        @SubscribeEvent
+        private fun clientClose(event: ClientStoppingEvent) {
+            PlatformProvider.platform?.close()
         }
     }
 }

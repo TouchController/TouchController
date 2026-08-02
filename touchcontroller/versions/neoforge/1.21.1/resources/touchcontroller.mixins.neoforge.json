@@ -8,6 +8,7 @@
     "client": [
         "KeyBindingMixin",
         "KeyModifierMixin",
+        "MinecraftMixin",
         "ToggleKeyMappingMixin"
     ]
 }

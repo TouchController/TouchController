@@ -20,16 +20,15 @@ import top.fifthlight.touchcontroller.proxy.message.ProxyMessage
 import top.fifthlight.touchcontroller.proxy.message.RemovePointerMessage
 import top.fifthlight.touchcontroller.proxy.message.VibrateMessage
 
-class BlazeSDLPlatform(api: BlazeSDLAPI) : BlazeSDLEventHandler, Platform {
+class BlazeSDLPlatform(private val api: BlazeSDLAPI) : BlazeSDLEventHandler, Platform {
     private val logger = LoggerFactory.getLogger(BlazeSDLPlatform::class.java)
+    private var haptic: Long? = null
 
-    init {
+    override fun init() {
         api.registerEventHandler(this)
-        SDLInit.SDL_Init(SDLInit.SDL_INIT_HAPTIC)
+        SDLInit.SDL_InitSubSystem(SDLInit.SDL_INIT_HAPTIC)
         initHaptics()
     }
-
-    private var haptic: Long? = null
 
     private fun initHaptics() {
         val haptics = SDLHaptic.SDL_GetHaptics() ?: return
@@ -125,5 +124,10 @@ class BlazeSDLPlatform(api: BlazeSDLAPI) : BlazeSDLEventHandler, Platform {
 
             else -> {}
         }
+    }
+
+    override fun close() {
+        haptic?.let { SDLHaptic.SDL_CloseHaptic(it) }
+        SDLInit.SDL_QuitSubSystem(SDLInit.SDL_INIT_HAPTIC)
     }
 }

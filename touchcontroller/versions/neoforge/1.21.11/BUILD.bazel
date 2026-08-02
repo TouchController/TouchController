@@ -76,6 +76,7 @@ kt_merge_library(
         "//touchcontroller/common/gal/key",
         "//touchcontroller/common/layout/data",
         "//touchcontroller/common/model",
+        "//touchcontroller/common/platform",
         "//touchcontroller/common/platform/provider",
         "//touchcontroller/common/ui/config/screen",
         "@neoforge_1_21_11//:net_fabricmc_sponge_mixin",

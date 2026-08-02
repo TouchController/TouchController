@@ -134,5 +134,10 @@ class TouchController(modEventBus: IEventBus, private val container: ModContaine
         private fun blockBroken(event: BlockEvent.BreakEvent) {
             BlockBreakEvents.afterBlockBreak()
         }
+
+        @JvmStatic
+        fun clientClose() {
+            PlatformProvider.platform?.close()
+        }
     }
 }

@@ -47,4 +47,8 @@ class AndroidPlatform(name: String) : LargeMessageWrappedPlatform() {
         buffer.flip()
         Transport.send(handle, buffer.array(), buffer.arrayOffset() + buffer.position(), buffer.remaining())
     }
+
+    override fun close() {
+        Transport.destroy(handle)
+    }
 }
