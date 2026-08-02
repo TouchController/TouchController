@@ -12,6 +12,7 @@ kt_merge_library(
         "//touchcontroller/common/platform/android",
         "//touchcontroller/common/platform/blazesdl",
         "//touchcontroller/common/platform/ios",
+        "//touchcontroller/common/platform/native",
         "//touchcontroller/common/platform/proxy",
         "//touchcontroller/common/platform/wayland",
         "//touchcontroller/common/platform/win32",
@@ -22,6 +23,7 @@ kt_merge_library(
         ":proxy_server_windows",
         ":proxy_server_windows_legacy",
         ":proxy_server_android",
+        ":proxy_server_native_bridge",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
@@ -98,4 +100,20 @@ cc_jni_library(
         ],
     }),
     deps = ["//touchcontroller/proxy/server/android"],
+)
+
+cc_jni_library(
+    name = "proxy_server_native_bridge",
+    platforms = select({
+        "//:config_release": [
+            "@//platforms:android_arm32",
+            "@//platforms:android_arm64",
+            "@//platforms:android_x86_32",
+            "@//platforms:android_x86_64",
+        ],
+        "//conditions:default": [
+            "@//platforms:android_arm64",
+        ],
+    }),
+    deps = ["//touchcontroller/proxy/server/native_bridge"],
 )

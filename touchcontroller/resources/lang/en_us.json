@@ -12,6 +12,7 @@
     "touchcontroller.warning.development_version.ok": "I know",
     "touchcontroller.platform.proxy": "Legacy UDP",
     "touchcontroller.platform.android": "Android",
+    "touchcontroller.platform.android.native": "Android (native bridge)",
     "touchcontroller.platform.win32": "Win32",
     "touchcontroller.platform.wayland": "Wayland",
     "touchcontroller.platform.ios": "iOS",

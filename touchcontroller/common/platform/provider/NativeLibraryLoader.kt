@@ -5,6 +5,7 @@ import top.fifthlight.touchcontroller.common.gal.window.GlfwPlatform
 import top.fifthlight.touchcontroller.common.gal.window.PlatformWindowProvider
 import top.fifthlight.touchcontroller.common.platform.Platform
 import top.fifthlight.touchcontroller.common.platform.android.AndroidPlatform
+import top.fifthlight.touchcontroller.common.platform.native.NativePlatform
 import top.fifthlight.touchcontroller.common.platform.provider.PlatformProvider.isAndroid
 import top.fifthlight.touchcontroller.common.platform.provider.PlatformProvider.systemArch
 import top.fifthlight.touchcontroller.common.platform.provider.PlatformProvider.systemName
@@ -44,15 +45,63 @@ internal object NativeLibraryLoader {
         )
     }
 
+    private fun getPointerFromEnvironment(name: String): Long? = System.getenv(name)
+        ?.lowercase()
+        ?.let { str ->
+            if (str.startsWith("0x")) {
+                str.removePrefix("0x").let { hexStr ->
+                    hexStr.toLongOrNull(16) ?: hexStr.toULongOrNull(16)?.toLong()
+                }
+            } else {
+                str.toLongOrNull(10)
+            }
+        }
+        ?.takeIf { it != 0L && it != -1L }
+
     fun probeNativeLibraryInfo(): NativeLibraryInfo? {
         if ((systemName.startsWith("Linux", ignoreCase = true) && isAndroid) ||
             systemName.contains("Android", ignoreCase = true)
         ) {
             logger.info("Android detected")
 
+            val useNativeFlag = System.getenv("TOUCH_CONTROLLER_USE_NATIVE")
+            if (useNativeFlag != null && useNativeFlag != "0") {
+                logger.info("TOUCH_CONTROLLER_USE_NATIVE set, try native bridge")
+                val dalvikJavaVM = getPointerFromEnvironment("DALVIK_JAVAVM")
+                val dalvikApplication = getPointerFromEnvironment("DALVIK_APPLICATION")
+                if (dalvikJavaVM != null && dalvikApplication != null) {
+                    logger.info("DALVIK_JAVAVM set, using native bridge")
+
+                    val target = when (systemArch) {
+                        "x86_32", "x86", "i386", "i486", "i586", "i686" -> "android_x86_32"
+                        "amd64", "x86_64" -> "android_x86_64"
+                        "armeabi", "armeabi-v7a", "armhf", "arm", "armel" -> "android_armv7"
+                        "arm64", "aarch64" -> "android_aarch64"
+                        else -> null
+                    } ?: run {
+                        logger.warn("Unsupported Android arch: $systemArch")
+                        return null
+                    }
+                    logger.info("Target: $target")
+
+                    val libraryName = "proxy_server_native_bridge"
+
+                    return NativeLibraryInfo(
+                        modContainerPath = "${libraryName}_${target}/lib${libraryName}.so",
+                        extractPrefix = "lib$libraryName",
+                        extractSuffix = ".so",
+                        readOnlySetter = ::posixReadOnlySetter,
+                        removeAfterLoaded = true,
+                        platformFactory = { NativePlatform(dalvikJavaVM, dalvikApplication) },
+                    )
+                } else {
+                    logger.info("DALVIK_JAVAVM: $dalvikJavaVM, DALVIK_APPLICATION: $dalvikApplication, fall back to Unix domain socket")
+                }
+            }
+
             val socketName = System.getenv("TOUCH_CONTROLLER_PROXY_SOCKET")?.takeIf { it.isNotEmpty() }
             if (socketName == null) {
-                logger.info("No TOUCH_CONTROLLER_PROXY_SOCKET environment set, TouchController will not be loaded")
+                logger.info("No TOUCH_CONTROLLER_PROXY_SOCKET or DALVIK_JAVAVM environment set, TouchController will not be loaded")
                 return null
             }
 
@@ -63,7 +112,7 @@ internal object NativeLibraryLoader {
                 "arm64", "aarch64" -> "android_aarch64"
                 else -> null
             } ?: run {
-                logger.warn("Unsupported Android arch")
+                logger.warn("Unsupported Android arch: $systemArch")
                 return null
             }
             logger.info("Target: $target")

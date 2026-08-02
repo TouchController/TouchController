@@ -14,7 +14,7 @@ indent_size = 4
 [{*.mixins.*.json, *.mixins.json}]
 indent_size = 4
 
-[en_us.json]
+[**/lang/*.json]
 indent_size = 4
 
 [aboutlibraries.json]

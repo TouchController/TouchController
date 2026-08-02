@@ -5,6 +5,7 @@
 
 package top.fifthlight.touchcontroller.proxy.client
 
+import top.fifthlight.touchcontroller.proxy.client.native.NativeInterface
 import top.fifthlight.touchcontroller.proxy.message.LargeMessage
 import top.fifthlight.touchcontroller.proxy.message.MessageDecodeException
 import top.fifthlight.touchcontroller.proxy.message.ProxyMessage
@@ -20,17 +21,28 @@ import java.util.concurrent.atomic.AtomicBoolean
  * 调用 send() 方法可以发送数据包，需要调用 run() 方法来运行，否则消息会累积在消息队列中不会发送。
  *
  * @param transport 使用到的消息运输层
+ * @param allowNative 允许使用原生代码运输层
  */
-class LauncherProxyMessageClient(private val transport: MessageTransport) : AutoCloseable {
-    private sealed class MessageItem {
+class LauncherProxyMessageClient @JvmOverloads constructor(
+    private val transport: MessageTransport?,
+    private val allowNative: Boolean = false,
+) : AutoCloseable {
+    init {
+        require(transport != null || allowNative) {
+            "You need a transport or allow native"
+        }
+    }
+
+    internal sealed class MessageItem {
         data class Message(val message: ProxyMessage) : MessageItem()
         data object Close : MessageItem()
     }
 
-    private val sendQueue = LinkedBlockingQueue<MessageItem>(2048)
-    private val receiveQueue = LinkedBlockingQueue<MessageItem>(2048)
+    internal var useNative = AtomicBoolean(false)
+    internal val sendQueue = LinkedBlockingQueue<MessageItem>(2048)
+    internal val receiveQueue = LinkedBlockingQueue<MessageItem>(2048)
     private var running = AtomicBoolean(false)
-    private var closed = AtomicBoolean(false)
+    internal var closed = AtomicBoolean(false)
 
     /**
      * 开始处理消息，会新建线程用于处理，不会阻塞当前线程。
@@ -38,6 +50,9 @@ class LauncherProxyMessageClient(private val transport: MessageTransport) : Auto
     fun run() {
         if (!running.compareAndSet(false, true)) {
             return
+        }
+        if (allowNative) {
+            NativeInterface.bindNativeClient(this)
         }
         Thread {
             // Send thread
@@ -51,6 +66,16 @@ class LauncherProxyMessageClient(private val transport: MessageTransport) : Auto
                         encodeBuffer.clear()
                         message.encode(encodeBuffer)
                         encodeBuffer.flip()
+
+                        if (useNative.get()) {
+                            val sendBuffer = ByteArray(encodeBuffer.remaining())
+                            encodeBuffer.get(sendBuffer)
+                            NativeInterface.sendEvent(sendBuffer)
+                            continue
+                        }
+
+                        val transport = transport ?: continue
+
                         if (message.wrapInLargeMessage) {
                             // Split message to multiple LargeMessage
                             while (encodeBuffer.hasRemaining()) {
@@ -72,52 +97,53 @@ class LauncherProxyMessageClient(private val transport: MessageTransport) : Auto
                     }
                 }
             }
-            transport.close()
+            transport?.close()
         }.start()
-        Thread {
-            // Receive thread
-            val receiveBuffer = ByteBuffer.allocate(256)
-            val decodeBuffer = ByteBuffer.allocate(65536)
-            while (transport.receive(receiveBuffer)) {
-                receiveBuffer.flip()
+        transport?.let { transport ->
+            Thread {
+                // Receive thread
+                val receiveBuffer = ByteBuffer.allocate(256)
+                val decodeBuffer = ByteBuffer.allocate(65536)
+                while (transport.receive(receiveBuffer)) {
+                    receiveBuffer.flip()
 
-                if (receiveBuffer.remaining() < 4) {
-                    // Message without type
-                    receiveBuffer.clear()
-                    continue
-                }
-                val type = receiveBuffer.getInt()
-                val message = try {
-                    ProxyMessage.decode(type, receiveBuffer)
-                } catch (ex: MessageDecodeException) {
-                    // Ignore bad message
-                    null
-                }
-                if (message != null) {
-                    if (message is LargeMessage) {
-                        decodeBuffer.put(message.payload)
-                        if (message.end) {
-                            decodeBuffer.flip()
-                            try {
-                                if (decodeBuffer.remaining() >= 4) {
-                                    val wrappedType = decodeBuffer.getInt()
-                                    val wrappedMessage = ProxyMessage.decode(wrappedType, decodeBuffer)
-                                    receiveQueue.offer(MessageItem.Message(wrappedMessage))
-                                }
-                            } catch (ex: MessageDecodeException) {
-                                // Ignore bad message
-                                null
-                            }
-                            decodeBuffer.clear()
-                        }
-                    } else {
-                        receiveQueue.offer(MessageItem.Message(message))
+                    if (receiveBuffer.remaining() < 4) {
+                        // Message without type
+                        receiveBuffer.clear()
+                        continue
                     }
-                }
+                    val type = receiveBuffer.getInt()
+                    val message = try {
+                        ProxyMessage.decode(type, receiveBuffer)
+                    } catch (_: MessageDecodeException) {
+                        // Ignore bad message
+                        null
+                    }
+                    if (message != null) {
+                        if (message is LargeMessage) {
+                            decodeBuffer.put(message.payload)
+                            if (message.end) {
+                                decodeBuffer.flip()
+                                try {
+                                    if (decodeBuffer.remaining() >= 4) {
+                                        val wrappedType = decodeBuffer.getInt()
+                                        val wrappedMessage = ProxyMessage.decode(wrappedType, decodeBuffer)
+                                        receiveQueue.offer(MessageItem.Message(wrappedMessage))
+                                    }
+                                } catch (_: MessageDecodeException) {
+                                    // Ignore bad message
+                                }
+                                decodeBuffer.clear()
+                            }
+                        } else {
+                            receiveQueue.offer(MessageItem.Message(message))
+                        }
+                    }
 
-                receiveBuffer.clear()
-            }
-        }.start()
+                    receiveBuffer.clear()
+                }
+            }.start()
+        }
     }
 
     /**

@@ -1,0 +1,17 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "native_bridge",
+    srcs = glob([
+        "*.c",
+        "*.h",
+    ]),
+    linkopts = ["-llog"],
+    target_compatible_with = ["@platforms//os:android"],
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/proxy/server/util/blockingqueue",
+        "//touchcontroller/proxy/server/util/ringbuffer",
+        "@rules_jni//jni",
+    ],
+)

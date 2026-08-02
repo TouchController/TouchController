@@ -17,11 +17,12 @@ import java.util.concurrent.atomic.AtomicBoolean
  * @param transport 使用到的消息运输层
  */
 class LauncherProxyClient @JvmOverloads constructor(
-    transport: MessageTransport,
+    transport: MessageTransport?,
     capabilities: Set<PlatformCapability> = setOf(),
+    allowNative: Boolean = false,
 ) : AutoCloseable {
     private val running = AtomicBoolean(false)
-    private val messageClient = LauncherProxyMessageClient(transport)
+    private val messageClient = LauncherProxyMessageClient(transport, allowNative = allowNative)
     private var capabilities = HashSet(capabilities)
 
     /**
