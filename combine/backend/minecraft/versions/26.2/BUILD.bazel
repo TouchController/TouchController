@@ -64,7 +64,7 @@ jar(
 
 merge_library_jar(
     name = "26.2_merged",
-    aspect_impl_package_suffix = "v26_1",
+    aspect_impl_package_suffix = "v26_2",
     aspects = ["//combine/backend/minecraft:minecraft_unmerged"],
     resources = {
         "//combine/resources:icon": ".",
