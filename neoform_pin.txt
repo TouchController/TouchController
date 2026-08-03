@@ -1,8 +1,11 @@
+https://files.minecraftforge.net/maven/de/oceanlabs/mcp/mcinjector/3.7.3/mcinjector-3.7.3-fatjar.jar 4d55700baeaf023c2db3ef76cb43434c022123487d46fb60337e0e45aacfd369
 https://files.minecraftforge.net/maven/de/oceanlabs/mcp/mcinjector/3.7.7/mcinjector-3.7.7-fatjar.jar 2a42300475f52e416dc2b3a17016aeab6d955602e84bb91f40a78337c45da8a2
 https://files.minecraftforge.net/maven/de/oceanlabs/mcp/mcinjector/3.8.0/mcinjector-3.8.0-fatjar.jar 4ca2f91988f1a66868f1bafffab6be1ecd77bfd3417230d98b8ce030b2745eb2
+https://files.minecraftforge.net/maven/net/minecraftforge/forgeflower/1.0.342.8/forgeflower-1.0.342.8.jar bcd03e8311cfe741da222c08e689c80a5672a43d496991ba5da1904667f996e2
 https://files.minecraftforge.net/maven/net/minecraftforge/forgeflower/1.5.380.33/forgeflower-1.5.380.33.jar 4d9b5d6dd127705b6b74a3164556107c659df99f9a338895296af42efe5fa5bd
 https://files.minecraftforge.net/maven/net/minecraftforge/forgeflower/1.5.380.44/forgeflower-1.5.380.44.jar 699f51fffdb80e47b62d36f9f2e70f4d5898bc8fda1063c6e7af66c7beb2939b
 https://files.minecraftforge.net/maven/net/minecraftforge/forgeflower/1.5.478.16/forgeflower-1.5.478.16.jar 14e68616b71c2e3c6689f6759c7c77e0cbc19a604e171df9cb5bcbfb80b599bd
+https://files.minecraftforge.net/maven/net/minecraftforge/mergetool/0.2.3.2/mergetool-0.2.3.2-fatjar.jar 00f405d3bcbdb20a3d4e41b3a22c9199d1fd0cce481da3363a9433867803749d
 https://files.minecraftforge.net/maven/net/minecraftforge/mergetool/1.0.9/mergetool-1.0.9-fatjar.jar 841bf952ee14868f2347942c4e756552d218d22d8c119432444be34d4a45b096
 https://files.minecraftforge.net/maven/net/minecraftforge/mergetool/1.1.1/mergetool-1.1.1-fatjar.jar 12b7afb3f00b31db4849cbe1f50a78c1fa10ae663f70377dee6cc74a63c57993
 https://maven.minecraftforge.net/net/minecraftforge/ForgeAutoRenamingTool/0.1.17/ForgeAutoRenamingTool-0.1.17-all.jar 9b3e6709f542915a91b784068591159430d4e1ab8d6e35dfd9a1d69545f16682
@@ -25,6 +28,7 @@ https://maven.minecraftforge.net/releases/ca/weblite/java-objc-bridge/1.0.0/java
 https://maven.minecraftforge.net/releases/ca/weblite/java-objc-bridge/1.1/java-objc-bridge-1.1.jar 77e34a13bccffc6c8b1a0e3ed46ddb0ea7dd56f2104ecdfacaaec9e4054ac332
 https://maven.minecraftforge.net/releases/com/google/code/findbugs/jsr305/3.0.1/jsr305-3.0.1.jar c885ce34249682bc0236b4a7d56efcc12048e6135a5baf7a9cde8ad8cda13fcd
 https://maven.minecraftforge.net/releases/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar 766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7
+https://maven.minecraftforge.net/releases/net/minecraftforge/mergetool/0.2.3.2/mergetool-0.2.3.2-forge.jar 6eaa37538f7bf9f43a3a117fcd42f87262fbf33a268f65d32ac08ca1613f1b8a
 https://maven.minecraftforge.net/releases/net/minecraftforge/mergetool/1.0.9/mergetool-1.0.9-api.jar 46d9d0b4a42ab220a2baa25807bc7a076c2cb51594fa6c013c595f43b92956b3
 https://maven.minecraftforge.net/releases/net/minecraftforge/mergetool/1.1.3/mergetool-1.1.3-api.jar a98901a786a5cf7bba1645aeca51f4ae6cc05525332178baeba72babcd76e499
 https://maven.minecraftforge.net/releases/net/minecraftforge/mergetool/1.1.5/mergetool-1.1.5-api.jar 39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a
@@ -44,6 +48,7 @@ https://maven.neoforged.net/releases/net/neoforged/AutoRenamingTool/2.0.8/AutoRe
 https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.jar 9fe7c6df17299f661b9cd07fc1c4e85493b63efae6bb9da0255a97d9d0a87c60
 https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/3.0.13/installertools-3.0.13-fatjar.jar 0266b19d63cd88a735186c37a41fe3db2c0223411358422b04841feafb446099
 https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/4.0.16/installertools-4.0.16-fatjar.jar f8e5d76e3a388a106cf8a77cb34c604cb03517806b9f5f20e8e2201b9ec671e4
+https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/4.0.17/installertools-4.0.17-fatjar.jar 412c5f5bd74717d62441a3d5914945122f7f44f063c90284545bb0b9ba8751b9
 https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/4.0.7/installertools-4.0.7-fatjar.jar 3d371ba82e89d25df90ba086cd08ab38490d3099fd05318046177e3678b2cfb3
 https://maven.neoforged.net/releases/net/neoforged/mergetool/2.0.2/mergetool-2.0.2-api.jar 568e4bf03a0da636d7908305d6d9e226acbd58f3865fe4a29a0344201c77e34e
 https://maven.neoforged.net/releases/net/neoforged/mergetool/2.0.2/mergetool-2.0.2-fatjar.jar b5768cfe7d8a70d854f2e53901396514d5087fa77ed63d2737af56d7bf833134

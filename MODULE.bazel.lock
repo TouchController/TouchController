@@ -4840,7 +4840,7 @@
           "REPO_MAPPING:rules_java+,compatibility_proxy rules_java++compatibility_proxy+compatibility_proxy",
           "REPO_MAPPING:rules_java+,rules_cc rules_cc+",
           "REPO_MAPPING:rules_java++compatibility_proxy+compatibility_proxy,rules_java rules_java+",
-          "FILE:@@//neoform_pin.txt 8399bdf8a49dc635cae91bb17d5dad23e375125aac8da356d7ea683415762881"
+          "FILE:@@//neoform_pin.txt 3fc232568b6e6615ed1bd53d641bdc3bc4721c25cda8608515cd8a8ae3650fe0"
         ],
         "generatedRepoSpecs": {
           "mcp_1_12_2_20201025_185735": {
@@ -5274,19 +5274,22 @@
           "mcp_net_minecraftforge_forgeflower_1_0_342_8": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
-              "url": "https://files.minecraftforge.net/maven/net/minecraftforge/forgeflower/1.0.342.8/forgeflower-1.0.342.8.jar"
+              "url": "https://files.minecraftforge.net/maven/net/minecraftforge/forgeflower/1.0.342.8/forgeflower-1.0.342.8.jar",
+              "sha256": "bcd03e8311cfe741da222c08e689c80a5672a43d496991ba5da1904667f996e2"
             }
           },
           "mcp_de_oceanlabs_mcp_mcinjector_3_7_3_fatjar": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
-              "url": "https://files.minecraftforge.net/maven/de/oceanlabs/mcp/mcinjector/3.7.3/mcinjector-3.7.3-fatjar.jar"
+              "url": "https://files.minecraftforge.net/maven/de/oceanlabs/mcp/mcinjector/3.7.3/mcinjector-3.7.3-fatjar.jar",
+              "sha256": "4d55700baeaf023c2db3ef76cb43434c022123487d46fb60337e0e45aacfd369"
             }
           },
           "mcp_net_minecraftforge_mergetool_0_2_3_2_fatjar": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
-              "url": "https://files.minecraftforge.net/maven/net/minecraftforge/mergetool/0.2.3.2/mergetool-0.2.3.2-fatjar.jar"
+              "url": "https://files.minecraftforge.net/maven/net/minecraftforge/mergetool/0.2.3.2/mergetool-0.2.3.2-fatjar.jar",
+              "sha256": "00f405d3bcbdb20a3d4e41b3a22c9199d1fd0cce481da3363a9433867803749d"
             }
           },
           "mcp_net_md_5_SpecialSource_1_8_3_shaded": {
@@ -5306,7 +5309,8 @@
           "mcp_net_minecraftforge_mergetool_0_2_3_2_forge": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
-              "url": "https://maven.minecraftforge.net/releases/net/minecraftforge/mergetool/0.2.3.2/mergetool-0.2.3.2-forge.jar"
+              "url": "https://maven.minecraftforge.net/releases/net/minecraftforge/mergetool/0.2.3.2/mergetool-0.2.3.2-forge.jar",
+              "sha256": "6eaa37538f7bf9f43a3a117fcd42f87262fbf33a268f65d32ac08ca1613f1b8a"
             }
           },
           "mcp_net_minecraftforge_forgeflower_1_5_380_33": {
@@ -5760,7 +5764,8 @@
           "neoform_net_neoforged_installertools_installertools_4_0_17_fatjar": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
-              "url": "https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/4.0.17/installertools-4.0.17-fatjar.jar"
+              "url": "https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/4.0.17/installertools-4.0.17-fatjar.jar",
+              "sha256": "412c5f5bd74717d62441a3d5914945122f7f44f063c90284545bb0b9ba8751b9"
             }
           },
           "neoform_pin": {
