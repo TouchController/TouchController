@@ -1,4 +1,4 @@
-load("//rule:libraries.bzl", _library = "library")
+load("//rule:libraries.bzl", "fabric_jij_deps", _library = "library")
 
 _libraries = [
     _library("androidx.compose.runtime:runtime-saveable-desktop:1.10.0"),
@@ -22,10 +22,43 @@ touchcontroller_unified_deps = {lib.name: lib.label for lib in _libraries}
 touchcontroller_unified_neoforge = {lib.name: lib.constraints for lib in _libraries}
 touchcontroller_unified_fabric = {lib.name: lib.version for lib in _libraries}
 
-touchcontroller_common_deps = {
+combine_common_deps = {
     "combine-common": "//combine/backend/minecraft:minecraft_common_standalone",
     "combine-26-1": "//combine/backend/minecraft/versions/26.1:26.1_merged",
     "combine-26-2": "//combine/backend/minecraft/versions/26.2:26.2_merged",
+}
+
+combine_fabric_deps = {
+    "combine-fabric-1-21-1": "//combine/backend/minecraft/fabric/1.21.1",
+    "combine-fabric-1-21-10": "//combine/backend/minecraft/fabric/1.21.10",
+    "combine-fabric-1-21-11": "//combine/backend/minecraft/fabric/1.21.11",
+}
+
+combine_neoforge_deps = {
+    "combine-neoforge-1-21-1": "//combine/backend/minecraft/neoforge/1.21.1",
+    "combine-neoforge-1-21-10": "//combine/backend/minecraft/neoforge/1.21.10",
+    "combine-neoforge-1-21-11": "//combine/backend/minecraft/neoforge/1.21.11",
+}
+
+combine_fabric_config = {
+    "combine-common": "=",
+    "combine-fabric-1-21-1": "=",
+    "combine-fabric-1-21-10": "=",
+    "combine-fabric-1-21-11": "=",
+    "combine-26-1": "=",
+    "combine-26-2": "=",
+}
+
+combine_neoforge_config = {
+    "combine-common": "",
+    "combine-neoforge-1-21-1": "minecraft: +[1.21.1]",
+    "combine-neoforge-1-21-10": "minecraft: +[1.21.10]",
+    "combine-neoforge-1-21-11": "minecraft: +[1.21.11]",
+    "combine-26-1": "minecraft: +[26.1,26.2)",
+    "combine-26-2": "minecraft: +[26.2]",
+}
+
+touchcontroller_common_deps = combine_common_deps | {
     "combine-theme-blackstone": "//combine/theme/blackstone:blackstone_common",
     "combine-theme-blackstone-atlas": "//combine/theme/blackstone:blackstone_atlas",
     "combine-theme-blackstone-vanilla": "//combine/theme/blackstone:blackstone_vanilla",
@@ -39,10 +72,7 @@ touchcontroller_common_deps = {
     "touchcontroller-26-2": "//touchcontroller/versions/26.2:26.2_merged",
 }
 
-touchcontroller_neoforge_deps = {
-    "combine-neoforge-1-21-1": "//combine/backend/minecraft/neoforge/1.21.1",
-    "combine-neoforge-1-21-10": "//combine/backend/minecraft/neoforge/1.21.10",
-    "combine-neoforge-1-21-11": "//combine/backend/minecraft/neoforge/1.21.11",
+touchcontroller_neoforge_deps = combine_neoforge_deps | {
     "touchcontroller-1-21-1-neoforge": "//touchcontroller/versions/neoforge/1.21.1",
     "touchcontroller-1-21-10-neoforge": "//touchcontroller/versions/neoforge/1.21.10",
     "touchcontroller-1-21-11-neoforge": "//touchcontroller/versions/neoforge/1.21.11",
@@ -51,13 +81,7 @@ touchcontroller_neoforge_deps = {
     "touchcontroller-26-2-neoforge": "//touchcontroller/versions/neoforge/26.2",
 }
 
-touchcontroller_neoforge_config = {
-    "combine-common": "",
-    "combine-neoforge-1-21-1": "minecraft: +[1.21.1]",
-    "combine-neoforge-1-21-10": "minecraft: +[1.21.10]",
-    "combine-neoforge-1-21-11": "minecraft: +[1.21.11]",
-    "combine-26-1": "minecraft: +[26.1,26.2)",
-    "combine-26-2": "minecraft: +[26.2]",
+touchcontroller_neoforge_config = combine_neoforge_config | {
     "combine-theme-blackstone": "",
     "combine-theme-blackstone-atlas": "minecraft: +(,1.21.1]",
     "combine-theme-blackstone-vanilla": "minecraft: +(1.21.1,)",
@@ -77,10 +101,7 @@ touchcontroller_neoforge_config = {
     "touchcontroller-26-2-neoforge": "minecraft: +[26.2]",
 }
 
-touchcontroller_fabric_deps = {
-    "combine-fabric-1-21-1": "//combine/backend/minecraft/fabric/1.21.1",
-    "combine-fabric-1-21-10": "//combine/backend/minecraft/fabric/1.21.10",
-    "combine-fabric-1-21-11": "//combine/backend/minecraft/fabric/1.21.11",
+touchcontroller_fabric_deps = combine_fabric_deps | {
     "touchcontroller-1-21-1-fabric": "//touchcontroller/versions/fabric/1.21.1",
     "touchcontroller-1-21-10-fabric": "//touchcontroller/versions/fabric/1.21.10",
     "touchcontroller-1-21-11-fabric": "//touchcontroller/versions/fabric/1.21.11",
@@ -88,13 +109,7 @@ touchcontroller_fabric_deps = {
     "touchcontroller-26-2-fabric": "//touchcontroller/versions/fabric/26.2",
 }
 
-touchcontroller_fabric_config = {
-    "combine-common": "=",
-    "combine-fabric-1-21-1": "=",
-    "combine-fabric-1-21-10": "=",
-    "combine-fabric-1-21-11": "=",
-    "combine-26-1": "=",
-    "combine-26-2": "=",
+touchcontroller_fabric_config = combine_fabric_config | {
     "combine-theme-blackstone": "=",
     "combine-theme-blackstone-atlas": "=",
     "combine-theme-blackstone-vanilla": "=",
@@ -111,4 +126,19 @@ touchcontroller_fabric_config = {
     "touchcontroller-26-1-fabric": "=",
     "touchcontroller-26-2": "=",
     "touchcontroller-26-2-fabric": "=",
+}
+
+touchcontroller_fabric_jij_deps = fabric_jij_deps(
+    touchcontroller_common_deps | touchcontroller_fabric_deps,
+    renames = {
+        "combine-fabric-1-21-1": "combine-1-21-1",
+        "combine-fabric-1-21-10": "combine-1-21-10",
+        "combine-fabric-1-21-11": "combine-1-21-11",
+        "touchcontroller-1-21-1-fabric": "touchcontroller-1-21-1",
+        "touchcontroller-1-21-10-fabric": "touchcontroller-1-21-10",
+        "touchcontroller-1-21-11-fabric": "touchcontroller-1-21-11",
+    },
+    excludes = ["combine-common"],
+) | {
+    "//combine/backend/minecraft/fabric:fabric_unmerged": "combine:=",
 }

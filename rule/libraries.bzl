@@ -19,3 +19,10 @@ def library(coordinate, merge_dep = None, constraints = None):
         merge_dep = _split_coordinate(merge_dep).name if merge_dep else None,
         constraints = constraints if constraints else "",
     )
+
+def fabric_jij_deps(deps, renames = {}, excludes = [], version = "="):
+    return {
+        label: (renames.get(dep_key, dep_key) + ":" + version)
+        for dep_key, label in deps.items()
+        if dep_key not in excludes
+    }

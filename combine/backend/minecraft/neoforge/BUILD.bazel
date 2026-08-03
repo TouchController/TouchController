@@ -1,6 +1,7 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_neoforge")
 load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
+load("//combine/backend/minecraft:libraries.bzl", "combine_common_deps", "combine_neoforge_config", "combine_neoforge_deps")
 load("//rule:unified_jar.bzl", "unified_jar")
 
 expand_template(
@@ -21,24 +22,10 @@ expand_template(
 unified_jar(
     name = "neoforge",
     neoforge_mod_toml = ":neoforge_mod_toml",
-    neoforge_rules = {
-        "combine-common": "",
-        "combine-neoforge-1-21-1": "minecraft: +[1.21.1]",
-        "combine-neoforge-1-21-8": "minecraft: +[1.21.8]",
-        "combine-neoforge-1-21-10": "minecraft: +[1.21.10]",
-        "combine-neoforge-1-21-11": "minecraft: +[1.21.11]",
-        "combine-26-1": "minecraft: +[26.1]",
-    } | combine_unified_neoforge,
+    neoforge_rules = combine_neoforge_config | combine_unified_neoforge,
     resources = {
         "//combine/resources:icon": ".",
     },
     visibility = ["//visibility:public"],
-    deps = {
-        "combine-common": "//combine/backend/minecraft:minecraft_common",
-        "combine-neoforge-1-21-1": "//combine/backend/minecraft/neoforge/1.21.1",
-        "combine-neoforge-1-21-8": "//combine/backend/minecraft/neoforge/1.21.8",
-        "combine-neoforge-1-21-10": "//combine/backend/minecraft/neoforge/1.21.10",
-        "combine-neoforge-1-21-11": "//combine/backend/minecraft/neoforge/1.21.11",
-        "combine-26-1": "//combine/backend/minecraft/versions/26.1:26.1_merged",
-    } | combine_unified_deps,
+    deps = combine_common_deps | combine_neoforge_deps | combine_unified_deps,
 )

@@ -3,7 +3,7 @@ load("//combine:libraries.bzl", "combine_fabric_libraries")
 load("//combine:properties.bzl", "combine_version")
 load("//rule:jar.bzl", "jar")
 load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
-load("//touchcontroller:libraries.bzl", "touchcontroller_fabric_libraries")
+load("//touchcontroller:libraries.bzl", "touchcontroller_fabric_jij_deps", "touchcontroller_fabric_libraries")
 load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_fabric_game_versions", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
 expand_template(
@@ -37,28 +37,5 @@ fabric_merge_jij(
     name = "fabric",
     input = ":fabric_unmerged",
     visibility = ["//visibility:public"],
-    deps = {
-        "//combine/theme/blackstone:blackstone_common": "combine-theme-blackstone:=",
-        "//combine/theme/blackstone:blackstone_vanilla": "combine-theme-blackstone-vanilla:=",
-        "//combine/theme/blackstone:blackstone_atlas": "combine-theme-blackstone-atlas:=",
-        "//combine/backend/minecraft/fabric:fabric_unmerged": "combine:=",
-        "//combine/backend/minecraft/fabric/1.21.1": "combine-1-21-1:=",
-        "//combine/backend/minecraft/fabric/1.21.10": "combine-1-21-10:=",
-        "//combine/backend/minecraft/fabric/1.21.11": "combine-1-21-11:=",
-        "//combine/backend/minecraft/versions/26.1:26.1_merged": "combine-26-1:=",
-        "//combine/backend/minecraft/versions/26.2:26.2_merged": "combine-26-2:=",
-        "//touchcontroller/api": "touchcontroller-api:=",
-        "//touchcontroller/common:common_merged": "touchcontroller-common:=",
-        "//touchcontroller/resources/lang": "touchcontroller-lang-modern:=",
-        "//touchcontroller/resources/texture:texture_common": "touchcontroller-texture:=",
-        "//touchcontroller/resources/texture:texture_vanilla": "touchcontroller-texture-vanilla:=",
-        "//touchcontroller/resources/texture:texture_atlas": "touchcontroller-texture-atlas:=",
-        "//touchcontroller/versions/fabric/1.21.1": "touchcontroller-1-21-1:=",
-        "//touchcontroller/versions/fabric/1.21.10": "touchcontroller-1-21-10:=",
-        "//touchcontroller/versions/fabric/1.21.11": "touchcontroller-1-21-11:=",
-        "//touchcontroller/versions/26.1:26.1_merged": "touchcontroller-26-1:=",
-        "//touchcontroller/versions/fabric/26.1": "touchcontroller-26-1-fabric:=",
-        "//touchcontroller/versions/26.2:26.2_merged": "touchcontroller-26-2:=",
-        "//touchcontroller/versions/fabric/26.2": "touchcontroller-26-2-fabric:=",
-    } | combine_fabric_libraries | touchcontroller_fabric_libraries,
+    deps = touchcontroller_fabric_jij_deps | combine_fabric_libraries | touchcontroller_fabric_libraries,
 )

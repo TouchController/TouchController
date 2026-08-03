@@ -1,6 +1,7 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//combine:libraries.bzl", "combine_fabric_libraries")
 load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
+load("//combine/backend/minecraft:libraries.bzl", "combine_fabric_jij_deps")
 load("//rule:jar.bzl", "jar")
 load("//rule:merge_jar.bzl", "merge_jar")
 load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
@@ -26,6 +27,7 @@ jar(
     visibility = ["//visibility:public"],
 )
 
+# Mod ID is combine, so can be used standalone or packaged as JIJ in other Fabric mods
 merge_jar(
     name = "fabric_unmerged",
     resources = {
@@ -42,12 +44,5 @@ fabric_merge_jij(
     name = "fabric",
     input = ":fabric_unmerged",
     visibility = ["//visibility:public"],
-    deps = {
-        "//combine/backend/minecraft/fabric/1.21.1": "combine-1-21-1:=",
-        "//combine/backend/minecraft/fabric/1.21.8": "combine-1-21-8:=",
-        "//combine/backend/minecraft/fabric/1.21.10": "combine-1-21-10:=",
-        "//combine/backend/minecraft/fabric/1.21.11": "combine-1-21-11:=",
-        "//combine/backend/minecraft/versions/26.1:26.1_merged": "combine-26-1:=",
-        "//combine/backend/minecraft/versions/26.2:26.2_merged": "combine-26-2:=",
-    } | combine_fabric_libraries,
+    deps = combine_fabric_jij_deps | combine_fabric_libraries,
 )
