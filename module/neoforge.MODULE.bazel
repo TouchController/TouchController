@@ -288,10 +288,10 @@ neoforge_versions = {
     },
     "26.3": {
         "java_target": 25,
-        "version": "26.3-snapshot-3",
+        "version": "26.3-snapshot-6",
         "mapping": False,
-        "neoform_version": "26.3-snapshot-3-1",
-        "neoform_sha256": "13551352c2bf7fc7ba4454dcb73fe76e17f850fe5ed7e585e795c3dee8f23d06",
+        "neoform_version": "26.3-snapshot-6-1",
+        "neoform_sha256": "1d8ee2acaff4bb27caf9241667f2416df707e5ca5ec7fcc99353b2e536d18fd4",
     },
 }
 
@@ -328,7 +328,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
                 ("mcp_%s" % version.replace(".", "_")): ("mcp_%s" % data["mcp_version"].replace(".", "_").replace("-", "_")),
             }
         ),
-    ) + (
+    ) + ((
         neoforge.version(
             java_target = data["java_target"],
             joined_patched_sources = "@mcp_%s//tasks/joined_patch" % version.replace(".", "_"),
@@ -345,7 +345,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
                 ("forge_%s" % version.replace(".", "_")): ("forge_%s" % data["forge_version"].replace(".", "_").replace("-", "_")),
             }
         ),
-    ) if "forge_version" in data else ()
+    ) if "forge_version" in data else ())
     for version, data in lexforge_versions.items()
 ]
 
@@ -372,7 +372,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
                 ("neoform_%s" % version.replace(".", "_")): ("neoform_%s" % data["neoform_version"].replace(".", "_").replace("-", "_")),
             }
         ),
-    ) + (
+    ) + ((
         neoforge.version(
             java_target = data["java_target"],
             joined_patched_sources = "@neoform_%s//tasks/joined_patch" % version.replace(".", "_"),
@@ -388,7 +388,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
                 ("neoforge_%s" % version.replace(".", "_")): ("neoforge_%s" % data["neoforge_version"].replace(".", "_").replace("-", "_").replace("+", "_")),
             }
         ),
-    ) if "neoforge_version" in data else ()
+    ) if "neoforge_version" in data else ())
     for version, data in neoforge_versions.items()
 ]
 
