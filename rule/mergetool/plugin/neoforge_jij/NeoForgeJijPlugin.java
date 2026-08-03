@@ -13,13 +13,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
@@ -32,7 +33,7 @@ public class NeoForgeJijPlugin implements Plugin {
     private static final Pattern DESCRIPTION_PATTERN = Pattern.compile("([^:]+):([^:]+):([^:]+):([^:]*)");
     private static final ObjectMapper MAPPER = new ObjectMapper().configure(JsonGenerator.Feature.AUTO_CLOSE_TARGET, false);
 
-    private final LinkedHashMap<String, NeoForgeEntry> neoforgeEntries = new LinkedHashMap<>();
+    private final TreeMap<String, NeoForgeEntry> neoforgeEntries = new TreeMap<>();
 
     @Override
     public boolean processArg(String arg, PreprocessEnvironment environment) {
@@ -54,7 +55,7 @@ public class NeoForgeJijPlugin implements Plugin {
         return 402;
     }
 
-    private byte[] buildWrappedJar(NeoForgeEntry neoforgeEntry, java.nio.file.Path sourcePath) throws IOException {
+    private static byte[] buildWrappedJar(NeoForgeEntry neoforgeEntry, Path sourcePath) throws IOException {
         var resultStream = new ByteArrayOutputStream();
         try (var entryInputStream = new JarInputStream(Files.newInputStream(sourcePath));
              var entryOutputStream = new ZipOutputStream(resultStream)) {
@@ -97,12 +98,7 @@ public class NeoForgeJijPlugin implements Plugin {
 
             var existingEntry = mergeEntries.get(jiJEntry.entryPath());
             if (existingEntry != null) {
-                try {
-                    var wrappedBytes = buildWrappedJar(neoforgeEntry, jiJEntry.sourcePath());
-                    mergeEntries.put(jiJEntry.entryPath(), new BytesMergeEntry(wrappedBytes));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                mergeEntries.put(jiJEntry.entryPath(), new WrappedJarMergeEntry(neoforgeEntry, jiJEntry.sourcePath()));
             }
 
             metadataJars.add(new JijMetadata.Jar(
@@ -113,14 +109,8 @@ public class NeoForgeJijPlugin implements Plugin {
         }
 
         if (!metadataJars.isEmpty()) {
-            try {
-                var metadataPath = context.basePath() + "metadata.json";
-                var baos = new ByteArrayOutputStream();
-                MAPPER.writeValue(baos, new JijMetadata(metadataJars));
-                mergeEntries.put(metadataPath, new BytesMergeEntry(baos.toByteArray()));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            var metadataPath = context.basePath() + "metadata.json";
+            mergeEntries.put(metadataPath, new MetadataMergeEntry(metadataJars));
         }
     }
 
@@ -146,10 +136,17 @@ public class NeoForgeJijPlugin implements Plugin {
         }
     }
 
-    private record BytesMergeEntry(byte[] content) implements MergeEntry {
+    private record WrappedJarMergeEntry(NeoForgeEntry neoforgeEntry, Path sourcePath) implements MergeEntry {
         @Override
         public void write(OutputStream output) throws IOException {
-            output.write(content);
+            output.write(buildWrappedJar(neoforgeEntry, sourcePath));
+        }
+    }
+
+    private record MetadataMergeEntry(List<JijMetadata.Jar> jars) implements MergeEntry {
+        @Override
+        public void write(OutputStream output) throws IOException {
+            MAPPER.writeValue(output, new JijMetadata(jars));
         }
     }
 }
