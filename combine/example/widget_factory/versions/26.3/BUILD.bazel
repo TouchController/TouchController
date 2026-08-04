@@ -72,7 +72,7 @@ java_binary(
     },
     jvm_flags = [
         "-Dfabric.development=true",
-        "-Ddev.launch.version=26.3-snapshot-6",
+        "-Ddev.launch.version=26.3-snapshot-7",
         "-Ddev.launch.type=client",
         "-Ddev.launch.assetsVersion=$(rlocationpath //game/26.3:game_client_assets_version)",
         "-Ddev.launch.mainClass=net.fabricmc.loader.impl.launch.knot.KnotClient",
