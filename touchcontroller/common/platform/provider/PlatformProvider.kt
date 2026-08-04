@@ -5,13 +5,16 @@
 
 package top.fifthlight.touchcontroller.common.platform.provider
 
+import org.lwjgl.sdl.SDL_Event
 import org.slf4j.LoggerFactory
 import top.fifthlight.blazesdl.api.BlazeSDLAPI
+import top.fifthlight.blazesdl.api.BlazeSDLEventHandler
 import top.fifthlight.touchcontroller.common.gal.window.PlatformWindowProvider
+import top.fifthlight.touchcontroller.common.gal.window.PlatformWindow
 import top.fifthlight.touchcontroller.common.platform.Platform
 import top.fifthlight.touchcontroller.common.platform.ios.IosPlatform
 import top.fifthlight.touchcontroller.common.platform.proxy.ProxyPlatform
-import top.fifthlight.touchcontroller.common.platform.sdl.BlazeSDLPlatform
+import top.fifthlight.touchcontroller.common.platform.sdl.SdlPlatform
 import top.fifthlight.touchcontroller.proxy.server.localhostLauncherSocketProxyServer
 import java.io.IOException
 import java.io.InputStream
@@ -64,7 +67,7 @@ object PlatformProvider {
         }
     }
 
-    val hasBlazeSDL: Boolean by lazy {
+    private val hasBlazeSDL: Boolean by lazy {
         try {
             Class.forName("top.fifthlight.blazesdl.api.BlazeSDLAPI")
             BlazeSDLAPI.getInstance() != null
@@ -86,7 +89,15 @@ object PlatformProvider {
     internal fun loadPlatform(): (() -> Platform)? {
         if (hasBlazeSDL) {
             BlazeSDLAPI.getInstance()?.let { api ->
-                return@loadPlatform { BlazeSDLPlatform(api) }
+                return@loadPlatform {
+                    SdlPlatform { handler ->
+                        api.registerEventHandler(object : BlazeSDLEventHandler {
+                            override fun getPriority(): Int = 1000
+
+                            override fun handleEvent(event: SDL_Event): Boolean = handler(event)
+                        })
+                    }
+                }
             }
         }
 
@@ -98,59 +109,67 @@ object PlatformProvider {
         }
 
         logger.info("System name: $systemName, system arch: $systemArch")
+
+        val platformWindow = PlatformWindowProvider.platform
+
         if (isIos) {
+            IosPlatform().also { platform ->
+                platform.resize(PlatformWindowProvider.windowWidth, PlatformWindowProvider.windowHeight)
+            }
+        }
+
+        NativeLibraryLoader.probeNativeLibraryInfo(platformWindow)?.let { info ->
+            logger.info("Native library info:")
+            logger.info("path: ${info.modContainerPath}")
+            val nativeLibrary = try {
+                javaClass.classLoader.getResourceAsStream(info.modContainerPath)
+            } catch (ex: Exception) {
+                logger.warn("Failed to get native library path: {}", info.modContainerPath, ex)
+                return null
+            } ?: run {
+                logger.warn("Failed to get native library path: {}", info.modContainerPath)
+                return null
+            }
+
+            val destinationFile = try {
+                extractNativeLibrary(info.extractPrefix, info.extractSuffix, nativeLibrary)
+            } catch (ex: Exception) {
+                logger.warn("Failed to extract native library", ex)
+                return null
+            }
+
+            try {
+                info.readOnlySetter.invoke(destinationFile)
+            } catch (ex: Exception) {
+                logger.info("Failed to set file $destinationFile read-only", ex)
+            }
+
+            logger.info("Loading native library")
+            try {
+                @Suppress("UnsafeDynamicallyLoadedCode")
+                System.load(destinationFile.toAbsolutePath().toString())
+            } catch (_: Exception) {
+                return null
+            }
+            logger.info("Loaded native library")
+
+            if (info.removeAfterLoaded) {
+                destinationFile.deleteIfExists()
+            }
+
             return {
-                IosPlatform().also { platform ->
+                info.platformFactory().also { platform ->
                     platform.resize(PlatformWindowProvider.windowWidth, PlatformWindowProvider.windowHeight)
                 }
             }
         }
 
-        val info = NativeLibraryLoader.probeNativeLibraryInfo() ?: return null
-
-        logger.info("Native library info:")
-        logger.info("path: ${info.modContainerPath}")
-        val nativeLibrary = try {
-            javaClass.classLoader.getResourceAsStream(info.modContainerPath)
-        } catch (ex: Exception) {
-            logger.warn("Failed to get native library path: {}", info.modContainerPath, ex)
-            return null
-        } ?: run {
-            logger.warn("Failed to get native library path: {}", info.modContainerPath)
-            return null
+        if (platformWindow is PlatformWindow.Sdl) {
+            return { SdlPlatform(platformWindow::registerEventHandler) }
         }
 
-        val destinationFile = try {
-            extractNativeLibrary(info.extractPrefix, info.extractSuffix, nativeLibrary)
-        } catch (ex: Exception) {
-            logger.warn("Failed to extract native library", ex)
-            return null
-        }
-
-        try {
-            info.readOnlySetter.invoke(destinationFile)
-        } catch (ex: Exception) {
-            logger.info("Failed to set file $destinationFile read-only", ex)
-        }
-
-        logger.info("Loading native library")
-        try {
-            @Suppress("UnsafeDynamicallyLoadedCode")
-            System.load(destinationFile.toAbsolutePath().toString())
-        } catch (_: Exception) {
-            return null
-        }
-        logger.info("Loaded native library")
-
-        if (info.removeAfterLoaded) {
-            destinationFile.deleteIfExists()
-        }
-
-        return {
-            info.platformFactory().also { platform ->
-                platform.resize(PlatformWindowProvider.windowWidth, PlatformWindowProvider.windowHeight)
-            }
-        }
+        logger.warn("No platform loaded")
+        return null
     }
 
     private var platformNativeLoaded = false

@@ -10,10 +10,10 @@ kt_merge_library(
         "//touchcontroller/common/gal/window",
         "//touchcontroller/common/platform",
         "//touchcontroller/common/platform/android",
-        "//touchcontroller/common/platform/blazesdl",
         "//touchcontroller/common/platform/ios",
         "//touchcontroller/common/platform/native",
         "//touchcontroller/common/platform/proxy",
+        "//touchcontroller/common/platform/sdl",
         "//touchcontroller/common/platform/wayland",
         "//touchcontroller/common/platform/win32",
         "//touchcontroller/proxy/server/udp",
@@ -30,6 +30,7 @@ kt_merge_library(
         "//blazesdl/api",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
         "@maven//:org_slf4j_slf4j_api",
+        "@maven_blazesdl//:org_lwjgl_lwjgl_sdl",
     ],
 )
 

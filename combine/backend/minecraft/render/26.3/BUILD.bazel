@@ -1,0 +1,28 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "26.3",
+    srcs = glob([
+        "**/*.kt",
+        "**/*.java",
+    ]),
+    actual = True,
+    javac_opts = "//combine:javac_opts_jvm_25",
+    kotlinc_opts = "//combine:kotlinc_opts_jvm_25",
+    resource_strip_prefix = "combine/backend/minecraft/render/26.3/resource",
+    resources = glob(["resource/**"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//combine/backend/minecraft/game/26.3",
+        "//combine/backend/minecraft/item/26.3",
+        "//combine/backend/minecraft/text/26.3",
+        "//combine/core/data",
+        "//combine/core/input/pointer",
+        "//combine/core/paint",
+        "//combine/data",
+        "//combine/item/data",
+        "//combine/item/paint",
+        "//game/26.3:game_client_libraries",
+        "@maven_fabric_26_3//:net_fabricmc_sponge_mixin",
+    ],
+)

@@ -1,0 +1,54 @@
+modLoader = "javafml"
+loaderVersion = "[0,)"
+license = "${license}"
+issueTrackerURL = "${issue_tracker}"
+
+[[mixins]]
+config = "touchcontroller.mixins.json"
+
+[[mods]]
+modId = "touchcontroller_26_3"
+version = "${version}"
+displayName = "TouchController 26.3 implementation"
+displayURL = "${home_page}"
+logoFile = "assets/touchcontroller/textures/icon.png"
+authors = "${mod_authors}"
+credits = "${mod_contributors}"
+description = "${description}"
+
+[[dependencies.touchcontroller_26_3]]
+modId = "minecraft"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_3]]
+modId = "combine"
+type = "required"
+versionRange = "[${combine_version},]"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_3]]
+modId = "kotlinforforge"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_3]]
+modId = "touchcontroller_common"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_3]]
+modId = "touchcontroller_texture_vanilla"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.touchcontroller_26_3]]
+modId = "touchcontroller_lang_modern"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"

@@ -5,6 +5,7 @@
 
 package top.fifthlight.touchcontroller.common.gal.window
 
+import org.lwjgl.sdl.SDL_Event
 import top.fifthlight.mergetools.api.ExpectFactory
 
 sealed class NativeWindow {
@@ -27,35 +28,42 @@ sealed class NativeWindow {
     ) : NativeWindow()
 }
 
-sealed class GlfwPlatform<Window : NativeWindow> {
-    abstract val nativeWindow: Window
+sealed interface PlatformWindow<Window : NativeWindow> {
+    val nativeWindow: Window?
 
-    class Win32(nativeWindowFactory: () -> NativeWindow.Win32) : GlfwPlatform<NativeWindow.Win32>() {
+    class Win32(nativeWindowFactory: () -> NativeWindow.Win32) : PlatformWindow<NativeWindow.Win32> {
         override val nativeWindow: NativeWindow.Win32 by lazy(nativeWindowFactory)
     }
 
-    class Wayland(nativeWindowFactory: () -> NativeWindow.Wayland) : GlfwPlatform<NativeWindow.Wayland>() {
+    class Wayland(nativeWindowFactory: () -> NativeWindow.Wayland) : PlatformWindow<NativeWindow.Wayland> {
         override val nativeWindow: NativeWindow.Wayland by lazy(nativeWindowFactory)
     }
 
-    data object Cocoa : GlfwPlatform<NativeWindow>() {
+    data object Cocoa : PlatformWindow<NativeWindow> {
         override val nativeWindow: NativeWindow
             get() = error("Not yet implemented")
     }
 
-    data object X11 : GlfwPlatform<NativeWindow>() {
+    data object X11 : PlatformWindow<NativeWindow> {
         override val nativeWindow: NativeWindow
             get() = error("Not yet implemented")
     }
 
-    data object Unknown : GlfwPlatform<NativeWindow>() {
+    fun interface Sdl : PlatformWindow<NativeWindow> {
+        override val nativeWindow: NativeWindow?
+            get() = null
+
+        fun registerEventHandler(handler: (event: SDL_Event) -> Boolean)
+    }
+
+    data object Unknown : PlatformWindow<NativeWindow> {
         override val nativeWindow: NativeWindow
             get() = error("Unsupported platform!")
     }
 }
 
 interface PlatformWindowProvider {
-    val platform: GlfwPlatform<*>
+    val platform: PlatformWindow<*>
     val windowWidth: Int
     val windowHeight: Int
 

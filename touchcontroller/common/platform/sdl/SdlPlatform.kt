@@ -5,12 +5,13 @@
 
 package top.fifthlight.touchcontroller.common.platform.sdl
 
-import org.lwjgl.sdl.*
-import org.lwjgl.sdl.SDLHaptic.SDL_InitHapticRumble
-import org.lwjgl.sdl.SDLHaptic.SDL_OpenHaptic
-import org.slf4j.LoggerFactory
+import org.lwjgl.sdl.SDLEvents
+import org.lwjgl.sdl.SDLHaptic
+import org.lwjgl.sdl.SDLInit
+import org.lwjgl.sdl.SDLStdinc
+import org.lwjgl.sdl.SDL_Event
+import org.lwjgl.sdl.SDL_TouchFingerEvent
 import top.fifthlight.blazesdl.api.BlazeSDLAPI
-import top.fifthlight.blazesdl.api.BlazeSDLEventHandler
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.platform.PlatformConfigProvider
@@ -19,13 +20,16 @@ import top.fifthlight.touchcontroller.proxy.message.AddPointerMessage
 import top.fifthlight.touchcontroller.proxy.message.ProxyMessage
 import top.fifthlight.touchcontroller.proxy.message.RemovePointerMessage
 import top.fifthlight.touchcontroller.proxy.message.VibrateMessage
+import kotlin.collections.getOrPut
+import kotlin.jvm.java
+import kotlin.let
 
-class BlazeSDLPlatform(private val api: BlazeSDLAPI) : BlazeSDLEventHandler, Platform {
-    private val logger = LoggerFactory.getLogger(BlazeSDLPlatform::class.java)
+class SdlPlatform(private val eventRegister: (handler: (event: SDL_Event) -> Boolean) -> Unit) : Platform {
+    private val logger = org.slf4j.LoggerFactory.getLogger(SdlPlatform::class.java)
     private var haptic: Long? = null
 
     override fun init() {
-        api.registerEventHandler(this)
+        eventRegister(::handleEvent)
         SDLInit.SDL_InitSubSystem(SDLInit.SDL_INIT_HAPTIC)
         initHaptics()
     }
@@ -36,13 +40,13 @@ class BlazeSDLPlatform(private val api: BlazeSDLAPI) : BlazeSDLEventHandler, Pla
             if (!haptics.hasRemaining()) {
                 return
             }
-            val haptic = SDL_OpenHaptic(haptics.get())
+            val haptic = SDLHaptic.SDL_OpenHaptic(haptics.get())
             if (haptic == 0L) {
-                logger.warn("Failed to call SDL_OpenHaptic: {}", SDLError.SDL_GetError())
+                logger.warn("Failed to call SDL_OpenHaptic: {}", org.lwjgl.sdl.SDLError.SDL_GetError())
                 return
             }
-            if (!SDL_InitHapticRumble(haptic)) {
-                logger.warn("Failed to call SDL_InitHapticRumble: {}", SDLError.SDL_GetError())
+            if (!SDLHaptic.SDL_InitHapticRumble(haptic)) {
+                logger.warn("Failed to call SDL_InitHapticRumble: {}", org.lwjgl.sdl.SDLError.SDL_GetError())
                 SDLHaptic.SDL_CloseHaptic(haptic)
                 return
             }
@@ -51,8 +55,6 @@ class BlazeSDLPlatform(private val api: BlazeSDLAPI) : BlazeSDLEventHandler, Pla
             SDLStdinc.SDL_free(haptics)
         }
     }
-
-    override fun getPriority() = 1000
 
     private val queue = ArrayDeque<ProxyMessage>()
 
@@ -69,7 +71,7 @@ class BlazeSDLPlatform(private val api: BlazeSDLAPI) : BlazeSDLEventHandler, Pla
     private val pointerIdMap = HashMap<PointerId, Int>()
     private var nextPointerIndex = 0
 
-    override fun handleEvent(event: SDL_Event): Boolean {
+    private fun handleEvent(event: SDL_Event): Boolean {
         when (event.type()) {
             SDLEvents.SDL_EVENT_FINGER_DOWN -> {
                 val event = event.tfinger()
@@ -107,7 +109,7 @@ class BlazeSDLPlatform(private val api: BlazeSDLAPI) : BlazeSDLEventHandler, Pla
     }
 
     override val name: Text
-        get() = Text.translatable(Texts.PLATFORM_BLAZESDL)
+        get() = Text.translatable(Texts.PLATFORM_SDL)
 
     override val useDefaultInputHandler: Boolean
         get() = true
@@ -118,7 +120,7 @@ class BlazeSDLPlatform(private val api: BlazeSDLAPI) : BlazeSDLEventHandler, Pla
         when (message) {
             is VibrateMessage -> {
                 val haptic = haptic ?: return
-                val config = PlatformConfigProvider.platformConfig.value.blazesdl
+                val config = PlatformConfigProvider.platformConfig.value.sdl
                 SDLHaptic.SDL_PlayHapticRumble(haptic, config.vibrationStrength, config.vibrationLength)
             }
 

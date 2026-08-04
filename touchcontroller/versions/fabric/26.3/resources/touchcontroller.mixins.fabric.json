@@ -1,0 +1,11 @@
+{
+    "required": true,
+    "package": "top.fifthlight.touchcontroller.fabric.v26_3.mixin",
+    "compatibilityLevel": "JAVA_25",
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "client": [
+        "KeyBindingMixin"
+    ]
+}

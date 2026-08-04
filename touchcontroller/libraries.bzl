@@ -26,6 +26,7 @@ combine_common_deps = {
     "combine-common": "//combine/backend/minecraft:minecraft_common_standalone",
     "combine-26-1": "//combine/backend/minecraft/versions/26.1:26.1_merged",
     "combine-26-2": "//combine/backend/minecraft/versions/26.2:26.2_merged",
+    "combine-26-3": "//combine/backend/minecraft/versions/26.3:26.3_merged",
 }
 
 combine_fabric_deps = {
@@ -47,6 +48,7 @@ combine_fabric_config = {
     "combine-fabric-1-21-11": "=",
     "combine-26-1": "=",
     "combine-26-2": "=",
+    "combine-26-3": "=",
 }
 
 combine_neoforge_config = {
@@ -56,6 +58,7 @@ combine_neoforge_config = {
     "combine-neoforge-1-21-11": "minecraft: +[1.21.11]",
     "combine-26-1": "minecraft: +[26.1,26.2)",
     "combine-26-2": "minecraft: +[26.2]",
+    "combine-26-3": "minecraft: +[26.3]",
 }
 
 touchcontroller_common_deps = combine_common_deps | {
@@ -70,6 +73,7 @@ touchcontroller_common_deps = combine_common_deps | {
     "touchcontroller-texture-vanilla": "//touchcontroller/resources/texture:texture_vanilla",
     "touchcontroller-26-1": "//touchcontroller/versions/26.1:26.1_merged",
     "touchcontroller-26-2": "//touchcontroller/versions/26.2:26.2_merged",
+    "touchcontroller-26-3": "//touchcontroller/versions/26.3:26.3_merged",
 }
 
 touchcontroller_neoforge_deps = combine_neoforge_deps | {
@@ -95,10 +99,11 @@ touchcontroller_neoforge_config = combine_neoforge_config | {
     "touchcontroller-1-21-10-neoforge": "minecraft: +[1.21.10]",
     "touchcontroller-1-21-11-neoforge": "minecraft: +[1.21.11]",
     "touchcontroller-26-1": "minecraft: +[26.1,26.2)",
-    "touchcontroller-26-2": "minecraft: +[26.2]",
     "touchcontroller-26-1-neoforge": "minecraft: +[26.1,26.1.2)",
     "touchcontroller-26-1-2-neoforge": "minecraft: +[26.1.2]",
+    "touchcontroller-26-2": "minecraft: +[26.2]",
     "touchcontroller-26-2-neoforge": "minecraft: +[26.2]",
+    "touchcontroller-26-3": "minecraft: +[26.3]",
 }
 
 touchcontroller_fabric_deps = combine_fabric_deps | {
@@ -107,6 +112,7 @@ touchcontroller_fabric_deps = combine_fabric_deps | {
     "touchcontroller-1-21-11-fabric": "//touchcontroller/versions/fabric/1.21.11",
     "touchcontroller-26-1-fabric": "//touchcontroller/versions/fabric/26.1",
     "touchcontroller-26-2-fabric": "//touchcontroller/versions/fabric/26.2",
+    "touchcontroller-26-3-fabric": "//touchcontroller/versions/fabric/26.3",
 }
 
 touchcontroller_fabric_config = combine_fabric_config | {
@@ -126,6 +132,8 @@ touchcontroller_fabric_config = combine_fabric_config | {
     "touchcontroller-26-1-fabric": "=",
     "touchcontroller-26-2": "=",
     "touchcontroller-26-2-fabric": "=",
+    "touchcontroller-26-3": "=",
+    "touchcontroller-26-3-fabric": "=",
 }
 
 touchcontroller_fabric_jij_deps = fabric_jij_deps(

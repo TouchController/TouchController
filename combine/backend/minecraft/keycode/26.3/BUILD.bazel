@@ -1,0 +1,13 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "26.3",
+    srcs = ["KeyCodeMapping.kt"],
+    javac_opts = "//combine:javac_opts_jvm_25",
+    kotlinc_opts = "//combine:kotlinc_opts_jvm_25",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//combine/core/input/key",
+        "//game/26.3:game_client_libraries",
+    ],
+)

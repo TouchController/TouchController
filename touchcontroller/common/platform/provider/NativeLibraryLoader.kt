@@ -1,7 +1,7 @@
 package top.fifthlight.touchcontroller.common.platform.provider
 
 import org.slf4j.LoggerFactory
-import top.fifthlight.touchcontroller.common.gal.window.GlfwPlatform
+import top.fifthlight.touchcontroller.common.gal.window.PlatformWindow
 import top.fifthlight.touchcontroller.common.gal.window.PlatformWindowProvider
 import top.fifthlight.touchcontroller.common.platform.Platform
 import top.fifthlight.touchcontroller.common.platform.android.AndroidPlatform
@@ -58,7 +58,7 @@ internal object NativeLibraryLoader {
         }
         ?.takeIf { it != 0L && it != -1L }
 
-    fun probeNativeLibraryInfo(): NativeLibraryInfo? {
+    fun probeNativeLibraryInfo(platformWindow: PlatformWindow<*>): NativeLibraryInfo? {
         if ((systemName.startsWith("Linux", ignoreCase = true) && isAndroid) ||
             systemName.contains("Android", ignoreCase = true)
         ) {
@@ -129,8 +129,8 @@ internal object NativeLibraryLoader {
             )
         }
 
-        when (val platform = PlatformWindowProvider.platform) {
-            is GlfwPlatform.Win32 -> {
+        when (platformWindow) {
+            is PlatformWindow.Win32 -> {
                 val target = when (systemArch) {
                     "x86_32", "x86", "i386", "i486", "i586", "i686" -> "windows_x86_32"
                     "amd64", "x86_64" -> "windows_x86_64"
@@ -156,11 +156,11 @@ internal object NativeLibraryLoader {
                     extractSuffix = ".dll",
                     readOnlySetter = ::windowsReadOnlySetter,
                     removeAfterLoaded = false,
-                    platformFactory = { Win32Platform(platform.nativeWindow) },
+                    platformFactory = { Win32Platform(platformWindow.nativeWindow) },
                 )
             }
 
-            is GlfwPlatform.Wayland, GlfwPlatform.X11 -> {
+            is PlatformWindow.Wayland, PlatformWindow.X11 -> {
                 val target = when (systemArch) {
                     "amd64", "x86_64" -> "linux_x86_64"
                     "armv8", "arm64", "aarch64" -> "linux_aarch64"
@@ -169,9 +169,9 @@ internal object NativeLibraryLoader {
                     logger.warn("Unsupported Linux arch: $systemArch")
                     return null
                 }
-                val libraryName = when (platform) {
-                    is GlfwPlatform.Wayland -> "proxy_server_wayland"
-                    is GlfwPlatform.X11 -> {
+                val libraryName = when (platformWindow) {
+                    is PlatformWindow.Wayland -> "proxy_server_wayland"
+                    is PlatformWindow.X11 -> {
                         logger.warn("X11 is not supported for now")
                         return null
                     }
@@ -187,16 +187,18 @@ internal object NativeLibraryLoader {
                     extractSuffix = ".so",
                     readOnlySetter = ::posixReadOnlySetter,
                     removeAfterLoaded = true,
-                    platformFactory = { WaylandPlatform(platform.nativeWindow) },
+                    platformFactory = { WaylandPlatform(platformWindow.nativeWindow) },
                 )
             }
 
-            GlfwPlatform.Cocoa -> {
+            is PlatformWindow.Sdl -> return null
+
+            PlatformWindow.Cocoa -> {
                 logger.warn("macOS is not supported for now")
                 return null
             }
 
-            GlfwPlatform.Unknown -> {
+            PlatformWindow.Unknown -> {
                 logger.warn("Unsupported system: $systemName")
                 return null
             }

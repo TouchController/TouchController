@@ -1,0 +1,86 @@
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
+load("//rule:class_version_test.bzl", "class_version_test")
+load("//rule:jar.bzl", "jar")
+load("//rule:merge_library.bzl", "merge_library_group", "merge_library_jar")
+
+merge_library_group(
+    name = "26.3",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//combine/backend/minecraft/clipboard/26.3",
+        "//combine/backend/minecraft/dispatcher/26.3",
+        "//combine/backend/minecraft/drawable/26.3",
+        "//combine/backend/minecraft/hittest/26.3",
+        "//combine/backend/minecraft/identifier/26.3",
+        "//combine/backend/minecraft/input/26.3",
+        "//combine/backend/minecraft/item/26.3",
+        "//combine/backend/minecraft/keycode/26.3",
+        "//combine/backend/minecraft/render/26.3",
+        "//combine/backend/minecraft/screen/26.3",
+        "//combine/backend/minecraft/sound/26.3",
+        "//combine/backend/minecraft/text/26.3",
+        "//combine/backend/minecraft/textbuilder/26.3",
+        "//combine/backend/minecraft/textmeasurer/26.3",
+    ],
+)
+
+expand_template(
+    name = "fabric_mod_json",
+    out = "expanded/fabric.mod.json",
+    substitutions = {
+        "${version}": combine_version,
+        "${license}": combine_license,
+        "${description}": combine_description,
+        "${home_page}": combine_home_page,
+        "${sources_page}": combine_sources_page,
+        "${issue_tracker}": combine_issue_tracker,
+    },
+    template = "fabric.mod.json",
+)
+
+expand_template(
+    name = "neoforge_mods_toml",
+    out = "META-INF/neoforge.mods.toml",
+    substitutions = {
+        "${version}": combine_version,
+        "${license}": combine_license,
+        "${description}": combine_description,
+        "${home_page}": combine_home_page,
+        "${sources_page}": combine_sources_page,
+        "${issue_tracker}": combine_issue_tracker,
+    },
+    template = "neoforge.mods.toml",
+)
+
+jar(
+    name = "meta_jar",
+    resources = [
+        ":fabric_mod_json",
+        "//combine/backend/minecraft/game/26.3:access_widener",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+merge_library_jar(
+    name = "26.3_merged",
+    aspect_impl_package_suffix = "v26_3",
+    aspects = ["//combine/backend/minecraft:minecraft_unmerged"],
+    resources = {
+        "//combine/resources:icon": ".",
+        ":neoforge_mods_toml": "combine/backend/minecraft/versions/26.3",
+        "//combine/backend/minecraft/game/26.3:access_transformer": ".",
+    },
+    visibility = ["//visibility:public"],
+    deps = [
+        ":26.3",
+        ":meta_jar",
+    ],
+)
+
+class_version_test(
+    name = "26.3_merged_class_version",
+    class_major = 69,
+    jars = [":26.3_merged"],
+    tags = ["class_version"],
+)

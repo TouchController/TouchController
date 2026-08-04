@@ -11,7 +11,7 @@ import org.lwjgl.glfw.GLFWNativeWayland
 import org.lwjgl.glfw.GLFWNativeWin32
 import top.fifthlight.mergetools.api.ActualConstructor
 import top.fifthlight.mergetools.api.ActualImpl
-import top.fifthlight.touchcontroller.common.gal.window.GlfwPlatform
+import top.fifthlight.touchcontroller.common.gal.window.PlatformWindow
 import top.fifthlight.touchcontroller.common.gal.window.NativeWindow
 import top.fifthlight.touchcontroller.common.gal.window.PlatformWindowProvider
 
@@ -30,22 +30,22 @@ object PlatformWindowProviderImpl : PlatformWindowProvider {
     override val windowHeight: Int
         get() = inner.screenHeight
 
-    override val platform: GlfwPlatform<*> by lazy {
+    override val platform: PlatformWindow<*> by lazy {
         when (GLFW.glfwGetPlatform()) {
-            GLFW.GLFW_PLATFORM_WIN32 -> GlfwPlatform.Win32 {
+            GLFW.GLFW_PLATFORM_WIN32 -> PlatformWindow.Win32 {
                 NativeWindow.Win32(GLFWNativeWin32.glfwGetWin32Window(inner.handle()))
             }
 
-            GLFW.GLFW_PLATFORM_WAYLAND -> GlfwPlatform.Wayland {
+            GLFW.GLFW_PLATFORM_WAYLAND -> PlatformWindow.Wayland {
                 NativeWindow.Wayland(
                     displayPointer = GLFWNativeWayland.glfwGetWaylandDisplay(),
                     surfacePointer = GLFWNativeWayland.glfwGetWaylandWindow(inner.handle()),
                 )
             }
 
-            GLFW.GLFW_PLATFORM_COCOA -> GlfwPlatform.Cocoa
-            GLFW.GLFW_PLATFORM_X11 -> GlfwPlatform.X11
-            else -> GlfwPlatform.Unknown
+            GLFW.GLFW_PLATFORM_COCOA -> PlatformWindow.Cocoa
+            GLFW.GLFW_PLATFORM_X11 -> PlatformWindow.X11
+            else -> PlatformWindow.Unknown
         }
     }
 }

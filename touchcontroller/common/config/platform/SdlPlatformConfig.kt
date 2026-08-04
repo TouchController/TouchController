@@ -8,7 +8,7 @@ package top.fifthlight.touchcontroller.common.config.platform
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlazeSDLPlatformConfig(
+data class SdlPlatformConfig(
     val vibrationStrength: Float = 0.5f,
     val vibrationLength: Int = 200,
 )

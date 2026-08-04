@@ -16,7 +16,7 @@ import top.fifthlight.combine.core.modifier.placement.padding
 import top.fifthlight.combine.core.modifier.scroll.verticalScroll
 import top.fifthlight.combine.core.widget.layout.Column
 import top.fifthlight.touchcontroller.assets.lang.Texts
-import top.fifthlight.touchcontroller.common.config.platform.BlazeSDLPlatformConfig
+import top.fifthlight.touchcontroller.common.config.platform.SdlPlatformConfig
 import top.fifthlight.touchcontroller.common.ui.config.model.LocalConfigScreenModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.Tab
 import top.fifthlight.touchcontroller.common.ui.config.tab.TabGroup
@@ -25,12 +25,12 @@ import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.widget.IntSliderPreferenceItem
 import top.fifthlight.touchcontroller.common.ui.widget.SliderPreferenceItem
 
-object BlazeSDLConfigTab : Tab() {
+object SdlConfigTab : Tab() {
     override val options = TabOptions(
         titleId = Texts.SCREEN_CONFIG_PLATFORM_TITLE,
         group = TabGroup.SystemGroup,
         index = 2,
-        onReset = { copy(platform = platform.copy(blazesdl = BlazeSDLPlatformConfig())) },
+        onReset = { copy(platform = platform.copy(sdl = SdlPlatformConfig())) },
     )
 
     @Composable
@@ -45,26 +45,26 @@ object BlazeSDLConfigTab : Tab() {
         ) {
             val uiState by screenModel.uiState.collectAsState()
             val globalConfig = uiState.config
-            fun update(editor: BlazeSDLPlatformConfig.() -> BlazeSDLPlatformConfig) {
+            fun update(editor: SdlPlatformConfig.() -> SdlPlatformConfig) {
                 screenModel.updateConfig {
                     copy(
                         platform = platform.copy(
-                            blazesdl = editor(platform.blazesdl),
+                            sdl = editor(platform.sdl),
                         ),
                     )
                 }
             }
             SliderPreferenceItem(
-                title = Text.translatable(Texts.SCREEN_CONFIG_PLATFORM_BLAZESDL_VIBRATION_STRENGTH_TITLE),
-                description = Text.translatable(Texts.SCREEN_CONFIG_PLATFORM_BLAZESDL_VIBRATION_STRENGTH_DESCRIPTION),
-                value = globalConfig.platform.blazesdl.vibrationStrength,
+                title = Text.translatable(Texts.SCREEN_CONFIG_PLATFORM_SDL_VIBRATION_STRENGTH_TITLE),
+                description = Text.translatable(Texts.SCREEN_CONFIG_PLATFORM_SDL_VIBRATION_STRENGTH_DESCRIPTION),
+                value = globalConfig.platform.sdl.vibrationStrength,
                 range = 0f..1f,
                 onValueChanged = { update { copy(vibrationStrength = it) } }
             )
             IntSliderPreferenceItem(
-                title = Text.translatable(Texts.SCREEN_CONFIG_PLATFORM_BLAZESDL_VIBRATION_LENGTH_TITLE),
-                description = Text.translatable(Texts.SCREEN_CONFIG_PLATFORM_BLAZESDL_VIBRATION_LENGTH_DESCRIPTION),
-                value = globalConfig.platform.blazesdl.vibrationLength,
+                title = Text.translatable(Texts.SCREEN_CONFIG_PLATFORM_SDL_VIBRATION_LENGTH_TITLE),
+                description = Text.translatable(Texts.SCREEN_CONFIG_PLATFORM_SDL_VIBRATION_LENGTH_DESCRIPTION),
+                value = globalConfig.platform.sdl.vibrationLength,
                 range = 0..1000,
                 onValueChanged = { update { copy(vibrationLength = it) } }
             )

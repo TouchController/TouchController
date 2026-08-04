@@ -1,0 +1,37 @@
+license = "${license}"
+issueTrackerURL = "${issue_tracker}"
+
+[[mods]]
+modId = "combine_26_3"
+version = "${version}"
+displayName = "Combine 26.3 implementation"
+displayURL = "${home_page}"
+logoFile = "icon.png"
+authors = "fifth_light"
+description = "${description}"
+
+[[mixins]]
+config = "combine.mixins.render.json"
+
+[[accessTransformers]]
+file = "access_transformer.cfg"
+
+[[dependencies.combine_26_3]]
+modId = "minecraft"
+type = "required"
+versionRange = "26.1"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.combine_26_3]]
+modId = "kotlinforforge"
+type = "required"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.combine_26_3]]
+modId = "combine"
+type = "required"
+versionRange = "[${version},)"
+ordering = "NONE"
+side = "CLIENT"

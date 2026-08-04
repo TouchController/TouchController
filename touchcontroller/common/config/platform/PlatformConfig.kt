@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PlatformConfig(
-    val blazesdl: BlazeSDLPlatformConfig = BlazeSDLPlatformConfig(),
+    val sdl: SdlPlatformConfig = SdlPlatformConfig(),
 )

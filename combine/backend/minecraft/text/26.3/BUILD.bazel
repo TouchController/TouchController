@@ -1,0 +1,14 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "26.3",
+    srcs = ["TextImpl.kt"],
+    javac_opts = "//combine:javac_opts_jvm_25",
+    kotlinc_opts = "//combine:kotlinc_opts_jvm_25",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//combine/backend/minecraft/game/26.3",
+        "//combine/core/data",
+        "//game/26.3:game_client_libraries",
+    ],
+)

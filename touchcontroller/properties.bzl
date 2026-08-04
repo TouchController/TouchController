@@ -44,6 +44,7 @@ touchcontroller_fabric_game_versions = [
     "26.1.1",
     "26.1.2",
     "26.2",
+    "26.3-alpha.6",
 ]
 
 touchcontroller_api_version = "1.0.0"
