@@ -1,9 +1,0 @@
---- a/MODULE.bazel
-+++ b/MODULE.bazel
-@@ -1,5 +1,5 @@
- module(
-     name = "rules_kotlin",
--    version = "1.9.0",
-+    version = "2.3.21",
-     repo_name = "rules_kotlin",
- )

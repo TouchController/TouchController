@@ -1,0 +1,15 @@
+--- a/BUILD.bazel
++++ b/BUILD.bazel
+@@ -49,7 +49,11 @@
+             "#cmakedefine HAVE_GETRANDOM": "",  # not available on macos
+             "#cmakedefine HAVE_SYSCALL_GETRANDOM": "",  # not available on macos
+         },
+-        # Only support Linux and Mac for now.
++        "@platforms//os:windows": {
++            "#cmakedefine HAVE_GETRANDOM": "",  # not available on windows
++            "#cmakedefine HAVE_SYSCALL_GETRANDOM": "",  # not available on windows
++        },
++        # Only support Linux, Mac and Windows for now.
+     }),
+     template = "expat/expat_config.h.cmake",
+ )

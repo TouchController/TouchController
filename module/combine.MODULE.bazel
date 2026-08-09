@@ -3,7 +3,7 @@
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
     artifacts = [
-        "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:2.3.20",
+        "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:2.4.0",
         "androidx.compose.runtime:runtime-desktop:1.10.3",
         "androidx.compose.runtime:runtime-saveable-desktop:1.10.3",
         "androidx.collection:collection-jvm:1.6.0",

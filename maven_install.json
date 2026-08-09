@@ -56,7 +56,7 @@
     "org.apache.maven:maven-resolver-provider": 2046956324,
     "org.eclipse.sisu:org.eclipse.sisu.inject": -589010221,
     "org.javassist:javassist": -734299230,
-    "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable": -113555848,
+    "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable": -1148288165,
     "org.jetbrains.kotlin:kotlin-stdlib": 52847824,
     "org.jetbrains.kotlin:kotlin-test-junit5": 1682081423,
     "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm": 2136054853,
@@ -289,8 +289,8 @@
     "org.eclipse.sisu:org.eclipse.sisu.inject:jar:sources": -275882963,
     "org.javassist:javassist": -1500659286,
     "org.javassist:javassist:jar:sources": 1768844995,
-    "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable": -1145921977,
-    "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:jar:sources": -407193379,
+    "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable": -121318213,
+    "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:jar:sources": -2049731316,
     "org.jetbrains.kotlin:kotlin-reflect": 9042768,
     "org.jetbrains.kotlin:kotlin-reflect:jar:sources": 992770884,
     "org.jetbrains.kotlin:kotlin-stdlib": -544128162,
@@ -1143,10 +1143,10 @@
     },
     "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable": {
       "shasums": {
-        "jar": "e1024c542f1d021e170cd040e4e1730f2fd76ce8ed76fc9e3496988ca643a2e0",
-        "sources": "d961f32a5ae9740149dca1ef6a99a4c5a923f53dff35bd663c1dc1d3561069a5"
+        "jar": "95ccd5c4008e454a5cb26f89405613f2ae33f46bf950c8be4d01bbdbdcfbcd08",
+        "sources": "837da83c9438fa3d7925eb04463ee4475ece2ae568006549e4145972925a1118"
       },
-      "version": "2.3.20"
+      "version": "2.4.0"
     },
     "org.jetbrains.kotlin:kotlin-reflect": {
       "shasums": {

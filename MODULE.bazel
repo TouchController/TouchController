@@ -6,7 +6,7 @@ module(
 )
 
 bazel_dep(name = "rules_java", version = "9.6.1")
-bazel_dep(name = "rules_kotlin", version = "2.3.21")
+bazel_dep(name = "rules_kotlin", version = "2.4.0")
 bazel_dep(name = "rules_jvm_external", version = "7.0")
 bazel_dep(name = "bazel_skylib", version = "1.9.0")
 bazel_dep(name = "bazel_lib", version = "3.3.1")
@@ -32,57 +32,59 @@ local_path_override(
 
 # Patch rule_android to enable maven pinning
 bazel_dep(name = "rules_android", version = "0.7.3")
-archive_override(
+single_version_override(
     module_name = "rules_android",
-    integrity = "sha256-xM0ljTdh7/CO4ETAJSF5u27or4qyT32vtzsoDu2pgkM=",
     patch_strip = 1,
     patches = [
         "//third_party/rules_android/patches:maven_pinning.patch",
         "//third_party/rules_android/patches:lower_min_sdk_floor.patch",
     ],
-    strip_prefix = "rules_android-0.7.3",
-    url = "https://github.com/bazelbuild/rules_android/releases/download/v0.7.3/rules_android-v0.7.3.tar.gz",
+    version = "0.7.3",
 )
 
 # Patch rules_android_ndk to fix https://github.com/bazelbuild/rules_android_ndk/issues/107
 bazel_dep(name = "rules_android_ndk", version = "0.1.5")
-archive_override(
+single_version_override(
     module_name = "rules_android_ndk",
-    integrity = "sha256-B+eid3ETuz0KQyJl0ceM+qFApbxMgr5MjNmIs0OC7JA=",
     patch_strip = 1,
     patches = [
         "//third_party/rules_android_ndk/patches:fix-windows-path.patch",
     ],
-    strip_prefix = "rules_android_ndk-0.1.5",
-    url = "https://github.com/bazelbuild/rules_android_ndk/releases/download/v0.1.5/rules_android_ndk-v0.1.5.tar.gz",
+    version = "0.1.5",
 )
 
 # Patch bazel_worker_java to add maven pinning
 bazel_dep(name = "bazel_worker_java", version = "0.0.11")
-archive_override(
+single_version_override(
     module_name = "bazel_worker_java",
-    integrity = "sha256-vk+rcgFNwL2S6tUUb+mumTm9zSYkU2mbtSth5C+GToU=",
     patch_strip = 1,
     patches = [
         "//third_party/bazel_worker_java/patches:maven_pinning.patch",
-        "//third_party/bazel_worker_java/patches:module_dot_bazel_version.patch",
     ],
-    strip_prefix = "bazel-worker-api-0.0.11/java",
-    url = "https://github.com/bazelbuild/bazel-worker-api/releases/download/v0.0.11/bazel-worker-api-v0.0.11.tar.gz",
+    version = "0.0.11",
 )
 
 # Patch rules_kotlin to add common source support
-archive_override(
+single_version_override(
     module_name = "rules_kotlin",
     patch_strip = 1,
     patches = [
         "//third_party/rules_kotlin/patches:common_library.patch",
-        "//third_party/rules_kotlin/patches:module_dot_bazel_version.patch",
         "//third_party/rules_kotlin/patches:javac_release_25.patch",
     ],
-    sha256 = "118fcba9b15a5f35f52be6ea84a3cd98f78658b2071ec0f3a1de6d2863f2e50a",
-    url = "https://github.com/bazel-contrib/rules_kotlin/releases/download/v2.3.21/rules_kotlin-v2.3.21.tar.gz",
+    version = "2.4.0",
 )
+
+# Pin KSP to 2.3.11 for Kotlin 2.4.0 module-name compatibility: https://github.com/google/ksp/issues/2964
+rules_kotlin_extensions = use_extension(
+    "@rules_kotlin//src/main/starlark/core/repositories:bzlmod_setup.bzl",
+    "rules_kotlin_extensions",
+)
+rules_kotlin_extensions.ksp_version(
+    sha256 = "b0e7666caf7afb634350ca64af9a88c3bd3e04df393fd33dbf430daaf285c6b3",
+    version = "2.3.11",
+)
+use_repo(rules_kotlin_extensions, "com_github_google_ksp", "com_github_jetbrains_kotlin", "com_github_jetbrains_kotlin_git", "com_github_pinterest_ktlint", "kotlin_build_tools_api", "kotlin_build_tools_impl", "kotlinx_coroutines_core_jvm", "kotlinx_serialization_core_jvm", "kotlinx_serialization_json", "kotlinx_serialization_json_jvm")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 git_override(
@@ -112,15 +114,12 @@ bazel_dep(name = "zlib", version = "1.3.2")
 bazel_dep(name = "libpng", version = "1.6.54")
 
 # Patch libexpat to add windows support
-bazel_dep(name = "libexpat", version = "2.7.1.bcr1")
-archive_override(
+bazel_dep(name = "libexpat", version = "2.7.1.bcr.1")
+single_version_override(
     module_name = "libexpat",
-    build_file = "//third_party/expat:BUILD.expat.bazel",
-    integrity = "sha256-hTcnl/8Gc6j8SmvhZGa7WgyijA3PPG96wWhrSjuiqrs=",
     patch_strip = 1,
-    patches = ["//third_party/expat/patches:add-module-file.patch"],
-    strip_prefix = "libexpat-R_2_7_1",
-    url = "https://github.com/libexpat/libexpat/archive/refs/tags/R_2_7_1.tar.gz",
+    patches = ["//third_party/expat/patches:add_windows_support.patch"],
+    version = "2.7.1.bcr.1",
 )
 
 # toolchain
