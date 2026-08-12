@@ -1,0 +1,15 @@
+<idea-plugin>
+    <id>fifthlight.textitem</id>
+    <name>Text Folding</name>
+    <version>0.0.1</version>
+    <vendor>fifth_light</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.kotlin.k2</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.foldingBuilder
+                language="kotlin"
+                implementationClass="top.fifthlight.intellij.textitem.TextItemFoldingBuilder"/>
+    </extensions>
+</idea-plugin>

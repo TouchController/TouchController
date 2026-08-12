@@ -29,9 +29,15 @@ fun main(vararg args: String) = object : Worker() {
             val strippedKey = key.removePrefix("touchcontroller.")
             val transformedKey = strippedKey.uppercase().replace('.', '_')
 
+            val textItemAnnotation = AnnotationSpec
+                .builder(ClassName("top.fifthlight.touchcontroller.common.annotations", "TextItem"))
+                .addMember("%S", value)
+                .build()
+
             textsBuilder.addProperty(
                 PropertySpec
                     .builder(transformedKey, ClassName("top.fifthlight.combine.core.data", "Identifier"))
+                    .addAnnotation(textItemAnnotation)
                     .addKdoc("Translation text: %L", value)
                     .initializer("Identifier.Namespaced(%S, %S)", "touchcontroller", strippedKey)
                     .build()

@@ -5,5 +5,5 @@ kt_merge_library(
     srcs = glob(["*.kt"]),
     javac_opts = "//touchcontroller:javac_opts_jvm_8",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
-    visibility = ["//touchcontroller:__subpackages__"],
+    visibility = ["//visibility:public"],
 )

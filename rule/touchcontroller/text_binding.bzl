@@ -62,7 +62,10 @@ def _kt_text_binding_lib_impl(name, visibility, input, class_name, package_name)
         visibility = visibility,
         javac_opts = "//rule:javac_opts_jvm_8",
         kotlinc_opts = "//rule:kotlinc_opts_jvm_8",
-        deps = ["//combine/core/data"],
+        deps = [
+            "//combine/core/data",
+            "//touchcontroller/common/annotations",
+        ],
     )
 
 kt_text_binding_lib = macro(
