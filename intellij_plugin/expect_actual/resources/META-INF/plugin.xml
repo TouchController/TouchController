@@ -18,5 +18,12 @@
         <codeInsight.lineMarkerProvider
                 language="UAST"
                 implementationClass="top.fifthlight.intellij.expectactual.ActualConstructorMarkerProvider"/>
+        <java.elementFinder implementation="top.fifthlight.intellij.expectactual.ExpectFactoryElementFinder"/>
+        <fileBasedIndex implementation="top.fifthlight.intellij.expectactual.ExpectFactoryIndexExtension"/>
+        <implicitUsageProvider implementation="top.fifthlight.intellij.expectactual.ExpectFactoryImplicitUsageProvider"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <kaResolveExtensionProvider implementation="top.fifthlight.intellij.expectactual.ExpectFactoryResolveExtensionProvider"/>
     </extensions>
 </idea-plugin>

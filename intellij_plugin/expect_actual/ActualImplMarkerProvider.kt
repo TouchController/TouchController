@@ -17,7 +17,7 @@ class ActualImplMarkerProvider : LineMarkerProvider {
         for (element in elements) {
             val identifierOwner = getUParentForIdentifier(element) ?: continue
             val identifierClass = (identifierOwner as? UClass) ?: continue
-            val annotation = identifierClass.findAnnotation("top.fifthlight.mergetools.api.ActualImpl") ?: continue
+            val annotation = identifierClass.findAnnotation(Consts.EXPECT_FACTORY_ANNOTATION_FQN) ?: continue
             val valueExpression = annotation.findAttributeValue("value") as? UClassLiteralExpression ?: continue
             val targetType = valueExpression.type ?: continue
             val targetClass = PsiUtil.resolveClassInType(targetType) ?: continue

@@ -48,7 +48,7 @@ class ActualConstructorMarkerProvider : LineMarkerProvider {
             val expectClass = PsiUtil.resolveClassInType(targetType) ?: continue
 
             val factoryClass = expectClass.innerClasses.firstOrNull {
-                it.modifierList?.findAnnotation("top.fifthlight.mergetools.api.ExpectFactory") != null
+                it.modifierList?.findAnnotation(Consts.EXPECT_FACTORY_ANNOTATION_FQN) != null
             } ?: continue
 
             val annotationValue = annotation.findAttributeValue("value")
