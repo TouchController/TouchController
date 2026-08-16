@@ -255,7 +255,7 @@ fabric_versions = {
     },
     "26.3": {
         "intermediary": False,
-        "api": "0.156.2+26.3",
+        "api": "0.157.1+26.3",
         # modmenu declared 0.19.2, api declared 0.18.4
         "loader": "0.19.2",
         "modmenu": "21.0.0-alpha.1",

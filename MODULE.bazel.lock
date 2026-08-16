@@ -5765,7 +5765,7 @@
     "@@rules_mc+//:extensions.bzl%minecraft": {
       "general": {
         "bzlTransitiveDigest": "oVhkbj0h2wDacUgrOA1dyrvri6NygFl5ZEaV9bidMRg=",
-        "usagesDigest": "mkGmC5Y+h14YumXYNbZLOt8Q+oBQdJgBNaXYcFEjJ/U=",
+        "usagesDigest": "Hx05SYHMQTelt8rtSBM1d64CIb29r7oV2Vzvwj0+X10=",
         "recordedInputs": [
           "REPO_MAPPING:rules_mc+,bazel_tools bazel_tools"
         ],
@@ -6658,19 +6658,19 @@
               "downloaded_file_path": "server.jar"
             }
           },
-          "minecraft_26_3-snapshot-7_client": {
+          "minecraft_26_3-snapshot-8_client": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/16169fc68cc553b82f495bb2896bde6170aa51a7/client.jar",
-              "integrity": "sha1-FhafxozFU7gvSVuyiWveYXCqUac=",
+              "url": "https://piston-data.mojang.com/v1/objects/dd75cb26bf71099ae196080606dbaaf6eb77d59a/client.jar",
+              "integrity": "sha1-3XXLJr9xCZrhlggGBtuq9ut31Zo=",
               "downloaded_file_path": "client.jar"
             }
           },
-          "minecraft_26_3-snapshot-7_server": {
+          "minecraft_26_3-snapshot-8_server": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/06157fedd67ff4dd6e0e6fa4a9dd0af296f0dd61/server.jar",
-              "integrity": "sha1-BhV/7dZ/9N1uDm+kqd0K8pbw3WE=",
+              "url": "https://piston-data.mojang.com/v1/objects/f56c190d1deda0a8e63592ae07b1cd7f26cccd3e/server.jar",
+              "integrity": "sha1-9WwZDR3toKjmNZKuB7HNfybMzT4=",
               "downloaded_file_path": "server.jar"
             }
           },
@@ -12733,7 +12733,7 @@
                   "client#file",
                   "server#file"
                 ],
-                "26.3-snapshot-7": [
+                "26.3-snapshot-8": [
                   "client#file",
                   "server#file"
                 ]
@@ -15472,7 +15472,7 @@
                   "org.lwjgl:lwjgl:3.4.1:unsafe",
                   "org.slf4j:slf4j-api:2.0.17"
                 ],
-                "26.3-snapshot-7": [
+                "26.3-snapshot-8": [
                   "at.yawk.lz4:lz4-java:1.10.1",
                   "ca.weblite:java-objc-bridge:1.1",
                   "com.azure:azure-json:1.4.0",
@@ -19921,19 +19921,19 @@
                 "1.17": "f425401a00adf0112fde624ee80c66333530f8a1",
                 "1.18": "d31a2e85ae149dd1b1a7070b22cb8887892fda6c",
                 "1.19": "a9c8b05a8082a65678beda6dfa2b8f21fa627bce",
-                "5": "5a5c8f53cee933b4ed2a27bdadbfb4bccfe3b397",
-                "12": "041661b12d1b24acf73b9afd8b9b846b3ba2475e",
-                "16": "a8b51e21164d06a03e0b06c1a6e5caa897b120ff",
-                "17": "84fb63f8ed4091fab26fb68b32f79dfecfae31d9",
-                "18": "66a2d7c3652918b91d90f022c58dfb0384abf0e7",
-                "19": "9e4b97f80caf5d03095809d9c349f589375fa43b",
-                "24": "4614e375e21b0ddc745e4146a4de0ac8119424a6",
-                "26": "4a71338c390c9c07843144cec3e98a39f268f8b4",
-                "27": "a1b7ed58f78f7f8e9248c3e5d4ec6726189e278c",
-                "29": "e9f7ce469a9f70f7e1197bc61b6b74ad8c87ab11",
-                "30": "3391216608325aaf428712b211476abf6d5ddffa",
-                "32": "4050401d6e5df16ef17c2d0adea6fd37937badae",
-                "33": "3cb0f8f92282d8be20d2713b665824b86908c141"
+                "5": "ad7d544265d0757dd6b9540b82f0bdab272eb76c",
+                "12": "76e5d247c2bb6bb3c75cef72c7b9577f6583f49c",
+                "16": "3cc683fd4cd1c351ae6e6dfba4531231f5f943f4",
+                "17": "ae4f2779919ee343d3d98445f9a3ae1dc6542bc9",
+                "18": "1258f169367075dee644d5c3f38c3b2e3c8c895f",
+                "19": "86f089ef8ad3fa90409c22647df40de289b1f424",
+                "24": "13c83fa5d55d68a4ca209f83ffef1c2f83a4c725",
+                "26": "6e351e1de5bdfca8be9997367a120925cfc09ae4",
+                "27": "afe17cfa77f25dd8c6a976a8642ab2bdbfaf7cf0",
+                "29": "34c7bef563edad4d5e3ae8157e904690afb1fa50",
+                "30": "aa83698cef26e50089d85218e55bd402f38c7821",
+                "32": "cf75b185cb35b32e299b0c8e674fa202d7911a3c",
+                "33": "328808cdd6eb359bf66f0e6cdf80901959da45b0"
               },
               "asset_urls": {
                 "pre-1.6": "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json",
@@ -19946,19 +19946,19 @@
                 "1.17": "https://piston-meta.mojang.com/v1/packages/f425401a00adf0112fde624ee80c66333530f8a1/1.17.json",
                 "1.18": "https://piston-meta.mojang.com/v1/packages/d31a2e85ae149dd1b1a7070b22cb8887892fda6c/1.18.json",
                 "1.19": "https://piston-meta.mojang.com/v1/packages/a9c8b05a8082a65678beda6dfa2b8f21fa627bce/1.19.json",
-                "5": "https://piston-meta.mojang.com/v1/packages/5a5c8f53cee933b4ed2a27bdadbfb4bccfe3b397/5.json",
-                "12": "https://piston-meta.mojang.com/v1/packages/041661b12d1b24acf73b9afd8b9b846b3ba2475e/12.json",
-                "16": "https://piston-meta.mojang.com/v1/packages/a8b51e21164d06a03e0b06c1a6e5caa897b120ff/16.json",
-                "17": "https://piston-meta.mojang.com/v1/packages/84fb63f8ed4091fab26fb68b32f79dfecfae31d9/17.json",
-                "18": "https://piston-meta.mojang.com/v1/packages/66a2d7c3652918b91d90f022c58dfb0384abf0e7/18.json",
-                "19": "https://piston-meta.mojang.com/v1/packages/9e4b97f80caf5d03095809d9c349f589375fa43b/19.json",
-                "24": "https://piston-meta.mojang.com/v1/packages/4614e375e21b0ddc745e4146a4de0ac8119424a6/24.json",
-                "26": "https://piston-meta.mojang.com/v1/packages/4a71338c390c9c07843144cec3e98a39f268f8b4/26.json",
-                "27": "https://piston-meta.mojang.com/v1/packages/a1b7ed58f78f7f8e9248c3e5d4ec6726189e278c/27.json",
-                "29": "https://piston-meta.mojang.com/v1/packages/e9f7ce469a9f70f7e1197bc61b6b74ad8c87ab11/29.json",
-                "30": "https://piston-meta.mojang.com/v1/packages/3391216608325aaf428712b211476abf6d5ddffa/30.json",
-                "32": "https://piston-meta.mojang.com/v1/packages/4050401d6e5df16ef17c2d0adea6fd37937badae/32.json",
-                "33": "https://piston-meta.mojang.com/v1/packages/3cb0f8f92282d8be20d2713b665824b86908c141/33.json"
+                "5": "https://piston-meta.mojang.com/v1/packages/ad7d544265d0757dd6b9540b82f0bdab272eb76c/5.json",
+                "12": "https://piston-meta.mojang.com/v1/packages/76e5d247c2bb6bb3c75cef72c7b9577f6583f49c/12.json",
+                "16": "https://piston-meta.mojang.com/v1/packages/3cc683fd4cd1c351ae6e6dfba4531231f5f943f4/16.json",
+                "17": "https://piston-meta.mojang.com/v1/packages/ae4f2779919ee343d3d98445f9a3ae1dc6542bc9/17.json",
+                "18": "https://piston-meta.mojang.com/v1/packages/1258f169367075dee644d5c3f38c3b2e3c8c895f/18.json",
+                "19": "https://piston-meta.mojang.com/v1/packages/86f089ef8ad3fa90409c22647df40de289b1f424/19.json",
+                "24": "https://piston-meta.mojang.com/v1/packages/13c83fa5d55d68a4ca209f83ffef1c2f83a4c725/24.json",
+                "26": "https://piston-meta.mojang.com/v1/packages/6e351e1de5bdfca8be9997367a120925cfc09ae4/26.json",
+                "27": "https://piston-meta.mojang.com/v1/packages/afe17cfa77f25dd8c6a976a8642ab2bdbfaf7cf0/27.json",
+                "29": "https://piston-meta.mojang.com/v1/packages/34c7bef563edad4d5e3ae8157e904690afb1fa50/29.json",
+                "30": "https://piston-meta.mojang.com/v1/packages/aa83698cef26e50089d85218e55bd402f38c7821/30.json",
+                "32": "https://piston-meta.mojang.com/v1/packages/cf75b185cb35b32e299b0c8e674fa202d7911a3c/32.json",
+                "33": "https://piston-meta.mojang.com/v1/packages/328808cdd6eb359bf66f0e6cdf80901959da45b0/33.json"
               },
               "version_assets": {
                 "b1.7.3": "pre-1.6",
@@ -19995,7 +19995,7 @@
                 "26w14a": "30",
                 "26.1.2": "30",
                 "26.2": "32",
-                "26.3-snapshot-7": "33"
+                "26.3-snapshot-8": "33"
               }
             }
           }
