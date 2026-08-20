@@ -23,6 +23,9 @@ bazel_dep(name = "with_cfg.bzl", version = "0.14.6")
 bazel_dep(name = "protobuf", version = "35.1")
 bazel_dep(name = "rules_apple", version = "5.0.0-rc2")
 
+# FastMerger is not ready, so use jarjar as alternative
+bazel_dep(name = "bazel_jar_jar", version = "0.1.15")
+
 # Our own rules
 bazel_dep(name = "rules_mc", version = "0.0.0")
 local_path_override(
@@ -101,6 +104,7 @@ git_override(
     patches = [
         "//third_party/intellij_aspect/patches:module_bazel.patch",
         "//third_party/intellij_aspect/patches:extra_rules.patch",
+        "//third_party/intellij_aspect/patches:hmpp.patch",
     ],
     remote = "https://github.com/JetBrains/intellij-aspect.git",
 )

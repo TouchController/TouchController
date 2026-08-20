@@ -23,6 +23,7 @@ class BcrAspectLauncher(
             .flatMap { it.additionalAspects() }
             .joinToString(", ")
 
+        // Replace extracted aspects with the BCR one
         val newCommand = desc.command.map { arg ->
             if (arg.startsWith("--aspects=")) {
                 val aspectContent = arg.removePrefix("--aspects=")
@@ -38,6 +39,8 @@ class BcrAspectLauncher(
                 arg
             }
         }.toMutableList()
+
+        // Inject extra aspects if there is any aspects
         val aspectsIndex = newCommand.indexOfFirst { arg -> arg.startsWith("--aspects") }
         if (aspectsIndex != -1 && extraAspects.isNotEmpty()) {
             newCommand.add(aspectsIndex, "--aspects=$extraAspects")

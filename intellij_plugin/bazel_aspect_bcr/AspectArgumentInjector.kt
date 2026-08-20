@@ -2,6 +2,9 @@ package top.fifthlight.intellij.bazelaspectbcr
 
 import com.intellij.openapi.extensions.ExtensionPointName
 
+/**
+ * EP to inject additional aspects into sync phase.
+ */
 interface AspectArgumentInjector {
     fun additionalAspects(): List<String>
 

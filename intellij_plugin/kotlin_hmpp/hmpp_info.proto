@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package top.fifthlight.intellij.kotlinhmpp;
+
+option java_package = "top.fifthlight.intellij.kotlinhmpp.proto";
+option java_outer_classname = "HmppInfoProtos";
+
+message TargetKey {
+    string label = 1;
+}
+
+message KotlinTargetInfo {
+    string module_name = 1;
+}
+
+message KotlinCommonTargetInfo {
+    string fragment_name = 1;
+}
+
+message TargetIdeInfo {
+    string kind = 1;
+    TargetKey key = 2;
+    KotlinTargetInfo kotlin_target_info = 3;
+    KotlinCommonTargetInfo kotlin_common_target_info = 4;
+}

@@ -1,4 +1,4 @@
-package top.fifthlight.intellij
+package top.fifthlight.intellij.expectactual
 
 import com.intellij.openapi.util.IconLoader
 

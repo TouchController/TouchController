@@ -2,6 +2,6 @@ load("@rules_kotlin//kotlin:core.bzl", "kt_kotlinc_options")
 
 kt_kotlinc_options(
     name = "kotlinc_opts",
-    jvm_target = "11",
+    jvm_target = "25",
     visibility = ["//intellij_plugin:__subpackages__"],
 )

@@ -236,9 +236,10 @@
 
 --- /dev/null
 +++ b/kotlin/internal/jvm/kt_common.bzl
-@@ -0,0 +1,88 @@
+@@ -0,0 +1,90 @@
 +"""kt_common_library rule for Kotlin Multiplatform common source fragments."""
 +
++load("@rules_java//java/common:java_info.bzl", _JavaInfo = "JavaInfo")
 +load(
 +    "//kotlin/internal:defs.bzl",
 +    _KtCommonInfo = "KtCommonInfo",
@@ -316,7 +317,8 @@
 +        "deps": attr.label_list(
 +            doc = "Other kt_common_library targets that this fragment refines.",
 +            default = [],
-+            providers = [_KtCommonInfo],
++            # Hack here: _JavaInfo is not used for compile here, it is only used for IDE
++            providers = [[_KtCommonInfo], [_JavaInfo]],
 +        ),
 +        "fragment_name": attr.string(
 +            doc = "Name of this fragment (e.g. 'commonMain'). If not provided, generate from target name.",

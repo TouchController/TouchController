@@ -1,0 +1,24 @@
+<idea-plugin>
+    <id>fifthlight.kotlin.hmpp</id>
+    <name>Kotlin HMPP Support</name>
+    <version>0.0.1</version>
+    <vendor>fifth_light</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.kotlin.k2</depends>
+    <depends>org.jetbrains.bazel</depends>
+    <depends>fifthlight.bazel.aspect.bcr</depends>
+
+    <extensions defaultExtensionNs="top.fifthlight.bazelaspectbcr">
+        <aspectArgumentInjector
+            implementation="top.fifthlight.intellij.kotlinhmpp.AspectInjector"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="org.jetbrains.bazel">
+        <targetKindProvider implementation="top.fifthlight.intellij.kotlinhmpp.TargetKindProvider" />
+        <bepEventHandlerProvider implementation="top.fifthlight.intellij.kotlinhmpp.BepEventHandlerProvider"/>
+        <projectPostSyncHook implementation="top.fifthlight.intellij.kotlinhmpp.HmppInfoPostSyncHook"/>
+        <syncWorkspaceImporter implementation="top.fifthlight.intellij.kotlinhmpp.KotlinHmppWorkspaceImporter"/>
+    </extensions>
+
+</idea-plugin>

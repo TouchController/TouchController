@@ -1,7 +1,7 @@
-load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_jar")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
 
-kt_merge_library(
-    name = "text_item_unmerged",
+kt_jvm_library(
+    name = "text_item",
     srcs = glob(["**/*.kt"]),
     kotlinc_opts = "//intellij_plugin:kotlinc_opts",
     resource_strip_prefix = "intellij_plugin/text_item/resources",
@@ -11,9 +11,4 @@ kt_merge_library(
         "@intellij//:kotlin",
         "@intellij//:sdk",
     ],
-)
-
-merge_library_jar(
-    name = "text_item",
-    deps = [":text_item_unmerged"],
 )

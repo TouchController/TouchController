@@ -1,0 +1,61 @@
+--- /dev/null
++++ b/modules/kotlin_common_info.bzl
+@@ -0,0 +1,31 @@
++load("@rules_kotlin//kotlin/internal:defs.bzl", "KtCommonInfo")
++load("//common:common.bzl", "intellij_common")
++load("//common:dependencies.bzl", "intellij_deps")
++load("//modules:provider.bzl", "intellij_provider")
++
++def _aspect_impl(target, ctx):
++    if not KtCommonInfo in target:
++        return [intellij_provider.KotlinCommonInfo(present = False)]
++
++    info = target[KtCommonInfo]
++
++    return [
++        intellij_provider.create(
++            ctx = ctx,
++            provider = intellij_provider.KotlinCommonInfo,
++            value = intellij_common.struct(
++                fragment_name = info.fragment_name,
++            ),
++            dependencies = {
++                intellij_deps.COMPILE_TIME: intellij_deps.collect(
++                    ctx,
++                    attributes = ["deps"],
++                ),
++            },
++        ),
++    ]
++
++intellij_kotlin_common_info_aspect = intellij_common.aspect(
++    implementation = _aspect_impl,
++    provides = [intellij_provider.KotlinCommonInfo],
++)
+
+--- a/modules/provider.bzl
++++ b/modules/provider.bzl
+@@ -33,6 +33,7 @@ _IntelliJJavaCommonInfo = _intellij_module_provider()
+ _IntelliJJvmInfo = _intellij_module_provider()
+ _IntelliJJavaInfo = _intellij_module_provider()
+ _IntelliJKotlinInfo = _intellij_module_provider()
++_IntelliJKotlinCommonInfo = _intellij_module_provider()
+ _IntelliJScalaInfo = _intellij_module_provider()
+ _IntelliJGoInfo = _intellij_module_provider()
+ _IntelliJTestInfo = _intellij_module_provider()
+@@ -49,6 +50,7 @@ _MODULE_PROVIDERS = {
+     "java_common": _IntelliJJavaCommonInfo,
+     "java_provider": _IntelliJJavaInfo,
+     "kotlin_target_info": _IntelliJKotlinInfo,
++    "kotlin_common_target_info": _IntelliJKotlinCommonInfo,
+     "scala_target_info": _IntelliJScalaInfo,
+     "go_target_info": _IntelliJGoInfo,
+     "test_info": _IntelliJTestInfo,
+@@ -144,6 +146,7 @@ intellij_provider = struct(
+     JavaInfo = _IntelliJJavaInfo,
+     JavaToolchainInfo = _IntelliJJavaToolchainInfo,
+     KotlinInfo = _IntelliJKotlinInfo,
++    KotlinCommonInfo = _IntelliJKotlinCommonInfo,
+     ScalaInfo = _IntelliJScalaInfo,
+     GoInfo = _IntelliJGoInfo,
+     PyInfo = _IntelliJPyInfo,

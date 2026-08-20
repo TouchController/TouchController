@@ -1,8 +1,8 @@
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-PLUGIN_URL = "https://downloads.marketplace.jetbrains.com/files/22977/1098901/bazel-plugin-2026.2.1-nightly.7_c6bbc5881cb18.zip"
+PLUGIN_URL = "https://downloads.marketplace.jetbrains.com/files/22977/1128270/bazel-plugin-2026.2.1.1.zip"
 
-PLUGIN_SHA = "2989ec5d4d4c72ed0abd6d5429f62a63f3d245c44f5b8a7fc2c61a002e56fbc1"
+PLUGIN_SHA = "5e0d9398eb48cf105899d7b983ccd70410085dbe9170f5c6f5b15ee53132caac"
 
 http_archive(
     name = "intellij_bazel",

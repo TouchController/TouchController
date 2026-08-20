@@ -19,20 +19,35 @@ kt_common_library(
     name = "common",
     srcs = glob(["commonMain/**/*.kt"]),
     fragment_name = "commonMain",
+    deps = [
+        "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core",
+        "@maven//:androidx_collection_collection_jvm",
+    ],
 )
 
 kt_common_library(
     name = "non_android",
     srcs = glob(["nonAndroidMain/**/*.kt"]),
     fragment_name = "nonAndroidMain",
-    deps = [":common"],
+    deps = [
+        ":common",
+        "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core",
+        "@maven//:androidx_collection_collection_jvm",
+    ],
 )
 
 kt_common_library(
     name = "jvm",
     srcs = glob(["jvmMain/**/*.kt"]),
     fragment_name = "jvmMain",
-    deps = [":non_android"],
+    deps = [
+        ":non_android",
+        "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core",
+        "@maven//:androidx_collection_collection_jvm",
+    ],
 )
 
 kt_jvm_library(
@@ -43,6 +58,8 @@ kt_jvm_library(
     deps = [
         ":compose_compiler",
         ":jvm",
+        ":non_android",
+        ":common",
         "@maven//:androidx_annotation_annotation_jvm",
         "@maven//:androidx_collection_collection_jvm",
         "@maven//:androidx_compose_runtime_runtime_annotation_jvm",

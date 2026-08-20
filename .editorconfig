@@ -20,6 +20,9 @@ indent_size = 4
 [aboutlibraries.json]
 indent_size = 4
 
+[*.proto]
+indent_size = 4
+
 [MODULE.bazel.lock]
 indent_size = 2
 

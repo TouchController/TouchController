@@ -1,0 +1,84 @@
+load("@bazel_jar_jar//:jar_jar.bzl", "jar_jar")
+load("@protobuf//bazel:java_proto_library.bzl", "java_proto_library")
+load("@protobuf//bazel:proto_library.bzl", "proto_library")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
+load("//rule:merge_jar.bzl", "merge_jar")
+
+kt_jvm_library(
+    name = "consts",
+    srcs = ["Consts.kt"],
+    kotlinc_opts = "//intellij_plugin:kotlinc_opts",
+)
+
+proto_library(
+    name = "hmpp_info_proto",
+    srcs = ["//intellij_plugin/kotlin_hmpp:hmpp_info.proto"],
+)
+
+java_proto_library(
+    name = "hmpp_info_java_proto",
+    deps = [":hmpp_info_proto"],
+)
+
+kt_jvm_library(
+    name = "hmpp_info_parser_unmerged",
+    srcs = [
+        "HmppInfoParser.kt",
+        "TextFormatLogSilencer.kt",
+    ],
+    kotlinc_opts = "//intellij_plugin:kotlinc_opts",
+    deps = [
+        ":consts",
+        ":hmpp_info_java_proto",
+        "@protobuf//java/core",
+    ],
+)
+
+merge_jar(
+    name = "hmpp_info_parser_plain",
+    deps = [
+        ":hmpp_info_java_proto",
+        ":hmpp_info_parser_unmerged",
+        "@protobuf//java/core",
+    ],
+)
+
+jar_jar(
+    name = "hmpp_info_parser",
+    inline_rules = ["rule com.google.protobuf.** top.fifthlight.intellij.kotlinhmpp.internal.protobuf.@1"],
+    input_jar = ":hmpp_info_parser_plain",
+    output_jar = "hmpp_info_parser.jar",
+)
+
+kt_jvm_library(
+    name = "kotlin_hmpp_unmerged",
+    srcs = glob(
+        include = ["*.kt"],
+        exclude = [
+            "HmppInfoParser.kt",
+            "TextFormatLogSilencer.kt",
+            "Consts.kt",
+        ],
+    ),
+    kotlinc_opts = "//intellij_plugin:kotlinc_opts",
+    resource_strip_prefix = "intellij_plugin/kotlin_hmpp/resources",
+    resources = glob(["resources/**"]),
+    deps = [
+        ":consts",
+        ":hmpp_info_parser",
+        "//intellij_plugin/bazel_aspect_bcr",
+        "@intellij//:java",
+        "@intellij//:kotlin",
+        "@intellij//:sdk",
+        "@intellij_bazel",
+    ],
+)
+
+merge_jar(
+    name = "kotlin_hmpp",
+    deps = [
+        ":consts",
+        ":hmpp_info_parser",
+        ":kotlin_hmpp_unmerged",
+    ],
+)
