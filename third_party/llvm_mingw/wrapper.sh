@@ -1,4 +1,5 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+set -e
 export PATH="/usr/bin:/sbin:/bin:$PATH"
 wrapper_path="$(dirname "$0")"
 
