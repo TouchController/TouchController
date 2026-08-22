@@ -34,5 +34,9 @@ apple_static_xcframework(
         "ios": "14.0",
     },
     public_hdrs = ["ios.h"],
+    tags = [
+        "manual",
+        "no-ide",
+    ],
     deps = [":ios"],
 )

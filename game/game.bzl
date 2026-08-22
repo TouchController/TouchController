@@ -62,12 +62,14 @@ def _game_version_impl(
             entry_path = "mappings/mappings.tiny",
             filename = "intermediary.tiny",
             input = intermediary,
+            tags = ["manual"],
         )
 
         merge_mapping_input(
             name = intermediary_input,
             file = ":" + intermediary_mapping,
             format = "tinyv2",
+            tags = ["manual"],
         )
 
     if client_mappings:
@@ -79,6 +81,7 @@ def _game_version_impl(
                 "source": "named",
                 "target": "official",
             },
+            tags = ["manual"],
         )
     elif yarn:
         if not intermediary:
@@ -88,12 +91,14 @@ def _game_version_impl(
             entry_path = "mappings/mappings.tiny",
             filename = "yarn.tiny",
             input = yarn,
+            tags = ["manual"],
         )
 
         merge_mapping_input(
             name = named_input,
             file = ":" + yarn_mapping,
             format = "tinyv2",
+            tags = ["manual"],
         )
 
     if client_parchment:
@@ -103,6 +108,7 @@ def _game_version_impl(
             name = parchment_input,
             file = client_parchment,
             format = "parchment",
+            tags = ["manual"],
         )
 
     mcp = mcp_mappings_tsrg2 or mcp_mappings_tsrg1
@@ -117,6 +123,7 @@ def _game_version_impl(
                 "obf": "official",
                 "srg": "srg",
             },
+            tags = ["manual"],
         )
     elif mcp_mappings_tsrg1:
         merge_mapping_input(
@@ -127,12 +134,14 @@ def _game_version_impl(
                 "source": "official",
                 "target": "srg",
             },
+            tags = ["manual"],
         )
 
     native.alias(
         name = name + "_client",
         actual = client,
         visibility = visibility,
+        tags = ["manual"],
     )
 
     if client_assets:
@@ -140,6 +149,7 @@ def _game_version_impl(
             name = name + "_client_assets",
             actual = client_assets,
             visibility = visibility,
+            tags = ["manual"],
         )
 
     if client_assets_version:
@@ -147,12 +157,14 @@ def _game_version_impl(
             name = name + "_client_assets_version",
             actual = client_assets_version,
             visibility = visibility,
+            tags = ["manual"],
         )
 
     native.alias(
         name = name + "_client_libraries",
         actual = client_libraries,
         visibility = visibility,
+        tags = ["manual"],
     )
 
     decompile_jar(
@@ -213,6 +225,7 @@ def _game_version_impl(
             output = "merged.tiny",
             operations = operations,
             visibility = visibility,
+            tags = ["manual"],
         )
 
         jar(
@@ -223,6 +236,7 @@ def _game_version_impl(
             },
             resource_prefix = "mappings",
             visibility = visibility,
+            tags = ["manual"],
         )
 
         if intermediary:
@@ -233,6 +247,7 @@ def _game_version_impl(
                 mapping = ":" + merged_mapping,
                 to_namespace = "intermediary",
                 visibility = visibility,
+                tags = ["manual"],
             )
 
         remap_jar(
@@ -242,6 +257,7 @@ def _game_version_impl(
             mapping = ":" + merged_mapping,
             to_namespace = "named",
             visibility = visibility,
+            tags = ["manual"],
         )
 
         decompile_jar(
@@ -256,6 +272,7 @@ def _game_version_impl(
             name = client_neoforge,
             actual = neoforge,
             visibility = visibility,
+            tags = ["manual"],
         )
 
     if kotlinforforge:
@@ -263,6 +280,7 @@ def _game_version_impl(
             name = name + "_kotlinforforge",
             actual = kotlinforforge,
             visibility = visibility,
+            tags = ["manual"],
         )
 
     if server:
@@ -271,6 +289,7 @@ def _game_version_impl(
                 name = server_jar,
                 actual = server,
                 visibility = visibility,
+                tags = ["manual"],
             )
         else:
             extract_jar(
@@ -278,6 +297,7 @@ def _game_version_impl(
                 entry_path = "META-INF/versions/%s/server-%s.jar" % (version, version),
                 filename = "_minecraft/server.jar",
                 input = server,
+                tags = ["manual"],
             )
 
             java_import(
@@ -286,6 +306,7 @@ def _game_version_impl(
                     ":" + server_jar_file,
                 ],
                 visibility = visibility,
+                tags = ["manual"],
             )
 
     if server and (client_mappings or yarn):
@@ -296,6 +317,7 @@ def _game_version_impl(
             mapping = ":" + merged_mapping,
             to_namespace = "named",
             visibility = visibility,
+            tags = ["manual"],
         )
 
     if intermediary and sodium_intermediary:
@@ -309,6 +331,7 @@ def _game_version_impl(
             visibility = visibility,
             mixin = True,
             remove_jar_in_jar = True,
+            tags = ["manual"],
         )
 
     if intermediary and sodium_intermediary and iris_intermediary:
@@ -325,6 +348,7 @@ def _game_version_impl(
             visibility = visibility,
             mixin = True,
             remove_jar_in_jar = True,
+            tags = ["manual"],
         )
 
     if client_assets and client_assets_version and client_libraries:
@@ -356,6 +380,7 @@ def _game_version_impl(
                 client_libraries,
                 "//rule/dev_launch_wrapper",
             ],
+            tags = ["manual"],
         )
 
 game_version = macro(
