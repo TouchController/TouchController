@@ -6,7 +6,9 @@
 package top.fifthlight.touchcontroller.mixin.v1_21_11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.events.ContainerEventHandler;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.controls.ControlsScreen;
 import net.minecraft.network.chat.Component;
@@ -26,11 +28,24 @@ public abstract class ControlsScreenMixin {
         var body = ((OptionsSubScreenAccessor) this).body();
         var text = ConfigScreenKt.getConfigScreenButtonText();
         var component = ((TextImpl) text).getInner();
-        body.addSmall(
-                Button.builder(
-                        component,
-                        btn -> client.setScreen((Screen) ConfigScreenKt.getConfigScreen(screen))
-                ).build(), null
-        );
+        var button = Button.builder(
+                component, btn -> client.setScreen((Screen) ConfigScreenKt.getConfigScreen(screen))).build();
+
+        var children = ((AbstractSelectionListAccessor) body).touchController$entries();
+        var lastChild = children.getLast();
+        if (!(lastChild instanceof ContainerEventHandler lastRow)) {
+            body.addSmall(button, null);
+            return;
+        }
+
+        var lastRowWidgets = lastRow.children();
+        if (lastRowWidgets.size() >= 2) {
+            body.addSmall(button, null);
+            return;
+        }
+
+        var leftWidget = (AbstractWidget) lastRowWidgets.getFirst();
+        children.removeLast();
+        body.addSmall(leftWidget, button);
     }
 }
