@@ -5,7 +5,7 @@
 
 package top.fifthlight.touchcontroller.proxy.client
 
-import top.fifthlight.touchcontroller.proxy.client.native.NativeInterface
+import top.fifthlight.touchcontroller.proxy.client.nativebridge.NativeInterface
 import top.fifthlight.touchcontroller.proxy.message.LargeMessage
 import top.fifthlight.touchcontroller.proxy.message.MessageDecodeException
 import top.fifthlight.touchcontroller.proxy.message.ProxyMessage

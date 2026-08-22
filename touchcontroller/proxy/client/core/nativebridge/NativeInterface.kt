@@ -3,7 +3,7 @@
  * Copyright (C) 2026 fifth_light
  */
 
-package top.fifthlight.touchcontroller.proxy.client.native
+package top.fifthlight.touchcontroller.proxy.client.nativebridge
 
 import top.fifthlight.touchcontroller.proxy.client.LauncherProxyMessageClient
 import top.fifthlight.touchcontroller.proxy.message.ProxyMessage

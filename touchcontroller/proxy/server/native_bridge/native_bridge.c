@@ -133,7 +133,7 @@ static void* launcher_thread(void* arg) {
     // Register launcher_send_event to launcher side NativeInterface
     __android_log_print(ANDROID_LOG_INFO, TAG, "Registering NativeInterface#sendEvent in launcher side");
     jstring class_name =
-        (*env)->NewStringUTF(env, "top.fifthlight.touchcontroller.proxy.client.native.NativeInterface");
+        (*env)->NewStringUTF(env, "top.fifthlight.touchcontroller.proxy.client.nativebridge.NativeInterface");
     jclass interface_class = (jclass)(*env)->CallObjectMethod(env, classloader, load_class_method, class_name);
     if ((*env)->ExceptionCheck(env) || !interface_class) {
         if ((*env)->ExceptionCheck(env)) {
@@ -206,7 +206,7 @@ static void* launcher_thread(void* arg) {
     return NULL;
 }
 
-JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_native_Interface_init(
+JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_nativebridge_Interface_init(
     JNIEnv* env, jclass clazz, jlong art_jvm_ptr, jlong art_application) {
     __android_log_print(ANDROID_LOG_INFO, TAG, "Initializing native bridge");
 
@@ -261,7 +261,7 @@ JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_nativ
     pthread_detach(thread);
 }
 
-JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_native_Interface_send(JNIEnv* env,
+JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_nativebridge_Interface_send(JNIEnv* env,
                                                                                                  jclass clazz,
                                                                                                  jbyteArray data,
                                                                                                  jint len) {
@@ -283,7 +283,7 @@ JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_nativ
 JNIEXPORT jint
 
     JNICALL
-    Java_top_fifthlight_touchcontroller_common_platform_native_Interface_poll(JNIEnv* env, jclass clazz,
+    Java_top_fifthlight_touchcontroller_common_platform_nativebridge_Interface_poll(JNIEnv* env, jclass clazz,
                                                                               jbyteArray buf) {
     // Poll from launcher_to_mod_queue
     pthread_mutex_lock(&launcher_to_mod_lock);
@@ -303,7 +303,7 @@ JNIEXPORT jint
     return result;
 }
 
-JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_native_Interface_stop(JNIEnv* env,
+JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_nativebridge_Interface_stop(JNIEnv* env,
                                                                                                  jclass clazz) {
     __android_log_print(ANDROID_LOG_INFO, TAG, "Stopping native bridge!");
 

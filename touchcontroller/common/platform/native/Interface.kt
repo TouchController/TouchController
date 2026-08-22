@@ -1,4 +1,4 @@
-package top.fifthlight.touchcontroller.common.platform.native
+package top.fifthlight.touchcontroller.common.platform.nativebridge
 
 object Interface {
     @JvmStatic

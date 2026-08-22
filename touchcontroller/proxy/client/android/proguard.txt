@@ -1,1 +1,1 @@
--keep class top.fifthlight.touchcontroller.proxy.client.native.NativeInterface { *; }
+-keep class top.fifthlight.touchcontroller.proxy.client.nativebridge.NativeInterface { *; }

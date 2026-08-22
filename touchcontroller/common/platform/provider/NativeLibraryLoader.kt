@@ -5,7 +5,7 @@ import top.fifthlight.touchcontroller.common.gal.window.PlatformWindow
 import top.fifthlight.touchcontroller.common.gal.window.PlatformWindowProvider
 import top.fifthlight.touchcontroller.common.platform.Platform
 import top.fifthlight.touchcontroller.common.platform.android.AndroidPlatform
-import top.fifthlight.touchcontroller.common.platform.native.NativePlatform
+import top.fifthlight.touchcontroller.common.platform.nativebridge.NativePlatform
 import top.fifthlight.touchcontroller.common.platform.provider.PlatformProvider.isAndroid
 import top.fifthlight.touchcontroller.common.platform.provider.PlatformProvider.systemArch
 import top.fifthlight.touchcontroller.common.platform.provider.PlatformProvider.systemName

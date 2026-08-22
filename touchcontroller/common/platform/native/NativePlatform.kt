@@ -1,4 +1,4 @@
-package top.fifthlight.touchcontroller.common.platform.native
+package top.fifthlight.touchcontroller.common.platform.nativebridge
 
 import org.slf4j.LoggerFactory
 import top.fifthlight.combine.core.data.Text
