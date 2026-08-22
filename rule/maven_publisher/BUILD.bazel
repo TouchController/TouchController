@@ -2,7 +2,7 @@ load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
     name = "maven_publisher",
-    srcs = ["MavenPublisher.java"],
+    srcs = glob(["*.java"]),
     main_class = "top.fifthlight.fabazel.mavenpublisher.MavenPublisher",
     visibility = ["//visibility:public"],
     runtime_deps = [
@@ -21,6 +21,7 @@ java_binary(
         "@maven//:org_apache_maven_resolver_maven_resolver_spi",
         "@maven//:org_apache_maven_resolver_maven_resolver_util",
         "@maven//:org_eclipse_sisu_org_eclipse_sisu_inject",
+        "@maven//:org_jspecify_jspecify",
         "@maven//:org_slf4j_slf4j_api",
     ],
 )

@@ -24,4 +24,4 @@ done
 
 args=("--pom" "$pom_path" "--groupId" "{GROUP_ID}" "--artifactId" "{ARTIFACT_ID}" "--version" "{VERSION}" "${artifacts[@]}")
 
-JAVA_RUNFILES="$(realpath ..)" "$exec_path" "${args[@]}"
+JAVA_RUNFILES="$(realpath ..)" "$exec_path" "${args[@]}" ${1:+"$@"}
