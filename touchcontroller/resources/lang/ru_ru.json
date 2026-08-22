@@ -408,5 +408,6 @@
     "touchcontroller.screen.config.status.platform": "Текущая платформа: %s",
     "touchcontroller.screen.config.platform.sdl.vibration_strength.title": "Сила вибрации",
     "touchcontroller.widget.forward_button.name": "Передняя кнопка",
-    "touchcontroller.widget.vanilla_chat_button.name": "Ванильная кнопка чата"
+    "touchcontroller.widget.vanilla_chat_button.name": "Ванильная кнопка чата",
+    "touchcontroller.platform.android.native": ""
 }
