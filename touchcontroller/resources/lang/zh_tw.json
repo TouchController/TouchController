@@ -408,5 +408,6 @@
     "touchcontroller.screen.config.status.platform": "",
     "touchcontroller.screen.config.platform.sdl.vibration_strength.title": "",
     "touchcontroller.widget.forward_button.name": "",
-    "touchcontroller.widget.vanilla_chat_button.name": ""
+    "touchcontroller.widget.vanilla_chat_button.name": "",
+    "touchcontroller.platform.android.native": ""
 }
