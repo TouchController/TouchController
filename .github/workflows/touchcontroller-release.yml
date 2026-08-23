@@ -22,27 +22,27 @@ jobs:
         os: [ ubuntu-latest, windows-latest ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
       - name: Set up JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
         with:
           java-version: "21"
           distribution: "temurin"
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v4
+        uses: android-actions/setup-android@40fd30fb8d7440372e1316f5d1809ec01dcd3699 # v4
         with:
           log-accepted-android-sdk-licenses: false
 
       - name: Setup Android NDK
-        uses: nttld/setup-ndk@v1
+        uses: nttld/setup-ndk@ed92fe6cadad69be94a966a7ee3271275e62f779 # v1.6.0
         id: setup-ndk
         with:
           ndk-version: r28b
 
       - name: Setup Bazel
-        uses: bazel-contrib/setup-bazel@0.19.0
+        uses: bazel-contrib/setup-bazel@8cb04a772ab4c1eb984e9c1b493a182e96c5e425 # 0.19.0
 
       - name: Setup Bazel Mirror
         uses: ./.github/actions/setup-bazel-cache
@@ -54,7 +54,7 @@ jobs:
         run: bazel build --verbose_failures --config=opt --jobs=2 //touchcontroller:update_log //touchcontroller //touchcontroller/fabric //touchcontroller/neoforge
 
       - name: Attest
-        uses: actions/attest@v4
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
         if: matrix.os == 'ubuntu-latest'
         with:
           subject-path: |
@@ -63,7 +63,7 @@ jobs:
             bazel-bin/touchcontroller/neoforge/neoforge.jar
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: artifacts-${{ matrix.os }}
           path: |
@@ -82,28 +82,28 @@ jobs:
       MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
       - name: Download build artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: artifacts-ubuntu-latest
           path: release
 
       - name: Set up JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
         with:
           java-version: "21"
           distribution: "temurin"
 
       - name: Setup Android NDK
-        uses: nttld/setup-ndk@v1
+        uses: nttld/setup-ndk@ed92fe6cadad69be94a966a7ee3271275e62f779 # v1.6.0
         id: setup-ndk
         with:
           ndk-version: r28b
 
       - name: Setup Bazel
-        uses: bazel-contrib/setup-bazel@0.19.0
+        uses: bazel-contrib/setup-bazel@8cb04a772ab4c1eb984e9c1b493a182e96c5e425 # 0.19.0
 
       - name: Setup Bazel Mirror
         uses: ./.github/actions/setup-bazel-cache
@@ -161,7 +161,7 @@ jobs:
           mv release/neoforge/neoforge.jar "release/TouchController-${mod_version}+neoforge.jar"
 
       - name: Publish to GitHub Releases
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3
         with:
           name: TouchController v${{ env.MOD_VERSION }}
           draft: true
@@ -182,28 +182,28 @@ jobs:
       CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
       - name: Download build artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: artifacts-ubuntu-latest
           path: release
 
       - name: Set up JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
         with:
           java-version: "21"
           distribution: "temurin"
 
       - name: Setup Android NDK
-        uses: nttld/setup-ndk@v1
+        uses: nttld/setup-ndk@ed92fe6cadad69be94a966a7ee3271275e62f779 # v1.6.0
         id: setup-ndk
         with:
           ndk-version: r28b
 
       - name: Setup Bazel
-        uses: bazel-contrib/setup-bazel@0.19.0
+        uses: bazel-contrib/setup-bazel@8cb04a772ab4c1eb984e9c1b493a182e96c5e425 # 0.19.0
 
       - name: Setup Bazel Mirror
         uses: ./.github/actions/setup-bazel-cache
