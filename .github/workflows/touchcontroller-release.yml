@@ -128,9 +128,9 @@ jobs:
             --file-name "TouchController-${mod_version}+fabric.jar" \
             "$(realpath release/fabric/fabric.jar)" \
             $(jq -cr .touchcontroller_fabric_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
-            --dependency --dependency-project-id P7dR8mSH --dependency-type required \
-            --dependency --dependency-project-id Ha28R6CL --dependency-type required \
-            --dependency --dependency-project-id mOgUt4GM --dependency-type optional && \
+            --dependency required:P7dR8mSH \
+            --dependency required:Ha28R6CL \
+            --dependency optional:mOgUt4GM && \
           bazel run //rule/modrinth_uploader -- \
             --use-token-from-environment \
             --project-id "${MODRINTH_ID}" \
@@ -142,7 +142,7 @@ jobs:
             --file-name "TouchController-${mod_version}+neoforge.jar" \
             "$(realpath release/neoforge/neoforge.jar)" \
             $(jq -cr .touchcontroller_neoforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
-            --dependency --dependency-project-id ordsPcFz --dependency-type required
+            --dependency required:ordsPcFz
 
       - name: Move file and set environment variables
         shell: bash

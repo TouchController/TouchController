@@ -48,6 +48,17 @@ public record ModrinthUploadData(
             Objects.requireNonNull(type, "type cannot be null");
         }
 
+        public static Dependency parse(String dependency) {
+            var parts = dependency.split(":");
+            if (parts.length != 2 && parts.length != 3) {
+                throw new IllegalArgumentException("Invalid dependency: " + dependency);
+            }
+            var type = ModrinthUploadData.Dependency.Type.fromName(parts[0]);
+            var dependencyProjectId = parts[1];
+            var dependencyVersionId = parts.length == 3 ? parts[2] : null;
+            return new ModrinthUploadData.Dependency(dependencyProjectId, dependencyVersionId, type);
+        }
+
         public enum Type {
             REQUIRED,
             OPTIONAL,

@@ -82,10 +82,10 @@ def _upload_modrinth_impl(ctx):
         args += ["--loader", loader]
     for dependency_info in ctx.attr.deps:
         dependency = dependency_info[ModrinthDependencyInfo]
-        args += ["--dependency", "--dependency-project-id", dependency.project_id]
+        dependency_arg = dependency.dependency_type + ":" + dependency.project_id
         if dependency.version_id:
-            args += ["--dependency-version-id", dependency.version_id]
-        args += ["--dependency-type", dependency.dependency_type]
+            dependency_arg += ":" + dependency.version_id
+        args += ["--dependency", dependency_arg]
     args += ["--file-name", ctx.attr.file_name]
 
     substitutions = {
