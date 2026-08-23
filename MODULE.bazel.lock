@@ -4826,7 +4826,7 @@
     "//repo:neoform.bzl%neoform": {
       "general": {
         "bzlTransitiveDigest": "8vRcy7SSshY+1PjNQcyNede46h5mZweyXK7R6V0trKA=",
-        "usagesDigest": "zlHl41PjFFJfFMhHst2SfXMgE5u/xFB7LpYdZT9kM2E=",
+        "usagesDigest": "eUXmpiy9UpyaZ5ChVE31xfg4Ot3l9utvM/oQFWH08sw=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
@@ -5271,15 +5271,15 @@
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
-          "neoform_26_3_snapshot_8_1": {
+          "neoform_26_3_snapshot_9_1": {
             "repoRuleId": "@@//repo:neoform.bzl%_neoform_repo",
             "attributes": {
-              "version": "26.3-snapshot-8-1",
+              "version": "26.3-snapshot-9-1",
               "legacy": false,
-              "sha256": "d82de69e4e9a6f7c68f357a743cc7016780be5132374eb164557a68c59350434",
-              "client_jar": "@@rules_mc++minecraft+minecraft//26.3-snapshot-8:client",
-              "server_jar": "@@rules_mc++minecraft+minecraft//26.3-snapshot-8:server",
-              "client_libraries": "@@rules_mc++minecraft+minecraft//26.3-snapshot-8:client_libraries",
+              "sha256": "63ee778eb6243e7cdd18e1c3054ae6b818644e28ed4ff16b7d28e6e5b2dc67b8",
+              "client_jar": "@@rules_mc++minecraft+minecraft//26.3-snapshot-9:client",
+              "server_jar": "@@rules_mc++minecraft+minecraft//26.3-snapshot-9:server",
+              "client_libraries": "@@rules_mc++minecraft+minecraft//26.3-snapshot-9:client_libraries",
               "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
