@@ -72,7 +72,7 @@ jobs:
             bazel-bin/touchcontroller/fabric/fabric.jar
             bazel-bin/touchcontroller/neoforge/neoforge.jar
 
-  publish-production:
+  publish-modrinth:
     name: Publish to Modrinth Production
     runs-on: ubuntu-latest
     needs: build
@@ -171,3 +171,79 @@ jobs:
             release/TouchController-*.jar
             release/TouchController-*+fabric.jar
             release/TouchController-*+neoforge.jar
+
+  publish-curseforge:
+    name: Publish to CurseForge Production
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+    env:
+      CURSEFORGE_ID: ${{ vars.TOUCHCONTROLLER_CURSEFORGE_ID }}
+      CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifacts-ubuntu-latest
+          path: release
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Setup Android NDK
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r28b
+
+      - name: Setup Bazel
+        uses: bazel-contrib/setup-bazel@0.19.0
+
+      - name: Setup Bazel Mirror
+        uses: ./.github/actions/setup-bazel-cache
+        with:
+          downloader_cfg: ${{ vars.BAZEL_DOWNLOADER_CONFIG }}
+          netrc: ${{ secrets.BAZEL_NETRC }}
+
+      - name: Publish to CurseForge
+        shell: bash
+        run: |
+          properties="$(bazel --quiet run --show_result=0 //rule/properties_extractor -- "$(realpath touchcontroller/properties.bzl)")"
+          mod_version="$(jq -r .touchcontroller_version <<< "${properties}")"
+          mod_state="$(jq -r .touchcontroller_state <<< "${properties}")"
+          mv release/fabric/fabric.jar "release/TouchController-${mod_version}+fabric.jar"
+          mv release/neoforge/neoforge.jar "release/TouchController-${mod_version}+neoforge.jar"
+          bazel run //rule/curseforge_uploader -- \
+            --use-token-from-environment \
+            --project-id "${CURSEFORGE_ID}" \
+            --changelog "$(realpath release/update_log.md)" \
+            --changelog-type markdown \
+            --display-name "${mod_version}+fabric" \
+            --release-type "${mod_state}" \
+            --game-version modloader:fabric \
+            --game-version java:java-21 \
+            --game-version java:java-25 \
+            $(jq -cr .touchcontroller_fabric_curseforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
+            --dependency fabric-api:306612:requiredDependency \
+            --dependency fabric-language-kotlin:308769:requiredDependency \
+            --dependency modmenu:308702:optionalDependency \
+            --file "$(realpath "release/TouchController-${mod_version}+fabric.jar")" && \
+          bazel run //rule/curseforge_uploader -- \
+            --use-token-from-environment \
+            --project-id "${CURSEFORGE_ID}" \
+            --changelog "$(realpath release/update_log.md)" \
+            --changelog-type markdown \
+            --display-name "${mod_version}+neoforge" \
+            --release-type "${mod_state}" \
+            --game-version modloader:neoforge \
+            --game-version java:java-21 \
+            --game-version java:java-25 \
+            $(jq -cr .touchcontroller_neoforge_curseforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
+            --dependency kotlin-for-forge:351264:requiredDependency \
+            --file "$(realpath "release/TouchController-${mod_version}+neoforge.jar")"

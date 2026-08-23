@@ -52,6 +52,18 @@ def _transform_fabric_version(version):
 
 touchcontroller_fabric_mod_json_versions = [_transform_fabric_version(version) for version in touchcontroller_fabric_game_versions]
 
+def _curseforge_game_version(version):
+    dashed = version.replace(".", "-")
+    parts = dashed.split("-")
+    if "snapshot" in parts:
+        year = parts[0]
+        version_parts = parts[:parts.index("snapshot")]
+        return "minecraft-" + year + "-snapshots:" + "-".join(version_parts) + "-snapshot"
+    return "minecraft-%s-%s:%s" % (parts[0], parts[1], dashed)
+
+touchcontroller_fabric_curseforge_game_versions = [_curseforge_game_version(version) for version in touchcontroller_fabric_game_versions]
+touchcontroller_neoforge_curseforge_game_versions = [_curseforge_game_version(version) for version in touchcontroller_neoforge_game_versions]
+
 touchcontroller_api_version = "1.0.0"
 touchcontroller_api_license = "Apache-2.0"
 touchcontroller_api_description = "API for TouchController mod."
