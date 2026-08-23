@@ -1,4 +1,5 @@
 name: 'Setup Bazel Remote Cache'
+description: Setup Bazel remote cache and downloader config
 
 inputs:
   host:
