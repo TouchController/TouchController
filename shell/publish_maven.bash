@@ -82,7 +82,7 @@ EXTRA_ARGUMENTS=( "$@" )
 
 function publish() {
     if [ "$REPO_TYPE" = "bundle" ]; then
-        BASEDIR="$PWD" bazel run "$1" -- --bundle="${2+"$2-"}$BUNDLE_PATH" --sign "${EXTRA_ARGUMENTS[@]}"
+        BASEDIR="$PWD" bazel run "$1" -- --bundle="$BUNDLE_PATH${2+"-$2"}.zip" --sign "${EXTRA_ARGUMENTS[@]}"
     else
         bazel run "$1" -- --repo-url="$TARGET_REPO" "${EXTRA_ARGUMENTS[@]}"
     fi
