@@ -26,6 +26,11 @@ import java.util.concurrent.Callable;
         description = "Upload Minecraft mod to CurseForge."
 )
 public class CurseForgeUploader implements Callable<Integer> {
+    public static final String userAgent = "fifth_light/TouchController";
+
+    @CommandLine.Option(names = {"--use-token-from-environment"}, description = "Read token from environment variable CURSEFORGE_TOKEN")
+    private boolean useTokenFromEnvironment;
+
     @CommandLine.Option(names = {"--project-id"}, description = "Project ID", required = true)
     private int projectId;
 
@@ -53,7 +58,7 @@ public class CurseForgeUploader implements Callable<Integer> {
     @CommandLine.Option(names = {"--file"}, description = "File to be uploaded", required = true)
     private Path uploadFile;
 
-    @CommandLine.Option(names = {"--token-secret-id"}, description = "API secret ID", required = true)
+    @CommandLine.Option(names = {"--token-secret-id"}, description = "API secret ID")
     private String tokenSecretId;
 
     private static final Set<String> USABLE_CHANGELOG_TYPES = Set.of("text", "html", "markdown");
@@ -69,14 +74,25 @@ public class CurseForgeUploader implements Callable<Integer> {
         if (!USABLE_RELEASE_TYPES.contains(releaseType)) {
             throw new IllegalArgumentException("Invalid release type: " + releaseType);
         }
+        if (!useTokenFromEnvironment && tokenSecretId == null) {
+            throw new IllegalArgumentException("tokenSecretId cannot be null");
+        }
 
         var changelog = Files.readString(changelogFile);
 
         // Acquire token to access version list
-        var tokenBackend = TokenBackends.getDefault();
-        var token = tokenBackend.getToken(tokenSecretId);
-        if (token == null) {
-            throw new IllegalArgumentException("Token " + tokenSecretId + " not found");
+        String token;
+        if (useTokenFromEnvironment) {
+            token = System.getenv("CURSEFORGE_TOKEN");
+            if (token == null) {
+                throw new IllegalArgumentException("Token is not set in environment variable CURSEFORGE_TOKEN");
+            }
+        } else {
+            var tokenBackend = TokenBackends.getDefault();
+            token = tokenBackend.getToken(tokenSecretId);
+            if (token == null) {
+                throw new IllegalArgumentException("Token " + tokenSecretId + " not found");
+            }
         }
 
         try (var client = HttpClient.newHttpClient()) {
@@ -124,6 +140,7 @@ public class CurseForgeUploader implements Callable<Integer> {
 
             var uploadRequest = HttpRequest.newBuilder(URI.create("https://curseforge.com/api/projects/" + projectId + "/upload-file"))
                     .header("X-Api-Token", token)
+                    .header("User-Agent", CurseForgeUploader.userAgent)
                     .header("Accept", "application/json")
                     .POST(bodyPublisher)
                     .build();
