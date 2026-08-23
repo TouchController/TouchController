@@ -288,10 +288,10 @@ neoforge_versions = {
     },
     "26.3": {
         "java_target": 25,
-        "version": "26.3-snapshot-8",
+        "version": "26.3-snapshot-9",
         "mapping": False,
-        "neoform_version": "26.3-snapshot-8-1",
-        "neoform_sha256": "d82de69e4e9a6f7c68f357a743cc7016780be5132374eb164557a68c59350434",
+        "neoform_version": "26.3-snapshot-9-1",
+        "neoform_sha256": "63ee778eb6243e7cdd18e1c3054ae6b818644e28ed4ff16b7d28e6e5b2dc67b8",
     },
 }
 

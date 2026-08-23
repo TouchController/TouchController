@@ -6219,7 +6219,7 @@
     "@@rules_mc+//:extensions.bzl%minecraft": {
       "general": {
         "bzlTransitiveDigest": "oVhkbj0h2wDacUgrOA1dyrvri6NygFl5ZEaV9bidMRg=",
-        "usagesDigest": "Hx05SYHMQTelt8rtSBM1d64CIb29r7oV2Vzvwj0+X10=",
+        "usagesDigest": "U1CJ/BLwjChkGqbHJaDz2Kx++ZQ/q6UVH7eezq50Y6c=",
         "recordedInputs": [
           "REPO_MAPPING:rules_mc+,bazel_tools bazel_tools"
         ],
@@ -7112,19 +7112,19 @@
               "downloaded_file_path": "server.jar"
             }
           },
-          "minecraft_26_3-snapshot-8_client": {
+          "minecraft_26_3-snapshot-9_client": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/dd75cb26bf71099ae196080606dbaaf6eb77d59a/client.jar",
-              "integrity": "sha1-3XXLJr9xCZrhlggGBtuq9ut31Zo=",
+              "url": "https://piston-data.mojang.com/v1/objects/4815359f45cf77c9042296d98acb22a95df6a58a/client.jar",
+              "integrity": "sha1-SBU1n0XPd8kEIpbZissiqV32pYo=",
               "downloaded_file_path": "client.jar"
             }
           },
-          "minecraft_26_3-snapshot-8_server": {
+          "minecraft_26_3-snapshot-9_server": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/f56c190d1deda0a8e63592ae07b1cd7f26cccd3e/server.jar",
-              "integrity": "sha1-9WwZDR3toKjmNZKuB7HNfybMzT4=",
+              "url": "https://piston-data.mojang.com/v1/objects/9580afcd37c63cb01e81d5d9f836f21b4d21c540/server.jar",
+              "integrity": "sha1-lYCvzTfGPLAegdXZ+DbyG00hxUA=",
               "downloaded_file_path": "server.jar"
             }
           },
@@ -12220,12 +12220,12 @@
               "path": "org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar"
             }
           },
-          "minecraft_com_mojang_authlib_10_0_76_default": {
+          "minecraft_com_mojang_authlib_10_0_77_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
-              "url": "https://libraries.minecraft.net/com/mojang/authlib/10.0.76/authlib-10.0.76.jar",
-              "sha1": "c47995657c2a278b8d2e584115b1d745f051d53a",
-              "path": "com/mojang/authlib/10.0.76/authlib-10.0.76.jar"
+              "url": "https://libraries.minecraft.net/com/mojang/authlib/10.0.77/authlib-10.0.77.jar",
+              "sha1": "add8754cda96cf0cd840441632875648836f8a71",
+              "path": "com/mojang/authlib/10.0.77/authlib-10.0.77.jar"
             }
           },
           "minecraft_com_mojang_brigadier_1_3_11_default": {
@@ -12234,6 +12234,46 @@
               "url": "https://libraries.minecraft.net/com/mojang/brigadier/1.3.11/brigadier-1.3.11.jar",
               "sha1": "3373d1e7bf00c8b99bed1ea4efb8c47344e4a887",
               "path": "com/mojang/brigadier/1.3.11/brigadier-1.3.11.jar"
+            }
+          },
+          "minecraft_com_mojang_jtracy_1_14_38_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38.jar",
+              "sha1": "cc2ad81342001b4281c305a298d7f50332354058",
+              "path": "com/mojang/jtracy/1.14.38/jtracy-1.14.38.jar"
+            }
+          },
+          "minecraft_com_mojang_jtracy_1_14_38_natives_linux_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-linux.jar",
+              "sha1": "d2433300f8a4e99595d513546d19ecddc3eaa15e",
+              "path": "com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-linux.jar"
+            }
+          },
+          "minecraft_com_mojang_jtracy_1_14_38_natives_macos_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-macos.jar",
+              "sha1": "5ef8d24352733e915e35e8c39efb099520bcabcf",
+              "path": "com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-macos.jar"
+            }
+          },
+          "minecraft_com_mojang_jtracy_1_14_38_natives_macos_arm64_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-macos-arm64.jar",
+              "sha1": "e5cad241e2c018c39d2b5e767e201ead40f93309",
+              "path": "com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-macos-arm64.jar"
+            }
+          },
+          "minecraft_com_mojang_jtracy_1_14_38_natives_windows_default": {
+            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
+            "attributes": {
+              "url": "https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-windows.jar",
+              "sha1": "3e26b44141ba853b45f734f643a6a8ac8b8fc259",
+              "path": "com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-windows.jar"
             }
           },
           "minecraft_io_netty_netty_buffer_4_2_16_Final_default": {
@@ -12812,62 +12852,6 @@
               "path": "org/lwjgl/lwjgl-stb/3.4.2/lwjgl-stb-3.4.2-natives-windows-x86.jar"
             }
           },
-          "minecraft_org_lwjgl_lwjgl_tinyfd_3_4_2_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2.jar",
-              "sha1": "bc8666e427ec6bec2626b8297614827aa53f83bc",
-              "path": "org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_tinyfd_3_4_2_natives_linux_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-linux.jar",
-              "sha1": "6155c889f09ab96001cc0f08c7c63cd7091994e6",
-              "path": "org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-linux.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_tinyfd_3_4_2_natives_macos_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-macos.jar",
-              "sha1": "a130b005a3cfef5482c511169d10dae2bd94f890",
-              "path": "org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-macos.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_tinyfd_3_4_2_natives_macos_arm64_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-macos-arm64.jar",
-              "sha1": "f17e62c78e20a7e50ea5e2b5e7d87d94322d1e3e",
-              "path": "org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-macos-arm64.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_tinyfd_3_4_2_natives_windows_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows.jar",
-              "sha1": "faa1a75dd8ac99fd85368ee756fd7a40a72337dd",
-              "path": "org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_tinyfd_3_4_2_natives_windows_arm64_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows-arm64.jar",
-              "sha1": "73e97490d5d95c3bb4bbb58daf5921a49aa08226",
-              "path": "org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows-arm64.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_tinyfd_3_4_2_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows-x86.jar",
-              "sha1": "0fba10dde9c73c7a25c3c0d9151983025948a719",
-              "path": "org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows-x86.jar"
-            }
-          },
           "minecraft_org_lwjgl_lwjgl_vma_3_4_2_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
@@ -13187,7 +13171,7 @@
                   "client#file",
                   "server#file"
                 ],
-                "26.3-snapshot-8": [
+                "26.3-snapshot-9": [
                   "client#file",
                   "server#file"
                 ]
@@ -15926,7 +15910,7 @@
                   "org.lwjgl:lwjgl:3.4.1:unsafe",
                   "org.slf4j:slf4j-api:2.0.17"
                 ],
-                "26.3-snapshot-8": [
+                "26.3-snapshot-9": [
                   "at.yawk.lz4:lz4-java:1.10.1",
                   "ca.weblite:java-objc-bridge:1.1",
                   "com.azure:azure-json:1.4.0",
@@ -15936,15 +15920,15 @@
                   "com.google.guava:guava:33.6.0-jre",
                   "com.ibm.icu:icu4j:78.3",
                   "com.microsoft.azure:msal4j:1.24.1",
-                  "com.mojang:authlib:10.0.76",
+                  "com.mojang:authlib:10.0.77",
                   "com.mojang:blocklist:1.0.10",
                   "com.mojang:brigadier:1.3.11",
                   "com.mojang:datafixerupper:10.0.21",
-                  "com.mojang:jtracy:1.0.37",
-                  "com.mojang:jtracy:1.0.37:natives-linux",
-                  "com.mojang:jtracy:1.0.37:natives-macos",
-                  "com.mojang:jtracy:1.0.37:natives-macos-arm64",
-                  "com.mojang:jtracy:1.0.37:natives-windows",
+                  "com.mojang:jtracy:1.14.38",
+                  "com.mojang:jtracy:1.14.38:natives-linux",
+                  "com.mojang:jtracy:1.14.38:natives-macos",
+                  "com.mojang:jtracy:1.14.38:natives-macos-arm64",
+                  "com.mojang:jtracy:1.14.38:natives-windows",
                   "com.mojang:logging:1.7.12",
                   "com.mojang:patchy:2.2.10",
                   "com.mojang:text2speech:1.19.12",
@@ -16033,13 +16017,6 @@
                   "org.lwjgl:lwjgl-stb:3.4.2:natives-windows",
                   "org.lwjgl:lwjgl-stb:3.4.2:natives-windows-arm64",
                   "org.lwjgl:lwjgl-stb:3.4.2:natives-windows-x86",
-                  "org.lwjgl:lwjgl-tinyfd:3.4.2",
-                  "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-linux",
-                  "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-macos",
-                  "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-macos-arm64",
-                  "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-windows",
-                  "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-windows-x86",
                   "org.lwjgl:lwjgl-vma:3.4.2",
                   "org.lwjgl:lwjgl-vma:3.4.2:natives-linux",
                   "org.lwjgl:lwjgl-vma:3.4.2:natives-macos",
@@ -17896,11 +17873,26 @@
                 "org.lwjgl:lwjgl:3.4.1:unsafe": [
                   "default#struct(path = \"org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar\", sha1 = \"129e06a04f93992cb2a45172435b21fc4b60dd7d\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl/3.4.1/lwjgl-3.4.1-unsafe.jar\")"
                 ],
-                "com.mojang:authlib:10.0.76": [
-                  "default#struct(path = \"com/mojang/authlib/10.0.76/authlib-10.0.76.jar\", sha1 = \"c47995657c2a278b8d2e584115b1d745f051d53a\", url = \"https://libraries.minecraft.net/com/mojang/authlib/10.0.76/authlib-10.0.76.jar\")"
+                "com.mojang:authlib:10.0.77": [
+                  "default#struct(path = \"com/mojang/authlib/10.0.77/authlib-10.0.77.jar\", sha1 = \"add8754cda96cf0cd840441632875648836f8a71\", url = \"https://libraries.minecraft.net/com/mojang/authlib/10.0.77/authlib-10.0.77.jar\")"
                 ],
                 "com.mojang:brigadier:1.3.11": [
                   "default#struct(path = \"com/mojang/brigadier/1.3.11/brigadier-1.3.11.jar\", sha1 = \"3373d1e7bf00c8b99bed1ea4efb8c47344e4a887\", url = \"https://libraries.minecraft.net/com/mojang/brigadier/1.3.11/brigadier-1.3.11.jar\")"
+                ],
+                "com.mojang:jtracy:1.14.38": [
+                  "default#struct(path = \"com/mojang/jtracy/1.14.38/jtracy-1.14.38.jar\", sha1 = \"cc2ad81342001b4281c305a298d7f50332354058\", url = \"https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38.jar\")"
+                ],
+                "com.mojang:jtracy:1.14.38:natives-linux": [
+                  "default#struct(path = \"com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-linux.jar\", sha1 = \"d2433300f8a4e99595d513546d19ecddc3eaa15e\", url = \"https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-linux.jar\")"
+                ],
+                "com.mojang:jtracy:1.14.38:natives-macos": [
+                  "default#struct(path = \"com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-macos.jar\", sha1 = \"5ef8d24352733e915e35e8c39efb099520bcabcf\", url = \"https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-macos.jar\")"
+                ],
+                "com.mojang:jtracy:1.14.38:natives-macos-arm64": [
+                  "default#struct(path = \"com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-macos-arm64.jar\", sha1 = \"e5cad241e2c018c39d2b5e767e201ead40f93309\", url = \"https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-macos-arm64.jar\")"
+                ],
+                "com.mojang:jtracy:1.14.38:natives-windows": [
+                  "default#struct(path = \"com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-windows.jar\", sha1 = \"3e26b44141ba853b45f734f643a6a8ac8b8fc259\", url = \"https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38-natives-windows.jar\")"
                 ],
                 "io.netty:netty-buffer:4.2.16.Final": [
                   "default#struct(path = \"io/netty/netty-buffer/4.2.16.Final/netty-buffer-4.2.16.Final.jar\", sha1 = \"05397ef65dcb60670e0e0dba4854522873af3070\", url = \"https://libraries.minecraft.net/io/netty/netty-buffer/4.2.16.Final/netty-buffer-4.2.16.Final.jar\")"
@@ -18117,27 +18109,6 @@
                 ],
                 "org.lwjgl:lwjgl-stb:3.4.2:natives-windows-x86": [
                   "default#struct(path = \"org/lwjgl/lwjgl-stb/3.4.2/lwjgl-stb-3.4.2-natives-windows-x86.jar\", sha1 = \"030f5463ff547e3690af13eb4b3098e37586f234\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-stb/3.4.2/lwjgl-stb-3.4.2-natives-windows-x86.jar\")"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2.jar\", sha1 = \"bc8666e427ec6bec2626b8297614827aa53f83bc\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2.jar\")"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-linux": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-linux.jar\", sha1 = \"6155c889f09ab96001cc0f08c7c63cd7091994e6\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-linux.jar\")"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-macos": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-macos.jar\", sha1 = \"a130b005a3cfef5482c511169d10dae2bd94f890\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-macos.jar\")"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-macos-arm64": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-macos-arm64.jar\", sha1 = \"f17e62c78e20a7e50ea5e2b5e7d87d94322d1e3e\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-macos-arm64.jar\")"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-windows": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows.jar\", sha1 = \"faa1a75dd8ac99fd85368ee756fd7a40a72337dd\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows.jar\")"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-windows-arm64": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows-arm64.jar\", sha1 = \"73e97490d5d95c3bb4bbb58daf5921a49aa08226\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows-arm64.jar\")"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows-x86.jar\", sha1 = \"0fba10dde9c73c7a25c3c0d9151983025948a719\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-tinyfd/3.4.2/lwjgl-tinyfd-3.4.2-natives-windows-x86.jar\")"
                 ],
                 "org.lwjgl:lwjgl-vma:3.4.2": [
                   "default#struct(path = \"org/lwjgl/lwjgl-vma/3.4.2/lwjgl-vma-3.4.2.jar\", sha1 = \"9c0b277d9028721618f3ed7de68b7ae9f85b4474\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-vma/3.4.2/lwjgl-vma-3.4.2.jar\")"
@@ -20032,11 +20003,26 @@
                 "org.lwjgl:lwjgl:3.4.1:unsafe": [
                   "common#default"
                 ],
-                "com.mojang:authlib:10.0.76": [
+                "com.mojang:authlib:10.0.77": [
                   "common#default"
                 ],
                 "com.mojang:brigadier:1.3.11": [
                   "common#default"
+                ],
+                "com.mojang:jtracy:1.14.38": [
+                  "common#default"
+                ],
+                "com.mojang:jtracy:1.14.38:natives-linux": [
+                  "linux#default"
+                ],
+                "com.mojang:jtracy:1.14.38:natives-macos": [
+                  "osx#default"
+                ],
+                "com.mojang:jtracy:1.14.38:natives-macos-arm64": [
+                  "osx#default"
+                ],
+                "com.mojang:jtracy:1.14.38:natives-windows": [
+                  "windows#default"
                 ],
                 "io.netty:netty-buffer:4.2.16.Final": [
                   "common#default"
@@ -20254,27 +20240,6 @@
                 "org.lwjgl:lwjgl-stb:3.4.2:natives-windows-x86": [
                   "windows#default"
                 ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2": [
-                  "common#default"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-linux": [
-                  "linux#default"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-macos": [
-                  "osx#default"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-macos-arm64": [
-                  "osx#default"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-windows": [
-                  "windows#default"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-windows-arm64": [
-                  "windows#default"
-                ],
-                "org.lwjgl:lwjgl-tinyfd:3.4.2:natives-windows-x86": [
-                  "windows#default"
-                ],
                 "org.lwjgl:lwjgl-vma:3.4.2": [
                   "common#default"
                 ],
@@ -20375,19 +20340,19 @@
                 "1.17": "f425401a00adf0112fde624ee80c66333530f8a1",
                 "1.18": "d31a2e85ae149dd1b1a7070b22cb8887892fda6c",
                 "1.19": "a9c8b05a8082a65678beda6dfa2b8f21fa627bce",
-                "5": "ad7d544265d0757dd6b9540b82f0bdab272eb76c",
-                "12": "76e5d247c2bb6bb3c75cef72c7b9577f6583f49c",
-                "16": "3cc683fd4cd1c351ae6e6dfba4531231f5f943f4",
-                "17": "ae4f2779919ee343d3d98445f9a3ae1dc6542bc9",
-                "18": "1258f169367075dee644d5c3f38c3b2e3c8c895f",
-                "19": "86f089ef8ad3fa90409c22647df40de289b1f424",
-                "24": "13c83fa5d55d68a4ca209f83ffef1c2f83a4c725",
-                "26": "6e351e1de5bdfca8be9997367a120925cfc09ae4",
-                "27": "afe17cfa77f25dd8c6a976a8642ab2bdbfaf7cf0",
-                "29": "34c7bef563edad4d5e3ae8157e904690afb1fa50",
-                "30": "aa83698cef26e50089d85218e55bd402f38c7821",
-                "32": "cf75b185cb35b32e299b0c8e674fa202d7911a3c",
-                "33": "328808cdd6eb359bf66f0e6cdf80901959da45b0"
+                "5": "0c8375b5fa13127620776dbb498a4cbcc833f2f4",
+                "12": "151b29085b587f6b54844ca15aa614835872c283",
+                "16": "e8a9342bab4617b55ffca103a8870d4edda8afb9",
+                "17": "e5cb391af96038a8af638bf7cc7f2be44bc4b843",
+                "18": "9b44af5bf864de39cc170ed366d813c2ef0ef5a5",
+                "19": "39a8f50b6ea870e97afe9b4400d7429542d017b2",
+                "24": "e32b84c4a7776b0c8a10b72bd13159614bbe25a1",
+                "26": "a282bd9c58b40d84f97c46d31b5b50117a4daf98",
+                "27": "bc60ed270585f2884392281ae655db01d5795a4c",
+                "29": "3c6eabc1f3b6b03329c91816f0be1229820b4d83",
+                "30": "9239758051a3501442ae38f4f70a79f3e4b6eafc",
+                "32": "773791767c043b4f9493b50c54257619cecb08a4",
+                "33": "5120b0c971f265c2718876547ccb27a2f94b1ca5"
               },
               "asset_urls": {
                 "pre-1.6": "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json",
@@ -20400,19 +20365,19 @@
                 "1.17": "https://piston-meta.mojang.com/v1/packages/f425401a00adf0112fde624ee80c66333530f8a1/1.17.json",
                 "1.18": "https://piston-meta.mojang.com/v1/packages/d31a2e85ae149dd1b1a7070b22cb8887892fda6c/1.18.json",
                 "1.19": "https://piston-meta.mojang.com/v1/packages/a9c8b05a8082a65678beda6dfa2b8f21fa627bce/1.19.json",
-                "5": "https://piston-meta.mojang.com/v1/packages/ad7d544265d0757dd6b9540b82f0bdab272eb76c/5.json",
-                "12": "https://piston-meta.mojang.com/v1/packages/76e5d247c2bb6bb3c75cef72c7b9577f6583f49c/12.json",
-                "16": "https://piston-meta.mojang.com/v1/packages/3cc683fd4cd1c351ae6e6dfba4531231f5f943f4/16.json",
-                "17": "https://piston-meta.mojang.com/v1/packages/ae4f2779919ee343d3d98445f9a3ae1dc6542bc9/17.json",
-                "18": "https://piston-meta.mojang.com/v1/packages/1258f169367075dee644d5c3f38c3b2e3c8c895f/18.json",
-                "19": "https://piston-meta.mojang.com/v1/packages/86f089ef8ad3fa90409c22647df40de289b1f424/19.json",
-                "24": "https://piston-meta.mojang.com/v1/packages/13c83fa5d55d68a4ca209f83ffef1c2f83a4c725/24.json",
-                "26": "https://piston-meta.mojang.com/v1/packages/6e351e1de5bdfca8be9997367a120925cfc09ae4/26.json",
-                "27": "https://piston-meta.mojang.com/v1/packages/afe17cfa77f25dd8c6a976a8642ab2bdbfaf7cf0/27.json",
-                "29": "https://piston-meta.mojang.com/v1/packages/34c7bef563edad4d5e3ae8157e904690afb1fa50/29.json",
-                "30": "https://piston-meta.mojang.com/v1/packages/aa83698cef26e50089d85218e55bd402f38c7821/30.json",
-                "32": "https://piston-meta.mojang.com/v1/packages/cf75b185cb35b32e299b0c8e674fa202d7911a3c/32.json",
-                "33": "https://piston-meta.mojang.com/v1/packages/328808cdd6eb359bf66f0e6cdf80901959da45b0/33.json"
+                "5": "https://piston-meta.mojang.com/v1/packages/0c8375b5fa13127620776dbb498a4cbcc833f2f4/5.json",
+                "12": "https://piston-meta.mojang.com/v1/packages/151b29085b587f6b54844ca15aa614835872c283/12.json",
+                "16": "https://piston-meta.mojang.com/v1/packages/e8a9342bab4617b55ffca103a8870d4edda8afb9/16.json",
+                "17": "https://piston-meta.mojang.com/v1/packages/e5cb391af96038a8af638bf7cc7f2be44bc4b843/17.json",
+                "18": "https://piston-meta.mojang.com/v1/packages/9b44af5bf864de39cc170ed366d813c2ef0ef5a5/18.json",
+                "19": "https://piston-meta.mojang.com/v1/packages/39a8f50b6ea870e97afe9b4400d7429542d017b2/19.json",
+                "24": "https://piston-meta.mojang.com/v1/packages/e32b84c4a7776b0c8a10b72bd13159614bbe25a1/24.json",
+                "26": "https://piston-meta.mojang.com/v1/packages/a282bd9c58b40d84f97c46d31b5b50117a4daf98/26.json",
+                "27": "https://piston-meta.mojang.com/v1/packages/bc60ed270585f2884392281ae655db01d5795a4c/27.json",
+                "29": "https://piston-meta.mojang.com/v1/packages/3c6eabc1f3b6b03329c91816f0be1229820b4d83/29.json",
+                "30": "https://piston-meta.mojang.com/v1/packages/9239758051a3501442ae38f4f70a79f3e4b6eafc/30.json",
+                "32": "https://piston-meta.mojang.com/v1/packages/773791767c043b4f9493b50c54257619cecb08a4/32.json",
+                "33": "https://piston-meta.mojang.com/v1/packages/5120b0c971f265c2718876547ccb27a2f94b1ca5/33.json"
               },
               "version_assets": {
                 "b1.7.3": "pre-1.6",
@@ -20449,7 +20414,7 @@
                 "26w14a": "30",
                 "26.1.2": "30",
                 "26.2": "32",
-                "26.3-snapshot-8": "33"
+                "26.3-snapshot-9": "33"
               }
             }
           }
