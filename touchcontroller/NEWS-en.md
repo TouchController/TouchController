@@ -1,5 +1,11 @@
 # TouchController NEWS - User visible changes
 
+## 0.3.1-alpha14
+
+- Fixed the problem that long-press cannot be triggered on NeoForge 26.2
+- Added native event bridge for Android launchers, to reduce the overhead of Unix Domain Socket
+- Updated Chinese text in UI
+
 ## 0.3.1-alpha13
 
 - Fixed crashes caused by zero size scissor area on 26.2
