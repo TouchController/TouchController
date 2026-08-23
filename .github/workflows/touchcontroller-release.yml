@@ -114,7 +114,7 @@ jobs:
       - name: Publish to Modrinth
         shell: bash
         run: |
-          properties="$(python3 <<< "import os; import json; item = {}; exec(open('touchcontroller/properties.bzl').read(), None, item); print(json.dumps(item))")"
+          properties="$(bazel --quiet run --show_result=0 //rule/properties_extractor -- "$(realpath touchcontroller/properties.bzl)")"
           mod_version="$(jq -r .touchcontroller_version <<< "${properties}")"
           mod_state="$(jq -r .touchcontroller_state <<< "${properties}")"
           bazel run //rule/modrinth_uploader -- \
@@ -147,7 +147,7 @@ jobs:
       - name: Move file and set environment variables
         shell: bash
         run: |
-          properties="$(python3 <<< "import os; import json; item = {}; exec(open('touchcontroller/properties.bzl').read(), None, item); print(json.dumps(item))")"
+          properties="$(bazel --quiet run --show_result=0 //rule/properties_extractor -- "$(realpath touchcontroller/properties.bzl)")"
           mod_version="$(jq -r .touchcontroller_version <<< "${properties}")"
           mod_state="$(jq -r .touchcontroller_state <<< "${properties}")"
           echo "MOD_VERSION=${mod_version}" >> $GITHUB_ENV

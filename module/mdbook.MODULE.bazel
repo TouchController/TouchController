@@ -1,10 +1,10 @@
 "MODULE.bazel mdbook part"
 
-mdbook_deps = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+mdbook_deps = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
 mdbook_deps.spec(
     artifact = "bin",
     package = "mdbook",
-    version = "=0.5.2",
+    version = "=0.5.4",
 )
 mdbook_deps.annotation(
     crate = "mdbook",
@@ -13,6 +13,8 @@ mdbook_deps.annotation(
 mdbook_deps.from_specs(
     name = "mdbook_deps",
     host_tools = "@rust_host_tools_nightly",
+    cargo_lockfile = "//:Cargo.mdbook.lock",
+    lockfile = "//:cargo-bazel-mdbook-lock.json",
 )
 use_repo(mdbook_deps, "mdbook_deps")
 

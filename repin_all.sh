@@ -39,3 +39,4 @@ REPIN=1 bazel run @maven_fabric_26_3//:pin
 bazel run @modrinth_pin//:pin
 bazel run @neoforge_pin//:pin
 bazel run @neoform_pin//:pin
+CARGO_BAZEL_REPIN=true bazel fetch --repo=@crate --repo=@mdbook_deps

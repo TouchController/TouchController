@@ -3,7 +3,7 @@
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
     edition = "2024",
-    versions = ["1.93.1"],
+    versions = ["1.98.0"],
 )
 
 rust_host_tools = use_extension("@rules_rust//rust:extensions.bzl", "rust_host_tools")
@@ -12,3 +12,30 @@ rust_host_tools.host_tools(
     version = "nightly",
 )
 use_repo(rust_host_tools, "rust_host_tools_nightly")
+
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+crate.spec(
+    package = "starlark",
+    version = "=0.14.2",
+)
+crate.spec(
+    features = ["derive"],
+    package = "clap",
+    version = "=4.6.6",
+)
+crate.spec(
+    features = ["derive"],
+    package = "serde",
+    version = "=1.0.229",
+)
+crate.spec(
+    package = "serde_json",
+    version = "=1.0.151",
+)
+crate.from_specs(
+    name = "crate",
+    cargo_lockfile = "//:Cargo.lock",
+    host_tools = "@rust_host_tools_nightly",
+    lockfile = "//:cargo-bazel-lock.json",
+)
+use_repo(crate, "crate")

@@ -1,0 +1,12 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+
+rust_binary(
+    name = "properties_extractor",
+    srcs = ["main.rs"],
+    deps = [
+        "@crate//:clap",
+        "@crate//:serde",
+        "@crate//:serde_json",
+        "@crate//:starlark",
+    ],
+)
