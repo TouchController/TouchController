@@ -44,8 +44,13 @@ touchcontroller_fabric_game_versions = [
     "26.1.1",
     "26.1.2",
     "26.2",
-    "26.3-alpha.8",
+    "26.3-snapshot-8",
 ]
+
+def _transform_fabric_version(version):
+    return version.replace("-snapshot-", "-alpha.")
+
+touchcontroller_fabric_mod_json_versions = [_transform_fabric_version(version) for version in touchcontroller_fabric_game_versions]
 
 touchcontroller_api_version = "1.0.0"
 touchcontroller_api_license = "Apache-2.0"

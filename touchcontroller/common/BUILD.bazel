@@ -4,7 +4,7 @@ load("//combine:properties.bzl", "combine_version")
 load("//rule:class_version_test.bzl", "class_version_test")
 load("//rule:jar.bzl", "jar")
 load("//rule:merge_library.bzl", "merge_library_group", "merge_library_jar")
-load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_fabric_game_versions", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_fabric_mod_json_versions", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
 merge_library_group(
     name = "common",
@@ -74,7 +74,7 @@ expand_template(
         "${combine_version}": combine_version,
         '"mod_authors_array"': json.encode(touchcontroller_authors),
         '"mod_contributors_array"': json.encode(touchcontroller_contributors),
-        '"mod_game_versions_array"': json.encode(touchcontroller_fabric_game_versions),
+        '"mod_game_versions_array"': json.encode(touchcontroller_fabric_mod_json_versions),
     },
     template = "resources/fabric.mod.json",
 )
