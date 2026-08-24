@@ -70,7 +70,11 @@ object DefaultItemListProviderImpl : DefaultItemListProvider {
         subclasses = persistentSetOf(
             ItemSubclassProviderImpl.rangedWeaponSubclass,
             ItemSubclassProviderImpl.projectileSubclass,
-        )
+        ),
+        components = persistentListOf(
+            ItemDataComponentTypeImpl(DataComponents.KINETIC_WEAPON),
+            ItemDataComponentTypeImpl(DataComponents.PIERCING_WEAPON),
+        ),
     )
 
     override val usingAimingItems = ItemList(
