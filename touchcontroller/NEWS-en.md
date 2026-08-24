@@ -5,6 +5,7 @@
 - Fixed the problem that long-press cannot be triggered on NeoForge 26.2
 - Added native event bridge for Android launchers, to reduce the overhead of Unix Domain Socket
 - Updated Chinese text in UI
+- Show crosshair when holding spear by default
 
 ## 0.3.1-alpha13
 

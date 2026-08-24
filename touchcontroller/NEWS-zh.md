@@ -5,6 +5,7 @@
 - 修复 NeoForge 26.2 上长按按键无法触发的问题
 - 为 Android 启动器添加了原生事件桥，避免 Unix Domain Socket 的 IPC 开销
 - 更新部分界面的中文文本
+- 手持长矛时默认显示准心
 
 ## 0.3.1-alpha13
 
