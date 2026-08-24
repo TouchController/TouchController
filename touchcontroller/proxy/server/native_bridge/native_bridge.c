@@ -2,10 +2,12 @@
 
 #include <android/log.h>
 #include <jni.h>
+#include <linux/prctl.h>
 #include <pthread.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/prctl.h>
 
 #include "touchcontroller/proxy/server/util/blockingqueue/blocking_queue.h"
 #include "touchcontroller/proxy/server/util/ringbuffer/ring_buffer.h"
@@ -90,8 +92,17 @@ static void* launcher_thread(void* arg) {
     jobject application = launcher_arg->application;
     free(launcher_arg);
 
+    char thread_name[16];
+    prctl(PR_GET_NAME, thread_name);
+
+    JavaVMAttachArgs args;
+    memset(&args, 0, sizeof(args));
+    args.version = JNI_VERSION_1_6;
+    args.name = thread_name;
+    args.group = NULL;
+
     void* venv = NULL;
-    (*launcher_vm)->AttachCurrentThread(launcher_vm, &venv, NULL);
+    (*launcher_vm)->AttachCurrentThread(launcher_vm, &venv, &args);
     JNIEnv* env = (JNIEnv*)venv;
 
     // Get Application's ClassLoader in launcher VM
@@ -223,6 +234,8 @@ static void* launcher_thread(void* arg) {
     (*launcher_vm)->DetachCurrentThread(launcher_vm);
     blocking_queue_destroy(mod_to_launcher_queue);
     mod_to_launcher_queue = NULL;
+
+    __android_log_print(ANDROID_LOG_INFO, TAG, "Thread stopped");
     return NULL;
 }
 
@@ -278,6 +291,7 @@ JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_nativ
         throw_exception(env, "Failed to create launcher bridge thread");
         return;
     }
+    pthread_setname_np(thread, "TouchController native bridge");
     pthread_detach(thread);
 }
 
@@ -349,5 +363,6 @@ JNIEXPORT void JNICALL Java_top_fifthlight_touchcontroller_common_platform_nativ
         close_message->is_error = 0;
         close_message->len = 0;
         blocking_queue_push(mod_to_launcher_queue, close_message);
+        __android_log_print(ANDROID_LOG_INFO, TAG, "Sent close message to launcher thread");
     }
 }
