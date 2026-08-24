@@ -4826,7 +4826,7 @@
     },
     "//repo:neoform.bzl%neoform": {
       "general": {
-        "bzlTransitiveDigest": "8vRcy7SSshY+1PjNQcyNede46h5mZweyXK7R6V0trKA=",
+        "bzlTransitiveDigest": "+ZzsBcC5deA+piPSu+W/FlZA2HFr28z1j6CUEJZjhrE=",
         "usagesDigest": "eUXmpiy9UpyaZ5ChVE31xfg4Ot3l9utvM/oQFWH08sw=",
         "recordedInputs": [
           "REPO_MAPPING:, ",

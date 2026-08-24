@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * @param allowNative 允许使用原生代码运输层
  */
 class LauncherProxyMessageClient @JvmOverloads constructor(
-    private val transport: MessageTransport?,
+    internal val transport: MessageTransport?,
     private val allowNative: Boolean = false,
 ) : AutoCloseable {
     init {

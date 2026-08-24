@@ -30,6 +30,7 @@ internal object NativeInterface {
     fun initNative(): Boolean {
         val client = this.client ?: return false
         client.useNative.set(true)
+        client.transport?.close()
         return true
     }
 

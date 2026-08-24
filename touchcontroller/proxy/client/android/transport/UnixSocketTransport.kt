@@ -21,73 +21,63 @@ private class UnixSocketTransport(
     private val serverSocket: LocalServerSocket,
 ) : MessageTransport {
     private val closed = AtomicBoolean(false)
+    @Volatile
     private var clientSocket: LocalSocket? = null
-
-    private val clientLock = ReentrantLock()
-    private fun acceptClientSocket(): LocalSocket =
-        clientLock.withLock {
-            clientSocket ?: run {
-                serverSocket.accept().apply {
-                    clientSocket = this
-                }
-            }
-        }
 
     override fun close() {
         if (closed.compareAndSet(false, true)) {
+            Log.d("TouchControllerBridge", "Unix closing")
             clientSocket?.close()
             serverSocket.close()
         }
     }
 
     override fun send(buffer: ByteBuffer) {
-        while (true) {
-            val client = try {
-                acceptClientSocket()
-            } catch (ex: IOException) {
-                break
-            }
+        val client = clientSocket ?: return
 
+        try {
+            val stream = client.outputStream
+
+            if (buffer.remaining() > 255) {
+                // Message too big
+                throw IOException("Message too big: ${buffer.remaining()}")
+            } else if (!buffer.hasRemaining()) {
+                throw IllegalArgumentException("Empty message")
+            }
+            // Length-prefixed encoding
+            stream.write(buffer.remaining())
+
+            if (buffer.hasArray() && !buffer.isReadOnly) {
+                // Directly use array
+                val array = buffer.array()
+                stream.write(array, buffer.position() + buffer.arrayOffset(), buffer.remaining())
+                buffer.position(buffer.position() + buffer.remaining())
+            } else {
+                // Copy to a new array
+                val array = ByteArray(buffer.remaining())
+                buffer.get(array)
+                stream.write(array)
+            }
+        } catch (ex: IOException) {
+            Log.w(TAG, "Send message failed: ", ex)
             try {
-                val stream = client.outputStream
-
-                if (buffer.remaining() > 255) {
-                    // Message too big
-                    throw IOException("Message too big: ${buffer.remaining()}")
-                } else if (!buffer.hasRemaining()) {
-                    throw IllegalArgumentException("Empty message")
-                }
-                // Length-prefixed encoding
-                stream.write(buffer.remaining())
-
-                if (buffer.hasArray() && !buffer.isReadOnly) {
-                    // Directly use array
-                    val array = buffer.array()
-                    stream.write(array, buffer.position() + buffer.arrayOffset(), buffer.remaining())
-                    buffer.position(buffer.position() + buffer.remaining())
-                } else {
-                    // Copy to a new array
-                    val array = ByteArray(buffer.remaining())
-                    buffer.get(array)
-                    stream.write(array)
-                }
-                break
-            } catch (ex: IOException) {
-                Log.w(TAG, "Send message failed: ", ex)
-                try {
-                    clientSocket?.close()
-                } catch (_: IOException) {
-                }
-                clientSocket = null
+                clientSocket?.close()
+            } catch (_: IOException) {
             }
+            clientSocket = null
         }
     }
 
     override fun receive(buffer: ByteBuffer): Boolean {
         clientLoop@ while (true) {
             val client = try {
-                acceptClientSocket()
+                clientSocket ?: run {
+                    serverSocket.accept().apply {
+                        clientSocket = this
+                    }
+                }
             } catch (ex: IOException) {
+                ex.printStackTrace()
                 break
             }
 
