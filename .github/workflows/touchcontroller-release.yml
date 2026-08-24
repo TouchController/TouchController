@@ -73,7 +73,7 @@ jobs:
             bazel-bin/touchcontroller/neoforge/neoforge.jar
 
   publish-modrinth:
-    name: Publish to Modrinth Production
+    name: Publish to Modrinth
     runs-on: ubuntu-latest
     needs: build
     environment: production
@@ -144,36 +144,8 @@ jobs:
             $(jq -cr .touchcontroller_neoforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
             --dependency required:ordsPcFz
 
-      - name: Move file and set environment variables
-        shell: bash
-        run: |
-          properties="$(bazel --quiet run --show_result=0 //rule/properties_extractor -- "$(realpath touchcontroller/properties.bzl)")"
-          mod_version="$(jq -r .touchcontroller_version <<< "${properties}")"
-          mod_state="$(jq -r .touchcontroller_state <<< "${properties}")"
-          echo "MOD_VERSION=${mod_version}" >> $GITHUB_ENV
-          if [[ "$mod_state" == "release" ]]; then
-            echo "MOD_PRERELEASE=false" >> $GITHUB_ENV
-          else
-            echo "MOD_PRERELEASE=true" >> $GITHUB_ENV
-          fi
-          mv release/touchcontroller.jar "release/TouchController-${mod_version}.jar"
-          mv release/fabric/fabric.jar "release/TouchController-${mod_version}+fabric.jar"
-          mv release/neoforge/neoforge.jar "release/TouchController-${mod_version}+neoforge.jar"
-
-      - name: Publish to GitHub Releases
-        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3
-        with:
-          name: TouchController v${{ env.MOD_VERSION }}
-          draft: true
-          body_path: release/update_log.md
-          prerelease: ${{ env.MOD_PRERELEASE == 'true' }}
-          files: |
-            release/TouchController-*.jar
-            release/TouchController-*+fabric.jar
-            release/TouchController-*+neoforge.jar
-
   publish-curseforge:
-    name: Publish to CurseForge Production
+    name: Publish to CurseForge
     runs-on: ubuntu-latest
     needs: build
     environment: production
@@ -247,3 +219,67 @@ jobs:
             $(jq -cr .touchcontroller_neoforge_curseforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
             --dependency kotlin-for-forge:351264:requiredDependency \
             --file "$(realpath "release/TouchController-${mod_version}+neoforge.jar")"
+
+  publish-github:
+    name: Publish to GitHub Release
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Download build artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: artifacts-ubuntu-latest
+          path: release
+
+      - name: Set up JDK
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Setup Android NDK
+        uses: nttld/setup-ndk@ed92fe6cadad69be94a966a7ee3271275e62f779 # v1.6.0
+        id: setup-ndk
+        with:
+          ndk-version: r28b
+
+      - name: Setup Bazel
+        uses: bazel-contrib/setup-bazel@8cb04a772ab4c1eb984e9c1b493a182e96c5e425 # 0.19.0
+
+      - name: Setup Bazel Mirror
+        uses: ./.github/actions/setup-bazel-cache
+        with:
+          downloader_cfg: ${{ vars.BAZEL_DOWNLOADER_CONFIG }}
+          netrc: ${{ secrets.BAZEL_NETRC }}
+
+      - name: Move file and set environment variables
+        shell: bash
+        run: |
+          properties="$(bazel --quiet run --show_result=0 //rule/properties_extractor -- "$(realpath touchcontroller/properties.bzl)")"
+          mod_version="$(jq -r .touchcontroller_version <<< "${properties}")"
+          mod_state="$(jq -r .touchcontroller_state <<< "${properties}")"
+          echo "MOD_VERSION=${mod_version}" >> $GITHUB_ENV
+          if [[ "$mod_state" == "release" ]]; then
+            echo "MOD_PRERELEASE=false" >> $GITHUB_ENV
+          else
+            echo "MOD_PRERELEASE=true" >> $GITHUB_ENV
+          fi
+          mv release/touchcontroller.jar "release/TouchController-${mod_version}.jar"
+          mv release/fabric/fabric.jar "release/TouchController-${mod_version}+fabric.jar"
+          mv release/neoforge/neoforge.jar "release/TouchController-${mod_version}+neoforge.jar"
+
+      - name: Publish to GitHub Releases
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3
+        with:
+          name: TouchController v${{ env.MOD_VERSION }}
+          draft: true
+          body_path: release/update_log.md
+          prerelease: ${{ env.MOD_PRERELEASE == 'true' }}
+          files: |
+            release/TouchController-*.jar
+            release/TouchController-*+fabric.jar
+            release/TouchController-*+neoforge.jar
