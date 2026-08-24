@@ -955,7 +955,7 @@
     },
     "//repo:neoforge.bzl%neoforge": {
       "general": {
-        "bzlTransitiveDigest": "2AwtfXQoLyJf2TCKx/iTRrwd6L6o3MJdXzqFsNeaCh4=",
+        "bzlTransitiveDigest": "RIc+uHctqmLsZTUXxBQO6oTfQvdgL0SvvTH4Ml8bHl4=",
         "usagesDigest": "WiRQ/wa72wY60U4+vWE1vpcIWo2p/U25gJYfprGCJwY=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
