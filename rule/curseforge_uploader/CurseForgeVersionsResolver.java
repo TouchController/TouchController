@@ -58,7 +58,7 @@ public class CurseForgeVersionsResolver {
             return Optional.empty();
         }
         for (var entry : this.versionEntries) {
-            if (entry.gameVersionTypeId() == typeEntry.id() && entry.slug().equals(version)) {
+            if (entry.gameVersionTypeID() == typeEntry.id() && entry.slug().equals(version)) {
                 return Optional.of(entry.id());
             }
         }

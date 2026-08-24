@@ -1,4 +1,4 @@
 package top.fifthlight.fabazel.curseforge;
 
-public record VersionEntry(int id, int gameVersionTypeId, String name, String slug) {
+public record VersionEntry(int id, int gameVersionTypeID, String name, String slug) {
 }
