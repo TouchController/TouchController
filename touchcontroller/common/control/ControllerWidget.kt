@@ -66,7 +66,7 @@ abstract class ControllerWidget {
     ) {
         data class ConfigContext(
             val presetControlInfo: PresetControlInfo?,
-            val editAreaSize: IntSize,
+            val editAreaSize: IntSize?,
         )
 
         @Composable

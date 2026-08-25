@@ -203,9 +203,15 @@ private fun LayoutEditorPanel(
                         val newWidget = if (widget.autoAlign) {
                             val absolutePos = widget.align.alignOffset(panelSize, widgetSize, clampedOffset)
                             val newAlign = Align.fromPosition(
-                                panelSize, widgetSize, absolutePos
+                                windowSize = panelSize,
+                                size = widgetSize,
+                                absolutePos = absolutePos,
                             )
-                            val newOffset = newAlign.offsetAt(panelSize, widgetSize, absolutePos)
+                            val newOffset = newAlign.offsetAt(
+                                windowSize = panelSize,
+                                size = widgetSize,
+                                absolutePos = absolutePos,
+                            )
                             widget.cloneBase(align = newAlign, offset = newOffset)
                         } else widget.cloneBase(offset = clampedOffset)
                         dragTotalOffset = Offset.ZERO

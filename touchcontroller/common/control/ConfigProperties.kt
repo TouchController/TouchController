@@ -299,11 +299,13 @@ class AnchorProperty<Config : ControllerWidget> : ControllerWidget.Property<Conf
                             onConfigChanged(
                                 config.cloneBase(
                                     align = anchor,
-                                    offset = anchor.offsetAt(
-                                        windowSize,
-                                        size,
-                                        config.align.alignOffset(windowSize, size, config.offset)
-                                    ),
+                                    offset = windowSize?.let { windowSize ->
+                                        anchor.offsetAt(
+                                            windowSize = windowSize,
+                                            size = size,
+                                            absolutePos = config.align.alignOffset(windowSize, size, config.offset)
+                                        )
+                                    } ?: IntOffset.ZERO,
                                 )
                             )
                         }
@@ -954,12 +956,22 @@ class TriggerActionProperty<Config : ControllerWidget>(
                                 },
                                 Pair(Text.translatable(WidgetTriggerAction.Type.GAME.nameId)) {
                                     if (value !is WidgetTriggerAction.Game) {
-                                        onConfigChanged(setValue(config, WidgetTriggerAction.Game(GameActions.gameMenu)))
+                                        onConfigChanged(
+                                            setValue(
+                                                config,
+                                                WidgetTriggerAction.Game(GameActions.gameMenu)
+                                            )
+                                        )
                                     }
                                 },
                                 Pair(Text.translatable(WidgetTriggerAction.Type.PLAYER.nameId)) {
                                     if (value !is WidgetTriggerAction.Player) {
-                                        onConfigChanged(setValue(config, WidgetTriggerAction.Player(PlayerActions.startSprint)))
+                                        onConfigChanged(
+                                            setValue(
+                                                config,
+                                                WidgetTriggerAction.Player(PlayerActions.startSprint)
+                                            )
+                                        )
                                     }
                                 },
                                 Pair(Text.translatable(WidgetTriggerAction.Type.LAYER_CONDITION.nameId)) {
