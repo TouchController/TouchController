@@ -1,5 +1,9 @@
 # TouchController NEWS - 用户可见的更改
 
+## 0.3.1-alpha15
+
+- 加入了控件的自动锚点功能
+
 ## 0.3.1-alpha14
 
 - 修复 NeoForge 26.2 上长按按键无法触发的问题

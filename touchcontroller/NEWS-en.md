@@ -1,5 +1,9 @@
 # TouchController NEWS - User visible changes
 
+## 0.3.1-alpha15
+
+- Added automatic anchor for widget
+
 ## 0.3.1-alpha14
 
 - Fixed the problem that long-press cannot be triggered on NeoForge 26.2
