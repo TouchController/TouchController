@@ -288,10 +288,10 @@ neoforge_versions = {
     },
     "26.3": {
         "java_target": 25,
-        "version": "26.3-snapshot-9",
+        "version": "26.3-snapshot-10",
         "mapping": False,
-        "neoform_version": "26.3-snapshot-9-1",
-        "neoform_sha256": "63ee778eb6243e7cdd18e1c3054ae6b818644e28ed4ff16b7d28e6e5b2dc67b8",
+        "neoform_version": "26.3-snapshot-10-1",
+        "neoform_sha256": "029d70f5e2eb9eaef8cc491b518b1849599ee991798e4e21274c8c132c1135e5",
     },
 }
 
@@ -395,7 +395,6 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
 neoform.pin(pin_file = "//:neoform_pin.txt")
 
 use_repo(neoforge, "neoforge_pin")
-
 neoforge.pin(pin_file = "//:neoforge_pin.txt")
 
 use_repo(neoform, "neoform_pin")
