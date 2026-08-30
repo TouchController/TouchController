@@ -9,6 +9,7 @@ import top.fifthlight.combine.core.modifier.placement.fillMaxSize
 import top.fifthlight.combine.core.modifier.placement.fillMaxWidth
 import top.fifthlight.combine.core.modifier.placement.padding
 import top.fifthlight.combine.core.modifier.scroll.verticalScroll
+import top.fifthlight.combine.core.widget.layout.Box
 import top.fifthlight.combine.core.widget.layout.Column
 import top.fifthlight.combine.core.widget.layout.Row
 import top.fifthlight.combine.example.widgetfactory.common.category.*
@@ -98,7 +99,6 @@ fun WidgetFactory() {
         Column(
             modifier = Modifier
                 .padding(4)
-                .verticalScroll()
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(4),
         ) {
@@ -120,7 +120,13 @@ fun WidgetFactory() {
                 )
             }
 
-            category.Interface()
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
+            ) {
+                category.Interface()
+            }
         }
     }
 }
