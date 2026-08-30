@@ -29,6 +29,7 @@ val categories = listOf(
     EditTextCategory,
     SliderCategory,
     SwitchCategory,
+    VerticalScrollCategory,
     BlackstoneAlertDialogCategory,
 )
 
