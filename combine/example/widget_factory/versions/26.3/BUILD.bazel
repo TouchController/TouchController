@@ -16,6 +16,8 @@ kt_merge_library(
         "//combine/theme/oreui:oreui_vanilla",
     ],
     deps = [
+        "//game/26.3:game_client_libraries",
+    ] + [
         "//:compose",
         "//combine/backend/minecraft/game/26.3",
         "//combine/core/data",
@@ -35,7 +37,6 @@ kt_merge_library(
         "//combine/theme/oreui",
         "//combine/theme/vanilla",
         "//combine/widget",
-        "//game/26.3:game_client_libraries",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
         "@maven_fabric_26_3//:com_terraformersmc_modmenu",
         "@maven_fabric_26_3//:net_fabricmc_fabric_api_fabric_api",
@@ -83,11 +84,12 @@ java_binary(
     }),
     main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
     runtime_deps = [
+        "//game/26.3:game_client",
+        "//game/26.3:game_client_libraries",
+    ] + [
         ":widget_factory_unmerged",
         "//combine/backend/minecraft/fabric:meta_jar",
         "//combine/backend/minecraft/versions/26.3:meta_jar",
-        "//game/26.3:game_client",
-        "//game/26.3:game_client_libraries",
         "//rule/dev_launch_wrapper",
         "@maven_fabric_26_3//:io_github_llamalad7_mixinextras_fabric",
         "@maven_fabric_26_3//:net_fabricmc_fabric_language_kotlin",

@@ -8,7 +8,8 @@ kt_merge_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "//blazerod/render/versions/1.21.8/game:remapped_client_access_widened_named",
         "//game/1.21.8:game_client_libraries",
+    ] + [
+        "//blazerod/render/versions/1.21.8/game:remapped_client_access_widened_named",
     ],
 )

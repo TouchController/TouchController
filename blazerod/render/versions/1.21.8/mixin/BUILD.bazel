@@ -14,8 +14,9 @@ java_merge_library(
     resources = glob(["resources/**"]),
     visibility = ["//blazerod/render/versions/1.21.8:__subpackages__"],
     deps = [
-        "//blazerod/render/versions/1.21.8/game:remapped_client_access_widened_named",
         "//game/1.21.8:game_client_libraries",
+    ] + [
+        "//blazerod/render/versions/1.21.8/game:remapped_client_access_widened_named",
         "@maven//:org_jetbrains_annotations",
         "@maven_fabric_1_21_8//:io_github_llamalad7_mixinextras_fabric",
         "@maven_fabric_1_21_8//:net_fabricmc_sponge_mixin",

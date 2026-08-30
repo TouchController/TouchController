@@ -7,7 +7,8 @@ kt_merge_library(
     kotlinc_opts = "//combine:kotlinc_opts_jvm_21",
     visibility = ["//visibility:public"],
     deps = [
-        "//combine/core/input/key",
         "//game/1.21.11:game_client_libraries",
+    ] + [
+        "//combine/core/input/key",
     ],
 )

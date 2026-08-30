@@ -10,10 +10,11 @@ kt_merge_library(
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//combine/backend/minecraft/text/26.1",
-        "//combine/core/data",
         "//game/26.1:game_client",
         "//game/26.1:game_client_libraries",
+    ] + [
+        "//combine/backend/minecraft/text/26.1",
+        "//combine/core/data",
         "//touchcontroller/common/gal/key",
     ],
 )

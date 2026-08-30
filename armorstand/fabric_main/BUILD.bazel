@@ -41,9 +41,10 @@ kt_merge_library(
         "//armorstand/main",
     ],
     deps = [
-        ":remapped_deps",
         "//game/1.21.8:game_client_libraries",
         "//game/1.21.8:game_client_named",
+    ] + [
+        ":remapped_deps",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
         "@maven_fabric_1_21_8//:net_fabricmc_fabric_loader",
     ],

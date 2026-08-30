@@ -16,6 +16,8 @@ kt_merge_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
+        "//game/1.21.11:game_client_libraries",
+    ] + [
         "//:compose",
         "//combine/backend/minecraft/game/1.21.11",
         "//combine/core/data",
@@ -26,6 +28,5 @@ kt_merge_library(
         "//combine/core/screen",
         "//combine/core/sound",
         "//combine/data",
-        "//game/1.21.11:game_client_libraries",
     ],
 )

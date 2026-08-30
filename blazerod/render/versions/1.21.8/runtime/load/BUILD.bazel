@@ -17,9 +17,10 @@ kt_merge_library(
     ],
     visibility = ["//blazerod/render:__subpackages__"],
     deps = [
+        "//game/1.21.8:game_client_libraries",
+    ] + [
         "//blazerod/model/model-base",
         "//blazerod/render/versions/1.21.8/game:remapped_client_access_widened_named",
-        "//game/1.21.8:game_client_libraries",
         "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
     ],

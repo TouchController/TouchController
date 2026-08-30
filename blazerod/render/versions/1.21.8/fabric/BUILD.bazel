@@ -55,9 +55,10 @@ kt_merge_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":remapped_deps",
         "//blazerod/render/versions/1.21.8/game:remapped_client_access_widened_named",
-        "//game/1.21.8:game_client_neoforge",
+    ] + [
+        ":remapped_deps",
+        "//game/1.21.8:game_client_named",
         "//game/1.21.8:game_iris_named",
         "@maven//:org_slf4j_slf4j_api",
         "@maven_fabric_1_21_8//:net_fabricmc_fabric_loader",

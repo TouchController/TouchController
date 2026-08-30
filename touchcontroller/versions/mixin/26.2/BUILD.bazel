@@ -12,11 +12,12 @@ java_merge_library(
     resources = ["resources/touchcontroller.mixins.json"],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
+        "//game/26.2:game_client",
+        "//game/26.2:game_client_libraries",
+    ] + [
         "//combine/backend/minecraft/item/26.2",
         "//combine/backend/minecraft/render/26.2",
         "//combine/backend/minecraft/text/26.2",
-        "//game/26.2:game_client",
-        "//game/26.2:game_client_libraries",
         "//touchcontroller/common/config",
         "//touchcontroller/common/config/data",
         "//touchcontroller/common/config/holder",

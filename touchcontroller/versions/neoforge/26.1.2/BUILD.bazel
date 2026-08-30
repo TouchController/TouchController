@@ -52,7 +52,7 @@ kt_merge_library(
     deps = [
         "//game/26.1.2:game_client_libraries",
         "//game/26.1.2:game_client_neoforge",
-        # Classpath separator
+    ] + [
         "//combine/backend/minecraft/identifier/26.1",
         "//combine/backend/minecraft/render/26.1",
         "//combine/core/data",
@@ -77,11 +77,11 @@ kt_merge_library(
         "//touchcontroller/versions/extension/26.1",
         "//touchcontroller/versions/gal/gameconfig/26.1",
         "//touchcontroller/versions/gal/key/26.1",
+        "@neoforge_26_1_2//:io_github_llamalad7_mixinextras_neoforge",
         "@neoforge_26_1_2//:net_fabricmc_sponge_mixin",
         "@neoforge_26_1_2//:net_neoforged_bus",
         "@neoforge_26_1_2//:net_neoforged_fancymodloader_loader",
         "@neoforge_26_1_2//:net_neoforged_mergetool",
-        "@neoforge_26_1_2//:io_github_llamalad7_mixinextras_neoforge",
     ],
 )
 
@@ -145,17 +145,17 @@ java_binary(
     }),
     main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
     runtime_deps = [
-        "//game/26.1.2:game_client_neoforge",
-        "//game/26.1.2:game_client_libraries",
-        "//game/26.1.2:game_kotlinforforge",
         "//blazesdl/26.1",
-        # Classpath separator
+        "//game/26.1.2:game_client_libraries",
+        "//game/26.1.2:game_client_neoforge",
+        "//game/26.1.2:game_kotlinforforge",
+    ] + [
         ":neoforge_merged",
-        "//rule/dev_launch_wrapper",
-        "@neoforge_26_1_2//:neoforge_deps",
-        "//combine/backend/minecraft:minecraft_common_standalone",
         "//combine/backend/minecraft:combine_neoforge_libraries",
+        "//combine/backend/minecraft:minecraft_common_standalone",
         "//combine/backend/minecraft/versions/26.1:26.1_merged",
+        "//rule/dev_launch_wrapper",
         "@maven//:org_jetbrains_kotlin_kotlin_reflect",
+        "@neoforge_26_1_2//:neoforge_deps",
     ],
 )

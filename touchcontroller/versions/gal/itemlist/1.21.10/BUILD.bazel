@@ -11,9 +11,10 @@ kt_merge_library(
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//combine/backend/minecraft/item/1.21.10",
         "//game/1.21.10:game_client_libraries",
         "//game/1.21.10:game_client_named",
+    ] + [
+        "//combine/backend/minecraft/item/1.21.10",
         "//touchcontroller/common/config/item",
         "//touchcontroller/common/gal/itemlist",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",

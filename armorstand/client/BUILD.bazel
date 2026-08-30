@@ -27,6 +27,8 @@ kt_merge_library(
         "//armorstand/main",
     ],
     deps = [
+        "//game/1.21.8:game_client_libraries",
+    ] + [
         "//:kotlin_serialization",
         "//armorstand/game:remapped_client_access_widened_named",
         "//blazerod/model/model-base",
@@ -40,7 +42,6 @@ kt_merge_library(
         "//blazerod/render/versions/1.21.8/api/animation",
         "//blazerod/render/versions/1.21.8/api/render",
         "//blazerod/render/versions/1.21.8/api/resource",
-        "//game/1.21.8:game_client_libraries",
         "@maven//:com_illposed_osc_javaosc_core",
         "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",

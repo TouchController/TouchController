@@ -50,9 +50,10 @@ kt_merge_library(
     ),
     visibility = ["//visibility:public"],
     deps = [
-        "//combine/backend/minecraft/render/26.1",
         "//game/26.1:game_client_libraries",
         "//game/26.1:game_client_neoforge",
+    ] + [
+        "//combine/backend/minecraft/render/26.1",
         "//touchcontroller/buildinfo",
         "//touchcontroller/common/config",
         "//touchcontroller/common/config/data",
@@ -140,17 +141,17 @@ java_binary(
     }),
     main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
     runtime_deps = [
-        "//game/26.1:game_client_neoforge",
-        "//game/26.1:game_client_libraries",
-        "//game/26.1:game_kotlinforforge",
         "//blazesdl/26.1",
-        # Classpath separator
+        "//game/26.1:game_client_libraries",
+        "//game/26.1:game_client_neoforge",
+        "//game/26.1:game_kotlinforforge",
+    ] + [
         ":neoforge_merged",
-        "//rule/dev_launch_wrapper",
-        "@neoforge_26_1//:neoforge_deps",
-        "//combine/backend/minecraft:minecraft_common_standalone",
         "//combine/backend/minecraft:combine_neoforge_libraries",
+        "//combine/backend/minecraft:minecraft_common_standalone",
         "//combine/backend/minecraft/versions/26.1:26.1_merged",
+        "//rule/dev_launch_wrapper",
         "@maven//:org_jetbrains_kotlin_kotlin_reflect",
+        "@neoforge_26_1//:neoforge_deps",
     ],
 )

@@ -8,6 +8,7 @@ kt_merge_library(
     visibility = ["//visibility:public"],
     deps = [
         "//game/26.2:game_client",
+    ] + [
         "//touchcontroller/common/layout/data",
         "//touchcontroller/common/model",
     ],

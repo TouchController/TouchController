@@ -93,9 +93,10 @@ java_binary(
     name = "dev_client",
     srcs = [],
     data = [
-        "//blazerod/model/example-models",
         "//game/1.21.8:game_client_assets",
         "//game/1.21.8:game_client_assets_version",
+    ] + [
+        "//blazerod/model/example-models",
         "@makeup_ultra_fast//:primary",
     ],
     env = {
@@ -123,9 +124,9 @@ java_binary(
     }),
     main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
     runtime_deps = [
-        "//game/1.21.8:game_client_named",
         "//game/1.21.8:game_client_libraries",
-        # Classpath separator
+        "//game/1.21.8:game_client_named",
+    ] + [
         ":mod_fabric_unmapped",
         "//armorstand/fabric_client:remapped_deps",
         "//blazerod:blazerod_fabric_without_jij",
@@ -160,7 +161,7 @@ java_binary(
     runtime_deps = [
         ":mod_fabric_unmapped",
         "//game/1.21.8:game_client_libraries",
-        # Classpath separator
+    ] + [
         "//armorstand/fabric_main:remapped_deps",
         "//game/1.21.8:game_mapping_jar",
         "//game/1.21.8:game_server_named",

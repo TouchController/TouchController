@@ -57,6 +57,7 @@ java_library(
     visibility = ["//visibility:public"],
     runtime_deps = [
         "//game/26.2:game_client",
+    ] + [
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm32",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_linux_arm64",
@@ -67,9 +68,10 @@ java_library(
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl_natives_windows_x86",
     ],
     deps = [
+        "//game/26.2:game_client_libraries",
+    ] + [
         ":game_access_widened",
         "//blazesdl/api",
-        "//game/26.2:game_client_libraries",
         "@maven//:org_jetbrains_annotations",
         "@maven_blazesdl//:org_lwjgl_lwjgl",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl",
@@ -146,14 +148,14 @@ java_binary(
     runtime_deps = [
         "//game/26.2:game_client",
         "//game/26.2:game_client_libraries",
-        # Classpath separator
+    ] + [
         ":blazesdl_unmerged",
         "//rule/dev_launch_wrapper",
-        "@maven_fabric_26_2//:net_fabricmc_fabric_api_fabric_api",
+        "@maven_fabric_26_2//:com_terraformersmc_modmenu",
         "@maven_fabric_26_2//:io_github_llamalad7_mixinextras_fabric",
+        "@maven_fabric_26_2//:net_fabricmc_fabric_api_fabric_api",
         "@maven_fabric_26_2//:net_fabricmc_fabric_loader",
         "@maven_fabric_26_2//:net_fabricmc_sponge_mixin",
-        "@maven_fabric_26_2//:com_terraformersmc_modmenu",
     ],
 )
 
@@ -182,9 +184,10 @@ java_binary(
     }),
     main_class = "top.fifthlight.fabazel.devlaunchwrapper.DevLaunchWrapper",
     runtime_deps = [
-        ":blazesdl",
         "//game/26.2:game_client_libraries",
         "//game/26.2:game_client_neoforge",
+    ] + [
+        ":blazesdl",
         "//rule/dev_launch_wrapper",
         "@neoforge_26_2//:neoforge_deps",
     ],

@@ -9,6 +9,7 @@ kt_merge_library(
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//game/26.2:game_client_neoforge",
+    ] + [
         "//touchcontroller/common/gal/key",
         "//touchcontroller/versions/gal/key/26.2",
         "//touchcontroller/versions/mixin/26.2",

@@ -37,6 +37,7 @@ kt_merge_library(
     deps = [
         "//game/1.21.8:game_client_libraries",
         "//game/1.21.8:game_server_named",
+    ] + [
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
     ],
 )

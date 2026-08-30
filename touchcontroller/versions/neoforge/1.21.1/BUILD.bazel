@@ -58,7 +58,7 @@ kt_merge_library(
     deps = [
         "//game/1.21.1:game_client_libraries",
         "//game/1.21.1:game_client_neoforge",
-        # Classpath separator
+    ] + [
         "//combine/backend/minecraft/render/1.21.1",
         "//touchcontroller/buildinfo",
         "//touchcontroller/common/config",
@@ -136,11 +136,12 @@ java_binary(
     name = "dev_client",
     srcs = [],
     data = [
-        ":neoforge_merged",
         "//game/1.21.1:game_client_assets",
         "//game/1.21.1:game_client_assets_version",
         "//game/1.21.1:game_client_neoforge",
         "//game/1.21.1:game_kotlinforforge",
+    ] + [
+        ":neoforge_merged",
         "@neoforge_1_21_1//:ignore_list_client",
         "@neoforge_1_21_1//:neoforge_modules",
         "@neoforge_1_21_1//:resources_jar",
@@ -177,8 +178,8 @@ java_binary(
     main_class = "cpw.mods.bootstraplauncher.BootstrapLauncher",
     runtime_deps = [
         "//game/1.21.1:game_client_libraries",
-        # Classpath separator
-        "@neoforge_1_21_1//:neoforge_deps",
+    ] + [
         "//combine/backend/minecraft",
+        "@neoforge_1_21_1//:neoforge_deps",
     ],
 )

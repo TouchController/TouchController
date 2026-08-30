@@ -13,6 +13,8 @@ kt_merge_library(
     resources = glob(["resource/**"]),
     visibility = ["//visibility:public"],
     deps = [
+        "//game/26.2:game_client_libraries",
+    ] + [
         "//combine/backend/minecraft/game/26.2",
         "//combine/backend/minecraft/item/26.2",
         "//combine/backend/minecraft/text/26.2",
@@ -22,7 +24,6 @@ kt_merge_library(
         "//combine/data",
         "//combine/item/data",
         "//combine/item/paint",
-        "//game/26.2:game_client_libraries",
         "@maven_fabric_26_2//:net_fabricmc_sponge_mixin",
     ],
 )

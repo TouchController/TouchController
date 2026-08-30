@@ -8,13 +8,14 @@ kt_merge_library(
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_21",
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
+        "//game/1.21.10:game_client_libraries",
+        "//game/1.21.10:game_client_named",
+    ] + [
         "//combine/backend/minecraft/identifier/1.21.10",
         "//combine/backend/minecraft/item/1.21.10",
         "//combine/backend/minecraft/text/1.21.10",
         "//combine/core/data",
         "//combine/item/data",
-        "//game/1.21.10:game_client_libraries",
-        "//game/1.21.10:game_client_named",
         "//touchcontroller/common/gal/entity",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],

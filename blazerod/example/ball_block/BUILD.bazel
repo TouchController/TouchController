@@ -37,6 +37,8 @@ java_library(
         "//blazerod:blazerod_fabric_without_jij",
     ],
     deps = [
+        "//game/1.21.8:game_client_libraries",
+    ] + [
         ":remapped_client_access_widened_named",
         ":remapped_deps",
         "//blazerod/model/model-base",
@@ -44,7 +46,6 @@ java_library(
         "//blazerod/render/api/loader",
         "//blazerod/render/api/resource",
         "//blazerod/render/versions/1.21.8/api/render",
-        "//game/1.21.8:game_client_libraries",
         "@maven_fabric_1_21_8//:net_fabricmc_fabric_loader",
     ],
 )

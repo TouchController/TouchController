@@ -13,6 +13,7 @@ kt_merge_library(
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//game/1.21.10:game_client_named",
+    ] + [
         "//touchcontroller/common/gal/key",
     ],
 )

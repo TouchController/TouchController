@@ -8,9 +8,10 @@ kt_merge_library(
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_21",
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//combine/data",
         "//game/1.21.11:game_client_libraries",
         "//game/1.21.11:game_client_named",
+    ] + [
+        "//combine/data",
         "//touchcontroller/common/gal/window",
     ],
 )
