@@ -1,5 +1,8 @@
 common --enable_platform_specific_config
 
+# Dismiss obsolete warning for old Java version
+build --javacopt -Xlint:-options
+
 # Sandboxing
 build --nosandbox_default_allow_network
 
