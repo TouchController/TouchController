@@ -410,5 +410,11 @@
     "touchcontroller.widget.trigger.layer_condition.condition.empty": "空",
     "touchcontroller.widget.double_trigger.interval": "触发间隔",
     "touchcontroller.widget.double_trigger.action": "触发行为",
-    "touchcontroller.screen.config.percent": "%s：%s%%"
+    "touchcontroller.screen.config.percent": "%s：%s%%",
+    "touchcontroller.item.subclass.ranged_weapon": "远程武器",
+    "touchcontroller.item.subclass.projectile": "弹射物",
+    "touchcontroller.item.subclass.bucket": "桶",
+    "touchcontroller.item.subclass.boat": "船",
+    "touchcontroller.item.subclass.placeable_on_water": "可放置在水上",
+    "touchcontroller.item.subclass.spawn_egg": "刷怪蛋"
 }

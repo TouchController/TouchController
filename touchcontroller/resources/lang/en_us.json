@@ -410,5 +410,11 @@
     "touchcontroller.widget.trigger.layer_condition.condition": "Condition",
     "touchcontroller.widget.trigger.layer_condition.condition.empty": "Empty",
     "touchcontroller.widget.double_trigger.interval": "Trigger interval",
-    "touchcontroller.widget.double_trigger.action": "Trigger action"
+    "touchcontroller.widget.double_trigger.action": "Trigger action",
+    "touchcontroller.item.subclass.ranged_weapon": "Ranged weapon",
+    "touchcontroller.item.subclass.projectile": "Projectile",
+    "touchcontroller.item.subclass.bucket": "Bucket",
+    "touchcontroller.item.subclass.boat": "Boat",
+    "touchcontroller.item.subclass.placeable_on_water": "Placeable on water",
+    "touchcontroller.item.subclass.spawn_egg": "Spawn egg"
 }

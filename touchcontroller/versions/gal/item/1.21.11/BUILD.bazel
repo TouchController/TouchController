@@ -13,10 +13,10 @@ kt_merge_library(
     ] + [
         "//combine/backend/minecraft/identifier/1.21.11",
         "//combine/backend/minecraft/item/1.21.11",
-        "//combine/backend/minecraft/text/1.21.11",
         "//combine/core/data",
         "//combine/item/data",
         "//touchcontroller/common/gal/item",
+        "//touchcontroller/resources/lang:text_binding",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],
 )

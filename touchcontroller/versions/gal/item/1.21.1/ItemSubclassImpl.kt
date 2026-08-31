@@ -8,12 +8,11 @@ package top.fifthlight.touchcontroller.gal.item.v1_21_1
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
-import net.minecraft.network.chat.Component
 import net.minecraft.world.item.*
 import top.fifthlight.combine.backend.minecraft.item.v1_21_1.toVanilla
-import top.fifthlight.combine.backend.minecraft.text.v1_21_1.TextImpl
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.item.data.Item
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.mergetools.api.ActualConstructor
 import top.fifthlight.mergetools.api.ActualImpl
 import top.fifthlight.touchcontroller.common.gal.item.ItemSubclass
@@ -40,37 +39,37 @@ object ItemSubclassProviderImpl : ItemSubclassProvider {
     fun of(): ItemSubclassProvider = ItemSubclassProviderImpl
 
     val rangedWeaponSubclass = ItemSubclassImpl(
-        name = TextImpl(Component.literal("Ranged weapon")),
+        name = Text.translatable(Texts.ITEM_SUBCLASS_RANGED_WEAPON),
         configId = "RangedWeaponItem",
         clazz = ProjectileWeaponItem::class.java,
     )
 
     val projectileSubclass = ItemSubclassImpl(
-        name = TextImpl(Component.literal("Projectile")),
+        name = Text.translatable(Texts.ITEM_SUBCLASS_PROJECTILE),
         configId = "ProjectileItem",
         clazz = ProjectileItem::class.java,
     )
 
     val bucketSubclass = ItemSubclassImpl(
-        name = TextImpl(Component.literal("Bucket")),
+        name = Text.translatable(Texts.ITEM_SUBCLASS_BUCKET),
         configId = "BucketItem",
         clazz = BucketItem::class.java,
     )
 
     val boatSubclass = ItemSubclassImpl(
-        name = TextImpl(Component.literal("Boat")),
+        name = Text.translatable(Texts.ITEM_SUBCLASS_BOAT),
         configId = "BoatItem",
         clazz = BoatItem::class.java,
     )
 
     val placeableOnWaterSubclass = ItemSubclassImpl(
-        name = TextImpl(Component.literal("PlaceableOnWater")),
+        name = Text.translatable(Texts.ITEM_SUBCLASS_PLACEABLE_ON_WATER),
         configId = "PlaceableOnWaterItem",
         clazz = PlaceOnWaterBlockItem::class.java,
     )
 
     val spawnEggSubclass = ItemSubclassImpl(
-        name = TextImpl(Component.literal("SpawnEgg")),
+        name = Text.translatable(Texts.ITEM_SUBCLASS_SPAWN_EGG),
         configId = "SpawnEggItem",
         clazz = SpawnEggItem::class.java,
     )
