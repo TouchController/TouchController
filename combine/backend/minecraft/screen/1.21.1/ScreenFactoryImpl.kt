@@ -139,6 +139,7 @@ class CombineScreen(
                     x = horizontalAmount.toFloat(),
                     y = verticalAmount.toFloat(),
                 ),
+                holdingShift = hasShiftDown(),
                 type = PointerEventType.Scroll,
             ),
         )

@@ -13,16 +13,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import top.fifthlight.combine.core.animation.LocalTweenManager
 import top.fifthlight.data.Offset
 
-class ScrollState(private val tweenManager: TweenManager) {
+class SingleDirectionScrollState(private val tweenManager: TweenManager) {
     private val _actualProgress = MutableStateFlow(0)
     val actualProgress = _actualProgress.asStateFlow()
     private val _overscroll = MutableStateFlow(0)
     val overscroll = _overscroll.asStateFlow()
     private val _renderProgress = TweenFlow(MutableStateFlow(0))
     val progress = _renderProgress.asStateFlow()
-    var contentHeight = 0
+    var contentAmount = 0
         internal set
-    var viewportHeight = 0
+    var viewportAmount = 0
         internal set
     internal var initialPointerPosition: Offset? = null
     internal var startProgress = 0
@@ -67,7 +67,7 @@ class ScrollState(private val tweenManager: TweenManager) {
     }
 
     fun updateProgress(progress: Int, animateOverscroll: Boolean = false) {
-        val maxProgress = (contentHeight - viewportHeight).takeIf { it > 0 }
+        val maxProgress = (contentAmount - viewportAmount).takeIf { it > 0 }
 
         // calculate actualProgress and overscroll
         val needAnimation = if (maxProgress != null && progress < 0) {
@@ -99,7 +99,7 @@ class ScrollState(private val tweenManager: TweenManager) {
 @Composable
 fun rememberScrollState() = run {
     val tweenManager = LocalTweenManager.current
-    val state = remember { ScrollState(tweenManager) }
+    val state = remember { SingleDirectionScrollState(tweenManager) }
     DisposableEffect(state) {
         onDispose {
             state.stopAnimation()

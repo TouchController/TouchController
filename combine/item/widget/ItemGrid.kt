@@ -93,7 +93,7 @@ fun ItemGrid(
             )
         )
 
-        val rowRange = scrollPosition / gridSize until ((scrollPosition + scrollState.viewportHeight) ceilDiv gridSize)
+        val rowRange = scrollPosition / gridSize until ((scrollPosition + scrollState.viewportAmount) ceilDiv gridSize)
         canvas.item { canvas ->
             for (y in rowRange) {
                 for (x in 0 until columns) {

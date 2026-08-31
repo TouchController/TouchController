@@ -70,5 +70,16 @@ data class PointerEvent(
     val pointerType: PointerType = PointerType.Mouse,
     val button: PointerButton? = null,
     val scrollDelta: Offset = Offset.ZERO,
+    val holdingShift: Boolean = false,
     val type: PointerEventType,
-)
+) {
+    val effectiveDelta: Offset
+        get() = if (holdingShift) {
+            Offset(
+                x = scrollDelta.y,
+                y = scrollDelta.x,
+            )
+        } else {
+            scrollDelta
+        }
+}

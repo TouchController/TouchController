@@ -2,6 +2,7 @@ package top.fifthlight.combine.backend.minecraft.screen.v26_2
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.Screen
@@ -142,6 +143,8 @@ class CombineScreen(
                     x = horizontalAmount.toFloat(),
                     y = verticalAmount.toFloat(),
                 ),
+                holdingShift = InputConstants.isKeyDown(client.window, InputConstants.KEY_LSHIFT) ||
+                        InputConstants.isKeyDown(client.window, InputConstants.KEY_RSHIFT),
                 type = PointerEventType.Scroll,
             ),
         )

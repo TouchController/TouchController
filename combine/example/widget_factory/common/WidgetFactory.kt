@@ -30,6 +30,7 @@ val categories = listOf(
     SliderCategory,
     SwitchCategory,
     VerticalScrollCategory,
+    HorizontalScrollCategory,
     BlackstoneAlertDialogCategory,
 )
 

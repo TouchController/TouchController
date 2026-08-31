@@ -9,6 +9,8 @@ import net.minecraft.client.input.CharacterEvent
 import net.minecraft.client.input.KeyEvent
 import net.minecraft.client.input.MouseButtonEvent
 import net.minecraft.network.chat.Component
+import org.lwjgl.sdl.SDLKeyboard
+import org.lwjgl.sdl.SDLKeycode
 import top.fifthlight.combine.backend.minecraft.clipboard.v26_3.ClipboardHandlerImpl
 import top.fifthlight.combine.backend.minecraft.dispatcher.v26_3.GameDispatcher
 import top.fifthlight.combine.backend.minecraft.keycode.v26_3.mapKeyCode
@@ -141,6 +143,7 @@ class CombineScreen(
                     x = horizontalAmount.toFloat(),
                     y = verticalAmount.toFloat(),
                 ),
+                holdingShift = (SDLKeyboard.SDL_GetModState().toUInt() and (SDLKeycode.SDL_KMOD_SHIFT).toUInt()) != 0U,
                 type = PointerEventType.Scroll,
             ),
         )

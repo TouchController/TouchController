@@ -8,17 +8,18 @@ import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.combine.core.modifier.drawing.background
 import top.fifthlight.combine.core.modifier.drawing.border
 import top.fifthlight.combine.core.modifier.placement.fillMaxWidth
+import top.fifthlight.combine.core.modifier.scroll.horizontalScroll
 import top.fifthlight.combine.core.modifier.scroll.rememberScrollState
-import top.fifthlight.combine.core.modifier.scroll.verticalScroll
 import top.fifthlight.combine.core.paint.Colors
 import top.fifthlight.combine.core.widget.layout.Box
 import top.fifthlight.combine.core.widget.layout.Column
+import top.fifthlight.combine.core.widget.layout.Row
 import top.fifthlight.combine.widget.Button
 import top.fifthlight.combine.widget.Text
 
-object VerticalScrollCategory : WidgetCategory() {
+object HorizontalScrollCategory : WidgetCategory() {
     override val name: String
-        get() = "Vertical scroll"
+        get() = "Horizontal scroll"
 
     @Composable
     override fun Interface() {
@@ -26,7 +27,7 @@ object VerticalScrollCategory : WidgetCategory() {
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(4),
         ) {
-            Text("Vertical scroll")
+            Text("Horizontal scroll")
 
             val scrollState = rememberScrollState()
 
@@ -37,12 +38,12 @@ object VerticalScrollCategory : WidgetCategory() {
             Box(
                 modifier = Modifier
                     .weight(1f)
-                    .verticalScroll(scrollState = scrollState)
+                    .horizontalScroll(scrollState = scrollState)
                     .fillMaxWidth()
                     .background(Colors.BLACK)
                     .border(size = 1, color = Colors.WHITE),
             ) {
-                Column {
+                Row {
                     repeat(30) {
                         Button(onClick = {}) {
                             Text(text = "$it")
