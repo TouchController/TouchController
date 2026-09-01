@@ -100,13 +100,3 @@ Thanks to every translate contributor for making our projects multilingual!
 
 Want to improve the code? Or just want to compile the mods yourself? Welcome! Read [this document](ENVIRONMENT_SETUP.md)
 to set up your environment.
-
-## Star History
-
-<a href="https://star-history.com/#TouchController/TouchController&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=TouchController/TouchController&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=TouchController/TouchController&type=Date" />
-   <img alt="Star history" src="https://api.star-history.com/svg?repos=TouchController/TouchController&type=Date" />
- </picture>
-</a>
