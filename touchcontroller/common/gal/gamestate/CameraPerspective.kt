@@ -5,8 +5,23 @@
 
 package top.fifthlight.touchcontroller.common.gal.gamestate
 
-enum class CameraPerspective {
-    FIRST_PERSON,
-    THIRD_PERSON_BACK,
-    THIRD_PERSON_FRONT,
+import top.fifthlight.mergetools.api.ExpectFactory
+
+interface CameraPerspective {
+    enum class PredefinedCameraType {
+        FIRST_PERSON,
+        THIRD_PERSON_BACK,
+        THIRD_PERSON_FRONT,
+    }
+
+    val predefinedType: PredefinedCameraType?
+
+    fun cycle(): CameraPerspective
+
+    @ExpectFactory
+    interface Factory {
+        fun firstPerson(): CameraPerspective
+        fun thirdPersonBack(): CameraPerspective
+        fun thirdPersonFront(): CameraPerspective
+    }
 }

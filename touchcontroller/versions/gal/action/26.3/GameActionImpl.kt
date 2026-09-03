@@ -38,7 +38,7 @@ object GameActionImpl : GameAction {
         val perspective = client.options.cameraType
         client.options.cameraType = client.options.cameraType.cycle()
         if (perspective.isFirstPerson != client.options.cameraType.isFirstPerson) {
-            val newCameraEntity = client.getCameraEntity().takeIf { client.options.cameraType.isFirstPerson }
+            val newCameraEntity = client.cameraEntity.takeIf { client.options.cameraType.isFirstPerson }
             client.gameRenderer.checkEntityPostEffect(newCameraEntity)
         }
     }

@@ -13,6 +13,7 @@ import top.fifthlight.touchcontroller.common.config.condition.input.LayerConditi
 import top.fifthlight.touchcontroller.common.gal.entity.EntityType
 import top.fifthlight.touchcontroller.common.gal.player.PlayerHandle
 import top.fifthlight.touchcontroller.common.gal.gamestate.CameraPerspective
+import top.fifthlight.touchcontroller.common.gal.gamestate.CameraPerspectiveFactory
 import top.fifthlight.touchcontroller.common.gal.view.CrosshairTarget
 import kotlin.uuid.Uuid
 
@@ -23,7 +24,7 @@ data class ContextInput(
     override val crosshairTarget: CrosshairTarget? = null,
     override val ridingEntity: EntityType? = null,
     val playerHandle: PlayerHandle? = null,
-    val perspective: CameraPerspective = CameraPerspective.FIRST_PERSON,
+    val perspective: CameraPerspective = CameraPerspectiveFactory.firstPerson(),
 ) : LayerConditionInput {
     companion object {
         val EMPTY = ContextInput()

@@ -5,7 +5,6 @@
 
 package top.fifthlight.touchcontroller.gal.gamestate.v26_1
 
-import net.minecraft.client.CameraType
 import net.minecraft.client.Minecraft
 import top.fifthlight.mergetools.api.ActualConstructor
 import top.fifthlight.mergetools.api.ActualImpl
@@ -23,11 +22,7 @@ private object GameStateImpl : GameState {
         get() = client.screen != null
 
     override val perspective: CameraPerspective
-        get() = when (client.options.cameraType) {
-            CameraType.FIRST_PERSON -> CameraPerspective.FIRST_PERSON
-            CameraType.THIRD_PERSON_BACK -> CameraPerspective.THIRD_PERSON_BACK
-            CameraType.THIRD_PERSON_FRONT -> CameraPerspective.THIRD_PERSON_FRONT
-        }
+        get() = CameraPerspectiveImpl.from(client.options.cameraType)
 }
 
 @ActualImpl(GameStateProvider::class)
