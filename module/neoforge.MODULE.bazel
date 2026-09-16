@@ -288,10 +288,14 @@ neoforge_versions = {
     },
     "26.3": {
         "java_target": 25,
-        "version": "26.3-snapshot-10",
+        "version": "26.3",
         "mapping": False,
-        "neoform_version": "26.3-snapshot-10-1",
-        "neoform_sha256": "029d70f5e2eb9eaef8cc491b518b1849599ee991798e4e21274c8c132c1135e5",
+        "neoform_version": "26.3-1",
+        "neoform_sha256": "df5ff673af2d92b7796f31014d3d3c6ebddbf5206ca8dbcdac055375cfbe9450",
+        "neoforge_version": "26.3.0.1-beta",
+        "neoforge_userdev_sha256": "5221335091bc52998c4fb11cc8307cf15f806855b6df49bc655504e38dd532d3",
+        "neoforge_sources_sha256": "61757dbb9a6b5ca24769bcd5dbaaffe75887e89e2172ed44131e4f003fd5345e",
+        "neoforge_universal_sha256": "13e9da116fc34d10cc2422451fc99be4e2a1f50041968b0402d19c4be48350b4",
     },
 }
 

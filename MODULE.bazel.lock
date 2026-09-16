@@ -956,7 +956,7 @@
     "//repo:neoforge.bzl%neoforge": {
       "general": {
         "bzlTransitiveDigest": "RIc+uHctqmLsZTUXxBQO6oTfQvdgL0SvvTH4Ml8bHl4=",
-        "usagesDigest": "WiRQ/wa72wY60U4+vWE1vpcIWo2p/U25gJYfprGCJwY=",
+        "usagesDigest": "hOoG3RN/pioj3IGVT5ZlK/Ct1XZbIjNGpFV/uqf9jlY=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
@@ -986,6 +986,7 @@
           "REPO_MAPPING:,neoform_26_1_1 +neoform+neoform_26_1_1_1",
           "REPO_MAPPING:,neoform_26_1_2 +neoform+neoform_26_1_2_1",
           "REPO_MAPPING:,neoform_26_2 +neoform+neoform_26_2_2",
+          "REPO_MAPPING:,neoform_26_3 +neoform+neoform_26_3_1",
           "REPO_MAPPING:,rules_java rules_java+",
           "REPO_MAPPING:bazel_features+,bazel_features_globals bazel_features++version_extension+bazel_features_globals",
           "REPO_MAPPING:bazel_features+,bazel_features_version bazel_features++version_extension+bazel_features_version",
@@ -1337,6 +1338,18 @@
               "universal_sha256": "95dc533d5ee6a8d56b428723e972b46731b72c508567e3921f9df53f74f2d7eb",
               "sources_sha256": "0016ca38837eebbae695869c705839246b49a3c1bab0204332b870b1ddb2add2",
               "joined_patched_sources": "@@+neoform+neoform_26_2_2//tasks/joined_patch:joined_patch"
+            }
+          },
+          "neoforge_26_3_0_1_beta": {
+            "repoRuleId": "@@//repo:neoforge.bzl%_neoforge_repo",
+            "attributes": {
+              "version": "26.3.0.1-beta",
+              "java_target": 25,
+              "legacy": false,
+              "userdev_sha256": "5221335091bc52998c4fb11cc8307cf15f806855b6df49bc655504e38dd532d3",
+              "universal_sha256": "13e9da116fc34d10cc2422451fc99be4e2a1f50041968b0402d19c4be48350b4",
+              "sources_sha256": "61757dbb9a6b5ca24769bcd5dbaaffe75887e89e2172ed44131e4f003fd5345e",
+              "joined_patched_sources": "@@+neoform+neoform_26_3_1//tasks/joined_patch:joined_patch"
             }
           },
           "forge_org_ow2_asm_asm_6_2": {
@@ -4427,6 +4440,97 @@
               "downloaded_file_name": "commons-lang3-3.20.0.jar"
             }
           },
+          "neoforge_net_neoforged_fancymodloader_earlydisplay_12_0_0": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/earlydisplay/12.0.0/earlydisplay-12.0.0.jar",
+              "downloaded_file_name": "earlydisplay-12.0.0.jar"
+            }
+          },
+          "neoforge_net_neoforged_fancymodloader_loader_12_0_0": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/loader/12.0.0/loader-12.0.0.jar",
+              "downloaded_file_name": "loader-12.0.0.jar"
+            }
+          },
+          "neoforge_org_ow2_asm_asm_commons_9_10_1": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+              "downloaded_file_name": "asm-commons-9.10.1.jar"
+            }
+          },
+          "neoforge_org_ow2_asm_asm_util_9_10_1": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar",
+              "downloaded_file_name": "asm-util-9.10.1.jar"
+            }
+          },
+          "neoforge_org_ow2_asm_asm_analysis_9_10_1": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar",
+              "downloaded_file_name": "asm-analysis-9.10.1.jar"
+            }
+          },
+          "neoforge_org_ow2_asm_asm_tree_9_10_1": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+              "downloaded_file_name": "asm-tree-9.10.1.jar"
+            }
+          },
+          "neoforge_org_ow2_asm_asm_9_10_1": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+              "downloaded_file_name": "asm-9.10.1.jar"
+            }
+          },
+          "neoforge_com_electronwill_night_config_toml_3_9_0": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/com/electronwill/night-config/toml/3.9.0/toml-3.9.0.jar",
+              "downloaded_file_name": "toml-3.9.0.jar"
+            }
+          },
+          "neoforge_com_electronwill_night_config_core_3_9_0": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/com/electronwill/night-config/core/3.9.0/core-3.9.0.jar",
+              "downloaded_file_name": "core-3.9.0.jar"
+            }
+          },
+          "neoforge_net_neoforged_JarJarSelector_0_5_1": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/net/neoforged/JarJarSelector/0.5.1/JarJarSelector-0.5.1.jar",
+              "downloaded_file_name": "JarJarSelector-0.5.1.jar"
+            }
+          },
+          "neoforge_net_neoforged_JarJarMetadata_0_5_1": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/net/neoforged/JarJarMetadata/0.5.1/JarJarMetadata-0.5.1.jar",
+              "downloaded_file_name": "JarJarMetadata-0.5.1.jar"
+            }
+          },
+          "neoforge_org_apache_maven_maven_artifact_3_9_16": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/org/apache/maven/maven-artifact/3.9.16/maven-artifact-3.9.16.jar",
+              "downloaded_file_name": "maven-artifact-3.9.16.jar"
+            }
+          },
+          "neoforge_org_codehaus_plexus_plexus_utils_3_6_1": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/org/codehaus/plexus/plexus-utils/3.6.1/plexus-utils-3.6.1.jar",
+              "downloaded_file_name": "plexus-utils-3.6.1.jar"
+            }
+          },
           "neoforge_pin": {
             "repoRuleId": "@@//repo:neoforge.bzl%neoforge_pin",
             "attributes": {
@@ -4816,7 +4920,20 @@
                 "@neoforge_com_google_guava_guava_33_6_0_jre//jar": "https://maven.neoforged.net/releases/com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar",
                 "@neoforge_com_google_code_gson_gson_2_14_0//jar": "https://maven.neoforged.net/releases/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
                 "@neoforge_com_google_errorprone_error_prone_annotations_2_48_0//jar": "https://maven.neoforged.net/releases/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar",
-                "@neoforge_org_apache_commons_commons_lang3_3_20_0//jar": "https://maven.neoforged.net/releases/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar"
+                "@neoforge_org_apache_commons_commons_lang3_3_20_0//jar": "https://maven.neoforged.net/releases/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar",
+                "@neoforge_net_neoforged_fancymodloader_earlydisplay_12_0_0//jar": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/earlydisplay/12.0.0/earlydisplay-12.0.0.jar",
+                "@neoforge_net_neoforged_fancymodloader_loader_12_0_0//jar": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/loader/12.0.0/loader-12.0.0.jar",
+                "@neoforge_org_ow2_asm_asm_commons_9_10_1//jar": "https://maven.neoforged.net/releases/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+                "@neoforge_org_ow2_asm_asm_util_9_10_1//jar": "https://maven.neoforged.net/releases/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar",
+                "@neoforge_org_ow2_asm_asm_analysis_9_10_1//jar": "https://maven.neoforged.net/releases/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar",
+                "@neoforge_org_ow2_asm_asm_tree_9_10_1//jar": "https://maven.neoforged.net/releases/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+                "@neoforge_org_ow2_asm_asm_9_10_1//jar": "https://maven.neoforged.net/releases/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+                "@neoforge_com_electronwill_night_config_toml_3_9_0//jar": "https://maven.neoforged.net/releases/com/electronwill/night-config/toml/3.9.0/toml-3.9.0.jar",
+                "@neoforge_com_electronwill_night_config_core_3_9_0//jar": "https://maven.neoforged.net/releases/com/electronwill/night-config/core/3.9.0/core-3.9.0.jar",
+                "@neoforge_net_neoforged_JarJarSelector_0_5_1//jar": "https://maven.neoforged.net/releases/net/neoforged/JarJarSelector/0.5.1/JarJarSelector-0.5.1.jar",
+                "@neoforge_net_neoforged_JarJarMetadata_0_5_1//jar": "https://maven.neoforged.net/releases/net/neoforged/JarJarMetadata/0.5.1/JarJarMetadata-0.5.1.jar",
+                "@neoforge_org_apache_maven_maven_artifact_3_9_16//jar": "https://maven.neoforged.net/releases/org/apache/maven/maven-artifact/3.9.16/maven-artifact-3.9.16.jar",
+                "@neoforge_org_codehaus_plexus_plexus_utils_3_6_1//jar": "https://maven.neoforged.net/releases/org/codehaus/plexus/plexus-utils/3.6.1/plexus-utils-3.6.1.jar"
               },
               "pin_file": "@@//:neoforge_pin.txt"
             }
@@ -4827,7 +4944,7 @@
     "//repo:neoform.bzl%neoform": {
       "general": {
         "bzlTransitiveDigest": "+ZzsBcC5deA+piPSu+W/FlZA2HFr28z1j6CUEJZjhrE=",
-        "usagesDigest": "CibDjhNprO4RiFHQD6uMcC6gpPiYYFekFu04jhVKNN8=",
+        "usagesDigest": "uLFG+CcOCMCRHaoH7axHfirOl3deJuKMU7dQXlrXqik=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
@@ -5272,15 +5389,15 @@
               "pin_file": "@@//:neoform_pin.txt"
             }
           },
-          "neoform_26_3_snapshot_10_1": {
+          "neoform_26_3_1": {
             "repoRuleId": "@@//repo:neoform.bzl%_neoform_repo",
             "attributes": {
-              "version": "26.3-snapshot-10-1",
+              "version": "26.3-1",
               "legacy": false,
-              "sha256": "029d70f5e2eb9eaef8cc491b518b1849599ee991798e4e21274c8c132c1135e5",
-              "client_jar": "@@rules_mc++minecraft+minecraft//26.3-snapshot-10:client",
-              "server_jar": "@@rules_mc++minecraft+minecraft//26.3-snapshot-10:server",
-              "client_libraries": "@@rules_mc++minecraft+minecraft//26.3-snapshot-10:client_libraries",
+              "sha256": "df5ff673af2d92b7796f31014d3d3c6ebddbf5206ca8dbcdac055375cfbe9450",
+              "client_jar": "@@rules_mc++minecraft+minecraft//26.3:client",
+              "server_jar": "@@rules_mc++minecraft+minecraft//26.3:server",
+              "client_libraries": "@@rules_mc++minecraft+minecraft//26.3:client_libraries",
               "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
@@ -6220,7 +6337,7 @@
     "@@rules_mc+//:extensions.bzl%minecraft": {
       "general": {
         "bzlTransitiveDigest": "oVhkbj0h2wDacUgrOA1dyrvri6NygFl5ZEaV9bidMRg=",
-        "usagesDigest": "s8HTB73sGK++EpqQ59mGPW2BauZlS0thHl5sijQiGjg=",
+        "usagesDigest": "VtR8pao15HxYOO3tL28/onwiU4W4/YyufnC0W6gY0RU=",
         "recordedInputs": [
           "REPO_MAPPING:rules_mc+,bazel_tools bazel_tools"
         ],
@@ -7113,19 +7230,19 @@
               "downloaded_file_path": "server.jar"
             }
           },
-          "minecraft_26_3-snapshot-10_client": {
+          "minecraft_26_3_client": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/b36eac90fae6cce3c83c5cb42e11d3ea8cd04f19/client.jar",
-              "integrity": "sha1-s26skPrmzOPIPFy0LhHT6ozQTxk=",
+              "url": "https://piston-data.mojang.com/v1/objects/e877b6a07acd633fb3bb475002175cec036e7b87/client.jar",
+              "integrity": "sha1-6He2oHrNYz+zu0dQAhdc7ANue4c=",
               "downloaded_file_path": "client.jar"
             }
           },
-          "minecraft_26_3-snapshot-10_server": {
+          "minecraft_26_3_server": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
             "attributes": {
-              "url": "https://piston-data.mojang.com/v1/objects/82cf54c229336e243fbf50d9f2a6a49734731d0d/server.jar",
-              "integrity": "sha1-gs9UwikzbiQ/v1DZ8qaklzRzHQ0=",
+              "url": "https://piston-data.mojang.com/v1/objects/33680f5f2ac32864d6d7cf5e56a705fdb3e05f4c/server.jar",
+              "integrity": "sha1-M2gPXyrDKGTW189eVqcF/bPgX0w=",
               "downloaded_file_path": "server.jar"
             }
           },
@@ -12453,14 +12570,6 @@
               "path": "org/lwjgl/lwjgl-freetype/3.4.3/lwjgl-freetype-3.4.3-natives-windows-arm64.jar"
             }
           },
-          "minecraft_org_lwjgl_lwjgl_freetype_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-freetype/3.4.3/lwjgl-freetype-3.4.3-natives-windows-x86.jar",
-              "sha1": "adc2db6b6f03612f908604ea6abd97220e23a2bc",
-              "path": "org/lwjgl/lwjgl-freetype/3.4.3/lwjgl-freetype-3.4.3-natives-windows-x86.jar"
-            }
-          },
           "minecraft_org_lwjgl_lwjgl_jemalloc_3_4_3_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
@@ -12507,14 +12616,6 @@
               "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3-natives-windows-arm64.jar",
               "sha1": "7362dcccaf4ee997e9af3e267d5beacb4771e93e",
               "path": "org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3-natives-windows-arm64.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_jemalloc_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3-natives-windows-x86.jar",
-              "sha1": "95a8412e95214edb7d6f65a55ac45b0d77dda69c",
-              "path": "org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3-natives-windows-x86.jar"
             }
           },
           "minecraft_org_lwjgl_lwjgl_openal_3_4_3_default": {
@@ -12565,14 +12666,6 @@
               "path": "org/lwjgl/lwjgl-openal/3.4.3/lwjgl-openal-3.4.3-natives-windows-arm64.jar"
             }
           },
-          "minecraft_org_lwjgl_lwjgl_openal_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-openal/3.4.3/lwjgl-openal-3.4.3-natives-windows-x86.jar",
-              "sha1": "0dda193b8ded0dd2298e5e9b048f061f50b4c208",
-              "path": "org/lwjgl/lwjgl-openal/3.4.3/lwjgl-openal-3.4.3-natives-windows-x86.jar"
-            }
-          },
           "minecraft_org_lwjgl_lwjgl_opengl_3_4_3_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
@@ -12619,14 +12712,6 @@
               "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3-natives-windows-arm64.jar",
               "sha1": "f49d3b795fb4ea9b33c2b8403411eab8620879a1",
               "path": "org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3-natives-windows-arm64.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_opengl_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3-natives-windows-x86.jar",
-              "sha1": "6659f87c921d236202dfddbdbf72746f3b8b6380",
-              "path": "org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3-natives-windows-x86.jar"
             }
           },
           "minecraft_org_lwjgl_lwjgl_sdl_3_4_3_default": {
@@ -12677,14 +12762,6 @@
               "path": "org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3-natives-windows-arm64.jar"
             }
           },
-          "minecraft_org_lwjgl_lwjgl_sdl_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3-natives-windows-x86.jar",
-              "sha1": "f2bba0544e8c04be5326fdda72acca5779f7feb4",
-              "path": "org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3-natives-windows-x86.jar"
-            }
-          },
           "minecraft_org_lwjgl_lwjgl_shaderc_3_4_3_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
@@ -12731,14 +12808,6 @@
               "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3-natives-windows-arm64.jar",
               "sha1": "bb28dabb8b7d8bea1a35de1a2be6aeade0e565d2",
               "path": "org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3-natives-windows-arm64.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_shaderc_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3-natives-windows-x86.jar",
-              "sha1": "58b553b38e68617e195e48fc1c7b74158f8b83b7",
-              "path": "org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3-natives-windows-x86.jar"
             }
           },
           "minecraft_org_lwjgl_lwjgl_spvc_3_4_3_default": {
@@ -12789,14 +12858,6 @@
               "path": "org/lwjgl/lwjgl-spvc/3.4.3/lwjgl-spvc-3.4.3-natives-windows-arm64.jar"
             }
           },
-          "minecraft_org_lwjgl_lwjgl_spvc_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-spvc/3.4.3/lwjgl-spvc-3.4.3-natives-windows-x86.jar",
-              "sha1": "82287bf44d44f690b5734cad6c7d41d2a5719e14",
-              "path": "org/lwjgl/lwjgl-spvc/3.4.3/lwjgl-spvc-3.4.3-natives-windows-x86.jar"
-            }
-          },
           "minecraft_org_lwjgl_lwjgl_stb_3_4_3_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
@@ -12845,14 +12906,6 @@
               "path": "org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3-natives-windows-arm64.jar"
             }
           },
-          "minecraft_org_lwjgl_lwjgl_stb_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3-natives-windows-x86.jar",
-              "sha1": "d54c9488ffb09c946e519976cc9dc50fd0b5c3ab",
-              "path": "org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3-natives-windows-x86.jar"
-            }
-          },
           "minecraft_org_lwjgl_lwjgl_vma_3_4_3_default": {
             "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
             "attributes": {
@@ -12899,14 +12952,6 @@
               "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3-natives-windows-arm64.jar",
               "sha1": "f895ba1ad2811d1461e5b46e5057ddcbfd65841e",
               "path": "org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3-natives-windows-arm64.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_vma_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3-natives-windows-x86.jar",
-              "sha1": "85f9a5d83816425131271bfe16b525eca638e034",
-              "path": "org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3-natives-windows-x86.jar"
             }
           },
           "minecraft_org_lwjgl_lwjgl_vulkan_3_4_3_default": {
@@ -12979,14 +13024,6 @@
               "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-windows-arm64.jar",
               "sha1": "cedd8fc68a4955a26e9ffdf3dc7d4d31c35e5194",
               "path": "org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-windows-arm64.jar"
-            }
-          },
-          "minecraft_org_lwjgl_lwjgl_3_4_3_natives_windows_x86_default": {
-            "repoRuleId": "@@rules_mc+//private/repo:library.bzl%minecraft_library_repo",
-            "attributes": {
-              "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-windows-x86.jar",
-              "sha1": "e22da735c9368bcc8e9c6a54b82f80dcc14cf6ec",
-              "path": "org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-windows-x86.jar"
             }
           },
           "minecraft": {
@@ -13172,7 +13209,7 @@
                   "client#file",
                   "server#file"
                 ],
-                "26.3-snapshot-10": [
+                "26.3": [
                   "client#file",
                   "server#file"
                 ]
@@ -15911,7 +15948,7 @@
                   "org.lwjgl:lwjgl:3.4.1:unsafe",
                   "org.slf4j:slf4j-api:2.0.17"
                 ],
-                "26.3-snapshot-10": [
+                "26.3": [
                   "at.yawk.lz4:lz4-java:1.10.1",
                   "ca.weblite:java-objc-bridge:1.1",
                   "com.azure:azure-json:1.4.0",
@@ -15968,63 +16005,54 @@
                   "org.lwjgl:lwjgl-freetype:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl-freetype:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl-freetype:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-freetype:3.4.3:natives-windows-x86",
                   "org.lwjgl:lwjgl-jemalloc:3.4.3",
                   "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-linux",
                   "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-macos",
                   "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-windows-x86",
                   "org.lwjgl:lwjgl-openal:3.4.3",
                   "org.lwjgl:lwjgl-openal:3.4.3:natives-linux",
                   "org.lwjgl:lwjgl-openal:3.4.3:natives-macos",
                   "org.lwjgl:lwjgl-openal:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl-openal:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl-openal:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-openal:3.4.3:natives-windows-x86",
                   "org.lwjgl:lwjgl-opengl:3.4.3",
                   "org.lwjgl:lwjgl-opengl:3.4.3:natives-linux",
                   "org.lwjgl:lwjgl-opengl:3.4.3:natives-macos",
                   "org.lwjgl:lwjgl-opengl:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl-opengl:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl-opengl:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-opengl:3.4.3:natives-windows-x86",
                   "org.lwjgl:lwjgl-sdl:3.4.3",
                   "org.lwjgl:lwjgl-sdl:3.4.3:natives-linux",
                   "org.lwjgl:lwjgl-sdl:3.4.3:natives-macos",
                   "org.lwjgl:lwjgl-sdl:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl-sdl:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl-sdl:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-sdl:3.4.3:natives-windows-x86",
                   "org.lwjgl:lwjgl-shaderc:3.4.3",
                   "org.lwjgl:lwjgl-shaderc:3.4.3:natives-linux",
                   "org.lwjgl:lwjgl-shaderc:3.4.3:natives-macos",
                   "org.lwjgl:lwjgl-shaderc:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl-shaderc:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl-shaderc:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-shaderc:3.4.3:natives-windows-x86",
                   "org.lwjgl:lwjgl-spvc:3.4.3",
                   "org.lwjgl:lwjgl-spvc:3.4.3:natives-linux",
                   "org.lwjgl:lwjgl-spvc:3.4.3:natives-macos",
                   "org.lwjgl:lwjgl-spvc:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl-spvc:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl-spvc:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-spvc:3.4.3:natives-windows-x86",
                   "org.lwjgl:lwjgl-stb:3.4.3",
                   "org.lwjgl:lwjgl-stb:3.4.3:natives-linux",
                   "org.lwjgl:lwjgl-stb:3.4.3:natives-macos",
                   "org.lwjgl:lwjgl-stb:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl-stb:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl-stb:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-stb:3.4.3:natives-windows-x86",
                   "org.lwjgl:lwjgl-vma:3.4.3",
                   "org.lwjgl:lwjgl-vma:3.4.3:natives-linux",
                   "org.lwjgl:lwjgl-vma:3.4.3:natives-macos",
                   "org.lwjgl:lwjgl-vma:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl-vma:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl-vma:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl-vma:3.4.3:natives-windows-x86",
                   "org.lwjgl:lwjgl-vulkan:3.4.3",
                   "org.lwjgl:lwjgl-vulkan:3.4.3:natives-macos",
                   "org.lwjgl:lwjgl-vulkan:3.4.3:natives-macos-arm64",
@@ -16034,7 +16062,6 @@
                   "org.lwjgl:lwjgl:3.4.3:natives-macos-arm64",
                   "org.lwjgl:lwjgl:3.4.3:natives-windows",
                   "org.lwjgl:lwjgl:3.4.3:natives-windows-arm64",
-                  "org.lwjgl:lwjgl:3.4.3:natives-windows-x86",
                   "org.slf4j:slf4j-api:2.0.17"
                 ]
               },
@@ -17961,9 +17988,6 @@
                 "org.lwjgl:lwjgl-freetype:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-freetype/3.4.3/lwjgl-freetype-3.4.3-natives-windows-arm64.jar\", sha1 = \"c611e83aea59f960d621c79c78de06745bc95a9e\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-freetype/3.4.3/lwjgl-freetype-3.4.3-natives-windows-arm64.jar\")"
                 ],
-                "org.lwjgl:lwjgl-freetype:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-freetype/3.4.3/lwjgl-freetype-3.4.3-natives-windows-x86.jar\", sha1 = \"adc2db6b6f03612f908604ea6abd97220e23a2bc\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-freetype/3.4.3/lwjgl-freetype-3.4.3-natives-windows-x86.jar\")"
-                ],
                 "org.lwjgl:lwjgl-jemalloc:3.4.3": [
                   "default#struct(path = \"org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3.jar\", sha1 = \"350f317eaf5295b1e53f6664ef5fdeeaaa7dcbf0\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3.jar\")"
                 ],
@@ -17981,9 +18005,6 @@
                 ],
                 "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3-natives-windows-arm64.jar\", sha1 = \"7362dcccaf4ee997e9af3e267d5beacb4771e93e\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3-natives-windows-arm64.jar\")"
-                ],
-                "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3-natives-windows-x86.jar\", sha1 = \"95a8412e95214edb7d6f65a55ac45b0d77dda69c\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-jemalloc/3.4.3/lwjgl-jemalloc-3.4.3-natives-windows-x86.jar\")"
                 ],
                 "org.lwjgl:lwjgl-openal:3.4.3": [
                   "default#struct(path = \"org/lwjgl/lwjgl-openal/3.4.3/lwjgl-openal-3.4.3.jar\", sha1 = \"32b52cda5af6937a4e4bd321bdb83082025cb332\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-openal/3.4.3/lwjgl-openal-3.4.3.jar\")"
@@ -18003,9 +18024,6 @@
                 "org.lwjgl:lwjgl-openal:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-openal/3.4.3/lwjgl-openal-3.4.3-natives-windows-arm64.jar\", sha1 = \"6198ef79d4c7a220fb65689b584e8e3a148c81b7\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-openal/3.4.3/lwjgl-openal-3.4.3-natives-windows-arm64.jar\")"
                 ],
-                "org.lwjgl:lwjgl-openal:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-openal/3.4.3/lwjgl-openal-3.4.3-natives-windows-x86.jar\", sha1 = \"0dda193b8ded0dd2298e5e9b048f061f50b4c208\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-openal/3.4.3/lwjgl-openal-3.4.3-natives-windows-x86.jar\")"
-                ],
                 "org.lwjgl:lwjgl-opengl:3.4.3": [
                   "default#struct(path = \"org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3.jar\", sha1 = \"b81769ee48050f8c71e70839505f350bf9219d90\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3.jar\")"
                 ],
@@ -18023,9 +18041,6 @@
                 ],
                 "org.lwjgl:lwjgl-opengl:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3-natives-windows-arm64.jar\", sha1 = \"f49d3b795fb4ea9b33c2b8403411eab8620879a1\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3-natives-windows-arm64.jar\")"
-                ],
-                "org.lwjgl:lwjgl-opengl:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3-natives-windows-x86.jar\", sha1 = \"6659f87c921d236202dfddbdbf72746f3b8b6380\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-opengl/3.4.3/lwjgl-opengl-3.4.3-natives-windows-x86.jar\")"
                 ],
                 "org.lwjgl:lwjgl-sdl:3.4.3": [
                   "default#struct(path = \"org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3.jar\", sha1 = \"c02146735d6ff70d070c73532b435e5c893a346b\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3.jar\")"
@@ -18045,9 +18060,6 @@
                 "org.lwjgl:lwjgl-sdl:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3-natives-windows-arm64.jar\", sha1 = \"7ab134eaab451560b2248b89d2836214f4ce4f6b\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3-natives-windows-arm64.jar\")"
                 ],
-                "org.lwjgl:lwjgl-sdl:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3-natives-windows-x86.jar\", sha1 = \"f2bba0544e8c04be5326fdda72acca5779f7feb4\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3-natives-windows-x86.jar\")"
-                ],
                 "org.lwjgl:lwjgl-shaderc:3.4.3": [
                   "default#struct(path = \"org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3.jar\", sha1 = \"ba9fbc8fc4d50b3e4b436cc958ddb4abdb05867c\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3.jar\")"
                 ],
@@ -18065,9 +18077,6 @@
                 ],
                 "org.lwjgl:lwjgl-shaderc:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3-natives-windows-arm64.jar\", sha1 = \"bb28dabb8b7d8bea1a35de1a2be6aeade0e565d2\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3-natives-windows-arm64.jar\")"
-                ],
-                "org.lwjgl:lwjgl-shaderc:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3-natives-windows-x86.jar\", sha1 = \"58b553b38e68617e195e48fc1c7b74158f8b83b7\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-shaderc/3.4.3/lwjgl-shaderc-3.4.3-natives-windows-x86.jar\")"
                 ],
                 "org.lwjgl:lwjgl-spvc:3.4.3": [
                   "default#struct(path = \"org/lwjgl/lwjgl-spvc/3.4.3/lwjgl-spvc-3.4.3.jar\", sha1 = \"98e5b5ef5159100b26a169a9aed6c24e820e3eaa\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-spvc/3.4.3/lwjgl-spvc-3.4.3.jar\")"
@@ -18087,9 +18096,6 @@
                 "org.lwjgl:lwjgl-spvc:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-spvc/3.4.3/lwjgl-spvc-3.4.3-natives-windows-arm64.jar\", sha1 = \"220ef902b26215f0f4718e4cdf9aa49005e33f93\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-spvc/3.4.3/lwjgl-spvc-3.4.3-natives-windows-arm64.jar\")"
                 ],
-                "org.lwjgl:lwjgl-spvc:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-spvc/3.4.3/lwjgl-spvc-3.4.3-natives-windows-x86.jar\", sha1 = \"82287bf44d44f690b5734cad6c7d41d2a5719e14\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-spvc/3.4.3/lwjgl-spvc-3.4.3-natives-windows-x86.jar\")"
-                ],
                 "org.lwjgl:lwjgl-stb:3.4.3": [
                   "default#struct(path = \"org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3.jar\", sha1 = \"cdce54785bd3758e44a81f345d6260774d921c78\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3.jar\")"
                 ],
@@ -18108,9 +18114,6 @@
                 "org.lwjgl:lwjgl-stb:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3-natives-windows-arm64.jar\", sha1 = \"094ff1f4b128a8224fbef93d4b8b9b503c65b402\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3-natives-windows-arm64.jar\")"
                 ],
-                "org.lwjgl:lwjgl-stb:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3-natives-windows-x86.jar\", sha1 = \"d54c9488ffb09c946e519976cc9dc50fd0b5c3ab\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-stb/3.4.3/lwjgl-stb-3.4.3-natives-windows-x86.jar\")"
-                ],
                 "org.lwjgl:lwjgl-vma:3.4.3": [
                   "default#struct(path = \"org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3.jar\", sha1 = \"816a6ac87f1e447e5346ca0e7a1078353f51fbd6\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3.jar\")"
                 ],
@@ -18128,9 +18131,6 @@
                 ],
                 "org.lwjgl:lwjgl-vma:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3-natives-windows-arm64.jar\", sha1 = \"f895ba1ad2811d1461e5b46e5057ddcbfd65841e\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3-natives-windows-arm64.jar\")"
-                ],
-                "org.lwjgl:lwjgl-vma:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3-natives-windows-x86.jar\", sha1 = \"85f9a5d83816425131271bfe16b525eca638e034\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-vma/3.4.3/lwjgl-vma-3.4.3-natives-windows-x86.jar\")"
                 ],
                 "org.lwjgl:lwjgl-vulkan:3.4.3": [
                   "default#struct(path = \"org/lwjgl/lwjgl-vulkan/3.4.3/lwjgl-vulkan-3.4.3.jar\", sha1 = \"ffdaf1898192059f059d66f9fa37e3debcac10e0\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl-vulkan/3.4.3/lwjgl-vulkan-3.4.3.jar\")"
@@ -18158,9 +18158,6 @@
                 ],
                 "org.lwjgl:lwjgl:3.4.3:natives-windows-arm64": [
                   "default#struct(path = \"org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-windows-arm64.jar\", sha1 = \"cedd8fc68a4955a26e9ffdf3dc7d4d31c35e5194\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-windows-arm64.jar\")"
-                ],
-                "org.lwjgl:lwjgl:3.4.3:natives-windows-x86": [
-                  "default#struct(path = \"org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-windows-x86.jar\", sha1 = \"e22da735c9368bcc8e9c6a54b82f80dcc14cf6ec\", url = \"https://libraries.minecraft.net/org/lwjgl/lwjgl/3.4.3/lwjgl-3.4.3-natives-windows-x86.jar\")"
                 ]
               },
               "library_platforms": {
@@ -20091,9 +20088,6 @@
                 "org.lwjgl:lwjgl-freetype:3.4.3:natives-windows-arm64": [
                   "windows#default"
                 ],
-                "org.lwjgl:lwjgl-freetype:3.4.3:natives-windows-x86": [
-                  "windows#default"
-                ],
                 "org.lwjgl:lwjgl-jemalloc:3.4.3": [
                   "common#default"
                 ],
@@ -20110,9 +20104,6 @@
                   "windows#default"
                 ],
                 "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-windows-arm64": [
-                  "windows#default"
-                ],
-                "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-windows-x86": [
                   "windows#default"
                 ],
                 "org.lwjgl:lwjgl-openal:3.4.3": [
@@ -20133,9 +20124,6 @@
                 "org.lwjgl:lwjgl-openal:3.4.3:natives-windows-arm64": [
                   "windows#default"
                 ],
-                "org.lwjgl:lwjgl-openal:3.4.3:natives-windows-x86": [
-                  "windows#default"
-                ],
                 "org.lwjgl:lwjgl-opengl:3.4.3": [
                   "common#default"
                 ],
@@ -20152,9 +20140,6 @@
                   "windows#default"
                 ],
                 "org.lwjgl:lwjgl-opengl:3.4.3:natives-windows-arm64": [
-                  "windows#default"
-                ],
-                "org.lwjgl:lwjgl-opengl:3.4.3:natives-windows-x86": [
                   "windows#default"
                 ],
                 "org.lwjgl:lwjgl-sdl:3.4.3": [
@@ -20175,9 +20160,6 @@
                 "org.lwjgl:lwjgl-sdl:3.4.3:natives-windows-arm64": [
                   "windows#default"
                 ],
-                "org.lwjgl:lwjgl-sdl:3.4.3:natives-windows-x86": [
-                  "windows#default"
-                ],
                 "org.lwjgl:lwjgl-shaderc:3.4.3": [
                   "common#default"
                 ],
@@ -20194,9 +20176,6 @@
                   "windows#default"
                 ],
                 "org.lwjgl:lwjgl-shaderc:3.4.3:natives-windows-arm64": [
-                  "windows#default"
-                ],
-                "org.lwjgl:lwjgl-shaderc:3.4.3:natives-windows-x86": [
                   "windows#default"
                 ],
                 "org.lwjgl:lwjgl-spvc:3.4.3": [
@@ -20217,9 +20196,6 @@
                 "org.lwjgl:lwjgl-spvc:3.4.3:natives-windows-arm64": [
                   "windows#default"
                 ],
-                "org.lwjgl:lwjgl-spvc:3.4.3:natives-windows-x86": [
-                  "windows#default"
-                ],
                 "org.lwjgl:lwjgl-stb:3.4.3": [
                   "common#default"
                 ],
@@ -20238,9 +20214,6 @@
                 "org.lwjgl:lwjgl-stb:3.4.3:natives-windows-arm64": [
                   "windows#default"
                 ],
-                "org.lwjgl:lwjgl-stb:3.4.3:natives-windows-x86": [
-                  "windows#default"
-                ],
                 "org.lwjgl:lwjgl-vma:3.4.3": [
                   "common#default"
                 ],
@@ -20257,9 +20230,6 @@
                   "windows#default"
                 ],
                 "org.lwjgl:lwjgl-vma:3.4.3:natives-windows-arm64": [
-                  "windows#default"
-                ],
-                "org.lwjgl:lwjgl-vma:3.4.3:natives-windows-x86": [
                   "windows#default"
                 ],
                 "org.lwjgl:lwjgl-vulkan:3.4.3": [
@@ -20287,9 +20257,6 @@
                   "windows#default"
                 ],
                 "org.lwjgl:lwjgl:3.4.3:natives-windows-arm64": [
-                  "windows#default"
-                ],
-                "org.lwjgl:lwjgl:3.4.3:natives-windows-x86": [
                   "windows#default"
                 ]
               },
@@ -20341,19 +20308,19 @@
                 "1.17": "f425401a00adf0112fde624ee80c66333530f8a1",
                 "1.18": "d31a2e85ae149dd1b1a7070b22cb8887892fda6c",
                 "1.19": "a9c8b05a8082a65678beda6dfa2b8f21fa627bce",
-                "5": "7c4533d4bec68552b39668ce65cdd5cabfe68351",
-                "12": "1c7bb2981d812eadd27bb590d74d561f3f88d11b",
-                "16": "0f490f0618b9426f51f7f0d21b9d6818a6c9647d",
-                "17": "1f22f8f4b4575831ce8d1d74b5656eb1bc04732c",
-                "18": "e4200d9c6695f0b17be0c7737deb8198840a929b",
-                "19": "f95b2d091d1c4d7f353a1bbcb25d89bb61363142",
-                "24": "202e99c74867f9b5d9055d811371d4165cf7e754",
-                "26": "a19fb461bd02ecc1604384dc72838a228df57b68",
-                "27": "9e6dc548fd783e5f6e276792a03d2000fc4c47aa",
-                "29": "e9eeaade32639d73d4f7a30a007ace472c61cbd6",
-                "30": "f79274e7d9523e8ba9554a61877751a426e98c24",
-                "32": "0a7b601915914596801099f0522ad169a995b010",
-                "34": "e9d91243348037694b9a9509f7fa19fd13ae846d"
+                "5": "78fe335ef048443d060bc53ace10bb0f41af7d50",
+                "12": "3d7bedf0dd2f50327523995fe73a4c0dd23fb350",
+                "16": "20d463c249d5fccad978892f5a059d940fcb1c8e",
+                "17": "76d7a97b9e0778fda3b14e474f012450ca0de1bb",
+                "18": "a731b9783ba120df5e859ad7aec9c36bee7558bd",
+                "19": "8d07e20a532738f3ee13392a23871abb5927fd79",
+                "24": "2b11bad5dd93d7eae4e86aaafd8029d0dc79bfb8",
+                "26": "94077c8d52bb89d70e9ce408a56847423034c172",
+                "27": "5bcbc92cc2a59f0ac5af3ca59e871c7b06afc474",
+                "29": "a63b2bea5bcbba70c87df110b64ab6f2d71d446f",
+                "30": "c0f421369aed2b80c0490be50630519c49a2db77",
+                "32": "d6540f46a8fec49e45fb7312cdcf401a8e4e15ff",
+                "34": "d8492bc61d32a4874c77daa03c0cba9201e9b83b"
               },
               "asset_urls": {
                 "pre-1.6": "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json",
@@ -20366,19 +20333,19 @@
                 "1.17": "https://piston-meta.mojang.com/v1/packages/f425401a00adf0112fde624ee80c66333530f8a1/1.17.json",
                 "1.18": "https://piston-meta.mojang.com/v1/packages/d31a2e85ae149dd1b1a7070b22cb8887892fda6c/1.18.json",
                 "1.19": "https://piston-meta.mojang.com/v1/packages/a9c8b05a8082a65678beda6dfa2b8f21fa627bce/1.19.json",
-                "5": "https://piston-meta.mojang.com/v1/packages/7c4533d4bec68552b39668ce65cdd5cabfe68351/5.json",
-                "12": "https://piston-meta.mojang.com/v1/packages/1c7bb2981d812eadd27bb590d74d561f3f88d11b/12.json",
-                "16": "https://piston-meta.mojang.com/v1/packages/0f490f0618b9426f51f7f0d21b9d6818a6c9647d/16.json",
-                "17": "https://piston-meta.mojang.com/v1/packages/1f22f8f4b4575831ce8d1d74b5656eb1bc04732c/17.json",
-                "18": "https://piston-meta.mojang.com/v1/packages/e4200d9c6695f0b17be0c7737deb8198840a929b/18.json",
-                "19": "https://piston-meta.mojang.com/v1/packages/f95b2d091d1c4d7f353a1bbcb25d89bb61363142/19.json",
-                "24": "https://piston-meta.mojang.com/v1/packages/202e99c74867f9b5d9055d811371d4165cf7e754/24.json",
-                "26": "https://piston-meta.mojang.com/v1/packages/a19fb461bd02ecc1604384dc72838a228df57b68/26.json",
-                "27": "https://piston-meta.mojang.com/v1/packages/9e6dc548fd783e5f6e276792a03d2000fc4c47aa/27.json",
-                "29": "https://piston-meta.mojang.com/v1/packages/e9eeaade32639d73d4f7a30a007ace472c61cbd6/29.json",
-                "30": "https://piston-meta.mojang.com/v1/packages/f79274e7d9523e8ba9554a61877751a426e98c24/30.json",
-                "32": "https://piston-meta.mojang.com/v1/packages/0a7b601915914596801099f0522ad169a995b010/32.json",
-                "34": "https://piston-meta.mojang.com/v1/packages/e9d91243348037694b9a9509f7fa19fd13ae846d/34.json"
+                "5": "https://piston-meta.mojang.com/v1/packages/78fe335ef048443d060bc53ace10bb0f41af7d50/5.json",
+                "12": "https://piston-meta.mojang.com/v1/packages/3d7bedf0dd2f50327523995fe73a4c0dd23fb350/12.json",
+                "16": "https://piston-meta.mojang.com/v1/packages/20d463c249d5fccad978892f5a059d940fcb1c8e/16.json",
+                "17": "https://piston-meta.mojang.com/v1/packages/76d7a97b9e0778fda3b14e474f012450ca0de1bb/17.json",
+                "18": "https://piston-meta.mojang.com/v1/packages/a731b9783ba120df5e859ad7aec9c36bee7558bd/18.json",
+                "19": "https://piston-meta.mojang.com/v1/packages/8d07e20a532738f3ee13392a23871abb5927fd79/19.json",
+                "24": "https://piston-meta.mojang.com/v1/packages/2b11bad5dd93d7eae4e86aaafd8029d0dc79bfb8/24.json",
+                "26": "https://piston-meta.mojang.com/v1/packages/94077c8d52bb89d70e9ce408a56847423034c172/26.json",
+                "27": "https://piston-meta.mojang.com/v1/packages/5bcbc92cc2a59f0ac5af3ca59e871c7b06afc474/27.json",
+                "29": "https://piston-meta.mojang.com/v1/packages/a63b2bea5bcbba70c87df110b64ab6f2d71d446f/29.json",
+                "30": "https://piston-meta.mojang.com/v1/packages/c0f421369aed2b80c0490be50630519c49a2db77/30.json",
+                "32": "https://piston-meta.mojang.com/v1/packages/d6540f46a8fec49e45fb7312cdcf401a8e4e15ff/32.json",
+                "34": "https://piston-meta.mojang.com/v1/packages/d8492bc61d32a4874c77daa03c0cba9201e9b83b/34.json"
               },
               "version_assets": {
                 "b1.7.3": "pre-1.6",
@@ -20415,7 +20382,7 @@
                 "26w14a": "30",
                 "26.1.2": "30",
                 "26.2": "32",
-                "26.3-snapshot-10": "34"
+                "26.3": "34"
               }
             }
           }

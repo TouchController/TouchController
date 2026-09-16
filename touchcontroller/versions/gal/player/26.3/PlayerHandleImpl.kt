@@ -42,18 +42,17 @@ class PlayerHandleImpl(override val inner: LocalPlayer) : PlayerHandle {
 
     override fun dropSlot(index: Int) {
         if (index == currentSelectedSlot) {
-            inner.drop(true)
+            client.gameMode?.dropItem(inner, true)
             return
         }
 
         val originalSlot = currentSelectedSlot
-        val interactionManagerAccessor = client.gameMode as SyncableGameMode
+        val interactionManagerAccessor = client.gameMode as? SyncableGameMode ?: return
 
         // Can it trigger anti-cheat?
         currentSelectedSlot = index
-        interactionManagerAccessor.`touchcontroller$callSyncSelectedSlot`()
 
-        inner.drop(true)
+        client.gameMode?.dropItem(inner, true)
 
         currentSelectedSlot = originalSlot
         interactionManagerAccessor.`touchcontroller$callSyncSelectedSlot`()
