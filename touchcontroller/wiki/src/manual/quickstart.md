@@ -4,12 +4,13 @@
 
 > 参见 [#4](https://github.com/TouchController/TouchController/issues/4)
 
-- 1.21.1  (Fabric)
-- 1.21.10 (Fabric)
-- 1.21.11 (Fabric)
-- 26.1    (Fabric)
-- 26.1.1  (Fabric)
-- 26.1.2  (Fabric)
+- 1.21.1  (NeoForge, Fabric)
+- 1.21.10 (NeoForge, Fabric)
+- 1.21.11 (NeoForge, Fabric)
+- 26.1    (NeoForge, Fabric)
+- 26.1.1  (NeoForge, Fabric)
+- 26.1.2  (NeoForge, Fabric)
+- 26.2    (NeoForge, Fabric)
 
 ## 支持平台
 

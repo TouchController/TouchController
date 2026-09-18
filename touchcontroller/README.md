@@ -31,12 +31,13 @@ On different mod loaders, TouchController needs dependency mod as below:
 
 Below are game versions and mod loaders TouchController supports now:
 
-- 1.21.1  (Fabric)
-- 1.21.10 (Fabric)
-- 1.21.11 (Fabric)
-- 26.1    (Fabric)
-- 26.1.1  (Fabric)
-- 26.1.2  (Fabric)
+- 1.21.1  (NeoForge, Fabric)
+- 1.21.10 (NeoForge, Fabric)
+- 1.21.11 (NeoForge, Fabric)
+- 26.1    (NeoForge, Fabric)
+- 26.1.1  (NeoForge, Fabric)
+- 26.1.2  (NeoForge, Fabric)
+- 26.2    (NeoForge, Fabric)
 
 Support for more game versions and mod loaders is under development.
 
@@ -101,12 +102,13 @@ TouchController.
 
 目前 TouchController 支持的 Minecraft 版本和 mod 加载器有：
 
-- 1.21.1  (Fabric)
-- 1.21.10 (Fabric)
-- 1.21.11 (Fabric)
-- 26.1    (Fabric)
-- 26.1.1  (Fabric)
-- 26.1.2  (Fabric)
+- 1.21.1  (NeoForge, Fabric)
+- 1.21.10 (NeoForge, Fabric)
+- 1.21.11 (NeoForge, Fabric)
+- 26.1    (NeoForge, Fabric)
+- 26.1.1  (NeoForge, Fabric)
+- 26.1.2  (NeoForge, Fabric)
+- 26.2    (NeoForge, Fabric)
 
 更多游戏版本、mod 加载器的支持正在开发中。
 
