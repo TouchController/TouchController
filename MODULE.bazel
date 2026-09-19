@@ -5,23 +5,22 @@ module(
     version = "0.3.1-alpha",
 )
 
-bazel_dep(name = "rules_java", version = "9.6.1")
-bazel_dep(name = "rules_kotlin", version = "2.4.0")
-bazel_dep(name = "rules_jvm_external", version = "7.0")
-bazel_dep(name = "bazel_skylib", version = "1.9.0")
-bazel_dep(name = "bazel_lib", version = "3.3.1")
+bazel_dep(name = "rules_java", version = "9.9.0")
+bazel_dep(name = "rules_kotlin", version = "2.4.20")
+bazel_dep(name = "rules_jvm_external", version = "7.1")
+bazel_dep(name = "bazel_skylib", version = "1.9.2")
+bazel_dep(name = "bazel_lib", version = "3.7.2")
 bazel_dep(name = "platforms", version = "1.1.0")
-bazel_dep(name = "rules_rust", version = "0.73.0")
-bazel_dep(name = "rules_rust_mdbook", version = "0.73.0")
-bazel_dep(name = "rules_python", version = "2.0.2")
+bazel_dep(name = "rules_rust", version = "0.74.0")
+bazel_dep(name = "rules_rust_mdbook", version = "0.74.0")
+bazel_dep(name = "rules_python", version = "2.3.3")
 bazel_dep(name = "rules_jni", version = "0.11.1")
-bazel_dep(name = "rules_cc", version = "0.2.19")
+bazel_dep(name = "rules_cc", version = "0.2.25")
 bazel_dep(name = "rules_shell", version = "0.8.0")
-bazel_dep(name = "hermetic_cc_toolchain", version = "4.1.0")
+bazel_dep(name = "hermetic_cc_toolchain", version = "4.3.0")
 bazel_dep(name = "bazel_worker_api", version = "0.0.11")
-bazel_dep(name = "with_cfg.bzl", version = "0.14.6")
-bazel_dep(name = "protobuf", version = "35.1")
-bazel_dep(name = "rules_apple", version = "5.0.0-rc2")
+bazel_dep(name = "with_cfg.bzl", version = "1.0.0")
+bazel_dep(name = "rules_apple", version = "5.1.0")
 
 # FastMerger is not ready, so use jarjar as alternative
 bazel_dep(name = "bazel_jar_jar", version = "0.1.15")
@@ -73,27 +72,29 @@ single_version_override(
     patch_strip = 1,
     patches = [
         "//third_party/rules_kotlin/patches:common_library.patch",
-        "//third_party/rules_kotlin/patches:javac_release_25.patch",
     ],
-    version = "2.4.0",
+    version = "2.4.20",
 )
 
-# Pin KSP to 2.3.11 for Kotlin 2.4.0 module-name compatibility: https://github.com/google/ksp/issues/2964
 rules_kotlin_extensions = use_extension(
     "@rules_kotlin//src/main/starlark/core/repositories:bzlmod_setup.bzl",
     "rules_kotlin_extensions",
 )
-rules_kotlin_extensions.ksp_version(
-    sha256 = "b0e7666caf7afb634350ca64af9a88c3bd3e04df393fd33dbf430daaf285c6b3",
-    version = "2.3.11",
-)
-use_repo(rules_kotlin_extensions, "com_github_google_ksp", "com_github_jetbrains_kotlin", "com_github_jetbrains_kotlin_git", "com_github_pinterest_ktlint", "kotlin_build_tools_api", "kotlin_build_tools_impl", "kotlinx_coroutines_core_jvm", "kotlinx_serialization_core_jvm", "kotlinx_serialization_json", "kotlinx_serialization_json_jvm")
+use_repo(rules_kotlin_extensions, "com_github_google_ksp", "com_github_jetbrains_kotlin", "com_github_jetbrains_kotlin_git", "com_github_pinterest_ktlint", "kotlin_build_tools_api", "kotlinx_coroutines_core_jvm", "kotlinx_serialization_core_jvm", "kotlinx_serialization_json", "kotlinx_serialization_json_jvm")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 git_override(
     module_name = "hedron_compile_commands",
     commit = "7fe1eab26d2b8eeb5e1c6a2f38bddb001e3f9696",
     remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
+)
+
+# Pin protobuf to resolve https://github.com/protocolbuffers/protobuf/pull/28230
+bazel_dep(name = "protobuf", version = "36.2")
+git_override(
+    module_name = "protobuf",
+    commit = "e9b04c0713a0ae96496908cd07d367c367c5d992",
+    remote = "https://github.com/protocolbuffers/protobuf.git",
 )
 
 bazel_dep(name = "intellij_aspect", dev_dependency = True)

@@ -1,6 +1,6 @@
 --- a/kotlin/internal/defs.bzl
 +++ b/kotlin/internal/defs.bzl
-@@ -15,6 +15,7 @@ load(
+@@ -17,6 +17,7 @@ load(
      "//src/main/starlark/core/compile:common.bzl",
      _JAVA_RUNTIME_TOOLCHAIN_TYPE = "JAVA_RUNTIME_TOOLCHAIN_TYPE",
      _JAVA_TOOLCHAIN_TYPE = "JAVA_TOOLCHAIN_TYPE",
@@ -8,19 +8,19 @@
      _KtJvmInfo = "KtJvmInfo",
  )
  load(
-@@ -40,6 +41,8 @@ KSP_COMPILER_PLUGIN_REPO = "com_github_google_ksp"
-
+@@ -42,6 +43,8 @@ KSP_COMPILER_PLUGIN_REPO = "com_github_google_ksp"
+ 
  KtJvmInfo = _KtJvmInfo
-
+ 
 +KtCommonInfo = _KtCommonInfo
 +
  KtCompilerPluginInfo = _KtCompilerPluginInfo
-
+ 
  KspPluginInfo = _KspPluginInfo
 
 --- a/kotlin/internal/jvm/compile.bzl
 +++ b/kotlin/internal/jvm/compile.bzl
-@@ -24,6 +24,7 @@ load(
+@@ -27,6 +27,7 @@ load(
      "//kotlin/internal:defs.bzl",
      _JAVA_RUNTIME_TOOLCHAIN_TYPE = "JAVA_RUNTIME_TOOLCHAIN_TYPE",
      _JAVA_TOOLCHAIN_TYPE = "JAVA_TOOLCHAIN_TYPE",
@@ -28,10 +28,10 @@
      _KtCompilerPluginInfo = "KtCompilerPluginInfo",
      _KtJvmInfo = "KtJvmInfo",
      _KtPluginConfiguration = "KtPluginConfiguration",
-@@ -94,6 +95,33 @@ def _partitioned_srcs(srcs):
+@@ -105,6 +106,33 @@ def _partitioned_srcs(srcs):
          src_jars = src_jars,
      )
-
+ 
 +def _collect_fragments(deps):
 +    """Collects fragment metadata from KtCommonInfo deps.
 +
@@ -62,28 +62,28 @@
  def _compiler_toolchains(ctx):
      """Creates a struct of the relevant compilation toolchains"""
      return struct(
-@@ -402,7 +430,8 @@ def _run_kapt_builder_actions(
+@@ -441,7 +469,8 @@ def _run_kapt_builder_actions(
          deps_artifacts,
          annotation_processors,
          transitive_runtime_jars,
 -        plugins):
 +        plugins,
 +        common_srcs = None):
-     """Runs KAPT using the KotlinBuilder tool
-     Returns:
-         A struct containing KAPT outputs
-@@ -429,6 +458,7 @@ def _run_kapt_builder_actions(
+     """Runs KAPT using the KotlinBuilder tool.
+ 
+     Args:
+@@ -480,6 +509,7 @@ def _run_kapt_builder_actions(
          },
          build_kotlin = False,
          mnemonic = "KotlinKapt",
 +        common_srcs = common_srcs,
      )
-
+ 
      return struct(
-@@ -544,6 +574,17 @@ def _run_ksp_builder_actions(
-         ksp_generated_src_jar = ksp_generated_java_srcjar,
-     )
-
+@@ -620,6 +650,17 @@ def btapi_runtime_worker_args(runtime):
+ def _plugins_payload_to_json(payload):
+     return _plugin_payload.plugins_payload_json(payload.plugins)
+ 
 +def _map_fragments_to_name(fragment):
 +    return fragment.fragment_name
 +
@@ -98,7 +98,7 @@
  def _run_kt_builder_action(
          ctx,
          mnemonic,
-@@ -557,7 +598,8 @@ def _run_kt_builder_action(
+@@ -633,7 +674,8 @@ def _run_kt_builder_action(
          transitive_runtime_jars,
          plugins,
          outputs,
@@ -108,8 +108,8 @@
      """Creates a KotlinBuilder action invocation."""
      if not mnemonic:
          fail("Error: A `mnemonic` must be provided for every invocation of `_run_kt_builder_action`!")
-@@ -572,6 +614,24 @@ def _run_kt_builder_action(
-
+@@ -676,6 +718,28 @@ def _run_kt_builder_action(
+ 
      # Unwrap kotlinc_options/javac_options options or default to the ones being provided by the toolchain
      args.add_all("--kotlin_passthrough_flags", kotlinc_options_to_flags(kotlinc_options))
 +    if common_srcs:
@@ -129,29 +129,33 @@
 +            common_srcs.transitive_fragments,
 +            map_each = _map_fragments_to_argument,
 +        )
++
++        # NOTE: bare '-X' tokens must stay above this line: the worker groups
++        # every non-'--' token under the preceding flag, and the values of
++        # --sources are validated as .kt/.java file paths.
 +        args.add_all("--sources", common_srcs.srcs, omit_if_empty = True)
      args.add_all("--javacopts", javac_options_to_flags(javac_options))
-     args.add_all("--direct_dependencies", _java_infos_to_compile_jars(compile_deps.deps))
-     args.add("--strict_kotlin_deps", toolchains.kt.experimental_strict_kotlin_deps)
-@@ -665,7 +725,7 @@ def _run_kt_builder_action(
+ 
+     # Associates contribute their own jars to the classpath, and which flavor (compile jar or class
+@@ -770,7 +834,7 @@ def _run_kt_builder_action(
+                 transitive_runtime_jars,
                  deps_artifacts,
-                 plugins.stubs_phase.classpath,
-                 plugins.compile_phase.classpath,
+                 plugins.classpath,
 -            ],
 +            ] + ([common_srcs.srcs] if common_srcs else []),
          ),
          tools = [
              toolchains.kt.kotlinbuilder.files_to_run,
-@@ -739,6 +799,8 @@ def _kt_jvm_produce_output_jar_actions(
+@@ -850,6 +914,8 @@ def _kt_jvm_produce_output_jar_actions(
      toolchains = _compiler_toolchains(ctx)
      srcs = _partitioned_srcs(ctx.files.srcs)
-
+ 
 +    common_srcs = _collect_fragments(ctx.attr.deps)
 +
      annotation_processors = _plugin_mappers.targets_to_annotation_processors(ctx.attr.plugins + ctx.attr.deps)
      ksp_annotation_processors = _plugin_mappers.targets_to_ksp_annotation_processors(ctx.attr.plugins + ctx.attr.deps)
      ksp_options = _plugin_mappers.targets_to_ksp_options(ctx.attr.plugins + ctx.attr.deps)
-@@ -770,6 +832,7 @@ def _kt_jvm_produce_output_jar_actions(
+@@ -883,6 +949,7 @@ def _kt_jvm_produce_output_jar_actions(
          plugins = plugins,
          compile_jar = compile_jar,
          output_jdeps = output_jdeps,
@@ -159,17 +163,17 @@
      )
      output_jars = outputs_struct.output_jars
      generated_src_jars = outputs_struct.generated_src_jars
-@@ -874,7 +937,8 @@ def _run_kt_java_builder_actions(
-         transitive_runtime_jars,
+@@ -988,7 +1055,8 @@ def _run_kt_java_builder_actions(
+         ksp_transitive_runtime_jars,
          plugins,
          compile_jar,
 -        output_jdeps):
 +        output_jdeps,
 +        common_srcs = None):
      """Runs the necessary KotlinBuilder and JavaBuilder actions to compile a jar
-
+ 
      Returns:
-@@ -897,6 +961,7 @@ def _run_kt_java_builder_actions(
+@@ -1011,6 +1079,7 @@ def _run_kt_java_builder_actions(
              annotation_processors = annotation_processors,
              transitive_runtime_jars = transitive_runtime_jars,
              plugins = plugins,
@@ -177,13 +181,13 @@
          )
          generated_kapt_src_jars.append(kapt_outputs.ap_generated_src_jar)
          output_jars.append(kapt_outputs.kapt_generated_class_jar)
-@@ -961,6 +1026,7 @@ def _run_kt_java_builder_actions(
+@@ -1076,6 +1145,7 @@ def _run_kt_java_builder_actions(
              outputs = outputs,
              build_kotlin = True,
              mnemonic = "KotlinCompile",
 +            common_srcs = common_srcs,
          )
-
+ 
          compile_jars.append(kt_compile_jar)
 
 --- a/kotlin/internal/jvm/jvm.bzl
@@ -205,9 +209,9 @@
 +    _kt_common_library = "kt_common_library",
 +)
  load("//kotlin/internal/utils:utils.bzl", "utils")
-
+ 
  # Toolchain type for the Windows launcher maker
-@@ -230,6 +235,7 @@ _common_attr = utils.add_dicts(
+@@ -224,6 +229,7 @@ _common_attr = utils.add_dicts(
              providers = [
                  [JavaInfo],
                  [_KtJvmInfo],
@@ -215,7 +219,7 @@
              ],
              allow_files = False,
          ),
-@@ -738,3 +744,5 @@ attrs = struct(
+@@ -739,3 +745,5 @@ attrs = struct(
      lib_common_attr = _lib_common_attr,
      runnable_common_attr = _runnable_common_attr,
  )
@@ -224,7 +228,7 @@
 
 --- a/kotlin/internal/jvm/jvm_deps.bzl
 +++ b/kotlin/internal/jvm/jvm_deps.bzl
-@@ -30,7 +30,7 @@ def _jvm_deps(ctx, toolchains, associate_deps, deps = [], deps_java_infos = [],
+@@ -32,7 +32,7 @@ def _jvm_deps(ctx, toolchains, associate_deps, deps = [], deps_java_infos = [],
      )
      dep_infos = (
          deps_java_infos +
@@ -330,7 +334,7 @@
 
 --- a/kotlin/jvm.bzl
 +++ b/kotlin/jvm.bzl
-@@ -4,6 +4,7 @@ load(
+@@ -6,6 +6,7 @@ load(
  )
  load(
      "//kotlin/internal/jvm:jvm.bzl",
@@ -338,18 +342,247 @@
      _kt_jvm_binary = "kt_jvm_binary",
      _kt_jvm_import = "kt_jvm_import",
      _kt_jvm_library = "kt_jvm_library",
-@@ -11,6 +12,7 @@ load(
+@@ -13,6 +14,7 @@ load(
  )
-
+ 
  kt_javac_options = _kt_javac_options
 +kt_common_library = _kt_common_library
  kt_jvm_binary = _kt_jvm_binary
  kt_jvm_import = _kt_jvm_import
  kt_jvm_library = _kt_jvm_library
 
+--- a/src/main/kotlin/BUILD.bazel
++++ b/src/main/kotlin/BUILD.bazel
+@@ -71,11 +71,13 @@ java_binary(
+         "//kotlin/compiler:kotlin-compiler",
+         "//kotlin/compiler:kotlin-reflect",
+         "//kotlin/compiler:kotlin-stdlib",
++        "//src/main/kotlin/io/bazel/kotlin/agent:agent_deploy.jar",
+         "//src/main/kotlin/io/bazel/kotlin/compiler",
+         "@com_github_jetbrains_kotlin//:home",
+         "@kotlin_build_tools_api//file",
+     ],
+     jvm_flags = [
++        "-javaagent:$(execpath //src/main/kotlin/io/bazel/kotlin/agent:agent_deploy.jar)",
+         "-D@com_github_jetbrains_kotlin...build-tools-api=$(rlocationpath @kotlin_build_tools_api//file)",
+         "-D@com_github_jetbrains_kotlin...jvm-abi-gen=$(rlocationpath //kotlin/compiler:jvm-abi-gen)",
+         "-D@com_github_jetbrains_kotlin...kotlin-compiler=$(rlocationpath //kotlin/compiler:kotlin-compiler)",
+
+--- /dev/null
++++ b/src/main/kotlin/io/bazel/kotlin/agent/BUILD.bazel
+@@ -0,0 +1,26 @@
++load("@rules_java//java:defs.bzl", "java_binary", "java_library")
++
++# The Build Tools API compiles the operation's sources as absolute paths
++# (JvmCompilationOperationImpl.addSources uses File.absolutePath), while the
++# worker hands the compiler relative exec paths. A fragment's -Xfragment-sources
++# must equal the free-args entry verbatim, so the Build Tools API compilation
++# only works once those flags carry absolute paths too. This agent rewrites the
++# worker's pass-through flags at class definition time; it is inert on the
++# legacy invocation.
++java_library(
++    name = "agent_lib",
++    srcs = [
++        "PathFixAgent.java",
++        "PathFixer.java",
++    ],
++    visibility = ["//visibility:public"],
++)
++
++java_binary(
++    name = "agent",
++    create_executable = False,
++    deploy_manifest_lines = ["Premain-Class: io.bazel.kotlin.agent.PathFixAgent"],
++    main_class = "io.bazel.kotlin.agent.PathFixAgent",
++    visibility = ["//visibility:public"],
++    runtime_deps = [":agent_lib"],
++)
+
+--- /dev/null
++++ b/src/main/kotlin/io/bazel/kotlin/agent/PathFixAgent.java
+@@ -0,0 +1,96 @@
++package io.bazel.kotlin.agent;
++
++import java.lang.classfile.ClassFile;
++import java.lang.classfile.ClassModel;
++import java.lang.classfile.ClassTransform;
++import java.lang.classfile.CodeBuilder;
++import java.lang.classfile.CodeElement;
++import java.lang.classfile.CodeTransform;
++import java.lang.classfile.MethodModel;
++import java.lang.constant.ClassDesc;
++import java.lang.constant.MethodTypeDesc;
++import java.lang.instrument.ClassFileTransformer;
++import java.lang.instrument.Instrumentation;
++import java.security.ProtectionDomain;
++
++/**
++ * The {@code -javaagent} entry point that adapts the worker's pass-through flags to the Build Tools
++ * API compilation.
++ *
++ * <p>See {@link PathFixer} for the problem this solves. The agent is attached to the Kotlin worker
++ * JVM from {@code //src/main/kotlin:build}; it rewrites one getter of the worker's own
++ * {@code BtapiTaskExecutor.TaskCompilerConfiguration}, so it depends on rules_kotlin's contract but
++ * on none of the Build Tools API implementation classes.
++ */
++public final class PathFixAgent {
++  private PathFixAgent() {}
++
++  public static void premain(String agentArguments, Instrumentation instrumentation) {
++    // The target class is loaded lazily, long after premain, so no retransformation is needed; and
++    // the worker JVM does not offer retransformable transformers.
++    instrumentation.addTransformer(new FragmentPathTransformer(), false);
++  }
++
++  private static final class FragmentPathTransformer implements ClassFileTransformer {
++    // ClassFileTransformer hands class names in internal (slash-separated) form.
++    private static final String TARGET =
++        "io/bazel/kotlin/builder/tasks/jvm/btapi/BtapiTaskExecutor$TaskCompilerConfiguration";
++    private static final ClassDesc TARGET_DESC =
++        ClassDesc.of(
++            "io.bazel.kotlin.builder.tasks.jvm.btapi.BtapiTaskExecutor$TaskCompilerConfiguration");
++    private static final String GETTER = "getPassthroughArguments";
++    private static final String FIELD = "passthroughArguments";
++    private static final ClassDesc LIST = ClassDesc.of("java.util.List");
++    private static final ClassDesc FIXER = ClassDesc.of("io.bazel.kotlin.agent.PathFixer");
++    private static final MethodTypeDesc FIX = MethodTypeDesc.of(LIST, LIST);
++
++    @Override
++    public byte[] transform(
++        ClassLoader loader,
++        String className,
++        Class<?> classBeingRedefined,
++        ProtectionDomain protectionDomain,
++        byte[] classfileBuffer) {
++      if (!TARGET.equals(className)) {
++        return null;
++      }
++      ClassFile classFile =
++          ClassFile.of(
++              ClassFile.StackMapsOption.GENERATE_STACK_MAPS,
++              ClassFile.DeadCodeOption.PATCH_DEAD_CODE);
++      ClassModel model = classFile.parse(classfileBuffer);
++      return classFile.transformClass(
++          model,
++          ClassTransform.transformingMethodBodies(
++              FragmentPathTransformer::isPassthroughArguments,
++              CodeTransform.ofStateful(FragmentPathTransformer::fixedBody)));
++    }
++
++    private static boolean isPassthroughArguments(MethodModel method) {
++      return method.methodName().equalsString(GETTER);
++    }
++
++    /**
++     * Rebuilds the trivial getter as {@code return PathFixer.fix(this.passthroughArguments);}. The
++     * original body has no branches, and the Class-File API recomputes the stack map.
++     */
++    private static CodeTransform fixedBody() {
++      return new CodeTransform() {
++        private boolean emitted;
++
++        @Override
++        public void accept(CodeBuilder builder, CodeElement element) {
++          if (emitted) {
++            return;
++          }
++          emitted = true;
++          builder
++              .aload(0)
++              .getfield(TARGET_DESC, FIELD, LIST)
++              .invokestatic(FIXER, "fix", FIX)
++              .areturn();
++        }
++      };
++    }
++  }
++}
+
+--- /dev/null
++++ b/src/main/kotlin/io/bazel/kotlin/agent/PathFixer.java
+@@ -0,0 +1,78 @@
++package io.bazel.kotlin.agent;
++
++import java.io.File;
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Rewrites the paths carried by the worker's fragment pass-through flags.
++ *
++ * <p>The Build Tools API turns the compilation unit's sources into compiler free arguments with
++ * {@code File.absolutePath}, while the flags forwarded by this worker keep the execution paths
++ * Bazel passed in. The Kotlin compiler matches {@code -Xfragment-sources} entries against the free
++ * arguments verbatim, so without this rewrite every source is reported as not belonging to any
++ * module. The rewrite uses {@code File.absolutePath} as well, which is what makes the two sides
++ * agree: the agent runs in the worker process, whose working directory is the execution root.
++ *
++ * <p>Only {@code java.base} is used, so the class also works when loaded outside this package's
++ * class loader.
++ */
++public final class PathFixer {
++  /** The flags whose value is {@code <fragment>:<path>} and whose path needs absolutizing. */
++  private static final String[] PATH_FLAGS = {
++    "-Xfragment-sources=",
++    "-Xfragment-dependency=",
++    "-Xfragment-friend-dependency=",
++  };
++
++  private PathFixer() {}
++
++  /**
++   * Returns {@code arguments} with the paths of fragment flags absolutized, or the input itself
++   * when nothing changed.
++   */
++  public static List<String> fix(List<String> arguments) {
++    if (arguments == null || arguments.isEmpty()) {
++      return arguments;
++    }
++    List<String> fixed = null;
++    for (int i = 0; i < arguments.size(); i++) {
++      String rewritten = rewrite(arguments.get(i));
++      if (rewritten != null) {
++        if (fixed == null) {
++          fixed = new ArrayList<>(arguments);
++        }
++        fixed.set(i, rewritten);
++      }
++    }
++    return fixed == null ? arguments : fixed;
++  }
++
++  /**
++   * Returns the absolutized form of {@code "-Xfragment-sources=<fragment>:<path>"} and friends, or
++   * null when the argument is not such a flag or its path already is absolute.
++   */
++  private static String rewrite(String argument) {
++    for (String flag : PATH_FLAGS) {
++      if (!argument.startsWith(flag)) {
++        continue;
++      }
++      String value = argument.substring(flag.length());
++      // A Windows drive letter makes the path contain another ':', so split on the first one only.
++      int separator = value.indexOf(':');
++      if (separator < 0) {
++        return null;
++      }
++      String path = value.substring(separator + 1);
++      if (path.isEmpty()) {
++        return null;
++      }
++      String absolute = new File(path).getAbsolutePath();
++      if (absolute.equals(path)) {
++        return null;
++      }
++      return flag + value.substring(0, separator + 1) + absolute;
++    }
++    return null;
++  }
++}
+
 --- a/src/main/starlark/core/compile/common.bzl
 +++ b/src/main/starlark/core/compile/common.bzl
-@@ -55,3 +55,13 @@ KtJvmInfo = provider(
+@@ -58,3 +58,13 @@ KtJvmInfo = provider(
          "transitive_source_jars": "Returns the Jars containing source files of the current target and all of its transitive dependencies. [intellij-aspect]",
      },
  )
