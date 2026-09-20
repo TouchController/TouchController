@@ -399,6 +399,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
 neoform.pin(pin_file = "//:neoform_pin.txt")
 
 use_repo(neoforge, "neoforge_pin")
+
 neoforge.pin(pin_file = "//:neoforge_pin.txt")
 
 use_repo(neoform, "neoform_pin")

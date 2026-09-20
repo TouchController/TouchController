@@ -17,7 +17,7 @@ bazel_dep(name = "rules_python", version = "2.3.3")
 bazel_dep(name = "rules_jni", version = "0.11.1")
 bazel_dep(name = "rules_cc", version = "0.2.25")
 bazel_dep(name = "rules_shell", version = "0.8.0")
-bazel_dep(name = "hermetic_cc_toolchain", version = "4.3.0")
+bazel_dep(name = "hermetic_cc_toolchain", version = "4.1.0")
 bazel_dep(name = "bazel_worker_api", version = "0.0.11")
 bazel_dep(name = "with_cfg.bzl", version = "1.0.0")
 bazel_dep(name = "rules_apple", version = "5.1.0")
@@ -80,7 +80,7 @@ rules_kotlin_extensions = use_extension(
     "@rules_kotlin//src/main/starlark/core/repositories:bzlmod_setup.bzl",
     "rules_kotlin_extensions",
 )
-use_repo(rules_kotlin_extensions, "com_github_google_ksp", "com_github_jetbrains_kotlin", "com_github_jetbrains_kotlin_git", "com_github_pinterest_ktlint", "kotlin_build_tools_api", "kotlinx_coroutines_core_jvm", "kotlinx_serialization_core_jvm", "kotlinx_serialization_json", "kotlinx_serialization_json_jvm")
+use_repo(rules_kotlin_extensions, "btapi_impl", "com_github_google_ksp", "com_github_jetbrains_kotlin", "com_github_jetbrains_kotlin_git", "com_github_pinterest_ktlint", "kotlin_build_tools_api", "kotlinx_coroutines_core_jvm", "kotlinx_serialization_core_jvm", "kotlinx_serialization_json", "kotlinx_serialization_json_jvm")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 git_override(
