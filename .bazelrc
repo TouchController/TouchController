@@ -43,3 +43,6 @@ common --android_platforms=@//platforms:android_arm32,@//platforms:android_arm64
 
 # C++20
 common --cxxopt=-std=c++20 --host_cxxopt=-std=c++20
+
+# Slient https://github.com/bazel-contrib/rules_python/issues/2945
+common --incompatible_default_to_explicit_init_py
