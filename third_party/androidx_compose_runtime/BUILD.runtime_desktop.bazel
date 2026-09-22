@@ -1,3 +1,4 @@
+load("@rules_java//java:defs.bzl", "java_import")
 load("@rules_kotlin//kotlin:core.bzl", "kt_kotlinc_options")
 load("@rules_kotlin//kotlin:jvm.bzl", "kt_common_library", "kt_jvm_library")
 
@@ -20,9 +21,9 @@ kt_common_library(
     srcs = glob(["commonMain/**/*.kt"]),
     fragment_name = "commonMain",
     deps = [
+        "@maven//:androidx_collection_collection_jvm",
         "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core",
-        "@maven//:androidx_collection_collection_jvm",
     ],
 )
 
@@ -32,9 +33,9 @@ kt_common_library(
     fragment_name = "nonAndroidMain",
     deps = [
         ":common",
+        "@maven//:androidx_collection_collection_jvm",
         "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core",
-        "@maven//:androidx_collection_collection_jvm",
     ],
 )
 
@@ -44,22 +45,34 @@ kt_common_library(
     fragment_name = "jvmMain",
     deps = [
         ":non_android",
+        "@maven//:androidx_collection_collection_jvm",
         "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core",
-        "@maven//:androidx_collection_collection_jvm",
     ],
 )
 
 kt_jvm_library(
-    name = "runtime_desktop",
+    name = "runtime_desktop_lib",
     srcs = glob(["desktopMain/**/*.kt"]),
     kotlinc_opts = ":kotlinc_opts_jvm_8",
-    visibility = ["//visibility:public"],
     deps = [
+        ":common",
         ":compose_compiler",
         ":jvm",
         ":non_android",
-        ":common",
+        "@maven//:androidx_annotation_annotation_jvm",
+        "@maven//:androidx_collection_collection_jvm",
+        "@maven//:androidx_compose_runtime_runtime_annotation_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
+    ],
+)
+
+java_import(
+    name = "runtime_desktop",
+    jars = ["runtime_desktop_lib.jar"],
+    srcjar = "runtime_desktop_lib-sources.jar",
+    visibility = ["//visibility:public"],
+    deps = [
         "@maven//:androidx_annotation_annotation_jvm",
         "@maven//:androidx_collection_collection_jvm",
         "@maven//:androidx_compose_runtime_runtime_annotation_jvm",

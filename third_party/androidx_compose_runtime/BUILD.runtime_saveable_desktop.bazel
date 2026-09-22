@@ -1,3 +1,4 @@
+load("@rules_java//java:defs.bzl", "java_import")
 load("@rules_kotlin//kotlin:core.bzl", "kt_kotlinc_options")
 load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
 
@@ -9,12 +10,25 @@ kt_kotlinc_options(
 )
 
 kt_jvm_library(
-    name = "runtime_saveable_desktop",
+    name = "runtime_saveable_desktop_lib",
     srcs = glob(["commonMain/**/*.kt"]),
     kotlinc_opts = ":kotlinc_opts_jvm_8",
-    visibility = ["//visibility:public"],
     deps = [
         "@//:compose",
+        "@maven//:androidx_collection_collection_jvm",
+        "@maven//:androidx_lifecycle_lifecycle_runtime_desktop",
+        "@maven//:androidx_savedstate_savedstate_compose_desktop",
+        "@maven//:androidx_savedstate_savedstate_desktop",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
+    ],
+)
+
+java_import(
+    name = "runtime_saveable_desktop",
+    jars = ["runtime_saveable_desktop_lib.jar"],
+    srcjar = "runtime_saveable_desktop_lib-sources.jar",
+    visibility = ["//visibility:public"],
+    deps = [
         "@maven//:androidx_collection_collection_jvm",
         "@maven//:androidx_lifecycle_lifecycle_runtime_desktop",
         "@maven//:androidx_savedstate_savedstate_compose_desktop",
