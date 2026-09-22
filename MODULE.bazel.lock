@@ -876,7 +876,7 @@
     },
     "//repo:neoforge.bzl%neoforge": {
       "general": {
-        "bzlTransitiveDigest": "M0M52j5VbueMvRSvAd74SYNzcBD6KGR6E1kkvNjtfZk=",
+        "bzlTransitiveDigest": "l1aPIkAkrFdds4sKZ+ZWB5aELBidMXj2n4oSPpcAw8M=",
         "usagesDigest": "hOoG3RN/pioj3IGVT5ZlK/Ct1XZbIjNGpFV/uqf9jlY=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
@@ -911,6 +911,7 @@
           "REPO_MAPPING:,rules_java rules_java+",
           "REPO_MAPPING:bazel_features+,bazel_features_globals bazel_features++version_extension+bazel_features_globals",
           "REPO_MAPPING:bazel_features+,bazel_features_version bazel_features++version_extension+bazel_features_version",
+          "REPO_MAPPING:protobuf+,bazel_skylib bazel_skylib+",
           "REPO_MAPPING:protobuf+,proto_bazel_features bazel_features+",
           "REPO_MAPPING:protobuf+,rules_java rules_java+",
           "REPO_MAPPING:rules_cc+,bazel_features bazel_features+",
@@ -4864,7 +4865,7 @@
     },
     "//repo:neoform.bzl%neoform": {
       "general": {
-        "bzlTransitiveDigest": "64cDhiX5s4we5qj72IHnI6TZS1hUfHbNPDdCsyFmEnI=",
+        "bzlTransitiveDigest": "69m2eFE+u/SUY9BB1bLFy5d6uUJmCS4hmHgsYbmfjmQ=",
         "usagesDigest": "uLFG+CcOCMCRHaoH7axHfirOl3deJuKMU7dQXlrXqik=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
@@ -4876,6 +4877,7 @@
           "REPO_MAPPING:,rules_java rules_java+",
           "REPO_MAPPING:bazel_features+,bazel_features_globals bazel_features++version_extension+bazel_features_globals",
           "REPO_MAPPING:bazel_features+,bazel_features_version bazel_features++version_extension+bazel_features_version",
+          "REPO_MAPPING:protobuf+,bazel_skylib bazel_skylib+",
           "REPO_MAPPING:protobuf+,proto_bazel_features bazel_features+",
           "REPO_MAPPING:protobuf+,rules_java rules_java+",
           "REPO_MAPPING:rules_cc+,bazel_features bazel_features+",
@@ -6101,7 +6103,7 @@
     "@@protobuf+//python/dist:system_python.bzl%system_python_extension": {
       "general": {
         "bzlTransitiveDigest": "qh0n9IrXU/xS94wxKQrG1J63zrLkA1Wy2Y3BQxptPcI=",
-        "usagesDigest": "S4mS052V96dya7WoyxPWGPDToSFmQEtmZ9aPSqmMgQ8=",
+        "usagesDigest": "729NT5g1WOPoRlz1gj2n8O5W61I2KE7oupR2tCn6Xac=",
         "recordedInputs": [],
         "generatedRepoSpecs": {
           "system_python": {
