@@ -89,12 +89,15 @@ git_override(
     remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
 )
 
-# Pin protobuf to resolve https://github.com/protocolbuffers/protobuf/pull/28230
+# Patch protobuf to resolve https://github.com/protocolbuffers/protobuf/pull/28224. Can be removed when 34.0 got released
 bazel_dep(name = "protobuf", version = "36.2")
-git_override(
+single_version_override(
     module_name = "protobuf",
-    commit = "e9b04c0713a0ae96496908cd07d367c367c5d992",
-    remote = "https://github.com/protocolbuffers/protobuf.git",
+    patch_strip = 1,
+    patches = [
+        "//third_party/protobuf/patches:protobuf-cargo-lockfile.patch",
+    ],
+    version = "36.2",
 )
 
 # libraries
