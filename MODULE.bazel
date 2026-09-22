@@ -97,19 +97,6 @@ git_override(
     remote = "https://github.com/protocolbuffers/protobuf.git",
 )
 
-bazel_dep(name = "intellij_aspect", dev_dependency = True)
-git_override(
-    module_name = "intellij_aspect",
-    commit = "13a256d39ce88fc0b705ca4c7ee48e1a8372a6cf",
-    patch_strip = 1,
-    patches = [
-        "//third_party/intellij_aspect/patches:module_bazel.patch",
-        "//third_party/intellij_aspect/patches:extra_rules.patch",
-        "//third_party/intellij_aspect/patches:hmpp.patch",
-    ],
-    remote = "https://github.com/JetBrains/intellij-aspect.git",
-)
-
 # libraries
 bazel_dep(name = "libffi", version = "3.4.7.bcr.4")
 bazel_dep(name = "bullet", version = "3.26.0-rc0.bcr.2")
