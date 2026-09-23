@@ -3,18 +3,16 @@ package top.fifthlight.blazerod.render.version_1_21_8.runtime.test
 import org.joml.Matrix4f
 import org.joml.Quaternionf
 import org.joml.Vector3f
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import top.fifthlight.blazerod.model.NodeTransform
 import top.fifthlight.blazerod.model.TransformId
 import top.fifthlight.blazerod.render.version_1_21_8.runtime.node.TransformMap
+import kotlin.test.*
 
 class TransformMapTest {
 
     private lateinit var transformMap: TransformMap
 
-    @BeforeEach
+    @BeforeTest
     fun setUp() {
         transformMap = TransformMap(null)
     }

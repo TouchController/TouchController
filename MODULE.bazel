@@ -182,12 +182,8 @@ maven.install(
         "org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.10.2",
 
         # Testing
-        "org.jetbrains.kotlin:kotlin-test-junit5:2.1.10",
-        "org.junit.jupiter:junit-jupiter-api:5.12.2",
-        "org.junit.jupiter:junit-jupiter-engine:5.12.2",
-        "org.junit.platform:junit-platform-suite-api:1.12.2",
-        "org.junit.platform:junit-platform-suite-engine:1.12.2",
-        "org.junit.platform:junit-platform-console:1.12.2",
+        "junit:junit:4.13.2",
+        "org.jetbrains.kotlin:kotlin-test-junit:2.4.20",
     ],
     fetch_sources = True,
     known_contributing_modules = ["protobuf"],

@@ -1,6 +1,6 @@
-load("//rule:junit_test.bzl", "kt_junit_test")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_test")
 
-kt_junit_test(
+kt_jvm_test(
     name = "std140_test",
     srcs = ["Std140Test.kt"],
     jvm_flags = [
@@ -11,11 +11,14 @@ kt_junit_test(
     deps = [
         "//blazerod/render/common/layout",
         "@maven//:it_unimi_dsi_fastutil",
+        "@maven//:junit_junit",
+        "@maven//:org_jetbrains_kotlin_kotlin_test",
+        "@maven//:org_jetbrains_kotlin_kotlin_test_junit",
         "@maven//:org_joml_joml",
     ],
 )
 
-kt_junit_test(
+kt_jvm_test(
     name = "std430_test",
     srcs = ["Std430Test.kt"],
     jvm_flags = [
@@ -26,6 +29,9 @@ kt_junit_test(
     deps = [
         "//blazerod/render/common/layout",
         "@maven//:it_unimi_dsi_fastutil",
+        "@maven//:junit_junit",
+        "@maven//:org_jetbrains_kotlin_kotlin_test",
+        "@maven//:org_jetbrains_kotlin_kotlin_test_junit",
         "@maven//:org_joml_joml",
     ],
 )

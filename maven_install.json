@@ -32,6 +32,7 @@
     "io.github.douira:glsl-transformer": -1326214273,
     "it.unimi.dsi:fastutil": 1729177888,
     "javax.inject:javax.inject": -297932879,
+    "junit:junit": -744267592,
     "net.fabricmc:class-tweaker": 218339506,
     "net.fabricmc:mapping-io": -166392093,
     "net.fabricmc:mapping-io-extras": 1912216819,
@@ -58,18 +59,13 @@
     "org.javassist:javassist": -734299230,
     "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable": 15526871,
     "org.jetbrains.kotlin:kotlin-stdlib": 52847824,
-    "org.jetbrains.kotlin:kotlin-test-junit5": 1682081423,
+    "org.jetbrains.kotlin:kotlin-test-junit": 2058945598,
     "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm": 2136054853,
     "org.jetbrains.kotlinx:kotlinx-coroutines-core": -636748508,
     "org.jetbrains.kotlinx:kotlinx-coroutines-swing": -921968153,
     "org.jetbrains.kotlinx:kotlinx-serialization-core": 757193003,
     "org.jetbrains.kotlinx:kotlinx-serialization-json": -282635724,
     "org.joml:joml": -1464888579,
-    "org.junit.jupiter:junit-jupiter-api": -95082348,
-    "org.junit.jupiter:junit-jupiter-engine": 776916472,
-    "org.junit.platform:junit-platform-console": -967827163,
-    "org.junit.platform:junit-platform-suite-api": -1125831277,
-    "org.junit.platform:junit-platform-suite-engine": -141033371,
     "org.lwjgl:lwjgl": 997026004,
     "org.lwjgl:lwjgl-assimp": -471123399,
     "org.lwjgl:lwjgl-stb": 930993265,
@@ -82,28 +78,28 @@
   },
   "__RESOLVED_ARTIFACTS_HASH": {
     "androidx.annotation:annotation": 1413426692,
-    "androidx.annotation:annotation-jvm": -219701841,
+    "androidx.annotation:annotation-jvm": 144351664,
     "androidx.annotation:annotation-jvm:jar:sources": -911823075,
     "androidx.annotation:annotation:jar:sources": 1810788939,
     "androidx.arch.core:core-common": -660697885,
     "androidx.arch.core:core-common:jar:sources": 2105214549,
-    "androidx.collection:collection-jvm": 1136620304,
+    "androidx.collection:collection-jvm": -622848987,
     "androidx.collection:collection-jvm:jar:sources": -505218911,
-    "androidx.compose.runtime:runtime-annotation-jvm": 1458096776,
+    "androidx.compose.runtime:runtime-annotation-jvm": 1822150281,
     "androidx.compose.runtime:runtime-annotation-jvm:jar:sources": -1394267084,
-    "androidx.compose.runtime:runtime-desktop": 1612357157,
+    "androidx.compose.runtime:runtime-desktop": -867667319,
     "androidx.compose.runtime:runtime-desktop:jar:sources": -29520277,
-    "androidx.compose.runtime:runtime-saveable-desktop": 668272454,
+    "androidx.compose.runtime:runtime-saveable-desktop": -105845287,
     "androidx.compose.runtime:runtime-saveable-desktop:jar:sources": -2035455773,
-    "androidx.lifecycle:lifecycle-common-jvm": 909497127,
+    "androidx.lifecycle:lifecycle-common-jvm": -1644543381,
     "androidx.lifecycle:lifecycle-common-jvm:jar:sources": -1706909879,
-    "androidx.lifecycle:lifecycle-runtime-compose-desktop": -227000371,
+    "androidx.lifecycle:lifecycle-runtime-compose-desktop": 1008505300,
     "androidx.lifecycle:lifecycle-runtime-compose-desktop:jar:sources": 2023001366,
-    "androidx.lifecycle:lifecycle-runtime-desktop": -195632831,
+    "androidx.lifecycle:lifecycle-runtime-desktop": 1411066766,
     "androidx.lifecycle:lifecycle-runtime-desktop:jar:sources": 57948102,
-    "androidx.savedstate:savedstate-compose-desktop": -1181738347,
+    "androidx.savedstate:savedstate-compose-desktop": 424195261,
     "androidx.savedstate:savedstate-compose-desktop:jar:sources": -411227098,
-    "androidx.savedstate:savedstate-desktop": 1189841119,
+    "androidx.savedstate:savedstate-desktop": -692466685,
     "androidx.savedstate:savedstate-desktop:jar:sources": 1089212324,
     "aopalliance:aopalliance": 1403132272,
     "aopalliance:aopalliance:jar:sources": -1259601821,
@@ -111,11 +107,11 @@
     "at.favre.lib:hkdf:jar:sources": 314347625,
     "at.yawk.lz4:lz4-java": -869829796,
     "at.yawk.lz4:lz4-java:jar:sources": -212797774,
-    "cafe.adriel.voyager:voyager-core-desktop": 1269515192,
+    "cafe.adriel.voyager:voyager-core-desktop": 1303280642,
     "cafe.adriel.voyager:voyager-core-desktop:jar:sources": 375558650,
-    "cafe.adriel.voyager:voyager-navigator-desktop": 779731747,
+    "cafe.adriel.voyager:voyager-navigator-desktop": 479880030,
     "cafe.adriel.voyager:voyager-navigator-desktop:jar:sources": 1884241016,
-    "cafe.adriel.voyager:voyager-screenmodel-desktop": 302062798,
+    "cafe.adriel.voyager:voyager-screenmodel-desktop": -1049013271,
     "cafe.adriel.voyager:voyager-screenmodel-desktop:jar:sources": -1482951702,
     "ch.qos.logback:logback-classic": 1251526921,
     "ch.qos.logback:logback-classic:jar:sources": -1227816428,
@@ -127,20 +123,20 @@
     "com.fasterxml.jackson.core:jackson-core:jar:sources": -1299553159,
     "com.fasterxml.jackson.core:jackson-databind": 728542137,
     "com.fasterxml.jackson.core:jackson-databind:jar:sources": -1650933162,
-    "com.github.ajalt.clikt:clikt-core-jvm": 2102682193,
+    "com.github.ajalt.clikt:clikt-core-jvm": -1828231598,
     "com.github.ajalt.clikt:clikt-core-jvm:jar:sources": -1735366762,
-    "com.github.ajalt.clikt:clikt-jvm": -1496769575,
+    "com.github.ajalt.clikt:clikt-jvm": -1794727389,
     "com.github.ajalt.clikt:clikt-jvm:jar:sources": 550733636,
-    "com.github.ajalt.colormath:colormath-jvm": 1574182764,
+    "com.github.ajalt.colormath:colormath-jvm": 1938236269,
     "com.github.ajalt.colormath:colormath-jvm:jar:sources": 676157425,
-    "com.github.ajalt.mordant:mordant-core-jvm": -1260765208,
+    "com.github.ajalt.mordant:mordant-core-jvm": -1467101621,
     "com.github.ajalt.mordant:mordant-core-jvm:jar:sources": -1256555576,
-    "com.github.ajalt.mordant:mordant-jvm": -1821876765,
-    "com.github.ajalt.mordant:mordant-jvm-ffm-jvm": -1155552670,
+    "com.github.ajalt.mordant:mordant-jvm": 1614266609,
+    "com.github.ajalt.mordant:mordant-jvm-ffm-jvm": -2084309973,
     "com.github.ajalt.mordant:mordant-jvm-ffm-jvm:jar:sources": 1077500993,
-    "com.github.ajalt.mordant:mordant-jvm-graal-ffi-jvm": 1628867381,
+    "com.github.ajalt.mordant:mordant-jvm-graal-ffi-jvm": 700110078,
     "com.github.ajalt.mordant:mordant-jvm-graal-ffi-jvm:jar:sources": -1728752909,
-    "com.github.ajalt.mordant:mordant-jvm-jna-jvm": 959226045,
+    "com.github.ajalt.mordant:mordant-jvm-jna-jvm": -1267751290,
     "com.github.ajalt.mordant:mordant-jvm-jna-jvm:jar:sources": -240528064,
     "com.github.ajalt.mordant:mordant-jvm:jar:sources": 1017669180,
     "com.github.hypfvieh:dbus-java-core": 669551100,
@@ -178,7 +174,7 @@
     "com.illposed.osc:javaosc-core:jar:sources": 1121083353,
     "com.palantir.javapoet:javapoet": 2045317867,
     "com.palantir.javapoet:javapoet:jar:sources": -356736363,
-    "com.squareup:kotlinpoet-jvm": -248224450,
+    "com.squareup:kotlinpoet-jvm": -1151145237,
     "com.squareup:kotlinpoet-jvm:jar:sources": 458207319,
     "commons-codec:commons-codec": 58403102,
     "commons-codec:commons-codec:jar:sources": 1330593853,
@@ -202,6 +198,8 @@
     "jakarta.inject:jakarta.inject-api:jar:sources": -1584622703,
     "javax.inject:javax.inject": 698155243,
     "javax.inject:javax.inject:jar:sources": 1222576539,
+    "junit:junit": -1256429642,
+    "junit:junit:jar:sources": 940567721,
     "net.covers1624:Quack": 1451624800,
     "net.covers1624:Quack:jar:sources": 198589378,
     "net.fabricmc:class-tweaker": 1635077665,
@@ -279,40 +277,40 @@
     "org.apache.maven:maven-repository-metadata:jar:sources": -1068809309,
     "org.apache.maven:maven-resolver-provider": -1193422360,
     "org.apache.maven:maven-resolver-provider:jar:sources": -1800812700,
-    "org.apiguardian:apiguardian-api": 1279798469,
-    "org.apiguardian:apiguardian-api:jar:sources": 729595858,
     "org.codehaus.plexus:plexus-interpolation": 1527468575,
     "org.codehaus.plexus:plexus-interpolation:jar:sources": 528814929,
     "org.codehaus.plexus:plexus-utils": -519732315,
     "org.codehaus.plexus:plexus-utils:jar:sources": -2142154509,
     "org.eclipse.sisu:org.eclipse.sisu.inject": -1133088002,
     "org.eclipse.sisu:org.eclipse.sisu.inject:jar:sources": -275882963,
+    "org.hamcrest:hamcrest-core": 649657847,
+    "org.hamcrest:hamcrest-core:jar:sources": -1646511374,
     "org.javassist:javassist": -1500659286,
     "org.javassist:javassist:jar:sources": 1768844995,
     "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable": 257751711,
     "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:jar:sources": 1251134462,
-    "org.jetbrains.kotlin:kotlin-reflect": 9042768,
+    "org.jetbrains.kotlin:kotlin-reflect": 373096273,
     "org.jetbrains.kotlin:kotlin-reflect:jar:sources": 992770884,
-    "org.jetbrains.kotlin:kotlin-stdlib": -544128162,
-    "org.jetbrains.kotlin:kotlin-stdlib:jar:sources": -107163053,
-    "org.jetbrains.kotlin:kotlin-test": 214415475,
-    "org.jetbrains.kotlin:kotlin-test-junit5": 1675277212,
-    "org.jetbrains.kotlin:kotlin-test-junit5:jar:sources": -1077934607,
-    "org.jetbrains.kotlin:kotlin-test:jar:sources": -1809726911,
-    "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm": -1545471701,
+    "org.jetbrains.kotlin:kotlin-stdlib": 1503014050,
+    "org.jetbrains.kotlin:kotlin-stdlib:jar:sources": -1011046907,
+    "org.jetbrains.kotlin:kotlin-test": 191471041,
+    "org.jetbrains.kotlin:kotlin-test-junit": -968881217,
+    "org.jetbrains.kotlin:kotlin-test-junit:jar:sources": 1193143685,
+    "org.jetbrains.kotlin:kotlin-test:jar:sources": 2018737578,
+    "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm": -1181418196,
     "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:jar:sources": -249703761,
-    "org.jetbrains.kotlinx:kotlinx-coroutines-core": -2105406387,
-    "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm": 1018865034,
+    "org.jetbrains.kotlinx:kotlinx-coroutines-core": -1551351688,
+    "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm": 1839863883,
     "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:jar:sources": 1967060403,
     "org.jetbrains.kotlinx:kotlinx-coroutines-core:jar:sources": 742848588,
-    "org.jetbrains.kotlinx:kotlinx-coroutines-swing": -975738241,
+    "org.jetbrains.kotlinx:kotlinx-coroutines-swing": -941972791,
     "org.jetbrains.kotlinx:kotlinx-coroutines-swing:jar:sources": -1443310474,
-    "org.jetbrains.kotlinx:kotlinx-serialization-core": -283964722,
-    "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm": -1035049366,
+    "org.jetbrains.kotlinx:kotlinx-serialization-core": 756747518,
+    "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm": -670995861,
     "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:jar:sources": -1117287358,
     "org.jetbrains.kotlinx:kotlinx-serialization-core:jar:sources": -2091977046,
-    "org.jetbrains.kotlinx:kotlinx-serialization-json": -362118972,
-    "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm": 690552354,
+    "org.jetbrains.kotlinx:kotlinx-serialization-json": -415032630,
+    "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm": -1521356117,
     "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:jar:sources": 2006823320,
     "org.jetbrains.kotlinx:kotlinx-serialization-json:jar:sources": -750749331,
     "org.jetbrains:annotations": -1663747638,
@@ -321,26 +319,6 @@
     "org.joml:joml:jar:sources": -568342878,
     "org.jspecify:jspecify": 117231129,
     "org.jspecify:jspecify:jar:sources": -2134060298,
-    "org.junit.jupiter:junit-jupiter-api": 1952991524,
-    "org.junit.jupiter:junit-jupiter-api:jar:sources": 582158783,
-    "org.junit.jupiter:junit-jupiter-engine": -1075862089,
-    "org.junit.jupiter:junit-jupiter-engine:jar:sources": 1822964712,
-    "org.junit.platform:junit-platform-commons": -381654750,
-    "org.junit.platform:junit-platform-commons:jar:sources": 1087483151,
-    "org.junit.platform:junit-platform-console": -109462702,
-    "org.junit.platform:junit-platform-console:jar:sources": 1917630543,
-    "org.junit.platform:junit-platform-engine": 500708226,
-    "org.junit.platform:junit-platform-engine:jar:sources": -475092026,
-    "org.junit.platform:junit-platform-launcher": 1879428872,
-    "org.junit.platform:junit-platform-launcher:jar:sources": -1315279943,
-    "org.junit.platform:junit-platform-reporting": 1906341214,
-    "org.junit.platform:junit-platform-reporting:jar:sources": -1802321129,
-    "org.junit.platform:junit-platform-suite-api": 104620840,
-    "org.junit.platform:junit-platform-suite-api:jar:sources": -1399823567,
-    "org.junit.platform:junit-platform-suite-commons": -1385929953,
-    "org.junit.platform:junit-platform-suite-commons:jar:sources": 642621297,
-    "org.junit.platform:junit-platform-suite-engine": -878185990,
-    "org.junit.platform:junit-platform-suite-engine:jar:sources": 654060760,
     "org.lwjgl:lwjgl": -1677030601,
     "org.lwjgl:lwjgl-assimp": -885668413,
     "org.lwjgl:lwjgl-assimp:jar:natives-linux": -1467609899,
@@ -373,10 +351,6 @@
     "org.lwjgl:lwjgl:jar:sources": -677423429,
     "org.mini2Dx:universal-tween-engine": 2126827366,
     "org.mini2Dx:universal-tween-engine:jar:sources": 227463831,
-    "org.opentest4j.reporting:open-test-reporting-tooling-spi": -1856542869,
-    "org.opentest4j.reporting:open-test-reporting-tooling-spi:jar:sources": 1937404689,
-    "org.opentest4j:opentest4j": -1711174392,
-    "org.opentest4j:opentest4j:jar:sources": -1740624156,
     "org.ow2.asm:asm": -153858314,
     "org.ow2.asm:asm-analysis": 1609639085,
     "org.ow2.asm:asm-analysis:jar:sources": 860015432,
@@ -404,7 +378,7 @@
     "com.google.guava:guava:32.0.1-jre": "com.google.guava:guava:33.4.8-jre",
     "com.google.j2objc:j2objc-annotations:2.8": "com.google.j2objc:j2objc-annotations:3.0.0",
     "org.eclipse.sisu:org.eclipse.sisu.inject:0.9.0.M4": "org.eclipse.sisu:org.eclipse.sisu.inject:1.0.0",
-    "org.jetbrains.kotlin:kotlin-stdlib:2.2.21": "org.jetbrains.kotlin:kotlin-stdlib:2.3.20",
+    "org.jetbrains.kotlin:kotlin-stdlib:2.2.21": "org.jetbrains.kotlin:kotlin-stdlib:2.4.20",
     "org.slf4j:slf4j-api:2.0.16": "org.slf4j:slf4j-api:2.0.17"
   },
   "artifacts": {
@@ -834,6 +808,13 @@
       },
       "version": "1"
     },
+    "junit:junit": {
+      "shasums": {
+        "jar": "8e495b634469d64fb8acfa3495a065cbacc8a0fff55ce1e31007be4c16dc57d3",
+        "sources": "34181df6482d40ea4c046b063cb53c7ffae94bdf1b1d62695bdf3adf9dea7e3a"
+      },
+      "version": "4.13.2"
+    },
     "net.covers1624:Quack": {
       "shasums": {
         "jar": "daed774cff5cc80483016538d40019bf799f49160b49d2129430e318fdf3052e",
@@ -1106,13 +1087,6 @@
       },
       "version": "3.9.16"
     },
-    "org.apiguardian:apiguardian-api": {
-      "shasums": {
-        "jar": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
-        "sources": "277a7a4315412817beb6655b324dc7276621e95ebff00b8bf65e17a27b685e2d"
-      },
-      "version": "1.1.2"
-    },
     "org.codehaus.plexus:plexus-interpolation": {
       "shasums": {
         "jar": "088d444dbcedfb384630d8686697ece3c401d6f33c8f8b3aa7259ea1c6996878",
@@ -1133,6 +1107,13 @@
         "sources": "90793c11d4854a380f6f6ee5a5164f471c943f6c62d34ec4283f763ea336f6fc"
       },
       "version": "1.0.0"
+    },
+    "org.hamcrest:hamcrest-core": {
+      "shasums": {
+        "jar": "66fdef91e9739348df7a096aa384a5685f4e875584cce89386a7a47251c4d8e9",
+        "sources": "e223d2d8fbafd66057a8848cc94222d63c3cedd652cc48eddc0ab5c39c0f84df"
+      },
+      "version": "1.3"
     },
     "org.javassist:javassist": {
       "shasums": {
@@ -1157,24 +1138,24 @@
     },
     "org.jetbrains.kotlin:kotlin-stdlib": {
       "shasums": {
-        "jar": "0ae12504a5040ebaf37703908483420d1a5624dd1d93f357665f8c77c848a01e",
-        "sources": "5c9707bb04725260c2c03d88a218dd4ea87749aefcc4663e71afa9559430f661"
+        "jar": "2226de463d309d4a5500a481320b3dea515a6981dcae1def531fbc158884e25f",
+        "sources": "9a2ce1266925b3cb0ff361392b91c3e288d3e78ca0961bb39e33e27aa6d1749a"
       },
-      "version": "2.3.20"
+      "version": "2.4.20"
     },
     "org.jetbrains.kotlin:kotlin-test": {
       "shasums": {
-        "jar": "940eaaeccc434c79fc5afcb3093f47e46469661bb350e79f82f4d92ac6e960c5",
-        "sources": "4bfa47ebeb1c6e722434db0458bd5bafc0715c78604282816887517e542912c6"
+        "jar": "fa281d657898a34f6b0c7383f374f0a0161e61b6cea0095f135d917721d63f22",
+        "sources": "c1f6593aade90f8a3ea9669f60eebdcff231b534169dd0d15873410f337f0937"
       },
-      "version": "2.1.10"
+      "version": "2.4.20"
     },
-    "org.jetbrains.kotlin:kotlin-test-junit5": {
+    "org.jetbrains.kotlin:kotlin-test-junit": {
       "shasums": {
-        "jar": "a39b51d4be07e2f57a9f368386794dc77496a9486494e645ea11becea9beb2ce",
-        "sources": "891c56d8183d2cd3e912cf250adeca889dba51d02b07fce3015321e08f72b4a2"
+        "jar": "8a5c498fa3cc04f451498cd4ff9d5d81cc6e9f08d6b5ab1cb39f6db09ea69d1e",
+        "sources": "3fd39bbf3f8283cf7b7759e02abdd752ddde9964352f645467b779257bccef20"
       },
-      "version": "2.1.10"
+      "version": "2.4.20"
     },
     "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm": {
       "shasums": {
@@ -1253,76 +1234,6 @@
       },
       "version": "1.0.0"
     },
-    "org.junit.jupiter:junit-jupiter-api": {
-      "shasums": {
-        "jar": "0b9ca728e4bcd9adc57f29deb9556ff9ed5e08b4e8843b875aba4e4e3e04f092",
-        "sources": "babbccb7ae82e7ed4f14c140fb11f21fc6ac595c60e8cafe445fbc84d938adab"
-      },
-      "version": "5.12.2"
-    },
-    "org.junit.jupiter:junit-jupiter-engine": {
-      "shasums": {
-        "jar": "f576c06b8accde9985063b8bc80526cb980eec24dee0b7221fc8ddd7ace65800",
-        "sources": "95d15c0094b9af41bbeffb3f1fc9bfffbf68676de1c9497c4b2a8350969cd19e"
-      },
-      "version": "5.12.2"
-    },
-    "org.junit.platform:junit-platform-commons": {
-      "shasums": {
-        "jar": "e683a01e85dfabea520c056ac6015a6162756e602ec653c0da85e233f0afbc18",
-        "sources": "4c4275ef8401d04156e9e447c140b57bc8799b889a3095e4809ac8ad4e09b9f4"
-      },
-      "version": "1.12.2"
-    },
-    "org.junit.platform:junit-platform-console": {
-      "shasums": {
-        "jar": "5f515f08356396fd611c0951fffd44820f96eac14a6eea0bf1e7835c53945ad1",
-        "sources": "25ec318b1cf170690a6d87c24e77cdca0460ac31f2a208c55145300b34d4d08c"
-      },
-      "version": "1.12.2"
-    },
-    "org.junit.platform:junit-platform-engine": {
-      "shasums": {
-        "jar": "cef0efcb5bd2e05e2b808d38bab5c655089c0c3001527376e74cb606a7911ec8",
-        "sources": "054e04ebe1df5268cac321b30f1ef86f0e32a059ec71a6f36b8d0e44518a5157"
-      },
-      "version": "1.12.2"
-    },
-    "org.junit.platform:junit-platform-launcher": {
-      "shasums": {
-        "jar": "dccf2c1fa0a977c53ad094ad859bfdddd524d97594b76307ad787de71985757f",
-        "sources": "b25eddab9b9b48faa08ffb1646938d899cae2ae7ce528e1c86aac274798705fb"
-      },
-      "version": "1.12.2"
-    },
-    "org.junit.platform:junit-platform-reporting": {
-      "shasums": {
-        "jar": "5d0964d0fba027a39cc0123b8521e72a1371157239d56dadcf929529074b8cb3",
-        "sources": "4620e9b17a17e96b6ce74ef99031f4b5631cc242937e3e659d191d9fc5b7f08c"
-      },
-      "version": "1.12.2"
-    },
-    "org.junit.platform:junit-platform-suite-api": {
-      "shasums": {
-        "jar": "e17b2006290de11f6444a4f98b6d71bbbd7d6fccfc40fd85db413210cb2cbc8d",
-        "sources": "9a0be94aa7084a730005221c1c7d0b705bfd397d8ddc97d7f21262c1251a0e3a"
-      },
-      "version": "1.12.2"
-    },
-    "org.junit.platform:junit-platform-suite-commons": {
-      "shasums": {
-        "jar": "e9e43efdc85c8d83a612efd298c816447a11dc00c46ceb720c63ac386a065094",
-        "sources": "d275400c31c186efc3bc2d3e2b8ef8eba6241321cad225e72c585e4fcf06448c"
-      },
-      "version": "1.12.2"
-    },
-    "org.junit.platform:junit-platform-suite-engine": {
-      "shasums": {
-        "jar": "5f1e4ebae81b26eec980e49a497901856fb10ea2bbb139f0a3c837cf0fd22fba",
-        "sources": "8ec8433787a4cb9c4647a2d9cab0130eba591060a8d86d6b1445be79276535b5"
-      },
-      "version": "1.12.2"
-    },
     "org.lwjgl:lwjgl": {
       "shasums": {
         "jar": "dc9c7b2d48e8396d68895f8902ffa01e46253de44dfe927533ff09457ebfeec4",
@@ -1374,20 +1285,6 @@
         "sources": "1475cb8d65e1a9ec8e4e00e110cc02bfd5672c5d1ec1addd47401068d1708bda"
       },
       "version": "6.3.3"
-    },
-    "org.opentest4j.reporting:open-test-reporting-tooling-spi": {
-      "shasums": {
-        "jar": "772c9f9a09173bcfc29210257a1eb5e873561b5e931832ebf2d29c1ca5bf1af3",
-        "sources": "3a24af664af66dfb37c5c6400217f9f39e374a62ac51e8d672c40e5bbf93c996"
-      },
-      "version": "0.2.0"
-    },
-    "org.opentest4j:opentest4j": {
-      "shasums": {
-        "jar": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
-        "sources": "724a24e3a68267d5ebac9411389a15638a71e50c62448ffa58f59c34d5c1ebb2"
-      },
-      "version": "1.3.0"
     },
     "org.ow2.asm:asm": {
       "shasums": {
@@ -1627,6 +1524,9 @@
       "org.antlr:antlr4",
       "org.antlr:antlr4-runtime"
     ],
+    "junit:junit": [
+      "org.hamcrest:hamcrest-core"
+    ],
     "net.fabricmc:class-tweaker": [
       "net.fabricmc:tiny-remapper",
       "org.ow2.asm:asm",
@@ -1757,11 +1657,9 @@
     "org.jetbrains.kotlin:kotlin-test": [
       "org.jetbrains.kotlin:kotlin-stdlib"
     ],
-    "org.jetbrains.kotlin:kotlin-test-junit5": [
-      "org.jetbrains.kotlin:kotlin-test",
-      "org.junit.jupiter:junit-jupiter-api",
-      "org.junit.jupiter:junit-jupiter-engine",
-      "org.junit.platform:junit-platform-launcher"
+    "org.jetbrains.kotlin:kotlin-test-junit": [
+      "junit:junit",
+      "org.jetbrains.kotlin:kotlin-test"
     ],
     "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm": [
       "org.jetbrains.kotlin:kotlin-stdlib"
@@ -1789,53 +1687,6 @@
     "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm": [
       "org.jetbrains.kotlin:kotlin-stdlib",
       "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm"
-    ],
-    "org.junit.jupiter:junit-jupiter-api": [
-      "org.apiguardian:apiguardian-api",
-      "org.junit.platform:junit-platform-commons",
-      "org.opentest4j:opentest4j"
-    ],
-    "org.junit.jupiter:junit-jupiter-engine": [
-      "org.apiguardian:apiguardian-api",
-      "org.junit.jupiter:junit-jupiter-api",
-      "org.junit.platform:junit-platform-engine"
-    ],
-    "org.junit.platform:junit-platform-commons": [
-      "org.apiguardian:apiguardian-api"
-    ],
-    "org.junit.platform:junit-platform-console": [
-      "org.apiguardian:apiguardian-api",
-      "org.junit.platform:junit-platform-reporting"
-    ],
-    "org.junit.platform:junit-platform-engine": [
-      "org.apiguardian:apiguardian-api",
-      "org.junit.platform:junit-platform-commons",
-      "org.opentest4j:opentest4j"
-    ],
-    "org.junit.platform:junit-platform-launcher": [
-      "org.apiguardian:apiguardian-api",
-      "org.junit.platform:junit-platform-engine"
-    ],
-    "org.junit.platform:junit-platform-reporting": [
-      "org.apiguardian:apiguardian-api",
-      "org.junit.platform:junit-platform-launcher",
-      "org.opentest4j.reporting:open-test-reporting-tooling-spi"
-    ],
-    "org.junit.platform:junit-platform-suite-api": [
-      "org.apiguardian:apiguardian-api",
-      "org.junit.platform:junit-platform-commons"
-    ],
-    "org.junit.platform:junit-platform-suite-commons": [
-      "org.apiguardian:apiguardian-api",
-      "org.junit.platform:junit-platform-engine",
-      "org.junit.platform:junit-platform-launcher",
-      "org.junit.platform:junit-platform-suite-api"
-    ],
-    "org.junit.platform:junit-platform-suite-engine": [
-      "org.apiguardian:apiguardian-api",
-      "org.junit.platform:junit-platform-engine",
-      "org.junit.platform:junit-platform-suite-api",
-      "org.junit.platform:junit-platform-suite-commons"
     ],
     "org.lwjgl:lwjgl-assimp": [
       "org.lwjgl:lwjgl"
@@ -1890,9 +1741,6 @@
     ],
     "org.lwjgl:lwjgl-stb:jar:natives-windows-x86": [
       "org.lwjgl:lwjgl"
-    ],
-    "org.opentest4j.reporting:open-test-reporting-tooling-spi": [
-      "org.apiguardian:apiguardian-api"
     ],
     "org.ow2.asm:asm-analysis": [
       "org.ow2.asm:asm-tree"
@@ -2615,6 +2463,40 @@
     ],
     "javax.inject:javax.inject": [
       "javax.inject"
+    ],
+    "junit:junit": [
+      "junit.extensions",
+      "junit.framework",
+      "junit.runner",
+      "junit.textui",
+      "org.junit",
+      "org.junit.experimental",
+      "org.junit.experimental.categories",
+      "org.junit.experimental.max",
+      "org.junit.experimental.results",
+      "org.junit.experimental.runners",
+      "org.junit.experimental.theories",
+      "org.junit.experimental.theories.internal",
+      "org.junit.experimental.theories.suppliers",
+      "org.junit.function",
+      "org.junit.internal",
+      "org.junit.internal.builders",
+      "org.junit.internal.management",
+      "org.junit.internal.matchers",
+      "org.junit.internal.requests",
+      "org.junit.internal.runners",
+      "org.junit.internal.runners.model",
+      "org.junit.internal.runners.rules",
+      "org.junit.internal.runners.statements",
+      "org.junit.matchers",
+      "org.junit.rules",
+      "org.junit.runner",
+      "org.junit.runner.manipulation",
+      "org.junit.runner.notification",
+      "org.junit.runners",
+      "org.junit.runners.model",
+      "org.junit.runners.parameterized",
+      "org.junit.validator"
     ],
     "net.covers1624:Quack": [
       "net.covers1624.quack.annotation",
@@ -4258,9 +4140,6 @@
     "org.apache.maven:maven-resolver-provider": [
       "org.apache.maven.repository.internal"
     ],
-    "org.apiguardian:apiguardian-api": [
-      "org.apiguardian.api"
-    ],
     "org.codehaus.plexus:plexus-interpolation": [
       "org.codehaus.plexus.interpolation",
       "org.codehaus.plexus.interpolation.fixed",
@@ -4290,6 +4169,11 @@
       "org.eclipse.sisu.space",
       "org.eclipse.sisu.wire",
       "org.sonatype.inject"
+    ],
+    "org.hamcrest:hamcrest-core": [
+      "org.hamcrest",
+      "org.hamcrest.core",
+      "org.hamcrest.internal"
     ],
     "org.javassist:javassist": [
       "javassist",
@@ -4405,6 +4289,7 @@
       "kotlin.contracts",
       "kotlin.coroutines",
       "kotlin.coroutines.cancellation",
+      "kotlin.coroutines.debug",
       "kotlin.coroutines.intrinsics",
       "kotlin.coroutines.jvm.internal",
       "kotlin.enums",
@@ -4442,9 +4327,9 @@
     "org.jetbrains.kotlin:kotlin-test": [
       "kotlin.test"
     ],
-    "org.jetbrains.kotlin:kotlin-test-junit5": [
-      "kotlin.test.junit5",
-      "kotlin.test.junit5.annotations"
+    "org.jetbrains.kotlin:kotlin-test-junit": [
+      "kotlin.test.junit",
+      "kotlin.test.junit.annotations"
     ],
     "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm": [
       "kotlinx.collections.immutable",
@@ -4498,80 +4383,6 @@
     "org.jspecify:jspecify": [
       "org.jspecify.annotations"
     ],
-    "org.junit.jupiter:junit-jupiter-api": [
-      "org.junit.jupiter.api",
-      "org.junit.jupiter.api.condition",
-      "org.junit.jupiter.api.extension",
-      "org.junit.jupiter.api.extension.support",
-      "org.junit.jupiter.api.function",
-      "org.junit.jupiter.api.io",
-      "org.junit.jupiter.api.parallel"
-    ],
-    "org.junit.jupiter:junit-jupiter-engine": [
-      "org.junit.jupiter.engine",
-      "org.junit.jupiter.engine.config",
-      "org.junit.jupiter.engine.descriptor",
-      "org.junit.jupiter.engine.discovery",
-      "org.junit.jupiter.engine.discovery.predicates",
-      "org.junit.jupiter.engine.execution",
-      "org.junit.jupiter.engine.extension",
-      "org.junit.jupiter.engine.support"
-    ],
-    "org.junit.platform:junit-platform-commons": [
-      "org.junit.platform.commons",
-      "org.junit.platform.commons.annotation",
-      "org.junit.platform.commons.function",
-      "org.junit.platform.commons.logging",
-      "org.junit.platform.commons.support",
-      "org.junit.platform.commons.support.conversion",
-      "org.junit.platform.commons.support.scanning",
-      "org.junit.platform.commons.util"
-    ],
-    "org.junit.platform:junit-platform-console": [
-      "org.junit.platform.console",
-      "org.junit.platform.console.options",
-      "org.junit.platform.console.shadow.picocli",
-      "org.junit.platform.console.tasks"
-    ],
-    "org.junit.platform:junit-platform-engine": [
-      "org.junit.platform.engine",
-      "org.junit.platform.engine.discovery",
-      "org.junit.platform.engine.reporting",
-      "org.junit.platform.engine.support.config",
-      "org.junit.platform.engine.support.descriptor",
-      "org.junit.platform.engine.support.discovery",
-      "org.junit.platform.engine.support.filter",
-      "org.junit.platform.engine.support.hierarchical",
-      "org.junit.platform.engine.support.store"
-    ],
-    "org.junit.platform:junit-platform-launcher": [
-      "org.junit.platform.launcher",
-      "org.junit.platform.launcher.core",
-      "org.junit.platform.launcher.listeners",
-      "org.junit.platform.launcher.listeners.discovery",
-      "org.junit.platform.launcher.listeners.session",
-      "org.junit.platform.launcher.tagexpression"
-    ],
-    "org.junit.platform:junit-platform-reporting": [
-      "org.junit.platform.reporting.legacy",
-      "org.junit.platform.reporting.legacy.xml",
-      "org.junit.platform.reporting.open.xml",
-      "org.junit.platform.reporting.shadow.org.opentest4j.reporting.events.api",
-      "org.junit.platform.reporting.shadow.org.opentest4j.reporting.events.core",
-      "org.junit.platform.reporting.shadow.org.opentest4j.reporting.events.git",
-      "org.junit.platform.reporting.shadow.org.opentest4j.reporting.events.java",
-      "org.junit.platform.reporting.shadow.org.opentest4j.reporting.events.root",
-      "org.junit.platform.reporting.shadow.org.opentest4j.reporting.schema"
-    ],
-    "org.junit.platform:junit-platform-suite-api": [
-      "org.junit.platform.suite.api"
-    ],
-    "org.junit.platform:junit-platform-suite-commons": [
-      "org.junit.platform.suite.commons"
-    ],
-    "org.junit.platform:junit-platform-suite-engine": [
-      "org.junit.platform.suite.engine"
-    ],
     "org.lwjgl:lwjgl": [
       "org.lwjgl",
       "org.lwjgl.system",
@@ -4594,12 +4405,6 @@
       "aurelienribon.tweenengine.equations",
       "aurelienribon.tweenengine.paths",
       "aurelienribon.tweenengine.primitives"
-    ],
-    "org.opentest4j.reporting:open-test-reporting-tooling-spi": [
-      "org.opentest4j.reporting.tooling.spi.htmlreport"
-    ],
-    "org.opentest4j:opentest4j": [
-      "org.opentest4j"
     ],
     "org.ow2.asm:asm": [
       "org.objectweb.asm",
@@ -4807,6 +4612,8 @@
       "jakarta.inject:jakarta.inject-api:jar:sources",
       "javax.inject:javax.inject",
       "javax.inject:javax.inject:jar:sources",
+      "junit:junit",
+      "junit:junit:jar:sources",
       "net.covers1624:Quack",
       "net.covers1624:Quack:jar:sources",
       "net.fabricmc:class-tweaker",
@@ -4884,14 +4691,14 @@
       "org.apache.maven:maven-repository-metadata:jar:sources",
       "org.apache.maven:maven-resolver-provider",
       "org.apache.maven:maven-resolver-provider:jar:sources",
-      "org.apiguardian:apiguardian-api",
-      "org.apiguardian:apiguardian-api:jar:sources",
       "org.codehaus.plexus:plexus-interpolation",
       "org.codehaus.plexus:plexus-interpolation:jar:sources",
       "org.codehaus.plexus:plexus-utils",
       "org.codehaus.plexus:plexus-utils:jar:sources",
       "org.eclipse.sisu:org.eclipse.sisu.inject",
       "org.eclipse.sisu:org.eclipse.sisu.inject:jar:sources",
+      "org.hamcrest:hamcrest-core",
+      "org.hamcrest:hamcrest-core:jar:sources",
       "org.javassist:javassist",
       "org.javassist:javassist:jar:sources",
       "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable",
@@ -4901,8 +4708,8 @@
       "org.jetbrains.kotlin:kotlin-stdlib",
       "org.jetbrains.kotlin:kotlin-stdlib:jar:sources",
       "org.jetbrains.kotlin:kotlin-test",
-      "org.jetbrains.kotlin:kotlin-test-junit5",
-      "org.jetbrains.kotlin:kotlin-test-junit5:jar:sources",
+      "org.jetbrains.kotlin:kotlin-test-junit",
+      "org.jetbrains.kotlin:kotlin-test-junit:jar:sources",
       "org.jetbrains.kotlin:kotlin-test:jar:sources",
       "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm",
       "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:jar:sources",
@@ -4926,26 +4733,6 @@
       "org.joml:joml:jar:sources",
       "org.jspecify:jspecify",
       "org.jspecify:jspecify:jar:sources",
-      "org.junit.jupiter:junit-jupiter-api",
-      "org.junit.jupiter:junit-jupiter-api:jar:sources",
-      "org.junit.jupiter:junit-jupiter-engine",
-      "org.junit.jupiter:junit-jupiter-engine:jar:sources",
-      "org.junit.platform:junit-platform-commons",
-      "org.junit.platform:junit-platform-commons:jar:sources",
-      "org.junit.platform:junit-platform-console",
-      "org.junit.platform:junit-platform-console:jar:sources",
-      "org.junit.platform:junit-platform-engine",
-      "org.junit.platform:junit-platform-engine:jar:sources",
-      "org.junit.platform:junit-platform-launcher",
-      "org.junit.platform:junit-platform-launcher:jar:sources",
-      "org.junit.platform:junit-platform-reporting",
-      "org.junit.platform:junit-platform-reporting:jar:sources",
-      "org.junit.platform:junit-platform-suite-api",
-      "org.junit.platform:junit-platform-suite-api:jar:sources",
-      "org.junit.platform:junit-platform-suite-commons",
-      "org.junit.platform:junit-platform-suite-commons:jar:sources",
-      "org.junit.platform:junit-platform-suite-engine",
-      "org.junit.platform:junit-platform-suite-engine:jar:sources",
       "org.lwjgl:lwjgl",
       "org.lwjgl:lwjgl-assimp",
       "org.lwjgl:lwjgl-assimp:jar:natives-linux",
@@ -4978,10 +4765,6 @@
       "org.lwjgl:lwjgl:jar:sources",
       "org.mini2Dx:universal-tween-engine",
       "org.mini2Dx:universal-tween-engine:jar:sources",
-      "org.opentest4j.reporting:open-test-reporting-tooling-spi",
-      "org.opentest4j.reporting:open-test-reporting-tooling-spi:jar:sources",
-      "org.opentest4j:opentest4j",
-      "org.opentest4j:opentest4j:jar:sources",
       "org.ow2.asm:asm",
       "org.ow2.asm:asm-analysis",
       "org.ow2.asm:asm-analysis:jar:sources",
@@ -5125,6 +4908,8 @@
       "jakarta.inject:jakarta.inject-api:jar:sources",
       "javax.inject:javax.inject",
       "javax.inject:javax.inject:jar:sources",
+      "junit:junit",
+      "junit:junit:jar:sources",
       "net.covers1624:Quack",
       "net.covers1624:Quack:jar:sources",
       "net.fabricmc:class-tweaker",
@@ -5202,14 +4987,14 @@
       "org.apache.maven:maven-repository-metadata:jar:sources",
       "org.apache.maven:maven-resolver-provider",
       "org.apache.maven:maven-resolver-provider:jar:sources",
-      "org.apiguardian:apiguardian-api",
-      "org.apiguardian:apiguardian-api:jar:sources",
       "org.codehaus.plexus:plexus-interpolation",
       "org.codehaus.plexus:plexus-interpolation:jar:sources",
       "org.codehaus.plexus:plexus-utils",
       "org.codehaus.plexus:plexus-utils:jar:sources",
       "org.eclipse.sisu:org.eclipse.sisu.inject",
       "org.eclipse.sisu:org.eclipse.sisu.inject:jar:sources",
+      "org.hamcrest:hamcrest-core",
+      "org.hamcrest:hamcrest-core:jar:sources",
       "org.javassist:javassist",
       "org.javassist:javassist:jar:sources",
       "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable",
@@ -5219,8 +5004,8 @@
       "org.jetbrains.kotlin:kotlin-stdlib",
       "org.jetbrains.kotlin:kotlin-stdlib:jar:sources",
       "org.jetbrains.kotlin:kotlin-test",
-      "org.jetbrains.kotlin:kotlin-test-junit5",
-      "org.jetbrains.kotlin:kotlin-test-junit5:jar:sources",
+      "org.jetbrains.kotlin:kotlin-test-junit",
+      "org.jetbrains.kotlin:kotlin-test-junit:jar:sources",
       "org.jetbrains.kotlin:kotlin-test:jar:sources",
       "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm",
       "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:jar:sources",
@@ -5244,26 +5029,6 @@
       "org.joml:joml:jar:sources",
       "org.jspecify:jspecify",
       "org.jspecify:jspecify:jar:sources",
-      "org.junit.jupiter:junit-jupiter-api",
-      "org.junit.jupiter:junit-jupiter-api:jar:sources",
-      "org.junit.jupiter:junit-jupiter-engine",
-      "org.junit.jupiter:junit-jupiter-engine:jar:sources",
-      "org.junit.platform:junit-platform-commons",
-      "org.junit.platform:junit-platform-commons:jar:sources",
-      "org.junit.platform:junit-platform-console",
-      "org.junit.platform:junit-platform-console:jar:sources",
-      "org.junit.platform:junit-platform-engine",
-      "org.junit.platform:junit-platform-engine:jar:sources",
-      "org.junit.platform:junit-platform-launcher",
-      "org.junit.platform:junit-platform-launcher:jar:sources",
-      "org.junit.platform:junit-platform-reporting",
-      "org.junit.platform:junit-platform-reporting:jar:sources",
-      "org.junit.platform:junit-platform-suite-api",
-      "org.junit.platform:junit-platform-suite-api:jar:sources",
-      "org.junit.platform:junit-platform-suite-commons",
-      "org.junit.platform:junit-platform-suite-commons:jar:sources",
-      "org.junit.platform:junit-platform-suite-engine",
-      "org.junit.platform:junit-platform-suite-engine:jar:sources",
       "org.lwjgl:lwjgl",
       "org.lwjgl:lwjgl-assimp",
       "org.lwjgl:lwjgl-assimp:jar:natives-linux",
@@ -5296,10 +5061,6 @@
       "org.lwjgl:lwjgl:jar:sources",
       "org.mini2Dx:universal-tween-engine",
       "org.mini2Dx:universal-tween-engine:jar:sources",
-      "org.opentest4j.reporting:open-test-reporting-tooling-spi",
-      "org.opentest4j.reporting:open-test-reporting-tooling-spi:jar:sources",
-      "org.opentest4j:opentest4j",
-      "org.opentest4j:opentest4j:jar:sources",
       "org.ow2.asm:asm",
       "org.ow2.asm:asm-analysis",
       "org.ow2.asm:asm-analysis:jar:sources",
@@ -5443,6 +5204,8 @@
       "jakarta.inject:jakarta.inject-api:jar:sources",
       "javax.inject:javax.inject",
       "javax.inject:javax.inject:jar:sources",
+      "junit:junit",
+      "junit:junit:jar:sources",
       "net.covers1624:Quack",
       "net.covers1624:Quack:jar:sources",
       "net.fabricmc:class-tweaker",
@@ -5520,14 +5283,14 @@
       "org.apache.maven:maven-repository-metadata:jar:sources",
       "org.apache.maven:maven-resolver-provider",
       "org.apache.maven:maven-resolver-provider:jar:sources",
-      "org.apiguardian:apiguardian-api",
-      "org.apiguardian:apiguardian-api:jar:sources",
       "org.codehaus.plexus:plexus-interpolation",
       "org.codehaus.plexus:plexus-interpolation:jar:sources",
       "org.codehaus.plexus:plexus-utils",
       "org.codehaus.plexus:plexus-utils:jar:sources",
       "org.eclipse.sisu:org.eclipse.sisu.inject",
       "org.eclipse.sisu:org.eclipse.sisu.inject:jar:sources",
+      "org.hamcrest:hamcrest-core",
+      "org.hamcrest:hamcrest-core:jar:sources",
       "org.javassist:javassist",
       "org.javassist:javassist:jar:sources",
       "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable",
@@ -5537,8 +5300,8 @@
       "org.jetbrains.kotlin:kotlin-stdlib",
       "org.jetbrains.kotlin:kotlin-stdlib:jar:sources",
       "org.jetbrains.kotlin:kotlin-test",
-      "org.jetbrains.kotlin:kotlin-test-junit5",
-      "org.jetbrains.kotlin:kotlin-test-junit5:jar:sources",
+      "org.jetbrains.kotlin:kotlin-test-junit",
+      "org.jetbrains.kotlin:kotlin-test-junit:jar:sources",
       "org.jetbrains.kotlin:kotlin-test:jar:sources",
       "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm",
       "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:jar:sources",
@@ -5562,26 +5325,6 @@
       "org.joml:joml:jar:sources",
       "org.jspecify:jspecify",
       "org.jspecify:jspecify:jar:sources",
-      "org.junit.jupiter:junit-jupiter-api",
-      "org.junit.jupiter:junit-jupiter-api:jar:sources",
-      "org.junit.jupiter:junit-jupiter-engine",
-      "org.junit.jupiter:junit-jupiter-engine:jar:sources",
-      "org.junit.platform:junit-platform-commons",
-      "org.junit.platform:junit-platform-commons:jar:sources",
-      "org.junit.platform:junit-platform-console",
-      "org.junit.platform:junit-platform-console:jar:sources",
-      "org.junit.platform:junit-platform-engine",
-      "org.junit.platform:junit-platform-engine:jar:sources",
-      "org.junit.platform:junit-platform-launcher",
-      "org.junit.platform:junit-platform-launcher:jar:sources",
-      "org.junit.platform:junit-platform-reporting",
-      "org.junit.platform:junit-platform-reporting:jar:sources",
-      "org.junit.platform:junit-platform-suite-api",
-      "org.junit.platform:junit-platform-suite-api:jar:sources",
-      "org.junit.platform:junit-platform-suite-commons",
-      "org.junit.platform:junit-platform-suite-commons:jar:sources",
-      "org.junit.platform:junit-platform-suite-engine",
-      "org.junit.platform:junit-platform-suite-engine:jar:sources",
       "org.lwjgl:lwjgl",
       "org.lwjgl:lwjgl-assimp",
       "org.lwjgl:lwjgl-assimp:jar:natives-linux",
@@ -5614,10 +5357,6 @@
       "org.lwjgl:lwjgl:jar:sources",
       "org.mini2Dx:universal-tween-engine",
       "org.mini2Dx:universal-tween-engine:jar:sources",
-      "org.opentest4j.reporting:open-test-reporting-tooling-spi",
-      "org.opentest4j.reporting:open-test-reporting-tooling-spi:jar:sources",
-      "org.opentest4j:opentest4j",
-      "org.opentest4j:opentest4j:jar:sources",
       "org.ow2.asm:asm",
       "org.ow2.asm:asm-analysis",
       "org.ow2.asm:asm-analysis:jar:sources",
@@ -5761,6 +5500,8 @@
       "jakarta.inject:jakarta.inject-api:jar:sources",
       "javax.inject:javax.inject",
       "javax.inject:javax.inject:jar:sources",
+      "junit:junit",
+      "junit:junit:jar:sources",
       "net.covers1624:Quack",
       "net.covers1624:Quack:jar:sources",
       "net.fabricmc:class-tweaker",
@@ -5838,14 +5579,14 @@
       "org.apache.maven:maven-repository-metadata:jar:sources",
       "org.apache.maven:maven-resolver-provider",
       "org.apache.maven:maven-resolver-provider:jar:sources",
-      "org.apiguardian:apiguardian-api",
-      "org.apiguardian:apiguardian-api:jar:sources",
       "org.codehaus.plexus:plexus-interpolation",
       "org.codehaus.plexus:plexus-interpolation:jar:sources",
       "org.codehaus.plexus:plexus-utils",
       "org.codehaus.plexus:plexus-utils:jar:sources",
       "org.eclipse.sisu:org.eclipse.sisu.inject",
       "org.eclipse.sisu:org.eclipse.sisu.inject:jar:sources",
+      "org.hamcrest:hamcrest-core",
+      "org.hamcrest:hamcrest-core:jar:sources",
       "org.javassist:javassist",
       "org.javassist:javassist:jar:sources",
       "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable",
@@ -5855,8 +5596,8 @@
       "org.jetbrains.kotlin:kotlin-stdlib",
       "org.jetbrains.kotlin:kotlin-stdlib:jar:sources",
       "org.jetbrains.kotlin:kotlin-test",
-      "org.jetbrains.kotlin:kotlin-test-junit5",
-      "org.jetbrains.kotlin:kotlin-test-junit5:jar:sources",
+      "org.jetbrains.kotlin:kotlin-test-junit",
+      "org.jetbrains.kotlin:kotlin-test-junit:jar:sources",
       "org.jetbrains.kotlin:kotlin-test:jar:sources",
       "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm",
       "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:jar:sources",
@@ -5880,26 +5621,6 @@
       "org.joml:joml:jar:sources",
       "org.jspecify:jspecify",
       "org.jspecify:jspecify:jar:sources",
-      "org.junit.jupiter:junit-jupiter-api",
-      "org.junit.jupiter:junit-jupiter-api:jar:sources",
-      "org.junit.jupiter:junit-jupiter-engine",
-      "org.junit.jupiter:junit-jupiter-engine:jar:sources",
-      "org.junit.platform:junit-platform-commons",
-      "org.junit.platform:junit-platform-commons:jar:sources",
-      "org.junit.platform:junit-platform-console",
-      "org.junit.platform:junit-platform-console:jar:sources",
-      "org.junit.platform:junit-platform-engine",
-      "org.junit.platform:junit-platform-engine:jar:sources",
-      "org.junit.platform:junit-platform-launcher",
-      "org.junit.platform:junit-platform-launcher:jar:sources",
-      "org.junit.platform:junit-platform-reporting",
-      "org.junit.platform:junit-platform-reporting:jar:sources",
-      "org.junit.platform:junit-platform-suite-api",
-      "org.junit.platform:junit-platform-suite-api:jar:sources",
-      "org.junit.platform:junit-platform-suite-commons",
-      "org.junit.platform:junit-platform-suite-commons:jar:sources",
-      "org.junit.platform:junit-platform-suite-engine",
-      "org.junit.platform:junit-platform-suite-engine:jar:sources",
       "org.lwjgl:lwjgl",
       "org.lwjgl:lwjgl-assimp",
       "org.lwjgl:lwjgl-assimp:jar:natives-linux",
@@ -5932,10 +5653,6 @@
       "org.lwjgl:lwjgl:jar:sources",
       "org.mini2Dx:universal-tween-engine",
       "org.mini2Dx:universal-tween-engine:jar:sources",
-      "org.opentest4j.reporting:open-test-reporting-tooling-spi",
-      "org.opentest4j.reporting:open-test-reporting-tooling-spi:jar:sources",
-      "org.opentest4j:opentest4j",
-      "org.opentest4j:opentest4j:jar:sources",
       "org.ow2.asm:asm",
       "org.ow2.asm:asm-analysis",
       "org.ow2.asm:asm-analysis:jar:sources",
@@ -6201,9 +5918,9 @@
         "kotlin.reflect.jvm.internal.impl.load.java.JavaIncompatibilityRulesOverridabilityCondition"
       ]
     },
-    "org.jetbrains.kotlin:kotlin-test-junit5": {
+    "org.jetbrains.kotlin:kotlin-test-junit": {
       "kotlin.test.AsserterContributor": [
-        "kotlin.test.junit5.JUnit5Contributor"
+        "kotlin.test.junit.JUnitContributor"
       ]
     },
     "org.jetbrains.kotlinx:kotlinx-coroutines-swing": {
@@ -6214,96 +5931,6 @@
     "org.jetbrains.kotlinx:kotlinx-coroutines-swing:jar:sources": {
       "kotlinx.coroutines.internal.MainDispatcherFactory": [
         "kotlinx.coroutines.swing.SwingDispatcherFactory"
-      ]
-    },
-    "org.junit.jupiter:junit-jupiter-engine": {
-      "org.junit.platform.engine.TestEngine": [
-        "org.junit.jupiter.engine.JupiterTestEngine"
-      ]
-    },
-    "org.junit.jupiter:junit-jupiter-engine:jar:sources": {
-      "org.junit.platform.engine.TestEngine": [
-        "org.junit.jupiter.engine.JupiterTestEngine"
-      ]
-    },
-    "org.junit.platform:junit-platform-console": {
-      "java.util.spi.ToolProvider": [
-        "org.junit.platform.console.ConsoleLauncherToolProvider"
-      ]
-    },
-    "org.junit.platform:junit-platform-console:jar:sources": {
-      "java.util.spi.ToolProvider": [
-        "org.junit.platform.console.ConsoleLauncherToolProvider"
-      ]
-    },
-    "org.junit.platform:junit-platform-engine": {
-      "org.junit.platform.engine.discovery.DiscoverySelectorIdentifierParser": [
-        "org.junit.platform.engine.discovery.ClassSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.ClasspathResourceSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.ClasspathRootSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.DirectorySelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.FileSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.IterationSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.MethodSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.ModuleSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.NestedClassSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.NestedMethodSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.PackageSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.UniqueIdSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.UriSelector$IdentifierParser"
-      ]
-    },
-    "org.junit.platform:junit-platform-engine:jar:sources": {
-      "org.junit.platform.engine.discovery.DiscoverySelectorIdentifierParser": [
-        "org.junit.platform.engine.discovery.ClassSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.ClasspathResourceSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.ClasspathRootSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.DirectorySelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.FileSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.IterationSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.MethodSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.ModuleSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.NestedClassSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.NestedMethodSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.PackageSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.UniqueIdSelector$IdentifierParser",
-        "org.junit.platform.engine.discovery.UriSelector$IdentifierParser"
-      ]
-    },
-    "org.junit.platform:junit-platform-launcher": {
-      "org.junit.platform.launcher.TestExecutionListener": [
-        "org.junit.platform.launcher.listeners.UniqueIdTrackingListener"
-      ]
-    },
-    "org.junit.platform:junit-platform-launcher:jar:sources": {
-      "org.junit.platform.launcher.TestExecutionListener": [
-        "org.junit.platform.launcher.listeners.UniqueIdTrackingListener"
-      ]
-    },
-    "org.junit.platform:junit-platform-reporting": {
-      "org.junit.platform.launcher.TestExecutionListener": [
-        "org.junit.platform.reporting.open.xml.OpenTestReportGeneratingListener"
-      ],
-      "org.opentest4j.reporting.tooling.spi.htmlreport.Contributor": [
-        "org.junit.platform.reporting.open.xml.JUnitContributor"
-      ]
-    },
-    "org.junit.platform:junit-platform-reporting:jar:sources": {
-      "org.junit.platform.launcher.TestExecutionListener": [
-        "org.junit.platform.reporting.open.xml.OpenTestReportGeneratingListener"
-      ],
-      "org.opentest4j.reporting.tooling.spi.htmlreport.Contributor": [
-        "org.junit.platform.reporting.open.xml.JUnitContributor"
-      ]
-    },
-    "org.junit.platform:junit-platform-suite-engine": {
-      "org.junit.platform.engine.TestEngine": [
-        "org.junit.platform.suite.engine.SuiteTestEngine"
-      ]
-    },
-    "org.junit.platform:junit-platform-suite-engine:jar:sources": {
-      "org.junit.platform.engine.TestEngine": [
-        "org.junit.platform.suite.engine.SuiteTestEngine"
       ]
     },
     "org.slf4j:jcl-over-slf4j": {

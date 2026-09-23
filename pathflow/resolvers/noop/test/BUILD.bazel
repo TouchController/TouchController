@@ -1,18 +1,14 @@
-load("//rule:junit_test.bzl", "kt_junit_test")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_test")
 
-kt_junit_test(
+kt_jvm_test(
     name = "noop-test",
     srcs = ["NoopResolverTest.kt"],
     test_class = "top.fifthlight.pathflow.resolvers.noop.test.NoopResolverTest",
     deps = [
         "//pathflow/data",
         "//pathflow/resolvers/noop",
-    ],
-)
-
-test_suite(
-    name = "test",
-    tests = [
-        ":noop-test",
+        "@maven//:junit_junit",
+        "@maven//:org_jetbrains_kotlin_kotlin_test",
+        "@maven//:org_jetbrains_kotlin_kotlin_test_junit",
     ],
 )

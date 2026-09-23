@@ -1,12 +1,15 @@
-load("//rule:junit_test.bzl", "kt_junit_test")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_test")
 
-kt_junit_test(
+kt_jvm_test(
     name = "transform_map_test",
     srcs = ["TransformMapTest.kt"],
     test_class = "top.fifthlight.blazerod.render.version_1_21_8.runtime.test.TransformMapTest",
     deps = [
         "//blazerod/model/model-base",
         "//blazerod/render/versions/1.21.8/runtime",
+        "@maven//:junit_junit",
+        "@maven//:org_jetbrains_kotlin_kotlin_test",
+        "@maven//:org_jetbrains_kotlin_kotlin_test_junit",
         "@maven//:org_joml_joml",
     ],
 )
