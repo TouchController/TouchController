@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="touchcontroller-api" pattern="file[touchcontroller.api*]:*//*" />
+</component>

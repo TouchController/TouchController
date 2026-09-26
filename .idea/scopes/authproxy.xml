@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="authproxy" pattern="file[authproxy*]:*//*||src[authproxy*]:*..*" />
+</component>

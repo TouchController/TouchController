@@ -1,6 +1,5 @@
 .bazelbsp
 bazel-*
-.idea
 .*wb
 external
 compile_commands.json

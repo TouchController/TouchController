@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="blazerod-examples" pattern="file[blazerod.example*]:*//*" />
+</component>

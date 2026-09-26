@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="touchcontroller" pattern="(file[touchcontroller*]:*//*||src[touchcontroller*]:*..*)&amp;&amp;!src[touchcontroller.api*]:*..*" />
+</component>

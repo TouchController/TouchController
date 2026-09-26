@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="blazerod" pattern="(file[blazerod*]:*//*&amp;&amp;!file[blazerod.example*]:*//*||src[blazerod.model*]:*..*)&amp;&amp;!src[blazerod.example*]:*..*" />
+</component>
