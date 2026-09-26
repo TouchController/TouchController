@@ -8,8 +8,6 @@ package top.fifthlight.touchcontroller.common.control.widget.custom
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.plus
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.combine.core.paint.Colors
@@ -21,6 +19,7 @@ import top.fifthlight.data.IntSize
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.control.*
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
+import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.align.Align
 import top.fifthlight.touchcontroller.common.layout.widget.Texture
@@ -29,8 +28,6 @@ import top.fifthlight.touchcontroller.common.util.color.ColorHelper
 import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.uuid.Uuid
 
-@Serializable
-@SerialName("custom")
 data class CustomWidget(
     val normalTexture: ButtonTexture = ButtonTexture.NinePatch(extraPadding = IntPadding(8)),
     val activeTexture: ButtonActiveTexture = ButtonActiveTexture.Same,
@@ -41,7 +38,7 @@ data class CustomWidget(
     val moveView: Boolean = false,
     val action: ButtonTrigger = ButtonTrigger(),
     override val id: Uuid = fastRandomUuid(),
-    override val name: Name = Name.Translatable(Texts.WIDGET_CUSTOM_BUTTON_NAME),
+    override val name: ControllerWidgetName = ControllerWidgetName.Translatable(Texts.WIDGET_CUSTOM_BUTTON_NAME),
     override val align: Align = Align.CENTER_CENTER,
     override val autoAlign: Boolean = true,
     override val offset: IntOffset = IntOffset.ZERO,
@@ -269,7 +266,7 @@ data class CustomWidget(
 
     override fun cloneBase(
         id: Uuid,
-        name: Name,
+        name: ControllerWidgetName,
         align: Align,
         autoAlign: Boolean,
         offset: IntOffset,

@@ -5,8 +5,6 @@
 
 package top.fifthlight.touchcontroller.common.control.widget.custom
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.combine.core.paint.Colors
@@ -17,12 +15,9 @@ import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
 import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 
-@Serializable
 sealed class ButtonTexture {
     abstract val type: Type
 
-    @Serializable
-    @SerialName("empty")
     data class Empty(
         val extraPadding: IntPadding = IntPadding(4),
     ) : ButtonTexture() {
@@ -30,8 +25,6 @@ sealed class ButtonTexture {
             get() = Type.EMPTY
     }
 
-    @Serializable
-    @SerialName("color")
     data class Fill(
         val borderWidth: Int = 0,
         val extraPadding: IntPadding = IntPadding(4),
@@ -42,8 +35,6 @@ sealed class ButtonTexture {
             get() = Type.FILL
     }
 
-    @Serializable
-    @SerialName("fixed")
     data class Fixed(
         val texture: TextureCoordinate = TextureCoordinate(
             textureSet = BuiltInTextureSets.classic,
@@ -55,8 +46,6 @@ sealed class ButtonTexture {
             get() = Type.FIXED
     }
 
-    @Serializable
-    @SerialName("nine-patch")
     data class NinePatch(
         val texture: EmptyTexture = EmptyTexture.EMPTY_1,
         val extraPadding: IntPadding = IntPadding(4),
@@ -73,24 +62,17 @@ sealed class ButtonTexture {
     }
 }
 
-@Serializable
 sealed class ButtonActiveTexture {
     abstract val type: Type
 
-    @Serializable
-    @SerialName("same")
     data object Same : ButtonActiveTexture() {
         override val type = Type.SAME
     }
 
-    @Serializable
-    @SerialName("gray")
     data object Gray : ButtonActiveTexture() {
         override val type = Type.GRAY
     }
 
-    @Serializable
-    @SerialName("texture")
     data class Texture(
         val texture: ButtonTexture = ButtonTexture.Empty()
     ) : ButtonActiveTexture() {

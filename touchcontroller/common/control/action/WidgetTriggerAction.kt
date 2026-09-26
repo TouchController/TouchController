@@ -5,8 +5,6 @@
 
 package top.fifthlight.touchcontroller.common.control.action
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandler
@@ -15,7 +13,6 @@ import top.fifthlight.touchcontroller.common.gal.player.PlayerHandle
 import top.fifthlight.touchcontroller.common.model.ControllerHudModel
 import kotlin.uuid.Uuid
 
-@Serializable
 sealed class WidgetTriggerAction {
     abstract fun trigger(uuid: Uuid, tick: Int, player: PlayerHandle)
     open fun refresh(uuid: Uuid, tick: Int) = Unit
@@ -30,8 +27,6 @@ sealed class WidgetTriggerAction {
         LAYER_CONDITION(Texts.WIDGET_TRIGGER_LAYER_CONDITION),
     }
 
-    @Serializable
-    @SerialName("key")
     sealed class Key : WidgetTriggerAction() {
         override val actionType
             get() = Type.KEY
@@ -45,8 +40,6 @@ sealed class WidgetTriggerAction {
             keyBinding?.let { keyBindingHandler.getState(it) }
         }
 
-        @Serializable
-        @SerialName("click")
         data class Click(
             override val keyBinding: String? = null,
             val keepInClientTick: Boolean = true,
@@ -62,23 +55,17 @@ sealed class WidgetTriggerAction {
             }
         }
 
-        @Serializable
-        @SerialName("lock")
         data class Lock(
             override val keyBinding: String? = null,
             val lockType: LockActionType = LockActionType.INVERT,
         ) : Key() {
-            @Serializable
             enum class LockActionType(
                 val nameId: Identifier,
             ) {
-                @SerialName("start")
                 START(Texts.WIDGET_TRIGGER_KEY_LOCK_TYPE_START),
 
-                @SerialName("stop")
                 STOP(Texts.WIDGET_TRIGGER_KEY_LOCK_TYPE_STOP),
 
-                @SerialName("invert")
                 INVERT(Texts.WIDGET_TRIGGER_KEY_LOCK_TYPE_INVERT),
             }
 
@@ -112,8 +99,6 @@ sealed class WidgetTriggerAction {
         }
     }
 
-    @Serializable
-    @SerialName("game")
     data class Game(
         val action: GameActionInstanceImpl,
     ) : WidgetTriggerAction() {
@@ -123,8 +108,6 @@ sealed class WidgetTriggerAction {
         override fun trigger(uuid: Uuid, tick: Int, player: PlayerHandle) = action()
     }
 
-    @Serializable
-    @SerialName("player")
     data class Player(
         val action: PlayerActionInstanceImpl,
     ) : WidgetTriggerAction() {
@@ -134,8 +117,6 @@ sealed class WidgetTriggerAction {
         override fun trigger(uuid: Uuid, tick: Int, player: PlayerHandle) = action(player)
     }
 
-    @Serializable
-    @SerialName("layer_condition")
     sealed class LayerCondition : WidgetTriggerAction() {
         override val actionType: Type
             get() = Type.LAYER_CONDITION
@@ -162,8 +143,6 @@ sealed class WidgetTriggerAction {
 
         abstract fun clone(conditionUuid: Uuid?): LayerCondition
 
-        @Serializable
-        @SerialName("layer_toggle")
         data class Toggle(
             override val conditionUuid: Uuid? = null,
         ) : LayerCondition() {
@@ -174,8 +153,6 @@ sealed class WidgetTriggerAction {
             override fun clone(conditionUuid: Uuid?) = copy(conditionUuid = conditionUuid)
         }
 
-        @Serializable
-        @SerialName("layer_enable")
         data class Enable(
             override val conditionUuid: Uuid? = null,
         ) : LayerCondition() {
@@ -186,8 +163,6 @@ sealed class WidgetTriggerAction {
             override fun clone(conditionUuid: Uuid?) = copy(conditionUuid = conditionUuid)
         }
 
-        @Serializable
-        @SerialName("layer_disable")
         data class Disable(
             override val conditionUuid: Uuid? = null,
         ) : LayerCondition() {

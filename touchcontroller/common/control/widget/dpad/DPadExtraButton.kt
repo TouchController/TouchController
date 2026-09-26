@@ -5,15 +5,12 @@
 
 package top.fifthlight.touchcontroller.common.control.widget.dpad
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 
-@Serializable
 sealed class DPadExtraButton {
     abstract val type: Type
     abstract val info: ButtonInfo?
@@ -27,7 +24,6 @@ sealed class DPadExtraButton {
         SWIPE_LOCKING(Texts.WIDGET_DPAD_PROPERTY_EXTRA_BUTTON_TYPE_SWIPE_LOCKING),
     }
 
-    @Serializable
     sealed class ActiveTexture {
         abstract val type: Type
 
@@ -39,22 +35,16 @@ sealed class DPadExtraButton {
             TEXTURE(Texts.WIDGET_DPAD_PROPERTY_EXTRA_BUTTON_ACTIVE_TEXTURE_TEXTURE)
         }
 
-        @Serializable
-        @SerialName("same")
         data object Same : ActiveTexture() {
             override val type: Type
                 get() = Type.SAME
         }
 
-        @Serializable
-        @SerialName("gray")
         data object Gray : ActiveTexture() {
             override val type: Type
                 get() = Type.GRAY
         }
 
-        @Serializable
-        @SerialName("texture")
         data class Texture(
             val texture: TextureCoordinate = TextureCoordinate(
                 textureItem = BuiltInTextureItems.sneak,
@@ -65,7 +55,6 @@ sealed class DPadExtraButton {
         }
     }
 
-    @Serializable
     data class ButtonInfo(
         val size: Int = 22,
         val texture: TextureCoordinate = TextureCoordinate(
@@ -74,8 +63,6 @@ sealed class DPadExtraButton {
         val activeTexture: ActiveTexture = ActiveTexture.Gray,
     )
 
-    @SerialName("none")
-    @Serializable
     data object None : DPadExtraButton() {
         override val type: Type
             get() = Type.NONE
@@ -83,8 +70,6 @@ sealed class DPadExtraButton {
             get() = null
     }
 
-    @Serializable
-    @SerialName("normal")
     data class Normal(
         val trigger: ButtonTrigger = ButtonTrigger(),
         override val info: ButtonInfo = ButtonInfo(),
@@ -93,8 +78,6 @@ sealed class DPadExtraButton {
             get() = Type.NORMAL
     }
 
-    @Serializable
-    @SerialName("swipe")
     data class Swipe(
         val trigger: ButtonTrigger = ButtonTrigger(),
         override val info: ButtonInfo = ButtonInfo(),
@@ -103,8 +86,6 @@ sealed class DPadExtraButton {
             get() = Type.SWIPE
     }
 
-    @Serializable
-    @SerialName("swipe_locking")
     data class SwipeLocking(
         val press: String? = null,
         override val info: ButtonInfo = ButtonInfo(),

@@ -11,6 +11,8 @@ kt_merge_library(
         "//touchcontroller/common/config/platform",
         "//touchcontroller/common/config/preset",
         "//touchcontroller/common/config/preset/builtin/key",
+        "//touchcontroller/common/config/preset/manager",
+        "//touchcontroller/common/config/serialization",
         "//touchcontroller/common/config/widget",
         "//touchcontroller/common/gal/config",
         "//touchcontroller/common/gal/gameconfig",
@@ -19,9 +21,8 @@ kt_merge_library(
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//:kotlin_serialization",
+        "@maven//:com_ubertob_kondor_kondor_core",
         "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
-        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_json_jvm",
         "@maven//:org_slf4j_slf4j_api",
     ],
 )

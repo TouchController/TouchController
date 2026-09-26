@@ -19,6 +19,7 @@ import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.GameActions
 import top.fifthlight.touchcontroller.common.control.action.PlayerActions
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
+import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 import top.fifthlight.touchcontroller.common.control.widget.boat.BoatButton
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonActiveTexture
@@ -84,7 +85,7 @@ object BuiltinWidgets {
         grabTrigger = grabTrigger,
         moveView = moveView,
         action = action,
-        name = ControllerWidget.Name.Translatable(name),
+        name = ControllerWidgetName.Translatable(name),
         align = align,
         offset = offset,
     )

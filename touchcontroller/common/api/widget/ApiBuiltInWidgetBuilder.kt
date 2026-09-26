@@ -10,11 +10,11 @@ import top.fifthlight.touchcontroller.api.v1.widget.WidgetTexture
 import top.fifthlight.touchcontroller.common.api.text.ApiText
 import top.fifthlight.touchcontroller.common.api.texture.textureItem
 import top.fifthlight.touchcontroller.common.api.trigger.action
-import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
 import top.fifthlight.touchcontroller.common.control.builtin.BuiltInWidget
 import top.fifthlight.touchcontroller.common.control.builtin.BuiltinWidgets
+import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonActiveTexture
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonTexture
@@ -110,9 +110,9 @@ class ApiBuiltInWidgetBuilder : BuiltInWidgetBuilder {
                     activeTexture = activeTexture,
                     action = trigger,
                     name = when (name) {
-                        is ApiText.Translatable -> ControllerWidget.Name.TranslatableString(name.id)
-                        is ApiText.Literal -> ControllerWidget.Name.Literal(name.string)
-                        is ApiText.Raw -> ControllerWidget.Name.Literal(name.text.string)
+                        is ApiText.Translatable -> ControllerWidgetName.TranslatableString(name.id)
+                        is ApiText.Literal -> ControllerWidgetName.Literal(name.string)
+                        is ApiText.Raw -> ControllerWidgetName.Literal(name.text.string)
                     },
                     align = Align.CENTER_CENTER,
                 )

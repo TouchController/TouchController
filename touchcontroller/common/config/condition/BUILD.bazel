@@ -2,19 +2,20 @@ load("//rule:merge_library.bzl", "kt_merge_library")
 
 kt_merge_library(
     name = "condition",
-    srcs = glob(["**/*.kt"]),
+    srcs = glob(
+        ["**/*.kt"],
+        exclude = ["serialization/**"],
+    ),
     javac_opts = "//touchcontroller:javac_opts_jvm_8",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     merge_deps = [
         "//touchcontroller/common/config/condition/input",
         "//touchcontroller/common/gal/entity",
         "//touchcontroller/common/gal/view",
-        "//touchcontroller/common/serializer",
         "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//:kotlin_serialization",
         "//combine/core/data",
         "//combine/item/data",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",

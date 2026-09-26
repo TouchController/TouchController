@@ -5,39 +5,27 @@
 
 package top.fifthlight.touchcontroller.common.layout.align
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.layout.Alignment
 import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntSize
 
-@Serializable
 enum class Align(val alignment: Alignment) {
-    @SerialName("left_top")
     LEFT_TOP(Alignment.TopLeft),
 
-    @SerialName("center_top")
     CENTER_TOP(Alignment.TopCenter),
 
-    @SerialName("right_top")
     RIGHT_TOP(Alignment.TopRight),
 
-    @SerialName("left_center")
     LEFT_CENTER(Alignment.CenterLeft),
 
-    @SerialName("center_center")
     CENTER_CENTER(Alignment.Center),
 
-    @SerialName("right_center")
     RIGHT_CENTER(Alignment.CenterRight),
 
-    @SerialName("left_bottom")
     LEFT_BOTTOM(Alignment.BottomLeft),
 
-    @SerialName("center_bottom")
     CENTER_BOTTOM(Alignment.BottomCenter),
 
-    @SerialName("right_bottom")
     RIGHT_BOTTOM(Alignment.BottomRight);
 
     fun normalizeOffset(offset: IntOffset) = when (this) {

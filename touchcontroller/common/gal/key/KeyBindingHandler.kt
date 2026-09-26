@@ -5,48 +5,33 @@
 
 package top.fifthlight.touchcontroller.common.gal.key
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.mergetools.api.ExpectFactory
 import kotlin.uuid.Uuid
 
-@Serializable
 enum class DefaultKeyBindingType {
-    @SerialName("attack")
     ATTACK,
 
-    @SerialName("use")
     USE,
 
-    @SerialName("inventory")
     INVENTORY,
 
-    @SerialName("swap_hands")
     SWAP_HANDS,
 
-    @SerialName("sneak")
     SNEAK,
 
-    @SerialName("sprint")
     SPRINT,
 
-    @SerialName("jump")
     JUMP,
 
-    @SerialName("player_list")
     PLAYER_LIST,
 
-    @SerialName("left")
     LEFT,
 
-    @SerialName("right")
     RIGHT,
 
-    @SerialName("up")
     UP,
 
-    @SerialName("down")
     DOWN,
 }
 

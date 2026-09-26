@@ -6,7 +6,4 @@ kt_merge_library(
     javac_opts = "//touchcontroller:javac_opts_jvm_8",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     visibility = ["//touchcontroller:__subpackages__"],
-    deps = [
-        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
-    ],
 )

@@ -5,19 +5,16 @@
 
 package top.fifthlight.touchcontroller.common.control.action
 
-import kotlinx.serialization.Serializable
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.widget.button.ButtonResult
 import kotlin.uuid.Uuid
 
-@Serializable
 data class ButtonTrigger(
     val down: WidgetTriggerAction? = null,
     val press: String? = null,
     val release: WidgetTriggerAction? = null,
     val doubleClick: DoubleClickTrigger = DoubleClickTrigger(),
 ) {
-    @Serializable
     data class DoubleClickTrigger(
         val interval: Int = 7,
         val action: WidgetTriggerAction? = null,

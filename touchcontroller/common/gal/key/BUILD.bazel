@@ -8,7 +8,6 @@ kt_merge_library(
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//:kotlin_serialization",
         "//combine/core/data",
     ],
 )

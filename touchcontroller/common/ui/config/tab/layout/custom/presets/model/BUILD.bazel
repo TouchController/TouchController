@@ -7,6 +7,7 @@ kt_merge_library(
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     merge_deps = [
         "//touchcontroller/common/config/preset",
+        "//touchcontroller/common/config/preset/manager",
         "//touchcontroller/common/config/preset/info",
         "//touchcontroller/common/ui/config/tab/layout/custom/model",
         "//touchcontroller/common/ui/config/tab/layout/custom/presets/state",

@@ -1,0 +1,19 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "manager",
+    srcs = glob(["*.kt"]),
+    javac_opts = "//touchcontroller:javac_opts_jvm_8",
+    kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/common/config/preset",
+        "//touchcontroller/common/config/preset/serialization",
+        "//touchcontroller/common/gal/config",
+        "//touchcontroller/common/serialization",
+        "@maven//:com_ubertob_kondor_kondor_core",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
+        "@maven//:org_slf4j_slf4j_api",
+    ],
+)

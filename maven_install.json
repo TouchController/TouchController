@@ -24,6 +24,7 @@
     "com.illposed.osc:javaosc-core": 544772404,
     "com.palantir.javapoet:javapoet": 1629872375,
     "com.squareup:kotlinpoet-jvm": -1169055237,
+    "com.ubertob.kondor:kondor-core": 850181707,
     "de.swiesend:secret-service": -207859749,
     "info.picocli:picocli": 600678140,
     "info.picocli:picocli-codegen": 85961286,
@@ -176,6 +177,10 @@
     "com.palantir.javapoet:javapoet:jar:sources": -356736363,
     "com.squareup:kotlinpoet-jvm": -1151145237,
     "com.squareup:kotlinpoet-jvm:jar:sources": 458207319,
+    "com.ubertob.kondor:kondor-core": -366414127,
+    "com.ubertob.kondor:kondor-core:jar:sources": -404139092,
+    "com.ubertob.kondor:kondor-outcome": -574613428,
+    "com.ubertob.kondor:kondor-outcome:jar:sources": -149656733,
     "commons-codec:commons-codec": 58403102,
     "commons-codec:commons-codec:jar:sources": 1330593853,
     "commons-io:commons-io": -515402013,
@@ -292,6 +297,10 @@
     "org.jetbrains.kotlin:kotlin-reflect": 373096273,
     "org.jetbrains.kotlin:kotlin-reflect:jar:sources": 992770884,
     "org.jetbrains.kotlin:kotlin-stdlib": 1503014050,
+    "org.jetbrains.kotlin:kotlin-stdlib-jdk7": -1578571458,
+    "org.jetbrains.kotlin:kotlin-stdlib-jdk7:jar:sources": 1953305431,
+    "org.jetbrains.kotlin:kotlin-stdlib-jdk8": -1402100306,
+    "org.jetbrains.kotlin:kotlin-stdlib-jdk8:jar:sources": -1790008958,
     "org.jetbrains.kotlin:kotlin-stdlib:jar:sources": -1011046907,
     "org.jetbrains.kotlin:kotlin-test": 191471041,
     "org.jetbrains.kotlin:kotlin-test-junit": -968881217,
@@ -731,6 +740,20 @@
       },
       "version": "2.3.0"
     },
+    "com.ubertob.kondor:kondor-core": {
+      "shasums": {
+        "jar": "dd4999471dc55e55fb143599ab3cc0016bed540e1ad6db4b01b9686a944734dc",
+        "sources": "dfbaaa83a2b65babaff87877f9cb1b3fc155ae56abcdc83bdadc1df60aed3d17"
+      },
+      "version": "4.1.0"
+    },
+    "com.ubertob.kondor:kondor-outcome": {
+      "shasums": {
+        "jar": "a0d8d93f4b8980b4b7eaff8903f10b4d5dda5525cfc82b8d70bab31655be4a1e",
+        "sources": "3223c07322d5774665a79b21eecbe637f21025bedc7ddf3366328a0729d94011"
+      },
+      "version": "4.1.0"
+    },
     "commons-codec:commons-codec": {
       "shasums": {
         "jar": "4da851cb6abfb98bfe9eb77c5e5fc47f5414fa28b94e21b7fd9a646705dc167f",
@@ -1143,6 +1166,20 @@
       },
       "version": "2.4.20"
     },
+    "org.jetbrains.kotlin:kotlin-stdlib-jdk7": {
+      "shasums": {
+        "jar": "fdea6c4203724f42e8e64bef2f0bf79129ccd1df1edf1ccffdc22de7df498c76",
+        "sources": "2534c8908432e06de73177509903d405b55f423dd4c2f747e16b92a2162611e6"
+      },
+      "version": "2.1.0"
+    },
+    "org.jetbrains.kotlin:kotlin-stdlib-jdk8": {
+      "shasums": {
+        "jar": "238d3c7e492f119b50da1c22546dd762462e55f22409611f5e53dd77625cd544",
+        "sources": "3cb6895054a0985bba591c165503fe4dd63a215af53263b67a071ccdc242bf6e"
+      },
+      "version": "2.1.0"
+    },
     "org.jetbrains.kotlin:kotlin-test": {
       "shasums": {
         "jar": "fa281d657898a34f6b0c7383f374f0a0161e61b6cea0095f135d917721d63f22",
@@ -1504,6 +1541,13 @@
       "org.jetbrains.kotlin:kotlin-reflect",
       "org.jetbrains.kotlin:kotlin-stdlib"
     ],
+    "com.ubertob.kondor:kondor-core": [
+      "com.ubertob.kondor:kondor-outcome",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    ],
+    "com.ubertob.kondor:kondor-outcome": [
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    ],
     "de.swiesend:secret-service": [
       "at.favre.lib:hkdf",
       "com.github.hypfvieh:dbus-java-core",
@@ -1653,6 +1697,13 @@
     ],
     "org.jetbrains.kotlin:kotlin-stdlib": [
       "org.jetbrains:annotations"
+    ],
+    "org.jetbrains.kotlin:kotlin-stdlib-jdk7": [
+      "org.jetbrains.kotlin:kotlin-stdlib"
+    ],
+    "org.jetbrains.kotlin:kotlin-stdlib-jdk8": [
+      "org.jetbrains.kotlin:kotlin-stdlib",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk7"
     ],
     "org.jetbrains.kotlin:kotlin-test": [
       "org.jetbrains.kotlin:kotlin-stdlib"
@@ -2233,6 +2284,16 @@
       "com.squareup.kotlinpoet",
       "com.squareup.kotlinpoet.jvm",
       "com.squareup.kotlinpoet.tags"
+    ],
+    "com.ubertob.kondor:kondor-core": [
+      "com.ubertob.kondor.json",
+      "com.ubertob.kondor.json.datetime",
+      "com.ubertob.kondor.json.jsonnode",
+      "com.ubertob.kondor.json.parser",
+      "com.ubertob.kondor.json.schema"
+    ],
+    "com.ubertob.kondor:kondor-outcome": [
+      "com.ubertob.kondor.outcome"
     ],
     "commons-codec:commons-codec": [
       "org.apache.commons.codec",
@@ -4590,6 +4651,10 @@
       "com.palantir.javapoet:javapoet:jar:sources",
       "com.squareup:kotlinpoet-jvm",
       "com.squareup:kotlinpoet-jvm:jar:sources",
+      "com.ubertob.kondor:kondor-core",
+      "com.ubertob.kondor:kondor-core:jar:sources",
+      "com.ubertob.kondor:kondor-outcome",
+      "com.ubertob.kondor:kondor-outcome:jar:sources",
       "commons-codec:commons-codec",
       "commons-codec:commons-codec:jar:sources",
       "commons-io:commons-io",
@@ -4706,6 +4771,10 @@
       "org.jetbrains.kotlin:kotlin-reflect",
       "org.jetbrains.kotlin:kotlin-reflect:jar:sources",
       "org.jetbrains.kotlin:kotlin-stdlib",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk7",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk7:jar:sources",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8:jar:sources",
       "org.jetbrains.kotlin:kotlin-stdlib:jar:sources",
       "org.jetbrains.kotlin:kotlin-test",
       "org.jetbrains.kotlin:kotlin-test-junit",
@@ -4886,6 +4955,10 @@
       "com.palantir.javapoet:javapoet:jar:sources",
       "com.squareup:kotlinpoet-jvm",
       "com.squareup:kotlinpoet-jvm:jar:sources",
+      "com.ubertob.kondor:kondor-core",
+      "com.ubertob.kondor:kondor-core:jar:sources",
+      "com.ubertob.kondor:kondor-outcome",
+      "com.ubertob.kondor:kondor-outcome:jar:sources",
       "commons-codec:commons-codec",
       "commons-codec:commons-codec:jar:sources",
       "commons-io:commons-io",
@@ -5002,6 +5075,10 @@
       "org.jetbrains.kotlin:kotlin-reflect",
       "org.jetbrains.kotlin:kotlin-reflect:jar:sources",
       "org.jetbrains.kotlin:kotlin-stdlib",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk7",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk7:jar:sources",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8:jar:sources",
       "org.jetbrains.kotlin:kotlin-stdlib:jar:sources",
       "org.jetbrains.kotlin:kotlin-test",
       "org.jetbrains.kotlin:kotlin-test-junit",
@@ -5182,6 +5259,10 @@
       "com.palantir.javapoet:javapoet:jar:sources",
       "com.squareup:kotlinpoet-jvm",
       "com.squareup:kotlinpoet-jvm:jar:sources",
+      "com.ubertob.kondor:kondor-core",
+      "com.ubertob.kondor:kondor-core:jar:sources",
+      "com.ubertob.kondor:kondor-outcome",
+      "com.ubertob.kondor:kondor-outcome:jar:sources",
       "commons-codec:commons-codec",
       "commons-codec:commons-codec:jar:sources",
       "commons-io:commons-io",
@@ -5298,6 +5379,10 @@
       "org.jetbrains.kotlin:kotlin-reflect",
       "org.jetbrains.kotlin:kotlin-reflect:jar:sources",
       "org.jetbrains.kotlin:kotlin-stdlib",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk7",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk7:jar:sources",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8:jar:sources",
       "org.jetbrains.kotlin:kotlin-stdlib:jar:sources",
       "org.jetbrains.kotlin:kotlin-test",
       "org.jetbrains.kotlin:kotlin-test-junit",
@@ -5478,6 +5563,10 @@
       "com.palantir.javapoet:javapoet:jar:sources",
       "com.squareup:kotlinpoet-jvm",
       "com.squareup:kotlinpoet-jvm:jar:sources",
+      "com.ubertob.kondor:kondor-core",
+      "com.ubertob.kondor:kondor-core:jar:sources",
+      "com.ubertob.kondor:kondor-outcome",
+      "com.ubertob.kondor:kondor-outcome:jar:sources",
       "commons-codec:commons-codec",
       "commons-codec:commons-codec:jar:sources",
       "commons-io:commons-io",
@@ -5594,6 +5683,10 @@
       "org.jetbrains.kotlin:kotlin-reflect",
       "org.jetbrains.kotlin:kotlin-reflect:jar:sources",
       "org.jetbrains.kotlin:kotlin-stdlib",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk7",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk7:jar:sources",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+      "org.jetbrains.kotlin:kotlin-stdlib-jdk8:jar:sources",
       "org.jetbrains.kotlin:kotlin-stdlib:jar:sources",
       "org.jetbrains.kotlin:kotlin-test",
       "org.jetbrains.kotlin:kotlin-test-junit",

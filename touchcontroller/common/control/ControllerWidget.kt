@@ -9,56 +9,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.combine.core.data.Text
-import top.fifthlight.combine.core.data.TextFactory
 import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntSize
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.preset.info.PresetControlInfo
+import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.align.Align
 import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.uuid.Uuid
 
 @Immutable
-@Serializable(ControllerWidgetSerializer::class)
 abstract class ControllerWidget {
     abstract val id: Uuid
-    abstract val name: Name
+    abstract val name: ControllerWidgetName
     abstract val align: Align
     abstract val autoAlign: Boolean
     abstract val offset: IntOffset
     abstract val opacity: Float
     abstract val lockMoving: Boolean
-
-    @Immutable
-    @Serializable
-    sealed class Name {
-        @Serializable
-        @SerialName("translatable")
-        data class Translatable(val identifier: Identifier) : Name()
-
-        @Serializable
-        @SerialName("translatableString")
-        data class TranslatableString(val identifier: String) : Name()
-
-        @Serializable
-        @SerialName("literal")
-        data class Literal(val string: String) : Name()
-
-        fun getText() = when (this) {
-            is Translatable -> Text.translatable(identifier)
-            is TranslatableString -> TextFactory.of(identifier)
-            is Literal -> Text.literal(string)
-        }
-
-        fun asString() = getText().string
-    }
 
     abstract class Property<Config : ControllerWidget, Value>(
         val getValue: (Config) -> Value,
@@ -115,7 +86,6 @@ abstract class ControllerWidget {
         )
     }
 
-    @Transient
     open val properties: PersistentList<Property<ControllerWidget, *>> = Companion.properties
 
     abstract fun size(): IntSize
@@ -124,7 +94,7 @@ abstract class ControllerWidget {
 
     abstract fun cloneBase(
         id: Uuid = this.id,
-        name: Name = this.name,
+        name: ControllerWidgetName = this.name,
         align: Align = this.align,
         autoAlign: Boolean = this.autoAlign,
         offset: IntOffset = this.offset,

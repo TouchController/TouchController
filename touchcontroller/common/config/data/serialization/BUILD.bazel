@@ -1,0 +1,15 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "serialization",
+    srcs = glob(["*.kt"]),
+    javac_opts = "//touchcontroller:javac_opts_jvm_8",
+    kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//combine/core/paint",
+        "//touchcontroller/common/config/data",
+        "//touchcontroller/common/serialization",
+        "@maven//:com_ubertob_kondor_kondor_core",
+    ],
+)

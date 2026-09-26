@@ -5,14 +5,10 @@
 
 package top.fifthlight.touchcontroller.common.about
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class Developer(
     val name: String? = null,
 )
 
-@Serializable
 data class Library(
     val uniqueId: String,
     val name: String,
@@ -23,14 +19,12 @@ data class Library(
     val website: String? = null,
 )
 
-@Serializable
 data class License(
     val content: String? = null,
     val name: String,
     val url: String? = null,
 )
 
-@Serializable
 data class Libs(
     val libraries: List<Library> = listOf(),
     val licenses: Map<String, License> = mapOf(),

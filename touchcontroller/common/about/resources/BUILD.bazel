@@ -9,12 +9,14 @@ kt_merge_library(
     merge_deps = [
         "//touchcontroller/buildinfo",
         "//touchcontroller/common/about",
+        "//touchcontroller/common/about/serialization",
+        "//touchcontroller/common/serialization",
     ],
     resource_jars = [
         "//touchcontroller/resources/about",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_json_jvm",
+        "@maven//:com_ubertob_kondor_kondor_core",
     ],
 )

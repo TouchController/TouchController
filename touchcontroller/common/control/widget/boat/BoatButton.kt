@@ -8,8 +8,6 @@ package top.fifthlight.touchcontroller.common.control.widget.boat
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.plus
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.data.IntOffset
@@ -22,6 +20,7 @@ import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.EnumProperty
 import top.fifthlight.touchcontroller.common.control.FloatProperty
 import top.fifthlight.touchcontroller.common.control.TextureSetProperty
+import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.align.Align
 import top.fifthlight.touchcontroller.common.layout.widget.Texture
@@ -59,14 +58,12 @@ fun Context.BoatButton(
     }
 }
 
-@Serializable
-@SerialName("boat_button")
 data class BoatButton(
     val textureSet: TextureSet = BuiltInTextureSets.classic,
     val size: Float = 3f,
     val side: BoatButtonSide = BoatButtonSide.LEFT,
     override val id: Uuid = fastRandomUuid(),
-    override val name: Name = Name.Translatable(Texts.WIDGET_BOAT_BUTTON_NAME),
+    override val name: ControllerWidgetName = ControllerWidgetName.Translatable(Texts.WIDGET_BOAT_BUTTON_NAME),
     override val align: Align = Align.CENTER_CENTER,
     override val autoAlign: Boolean = true,
     override val offset: IntOffset = IntOffset.ZERO,
@@ -122,7 +119,7 @@ data class BoatButton(
 
     override fun cloneBase(
         id: Uuid,
-        name: Name,
+        name: ControllerWidgetName,
         align: Align,
         autoAlign: Boolean,
         offset: IntOffset,

@@ -465,7 +465,6 @@ def _kt_empty_texture_lib_impl(
         ],
         deps = [
             kt_texture_lib,
-            "//:kotlin_serialization",
             "//combine/core/data",
             "//combine/data",
             "//combine/core/paint",

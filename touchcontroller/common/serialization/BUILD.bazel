@@ -7,7 +7,10 @@ kt_merge_library(
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
-        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_json_jvm",
+        "//combine/core/data",
+        "//combine/core/paint",
+        "//combine/data",
+        "//combine/item/data",
+        "@maven//:com_ubertob_kondor_kondor_core",
     ],
 )

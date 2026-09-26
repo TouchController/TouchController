@@ -14,6 +14,7 @@ kt_merge_library(
         "//touchcontroller/common/config/preset/topbar",
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/builtin",
+        "//touchcontroller/common/control/name",
         "//touchcontroller/common/layout/align",
         "//touchcontroller/common/layout/data",
         "//touchcontroller/common/ui/control",

@@ -5,6 +5,7 @@
 
 package top.fifthlight.touchcontroller.common.config.holder
 
+import com.ubertob.kondor.json.toJson
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.updateAndGet
@@ -16,13 +17,14 @@ import top.fifthlight.touchcontroller.common.config.PresetConfig
 import top.fifthlight.touchcontroller.common.config.platform.PlatformConfigProvider
 import top.fifthlight.touchcontroller.common.config.preset.PresetManager
 import top.fifthlight.touchcontroller.common.config.preset.builtin.key.BuiltinPresetKey
+import top.fifthlight.touchcontroller.common.config.serialization.JGlobalConfig
 import top.fifthlight.touchcontroller.common.config.widget.WidgetPresetManager
 import top.fifthlight.touchcontroller.common.ext.combineStates
 import top.fifthlight.touchcontroller.common.ext.mapState
 import top.fifthlight.touchcontroller.common.gal.config.ConfigDirectoryProviderFactory
 import top.fifthlight.touchcontroller.common.gal.gameconfig.GameConfigEditor
 import top.fifthlight.touchcontroller.common.gal.gameconfig.GameConfigEditorFactory
-import top.fifthlight.touchcontroller.common.serialization.jsonFormat
+import top.fifthlight.touchcontroller.common.serialization.jsonStyle
 import java.nio.file.NoSuchFileException
 import kotlin.io.path.*
 
@@ -60,7 +62,7 @@ object GlobalConfigHolder : PlatformConfigProvider {
         }
         try {
             logger.info("Reading TouchController config file")
-            _config.value = jsonFormat.decodeFromString(configFile.readText())
+            _config.value = JGlobalConfig.fromJson(configFile.readText()).orThrow()
         } catch (ex: Exception) {
             if (ex !is NoSuchFileException) {
                 logger.warn("Failed to read config: ", ex)
@@ -93,6 +95,6 @@ object GlobalConfigHolder : PlatformConfigProvider {
         val config = _config.updateAndGet(editor)
         createConfigDirectory()
         logger.info("Saving TouchController config file")
-        configFile.writeText(jsonFormat.encodeToString(config))
+        configFile.writeText(JGlobalConfig.toJson(config, jsonStyle))
     }
 }

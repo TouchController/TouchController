@@ -9,6 +9,7 @@ kt_merge_library(
         "//touchcontroller/common/assets",
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/action",
+        "//touchcontroller/common/control/name",
         "//touchcontroller/common/control/property",
         "//touchcontroller/common/control/widget/boat",
         "//touchcontroller/common/control/widget/custom",
@@ -23,7 +24,6 @@ kt_merge_library(
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//:kotlin_serialization",
         "//combine/core/data",
         "//combine/data",
         "//touchcontroller/api",

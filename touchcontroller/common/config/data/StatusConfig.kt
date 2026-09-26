@@ -5,9 +5,7 @@
 
 package top.fifthlight.touchcontroller.common.config.data
 
-import kotlinx.serialization.Serializable
 
-@Serializable
 data class StatusConfig(
     val status: Status = Status.ENABLED,
 ) {

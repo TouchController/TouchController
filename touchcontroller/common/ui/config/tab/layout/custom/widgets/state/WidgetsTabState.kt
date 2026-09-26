@@ -11,6 +11,7 @@ import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.builtin.BuiltinWidgets
+import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 
 data class WidgetsTabState(
     val listContent: ListContent,
@@ -45,7 +46,7 @@ data class WidgetsTabState(
         data class RenameWidgetPresetItem(
             val index: Int,
             val widget: ControllerWidget,
-            val name: ControllerWidget.Name = widget.name,
+            val name: ControllerWidgetName = widget.name,
         ) : DialogState()
     }
 

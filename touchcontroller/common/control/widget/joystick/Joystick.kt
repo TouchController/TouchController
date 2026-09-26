@@ -8,8 +8,6 @@ package top.fifthlight.touchcontroller.common.control.widget.joystick
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.plus
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.data.*
@@ -21,6 +19,7 @@ import top.fifthlight.touchcontroller.common.control.BooleanProperty
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.FloatProperty
 import top.fifthlight.touchcontroller.common.control.TextureSetProperty
+import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.gal.key.DefaultKeyBindingType
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.align.Align
@@ -30,8 +29,6 @@ import kotlin.math.round
 import kotlin.math.sqrt
 import kotlin.uuid.Uuid
 
-@Serializable
-@SerialName("joystick")
 data class Joystick(
     val textureSet: TextureSet = BuiltInTextureSets.new,
     val size: Float = 1.5f,
@@ -39,7 +36,7 @@ data class Joystick(
     val triggerSprint: Boolean = false,
     val increaseOpacityWhenActive: Boolean = true,
     override val id: Uuid = fastRandomUuid(),
-    override val name: Name = Name.Translatable(Texts.WIDGET_JOYSTICK_NAME),
+    override val name: ControllerWidgetName = ControllerWidgetName.Translatable(Texts.WIDGET_JOYSTICK_NAME),
     override val align: Align = Align.CENTER_CENTER,
     override val autoAlign: Boolean = true,
     override val offset: IntOffset = IntOffset.ZERO,
@@ -101,7 +98,7 @@ data class Joystick(
 
     override fun cloneBase(
         id: Uuid,
-        name: Name,
+        name: ControllerWidgetName,
         align: Align,
         autoAlign: Boolean,
         offset: IntOffset,

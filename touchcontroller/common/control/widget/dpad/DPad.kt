@@ -8,8 +8,6 @@ package top.fifthlight.touchcontroller.common.control.widget.dpad
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.plus
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.data.IntOffset
@@ -22,6 +20,7 @@ import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.*
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
+import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 import top.fifthlight.touchcontroller.common.gal.key.DefaultKeyBindingType
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandler
@@ -38,10 +37,8 @@ import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.math.round
 import kotlin.uuid.Uuid
 
-@Serializable
-@SerialName("dpad")
 @ConsistentCopyVisibility
-data class DPad private constructor(
+data class DPad internal constructor(
     val textureSet: TextureSet = BuiltInTextureSets.classic,
     val size: Float = 2f,
     val padding: Int = 4,
@@ -57,7 +54,7 @@ data class DPad private constructor(
     val idRightBackward: Uuid = fastRandomUuid(),
     val idExtraButton: Uuid = fastRandomUuid(),
     override val id: Uuid = fastRandomUuid(),
-    override val name: Name = Name.Translatable(Texts.WIDGET_DPAD_NAME),
+    override val name: ControllerWidgetName = ControllerWidgetName.Translatable(Texts.WIDGET_DPAD_NAME),
     override val align: Align = Align.CENTER_CENTER,
     override val autoAlign: Boolean = true,
     override val offset: IntOffset = IntOffset.ZERO,
@@ -128,7 +125,7 @@ data class DPad private constructor(
             size: Float = 2f,
             padding: Int = if (textureSet.classic) 4 else -1,
             extraButton: DPadExtraButton = DPadExtraButton.None,
-            name: Name = Name.Translatable(Texts.WIDGET_DPAD_NAME),
+            name: ControllerWidgetName = ControllerWidgetName.Translatable(Texts.WIDGET_DPAD_NAME),
             align: Align = Align.CENTER_CENTER,
             offset: IntOffset = IntOffset.ZERO,
             opacity: Float = 1f,
@@ -174,7 +171,7 @@ data class DPad private constructor(
 
     override fun cloneBase(
         id: Uuid,
-        name: Name,
+        name: ControllerWidgetName,
         align: Align,
         autoAlign: Boolean,
         offset: IntOffset,
@@ -209,7 +206,7 @@ data class DPad private constructor(
         padding: Int = this.padding,
         extraButton: DPadExtraButton = this.extraButton,
         showBackwardButton: Boolean = this.showBackwardButton,
-        name: Name = this.name,
+        name: ControllerWidgetName = this.name,
         align: Align = this.align,
         offset: IntOffset = this.offset,
         opacity: Float = this.opacity,

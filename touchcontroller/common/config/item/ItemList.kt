@@ -6,33 +6,20 @@
 package top.fifthlight.touchcontroller.common.config.item
 
 import androidx.compose.runtime.Immutable
-import kotlinx.collections.immutable.*
-import kotlinx.serialization.*
-import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.builtins.SetSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.descriptors.serialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
-import top.fifthlight.combine.core.data.Identifier
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.PersistentSet
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.persistentSetOf
 import top.fifthlight.combine.item.data.Item
 import top.fifthlight.touchcontroller.common.gal.item.ItemDataComponentType
-import top.fifthlight.touchcontroller.common.gal.item.ItemDataComponentTypeFactory
 import top.fifthlight.touchcontroller.common.gal.item.ItemSubclass
-import top.fifthlight.touchcontroller.common.gal.item.ItemSubclassProvider
-import top.fifthlight.touchcontroller.common.serializer.ItemSerializer
 
 @Immutable
-@Serializable
 @ConsistentCopyVisibility
 data class ItemList private constructor(
-    @SerialName("whitelist")
     private val _whitelist: ItemsList = ItemsList(),
-    @SerialName("blacklist")
     private val _blacklist: ItemsList = ItemsList(),
-    @SerialName("subclasses")
     private val _subclasses: ItemSubclassSet = ItemSubclassSet(),
-    @SerialName("components")
     private val _components: ComponentTypesList = ComponentTypesList(),
 ) {
     constructor(
@@ -77,78 +64,11 @@ data class ItemList private constructor(
     }
 }
 
-// Workaround of Kotlin serialization
 @JvmInline
-@Serializable(with = ItemsListSerializer::class)
 value class ItemsList(val items: PersistentList<Item> = persistentListOf())
 
-class ItemsListSerializer : KSerializer<ItemsList> {
-    companion object {
-        private val itemSerializer = ItemSerializer()
-    }
-
-    @OptIn(SealedSerializationApi::class)
-    private class PersistentListDescriptor : SerialDescriptor by serialDescriptor<PersistentList<Item>>()
-
-    override val descriptor: SerialDescriptor = PersistentListDescriptor()
-
-    override fun serialize(encoder: Encoder, value: ItemsList) {
-        ListSerializer(itemSerializer).serialize(encoder, value.items)
-    }
-
-    override fun deserialize(decoder: Decoder): ItemsList {
-        return ItemsList(ListSerializer(itemSerializer).deserialize(decoder).toPersistentList())
-    }
-}
-
 @JvmInline
-@Serializable(with = ItemDataComponentTypeSerializer::class)
 value class ComponentTypesList(val items: PersistentList<ItemDataComponentType> = persistentListOf())
 
-class ItemDataComponentTypeSerializer : KSerializer<ComponentTypesList> {
-    @OptIn(SealedSerializationApi::class)
-    private class PersistentListDescriptor : SerialDescriptor by serialDescriptor<PersistentList<Item>>()
-
-    private val itemSerializer = serializer<String>()
-
-    override val descriptor: SerialDescriptor = PersistentListDescriptor()
-
-    override fun serialize(encoder: Encoder, value: ComponentTypesList) {
-        val ids = value.items.mapNotNull { it.id?.toString() }
-        ListSerializer(itemSerializer).serialize(encoder, ids)
-    }
-
-    override fun deserialize(decoder: Decoder): ComponentTypesList {
-        return ComponentTypesList(ListSerializer(itemSerializer).deserialize(decoder).mapNotNull {
-            ItemDataComponentTypeFactory.of(Identifier(it))
-        }.toPersistentList())
-    }
-}
-
 @JvmInline
-@Serializable(with = ItemSubclassSetSerializer::class)
 value class ItemSubclassSet(val items: PersistentSet<ItemSubclass> = persistentSetOf())
-
-class ItemSubclassSetSerializer : KSerializer<ItemSubclassSet> {
-    companion object {
-        private val allSubclasses = ItemSubclassProvider.itemSubclasses
-    }
-
-    @OptIn(SealedSerializationApi::class)
-    private class PersistentSetDescriptor : SerialDescriptor by serialDescriptor<PersistentSet<Item>>()
-
-    private val itemSerializer = serializer<String>()
-
-    override val descriptor: SerialDescriptor = PersistentSetDescriptor()
-
-    override fun serialize(encoder: Encoder, value: ItemSubclassSet) {
-        val ids = value.items.map { it.configId }.toSet()
-        SetSerializer(itemSerializer).serialize(encoder, ids)
-    }
-
-    override fun deserialize(decoder: Decoder): ItemSubclassSet {
-        return ItemSubclassSet(SetSerializer(itemSerializer).deserialize(decoder).mapNotNull { id ->
-            allSubclasses.firstOrNull { it.configId == id }
-        }.toPersistentSet())
-    }
-}

@@ -9,6 +9,7 @@ kt_merge_library(
         "//touchcontroller/common/assets",
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/builtin",
+        "//touchcontroller/common/control/name",
         "//touchcontroller/resources/texture:texture_set_lib",
     ],
     visibility = ["//touchcontroller:__subpackages__"],

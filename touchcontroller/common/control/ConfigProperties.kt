@@ -43,6 +43,7 @@ import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.GameActions
 import top.fifthlight.touchcontroller.common.control.action.PlayerActions
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
+import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandler
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandlerFactory
@@ -167,10 +168,10 @@ fun <Config : ControllerWidget, Value> ControllerWidget.Property<Config, Value>.
 
 @Immutable
 class NameProperty<Config : ControllerWidget>(
-    getValue: (Config) -> ControllerWidget.Name,
-    setValue: (Config, ControllerWidget.Name) -> Config,
+    getValue: (Config) -> ControllerWidgetName,
+    setValue: (Config, ControllerWidgetName) -> Config,
     private val name: Text,
-) : ControllerWidget.Property<Config, ControllerWidget.Name>(getValue, setValue) {
+) : ControllerWidget.Property<Config, ControllerWidgetName>(getValue, setValue) {
     @Composable
     override fun controller(
         modifier: Modifier,
@@ -189,7 +190,7 @@ class NameProperty<Config : ControllerWidget>(
                 modifier = Modifier.fillMaxWidth(),
                 value = getValue(widgetConfig).asString(),
                 onValueChanged = {
-                    onConfigChanged(setValue(config, ControllerWidget.Name.Literal(it)))
+                    onConfigChanged(setValue(config, ControllerWidgetName.Literal(it)))
                 }
             )
         }

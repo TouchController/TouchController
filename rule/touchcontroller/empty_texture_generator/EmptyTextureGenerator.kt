@@ -1,8 +1,6 @@
 package top.fifthlight.touchcontroller.resources.generator
 
 import com.squareup.kotlinpoet.*
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import top.fifthlight.bazel.worker.api.Worker
 import java.io.PrintWriter
 import java.nio.file.Path
@@ -23,7 +21,6 @@ private fun generateEmptyTexture(
     val identifierTypeName = ClassName("top.fifthlight.combine.core.data", "Identifier")
 
     val emptyTextureType = TypeSpec.enumBuilder(className)
-        .addAnnotation(Serializable::class)
         .primaryConstructor(
             FunSpec
                 .constructorBuilder()
@@ -58,12 +55,6 @@ private fun generateEmptyTexture(
             enumName,
             TypeSpec
                 .anonymousClassBuilder()
-                .addAnnotation(
-                    AnnotationSpec
-                        .builder(SerialName::class)
-                        .addMember("%S", identifier)
-                        .build()
-                )
                 .addSuperclassConstructorParameter("%T.%L", textureClassName, identifier)
                 .addSuperclassConstructorParameter("%T.EMPTY_TEXTURE_%L", textClassName, enumName)
                 .build()

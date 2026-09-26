@@ -9,6 +9,7 @@ kt_merge_library(
         "//touchcontroller/common/assets",
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/action",
+        "//touchcontroller/common/control/name",
         "//touchcontroller/common/control/property",
         "//touchcontroller/common/layout",
         "//touchcontroller/common/layout/align",
@@ -26,7 +27,6 @@ kt_merge_library(
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//:compose",
-        "//:kotlin_serialization",
         "//combine/core/data",
         "//combine/core/layout",
         "//combine/core/modifier",
@@ -39,6 +39,5 @@ kt_merge_library(
         "//combine/widget",
         "@maven//:androidx_compose_runtime_runtime_annotation_jvm",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
-        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
     ],
 )

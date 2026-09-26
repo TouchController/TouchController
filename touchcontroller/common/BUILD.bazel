@@ -49,7 +49,6 @@ merge_library_group(
         "//touchcontroller/common/platform/wayland",
         "//touchcontroller/common/platform/win32",
         "//touchcontroller/common/serialization",
-        "//touchcontroller/common/serializer",
         "//touchcontroller/common/state",
         "//touchcontroller/common/ui",
         "//touchcontroller/common/util/color",
