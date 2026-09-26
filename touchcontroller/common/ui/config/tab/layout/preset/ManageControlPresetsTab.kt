@@ -26,13 +26,13 @@ import top.fifthlight.combine.widget.Text
 import top.fifthlight.combine.widget.WarningButton
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.PresetConfig
-import top.fifthlight.touchcontroller.common.ui.component.BuiltInPresetKeySelector
 import top.fifthlight.touchcontroller.common.ui.config.model.LocalConfigScreenModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.Tab
 import top.fifthlight.touchcontroller.common.ui.config.tab.TabGroup
 import top.fifthlight.touchcontroller.common.ui.config.tab.TabOptions
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.preset.model.ManageControlPresetsTabModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.provider.CustomTabProvider
+import top.fifthlight.touchcontroller.common.ui.preset.BuiltInPresetKeySelector
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.widget.Scaffold
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.AppBar

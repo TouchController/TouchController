@@ -27,13 +27,13 @@ import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.config.layout.ControllerLayout
 import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
-import top.fifthlight.touchcontroller.common.ext.mapState
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.layers.model.LayersTabModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.layers.state.LayersTabState
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.state.CustomControlLayoutTabState
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.tab.CustomTab
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.tab.LocalCustomTabContext
 import top.fifthlight.touchcontroller.common.ui.layer.screen.LayerEditorScreen
+import top.fifthlight.touchcontroller.common.util.state.mapState
 
 @Composable
 private fun LayersList(

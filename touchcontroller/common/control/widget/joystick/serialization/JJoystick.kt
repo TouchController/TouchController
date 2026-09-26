@@ -3,7 +3,7 @@
  * Copyright (C) 2026 fifth_light
  */
 
-package top.fifthlight.touchcontroller.common.control.joystick.serialization
+package top.fifthlight.touchcontroller.common.control.widget.joystick.serialization
 
 import com.ubertob.kondor.json.*
 import com.ubertob.kondor.json.jsonnode.FieldsValues

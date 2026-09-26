@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.getAndUpdate
 import top.fifthlight.touchcontroller.common.config.widget.WidgetPresetManager
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
-import top.fifthlight.touchcontroller.common.ext.combineStates
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.model.CustomControlLayoutTabModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.widgets.state.WidgetsTabState
 import top.fifthlight.touchcontroller.common.ui.model.TouchControllerScreenModel
+import top.fifthlight.touchcontroller.common.util.state.combineStates
 
 class WidgetsTabModel(
     private val screenModel: CustomControlLayoutTabModel

@@ -3,7 +3,7 @@
  * Copyright (C) 2026 fifth_light
  */
 
-package top.fifthlight.touchcontroller.common.ui.component
+package top.fifthlight.touchcontroller.common.ui.preset
 
 import androidx.compose.runtime.*
 import cafe.adriel.voyager.navigator.LocalNavigator

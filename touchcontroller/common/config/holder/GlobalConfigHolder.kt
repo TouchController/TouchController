@@ -15,16 +15,16 @@ import top.fifthlight.mergetools.api.ActualImpl
 import top.fifthlight.touchcontroller.common.config.GlobalConfig
 import top.fifthlight.touchcontroller.common.config.PresetConfig
 import top.fifthlight.touchcontroller.common.config.platform.PlatformConfigProvider
-import top.fifthlight.touchcontroller.common.config.preset.PresetManager
 import top.fifthlight.touchcontroller.common.config.preset.builtin.key.BuiltinPresetKey
+import top.fifthlight.touchcontroller.common.config.preset.manager.PresetManager
 import top.fifthlight.touchcontroller.common.config.serialization.JGlobalConfig
 import top.fifthlight.touchcontroller.common.config.widget.WidgetPresetManager
-import top.fifthlight.touchcontroller.common.ext.combineStates
-import top.fifthlight.touchcontroller.common.ext.mapState
 import top.fifthlight.touchcontroller.common.gal.config.ConfigDirectoryProviderFactory
 import top.fifthlight.touchcontroller.common.gal.gameconfig.GameConfigEditor
 import top.fifthlight.touchcontroller.common.gal.gameconfig.GameConfigEditorFactory
 import top.fifthlight.touchcontroller.common.serialization.jsonStyle
+import top.fifthlight.touchcontroller.common.util.state.combineStates
+import top.fifthlight.touchcontroller.common.util.state.mapState
 import java.nio.file.NoSuchFileException
 import kotlin.io.path.*
 

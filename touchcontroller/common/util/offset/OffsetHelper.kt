@@ -3,7 +3,7 @@
  * Copyright (C) 2026 fifth_light
  */
 
-package top.fifthlight.touchcontroller.common.offset
+package top.fifthlight.touchcontroller.common.util.offset
 
 import top.fifthlight.data.IntSize
 import top.fifthlight.data.Offset

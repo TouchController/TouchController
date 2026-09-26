@@ -18,8 +18,8 @@ import top.fifthlight.combine.widget.Button
 import top.fifthlight.combine.widget.Text
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.preset.builtin.key.BuiltinPresetKey
-import top.fifthlight.touchcontroller.common.ui.component.BuiltInPresetKeySelector
 import top.fifthlight.touchcontroller.common.ui.importpreset.model.ImportPresetScreenModel
+import top.fifthlight.touchcontroller.common.ui.preset.BuiltInPresetKeySelector
 import top.fifthlight.touchcontroller.common.ui.widget.Scaffold
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.AppBar
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.BackButton

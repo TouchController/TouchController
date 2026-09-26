@@ -3,7 +3,7 @@
  * Copyright (C) 2026 fifth_light
  */
 
-package top.fifthlight.touchcontroller.common.ui.config.tab
+package top.fifthlight.touchcontroller.common.ui.config.tab.item
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -27,6 +27,9 @@ import top.fifthlight.touchcontroller.common.gal.item.ItemSubclassProvider
 import top.fifthlight.touchcontroller.common.gal.itemlist.DefaultItemListProvider
 import top.fifthlight.touchcontroller.common.ui.component.screen.ComponentScreen
 import top.fifthlight.touchcontroller.common.ui.config.model.ConfigScreenModel
+import top.fifthlight.touchcontroller.common.ui.config.tab.Tab
+import top.fifthlight.touchcontroller.common.ui.config.tab.TabGroup
+import top.fifthlight.touchcontroller.common.ui.config.tab.TabOptions
 import top.fifthlight.touchcontroller.common.ui.item.screen.ItemListScreen
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.widget.HorizontalPreferenceItem

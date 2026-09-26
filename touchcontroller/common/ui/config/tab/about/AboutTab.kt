@@ -38,7 +38,7 @@ import top.fifthlight.touchcontroller.common.ui.config.tab.Tab
 import top.fifthlight.touchcontroller.common.ui.config.tab.TabGroup
 import top.fifthlight.touchcontroller.common.ui.config.tab.TabOptions
 import top.fifthlight.touchcontroller.common.ui.config.tab.about.model.AboutScreenModel
-import top.fifthlight.touchcontroller.common.ui.screen.LicenseScreen
+import top.fifthlight.touchcontroller.common.ui.license.LicenseScreen
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
 
 object AboutTab : Tab() {

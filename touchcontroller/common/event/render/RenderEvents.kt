@@ -36,9 +36,9 @@ import top.fifthlight.touchcontroller.common.layout.queue.DrawQueue
 import top.fifthlight.touchcontroller.common.layout.widget.game.Hud
 import top.fifthlight.touchcontroller.common.model.ControllerHudModel
 import top.fifthlight.touchcontroller.common.model.TouchStateModel
-import top.fifthlight.touchcontroller.common.offset.fixAspectRadio
 import top.fifthlight.touchcontroller.common.platform.capabilities.PlatformCapabilitiesHolder
 import top.fifthlight.touchcontroller.common.platform.provider.PlatformProvider
+import top.fifthlight.touchcontroller.common.util.offset.fixAspectRadio
 import top.fifthlight.touchcontroller.proxy.client.PlatformCapability
 import top.fifthlight.touchcontroller.proxy.message.*
 

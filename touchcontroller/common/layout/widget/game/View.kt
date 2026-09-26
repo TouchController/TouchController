@@ -6,16 +6,16 @@
 package top.fifthlight.touchcontroller.common.layout.widget.game
 
 import top.fifthlight.data.Offset
-import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
-import top.fifthlight.touchcontroller.common.gal.player.PlayerHandleFactory
 import top.fifthlight.touchcontroller.common.gal.key.DefaultKeyBindingType
+import top.fifthlight.touchcontroller.common.gal.player.PlayerHandleFactory
 import top.fifthlight.touchcontroller.common.gal.view.CrosshairTarget
 import top.fifthlight.touchcontroller.common.gal.view.ViewActionProvider
 import top.fifthlight.touchcontroller.common.gal.view.ViewActionProviderFactory
-import top.fifthlight.touchcontroller.common.offset.fixAspectRadio
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.data.CrosshairStatus
 import top.fifthlight.touchcontroller.common.state.PointerState
+import top.fifthlight.touchcontroller.common.util.offset.fixAspectRadio
+import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 
 private val viewUuid = fastRandomUuid()
 

@@ -3,7 +3,7 @@
  * Copyright (C) 2026 fifth_light
  */
 
-package top.fifthlight.touchcontroller.common.config.preset
+package top.fifthlight.touchcontroller.common.config.preset.manager
 
 import com.ubertob.kondor.json.JList
 import com.ubertob.kondor.json.toJson
@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.updateAndGet
 import org.slf4j.LoggerFactory
+import top.fifthlight.touchcontroller.common.config.preset.LayoutPreset
+import top.fifthlight.touchcontroller.common.config.preset.PresetsContainer
 import top.fifthlight.touchcontroller.common.config.preset.serialization.JLayoutPreset
 import top.fifthlight.touchcontroller.common.gal.config.ConfigDirectoryProvider
 import top.fifthlight.touchcontroller.common.gal.config.ConfigDirectoryProviderFactory

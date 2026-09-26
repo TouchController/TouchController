@@ -7,9 +7,9 @@ package top.fifthlight.touchcontroller.common.ui.config.tab.layout.preset.model
 
 import top.fifthlight.touchcontroller.common.config.PresetConfig
 import top.fifthlight.touchcontroller.common.config.preset.builtin.key.BuiltinPresetKey
-import top.fifthlight.touchcontroller.common.ext.mapState
 import top.fifthlight.touchcontroller.common.ui.config.model.ConfigScreenModel
 import top.fifthlight.touchcontroller.common.ui.model.TouchControllerScreenModel
+import top.fifthlight.touchcontroller.common.util.state.mapState
 
 class ManageControlPresetsTabModel(
     private val configScreenModel: ConfigScreenModel,

@@ -5,7 +5,6 @@
 
 package top.fifthlight.touchcontroller.common.control.serialization
 
-import top.fifthlight.touchcontroller.common.control.joystick.serialization.JJoystick
 import top.fifthlight.touchcontroller.common.control.widget.boat.BoatButton
 import top.fifthlight.touchcontroller.common.control.widget.boat.serialization.JBoatButton
 import top.fifthlight.touchcontroller.common.control.widget.custom.CustomWidget
@@ -13,6 +12,7 @@ import top.fifthlight.touchcontroller.common.control.widget.custom.serialization
 import top.fifthlight.touchcontroller.common.control.widget.dpad.DPad
 import top.fifthlight.touchcontroller.common.control.widget.dpad.serialization.JDPad
 import top.fifthlight.touchcontroller.common.control.widget.joystick.Joystick
+import top.fifthlight.touchcontroller.common.control.widget.joystick.serialization.JJoystick
 import top.fifthlight.touchcontroller.common.serialization.sealedByName
 
 val JControllerWidget = sealedByName {

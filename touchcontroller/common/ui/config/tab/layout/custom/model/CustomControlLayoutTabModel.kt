@@ -13,14 +13,14 @@ import top.fifthlight.touchcontroller.common.config.PresetConfig
 import top.fifthlight.touchcontroller.common.config.layout.ControllerLayout
 import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
 import top.fifthlight.touchcontroller.common.config.preset.LayoutPreset
-import top.fifthlight.touchcontroller.common.config.preset.PresetManager
 import top.fifthlight.touchcontroller.common.config.preset.builtin.key.BuiltinPresetKey
+import top.fifthlight.touchcontroller.common.config.preset.manager.PresetManager
 import top.fifthlight.touchcontroller.common.config.widget.WidgetPresetManager
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
-import top.fifthlight.touchcontroller.common.ext.combineStates
 import top.fifthlight.touchcontroller.common.ui.config.model.ConfigScreenModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.state.CustomControlLayoutTabState
 import top.fifthlight.touchcontroller.common.ui.model.TouchControllerScreenModel
+import top.fifthlight.touchcontroller.common.util.state.combineStates
 import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.uuid.Uuid
 

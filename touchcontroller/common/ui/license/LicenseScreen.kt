@@ -3,7 +3,7 @@
  * Copyright (C) 2026 fifth_light
  */
 
-package top.fifthlight.touchcontroller.common.ui.screen
+package top.fifthlight.touchcontroller.common.ui.license
 
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
