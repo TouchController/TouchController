@@ -3,6 +3,8 @@ load("@rules_java//java:defs.bzl", "java_library", "java_plugin")
 load("@rules_kotlin//kotlin:core.bzl", "define_kt_toolchain", "kt_compiler_plugin", "kt_kotlinc_options")
 load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
 
+exports_files(["maven_install.json"])
+
 refresh_compile_commands(
     name = "refresh_compile_commands",
     targets = {

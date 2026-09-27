@@ -1,0 +1,7 @@
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
+
+kt_jvm_library(
+    name = "config",
+    srcs = ["Config.kt"],
+    visibility = ["//rule/aboutlibraries:__subpackages__"],
+)

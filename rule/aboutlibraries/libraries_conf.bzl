@@ -1,5 +1,3 @@
-"""Rule for generating the AboutLibraries config file."""
-
 def _libraries_conf_impl(ctx):
     output_file = ctx.actions.declare_file(ctx.label.name + ".conf")
     lines = ["{}={}".format(name, url) for name, url in ctx.attr.repositories.items()]

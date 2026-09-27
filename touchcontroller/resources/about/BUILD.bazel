@@ -1,6 +1,7 @@
 load("//combine:libraries.bzl", "combine_library_coordinates")
 load("//rule:jar.bzl", "jar")
-load("//rule:libraries_conf.bzl", "libraries_conf")
+load("//rule/aboutlibraries:libraries_conf.bzl", "libraries_conf")
+load("//rule/aboutlibraries/checker:libraries_conf_test.bzl", "libraries_conf_test")
 load("//touchcontroller:libraries.bzl", "touchcontroller_library_coordinates")
 
 jar(
@@ -16,7 +17,7 @@ jar(
 # 1. bazel build //touchcontroller/resources/about:libraries_conf && \
 #        cp bazel-bin/touchcontroller/resources/about/libraries_conf.conf \
 #            touchcontroller/resources/about/libraries.conf
-# 2. bazel run //rule/aboutlibraries_generator -- \
+# 2. bazel run //rule/aboutlibraries/generator -- \
 #        --config "$(realpath touchcontroller/resources/about/libraries.conf)" \
 #        --output "$(realpath touchcontroller/resources/about/aboutlibraries.json)"
 libraries_conf(
@@ -27,4 +28,10 @@ libraries_conf(
         "central": "https://repo1.maven.org/maven2",
     },
     visibility = ["//touchcontroller:__subpackages__"],
+)
+
+libraries_conf_test(
+    name = "libraries_conf_test",
+    conf = "libraries.conf",
+    maven_lock = "//:maven_install.json",
 )

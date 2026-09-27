@@ -24,6 +24,7 @@ import org.eclipse.aether.resolution.ArtifactRequest
 import org.eclipse.aether.spi.localrepo.LocalRepositoryManagerFactory
 import org.eclipse.sisu.launch.Main
 import org.slf4j.LoggerFactory
+import top.fifthlight.aboutlibraries.config.Config
 import top.fifthlight.touchcontroller.common.about.Developer
 import top.fifthlight.touchcontroller.common.about.Library
 import top.fifthlight.touchcontroller.common.about.Libs

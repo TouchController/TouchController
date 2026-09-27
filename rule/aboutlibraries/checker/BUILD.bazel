@@ -1,0 +1,20 @@
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_binary")
+
+exports_files([
+    "launcher.bat.tpl",
+    "launcher.sh.tpl",
+])
+
+kt_jvm_binary(
+    name = "checker",
+    srcs = ["LibrariesConfChecker.kt"],
+    main_class = "top.fifthlight.aboutlibraries.checker.LibrariesConfCheckerKt",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:kotlin_serialization",
+        "//rule/aboutlibraries/config",
+        "@maven//:com_github_ajalt_clikt_clikt_core_jvm",
+        "@maven//:com_github_ajalt_clikt_clikt_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_json_jvm",
+    ],
+)

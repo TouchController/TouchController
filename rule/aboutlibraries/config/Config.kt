@@ -1,4 +1,4 @@
-package top.fifthlight.aboutlibraries.generator
+package top.fifthlight.aboutlibraries.config
 
 import java.net.URI
 import java.nio.file.Files
