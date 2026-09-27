@@ -1,8 +1,12 @@
+/*
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ * Copyright (C) 2026 fifth_light
+ */
+
 package top.fifthlight.touchcontroller.common.platform.provider
 
 import org.slf4j.LoggerFactory
 import top.fifthlight.touchcontroller.common.gal.window.PlatformWindow
-import top.fifthlight.touchcontroller.common.gal.window.PlatformWindowProvider
 import top.fifthlight.touchcontroller.common.platform.Platform
 import top.fifthlight.touchcontroller.common.platform.android.AndroidPlatform
 import top.fifthlight.touchcontroller.common.platform.nativebridge.NativePlatform
