@@ -5,8 +5,10 @@
 
 package top.fifthlight.touchcontroller.common.config.layout.serialization
 
-import com.ubertob.kondor.json.*
-import com.ubertob.kondor.json.jsonnode.ArrayNode
+import com.ubertob.kondor.json.JFieldMaybe
+import com.ubertob.kondor.json.JList
+import com.ubertob.kondor.json.JObj
+import com.ubertob.kondor.json.JString
 import com.ubertob.kondor.json.jsonnode.FieldsValues
 import com.ubertob.kondor.json.jsonnode.NodePath
 import kotlinx.collections.immutable.persistentListOf
@@ -17,6 +19,8 @@ import top.fifthlight.touchcontroller.common.config.layout.ControllerLayout
 import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
 import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer.Companion.DEFAULT_LAYER_NAME
 import top.fifthlight.touchcontroller.common.control.serialization.JControllerWidget
+import top.fifthlight.touchcontroller.common.serialization.JPersistentList
+import top.fifthlight.touchcontroller.common.serialization.JValueClass
 
 object JLayoutLayer : JObj<LayoutLayer>() {
     val name by JFieldMaybe(LayoutLayer::name, JString)
@@ -30,12 +34,8 @@ object JLayoutLayer : JObj<LayoutLayer>() {
     )
 }
 
-object JControllerLayout : JArray<LayoutLayer, ControllerLayout> {
-    override val converter: JConverter<LayoutLayer> = JLayoutLayer
-    override val _nodeType = ArrayNode
-
-    override fun convertToCollection(iterable: Iterable<LayoutLayer?>): ControllerLayout =
-        ControllerLayout(iterable.filterNotNull().toPersistentList())
-
-    override fun convertFromCollection(collection: ControllerLayout): Iterable<LayoutLayer?> = collection.layers
-}
+val JControllerLayout = JValueClass(
+    getter = ControllerLayout::layers,
+    factory = ::ControllerLayout,
+    converter = JPersistentList(JLayoutLayer),
+)

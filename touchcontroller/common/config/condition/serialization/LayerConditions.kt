@@ -5,18 +5,15 @@
 
 package top.fifthlight.touchcontroller.common.config.condition.serialization
 
-import com.ubertob.kondor.json.*
-import com.ubertob.kondor.json.jsonnode.ArrayNode
+import com.ubertob.kondor.json.JObj
 import com.ubertob.kondor.json.jsonnode.FieldsValues
 import com.ubertob.kondor.json.jsonnode.NodePath
-import kotlinx.collections.immutable.toPersistentList
+import com.ubertob.kondor.json.obj
+import com.ubertob.kondor.json.str
 import top.fifthlight.touchcontroller.common.config.condition.*
 import top.fifthlight.touchcontroller.common.config.condition.input.serialization.JBuiltinLayerCondition
 import top.fifthlight.touchcontroller.common.gal.entity.serialization.JEntityType
-import top.fifthlight.touchcontroller.common.serialization.JItem
-import top.fifthlight.touchcontroller.common.serialization.JUuid
-import top.fifthlight.touchcontroller.common.serialization.enumByName
-import top.fifthlight.touchcontroller.common.serialization.sealedByName
+import top.fifthlight.touchcontroller.common.serialization.*
 
 val JLayerConditionValue = enumByName<LayerConditions.Value> {
     "never" encodes LayerConditions.Value.NEVER
@@ -54,7 +51,7 @@ object JSelectEntityLayerConditionKey : JObj<SelectEntityLayerConditionKey>() {
     override fun FieldsValues.deserializeOrThrow(path: NodePath) = SelectEntityLayerConditionKey(+entityType)
 }
 
-val JLayerConditionKey = sealedByName<LayerConditions.Key> {
+val JLayerConditionKey = sealedByName {
     "builtin" encodes subtype<BuiltinLayerConditionKey>(JBuiltinLayerConditionKey)
     "custom" encodes subtype<CustomLayerConditionKey>(JCustomLayerConditionKey)
     "holding_item" encodes subtype<HoldingItemLayerConditionKey>(JHoldingItemLayerConditionKey)
@@ -69,13 +66,8 @@ object JLayerConditionsItem : JObj<LayerConditions.Item>() {
     override fun FieldsValues.deserializeOrThrow(path: NodePath) = LayerConditions.Item(+key, +value)
 }
 
-object JLayerConditions : JArray<LayerConditions.Item, LayerConditions> {
-    override val converter: JConverter<LayerConditions.Item> = JLayerConditionsItem
-    override val _nodeType = ArrayNode
-
-    override fun convertToCollection(iterable: Iterable<LayerConditions.Item?>) =
-        LayerConditions(iterable.filterNotNull().toPersistentList())
-
-    override fun convertFromCollection(collection: LayerConditions): Iterable<LayerConditions.Item?> =
-        collection.conditions
-}
+val JLayerConditions = JValueClass(
+    getter = LayerConditions::conditions,
+    factory = ::LayerConditions,
+    converter = JPersistentList(JLayerConditionsItem),
+)

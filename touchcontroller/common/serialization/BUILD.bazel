@@ -12,5 +12,7 @@ kt_merge_library(
         "//combine/data",
         "//combine/item/data",
         "@maven//:com_ubertob_kondor_kondor_core",
+        "@maven//:com_ubertob_kondor_kondor_outcome",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],
 )
