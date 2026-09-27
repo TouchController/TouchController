@@ -9,8 +9,9 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
 import com.mikepenz.aboutlibraries.plugin.mapping.SpdxLicense
+import com.ubertob.kondor.json.JsonStyle
+import com.ubertob.kondor.json.toJson
 import kotlinx.coroutines.*
-import kotlinx.serialization.json.Json
 import org.apache.maven.model.building.DefaultModelBuildingRequest
 import org.apache.maven.model.building.ModelBuilder
 import org.eclipse.aether.DefaultRepositorySystemSession
@@ -27,6 +28,7 @@ import top.fifthlight.touchcontroller.common.about.Developer
 import top.fifthlight.touchcontroller.common.about.Library
 import top.fifthlight.touchcontroller.common.about.Libs
 import top.fifthlight.touchcontroller.common.about.License
+import top.fifthlight.touchcontroller.common.about.serialization.JLibs
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -46,9 +48,13 @@ class AboutLibrariesGenerator @Inject constructor(
     val config: Path by option().path().required().help("Config file")
     val output: Path by option().path().required().help("Output file")
 
-    private val format = Json {
-        prettyPrint = true
-    }
+    private val jsonStyle = JsonStyle(
+        appendFieldSeparator = JsonStyle.Companion::comma,
+        appendValueSeparator = JsonStyle.Companion::colonSpace,
+        appendNewline = JsonStyle.Companion::appendNewLineIndent,
+        sortedObjectFields = false,
+        explicitNulls = false,
+    )
 
     override fun run(): Unit = runBlocking {
         val config = withContext(Dispatchers.IO) { Config(config) }
@@ -140,7 +146,7 @@ class AboutLibrariesGenerator @Inject constructor(
             licenses = licenses,
         )
         withContext(Dispatchers.IO) {
-            Files.writeString(output, format.encodeToString(libs))
+            Files.writeString(output, JLibs.toJson(libs, jsonStyle))
         }
     }
 }

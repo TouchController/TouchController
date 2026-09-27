@@ -151,6 +151,36 @@
             "website": "https://github.com/Kotlin/kotlinx.collections.immutable"
         },
         {
+            "uniqueId": "com.ubertob.kondor:kondor-core",
+            "name": "kondor-core",
+            "artifactVersion": "4.1.0",
+            "description": "A Kotlin library to use Json in functional way without reflection",
+            "developers": [
+                {
+                    "name": "Uberto Barbini"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/uberto/kondor-json"
+        },
+        {
+            "uniqueId": "com.ubertob.kondor:kondor-outcome",
+            "name": "kondor-outcome",
+            "artifactVersion": "4.1.0",
+            "description": "A Kotlin specialized Either type for wrapping results in a functional way",
+            "developers": [
+                {
+                    "name": "Uberto Barbini"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/uberto/kondor-json"
+        },
+        {
             "uniqueId": "cafe.adriel.voyager:voyager-core-desktop",
             "name": "VoyagerCore",
             "artifactVersion": "1.1.0-beta03",

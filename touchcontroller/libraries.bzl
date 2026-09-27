@@ -12,6 +12,8 @@ _libraries = [
     _library("cafe.adriel.voyager:voyager-core-desktop:1.1.0-beta03"),
     _library("cafe.adriel.voyager:voyager-navigator-desktop:1.1.0-beta03"),
     _library("cafe.adriel.voyager:voyager-screenmodel-desktop:1.1.0-beta03"),
+    _library("com.ubertob.kondor:kondor-core:4.1.0"),
+    _library("com.ubertob.kondor:kondor-outcome:4.1.0"),
 ]
 
 touchcontroller_libraries = [lib.label for lib in _libraries]
