@@ -1,10 +1,30 @@
+load("//combine:libraries.bzl", "combine_library_coordinates")
 load("//rule:jar.bzl", "jar")
+load("//rule:libraries_conf.bzl", "libraries_conf")
+load("//touchcontroller:libraries.bzl", "touchcontroller_library_coordinates")
 
 jar(
     name = "about",
     resource_paths = {
         "aboutlibraries.json": "aboutlibraries.json",
         "//touchcontroller:license": "LICENSE_TouchController",
+    },
+    visibility = ["//touchcontroller:__subpackages__"],
+)
+
+# Regenerate libraries.conf and aboutlibraries.json with:
+# 1. bazel build //touchcontroller/resources/about:libraries_conf && \
+#        cp bazel-bin/touchcontroller/resources/about/libraries_conf.conf \
+#            touchcontroller/resources/about/libraries.conf
+# 2. bazel run //rule/aboutlibraries_generator -- \
+#        --config "$(realpath touchcontroller/resources/about/libraries.conf)" \
+#        --output "$(realpath touchcontroller/resources/about/aboutlibraries.json)"
+libraries_conf(
+    name = "libraries_conf",
+    libraries = combine_library_coordinates + touchcontroller_library_coordinates,
+    repositories = {
+        "android": "https://dl.google.com/dl/android/maven2",
+        "central": "https://repo1.maven.org/maven2",
     },
     visibility = ["//touchcontroller:__subpackages__"],
 )

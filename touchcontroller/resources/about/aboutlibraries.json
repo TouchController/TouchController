@@ -16,21 +16,6 @@
             "website": "https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.10.3"
         },
         {
-            "uniqueId": "androidx.compose.runtime:runtime-saveable-desktop",
-            "name": "Compose Saveable",
-            "artifactVersion": "1.10.3",
-            "description": "Compose components that allow saving and restoring the local ui state",
-            "developers": [
-                {
-                    "name": "The Android Open Source Project"
-                }
-            ],
-            "licenses": [
-                "Apache-2.0"
-            ],
-            "website": "https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.10.3"
-        },
-        {
             "uniqueId": "androidx.collection:collection-jvm",
             "name": "collections",
             "artifactVersion": "1.6.0",
@@ -46,10 +31,25 @@
             "website": "https://developer.android.com/jetpack/androidx/releases/collection#1.6.0"
         },
         {
-            "uniqueId": "androidx.arch.core:core-common",
-            "name": "Android Arch-Common",
-            "artifactVersion": "2.2.0",
-            "description": "Android Arch-Common",
+            "uniqueId": "org.mini2Dx:universal-tween-engine",
+            "name": "universal-tween-engine",
+            "artifactVersion": "6.3.3",
+            "description": "The Universal Tween Engine enables the interpolation of every attributes from any object",
+            "developers": [
+                {
+                    "name": "Thomas Cashman"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/mini2Dx/universal-tween-engine"
+        },
+        {
+            "uniqueId": "androidx.compose.runtime:runtime-saveable-desktop",
+            "name": "Compose Saveable",
+            "artifactVersion": "1.10.3",
+            "description": "Compose components that allow saving and restoring the local ui state",
             "developers": [
                 {
                     "name": "The Android Open Source Project"
@@ -58,7 +58,7 @@
             "licenses": [
                 "Apache-2.0"
             ],
-            "website": "https://developer.android.com/jetpack/androidx/releases/arch-core#2.2.0"
+            "website": "https://developer.android.com/jetpack/androidx/releases/compose-runtime#1.10.3"
         },
         {
             "uniqueId": "androidx.savedstate:savedstate-desktop",
@@ -136,6 +136,21 @@
             "website": "https://developer.android.com/jetpack/androidx/releases/lifecycle#2.9.4"
         },
         {
+            "uniqueId": "androidx.arch.core:core-common",
+            "name": "Android Arch-Common",
+            "artifactVersion": "2.2.0",
+            "description": "Android Arch-Common",
+            "developers": [
+                {
+                    "name": "The Android Open Source Project"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://developer.android.com/jetpack/androidx/releases/arch-core#2.2.0"
+        },
+        {
             "uniqueId": "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm",
             "name": "kotlinx-collections-immutable",
             "artifactVersion": "0.4.0",
@@ -149,36 +164,6 @@
                 "Apache-2.0"
             ],
             "website": "https://github.com/Kotlin/kotlinx.collections.immutable"
-        },
-        {
-            "uniqueId": "com.ubertob.kondor:kondor-core",
-            "name": "kondor-core",
-            "artifactVersion": "4.1.0",
-            "description": "A Kotlin library to use Json in functional way without reflection",
-            "developers": [
-                {
-                    "name": "Uberto Barbini"
-                }
-            ],
-            "licenses": [
-                "Apache-2.0"
-            ],
-            "website": "https://github.com/uberto/kondor-json"
-        },
-        {
-            "uniqueId": "com.ubertob.kondor:kondor-outcome",
-            "name": "kondor-outcome",
-            "artifactVersion": "4.1.0",
-            "description": "A Kotlin specialized Either type for wrapping results in a functional way",
-            "developers": [
-                {
-                    "name": "Uberto Barbini"
-                }
-            ],
-            "licenses": [
-                "Apache-2.0"
-            ],
-            "website": "https://github.com/uberto/kondor-json"
         },
         {
             "uniqueId": "cafe.adriel.voyager:voyager-core-desktop",
@@ -226,19 +211,34 @@
             "website": "https://github.com/adrielcafe/voyager"
         },
         {
-            "uniqueId": "org.mini2Dx:universal-tween-engine",
-            "name": "universal-tween-engine",
-            "artifactVersion": "6.3.3",
-            "description": "The Universal Tween Engine enables the interpolation of every attributes from any object",
+            "uniqueId": "com.ubertob.kondor:kondor-core",
+            "name": "kondor-core",
+            "artifactVersion": "4.1.0",
+            "description": "A Kotlin library to use Json in functional way without reflection",
             "developers": [
                 {
-                    "name": "Thomas Cashman"
+                    "name": "Uberto Barbini"
                 }
             ],
             "licenses": [
                 "Apache-2.0"
             ],
-            "website": "https://github.com/mini2Dx/universal-tween-engine"
+            "website": "https://github.com/uberto/kondor-json"
+        },
+        {
+            "uniqueId": "com.ubertob.kondor:kondor-outcome",
+            "name": "kondor-outcome",
+            "artifactVersion": "4.1.0",
+            "description": "A Kotlin specialized Either type for wrapping results in a functional way",
+            "developers": [
+                {
+                    "name": "Uberto Barbini"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/uberto/kondor-json"
         }
     ],
     "licenses": {

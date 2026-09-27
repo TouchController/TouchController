@@ -4,6 +4,8 @@
     "androidx.collection:collection-jvm": -1681335210,
     "androidx.compose.runtime:runtime-desktop": -1081111969,
     "androidx.compose.runtime:runtime-saveable-desktop": 1579390313,
+    "androidx.savedstate:savedstate-compose-desktop": -119589906,
+    "androidx.savedstate:savedstate-desktop": -82503895,
     "at.yawk.lz4:lz4-java": 1055460133,
     "cafe.adriel.voyager:voyager-navigator-desktop": -1034036741,
     "cafe.adriel.voyager:voyager-screenmodel-desktop": -1859791851,
@@ -90,7 +92,7 @@
     "androidx.compose.runtime:runtime-annotation-jvm:jar:sources": -1394267084,
     "androidx.compose.runtime:runtime-desktop": -867667319,
     "androidx.compose.runtime:runtime-desktop:jar:sources": -29520277,
-    "androidx.compose.runtime:runtime-saveable-desktop": -105845287,
+    "androidx.compose.runtime:runtime-saveable-desktop": 992731442,
     "androidx.compose.runtime:runtime-saveable-desktop:jar:sources": -2035455773,
     "androidx.lifecycle:lifecycle-common-jvm": -1644543381,
     "androidx.lifecycle:lifecycle-common-jvm:jar:sources": -1706909879,
@@ -98,10 +100,10 @@
     "androidx.lifecycle:lifecycle-runtime-compose-desktop:jar:sources": 2023001366,
     "androidx.lifecycle:lifecycle-runtime-desktop": 1411066766,
     "androidx.lifecycle:lifecycle-runtime-desktop:jar:sources": 57948102,
-    "androidx.savedstate:savedstate-compose-desktop": 424195261,
-    "androidx.savedstate:savedstate-compose-desktop:jar:sources": -411227098,
-    "androidx.savedstate:savedstate-desktop": -692466685,
-    "androidx.savedstate:savedstate-desktop:jar:sources": 1089212324,
+    "androidx.savedstate:savedstate-compose-desktop": 308427580,
+    "androidx.savedstate:savedstate-compose-desktop:jar:sources": -1113822937,
+    "androidx.savedstate:savedstate-desktop": -1824540510,
+    "androidx.savedstate:savedstate-desktop:jar:sources": 386616485,
     "aopalliance:aopalliance": 1403132272,
     "aopalliance:aopalliance:jar:sources": -1259601821,
     "at.favre.lib:hkdf": 53575863,
@@ -466,14 +468,14 @@
         "jar": "4a94787a6e5bcfe143390a4f2737d4425d2ea867f2b34a847de6cda3c6ccc58a",
         "sources": "87632984d47b10696a5b49c80c6876e0e1e65713695807959e10496b8912ba45"
       },
-      "version": "1.3.2"
+      "version": "1.3.3"
     },
     "androidx.savedstate:savedstate-desktop": {
       "shasums": {
         "jar": "c5c89062ba8402b8f8657efd54db1ff192f91ca95fae59c3b418fbc477c3e3ea",
         "sources": "e6d4ba23fb5155e6190ee0d6ddf05dc8b6c723fdb7c0b0dd4d0921a234e13c59"
       },
-      "version": "1.3.2"
+      "version": "1.3.3"
     },
     "aopalliance:aopalliance": {
       "shasums": {

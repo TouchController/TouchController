@@ -1,7 +1,7 @@
 load("//rule:libraries.bzl", "fabric_jij_deps", _library = "library")
 
 _libraries = [
-    _library("androidx.compose.runtime:runtime-saveable-desktop:1.10.0"),
+    _library("androidx.compose.runtime:runtime-saveable-desktop:1.10.3"),
     _library("androidx.savedstate:savedstate-desktop:1.3.3"),
     _library("androidx.savedstate:savedstate-compose-desktop:1.3.3"),
     _library("androidx.lifecycle:lifecycle-common-jvm:2.9.4"),
@@ -17,6 +17,7 @@ _libraries = [
 ]
 
 touchcontroller_libraries = [lib.label for lib in _libraries]
+touchcontroller_library_coordinates = [lib.coordinate for lib in _libraries]
 touchcontroller_fabric_libraries = {lib.label: (lib.name + ":" + lib.version) for lib in _libraries}
 touchcontroller_neoforge_libraries = {lib.label: (lib.coordinate + ":LIBRARY") for lib in _libraries}
 touchcontroller_merge_deps = {lib.name: lib.merge_dep for lib in _libraries if lib.merge_dep}
