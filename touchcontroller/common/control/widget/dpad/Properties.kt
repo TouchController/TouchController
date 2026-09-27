@@ -18,7 +18,11 @@ import top.fifthlight.combine.widget.Select
 import top.fifthlight.combine.widget.SelectIcon
 import top.fifthlight.combine.widget.Text
 import top.fifthlight.touchcontroller.assets.lang.Texts
-import top.fifthlight.touchcontroller.common.control.*
+import top.fifthlight.touchcontroller.common.control.ControllerWidget
+import top.fifthlight.touchcontroller.common.control.property.base.intProperty
+import top.fifthlight.touchcontroller.common.control.property.texture.textureCoordinateProperty
+import top.fifthlight.touchcontroller.common.control.property.trigger.keyBindingProperty
+import top.fifthlight.touchcontroller.common.control.property.trigger.triggerProperty
 
 private fun <Config : ControllerWidget, Value> ControllerWidget.Property<Config, Value>.dpadActiveTextureProperty(
     getTexture: (Value) -> DPadExtraButton.ActiveTexture?,

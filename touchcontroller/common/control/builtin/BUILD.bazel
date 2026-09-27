@@ -10,7 +10,7 @@ kt_merge_library(
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/action",
         "//touchcontroller/common/control/name",
-        "//touchcontroller/common/control/property",
+        "//touchcontroller/common/control/texture",
         "//touchcontroller/common/control/widget/boat",
         "//touchcontroller/common/control/widget/custom",
         "//touchcontroller/common/control/widget/dpad",

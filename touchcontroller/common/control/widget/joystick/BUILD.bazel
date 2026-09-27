@@ -9,6 +9,8 @@ kt_merge_library(
         "//touchcontroller/common/assets",
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/name",
+        "//touchcontroller/common/control/property/base",
+        "//touchcontroller/common/control/property/texture",
         "//touchcontroller/common/gal/key",
         "//touchcontroller/common/layout",
         "//touchcontroller/common/layout/align",

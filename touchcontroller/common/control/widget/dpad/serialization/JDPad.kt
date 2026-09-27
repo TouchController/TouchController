@@ -16,7 +16,7 @@ import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.serialization.JButtonTrigger
 import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.name.serialization.JControllerWidgetName
-import top.fifthlight.touchcontroller.common.control.property.serialization.JTextureCoordinate
+import top.fifthlight.touchcontroller.common.control.texture.serialization.JTextureCoordinate
 import top.fifthlight.touchcontroller.common.control.widget.dpad.DPad
 import top.fifthlight.touchcontroller.common.control.widget.dpad.DPadExtraButton
 import top.fifthlight.touchcontroller.common.layout.align.Align

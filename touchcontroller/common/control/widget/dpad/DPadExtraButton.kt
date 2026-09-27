@@ -9,7 +9,7 @@ import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
-import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
+import top.fifthlight.touchcontroller.common.control.texture.TextureCoordinate
 
 sealed class DPadExtraButton {
     abstract val type: Type

@@ -13,7 +13,7 @@ import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.assets.texture.empty.EmptyTexture
 import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
 import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
-import top.fifthlight.touchcontroller.common.control.property.TextureCoordinate
+import top.fifthlight.touchcontroller.common.control.texture.TextureCoordinate
 
 sealed class ButtonTexture {
     abstract val type: Type

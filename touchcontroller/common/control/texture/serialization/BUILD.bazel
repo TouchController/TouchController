@@ -8,7 +8,7 @@ kt_merge_library(
     merge_deps = [
         "//touchcontroller/common/assets",
         "//touchcontroller/common/assets/serialization",
-        "//touchcontroller/common/control/property",
+        "//touchcontroller/common/control/texture",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [

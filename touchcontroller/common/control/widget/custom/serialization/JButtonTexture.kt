@@ -14,7 +14,7 @@ import com.ubertob.kondor.json.jsonnode.NodePath
 import top.fifthlight.combine.core.paint.Colors
 import top.fifthlight.data.IntPadding
 import top.fifthlight.touchcontroller.assets.texture.empty.EmptyTexture
-import top.fifthlight.touchcontroller.common.control.property.serialization.JTextureCoordinate
+import top.fifthlight.touchcontroller.common.control.texture.serialization.JTextureCoordinate
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonActiveTexture
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonTexture
 import top.fifthlight.touchcontroller.common.serialization.*

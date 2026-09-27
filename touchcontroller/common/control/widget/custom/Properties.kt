@@ -20,7 +20,9 @@ import top.fifthlight.combine.widget.SelectIcon
 import top.fifthlight.combine.widget.Text
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.assets.texture.empty.EmptyTexture
-import top.fifthlight.touchcontroller.common.control.*
+import top.fifthlight.touchcontroller.common.control.ControllerWidget
+import top.fifthlight.touchcontroller.common.control.property.base.*
+import top.fifthlight.touchcontroller.common.control.property.texture.textureCoordinateProperty
 
 fun <Config : ControllerWidget, Value> ControllerWidget.Property<Config, Value>.buttonTextureProperty(
     getTexture: (Value) -> ButtonTexture?,

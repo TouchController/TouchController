@@ -17,10 +17,10 @@ import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
 import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
-import top.fifthlight.touchcontroller.common.control.EnumProperty
-import top.fifthlight.touchcontroller.common.control.FloatProperty
-import top.fifthlight.touchcontroller.common.control.TextureSetProperty
 import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
+import top.fifthlight.touchcontroller.common.control.property.base.EnumProperty
+import top.fifthlight.touchcontroller.common.control.property.base.FloatProperty
+import top.fifthlight.touchcontroller.common.control.property.texture.TextureSetProperty
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.align.Align
 import top.fifthlight.touchcontroller.common.layout.widget.Texture

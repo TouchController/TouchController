@@ -3,7 +3,7 @@
  * Copyright (C) 2026 fifth_light
  */
 
-package top.fifthlight.touchcontroller.common.control.property
+package top.fifthlight.touchcontroller.common.control.texture
 
 import top.fifthlight.combine.core.paint.Texture
 import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
