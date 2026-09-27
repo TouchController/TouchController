@@ -5,9 +5,7 @@ kt_merge_library(
     srcs = glob(["*.kt"]),
     javac_opts = "//touchcontroller:javac_opts_jvm_8",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
+    merge_deps = ["//touchcontroller/common/config/platform"],
     visibility = ["//touchcontroller:__subpackages__"],
-    deps = [
-        "//touchcontroller/common/config/platform",
-        "@maven//:com_ubertob_kondor_kondor_core",
-    ],
+    deps = ["@maven//:com_ubertob_kondor_kondor_core"],
 )

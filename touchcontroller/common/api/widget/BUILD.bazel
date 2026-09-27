@@ -10,6 +10,7 @@ kt_merge_library(
         "//touchcontroller/common/api/texture",
         "//touchcontroller/common/api/trigger",
         "//touchcontroller/common/assets",
+        "//touchcontroller/common/control",
         "//touchcontroller/common/control/action",
         "//touchcontroller/common/control/builtin",
         "//touchcontroller/common/control/name",
@@ -21,6 +22,5 @@ kt_merge_library(
     deps = [
         "//combine/core/data",
         "//touchcontroller/api",
-        "//touchcontroller/common/control",
     ],
 )

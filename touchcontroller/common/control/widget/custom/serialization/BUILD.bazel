@@ -6,8 +6,6 @@ kt_merge_library(
     javac_opts = "//touchcontroller:javac_opts_jvm_8",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     merge_deps = [
-        "//touchcontroller/common/assets",
-        "//touchcontroller/common/assets/serialization",
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/action",
         "//touchcontroller/common/control/action/serialization",
@@ -19,14 +17,10 @@ kt_merge_library(
         "//touchcontroller/common/layout/align",
         "//touchcontroller/common/layout/align/serialization",
         "//touchcontroller/common/serialization",
-        "//touchcontroller/common/util/uuid",
-        "//touchcontroller/resources/lang:text_binding",
         "//touchcontroller/resources/texture:empty_texture_lib",
-        "//touchcontroller/resources/texture:texture_set_lib",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//combine/core/data",
         "//combine/core/paint",
         "//combine/data",
         "@maven//:com_ubertob_kondor_kondor_core",

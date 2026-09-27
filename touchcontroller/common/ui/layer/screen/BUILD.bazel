@@ -37,7 +37,6 @@ kt_merge_library(
         "//combine/item/data",
         "//combine/item/widget",
         "//combine/style",
-        "//combine/theme/base",
         "//combine/theme/blackstone",
         "//combine/widget",
         "//touchcontroller/resources/texture:texture_lib",

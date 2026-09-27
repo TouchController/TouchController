@@ -12,8 +12,6 @@ kt_merge_library(
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//combine/core/data",
-        "//combine/core/paint",
-        "//combine/data",
         "@maven//:com_ubertob_kondor_kondor_core",
     ],
 )

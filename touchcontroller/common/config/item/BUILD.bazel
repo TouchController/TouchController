@@ -10,7 +10,6 @@ kt_merge_library(
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//combine/core/data",
         "//combine/item/data",
         "@maven//:androidx_compose_runtime_runtime_annotation_jvm",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",

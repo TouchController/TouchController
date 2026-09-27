@@ -15,6 +15,7 @@ merge_library_group(
         "//touchcontroller/common/gal/item",
         "//touchcontroller/common/gal/itemlist",
         "//touchcontroller/common/gal/key",
+        "//touchcontroller/common/gal/key/serialization",
         "//touchcontroller/common/gal/paint",
         "//touchcontroller/common/gal/player",
         "//touchcontroller/common/gal/view",

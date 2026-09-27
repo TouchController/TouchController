@@ -9,7 +9,6 @@ kt_merge_library(
         "//touchcontroller/common/assets",
         "//touchcontroller/common/config/widget",
         "//touchcontroller/common/control",
-        "//touchcontroller/common/control/builtin",
         "//touchcontroller/common/control/name",
         "//touchcontroller/common/ui/config/tab/layout/custom/model",
         "//touchcontroller/common/ui/config/tab/layout/custom/widgets/state",
