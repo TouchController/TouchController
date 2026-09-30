@@ -4890,7 +4890,7 @@
     "//repo:neoform.bzl%neoform": {
       "general": {
         "bzlTransitiveDigest": "69m2eFE+u/SUY9BB1bLFy5d6uUJmCS4hmHgsYbmfjmQ=",
-        "usagesDigest": "uLFG+CcOCMCRHaoH7axHfirOl3deJuKMU7dQXlrXqik=",
+        "usagesDigest": "QrQqz5d0zgqxb/i1U6q1M91ijOJ/O6EwBiilk3wVKBs=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
@@ -5345,6 +5345,19 @@
               "client_jar": "@@rules_mc++minecraft+minecraft//26.3:client",
               "server_jar": "@@rules_mc++minecraft+minecraft//26.3:server",
               "client_libraries": "@@rules_mc++minecraft+minecraft//26.3:client_libraries",
+              "strip_deny_patterns": [],
+              "pin_file": "@@//:neoform_pin.txt"
+            }
+          },
+          "neoform_26_4_snapshot_2_1": {
+            "repoRuleId": "@@//repo:neoform.bzl%_neoform_repo",
+            "attributes": {
+              "version": "26.4-snapshot-2-1",
+              "legacy": false,
+              "sha256": "45021005247873234cf7079d722271dd084aa784b5c70e067f15b73817ae07ca",
+              "client_jar": "@@rules_mc++minecraft+minecraft//26.4-snapshot-2:client",
+              "server_jar": "@@rules_mc++minecraft+minecraft//26.4-snapshot-2:server",
+              "client_libraries": "@@rules_mc++minecraft+minecraft//26.4-snapshot-2:client_libraries",
               "strip_deny_patterns": [],
               "pin_file": "@@//:neoform_pin.txt"
             }
@@ -6271,7 +6284,7 @@
     "@@rules_mc+//:extensions.bzl%minecraft": {
       "general": {
         "bzlTransitiveDigest": "oVhkbj0h2wDacUgrOA1dyrvri6NygFl5ZEaV9bidMRg=",
-        "usagesDigest": "VtR8pao15HxYOO3tL28/onwiU4W4/YyufnC0W6gY0RU=",
+        "usagesDigest": "fxyXtDe80bkefKyXbY768OrlasK9ICLFRLJN0qJW/Js=",
         "recordedInputs": [
           "REPO_MAPPING:rules_mc+,bazel_tools bazel_tools"
         ],
@@ -7177,6 +7190,22 @@
             "attributes": {
               "url": "https://piston-data.mojang.com/v1/objects/33680f5f2ac32864d6d7cf5e56a705fdb3e05f4c/server.jar",
               "integrity": "sha1-M2gPXyrDKGTW189eVqcF/bPgX0w=",
+              "downloaded_file_path": "server.jar"
+            }
+          },
+          "minecraft_26_4-snapshot-2_client": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "url": "https://piston-data.mojang.com/v1/objects/57390e151851510972714846a752c6b8307f7fae/client.jar",
+              "integrity": "sha1-VzkOFRhRUQlycUhGp1LGuDB/f64=",
+              "downloaded_file_path": "client.jar"
+            }
+          },
+          "minecraft_26_4-snapshot-2_server": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "url": "https://piston-data.mojang.com/v1/objects/e6cac6e2fa35d5847e60dede721ec75f7a28c34d/server.jar",
+              "integrity": "sha1-5srG4vo11YR+YN7ech7HX3oow00=",
               "downloaded_file_path": "server.jar"
             }
           },
@@ -13146,6 +13175,10 @@
                 "26.3": [
                   "client#file",
                   "server#file"
+                ],
+                "26.4-snapshot-2": [
+                  "client#file",
+                  "server#file"
                 ]
               },
               "version_libraries": {
@@ -15883,6 +15916,122 @@
                   "org.slf4j:slf4j-api:2.0.17"
                 ],
                 "26.3": [
+                  "at.yawk.lz4:lz4-java:1.10.1",
+                  "ca.weblite:java-objc-bridge:1.1",
+                  "com.azure:azure-json:1.4.0",
+                  "com.github.oshi:oshi-core:6.9.0",
+                  "com.google.code.gson:gson:2.14.0",
+                  "com.google.guava:failureaccess:1.0.3",
+                  "com.google.guava:guava:33.6.0-jre",
+                  "com.ibm.icu:icu4j:78.3",
+                  "com.microsoft.azure:msal4j:1.24.1",
+                  "com.mojang:authlib:10.0.77",
+                  "com.mojang:blocklist:1.0.10",
+                  "com.mojang:brigadier:1.3.11",
+                  "com.mojang:datafixerupper:10.0.21",
+                  "com.mojang:jtracy:1.14.38",
+                  "com.mojang:jtracy:1.14.38:natives-linux",
+                  "com.mojang:jtracy:1.14.38:natives-macos",
+                  "com.mojang:jtracy:1.14.38:natives-macos-arm64",
+                  "com.mojang:jtracy:1.14.38:natives-windows",
+                  "com.mojang:logging:1.7.12",
+                  "com.mojang:patchy:2.2.10",
+                  "com.mojang:text2speech:1.19.12",
+                  "commons-codec:commons-codec:1.22.0",
+                  "commons-io:commons-io:2.20.0",
+                  "io.netty:netty-buffer:4.2.16.Final",
+                  "io.netty:netty-codec-base:4.2.16.Final",
+                  "io.netty:netty-codec-compression:4.2.16.Final",
+                  "io.netty:netty-codec-http:4.2.16.Final",
+                  "io.netty:netty-common:4.2.16.Final",
+                  "io.netty:netty-handler:4.2.16.Final",
+                  "io.netty:netty-resolver:4.2.16.Final",
+                  "io.netty:netty-transport-classes-epoll:4.2.16.Final",
+                  "io.netty:netty-transport-classes-kqueue:4.2.16.Final",
+                  "io.netty:netty-transport-native-epoll:4.2.16.Final:linux-aarch_64",
+                  "io.netty:netty-transport-native-epoll:4.2.16.Final:linux-x86_64",
+                  "io.netty:netty-transport-native-kqueue:4.2.16.Final:osx-aarch_64",
+                  "io.netty:netty-transport-native-kqueue:4.2.16.Final:osx-x86_64",
+                  "io.netty:netty-transport-native-unix-common:4.2.16.Final",
+                  "io.netty:netty-transport:4.2.16.Final",
+                  "it.unimi.dsi:fastutil:8.5.18",
+                  "net.java.dev.jna:jna-platform:5.17.0",
+                  "net.java.dev.jna:jna:5.17.0",
+                  "net.sf.jopt-simple:jopt-simple:5.0.4",
+                  "org.apache.commons:commons-compress:1.28.0",
+                  "org.apache.commons:commons-lang3:3.20.0",
+                  "org.apache.logging.log4j:log4j-api:2.26.0",
+                  "org.apache.logging.log4j:log4j-core:2.26.0",
+                  "org.apache.logging.log4j:log4j-slf4j2-impl:2.26.0",
+                  "org.jcraft:jorbis:0.0.17",
+                  "org.joml:joml:1.10.9",
+                  "org.jspecify:jspecify:1.0.0",
+                  "org.lwjgl:lwjgl-freetype:3.4.3",
+                  "org.lwjgl:lwjgl-freetype:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl-freetype:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-freetype:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl-freetype:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl-freetype:3.4.3:natives-windows-arm64",
+                  "org.lwjgl:lwjgl-jemalloc:3.4.3",
+                  "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl-jemalloc:3.4.3:natives-windows-arm64",
+                  "org.lwjgl:lwjgl-openal:3.4.3",
+                  "org.lwjgl:lwjgl-openal:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl-openal:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-openal:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl-openal:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl-openal:3.4.3:natives-windows-arm64",
+                  "org.lwjgl:lwjgl-opengl:3.4.3",
+                  "org.lwjgl:lwjgl-opengl:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl-opengl:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-opengl:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl-opengl:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl-opengl:3.4.3:natives-windows-arm64",
+                  "org.lwjgl:lwjgl-sdl:3.4.3",
+                  "org.lwjgl:lwjgl-sdl:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl-sdl:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-sdl:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl-sdl:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl-sdl:3.4.3:natives-windows-arm64",
+                  "org.lwjgl:lwjgl-shaderc:3.4.3",
+                  "org.lwjgl:lwjgl-shaderc:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl-shaderc:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-shaderc:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl-shaderc:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl-shaderc:3.4.3:natives-windows-arm64",
+                  "org.lwjgl:lwjgl-spvc:3.4.3",
+                  "org.lwjgl:lwjgl-spvc:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl-spvc:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-spvc:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl-spvc:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl-spvc:3.4.3:natives-windows-arm64",
+                  "org.lwjgl:lwjgl-stb:3.4.3",
+                  "org.lwjgl:lwjgl-stb:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl-stb:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-stb:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl-stb:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl-stb:3.4.3:natives-windows-arm64",
+                  "org.lwjgl:lwjgl-vma:3.4.3",
+                  "org.lwjgl:lwjgl-vma:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl-vma:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-vma:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl-vma:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl-vma:3.4.3:natives-windows-arm64",
+                  "org.lwjgl:lwjgl-vulkan:3.4.3",
+                  "org.lwjgl:lwjgl-vulkan:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl-vulkan:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl:3.4.3",
+                  "org.lwjgl:lwjgl:3.4.3:natives-linux",
+                  "org.lwjgl:lwjgl:3.4.3:natives-macos",
+                  "org.lwjgl:lwjgl:3.4.3:natives-macos-arm64",
+                  "org.lwjgl:lwjgl:3.4.3:natives-windows",
+                  "org.lwjgl:lwjgl:3.4.3:natives-windows-arm64",
+                  "org.slf4j:slf4j-api:2.0.17"
+                ],
+                "26.4-snapshot-2": [
                   "at.yawk.lz4:lz4-java:1.10.1",
                   "ca.weblite:java-objc-bridge:1.1",
                   "com.azure:azure-json:1.4.0",
@@ -20242,19 +20391,20 @@
                 "1.17": "f425401a00adf0112fde624ee80c66333530f8a1",
                 "1.18": "d31a2e85ae149dd1b1a7070b22cb8887892fda6c",
                 "1.19": "a9c8b05a8082a65678beda6dfa2b8f21fa627bce",
-                "5": "78fe335ef048443d060bc53ace10bb0f41af7d50",
-                "12": "3d7bedf0dd2f50327523995fe73a4c0dd23fb350",
-                "16": "20d463c249d5fccad978892f5a059d940fcb1c8e",
-                "17": "76d7a97b9e0778fda3b14e474f012450ca0de1bb",
-                "18": "a731b9783ba120df5e859ad7aec9c36bee7558bd",
-                "19": "8d07e20a532738f3ee13392a23871abb5927fd79",
-                "24": "2b11bad5dd93d7eae4e86aaafd8029d0dc79bfb8",
-                "26": "94077c8d52bb89d70e9ce408a56847423034c172",
-                "27": "5bcbc92cc2a59f0ac5af3ca59e871c7b06afc474",
-                "29": "a63b2bea5bcbba70c87df110b64ab6f2d71d446f",
-                "30": "c0f421369aed2b80c0490be50630519c49a2db77",
-                "32": "d6540f46a8fec49e45fb7312cdcf401a8e4e15ff",
-                "34": "d8492bc61d32a4874c77daa03c0cba9201e9b83b"
+                "5": "3d1e8e9cad62f188270564f4bdfd3a79df9be65a",
+                "12": "16f8e2eca81b5c757d3870c17a58376fc296e2e0",
+                "16": "062ddb2dd67d41cdf332bbceb37963160a296cf0",
+                "17": "9b16298b1dc0697878cec88bb2d96168f5239e4f",
+                "18": "9ce695924be0343b71b516ec01376bc83916109d",
+                "19": "dc6757fadfa8abf306e90465661ec4a7dcd3386a",
+                "24": "cedfdc4e0969b0b581378ccda1827045838c389e",
+                "26": "c9b00f2b43d98434e27377c9312e06b4f0ec0f26",
+                "27": "28ce5206f3f8806a1a83242947119bdd4fefecc1",
+                "29": "4043c34fdd5d06b2ac1f6f46c5b91a4ac16e3452",
+                "30": "2c17565f9cd7dbb95294e71fe258d65d6a8f0360",
+                "32": "9a622c23d8ff76c4c44787c2e171c56feed1f786",
+                "34": "abfaa525f923f807df8b4e4d29c1b5e3a104adbe",
+                "35": "d41994f026f245c4802693977f4a0ff40091f4ff"
               },
               "asset_urls": {
                 "pre-1.6": "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json",
@@ -20267,19 +20417,20 @@
                 "1.17": "https://piston-meta.mojang.com/v1/packages/f425401a00adf0112fde624ee80c66333530f8a1/1.17.json",
                 "1.18": "https://piston-meta.mojang.com/v1/packages/d31a2e85ae149dd1b1a7070b22cb8887892fda6c/1.18.json",
                 "1.19": "https://piston-meta.mojang.com/v1/packages/a9c8b05a8082a65678beda6dfa2b8f21fa627bce/1.19.json",
-                "5": "https://piston-meta.mojang.com/v1/packages/78fe335ef048443d060bc53ace10bb0f41af7d50/5.json",
-                "12": "https://piston-meta.mojang.com/v1/packages/3d7bedf0dd2f50327523995fe73a4c0dd23fb350/12.json",
-                "16": "https://piston-meta.mojang.com/v1/packages/20d463c249d5fccad978892f5a059d940fcb1c8e/16.json",
-                "17": "https://piston-meta.mojang.com/v1/packages/76d7a97b9e0778fda3b14e474f012450ca0de1bb/17.json",
-                "18": "https://piston-meta.mojang.com/v1/packages/a731b9783ba120df5e859ad7aec9c36bee7558bd/18.json",
-                "19": "https://piston-meta.mojang.com/v1/packages/8d07e20a532738f3ee13392a23871abb5927fd79/19.json",
-                "24": "https://piston-meta.mojang.com/v1/packages/2b11bad5dd93d7eae4e86aaafd8029d0dc79bfb8/24.json",
-                "26": "https://piston-meta.mojang.com/v1/packages/94077c8d52bb89d70e9ce408a56847423034c172/26.json",
-                "27": "https://piston-meta.mojang.com/v1/packages/5bcbc92cc2a59f0ac5af3ca59e871c7b06afc474/27.json",
-                "29": "https://piston-meta.mojang.com/v1/packages/a63b2bea5bcbba70c87df110b64ab6f2d71d446f/29.json",
-                "30": "https://piston-meta.mojang.com/v1/packages/c0f421369aed2b80c0490be50630519c49a2db77/30.json",
-                "32": "https://piston-meta.mojang.com/v1/packages/d6540f46a8fec49e45fb7312cdcf401a8e4e15ff/32.json",
-                "34": "https://piston-meta.mojang.com/v1/packages/d8492bc61d32a4874c77daa03c0cba9201e9b83b/34.json"
+                "5": "https://piston-meta.mojang.com/v1/packages/3d1e8e9cad62f188270564f4bdfd3a79df9be65a/5.json",
+                "12": "https://piston-meta.mojang.com/v1/packages/16f8e2eca81b5c757d3870c17a58376fc296e2e0/12.json",
+                "16": "https://piston-meta.mojang.com/v1/packages/062ddb2dd67d41cdf332bbceb37963160a296cf0/16.json",
+                "17": "https://piston-meta.mojang.com/v1/packages/9b16298b1dc0697878cec88bb2d96168f5239e4f/17.json",
+                "18": "https://piston-meta.mojang.com/v1/packages/9ce695924be0343b71b516ec01376bc83916109d/18.json",
+                "19": "https://piston-meta.mojang.com/v1/packages/dc6757fadfa8abf306e90465661ec4a7dcd3386a/19.json",
+                "24": "https://piston-meta.mojang.com/v1/packages/cedfdc4e0969b0b581378ccda1827045838c389e/24.json",
+                "26": "https://piston-meta.mojang.com/v1/packages/c9b00f2b43d98434e27377c9312e06b4f0ec0f26/26.json",
+                "27": "https://piston-meta.mojang.com/v1/packages/28ce5206f3f8806a1a83242947119bdd4fefecc1/27.json",
+                "29": "https://piston-meta.mojang.com/v1/packages/4043c34fdd5d06b2ac1f6f46c5b91a4ac16e3452/29.json",
+                "30": "https://piston-meta.mojang.com/v1/packages/2c17565f9cd7dbb95294e71fe258d65d6a8f0360/30.json",
+                "32": "https://piston-meta.mojang.com/v1/packages/9a622c23d8ff76c4c44787c2e171c56feed1f786/32.json",
+                "34": "https://piston-meta.mojang.com/v1/packages/abfaa525f923f807df8b4e4d29c1b5e3a104adbe/34.json",
+                "35": "https://piston-meta.mojang.com/v1/packages/d41994f026f245c4802693977f4a0ff40091f4ff/35.json"
               },
               "version_assets": {
                 "b1.7.3": "pre-1.6",
@@ -20316,7 +20467,8 @@
                 "26w14a": "30",
                 "26.1.2": "30",
                 "26.2": "32",
-                "26.3": "34"
+                "26.3": "34",
+                "26.4-snapshot-2": "35"
               }
             }
           }
