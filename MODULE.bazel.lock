@@ -877,7 +877,7 @@
     "//repo:neoforge.bzl%neoforge": {
       "general": {
         "bzlTransitiveDigest": "l1aPIkAkrFdds4sKZ+ZWB5aELBidMXj2n4oSPpcAw8M=",
-        "usagesDigest": "hOoG3RN/pioj3IGVT5ZlK/Ct1XZbIjNGpFV/uqf9jlY=",
+        "usagesDigest": "FMMYoya/Br32NHaTMcSw7wUJ8tS9DQVCdDQRatNU8nA=",
         "recordedInputs": [
           "REPO_MAPPING:, ",
           "REPO_MAPPING:,bazel_tools bazel_tools",
@@ -1262,15 +1262,15 @@
               "joined_patched_sources": "@@+neoform+neoform_26_2_2//tasks/joined_patch:joined_patch"
             }
           },
-          "neoforge_26_3_0_1_beta": {
+          "neoforge_26_3_0_37_beta": {
             "repoRuleId": "@@//repo:neoforge.bzl%_neoforge_repo",
             "attributes": {
-              "version": "26.3.0.1-beta",
+              "version": "26.3.0.37-beta",
               "java_target": 25,
               "legacy": false,
-              "userdev_sha256": "5221335091bc52998c4fb11cc8307cf15f806855b6df49bc655504e38dd532d3",
-              "universal_sha256": "13e9da116fc34d10cc2422451fc99be4e2a1f50041968b0402d19c4be48350b4",
-              "sources_sha256": "61757dbb9a6b5ca24769bcd5dbaaffe75887e89e2172ed44131e4f003fd5345e",
+              "userdev_sha256": "6ac54b40839dffc95433dc11190402432af06fbc5227babc477caaa259c548dd",
+              "universal_sha256": "130e01c01ea04e96d38263ee7eb1fc33df3c0050a45f06d15f067f23acd34e0d",
+              "sources_sha256": "b486434264fed81430a0791aab4911348c40e5b768dcae733eb29cc021e49dc0",
               "joined_patched_sources": "@@+neoform+neoform_26_3_1//tasks/joined_patch:joined_patch"
             }
           },
@@ -4362,18 +4362,18 @@
               "downloaded_file_name": "commons-lang3-3.20.0.jar"
             }
           },
-          "neoforge_net_neoforged_fancymodloader_earlydisplay_12_0_0": {
+          "neoforge_net_neoforged_fancymodloader_earlydisplay_12_0_8": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
-              "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/earlydisplay/12.0.0/earlydisplay-12.0.0.jar",
-              "downloaded_file_name": "earlydisplay-12.0.0.jar"
+              "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/earlydisplay/12.0.8/earlydisplay-12.0.8.jar",
+              "downloaded_file_name": "earlydisplay-12.0.8.jar"
             }
           },
-          "neoforge_net_neoforged_fancymodloader_loader_12_0_0": {
+          "neoforge_net_neoforged_fancymodloader_loader_12_0_8": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
-              "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/loader/12.0.0/loader-12.0.0.jar",
-              "downloaded_file_name": "loader-12.0.0.jar"
+              "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/loader/12.0.8/loader-12.0.8.jar",
+              "downloaded_file_name": "loader-12.0.8.jar"
             }
           },
           "neoforge_org_ow2_asm_asm_commons_9_10_1": {
@@ -4444,6 +4444,27 @@
             "attributes": {
               "url": "https://maven.neoforged.net/releases/org/apache/maven/maven-artifact/3.9.16/maven-artifact-3.9.16.jar",
               "downloaded_file_name": "maven-artifact-3.9.16.jar"
+            }
+          },
+          "neoforge_net_fabricmc_sponge_mixin_0_17_4_mixin_0_8_7": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar",
+              "downloaded_file_name": "sponge-mixin-0.17.4+mixin.0.8.7.jar"
+            }
+          },
+          "neoforge_io_github_llamalad7_mixinextras_neoforge_0_5_5": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/io/github/llamalad7/mixinextras-neoforge/0.5.5/mixinextras-neoforge-0.5.5.jar",
+              "downloaded_file_name": "mixinextras-neoforge-0.5.5.jar"
+            }
+          },
+          "neoforge_org_lwjgl_lwjgl_sdl_3_4_3": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
+            "attributes": {
+              "url": "https://maven.neoforged.net/releases/org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3.jar",
+              "downloaded_file_name": "lwjgl-sdl-3.4.3.jar"
             }
           },
           "neoforge_org_codehaus_plexus_plexus_utils_3_6_1": {
@@ -4843,8 +4864,8 @@
                 "@neoforge_com_google_code_gson_gson_2_14_0//jar": "https://maven.neoforged.net/releases/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
                 "@neoforge_com_google_errorprone_error_prone_annotations_2_48_0//jar": "https://maven.neoforged.net/releases/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar",
                 "@neoforge_org_apache_commons_commons_lang3_3_20_0//jar": "https://maven.neoforged.net/releases/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar",
-                "@neoforge_net_neoforged_fancymodloader_earlydisplay_12_0_0//jar": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/earlydisplay/12.0.0/earlydisplay-12.0.0.jar",
-                "@neoforge_net_neoforged_fancymodloader_loader_12_0_0//jar": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/loader/12.0.0/loader-12.0.0.jar",
+                "@neoforge_net_neoforged_fancymodloader_earlydisplay_12_0_8//jar": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/earlydisplay/12.0.8/earlydisplay-12.0.8.jar",
+                "@neoforge_net_neoforged_fancymodloader_loader_12_0_8//jar": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/loader/12.0.8/loader-12.0.8.jar",
                 "@neoforge_org_ow2_asm_asm_commons_9_10_1//jar": "https://maven.neoforged.net/releases/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
                 "@neoforge_org_ow2_asm_asm_util_9_10_1//jar": "https://maven.neoforged.net/releases/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar",
                 "@neoforge_org_ow2_asm_asm_analysis_9_10_1//jar": "https://maven.neoforged.net/releases/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar",
@@ -4855,6 +4876,9 @@
                 "@neoforge_net_neoforged_JarJarSelector_0_5_1//jar": "https://maven.neoforged.net/releases/net/neoforged/JarJarSelector/0.5.1/JarJarSelector-0.5.1.jar",
                 "@neoforge_net_neoforged_JarJarMetadata_0_5_1//jar": "https://maven.neoforged.net/releases/net/neoforged/JarJarMetadata/0.5.1/JarJarMetadata-0.5.1.jar",
                 "@neoforge_org_apache_maven_maven_artifact_3_9_16//jar": "https://maven.neoforged.net/releases/org/apache/maven/maven-artifact/3.9.16/maven-artifact-3.9.16.jar",
+                "@neoforge_net_fabricmc_sponge_mixin_0_17_4_mixin_0_8_7//jar": "https://maven.neoforged.net/releases/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar",
+                "@neoforge_io_github_llamalad7_mixinextras_neoforge_0_5_5//jar": "https://maven.neoforged.net/releases/io/github/llamalad7/mixinextras-neoforge/0.5.5/mixinextras-neoforge-0.5.5.jar",
+                "@neoforge_org_lwjgl_lwjgl_sdl_3_4_3//jar": "https://maven.neoforged.net/releases/org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3.jar",
                 "@neoforge_org_codehaus_plexus_plexus_utils_3_6_1//jar": "https://maven.neoforged.net/releases/org/codehaus/plexus/plexus-utils/3.6.1/plexus-utils-3.6.1.jar"
               },
               "pin_file": "@@//:neoforge_pin.txt"

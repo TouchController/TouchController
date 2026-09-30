@@ -5,7 +5,7 @@ maven.install(
     artifacts = [
         "net.neoforged:srgutils:1.0.11",
         "io.codechicken:DiffPatch:2.1.0.43:all",
-        "net.neoforged.jst:jst-cli-bundle:2.0.8",
+        "net.neoforged.jst:jst-cli-bundle:2.0.11",
         "net.minecraftforge:mergetool:1.1.7:fatjar",
     ],
 )
@@ -292,10 +292,10 @@ neoforge_versions = {
         "mapping": False,
         "neoform_version": "26.3-1",
         "neoform_sha256": "df5ff673af2d92b7796f31014d3d3c6ebddbf5206ca8dbcdac055375cfbe9450",
-        "neoforge_version": "26.3.0.1-beta",
-        "neoforge_userdev_sha256": "5221335091bc52998c4fb11cc8307cf15f806855b6df49bc655504e38dd532d3",
-        "neoforge_sources_sha256": "61757dbb9a6b5ca24769bcd5dbaaffe75887e89e2172ed44131e4f003fd5345e",
-        "neoforge_universal_sha256": "13e9da116fc34d10cc2422451fc99be4e2a1f50041968b0402d19c4be48350b4",
+        "neoforge_version": "26.3.0.37-beta",
+        "neoforge_userdev_sha256": "6ac54b40839dffc95433dc11190402432af06fbc5227babc477caaa259c548dd",
+        "neoforge_sources_sha256": "b486434264fed81430a0791aab4911348c40e5b768dcae733eb29cc021e49dc0",
+        "neoforge_universal_sha256": "130e01c01ea04e96d38263ee7eb1fc33df3c0050a45f06d15f067f23acd34e0d",
     },
 }
 
@@ -397,9 +397,7 @@ neoforge = use_extension("//repo:neoforge.bzl", "neoforge")
 ]
 
 neoform.pin(pin_file = "//:neoform_pin.txt")
-
-use_repo(neoforge, "neoforge_pin")
+use_repo(neoform, "neoform_pin")
 
 neoforge.pin(pin_file = "//:neoforge_pin.txt")
-
-use_repo(neoform, "neoform_pin")
+use_repo(neoforge, "neoforge_pin")

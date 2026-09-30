@@ -43,7 +43,7 @@
     "net.java.dev.jna:jna": -867910362,
     "net.java.dev.jna:jna-platform": -561312286,
     "net.minecraftforge:mergetool": 115837290,
-    "net.neoforged.jst:jst-cli-bundle": 2014756470,
+    "net.neoforged.jst:jst-cli-bundle": -753170170,
     "net.neoforged:srgutils": -430037268,
     "org.anarres:jcpp": 1560666087,
     "org.antlr:antlr4": -626475756,
@@ -227,8 +227,8 @@
     "net.minecraftforge:mergetool:jar:sources": -1067132546,
     "net.minecraftforge:srgutils": -1105916448,
     "net.minecraftforge:srgutils:jar:sources": -1666927312,
-    "net.neoforged.jst:jst-cli-bundle": 1518062312,
-    "net.neoforged.jst:jst-cli-bundle:jar:sources": 1078536055,
+    "net.neoforged.jst:jst-cli-bundle": 199525586,
+    "net.neoforged.jst:jst-cli-bundle:jar:sources": -1876845793,
     "net.neoforged:srgutils": 1050875465,
     "net.neoforged:srgutils:jar:sources": -1505434115,
     "net.sf.jopt-simple:jopt-simple": -1677351973,
@@ -912,10 +912,10 @@
     },
     "net.neoforged.jst:jst-cli-bundle": {
       "shasums": {
-        "jar": "89f6567e00d1c2cd5c2d347762a28e502ec6fa110df4e3ada8abd63b12f9a69c",
-        "sources": "16c257741b32a55dab634afb8c4663e5790f43bd863608e027f33e4f855c501c"
+        "jar": "1e058f87f6c3de0d13d76d6d14a7698a749e7268521a95298f764228ebee88db",
+        "sources": "793fcac7a177aa9088f4af51c2f65d8ad5e419ee0bc66837a8bd1d3a6f4211c4"
       },
-      "version": "2.0.8"
+      "version": "2.0.11"
     },
     "net.neoforged:srgutils": {
       "shasums": {
