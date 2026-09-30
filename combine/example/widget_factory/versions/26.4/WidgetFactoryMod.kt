@@ -1,0 +1,40 @@
+package top.fifthlight.combine.example.widgetfactory.v26_4
+
+import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
+import net.minecraft.client.KeyMapping
+import net.minecraft.client.gui.screens.Screen
+import net.minecraft.resources.Identifier
+import org.lwjgl.sdl.SDLKeycode
+import top.fifthlight.combine.core.data.Text
+import top.fifthlight.combine.core.screen.ScreenFactoryFactory
+import top.fifthlight.combine.example.widgetfactory.common.WidgetFactory
+
+class WidgetFactoryMod : ClientModInitializer {
+    companion object {
+        private val keyCategory =
+            KeyMapping.Category.register(Identifier.fromNamespaceAndPath("combine", "example"))
+        private val keyMapping = KeyMapping("combine_widget_factory", SDLKeycode.SDLK_H, keyCategory)
+    }
+
+    override fun onInitializeClient() {
+        KeyMappingHelper.registerKeyMapping(keyMapping)
+        ClientTickEvents.END_CLIENT_TICK.register { client ->
+            if (!keyMapping.isDown) {
+                return@register
+            }
+            if (client.gui.screen() != null) {
+                return@register
+            }
+            client.gui.setScreen(
+                ScreenFactoryFactory.of().getScreen(
+                    parent = null,
+                    title = Text.literal("Widget Factory"),
+                ) {
+                    WidgetFactory()
+                } as Screen
+            )
+        }
+    }
+}

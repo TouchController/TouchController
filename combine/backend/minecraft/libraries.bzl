@@ -5,6 +5,7 @@ combine_common_deps = {
     "combine-26-1": "//combine/backend/minecraft/versions/26.1:26.1_merged",
     "combine-26-2": "//combine/backend/minecraft/versions/26.2:26.2_merged",
     "combine-26-3": "//combine/backend/minecraft/versions/26.3:26.3_merged",
+    "combine-26-4": "//combine/backend/minecraft/versions/26.4:26.4_merged",
 }
 
 combine_fabric_deps = {
@@ -26,6 +27,7 @@ combine_fabric_config = {
     "combine-26-1": "=",
     "combine-26-2": "=",
     "combine-26-3": "=",
+    "combine-26-4": "=",
     "combine-fabric-1-21-1": "=",
     "combine-fabric-1-21-8": "=",
     "combine-fabric-1-21-10": "=",
@@ -41,6 +43,7 @@ combine_neoforge_config = {
     "combine-26-1": "minecraft: +[26.1,26.2)",
     "combine-26-2": "minecraft: +[26.2]",
     "combine-26-3": "minecraft: +[26.3]",
+    "combine-26-4": "minecraft: +[26.4]",
 }
 
 combine_fabric_jij_deps = fabric_jij_deps(

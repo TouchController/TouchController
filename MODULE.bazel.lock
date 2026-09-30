@@ -928,7 +928,7 @@
           "REPO_MAPPING:rules_java+,compatibility_proxy rules_java++compatibility_proxy+compatibility_proxy",
           "REPO_MAPPING:rules_java+,rules_cc rules_cc+",
           "REPO_MAPPING:rules_java++compatibility_proxy+compatibility_proxy,rules_java rules_java+",
-          "FILE:@@//neoforge_pin.txt aadb673ac9315f2b64472007522b95f3a7c8cfe6aa3aa4bc9283dfce89049405"
+          "FILE:@@//neoforge_pin.txt e993a33bdeb8a27b103a355daabedbec3b2907263344d6b8ca18e43b977aeede"
         ],
         "generatedRepoSpecs": {
           "forge_1_14_4_28_2_26": {
@@ -4366,6 +4366,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/earlydisplay/12.0.8/earlydisplay-12.0.8.jar",
+              "sha256": "b76c5e01ef8051704c67cc28546483eae030133fd4aeffbc26803acdfb22d605",
               "downloaded_file_name": "earlydisplay-12.0.8.jar"
             }
           },
@@ -4373,6 +4374,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/loader/12.0.8/loader-12.0.8.jar",
+              "sha256": "6f23a533f9c8380cc40072d84965b5564311cfa1983e332b49b90fc87d11ff29",
               "downloaded_file_name": "loader-12.0.8.jar"
             }
           },
@@ -4380,6 +4382,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+              "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895",
               "downloaded_file_name": "asm-commons-9.10.1.jar"
             }
           },
@@ -4387,6 +4390,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar",
+              "sha256": "1bb99d091fba2597dc6d51193e9bbcf0d8447e7ed96bd8f0198b18152f09655c",
               "downloaded_file_name": "asm-util-9.10.1.jar"
             }
           },
@@ -4394,6 +4398,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar",
+              "sha256": "dede75a21306b65974ecd8f87114ff6970f09fb794157a4ca09ab25c888c2bfc",
               "downloaded_file_name": "asm-analysis-9.10.1.jar"
             }
           },
@@ -4401,6 +4406,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+              "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b",
               "downloaded_file_name": "asm-tree-9.10.1.jar"
             }
           },
@@ -4408,6 +4414,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+              "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb",
               "downloaded_file_name": "asm-9.10.1.jar"
             }
           },
@@ -4415,6 +4422,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/com/electronwill/night-config/toml/3.9.0/toml-3.9.0.jar",
+              "sha256": "475e6fa3315619294d5ab74f2eb80f0705129d43e652d3ccd5337c77d0a29a6b",
               "downloaded_file_name": "toml-3.9.0.jar"
             }
           },
@@ -4422,6 +4430,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/com/electronwill/night-config/core/3.9.0/core-3.9.0.jar",
+              "sha256": "cd890520bd3c680cf82e79f16071de9c8f367206a2f841c777d944289f343ebc",
               "downloaded_file_name": "core-3.9.0.jar"
             }
           },
@@ -4429,6 +4438,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/net/neoforged/JarJarSelector/0.5.1/JarJarSelector-0.5.1.jar",
+              "sha256": "76114eb591593a03d422fb9f8d84c7bea0dba2ad1d8c30488cf1ff04c50ce425",
               "downloaded_file_name": "JarJarSelector-0.5.1.jar"
             }
           },
@@ -4436,6 +4446,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/net/neoforged/JarJarMetadata/0.5.1/JarJarMetadata-0.5.1.jar",
+              "sha256": "0573f74ec304669fb3c5403f42403f359e565baf8532e61ec5c1d1c911f6661b",
               "downloaded_file_name": "JarJarMetadata-0.5.1.jar"
             }
           },
@@ -4443,6 +4454,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/org/apache/maven/maven-artifact/3.9.16/maven-artifact-3.9.16.jar",
+              "sha256": "54cc1c1ef932e3d4a903352111b42b4d3c3ed8e7a1d0de73b625309d9c3ad3e8",
               "downloaded_file_name": "maven-artifact-3.9.16.jar"
             }
           },
@@ -4450,6 +4462,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar",
+              "sha256": "1f0ae44db7295f8626f33b1dc0ad7f043d8954a8d6847247875fcc5dfcecc934",
               "downloaded_file_name": "sponge-mixin-0.17.4+mixin.0.8.7.jar"
             }
           },
@@ -4457,6 +4470,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/io/github/llamalad7/mixinextras-neoforge/0.5.5/mixinextras-neoforge-0.5.5.jar",
+              "sha256": "f0c3e3c1ad835b80e70cb3f78359b71f107f74689523b4fb391f160ee487cfbf",
               "downloaded_file_name": "mixinextras-neoforge-0.5.5.jar"
             }
           },
@@ -4464,6 +4478,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3.jar",
+              "sha256": "dcb33abcbd946553176bb668be80d7adc60cb9d919ab5c71fb01fc51cacc4c8f",
               "downloaded_file_name": "lwjgl-sdl-3.4.3.jar"
             }
           },
@@ -4471,6 +4486,7 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_jar",
             "attributes": {
               "url": "https://maven.neoforged.net/releases/org/codehaus/plexus/plexus-utils/3.6.1/plexus-utils-3.6.1.jar",
+              "sha256": "05a63effd67e2d6b9d610cc82e2bd7473289d34802e57a529b28110f28af5679",
               "downloaded_file_name": "plexus-utils-3.6.1.jar"
             }
           },

@@ -45,6 +45,7 @@ touchcontroller_fabric_game_versions = [
     "26.1.2",
     "26.2",
     "26.3",
+    "26.4-snapshot-2",
 ]
 
 def _transform_fabric_version(version):

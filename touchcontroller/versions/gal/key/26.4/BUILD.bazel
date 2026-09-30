@@ -1,0 +1,20 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "26.4",
+    srcs = glob(["*.kt"]),
+    javac_opts = "//touchcontroller:javac_opts_jvm_25",
+    kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_25",
+    merge_deps = [
+        "//touchcontroller/versions/extension/26.4",
+    ],
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//game/26.4:game_client",
+        "//game/26.4:game_client_libraries",
+    ] + [
+        "//combine/backend/minecraft/text/26.4",
+        "//combine/core/data",
+        "//touchcontroller/common/gal/key",
+    ],
+)
