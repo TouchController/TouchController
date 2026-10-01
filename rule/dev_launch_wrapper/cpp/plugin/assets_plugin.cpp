@@ -27,7 +27,7 @@ void AssetsPlugin::finalize(PluginContext& pctx) {
         return;
     }
 
-    auto assets_path = std::filesystem::canonical(assets_version / ".." / "..");
+    auto assets_path = std::filesystem::canonical(assets_version.parent_path().parent_path());
 
     pctx.append_program_args({"--assetsDir", assets_path});
     auto version = pctx.attributes["version"];
