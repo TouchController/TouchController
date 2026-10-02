@@ -8,11 +8,7 @@ import top.fifthlight.bazel.worker.api.Worker;
 import top.fifthlight.fabazel.mappingmerger.context.InputEntry;
 import top.fifthlight.fabazel.mappingmerger.context.MappingFormat;
 import top.fifthlight.fabazel.mappingmerger.context.MergeContext;
-import top.fifthlight.fabazel.mappingmerger.operation.ChangeSourceNamespaceOperation;
-import top.fifthlight.fabazel.mappingmerger.operation.CompleteNamespaceOperation;
-import top.fifthlight.fabazel.mappingmerger.operation.DropNamespacesOperation;
-import top.fifthlight.fabazel.mappingmerger.operation.ImportMappingOperation;
-import top.fifthlight.fabazel.mappingmerger.operation.Operation;
+import top.fifthlight.fabazel.mappingmerger.operation.*;
 
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -243,7 +239,13 @@ public class MappingMerger extends Worker {
             var contextResult = context.build();
             var tree = new MemoryMappingTree();
             for (var operation : contextResult.operations()) {
-                tree = operation.run(tree, contextResult.context());
+                try {
+                    tree = operation.run(tree, contextResult.context());
+                } catch (Exception e) {
+                    out.println("Current source namespace: " + tree.getSrcNamespace());
+                    out.println("Current target namespaces: " + String.join(", ", tree.getDstNamespaces()));
+                    throw e;
+                }
             }
             try (var writer = Files.newBufferedWriter(contextResult.outputPath()); var visitor = new Tiny2FileWriter(writer, false)) {
                 tree.accept(visitor);
