@@ -179,7 +179,7 @@ java_binary(
     runtime_deps = [
         "//game/1.21.1:game_client_libraries",
     ] + [
-        "//combine/backend/minecraft",
+        "//multijar",
         "@neoforge_1_21_1//:neoforge_deps",
     ],
 )
