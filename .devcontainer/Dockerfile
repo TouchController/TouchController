@@ -4,7 +4,7 @@ ENV ANDROID_HOME=/opt/android-sdk
 ENV ANDROID_NDK_HOME=${ANDROID_HOME}/ndk/27.3.13750724
 ENV PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools
 
-RUN apt-get update && apt-get install -y openjdk-21-jdk curl unzip zip git build-essential && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y openjdk-21-jdk curl unzip zip git build-essential clangd && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p ${ANDROID_HOME}/cmdline-tools \
     && curl -L https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -o /tmp/tools.zip \
