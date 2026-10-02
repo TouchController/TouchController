@@ -35,7 +35,12 @@ class PluginContext {
         program_args.insert(program_args.end(), args.begin(), args.end());
     }
 
-    std::string resolve_runfile(const std::string& path) { return runfiles->Rlocation(path); }
+    std::string resolve_runfile(const std::string& path) {
+        if (path.starts_with("./")) {
+            return path;
+        }
+        return runfiles->Rlocation(path);
+    }
 };
 
 class LaunchContext {

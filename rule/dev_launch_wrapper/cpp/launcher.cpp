@@ -30,7 +30,7 @@ static void call_main(LaunchContext& ctx) {
     });
 
     JavaVMInitArgs vm_args;
-    vm_args.version = JNI_VERSION_21;
+    vm_args.version = JNI_VERSION_1_8;
     vm_args.nOptions = options.size();
     vm_args.options = options.data();
     vm_args.ignoreUnrecognized = 0;

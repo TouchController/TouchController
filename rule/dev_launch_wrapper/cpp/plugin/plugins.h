@@ -4,4 +4,4 @@
 
 #include "../plugin.h"
 
-extern std::array<std::unique_ptr<Plugin>, 8> plugins;
+extern std::array<std::unique_ptr<Plugin>, 9> plugins;
