@@ -1,4 +1,5 @@
 load("//game:game.bzl", "game_version")
+load("//rule:remap_jar.bzl", "remap_jar")
 
 game_version(
     name = "game",
@@ -9,7 +10,9 @@ game_version(
     client_mappings = "@minecraft//1.20.1:client_mappings",
     client_parchment = "@parchment_1_20_1//:json",
     intermediary = "@maven_fabric_1_20_1//:net_fabricmc_intermediary_v2",
-    neoforge = "@forge_1_20_1//:neoforge",
+    kotlinforforge = "@kotlinforforge_forge_1_20_1//:primary",
+    mcp_mappings_tsrg = "@mcp_1_20_1//tasks/joined_merge_mappings",
+    forge = "@forge_1_20_1//:forge",
     server = "@minecraft//1.20.1:server",
     version = "1.20.1",
     visibility = ["//visibility:public"],
