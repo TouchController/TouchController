@@ -150,7 +150,6 @@ java_binary(
         "//combine/backend/minecraft:combine_neoforge_libraries",
         "//combine/backend/minecraft:minecraft_common_standalone",
         "//combine/backend/minecraft/neoforge/1.21.10",
-        "//game/1.21.10:game_mapping_jar",
         "//rule/dev_launch_wrapper",
         "@maven//:org_jetbrains_kotlin_kotlin_reflect",
         "@neoforge_1_21_10//:neoforge_deps",
