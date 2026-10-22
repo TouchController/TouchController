@@ -186,8 +186,6 @@ def _game_version_impl(
             if client_parchment:
                 operations.append(">parchment")
             operations.append("changeSrc(official)")
-            if mcp_mappings_tsrg:
-                operations.append(">mcp")
             if intermediary:
                 operations.append(">intermediary")
 
@@ -196,6 +194,9 @@ def _game_version_impl(
                 operations.append("changeSrc(intermediary, true)")
                 operations.append("changeSrc(official)")
                 operations.append("completeNamespace(named -> intermediary)")
+            if mcp_mappings_tsrg:
+                operations.append(">mojmap")
+                operations.append(">mcp")
         elif yarn:
             operations.append(">intermediary")
             operations.append("changeSrc(intermediary)")
