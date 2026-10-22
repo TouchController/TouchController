@@ -7,6 +7,7 @@ merge_library_jar(
     },
     visibility = ["//visibility:public"],
     deps = [
+        "//multijar/legacy",
         "//multijar/neov10",
         "//multijar/neov3",
     ],

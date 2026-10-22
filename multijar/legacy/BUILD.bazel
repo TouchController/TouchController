@@ -1,0 +1,27 @@
+load("//rule:merge_library.bzl", "java_merge_library")
+
+java_merge_library(
+    name = "legacy",
+    srcs = [
+        "LegacyLocator.java",
+        "LegacyModLocator.java",
+    ],
+    javacopts = ["--release=17"],
+    merge_deps = [
+        "//multijar/common",
+        "//multijar/common/maven385",
+    ],
+    resource_strip_prefix = "multijar/legacy/resources",
+    resources = glob(["resources/**"]),
+    visibility = ["//multijar:__pkg__"],
+    deps = [
+        "@forge_1_20_1//:cpw_mods_securejarhandler",
+        "@forge_1_20_1//:net_minecraftforge_JarJarFileSystems",
+        "@forge_1_20_1//:net_minecraftforge_fmlcore",
+        "@forge_1_20_1//:net_minecraftforge_fmlloader",
+        "@forge_1_20_1//:net_minecraftforge_forgespi",
+        "@forge_1_20_1//:org_apache_maven_maven_artifact",
+        "@maven//:org_jspecify_jspecify",
+        "@maven//:org_slf4j_slf4j_api",
+    ],
+)
