@@ -51,7 +51,7 @@ object PlatformProvider {
         }
         // Or launcher opt-in by a magic environment variable
         if (System.getenv("TOUCHCONTROLLER_USE_IOS_PLATFORM") != null) {
-            true
+            return@lazy true
         }
         // Check if running on iOS by detecting /var/mobile (iOS-specific path)
         val iosPath = Paths.get("/", "var", "mobile")
