@@ -17,7 +17,7 @@ config = "touchcontroller.mixins.neoforge.json"
 [[dependencies.touchcontroller_26_1_2_neoforge]]
 modId = "minecraft"
 type = "required"
-versionRange = "26.1.2"
+versionRange = "[26.1.2]"
 ordering = "NONE"
 side = "CLIENT"
 
