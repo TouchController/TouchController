@@ -1,0 +1,25 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "1.20.1",
+    srcs = glob(["**/*.kt"]),
+    actual = True,
+    javac_opts = "//combine:javac_opts_jvm_17",
+    kotlinc_opts = "//combine:kotlinc_opts_jvm_17",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//game/1.20.1:game_client_libraries",
+    ] + [
+        "//combine/backend/minecraft/game/1.20.1",
+        "//combine/backend/minecraft/identifier/1.20.1",
+        "//combine/backend/minecraft/item/1.20.1",
+        "//combine/backend/minecraft/text/1.20.1",
+        "//combine/core/data",
+        "//combine/core/paint",
+        "//combine/core/util/atlas",
+        "//combine/data",
+        "//combine/item/data",
+        "//combine/item/paint",
+        "@maven_fabric_1_20_1//:net_fabricmc_sponge_mixin",
+    ],
+)

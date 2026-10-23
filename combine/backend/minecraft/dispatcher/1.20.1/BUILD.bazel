@@ -1,0 +1,15 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "1.20.1",
+    srcs = ["GameDispatcher.kt"],
+    actual = True,
+    javac_opts = "//combine:javac_opts_jvm_17",
+    kotlinc_opts = "//combine:kotlinc_opts_jvm_17",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//combine/backend/minecraft/game/1.20.1",
+        "//combine/core/util/dispatcher",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
+    ],
+)

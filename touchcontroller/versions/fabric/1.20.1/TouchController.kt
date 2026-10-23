@@ -1,0 +1,112 @@
+/*
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ * Copyright (C) 2026 fifth_light
+ */
+
+package top.fifthlight.touchcontroller.fabric.v1_20_1
+
+import com.mojang.blaze3d.systems.RenderSystem
+import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
+import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.client.KeyMapping
+import net.minecraft.client.Minecraft
+import org.slf4j.LoggerFactory
+import top.fifthlight.combine.backend.minecraft.render.v1_20_1.CanvasImpl
+import top.fifthlight.touchcontroller.api.v1.fabric.TouchControllerApiEntrypoint
+import top.fifthlight.touchcontroller.common.api.TouchControllerApiImpl
+import top.fifthlight.touchcontroller.common.config.data.StatusConfig
+import top.fifthlight.touchcontroller.common.config.holder.GlobalConfigHolder
+import top.fifthlight.touchcontroller.common.event.block.BlockBreakEvents
+import top.fifthlight.touchcontroller.common.event.connection.ConnectionEvents
+import top.fifthlight.touchcontroller.common.event.key.KeyEvents
+import top.fifthlight.touchcontroller.common.event.render.RenderEvents
+import top.fifthlight.touchcontroller.common.event.tick.TickEvents
+import top.fifthlight.touchcontroller.common.event.window.WindowEvents
+import top.fifthlight.touchcontroller.common.model.ControllerHudModel
+import top.fifthlight.touchcontroller.common.model.TouchControllerLoadStatus
+import top.fifthlight.touchcontroller.common.platform.provider.PlatformProvider
+import top.fifthlight.touchcontroller.gal.gameconfig.v1_20_1.GameConfigEditorImpl
+import top.fifthlight.touchcontroller.gal.key.v1_20_1.KeyBindingStateImpl
+
+class TouchController : ClientModInitializer {
+    private val logger = LoggerFactory.getLogger(TouchController::class.java)
+
+    companion object {
+        @JvmStatic
+        var isInEmulatedSetDown = false
+    }
+
+    override fun onInitializeClient() {
+        logger.info("Loading TouchController…")
+
+        callEntrypoint()
+        initialize()
+
+        TouchControllerLoadStatus.isLoaded = true
+    }
+
+    private fun callEntrypoint() {
+        FabricLoader.getInstance()
+            .getEntrypoints("touchcontroller-v1", TouchControllerApiEntrypoint::class.java)
+            .forEach {
+                try {
+                    it.preTouchControllerInitialize(TouchControllerApiImpl)
+                } catch (e: Exception) {
+                    logger.error("Failed to call TouchControllerApiEntrypoint for ${it.javaClass.canonicalName}", e)
+                }
+            }
+    }
+
+    private fun initialize() {
+        HudRenderCallback.EVENT.register { drawContext, _ ->
+            val client = Minecraft.getInstance()
+            if (!client.options.hideGui) {
+                val canvas = CanvasImpl(drawContext)
+                RenderSystem.enableBlend()
+                RenderEvents.onHudRender(canvas)
+                RenderSystem.disableBlend()
+            }
+        }
+
+        KeyEvents.addClickHandler { state ->
+            val vanillaState = state as KeyBindingStateImpl
+            val vanillaKeyBinding = vanillaState.keyBinding
+            // Why emulate a down here? Some mods (like YSM) write their own subclass of KeyMapping,
+            // so we must fake a setDown() here for compatibility.
+            if (vanillaKeyBinding.javaClass != KeyMapping::class.java) {
+                isInEmulatedSetDown = true
+                vanillaState.keyBinding.isDown = true
+                isInEmulatedSetDown = false
+            }
+        }
+
+        WorldRenderEvents.BEFORE_BLOCK_OUTLINE.register { _, _ ->
+            GlobalConfigHolder.config.value.status.status == StatusConfig.Status.DISABLED || ControllerHudModel.result.showBlockOutline
+        }
+        ClientTickEvents.END_CLIENT_TICK.register {
+            TickEvents.clientTick()
+        }
+        ClientPlayConnectionEvents.JOIN.register { _, _, _ ->
+            ConnectionEvents.onJoinedWorld()
+        }
+        ClientLifecycleEvents.CLIENT_STARTED.register {
+            PlatformProvider.loadNative()
+
+            GlobalConfigHolder.load()
+            WindowEvents.loadPlatformWindow()
+            GameConfigEditorImpl.executePendingCallback()
+        }
+        PlayerBlockBreakEvents.AFTER.register { _, _, _, _, _ ->
+            BlockBreakEvents.afterBlockBreak()
+        }
+        ClientLifecycleEvents.CLIENT_STOPPING.register { _ ->
+            PlatformProvider.platform?.close()
+        }
+    }
+}

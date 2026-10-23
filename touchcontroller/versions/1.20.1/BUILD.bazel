@@ -1,0 +1,25 @@
+load("//rule:merge_library.bzl", "merge_library_group")
+
+merge_library_group(
+    name = "1.20.1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//touchcontroller/versions/event/1.20.1",
+        "//touchcontroller/versions/extension/1.20.1",
+        "//touchcontroller/versions/gal/action/1.20.1",
+        "//touchcontroller/versions/gal/chat/1.20.1",
+        "//touchcontroller/versions/gal/creativetab/1.20.1",
+        "//touchcontroller/versions/gal/entity/1.20.1",
+        "//touchcontroller/versions/gal/feature/1.20.1",
+        "//touchcontroller/versions/gal/gameconfig/1.20.1",
+        "//touchcontroller/versions/gal/gamestate/1.20.1",
+        "//touchcontroller/versions/gal/item/1.20.1",
+        "//touchcontroller/versions/gal/itemlist/1.20.1",
+        "//touchcontroller/versions/gal/key/1.20.1",
+        "//touchcontroller/versions/gal/paint/1.20.1",
+        "//touchcontroller/versions/gal/player/1.20.1",
+        "//touchcontroller/versions/gal/view/1.20.1",
+        "//touchcontroller/versions/gal/window/1.20.1",
+        "//touchcontroller/versions/mixin/1.20.1",
+    ],
+)

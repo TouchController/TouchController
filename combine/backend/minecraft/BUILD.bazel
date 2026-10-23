@@ -1,7 +1,7 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
-load("//combine:libraries.bzl", "combine_libraries", "combine_unified_deps", "combine_unified_fabric", "combine_unified_neoforge")
+load("//combine:libraries.bzl", "combine_libraries", "combine_unified_deps", "combine_unified_fabric", "combine_unified_forge", "combine_unified_neoforge")
 load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
-load("//combine/backend/minecraft:libraries.bzl", "combine_common_deps", "combine_fabric_config", "combine_fabric_deps", "combine_neoforge_config", "combine_neoforge_deps")
+load("//combine/backend/minecraft:libraries.bzl", "combine_common_deps", "combine_fabric_config", "combine_fabric_deps", "combine_forge_config", "combine_forge_deps", "combine_neoforge_config", "combine_neoforge_deps")
 load("//rule:class_version_test.bzl", "class_version_test")
 load("//rule:merge_jar.bzl", "merge_jar")
 load("//rule:merge_library.bzl", "merge_library_jar")
@@ -45,6 +45,8 @@ merge_jar(
     resources = {
         ":fabric_mod_json": "combine/backend/minecraft",
         "//combine/backend/minecraft/neoforge:neoforge_mod_toml": "combine/backend/minecraft/neoforge",
+        "//combine/backend/minecraft/forge:forge_mod_toml": "combine/backend/minecraft/forge",
+        "//combine/backend/minecraft/forge:pack_mcmeta": "combine/backend/minecraft/forge",
         "//combine/resources:icon": ".",
         "//combine/resources:banner": ".",
     },
@@ -58,6 +60,8 @@ merge_jar(
     resources = {
         "//combine/backend/minecraft/fabric:fabric_mod_json": "combine/backend/minecraft/fabric",
         "//combine/backend/minecraft/neoforge:neoforge_mod_toml": "combine/backend/minecraft/neoforge",
+        "//combine/backend/minecraft/forge:forge_mod_toml": "combine/backend/minecraft/forge",
+        "//combine/backend/minecraft/forge:pack_mcmeta": "combine/backend/minecraft/forge",
         "//combine/resources:icon": ".",
         "//combine/resources:banner": ".",
     },
@@ -76,6 +80,8 @@ unified_jar(
     name = "minecraft",
     fabric_deps = combine_fabric_config | combine_unified_fabric,
     fabric_mod_json = "//combine/backend/minecraft/fabric:fabric_mod_json",
+    forge_mods_toml = "//combine/backend/minecraft/forge:forge_mod_toml",
+    forge_rules = combine_forge_config | combine_unified_forge,
     neoforge_mod_toml = "//combine/backend/minecraft/neoforge:neoforge_mod_toml",
     neoforge_rules = combine_neoforge_config | combine_unified_neoforge,
     resources = {

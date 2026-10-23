@@ -1,0 +1,12 @@
+{
+    "pack": {
+        "description": "Language files for TouchController.",
+        "pack_format": 4,
+        "supported_formats": {
+            "min_inclusive": 4,
+            "max_inclusive": 2147483647
+        },
+        "min_format": 4,
+        "max_format": 2147483647
+    }
+}

@@ -1,0 +1,5 @@
+alias(
+    name = "1.20.1",
+    actual = "//game/1.20.1:game_client_named",
+    visibility = ["//visibility:public"],
+)

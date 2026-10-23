@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
+import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.layout.Alignment
 import top.fifthlight.combine.core.layout.Arrangement
@@ -70,8 +71,7 @@ object AboutTab : Tab() {
                 Icon(
                     drawable = remember {
                         TextureFactory.create(
-                            "touchcontroller",
-                            "textures/icon.png",
+                            Identifier.of("touchcontroller", "textures/icon.png"),
                             iconSize,
                             iconSize,
                             IntPadding.ZERO

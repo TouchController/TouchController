@@ -30,7 +30,7 @@ import java.util.function.Consumer
 import top.fifthlight.touchcontroller.common.control.builtin.BuiltInWidget as BuiltInWidgetImpl
 
 class TouchControllerApiImpl : TouchControllerApi {
-    override fun getApiLevel() = 1
+    override fun getApiLevel() = 2
 
     override fun getTextFactory() = ApiTextFactory
 

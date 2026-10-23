@@ -281,6 +281,7 @@ def _kt_vanilla_lib_impl(name, visibility, pack, dep, resources, resource_strip_
         javac_opts = "//rule:javac_opts_jvm_8",
         kotlinc_opts = "//rule:kotlinc_opts_jvm_8",
         deps = [
+            "//combine/core/data",
             "//combine/data",
             "//combine/core/paint",
             dep,
@@ -400,6 +401,7 @@ def _kt_atlas_lib_impl(name, visibility, pack, dep, resources, resource_strip_pr
         javac_opts = "//rule:javac_opts_jvm_8",
         kotlinc_opts = "//rule:kotlinc_opts_jvm_8",
         deps = [
+            "//combine/core/data",
             "//combine/data",
             "//combine/core/paint",
             "//combine/core/util/atlas",

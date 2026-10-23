@@ -11,6 +11,7 @@ kt_merge_library(
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
+        "//combine/core/data",
         "//combine/core/paint",
         "//combine/data",
         "//touchcontroller/api",

@@ -1,0 +1,45 @@
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_forge")
+load("//combine:properties.bzl", "combine_version")
+load("//rule:unified_jar.bzl", "unified_jar")
+load("//touchcontroller:libraries.bzl", "touchcontroller_common_deps", "touchcontroller_forge_config", "touchcontroller_forge_deps", "touchcontroller_merge_deps", "touchcontroller_unified_deps", "touchcontroller_unified_forge")
+load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+
+expand_template(
+    name = "forge_mods_toml",
+    out = "META-INF/mods.toml",
+    substitutions = {
+        "${version}": touchcontroller_version,
+        "${license}": touchcontroller_license,
+        "${home_page}": touchcontroller_homepage,
+        "${sources_page}": touchcontroller_source,
+        "${issue_tracker}": touchcontroller_issue_tracker,
+        "${description}": touchcontroller_description,
+        "${combine_version}": combine_version,
+        "${mod_authors}": ", ".join(touchcontroller_authors),
+        "${mod_contributors}": ", ".join(touchcontroller_contributors),
+    },
+    template = "resources/mods.toml",
+    visibility = [
+        "//touchcontroller:__pkg__",
+        "//touchcontroller/forge:__pkg__",
+    ],
+)
+
+copy_file(
+    name = "icon",
+    src = "//touchcontroller/resources/texture:icon",
+    out = "assets/touchcontroller/textures/icon.png",
+    is_executable = False,
+)
+
+unified_jar(
+    name = "forge",
+    forge_mods_toml = ":forge_mods_toml",
+    forge_rules = touchcontroller_forge_config | combine_unified_forge | touchcontroller_unified_forge,
+    merge_deps = touchcontroller_merge_deps,
+    resources = {":icon": "touchcontroller/forge"},
+    visibility = ["//visibility:public"],
+    deps = touchcontroller_common_deps | touchcontroller_forge_deps | combine_unified_deps | touchcontroller_unified_deps,
+)

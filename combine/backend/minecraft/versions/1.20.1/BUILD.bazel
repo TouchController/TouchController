@@ -1,0 +1,22 @@
+load("//rule:merge_library.bzl", "merge_library_group")
+
+merge_library_group(
+    name = "1.20.1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//combine/backend/minecraft/clipboard/1.20.1",
+        "//combine/backend/minecraft/dispatcher/1.20.1",
+        "//combine/backend/minecraft/drawable/1.20.1",
+        "//combine/backend/minecraft/hittest/1.20.1",
+        "//combine/backend/minecraft/identifier/1.20.1",
+        "//combine/backend/minecraft/input/1.20.1",
+        "//combine/backend/minecraft/item/1.20.1",
+        "//combine/backend/minecraft/keycode/1.20.1",
+        "//combine/backend/minecraft/render/1.20.1",
+        "//combine/backend/minecraft/screen/1.20.1",
+        "//combine/backend/minecraft/sound/1.20.1",
+        "//combine/backend/minecraft/text/1.20.1",
+        "//combine/backend/minecraft/textbuilder/1.20.1",
+        "//combine/backend/minecraft/textmeasurer/1.20.1",
+    ],
+)

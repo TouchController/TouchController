@@ -1,0 +1,54 @@
+modLoader = "lowcodefml"
+loaderVersion = "[1,)"
+license = "${license}"
+issueTrackerURL = "${issue_tracker}"
+
+[[mods]]
+modId = "touchcontroller_common"
+version = "${version}"
+displayName = "TouchController Common"
+displayURL = "${home_page}"
+logoFile = "assets/touchcontroller/textures/icon.png"
+authors = "${mod_authors}"
+credits = "${mod_contributors}"
+description = "${description}"
+
+[[dependencies.touchcontroller_common]]
+modId = "minecraft"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_common]]
+modId = "combine"
+type = "required"
+versionRange = "[${combine_version},]"
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_common]]
+modId = "kotlinforforge"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_common]]
+modId = "touchcontroller_api"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_common]]
+modId = "touchcontroller_texture"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true

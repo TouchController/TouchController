@@ -19,7 +19,7 @@ file = "access_transformer.cfg"
 [[dependencies.combine_1_21_10]]
 modId = "minecraft"
 type = "required"
-versionRange = "1.21.10"
+versionRange = "[1.21.10]"
 ordering = "NONE"
 side = "CLIENT"
 

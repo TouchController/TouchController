@@ -1,12 +1,11 @@
-load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//rule:jar.bzl", "jar")
 load("//rule:merge_library.bzl", "merge_library_jar")
+load("//rule:mod_info_jar.bzl", "mod_info_jar")
 load("//rule/combine:library.bzl", "kt_texture_lib")
 load("//rule/combine:minecraft.bzl", "atlas_pack", "kt_atlas_lib", "kt_vanilla_lib", "vanilla_pack")
 load("//rule/combine:texture.bzl", "texture", "texture_group", "texture_lib")
-load("//rule/neoforge:mod_toml_jar.bzl", "neoforge_mod_toml_jar")
 load("//rule/touchcontroller:control_texture_set.bzl", "kt_control_texture_set_lib", "kt_empty_texture_lib")
-load("//touchcontroller:properties.bzl", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_texture_authors", "touchcontroller_version")
+load("//touchcontroller:properties.bzl", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_texture_authors", "touchcontroller_version")
 
 texture(
     name = "icon_texture",
@@ -45,23 +44,12 @@ kt_texture_lib(
     visibility = ["//touchcontroller:__subpackages__"],
 )
 
-expand_template(
-    name = "fabric_mod_json",
-    out = "expanded/fabric.mod.json",
-    substitutions = {
-        "${version}": touchcontroller_version,
-        "${license}": touchcontroller_license,
-        "${home_page}": touchcontroller_homepage,
-        "${sources_page}": touchcontroller_source,
-        "${issue_tracker}": touchcontroller_issue_tracker,
-        '"texture_authors_array"': json.encode(touchcontroller_texture_authors),
-    },
-    template = "resources/fabric.mod.json",
-)
-
-expand_template(
-    name = "neoforge_mod_toml",
-    out = "expanded/META-INF/neoforge.mods.toml",
+mod_info_jar(
+    name = "mod_info",
+    fabric = "resources/fabric.mod.json",
+    forge = "resources/META-INF/mods.toml",
+    neoforge = "resources/META-INF/neoforge.mods.toml",
+    pack_mcmeta = "resources/pack.mcmeta",
     substitutions = {
         "${version}": touchcontroller_version,
         "${license}": touchcontroller_license,
@@ -71,22 +59,19 @@ expand_template(
         "${name}": "TouchController Textures",
         "${description}": "Common textures definitions for TouchController.",
         "${authors}": ", ".join(touchcontroller_texture_authors),
+        '"texture_authors_array"': json.encode(touchcontroller_texture_authors),
     },
-    template = "resources/META-INF/neoforge.mods.toml",
 )
 
 merge_library_jar(
     name = "texture_common",
     aspect = True,
     aspect_class = "top.fifthlight.touchcontroller.assets.texture.AspectProvider",
-    resources = {
-        ":fabric_mod_json": ".",
-        ":neoforge_mod_toml": "touchcontroller/resources/texture/expanded",
-    },
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         ":banner_jar",
         ":icon_jar",
+        ":mod_info",
         ":texture_lib",
     ],
 )
@@ -138,23 +123,10 @@ kt_vanilla_lib(
     visibility = ["//touchcontroller:__subpackages__"],
 )
 
-expand_template(
-    name = "fabric_mod_json_vanilla",
-    out = "vanilla_expanded/fabric.mod.json",
-    substitutions = {
-        "${version}": touchcontroller_version,
-        "${license}": touchcontroller_license,
-        "${home_page}": touchcontroller_homepage,
-        "${sources_page}": touchcontroller_source,
-        "${issue_tracker}": touchcontroller_issue_tracker,
-        '"texture_authors_array"': json.encode(touchcontroller_texture_authors),
-    },
-    template = "resources/fabric.mod.vanilla.json",
-)
-
-expand_template(
-    name = "neoforge_mod_toml_vanilla",
-    out = "vanilla_expanded/META-INF/neoforge.mods.toml",
+mod_info_jar(
+    name = "mod_info_vanilla",
+    fabric = "resources/fabric.mod.vanilla.json",
+    neoforge = "resources/META-INF/neoforge.mods.vanilla.toml",
     substitutions = {
         "${version}": touchcontroller_version,
         "${license}": touchcontroller_license,
@@ -164,20 +136,17 @@ expand_template(
         "${name}": "TouchController Textures Vanilla",
         "${description}": "Textures for TouchController. For Minecraft >= 1.21.2.",
         "${authors}": ", ".join(touchcontroller_texture_authors),
+        '"texture_authors_array"': json.encode(touchcontroller_texture_authors),
     },
-    template = "resources/META-INF/neoforge.mods.vanilla.toml",
 )
 
 merge_library_jar(
     name = "texture_vanilla",
     aspect_impl_package_suffix = "vanilla",
     aspects = [":texture_common"],
-    resources = {
-        ":fabric_mod_json_vanilla": ".",
-        ":neoforge_mod_toml_vanilla": "touchcontroller/resources/texture/vanilla_expanded",
-    },
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
+        ":mod_info_vanilla",
         ":vanilla_lib",
     ],
 )
@@ -204,23 +173,12 @@ kt_atlas_lib(
     visibility = ["//touchcontroller:__subpackages__"],
 )
 
-expand_template(
-    name = "fabric_mod_json_atlas",
-    out = "atlas_expanded/fabric.mod.json",
-    substitutions = {
-        "${version}": touchcontroller_version,
-        "${license}": touchcontroller_license,
-        "${home_page}": touchcontroller_homepage,
-        "${sources_page}": touchcontroller_source,
-        "${issue_tracker}": touchcontroller_issue_tracker,
-        '"texture_authors_array"': json.encode(touchcontroller_texture_authors),
-    },
-    template = "resources/fabric.mod.atlas.json",
-)
-
-expand_template(
-    name = "neoforge_mod_toml_atlas",
-    out = "atlas_expanded/META-INF/neoforge.mods.toml",
+mod_info_jar(
+    name = "mod_info_atlas",
+    fabric = "resources/fabric.mod.atlas.json",
+    forge = "resources/META-INF/mods.atlas.toml",
+    neoforge = "resources/META-INF/neoforge.mods.atlas.toml",
+    pack_mcmeta = "resources/pack.atlas.mcmeta",
     substitutions = {
         "${version}": touchcontroller_version,
         "${license}": touchcontroller_license,
@@ -230,21 +188,18 @@ expand_template(
         "${name}": "TouchController Textures Atlas",
         "${description}": "Textures for TouchController. For Minecraft < 1.21.2.",
         "${authors}": ", ".join(touchcontroller_texture_authors),
+        '"texture_authors_array"': json.encode(touchcontroller_texture_authors),
     },
-    template = "resources/META-INF/neoforge.mods.atlas.toml",
 )
 
 merge_library_jar(
     name = "texture_atlas",
     aspect_impl_package_suffix = "atlas",
     aspects = [":texture_common"],
-    resources = {
-        ":fabric_mod_json_atlas": ".",
-        ":neoforge_mod_toml_atlas": "touchcontroller/resources/texture/atlas_expanded",
-    },
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         ":atlas_lib",
+        ":mod_info_atlas",
     ],
 )
 

@@ -2,94 +2,49 @@ package top.fifthlight.combine.backend.minecraft.render.v1_21_1
 
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.resources.ResourceLocation
+import top.fifthlight.combine.backend.minecraft.identifier.v1_21_1.toMinecraft
+import top.fifthlight.combine.core.data.Identifier as CombineIdentifier
 import top.fifthlight.combine.core.paint.BackgroundTexture
 import top.fifthlight.combine.core.paint.Canvas
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.combine.core.paint.Texture
+import top.fifthlight.combine.core.util.atlas.AtlasTexture
 import top.fifthlight.data.*
 import top.fifthlight.mergetools.api.ActualConstructor
 import top.fifthlight.mergetools.api.ActualImpl
 
 @ActualImpl(Texture::class)
-data class TextureImpl(
-    val resourceLocation: ResourceLocation,
-    val sprite: Boolean,
-    override val size: IntSize,
-    override val padding: IntPadding = IntPadding.ZERO,
-) : Texture {
-    companion object : Texture.Factory {
-        @ActualConstructor
-        @JvmStatic
-        override fun create(
-            namespace: String,
-            id: String,
-            width: Int,
-            height: Int,
-            padding: IntPadding,
-        ): Texture = TextureImpl(
-            resourceLocation = ResourceLocation.fromNamespaceAndPath(namespace, id),
-            sprite = false,
-            size = IntSize(width, height),
-            padding = padding,
-        )
+sealed class TextureImpl : Texture {
+    abstract val resourceLocation: ResourceLocation
 
-        @ActualConstructor
-        @JvmStatic
-        override fun createSprite(
-            namespace: String,
-            id: String,
-            width: Int,
-            height: Int,
-            padding: IntPadding,
-        ): Texture = TextureImpl(
-            resourceLocation = ResourceLocation.fromNamespaceAndPath(namespace, id),
-            sprite = true,
-            size = IntSize(width, height),
-            padding = padding,
-        )
-    }
-
-    override fun draw(
-        canvas: Canvas,
-        dstRect: Rect,
-        tint: Color,
-        srcRect: Rect,
-    ) {
-        val canvasImpl = canvas as CanvasImpl
-        if (sprite) {
-            canvasImpl.drawSprite(
-                spriteId = resourceLocation,
-                dstRect = dstRect,
-                srcRect = srcRect,
-                tint = tint,
-            )
-        } else {
-            canvas.drawTexture(
+    data class Normal(
+        override val resourceLocation: ResourceLocation,
+        override val size: IntSize,
+        override val padding: IntPadding = IntPadding.ZERO,
+    ) : TextureImpl() {
+        override fun draw(
+            canvas: Canvas,
+            dstRect: Rect,
+            tint: Color,
+            srcRect: Rect,
+        ) {
+            val canvasImpl = canvas as CanvasImpl
+            canvasImpl.drawTexture(
                 resourceLocation = resourceLocation,
                 dstRect = dstRect,
                 uvRect = srcRect / size.toSize(),
                 tint = tint,
             )
         }
-    }
 
-    override fun draw(
-        canvas: Canvas,
-        dstRect: IntRect,
-        tint: Color,
-    ) {
-        val guiGraphics = (canvas as CanvasImpl).guiGraphics
-        RenderSystem.enableBlend()
-        guiGraphics.setColor(tint.rFloat, tint.gFloat, tint.bFloat, tint.aFloat)
-        if (sprite) {
-            guiGraphics.blitSprite(
-                resourceLocation,
-                dstRect.offset.x,
-                dstRect.offset.y,
-                dstRect.size.width,
-                dstRect.size.height,
-            )
-        } else {
+        override fun draw(
+            canvas: Canvas,
+            dstRect: IntRect,
+            tint: Color,
+        ) {
+            val guiGraphics = (canvas as CanvasImpl).guiGraphics
+            RenderSystem.enableBlend()
+            guiGraphics.setColor(tint.rFloat, tint.gFloat, tint.bFloat, tint.aFloat)
             guiGraphics.blit(
                 resourceLocation,
                 dstRect.offset.x,
@@ -101,8 +56,83 @@ data class TextureImpl(
                 size.width,
                 size.height,
             )
+            guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f)
         }
-        guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f)
+    }
+
+    data class Sprite(
+        override val resourceLocation: ResourceLocation,
+        override val size: IntSize,
+        override val padding: IntPadding = IntPadding.ZERO,
+    ) : TextureImpl() {
+        override fun draw(
+            canvas: Canvas,
+            dstRect: Rect,
+            tint: Color,
+            srcRect: Rect,
+        ) {
+            (canvas as CanvasImpl).drawSprite(
+                spriteId = resourceLocation,
+                dstRect = dstRect,
+                srcRect = srcRect,
+                tint = tint,
+            )
+        }
+
+        override fun draw(
+            canvas: Canvas,
+            dstRect: IntRect,
+            tint: Color,
+        ) {
+            val guiGraphics = (canvas as CanvasImpl).guiGraphics
+            RenderSystem.enableBlend()
+            guiGraphics.setColor(tint.rFloat, tint.gFloat, tint.bFloat, tint.aFloat)
+            guiGraphics.blitSprite(
+                resourceLocation,
+                dstRect.offset.x,
+                dstRect.offset.y,
+                dstRect.size.width,
+                dstRect.size.height,
+            )
+            guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f)
+        }
+    }
+
+    companion object : Texture.Factory {
+        @ActualConstructor
+        @JvmStatic
+        override fun create(
+            identifier: CombineIdentifier,
+            width: Int,
+            height: Int,
+            padding: IntPadding,
+        ): Texture = Normal(
+            resourceLocation = identifier.toMinecraft(),
+            size = IntSize(width, height),
+            padding = padding,
+        )
+
+        @ActualConstructor
+        @JvmStatic
+        override fun createSprite(
+            data: Texture.SpriteTextureData,
+            padding: IntPadding,
+        ): Texture = when (data) {
+            is Texture.SpriteTextureData.Atlas -> AtlasTexture(Normal(
+                resourceLocation = data.identifier.toMinecraft(),
+                size = data.atlasSize,
+                padding = padding,
+            )).createPart(
+                offset = data.atlasOffset,
+                size = data.atlasSize,
+            )
+
+            is Texture.SpriteTextureData.Native -> Sprite(
+                resourceLocation = data.identifier.toMinecraft(),
+                size = data.spriteSize,
+                padding = padding,
+            )
+        }
     }
 }
 

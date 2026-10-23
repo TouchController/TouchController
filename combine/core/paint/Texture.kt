@@ -1,6 +1,7 @@
 package top.fifthlight.combine.core.paint
 
 import androidx.compose.runtime.Immutable
+import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.data.*
 import top.fifthlight.mergetools.api.ExpectFactory
 
@@ -49,21 +50,31 @@ interface Texture : Drawable {
         srcRect = srcRect.toRect(),
     )
 
+    sealed interface SpriteTextureData {
+        data class Atlas(
+            val identifier: Identifier,
+            val spriteSize: IntSize,
+            val atlasOffset: IntOffset,
+            val atlasSize: IntSize,
+        ): SpriteTextureData
+
+        data class Native(
+            val identifier: Identifier,
+            val spriteSize: IntSize,
+        ): SpriteTextureData
+    }
+
     @ExpectFactory
     interface Factory {
         fun create(
-            namespace: String,
-            id: String,
+            identifier: Identifier,
             width: Int,
             height: Int,
             padding: IntPadding,
         ): Texture
 
         fun createSprite(
-            namespace: String,
-            id: String,
-            width: Int,
-            height: Int,
+            data: SpriteTextureData,
             padding: IntPadding,
         ): Texture
     }

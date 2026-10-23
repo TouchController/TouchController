@@ -15,7 +15,7 @@
     "icon": "assets/touchcontroller/textures/icon.png",
     "environment": "client",
     "depends": {
-        "java": ">=21",
+        "java": ">=8",
         "minecraft": "mod_game_versions_array",
         "combine": "^${combine_version}",
         "fabric-api": "*",

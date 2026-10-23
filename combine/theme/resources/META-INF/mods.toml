@@ -1,0 +1,13 @@
+modLoader = "lowcodefml"
+loaderVersion = "[1,)"
+license = "${license}"
+issueTrackerURL = "${issue_tracker}"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${version}"
+displayName = "${name}"
+displayURL = "${home_page}"
+logoFile = "icon.png"
+authors = "fifth_light"
+description = '''${description}'''

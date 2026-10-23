@@ -1,0 +1,65 @@
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
+load("//rule:class_version_test.bzl", "class_version_test")
+load("//rule:jar.bzl", "jar")
+load("//rule:merge_library.bzl", "merge_library_jar")
+load("//rule:remap_jar.bzl", "remap_jar")
+
+expand_template(
+    name = "fabric_mod_json",
+    out = "expanded/fabric.mod.json",
+    substitutions = {
+        "${version}": combine_version,
+        "${license}": combine_license,
+        "${description}": combine_description,
+        "${home_page}": combine_home_page,
+        "${sources_page}": combine_sources_page,
+        "${issue_tracker}": combine_issue_tracker,
+    },
+    template = "fabric.mod.json",
+)
+
+jar(
+    name = "meta_jar",
+    resources = [
+        ":fabric_mod_json",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+merge_library_jar(
+    name = "fabric_unmapped",
+    aspect_impl_package_suffix = "fabric.v1_20_1",
+    aspects = ["//combine/backend/minecraft:minecraft_unmerged"],
+    resources = {
+        "//combine/resources:icon": ".",
+    },
+    visibility = ["//visibility:public"],
+    deps = [
+        ":meta_jar",
+        "//combine/backend/minecraft/versions/1.20.1",
+    ],
+)
+
+class_version_test(
+    name = "fabric_unmapped_class_version",
+    class_major = 61,
+    jars = [":fabric_unmapped"],
+    tags = ["class_version"],
+)
+
+remap_jar(
+    name = "fabric",
+    classpath = ["//game/1.20.1:game_client_named"],
+    from_namespace = "named",
+    inputs = [":fabric_unmapped"],
+    mapping = "//game/1.20.1:game_merged_mapping",
+    mixin = True,
+    to_namespace = "intermediary",
+)
+
+alias(
+    name = "1.20.1",
+    actual = ":fabric",
+    visibility = ["//visibility:public"],
+)

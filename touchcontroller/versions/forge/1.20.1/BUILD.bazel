@@ -1,0 +1,205 @@
+load("@rules_java//java:java_binary.bzl", "java_binary")
+load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_neoforge")
+load("//combine:properties.bzl", "combine_version")
+load("//rule:class_version_test.bzl", "class_version_test")
+load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_jar")
+load("//rule:remap_jar.bzl", "remap_jar")
+load("//rule:unified_jar.bzl", "unified_jar")
+load("//rule/forge:mod_toml_jar.bzl", "forge_mod_toml_jar")
+load("//rule/neoforge:merge_jij.bzl", "neoforge_merge_jij")
+load("//touchcontroller:libraries.bzl", "touchcontroller_merge_deps", "touchcontroller_unified_deps", "touchcontroller_unified_neoforge")
+load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+
+forge_mod_toml_jar(
+    name = "forge_mod_toml",
+    src = "resources/mods.toml",
+    pack_mcmeta = "resources/pack.mcmeta",
+    substitutions = {
+        "${version}": touchcontroller_version,
+        "${license}": touchcontroller_license,
+        "${home_page}": touchcontroller_homepage,
+        "${sources_page}": touchcontroller_source,
+        "${issue_tracker}": touchcontroller_issue_tracker,
+        "${description}": touchcontroller_description,
+        "${combine_version}": combine_version,
+        "${mod_authors}": ", ".join(touchcontroller_authors),
+        "${mod_contributors}": ", ".join(touchcontroller_contributors),
+    },
+)
+
+kt_merge_library(
+    name = "forge_unmapped_unmerged",
+    srcs = glob(
+        include = [
+            "**/*.kt",
+            "**/*.java",
+        ],
+    ),
+    javac_opts = "//touchcontroller:javac_opts_jvm_17",
+    kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_17",
+    merge_deps = [
+        "//touchcontroller/versions/extension/1.20.1",
+        "//touchcontroller/versions/forge/gal/key/1.20.1",
+        "//touchcontroller/versions/gal/gameconfig/1.20.1",
+        "//touchcontroller/versions/gal/key/1.20.1",
+    ],
+    merge_only_deps = [
+        "//touchcontroller/versions/1.20.1",
+        "//touchcontroller/versions/forge/gal/1.20.1",
+    ],
+    resource_jars = [
+        ":forge_mod_toml",
+        "//touchcontroller/resources/texture:icon_jar",
+    ],
+    resource_strip_prefix = "touchcontroller/versions/forge/1.20.1/resources",
+    resources = glob(
+        include = ["resources/**"],
+        exclude = ["resources/mods.toml"],
+    ),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//game/1.20.1:game_client_forge_named",
+    ] + [
+        "//combine/backend/minecraft/render/1.20.1",
+        "//game/1.20.1:game_client_libraries",
+        "//touchcontroller/buildinfo",
+        "//touchcontroller/common/config",
+        "//touchcontroller/common/config/data",
+        "//touchcontroller/common/config/holder",
+        "//touchcontroller/common/event/block",
+        "//touchcontroller/common/event/connection",
+        "//touchcontroller/common/event/key",
+        "//touchcontroller/common/event/render",
+        "//touchcontroller/common/event/tick",
+        "//touchcontroller/common/event/window",
+        "//touchcontroller/common/gal/key",
+        "//touchcontroller/common/layout/data",
+        "//touchcontroller/common/model",
+        "//touchcontroller/common/platform",
+        "//touchcontroller/common/platform/provider",
+        "//touchcontroller/common/ui/config/screen",
+        "@forge_1_20_1//:net_minecraftforge_eventbus",
+        "@forge_1_20_1//:net_minecraftforge_fmlcore",
+        "@forge_1_20_1//:net_minecraftforge_fmlloader",
+        "@forge_1_20_1//:net_minecraftforge_forgespi",
+        "@forge_1_20_1//:net_minecraftforge_javafmllanguage",
+        "@forge_1_20_1//:net_minecraftforge_mergetool",
+        "@forge_1_20_1//:org_spongepowered_mixin",
+    ],
+)
+
+merge_library_jar(
+    name = "forge_unmapped",
+    aspect_impl_package_suffix = "forge.v1_20_1",
+    aspects = ["//touchcontroller/common:common_merged"],
+    manifest_entries = {
+        "MixinConfigs": "touchcontroller.mixins.json,touchcontroller.mixins.forge.json",
+    },
+    deps = [":forge_unmapped_unmerged"],
+)
+
+class_version_test(
+    name = "forge_class_version",
+    class_major = 61,
+    jars = [":forge_unmapped"],
+    tags = ["class_version"],
+)
+
+remap_jar(
+    name = "forge",
+    classpath = ["//game/1.20.1:game_client_forge_named"],
+    from_namespace = "named",
+    inputs = [":forge_unmapped"],
+    mapping = "//game/1.20.1:game_merged_mapping",
+    mixin = True,
+    to_namespace = "srg",
+)
+
+alias(
+    name = "1.20.1",
+    actual = "forge",
+    visibility = ["//touchcontroller:__subpackages__"],
+)
+
+unified_jar(
+    name = "forge_merged_unmapped",
+    forge_rules = combine_unified_neoforge | touchcontroller_unified_neoforge | {
+        "combine-common": "",
+        "combine-theme-blackstone": "",
+        "combine-theme-blackstone-atlas": "minecraft: +[1.20.1]",
+        "combine-forge-1-20-1": "minecraft: +[1.20.1]",
+        "touchcontroller-1-20-1-forge": "minecraft: +[1.20.1]",
+        "touchcontroller-api": "",
+        "touchcontroller-common": "",
+        "touchcontroller-lang-modern": "minecraft: +[1.20.1]",
+        "touchcontroller-texture": "",
+        "touchcontroller-texture-atlas": "minecraft: +[1.20.1]",
+    },
+    merge_deps = touchcontroller_merge_deps,
+    deps = combine_unified_deps | touchcontroller_unified_deps | {
+        "combine-common": "//combine/backend/minecraft:minecraft_common_standalone",
+        "combine-theme-blackstone": "//combine/theme/blackstone:blackstone_common",
+        "combine-theme-blackstone-atlas": "//combine/theme/blackstone:blackstone_atlas",
+        "combine-forge-1-20-1": "//combine/backend/minecraft/forge/1.20.1:forge_unmapped",
+        "touchcontroller-1-20-1-forge": ":forge_unmapped",
+        "touchcontroller-api": "//touchcontroller/api",
+        "touchcontroller-common": "//touchcontroller/common:common_merged",
+        "touchcontroller-lang-modern": "//touchcontroller/resources/lang:lang",
+        "touchcontroller-texture": "//touchcontroller/resources/texture:texture_common",
+        "touchcontroller-texture-atlas": "//touchcontroller/resources/texture:texture_atlas",
+    },
+)
+
+java_binary(
+    name = "dev_client",
+    srcs = [],
+    data = [
+        "//game/1.20.1:game_client_assets",
+        "//game/1.20.1:game_client_assets_version",
+        "//game/1.20.1:game_client_forge_named",
+        "//game/1.20.1:game_kotlinforforge",
+    ] + [
+        ":forge_merged_unmapped",
+        "@forge_1_20_1//:forge_modules",
+        "@forge_1_20_1//:ignore_list_client",
+        "@forge_1_20_1//:resources_jar",
+    ],
+    env = {
+        "LANG": "en_US.UTF8",
+    },
+    jvm_flags = [
+        "--add-exports=java.base/sun.security.util=cpw.mods.securejarhandler",
+        "--add-exports=jdk.naming.dns/com.sun.jndi.dns=java.naming",
+        "--add-opens=java.base/java.util.jar=cpw.mods.securejarhandler",
+        "--add-opens=java.base/java.lang.invoke=cpw.mods.securejarhandler",
+        "--add-modules=ALL-MODULE-PATH",
+        "-Ddev.launch.forgeVersion=47.4.10",
+        "-Ddev.launch.mcpVersion=20230612.114412",
+        "-Ddev.launch.version=1.20.1",
+        "-Ddev.launch.legacyFml=true",
+        "-Ddev.launch.type=client",
+        "-Ddev.launch.ignoreList=$(rlocationpath @forge_1_20_1//:ignore_list_client)",
+        "-Ddev.launch.assetsVersion=$(rlocationpath //game/1.20.1:game_client_assets_version)",
+        "-Ddev.launch.classPath=$(rlocationpath :forge_merged_unmapped)",
+        "-Ddev.launch.classPath=$(rlocationpath //game/1.20.1:game_kotlinforforge)",
+        "-Ddev.launch.copyFile=$(rlocationpath @forge_1_20_1//:resources_jar):client-extra.jar",
+        "-classpath",
+        "./client-extra.jar",
+        "-Ddev.launch.copyFile=$(rlocationpath //game/1.20.1:game_client_forge_named):forge-1.20.1-47.4.10.jar",
+        "-classpath",
+        "./forge-1.20.1-47.4.10.jar",
+        "-Xmx4G",
+        "START_MODULEPATH",
+        "$(rlocationpaths @forge_1_20_1//:forge_modules)",
+        "END_MODULEPATH",
+        "--",
+        "--launchTarget=forgeclientuserdev",
+    ],
+    launcher = "//rule/dev_launch_wrapper:launcher",
+    main_class = "cpw.mods.bootstraplauncher.BootstrapLauncher",
+    runtime_deps = [
+        "//game/1.20.1:game_client_libraries",
+    ] + [
+        "@forge_1_20_1//:forge_deps",
+    ],
+)

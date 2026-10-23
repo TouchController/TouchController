@@ -1,9 +1,7 @@
-load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("//rule:mod_info_jar.bzl", "mod_info_jar")
 load("//rule:text_resource_jar.bzl", "text_resource_jar")
-load("//rule/fabric:mod_json_jar.bzl", "fabric_mod_json_jar")
-load("//rule/neoforge:mod_toml_jar.bzl", "neoforge_mod_toml_jar")
 load("//rule/touchcontroller:text_binding.bzl", "kt_text_binding_lib")
-load("//touchcontroller:properties.bzl", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_language_authors", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+load("//touchcontroller:properties.bzl", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_language_authors", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
 kt_text_binding_lib(
     name = "text_binding",
@@ -13,9 +11,12 @@ kt_text_binding_lib(
     visibility = ["//touchcontroller:__subpackages__"],
 )
 
-neoforge_mod_toml_jar(
-    name = "neoforge_mod_toml_modern",
-    src = "modern/neoforge.mods.toml",
+mod_info_jar(
+    name = "mod_info_modern",
+    fabric = "modern/fabric.mod.json",
+    forge = "modern/mods.toml",
+    neoforge = "modern/neoforge.mods.toml",
+    pack_mcmeta = "modern/pack.mcmeta",
     substitutions = {
         "${version}": touchcontroller_version,
         "${license}": touchcontroller_license,
@@ -25,18 +26,6 @@ neoforge_mod_toml_jar(
         "${name}": "TouchController Languages",
         "${description}": "Language files for TouchController.",
         "${authors}": ", ".join(touchcontroller_language_authors),
-    },
-)
-
-fabric_mod_json_jar(
-    name = "fabric_mod_json_modern",
-    src = "modern/fabric.mod.json",
-    substitutions = {
-        "${version}": touchcontroller_version,
-        "${license}": touchcontroller_license,
-        "${home_page}": touchcontroller_homepage,
-        "${sources_page}": touchcontroller_source,
-        "${issue_tracker}": touchcontroller_issue_tracker,
         '"language_authors_array"': json.encode(touchcontroller_language_authors),
     },
 )
@@ -46,8 +35,7 @@ text_resource_jar(
     srcs = glob(["*.json"]),
     format = "json",
     resource_jars = [
-        ":neoforge_mod_toml_modern",
-        ":fabric_mod_json_modern",
+        ":mod_info_modern",
         "//touchcontroller/resources/texture:banner_jar",
         "//touchcontroller/resources/texture:icon_jar",
     ],

@@ -1,0 +1,17 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "top.fifthlight.touchcontroller.forge.v1_20_1.mixin",
+    "compatibilityLevel": "JAVA_17",
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "client": [
+        "KeyBindingMixin",
+        "MinecraftAccessor",
+        "OptionsAccessor",
+        "KeyModifierMixin",
+        "MinecraftMixin",
+        "ToggleKeyMappingMixin"
+    ]
+}

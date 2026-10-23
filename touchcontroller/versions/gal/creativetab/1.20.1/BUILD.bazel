@@ -1,0 +1,25 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "1.20.1",
+    srcs = glob(["*.kt"]),
+    actual = True,
+    javac_opts = "//touchcontroller:javac_opts_jvm_17",
+    kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_17",
+    merge_deps = [
+        "//touchcontroller/versions/gal/player/1.20.1",
+    ],
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//game/1.20.1:game_client_libraries",
+        "//game/1.20.1:game_client_named",
+    ] + [
+        "//combine/backend/minecraft/item/1.20.1",
+        "//combine/backend/minecraft/text/1.20.1",
+        "//combine/core/data",
+        "//combine/item/data",
+        "//touchcontroller/common/gal/creativetab",
+        "//touchcontroller/common/gal/player",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
+    ],
+)

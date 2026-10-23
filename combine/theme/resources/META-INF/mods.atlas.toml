@@ -1,0 +1,21 @@
+modLoader = "lowcodefml"
+loaderVersion = "[1,)"
+license = "${license}"
+issueTrackerURL = "${issue_tracker}"
+
+[[mods]]
+modId = "${mod_id}_atlas"
+version = "${version}"
+displayName = "${name-atlas}"
+displayURL = "${home_page}"
+logoFile = "icon.png"
+authors = "fifth_light"
+description = '''${description-atlas}'''
+
+[[dependencies.${mod_id}_atlas]]
+modId = "minecraft"
+type = "required"
+mandatory = true
+versionRange = "[,1.21.2)"
+ordering = "NONE"
+side = "CLIENT"

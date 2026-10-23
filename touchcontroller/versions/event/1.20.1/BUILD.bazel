@@ -1,0 +1,15 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "1.20.1",
+    srcs = glob(["**/*.kt"]),
+    javac_opts = "//touchcontroller:javac_opts_jvm_17",
+    kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_17",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//game/1.20.1:game_client_named",
+    ] + [
+        "//touchcontroller/common/layout/data",
+        "//touchcontroller/common/model",
+    ],
+)

@@ -1,0 +1,43 @@
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_forge")
+load("//combine:properties.bzl", "combine_description", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
+load("//combine/backend/minecraft:libraries.bzl", "combine_common_deps", "combine_forge_config", "combine_forge_deps")
+load("//rule:unified_jar.bzl", "unified_jar")
+
+expand_template(
+    name = "forge_mod_toml",
+    out = "META-INF/mods.toml",
+    substitutions = {
+        "${version}": combine_version,
+        "${license}": combine_license,
+        "${description}": combine_description,
+        "${home_page}": combine_home_page,
+        "${sources_page}": combine_sources_page,
+        "${issue_tracker}": combine_issue_tracker,
+    },
+    template = "resources/mods.toml",
+    visibility = ["//combine/backend/minecraft:__pkg__"],
+)
+
+expand_template(
+    name = "pack_mcmeta",
+    out = "pack.mcmeta",
+    substitutions = {
+        "${description}": combine_description,
+    },
+    template = "resources/pack.mcmeta",
+    visibility = ["//combine/backend/minecraft:__pkg__"],
+)
+
+# TODO: this also packs 26.x into Forge JAR
+unified_jar(
+    name = "forge",
+    forge_mods_toml = ":forge_mod_toml",
+    forge_rules = combine_forge_config | combine_unified_forge,
+    resources = {
+        "//combine/resources:icon": ".",
+        ":pack_mcmeta": ".",
+    },
+    visibility = ["//visibility:public"],
+    deps = combine_common_deps | combine_forge_deps | combine_unified_deps,
+)

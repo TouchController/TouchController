@@ -1,8 +1,7 @@
-load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//combine:properties.bzl", "combine_version")
 load("//rule:class_version_test.bzl", "class_version_test")
-load("//rule:jar.bzl", "jar")
 load("//rule:merge_library.bzl", "merge_library_group", "merge_library_jar")
+load("//rule:mod_info_jar.bzl", "mod_info_jar")
 load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_fabric_mod_json_versions", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
 merge_library_group(
@@ -127,27 +126,34 @@ merge_library_group(
     ],
 )
 
-expand_template(
-    name = "fabric_mod_json",
-    out = "fabric.mod.json",
-    substitutions = {
-        "${version}": touchcontroller_version,
-        "${license}": touchcontroller_license,
-        "${home_page}": touchcontroller_homepage,
-        "${sources_page}": touchcontroller_source,
-        "${issue_tracker}": touchcontroller_issue_tracker,
-        "${description}": touchcontroller_description,
-        "${combine_version}": combine_version,
-        '"mod_authors_array"': json.encode(touchcontroller_authors),
-        '"mod_contributors_array"': json.encode(touchcontroller_contributors),
-        '"mod_game_versions_array"': json.encode(touchcontroller_fabric_mod_json_versions),
-    },
-    template = "resources/fabric.mod.json",
+merge_library_jar(
+    name = "common_merged",
+    aspect = True,
+    aspect_class = "top.fifthlight.touchcontroller.AspectProvider",
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        ":meta_jar",
+        "//touchcontroller/common",
+        "//touchcontroller/resources/texture:banner_jar",
+    ],
 )
 
-expand_template(
-    name = "neoforge_mod_toml",
-    out = "META-INF/neoforge.mods.toml",
+class_version_test(
+    name = "common_merged_class_version",
+    class_major = 52,
+    jars = [":common_merged"],
+    tags = ["class_version"],
+)
+
+mod_info_jar(
+    name = "meta_jar",
+    fabric = "resources/fabric.mod.json",
+    forge = "resources/mods.toml",
+    neoforge = "resources/neoforge.mods.toml",
+    pack_mcmeta = "resources/pack.mcmeta",
+    resources = {
+        "//touchcontroller/resources/texture:icon": "assets/touchcontroller/textures/icon.png",
+    },
     substitutions = {
         "${version}": touchcontroller_version,
         "${license}": touchcontroller_license,
@@ -158,38 +164,9 @@ expand_template(
         "${combine_version}": combine_version,
         "${mod_authors}": ", ".join(touchcontroller_authors),
         "${mod_contributors}": ", ".join(touchcontroller_contributors),
-    },
-    template = "resources/neoforge.mods.toml",
-)
-
-jar(
-    name = "meta_jar",
-    resource_paths = {
-        ":fabric_mod_json": "fabric.mod.json",
-        "//touchcontroller/resources/texture:icon": "assets/touchcontroller/textures/icon.png",
+        '"mod_authors_array"': json.encode(touchcontroller_authors),
+        '"mod_contributors_array"': json.encode(touchcontroller_contributors),
+        '"mod_game_versions_array"': json.encode(touchcontroller_fabric_mod_json_versions),
     },
     visibility = ["//touchcontroller:__subpackages__"],
-)
-
-merge_library_jar(
-    name = "common_merged",
-    aspect = True,
-    aspect_class = "top.fifthlight.touchcontroller.AspectProvider",
-    resources = {
-        ":fabric_mod_json": "touchcontroller/common",
-        ":neoforge_mod_toml": "touchcontroller/common",
-    },
-    visibility = ["//touchcontroller:__subpackages__"],
-    deps = [
-        "//touchcontroller/common",
-        "//touchcontroller/resources/texture:banner_jar",
-        "//touchcontroller/resources/texture:icon_jar",
-    ],
-)
-
-class_version_test(
-    name = "common_merged_class_version",
-    class_major = 52,
-    jars = [":common_merged"],
-    tags = ["class_version"],
 )

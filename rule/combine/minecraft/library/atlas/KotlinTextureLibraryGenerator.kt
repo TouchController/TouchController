@@ -155,7 +155,7 @@ fun main(vararg args: String) = object : Worker() {
         classSpecBuilder.addProperty(
             PropertySpec.builder("atlasTexture", ClassName("top.fifthlight.combine.core.paint", "Texture"))
                 .initializer(
-                    "TextureFactory.create(%S, %S, %L, %L, IntPadding.ZERO)",
+                    "TextureFactory.create(Identifier.of(%S, %S), %L, %L, IntPadding.ZERO)",
                     namespace,
                     "textures/gui/$prefix/atlas.png",
                     atlasMetadata.width,
@@ -234,6 +234,7 @@ fun main(vararg args: String) = object : Worker() {
                     .addMember("%S", "RedundantVisibilityModifier")
                     .build()
             )
+            .addImport("top.fifthlight.combine.core.data", "Identifier")
             .addImport("top.fifthlight.combine.core.paint", "BackgroundTextureFactory")
             .addImport("top.fifthlight.combine.core.paint", "TextureFactory")
             .addImport("top.fifthlight.combine.core.util.atlas", "AtlasTexture")

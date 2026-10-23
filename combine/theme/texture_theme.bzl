@@ -51,7 +51,9 @@ def _combine_theme_impl(
         name = name + "_common",
         aspect = True,
         aspect_class = aspect_class,
-        resources = icon_resources | banner_resources,
+        resources = icon_resources | banner_resources | {
+            "//combine/theme:resources/pack.mcmeta": "combine/theme/resources",
+        },
         visibility = visibility,
         deps = [
             ":" + name,

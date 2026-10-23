@@ -157,7 +157,7 @@ fun main(vararg args: String) = object : Worker() {
                         texture.identifier,
                         ClassName("top.fifthlight.combine.core.paint", "Texture")
                     ).addModifiers(KModifier.OVERRIDE).initializer(
-                        "TextureFactory.createSprite(%S, %S, %L, %L, IntPadding.ZERO)",
+                        "TextureFactory.createSprite(Texture.SpriteTextureData.Native(Identifier.of(%S, %S), IntSize(%L, %L)), IntPadding.ZERO)",
                         namespace,
                         "$prefix/${texture.identifier}",
                         metadata.size.width,
@@ -174,7 +174,7 @@ fun main(vararg args: String) = object : Worker() {
                     .builder(ninePatch.identifier, ClassName("top.fifthlight.combine.core.paint", "Texture"))
                     .addModifiers(KModifier.OVERRIDE)
                     .initializer(
-                        "TextureFactory.createSprite(%S, %S, %L, %L, IntPadding(%L, %L, %L, %L))",
+                        "TextureFactory.createSprite(Texture.SpriteTextureData.Native(Identifier.of(%S, %S), IntSize(%L, %L)), IntPadding(%L, %L, %L, %L))",
                         namespace,
                         "$prefix/${ninePatch.identifier}",
                         metadata.size.width,
@@ -196,9 +196,12 @@ fun main(vararg args: String) = object : Worker() {
                     .addMember("%S", "RedundantVisibilityModifier")
                     .build()
             )
+            .addImport("top.fifthlight.combine.core.data", "Identifier")
+            .addImport("top.fifthlight.combine.core.paint", "Texture")
             .addImport("top.fifthlight.combine.core.paint", "TextureFactory")
             .addImport("top.fifthlight.combine.core.paint", "BackgroundTextureFactory")
             .addImport("top.fifthlight.data", "IntPadding")
+            .addImport("top.fifthlight.data", "IntSize")
             .addType(classSpecBuilder.build())
             .build()
         outputFile.writeText(buildString { file.writeTo(this) })

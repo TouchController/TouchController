@@ -10,12 +10,15 @@ import net.minecraft.client.gui.render.state.GuiElementRenderState
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.resources.ResourceLocation
 import org.joml.Matrix3x2f
+import top.fifthlight.combine.backend.minecraft.identifier.v1_21_10.toMinecraft
 import top.fifthlight.combine.backend.minecraft.render.v1_21_10.extension.SpriteAccessibleGuiGraphics
 import top.fifthlight.combine.backend.minecraft.render.v1_21_10.extension.SubmittableGuiGraphics
+import top.fifthlight.combine.core.data.Identifier as CombineIdentifier
 import top.fifthlight.combine.core.paint.BackgroundTexture
 import top.fifthlight.combine.core.paint.Canvas
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.combine.core.paint.Texture
+import top.fifthlight.combine.core.util.atlas.AtlasTexture
 import top.fifthlight.data.IntPadding
 import top.fifthlight.data.IntRect
 import top.fifthlight.data.IntSize
@@ -96,53 +99,77 @@ private data class BlitRenderState(
 }
 
 @ActualImpl(Texture::class)
-data class TextureImpl(
-    val resourceLocation: ResourceLocation,
-    val sprite: Boolean,
-    override val size: IntSize,
-    override val padding: IntPadding = IntPadding.ZERO,
-) : Texture {
-    companion object : Texture.Factory {
-        @ActualConstructor
-        @JvmStatic
-        override fun create(
-            namespace: String,
-            id: String,
-            width: Int,
-            height: Int,
-            padding: IntPadding,
-        ): Texture = TextureImpl(
-            resourceLocation = ResourceLocation.fromNamespaceAndPath(namespace, id),
-            sprite = false,
-            size = IntSize(width, height),
-            padding = padding,
-        )
+sealed class TextureImpl : Texture {
+    abstract val resourceLocation: ResourceLocation
 
-        @ActualConstructor
-        @JvmStatic
-        override fun createSprite(
-            namespace: String,
-            id: String,
-            width: Int,
-            height: Int,
-            padding: IntPadding,
-        ): Texture = TextureImpl(
-            resourceLocation = ResourceLocation.fromNamespaceAndPath(namespace, id),
-            sprite = true,
-            size = IntSize(width, height),
-            padding = padding,
-        )
+    data class Normal(
+        override val resourceLocation: ResourceLocation,
+        override val size: IntSize,
+        override val padding: IntPadding = IntPadding.ZERO,
+    ) : TextureImpl() {
+        override fun draw(
+            canvas: Canvas,
+            dstRect: Rect,
+            tint: Color,
+            srcRect: Rect,
+        ) {
+            val guiGraphics = (canvas as CanvasImpl).guiGraphics
+            val client = Minecraft.getInstance()
+            val gpuTextureView = client.textureManager.getTexture(resourceLocation).getTextureView()
+            guiGraphics.submitElement(
+                BlitRenderState(
+                    pipeline = RenderPipelines.GUI_TEXTURED,
+                    textureSetup = TextureSetup.singleTexture(gpuTextureView),
+                    pose = Matrix3x2f(guiGraphics.pose()),
+                    x0 = dstRect.offset.x,
+                    y0 = dstRect.offset.y,
+                    x1 = dstRect.offset.x + dstRect.size.width,
+                    y1 = dstRect.offset.y + dstRect.size.height,
+                    u0 = srcRect.offset.x / size.width,
+                    u1 = (srcRect.offset.x + srcRect.size.width) / size.width,
+                    v0 = srcRect.offset.y / size.height,
+                    v1 = (srcRect.offset.y + srcRect.size.height) / size.height,
+                    color = tint.value,
+                    screenRectangle = guiGraphics.peekScissorStack(),
+                )
+            )
+        }
+
+        override fun draw(
+            canvas: Canvas,
+            dstRect: IntRect,
+            tint: Color,
+        ) {
+            val guiGraphics = (canvas as CanvasImpl).guiGraphics
+            guiGraphics.blit(
+                RenderPipelines.GUI_TEXTURED,
+                resourceLocation,
+                dstRect.offset.x,
+                dstRect.offset.y,
+                0f,
+                0f,
+                dstRect.size.width,
+                dstRect.size.height,
+                size.width,
+                size.height,
+                tint.value,
+            )
+        }
     }
 
-    override fun draw(
-        canvas: Canvas,
-        dstRect: Rect,
-        tint: Color,
-        srcRect: Rect,
-    ) {
-        val guiGraphics = (canvas as CanvasImpl).guiGraphics
-        val client = Minecraft.getInstance()
-        if (sprite) {
+    data class Sprite(
+        override val resourceLocation: ResourceLocation,
+        override val size: IntSize,
+        override val padding: IntPadding = IntPadding.ZERO,
+    ) : TextureImpl() {
+        override fun draw(
+            canvas: Canvas,
+            dstRect: Rect,
+            tint: Color,
+            srcRect: Rect,
+        ) {
+            val guiGraphics = (canvas as CanvasImpl).guiGraphics
+            val client = Minecraft.getInstance()
             val sprite = guiGraphics.getSprite(resourceLocation)
             val atlasLocation = sprite.atlasLocation()
             val gpuTextureView = client.textureManager.getTexture(atlasLocation).getTextureView()
@@ -164,35 +191,14 @@ data class TextureImpl(
                     screenRectangle = guiGraphics.peekScissorStack(),
                 )
             )
-        } else {
-            val gpuTextureView = client.textureManager.getTexture(resourceLocation).getTextureView()
-            guiGraphics.submitElement(
-                BlitRenderState(
-                    pipeline = RenderPipelines.GUI_TEXTURED,
-                    textureSetup = TextureSetup.singleTexture(gpuTextureView),
-                    pose = Matrix3x2f(guiGraphics.pose()),
-                    x0 = dstRect.offset.x,
-                    y0 = dstRect.offset.y,
-                    x1 = dstRect.offset.x + dstRect.size.width,
-                    y1 = dstRect.offset.y + dstRect.size.height,
-                    u0 = srcRect.offset.x / size.width,
-                    u1 = (srcRect.offset.x + srcRect.size.width) / size.width,
-                    v0 = srcRect.offset.y / size.height,
-                    v1 = (srcRect.offset.y + srcRect.size.height) / size.height,
-                    color = tint.value,
-                    screenRectangle = guiGraphics.peekScissorStack(),
-                )
-            )
         }
-    }
 
-    override fun draw(
-        canvas: Canvas,
-        dstRect: IntRect,
-        tint: Color,
-    ) {
-        val guiGraphics = (canvas as CanvasImpl).guiGraphics
-        if (sprite) {
+        override fun draw(
+            canvas: Canvas,
+            dstRect: IntRect,
+            tint: Color,
+        ) {
+            val guiGraphics = (canvas as CanvasImpl).guiGraphics
             guiGraphics.blitSprite(
                 RenderPipelines.GUI_TEXTURED,
                 resourceLocation,
@@ -202,19 +208,42 @@ data class TextureImpl(
                 dstRect.size.height,
                 tint.value,
             )
-        } else {
-            guiGraphics.blit(
-                RenderPipelines.GUI_TEXTURED,
-                resourceLocation,
-                dstRect.offset.x,
-                dstRect.offset.y,
-                0f,
-                0f,
-                dstRect.size.width,
-                dstRect.size.height,
-                size.width,
-                size.height,
-                tint.value,
+        }
+    }
+
+    companion object : Texture.Factory {
+        @ActualConstructor
+        @JvmStatic
+        override fun create(
+            identifier: CombineIdentifier,
+            width: Int,
+            height: Int,
+            padding: IntPadding,
+        ): Texture = Normal(
+            resourceLocation = identifier.toMinecraft(),
+            size = IntSize(width, height),
+            padding = padding,
+        )
+
+        @ActualConstructor
+        @JvmStatic
+        override fun createSprite(
+            data: Texture.SpriteTextureData,
+            padding: IntPadding,
+        ): Texture = when (data) {
+            is Texture.SpriteTextureData.Atlas -> AtlasTexture(Normal(
+                resourceLocation = data.identifier.toMinecraft(),
+                size = data.atlasSize,
+                padding = padding,
+            )).createPart(
+                offset = data.atlasOffset,
+                size = data.atlasSize,
+            )
+
+            is Texture.SpriteTextureData.Native -> Sprite(
+                resourceLocation = data.identifier.toMinecraft(),
+                size = data.spriteSize,
+                padding = padding,
             )
         }
     }

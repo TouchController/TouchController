@@ -1,0 +1,78 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "${license}"
+issueTrackerURL = "${issue_tracker}"
+
+[[mods]]
+modId = "touchcontroller_1_20_1"
+version = "${version}"
+displayName = "TouchController"
+displayURL = "${home_page}"
+logoFile = "assets/touchcontroller/textures/icon.png"
+authors = "${mod_authors}"
+credits = "${mod_contributors}"
+description = "${description}"
+
+[[dependencies.touchcontroller_1_20_1]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.20.1]"
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_1_20_1]]
+modId = "forge"
+type = "required"
+versionRange = "[47,)"
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_1_20_1]]
+modId = "combine"
+type = "required"
+versionRange = "[${combine_version},]"
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_1_20_1]]
+modId = "combine_1_20_1"
+type = "required"
+versionRange = "[${combine_version},]"
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_1_20_1]]
+modId = "kotlinforforge"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_1_20_1]]
+modId = "touchcontroller_common"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_1_20_1]]
+modId = "touchcontroller_texture_atlas"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.touchcontroller_1_20_1]]
+modId = "touchcontroller_lang_modern"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true

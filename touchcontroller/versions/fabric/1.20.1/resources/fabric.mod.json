@@ -1,0 +1,44 @@
+{
+    "schemaVersion": 1,
+    "id": "touchcontroller-1-20-1",
+    "version": "${version}",
+    "name": "TouchController",
+    "description": "${description}",
+    "authors": "mod_authors_array",
+    "contributors": "mod_contributors_array",
+    "contact": {
+        "homepage": "${home_page}",
+        "sources": "${sources_page}",
+        "issues": "${issue_tracker}"
+    },
+    "license": "${license}",
+    "icon": "assets/touchcontroller/textures/icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "top.fifthlight.touchcontroller.fabric.v1_20_1.TouchController"
+        ],
+        "modmenu": [
+            "top.fifthlight.touchcontroller.fabric.v1_20_1.TouchControllerModMenuApiImpl"
+        ]
+    },
+    "mixins": [
+        {
+            "config": "touchcontroller.mixins.json",
+            "environment": "client"
+        },
+        {
+            "config": "touchcontroller.mixins.fabric.json",
+            "environment": "client"
+        }
+    ],
+    "depends": {
+        "minecraft": "1.20.1",
+        "java": ">=17",
+        "combine": "^${combine_version}",
+        "fabric-api": "*",
+        "fabric-language-kotlin": "*",
+        "touchcontroller-texture-atlas": "=${version}",
+        "touchcontroller-lang-modern": "=${version}"
+    }
+}

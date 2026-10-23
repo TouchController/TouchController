@@ -1,0 +1,29 @@
+modLoader = "lowcodefml"
+loaderVersion = "[1,)"
+license = "${license}"
+issueTrackerURL = "${issue_tracker}"
+
+[[mods]]
+modId = "combine"
+version = "${version}"
+displayName = "Combine"
+displayURL = "${home_page}"
+logoFile = "icon.png"
+authors = "fifth_light"
+description = "${description}"
+
+[[dependencies.combine]]
+modId = "minecraft"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true
+
+[[dependencies.combine]]
+modId = "kotlinforforge"
+type = "required"
+versionRange = " "
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true

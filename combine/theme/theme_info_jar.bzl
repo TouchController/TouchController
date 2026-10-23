@@ -1,5 +1,6 @@
 """Rules for generating mod loader metadata JAR for themes."""
 
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//combine:properties.bzl", "combine_home_page", "combine_issue_tracker", "combine_license", "combine_sources_page", "combine_version")
 load("//rule:mod_info_jar.bzl", "mod_info_jar")
 
@@ -17,6 +18,8 @@ def _theme_info_jar_impl(name, visibility, substitutions):
         visibility = visibility,
         fabric = "//combine/theme:resources/fabric.mod.json",
         neoforge = "//combine/theme:resources/META-INF/neoforge.mods.toml",
+        forge = "//combine/theme:resources/META-INF/mods.toml",
+        pack_mcmeta = "//combine/theme:resources/pack.mcmeta",
         substitutions = predefined_substitutions | substitutions,
     )
 
@@ -57,6 +60,8 @@ def _theme_atlas_info_jar_impl(name, visibility, substitutions):
         visibility = visibility,
         fabric = "//combine/theme:resources/fabric.mod.atlas.json",
         neoforge = "//combine/theme:resources/META-INF/neoforge.mods.atlas.toml",
+        forge = "//combine/theme:resources/META-INF/mods.atlas.toml",
+        pack_mcmeta = "//combine/theme:resources/pack.atlas.mcmeta",
         substitutions = predefined_substitutions | substitutions,
     )
 

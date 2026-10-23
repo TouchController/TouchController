@@ -27,6 +27,10 @@ touchcontroller_contributors = [
     "Lessebq",
 ]
 
+touchcontroller_forge_game_versions = [
+    "1.20.1",
+]
+
 touchcontroller_neoforge_game_versions = [
     "1.21.1",
     "1.21.10",
@@ -38,6 +42,7 @@ touchcontroller_neoforge_game_versions = [
     "26.3",
 ]
 touchcontroller_fabric_game_versions = [
+    "1.20.1",
     "1.21.1",
     "1.21.10",
     "1.21.11",
@@ -65,7 +70,8 @@ def _curseforge_game_version(version):
 
 touchcontroller_fabric_curseforge_game_versions = [_curseforge_game_version(version) for version in touchcontroller_fabric_game_versions]
 touchcontroller_neoforge_curseforge_game_versions = [_curseforge_game_version(version) for version in touchcontroller_neoforge_game_versions]
+touchcontroller_forge_curseforge_game_versions = [_curseforge_game_version(version) for version in touchcontroller_forge_game_versions]
 
-touchcontroller_api_version = "1.0.0"
+touchcontroller_api_version = "1.1.0"
 touchcontroller_api_license = "Apache-2.0"
 touchcontroller_api_description = "API for TouchController mod."

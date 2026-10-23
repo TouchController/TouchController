@@ -1,0 +1,10 @@
+{
+    "pack": {
+        "description": "${description}",
+        "pack_format": 4,
+        "supported_formats": {
+            "min_inclusive": 4,
+            "max_inclusive": 48
+        }
+    }
+}

@@ -40,6 +40,13 @@ expand_template(
     template = "resources/META-INF/mods.toml",
 )
 
+expand_template(
+    name = "pack_mcmeta",
+    out = "pack.mcmeta",
+    substitutions = substitutions,
+    template = "resources/pack.mcmeta",
+)
+
 copy_file(
     name = "icon",
     src = "//touchcontroller/resources/texture:icon",
@@ -70,6 +77,7 @@ java_export(
         ":mcmod_info",
         ":mods_toml",
         ":neoforge_mods_toml",
+        ":pack_mcmeta",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [

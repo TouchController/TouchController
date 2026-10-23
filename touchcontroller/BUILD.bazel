@@ -1,10 +1,10 @@
 load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
-load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_fabric", "combine_unified_neoforge")
+load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_fabric", "combine_unified_forge", "combine_unified_neoforge")
 load("//rule:class_version_test.bzl", "class_version_test")
 load("//rule:extract_update_log.bzl", "extract_update_log")
 load("//rule:jvm_opts.bzl", "kt_jvm_javac_options_set", "kt_jvm_kotlinc_options_set")
 load("//rule:unified_jar.bzl", "unified_jar")
-load("//touchcontroller:libraries.bzl", "touchcontroller_common_deps", "touchcontroller_fabric_config", "touchcontroller_fabric_deps", "touchcontroller_libraries", "touchcontroller_merge_deps", "touchcontroller_neoforge_config", "touchcontroller_neoforge_deps", "touchcontroller_unified_deps", "touchcontroller_unified_fabric", "touchcontroller_unified_neoforge")
+load("//touchcontroller:libraries.bzl", "touchcontroller_common_deps", "touchcontroller_fabric_config", "touchcontroller_fabric_deps", "touchcontroller_forge_config", "touchcontroller_forge_deps", "touchcontroller_libraries", "touchcontroller_merge_deps", "touchcontroller_neoforge_config", "touchcontroller_neoforge_deps", "touchcontroller_unified_deps", "touchcontroller_unified_fabric", "touchcontroller_unified_forge", "touchcontroller_unified_neoforge")
 load("//touchcontroller:properties.bzl", "touchcontroller_version")
 
 jvm_versions = [
@@ -56,11 +56,13 @@ unified_jar(
     name = "touchcontroller",
     fabric_deps = touchcontroller_fabric_config | combine_unified_fabric | touchcontroller_unified_fabric,
     fabric_mod_json = "//touchcontroller/fabric:fabric_mod_json",
+    forge_mods_toml = "//touchcontroller/forge:forge_mods_toml",
+    forge_rules = touchcontroller_forge_config | combine_unified_forge | touchcontroller_unified_forge,
     merge_deps = touchcontroller_merge_deps,
     neoforge_mod_toml = "//touchcontroller/neoforge:neoforge_mod_toml",
     neoforge_rules = touchcontroller_neoforge_config | combine_unified_neoforge | touchcontroller_unified_neoforge,
     resources = {":icon": "touchcontroller"},
-    deps = touchcontroller_fabric_deps | touchcontroller_common_deps | touchcontroller_neoforge_deps | combine_unified_deps | touchcontroller_unified_deps,
+    deps = touchcontroller_fabric_deps | touchcontroller_common_deps | touchcontroller_neoforge_deps | touchcontroller_forge_deps | combine_unified_deps | touchcontroller_unified_deps,
 )
 
 class_version_test(

@@ -18,7 +18,7 @@ config = "combine.mixins.render.json"
 [[dependencies.combine_1_21_1]]
 modId = "minecraft"
 type = "required"
-versionRange = "1.21.1"
+versionRange = "[1.21.1]"
 ordering = "NONE"
 side = "CLIENT"
 
