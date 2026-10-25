@@ -151,7 +151,7 @@ private data class DraggableModifierNode(
     }
 
     override fun renderAfter(canvas: Canvas, wrapperNode: Placeable, node: LayoutNode, cursorPos: Offset) {
-        if (cursorPos in node) {
+        if ((dragState.entered || dragState.pressed) && cursorPos in node) {
             canvas.requestPointerIcon(pointerIcon)
         }
     }

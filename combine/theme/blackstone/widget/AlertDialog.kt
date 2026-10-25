@@ -10,7 +10,6 @@ import top.fifthlight.combine.core.modifier.drawing.border
 import top.fifthlight.combine.core.modifier.drawing.clip
 import top.fifthlight.combine.core.modifier.placement.offset
 import top.fifthlight.combine.core.modifier.placement.padding
-import top.fifthlight.combine.core.modifier.pointer.consumePress
 import top.fifthlight.combine.core.paint.Color
 import top.fifthlight.combine.core.paint.Colors
 import top.fifthlight.combine.core.paint.Drawable
@@ -45,7 +44,6 @@ fun AlertDialog(
             modifier = Modifier
                 .padding(8)
                 .border(background)
-                .consumePress()
                 .offset(y = (1f - showingProgress) * .2f)
                 .clip(width = 1f, height = showingProgress)
                 .then(modifier),

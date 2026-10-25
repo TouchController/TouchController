@@ -29,14 +29,10 @@ interface PointerInputModifierNode: WrapperModifierNode {
             KeyEventReceiver by children {
 
             override fun onPointerEvent(event: PointerEvent): Boolean {
-                val accepted = modifierNode.onPointerEvent(event, this, node) {
+                val consumed = modifierNode.onPointerEvent(event, this, node) {
                     children.onPointerEvent(it)
                 }
-                return if (accepted) {
-                    true
-                } else {
-                    children.onPointerEvent(event)
-                }
+                return consumed || children.onPointerEvent(event)
             }
         }
 

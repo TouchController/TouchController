@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import top.fifthlight.combine.core.layout.Alignment
 import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.combine.core.modifier.placement.fillMaxSize
+import top.fifthlight.combine.core.modifier.pointer.consumePress
 import top.fifthlight.combine.core.screen.DismissHandler
 import top.fifthlight.combine.core.widget.layout.Box
 import top.fifthlight.combine.core.widget.layout.BoxScope
@@ -26,7 +27,9 @@ fun Dialog(
                 .then(modifier),
             alignment = Alignment.Center,
         ) {
-            content()
+            Box(modifier = Modifier.consumePress()) {
+                content()
+            }
         }
     }
 }

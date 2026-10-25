@@ -98,7 +98,7 @@ private data class ClickableTextModifierNode(
     }
 
     override fun renderAfter(canvas: Canvas, wrapperNode: Placeable, node: LayoutNode, cursorPos: Offset) {
-        if (cursorPos in node) {
+        if (clickState.entered && cursorPos in node) {
             val position = (cursorPos - node.absolutePosition).toIntOffset()
             val action = TextHitTestProvider.hitTest(
                 text = text,

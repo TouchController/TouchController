@@ -14,6 +14,7 @@ import top.fifthlight.combine.core.modifier.drawing.clip
 import top.fifthlight.combine.core.modifier.focus.focusable
 import top.fifthlight.combine.core.modifier.placement.*
 import top.fifthlight.combine.core.modifier.pointer.clickable
+import top.fifthlight.combine.core.modifier.pointer.consumePress
 import top.fifthlight.combine.core.paint.Drawable
 import top.fifthlight.combine.core.widget.Popup
 import top.fifthlight.combine.core.widget.layout.Box
@@ -135,6 +136,7 @@ fun DropDownMenu(
             Box(
                 modifier = Modifier
                     .border(drawableSet)
+                    .consumePress()
                     .clip(width = 1f, height = expandProgress, anchorOffset = anchor.offset)
             ) {
                 content(scope)

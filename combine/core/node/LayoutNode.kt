@@ -108,6 +108,7 @@ abstract class WrapperLayoutNode(
                         }
                         return true
                     }
+                    break
                 }
                 return false
             }
