@@ -35,14 +35,51 @@ fun Modifier.draggable(
     dragState: DragState = remember { DragState() },
     pointerIcon: PointerIcon = PointerIcon.ResizeAll,
     onDrag: (relative: Offset) -> Unit,
+) = DragHandler { relative, _ ->
+    onDrag(relative)
+}.let { handler ->
+    then(
+        DraggableModifierNode(
+            interactionSource = interactionSource,
+            dragState = dragState,
+            onDrag = handler,
+            onPress = handler,
+            onRelease = DragHandler.Empty,
+            onCancel = DragHandler.Empty,
+            pointerIcon = pointerIcon,
+            acceptUnstable = false,
+        )
+    )
+}
+
+fun interface DragHandler {
+    fun Placeable.dispatch(relative: Offset, absolute: Offset)
+
+    object Empty : DragHandler {
+        override fun Placeable.dispatch(relative: Offset, absolute: Offset) = Unit
+    }
+}
+
+@Suppress("NOTHING_TO_INLINE")
+private inline fun DragHandler.dispatch(placeable: Placeable, relative: Offset, absolute: Offset) =
+    with(placeable) { dispatch(relative, absolute) }
+
+@Composable
+fun Modifier.draggable(
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    dragState: DragState = remember { DragState() },
+    pointerIcon: PointerIcon = PointerIcon.ResizeAll,
+    onDrag: DragHandler,
 ) = then(
     DraggableModifierNode(
         interactionSource = interactionSource,
         dragState = dragState,
-        onDrag = { relative, _ -> onDrag(relative) },
-        onRelease = { _, _ -> },
-        onCancel = { _, _ -> },
+        onDrag = onDrag,
+        onPress = onDrag,
+        onRelease = DragHandler.Empty,
+        onCancel = DragHandler.Empty,
         pointerIcon = pointerIcon,
+        acceptUnstable = false,
     )
 )
 
@@ -51,43 +88,32 @@ fun Modifier.draggable(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     dragState: DragState = remember { DragState() },
     pointerIcon: PointerIcon = PointerIcon.ResizeAll,
-    onDrag: Placeable.(relative: Offset, absolute: Offset) -> Unit,
+    onDrag: DragHandler,
+    onPress: DragHandler? = onDrag,
+    onRelease: DragHandler?,
+    onCancel: DragHandler? = onRelease,
+    acceptUnstable: Boolean = true,
 ) = then(
     DraggableModifierNode(
         interactionSource = interactionSource,
         dragState = dragState,
         onDrag = onDrag,
-        onRelease = { _, _ -> },
-        onCancel = { _, _ -> },
-        pointerIcon = pointerIcon,
-    )
-)
-
-@Composable
-fun Modifier.draggable(
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    dragState: DragState = remember { DragState() },
-    pointerIcon: PointerIcon = PointerIcon.ResizeAll,
-    onDrag: Placeable.(relative: Offset, absolute: Offset) -> Unit,
-    onRelease: Placeable.(relative: Offset, absolute: Offset) -> Unit,
-    onCancel: Placeable.(relative: Offset, absolute: Offset) -> Unit = onRelease,
-) = then(
-    DraggableModifierNode(
-        interactionSource = interactionSource,
-        dragState = dragState,
-        onDrag = onDrag,
+        onPress = onPress,
         onRelease = onRelease,
         onCancel = onCancel,
         pointerIcon = pointerIcon,
+        acceptUnstable = acceptUnstable,
     )
 )
 
 private data class DraggableModifierNode(
     val interactionSource: MutableInteractionSource,
     val dragState: DragState,
-    val onDrag: Placeable.(relative: Offset, absolute: Offset) -> Unit,
-    val onRelease: Placeable.(relative: Offset, absolute: Offset) -> Unit,
-    val onCancel: Placeable.(relative: Offset, absolute: Offset) -> Unit,
+    val onDrag: DragHandler,
+    val onPress: DragHandler?,
+    val onRelease: DragHandler?,
+    val onCancel: DragHandler?,
+    val acceptUnstable: Boolean,
     val pointerIcon: PointerIcon,
 ) : Modifier.Node<DraggableModifierNode>, PointerInputModifierNode, DrawModifierNode {
 
@@ -106,32 +132,36 @@ private data class DraggableModifierNode(
             PointerEventType.Press -> {
                 dragState.pressed = true
                 dragState.lastPosition = event.position
-                onDrag(node, Offset.ZERO, absolutePosition)
+                if (!event.unstable || acceptUnstable) {
+                    onPress?.dispatch(node, Offset.ZERO, absolutePosition)
+                }
             }
 
             PointerEventType.Move -> {
                 if (dragState.pressed) {
                     val lastPosition = dragState.lastPosition
-                    if (lastPosition != null) {
-                        val diff = event.position - lastPosition
-                        onDrag(node, diff, absolutePosition)
-                    } else {
-                        onDrag(node, Offset.ZERO, absolutePosition)
+                    if (!event.unstable || acceptUnstable) {
+                        if (lastPosition != null) {
+                            val diff = event.position - lastPosition
+                            onDrag.dispatch(node, diff, absolutePosition)
+                        } else {
+                            onDrag.dispatch(node, Offset.ZERO, absolutePosition)
+                        }
                     }
                     dragState.lastPosition = event.position
                 }
             }
 
             PointerEventType.Release -> {
-                if (dragState.pressed) {
-                    onRelease(node, Offset.ZERO, absolutePosition)
+                if ((!event.unstable || acceptUnstable) && dragState.pressed) {
+                    onRelease?.dispatch(node, Offset.ZERO, absolutePosition)
                 }
                 dragState.pressed = false
             }
 
             PointerEventType.Cancel -> {
                 if (dragState.pressed) {
-                    onCancel(node, Offset.ZERO, absolutePosition)
+                    onCancel?.dispatch(node, Offset.ZERO, absolutePosition)
                 }
                 dragState.pressed = false
             }

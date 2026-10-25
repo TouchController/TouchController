@@ -67,6 +67,9 @@ value class PointerType private constructor(internal val value: Int) {
 data class PointerEvent(
     val id: Int,
     val position: Offset,
+    // Mark whether this event come from an unstable source, like scrolling.
+    // Widgets like Slider should not update for an event with unstable = true.
+    val unstable: Boolean = false,
     val pointerType: PointerType = PointerType.Mouse,
     val button: PointerButton? = null,
     val scrollDelta: Offset = Offset.ZERO,

@@ -190,10 +190,13 @@ private fun LayoutEditorPanel(
 
             if (!lockWidgetMoving) {
                 modifier = modifier.draggable(
-                    onDrag = { relative, _ ->
+                    onPress = { _, _ ->
                         if (index != selectedWidgetIndex) {
                             onSelectedWidgetChanged(index)
                         }
+                        dragTotalOffset = Offset.ZERO
+                    },
+                    onDrag = { relative, _ ->
                         dragTotalOffset += relative
                     },
                     onRelease = { _, _ ->

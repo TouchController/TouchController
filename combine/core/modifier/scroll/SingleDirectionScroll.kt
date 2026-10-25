@@ -77,6 +77,7 @@ private abstract class SingleDirectionScrollNode<T : SingleDirectionScrollNode<T
     abstract val backgroundScale: Float
 
     protected abstract val Offset.amount: Float
+    protected abstract val Offset.otherAxisAmount: Float
     protected abstract val Constraints.maxAmount: Int
     protected abstract fun Constraints.copyInDirection(): Constraints
     protected abstract val Placeable.sizeAmount: Int
@@ -110,7 +111,7 @@ private abstract class SingleDirectionScrollNode<T : SingleDirectionScrollNode<T
                 scrollState.startPointerPosition = null
                 scrollState.scrolling = false
                 scrollState.stopAnimation()
-                children(event)
+                children(event.copy(unstable = true))
                 true
             }
 
@@ -137,21 +138,29 @@ private abstract class SingleDirectionScrollNode<T : SingleDirectionScrollNode<T
                     scrollState.updateProgress(distance + scrollState.startProgress)
                     true
                 } else if (initialPosition != null) {
-                    val distance = if (reverse) {
-                        (event.position.amount - initialPosition.amount)
+                    val axisDistance = if (reverse) {
+                        (event.position - initialPosition)
                     } else {
-                        (initialPosition.amount - event.position.amount)
+                        (initialPosition - event.position)
                     }
-                    if (distance.absoluteValue > 8) {
+                    if (axisDistance.amount.absoluteValue > 8) {
+                        // Start scroll
                         scrollState.scrolling = true
                         scrollState.startProgress = scrollState.progress.value
                         scrollState.startPointerPosition = event.position
                         children(event.copy(type = PointerEventType.Cancel))
                         true
-                    } else {
+                    } else if (axisDistance.otherAxisAmount.absoluteValue > 8) {
+                        // Don't scroll
+                        scrollState.initialPointerPosition = null
                         false
+                    } else {
+                        // Unstable
+                        children(event.copy(unstable = true))
+                        true
                     }
                 } else {
+                    // Stable now
                     false
                 }
             }
@@ -239,6 +248,7 @@ private data class VerticalScrollNode(
     override val backgroundScale: Float,
 ) : SingleDirectionScrollNode<VerticalScrollNode>() {
     override val Offset.amount get() = y
+    override val Offset.otherAxisAmount get() = x
     override val Constraints.maxAmount get() = maxHeight
     override fun Constraints.copyInDirection() = copy(minHeight = minHeight, maxHeight = Int.MAX_VALUE)
     override val Placeable.sizeAmount: Int get() = height
@@ -299,6 +309,7 @@ private data class HorizontalScrollNode(
     override val backgroundScale: Float,
 ) : SingleDirectionScrollNode<HorizontalScrollNode>() {
     override val Offset.amount get() = x
+    override val Offset.otherAxisAmount get() = y
     override val Constraints.maxAmount get() = maxWidth
     override fun Constraints.copyInDirection() = copy(minWidth = minWidth, maxWidth = Int.MAX_VALUE)
     override val Placeable.sizeAmount: Int get() = width
