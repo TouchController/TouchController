@@ -30,7 +30,7 @@ data class ItemStackImpl(
         get() = inner.isEmpty
 
     override val name: Text
-        get() = TextImpl(inner.displayName)
+        get() = TextImpl(inner.item.getName(inner))
 
     override fun withAmount(amount: Int) = ItemStackImpl(inner.copyWithCount(amount))
 
