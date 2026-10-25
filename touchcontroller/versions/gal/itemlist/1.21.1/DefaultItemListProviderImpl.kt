@@ -34,6 +34,7 @@ object DefaultItemListProviderImpl : DefaultItemListProvider {
             ItemImpl(Items.WRITTEN_BOOK),
             ItemImpl(Items.ENDER_EYE),
             ItemImpl(Items.ENDER_PEARL),
+            ItemImpl(Items.POTION),
             ItemImpl(Items.MILK_BUCKET),
         ),
         blacklist = persistentListOf(
@@ -46,6 +47,7 @@ object DefaultItemListProviderImpl : DefaultItemListProvider {
         subclasses = persistentSetOf(
             ItemSubclassProviderImpl.rangedWeaponSubclass,
             ItemSubclassProviderImpl.projectileSubclass,
+            ItemSubclassProviderImpl.armorSubclass,
         ),
         components = persistentListOf(
             ItemDataComponentTypeImpl(DataComponents.FOOD),

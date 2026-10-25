@@ -41,7 +41,25 @@ object ItemSubclassProviderImpl : ItemSubclassProvider {
     val rangedWeaponSubclass = ItemSubclassImpl(
         name = Text.translatable(Texts.ITEM_SUBCLASS_RANGED_WEAPON),
         configId = "RangedWeaponItem",
-        clazz = ProjectileWeaponItem::class.java,
+        clazz = ProjectileWeaponItem::class.java
+    )
+
+    val armorSubclass = ItemSubclassImpl(
+        name = Text.translatable(Texts.ITEM_SUBCLASS_ARMOR),
+        configId = "ArmorItem",
+        clazz = ArmorItem::class.java
+    )
+
+    val equipmentSubclass = ItemSubclassImpl(
+        name = Text.translatable(Texts.ITEM_SUBCLASS_EQUIPMENT),
+        configId = "Equipment",
+        clazz = Equipable::class.java
+    )
+
+    val bundleSubclass = ItemSubclassImpl(
+        name = Text.translatable(Texts.ITEM_SUBCLASS_BUNDLE),
+        configId = "BundleItem",
+        clazz = BundleItem::class.java
     )
 
     val bucketSubclass = ItemSubclassImpl(

@@ -414,6 +414,9 @@
     "touchcontroller.item.subclass.ranged_weapon": "远程武器",
     "touchcontroller.item.subclass.projectile": "弹射物",
     "touchcontroller.item.subclass.bucket": "桶",
+    "touchcontroller.item.subclass.armor": "装甲",
+    "touchcontroller.item.subclass.equipment": "可装备",
+    "touchcontroller.item.subclass.bundle": "收纳袋",
     "touchcontroller.item.subclass.boat": "船",
     "touchcontroller.item.subclass.placeable_on_water": "可放置在水上",
     "touchcontroller.item.subclass.spawn_egg": "刷怪蛋"

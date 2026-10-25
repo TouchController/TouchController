@@ -44,6 +44,12 @@ object ItemSubclassProviderImpl : ItemSubclassProvider {
         clazz = ProjectileWeaponItem::class.java,
     )
 
+    val armorSubclass = ItemSubclassImpl(
+        name = Text.translatable(Texts.ITEM_SUBCLASS_ARMOR),
+        configId = "ArmorItem",
+        clazz = ArmorItem::class.java
+    )
+
     val projectileSubclass = ItemSubclassImpl(
         name = Text.translatable(Texts.ITEM_SUBCLASS_PROJECTILE),
         configId = "ProjectileItem",

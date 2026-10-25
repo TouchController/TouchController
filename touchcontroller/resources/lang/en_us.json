@@ -414,6 +414,9 @@
     "touchcontroller.item.subclass.ranged_weapon": "Ranged weapon",
     "touchcontroller.item.subclass.projectile": "Projectile",
     "touchcontroller.item.subclass.bucket": "Bucket",
+    "touchcontroller.item.subclass.armor": "Armor",
+    "touchcontroller.item.subclass.equipment": "Equipment",
+    "touchcontroller.item.subclass.bundle": "Bundle",
     "touchcontroller.item.subclass.boat": "Boat",
     "touchcontroller.item.subclass.placeable_on_water": "Placeable on water",
     "touchcontroller.item.subclass.spawn_egg": "Spawn egg"

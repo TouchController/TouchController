@@ -13,6 +13,7 @@ import top.fifthlight.mergetools.api.ActualConstructor
 import top.fifthlight.mergetools.api.ActualImpl
 import top.fifthlight.touchcontroller.common.config.item.ItemList
 import top.fifthlight.touchcontroller.common.gal.itemlist.DefaultItemListProvider
+import top.fifthlight.touchcontroller.gal.item.v1_20_1.ItemDataComponentTypeImpl
 import top.fifthlight.touchcontroller.gal.item.v1_20_1.ItemSubclassProviderImpl
 
 @ActualImpl(DefaultItemListProvider::class)
@@ -32,30 +33,34 @@ object DefaultItemListProviderImpl : DefaultItemListProvider {
             ItemImpl(Items.WRITTEN_BOOK),
             ItemImpl(Items.ENDER_EYE),
             ItemImpl(Items.ENDER_PEARL),
+            ItemImpl(Items.POTION),
+            ItemImpl(Items.SNOWBALL),
+            ItemImpl(Items.EGG),
+            ItemImpl(Items.SPLASH_POTION),
+            ItemImpl(Items.LINGERING_POTION),
+            ItemImpl(Items.EXPERIENCE_BOTTLE),
+            ItemImpl(Items.TRIDENT),
             ItemImpl(Items.MILK_BUCKET),
-        ),
-        blacklist = persistentListOf(
-            ItemImpl(Items.ARROW),
-            ItemImpl(Items.FIRE_CHARGE),
-            ItemImpl(Items.SPECTRAL_ARROW),
-            ItemImpl(Items.TIPPED_ARROW),
-            ItemImpl(Items.FIREWORK_ROCKET),
         ),
         subclasses = persistentSetOf(
             ItemSubclassProviderImpl.rangedWeaponSubclass,
+            ItemSubclassProviderImpl.armorSubclass,
+            ItemSubclassProviderImpl.bundleSubclass,
+        ),
+        components = persistentListOf(
+            ItemDataComponentTypeImpl.FoodItemDataComponentType,
         )
     )
 
     override val showCrosshairItems = ItemList(
         whitelist = persistentListOf(
+            ItemImpl(Items.EGG),
+            ItemImpl(Items.SNOWBALL),
+            ItemImpl(Items.SPLASH_POTION),
+            ItemImpl(Items.LINGERING_POTION),
+            ItemImpl(Items.EXPERIENCE_BOTTLE),
+            ItemImpl(Items.TRIDENT),
             ItemImpl(Items.ENDER_PEARL),
-        ),
-        blacklist = persistentListOf(
-            ItemImpl(Items.FIREWORK_ROCKET),
-            ItemImpl(Items.ARROW),
-            ItemImpl(Items.FIRE_CHARGE),
-            ItemImpl(Items.SPECTRAL_ARROW),
-            ItemImpl(Items.TIPPED_ARROW),
         ),
         subclasses = persistentSetOf(
             ItemSubclassProviderImpl.rangedWeaponSubclass,
