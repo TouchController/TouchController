@@ -8,6 +8,9 @@ kt_merge_library(
     ),
     javac_opts = "//touchcontroller:javac_opts_jvm_8",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
+    merge_deps = [
+        "//touchcontroller/common/util/uuid",
+    ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "@maven//:androidx_compose_runtime_runtime_annotation_jvm",

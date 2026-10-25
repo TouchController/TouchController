@@ -6,10 +6,11 @@
 package top.fifthlight.touchcontroller.common.config.preset.info
 
 import androidx.compose.runtime.Immutable
+import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.uuid.Uuid
 
 @Immutable
 data class CustomCondition(
-    val uuid: Uuid = Uuid.random(),
+    val uuid: Uuid = fastRandomUuid(),
     val name: String? = null,
 )

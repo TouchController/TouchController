@@ -112,7 +112,7 @@ class CustomControlLayoutTabModel(
         val firstPreset = PresetManager.presets.value.orderedEntries.firstOrNull()
         if (firstPreset == null) {
             val newPreset = prevPresetKey.preset
-            val newPresetUuid = Uuid.random()
+            val newPresetUuid = fastRandomUuid()
             PresetManager.savePreset(newPresetUuid, newPreset)
             configScreenModel.updateConfig {
                 copy(preset = PresetConfig.Custom(uuid = newPresetUuid))
