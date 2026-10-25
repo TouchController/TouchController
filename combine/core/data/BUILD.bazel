@@ -8,7 +8,6 @@ kt_merge_library(
     kotlinc_opts = "//combine:kotlinc_opts_jvm_8",
     visibility = ["//visibility:public"],
     deps = [
-        "//:compose",
         "//:kotlin_serialization",
         "@maven//:androidx_compose_runtime_runtime_annotation_jvm",
         "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",

@@ -1,6 +1,5 @@
 package top.fifthlight.combine.core.data
 
-import androidx.compose.runtime.Composable
 import top.fifthlight.mergetools.api.ExpectFactory
 
 enum class TextColor {
@@ -83,7 +82,6 @@ interface Text {
     fun copy(): Text
     operator fun plus(other: Text): Text
 
-    @Composable
     fun native(): Any = TextFactory.toNative(this)
 
     companion object {
