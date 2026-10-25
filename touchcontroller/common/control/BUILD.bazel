@@ -12,12 +12,10 @@ kt_merge_library(
         "//touchcontroller/common/layout",
         "//touchcontroller/common/layout/align",
         "//touchcontroller/common/util/uuid",
-        "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//:compose",
-        "//combine/core/data",
         "//combine/core/modifier",
         "//combine/data",
         "@maven//:androidx_compose_runtime_runtime_annotation_jvm",

@@ -12,6 +12,5 @@ kt_merge_library(
     visibility = ["//visibility:public"],
     deps = [
         "//:compose",
-        "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
     ],
 )
