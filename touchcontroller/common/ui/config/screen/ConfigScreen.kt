@@ -7,6 +7,7 @@ package top.fifthlight.touchcontroller.common.ui.config.screen
 
 import androidx.compose.runtime.*
 import cafe.adriel.voyager.navigator.CurrentScreen
+import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import kotlinx.collections.immutable.persistentListOf
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.layout.Alignment
@@ -78,7 +79,12 @@ private fun ConfigScreen() {
         }
 
         CompositionLocalProvider(LocalConfigScreenModel provides screenModel) {
-            TouchControllerNavigator(RegularTab) { navigator ->
+            TouchControllerNavigator(
+                screen = RegularTab,
+                disposeBehavior = NavigatorDisposeBehavior(
+                    disposeSteps = false,
+                ),
+            ) { navigator ->
                 val currentTab = (navigator.lastItem as? Tab)?.takeIf { !it.options.openAsScreen }
                 currentTab?.let {
                     var onResetTab by remember { mutableStateOf<OnResetHandler?>(null) }
