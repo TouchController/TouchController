@@ -67,12 +67,16 @@ fun EditText(
             interactionSource.interactions.collect {
                 when (it) {
                     FocusInteraction.Blur -> {
-                        inputManager?.tryHideKeyboard()
+                        if (focused) {
+                            inputManager?.tryHideKeyboard()
+                        }
                         focused = false
                     }
 
                     FocusInteraction.Focus -> {
-                        inputManager?.tryShowKeyboard()
+                        if (!focused) {
+                            inputManager?.tryShowKeyboard()
+                        }
                         focused = true
                     }
                 }
