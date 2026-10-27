@@ -1,6 +1,8 @@
 load("//game:game.bzl", "game_version")
 load("//rule:remap_jar.bzl", "remap_jar")
 
+package(default_visibility = ["//visibility:public"])
+
 game_version(
     name = "game",
     client = "@minecraft//b1.7.3:client",
@@ -13,7 +15,6 @@ game_version(
     intermediary = "@maven_fabric_b1_7_3//:babric_intermediary_v2",
     split_source_namespace = True,
     version = "b1.7.3",
-    visibility = ["//visibility:public"],
     yarn = "@maven_fabric_b1_7_3//:net_glasslauncher_biny_v2",
 )
 
@@ -27,5 +28,4 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )

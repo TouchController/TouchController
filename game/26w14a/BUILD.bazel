@@ -1,5 +1,7 @@
 load("//game:game.bzl", "game_version")
 
+package(default_visibility = ["//visibility:public"])
+
 game_version(
     name = "game",
     client = "@minecraft//26w14a:client",
@@ -8,12 +10,10 @@ game_version(
     client_libraries = "@minecraft//26w14a:client_libraries",
     server = "@minecraft//26w14a:server",
     version = "26w14a",
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "fabric_api_named",
     actual = "@maven_fabric_26w14a//:net_fabricmc_fabric_api_fabric_api",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )

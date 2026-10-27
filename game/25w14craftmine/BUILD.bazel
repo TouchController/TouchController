@@ -1,6 +1,8 @@
 load("//game:game.bzl", "game_version")
 load("//rule:remap_jar.bzl", "remap_jar")
 
+package(default_visibility = ["//visibility:public"])
+
 game_version(
     name = "game",
     client = "@minecraft//25w14craftmine:client",
@@ -12,7 +14,6 @@ game_version(
     neoforge = "@neoforge_25w14craftmine//:neoforge",
     server = "@minecraft//25w14craftmine:server",
     version = "25w14craftmine",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -27,7 +28,6 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -43,5 +43,4 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )

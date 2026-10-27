@@ -15,7 +15,6 @@ game_version(
     neoforge = "@neoforge_1_21_1//:neoforge",
     server = "@minecraft//1.21.1:server",
     version = "1.21.1",
-    visibility = ["//visibility:public"],
 )
 
 alias(
@@ -28,14 +27,12 @@ alias(
     name = "sodium_neoforge",
     actual = "@sodium_neoforge_1_21_1//:primary",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "iris_neoforge",
     actual = "@iris_neoforge_1_21_1//:primary",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -50,7 +47,6 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -67,7 +63,6 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -83,7 +78,6 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -96,7 +90,6 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -113,5 +106,4 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )

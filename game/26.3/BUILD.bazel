@@ -1,5 +1,7 @@
 load("//game:game.bzl", "game_version")
 
+package(default_visibility = ["//visibility:public"])
+
 game_version(
     name = "game",
     client = "@minecraft//26.3:client",
@@ -9,54 +11,46 @@ game_version(
     neoforge = "@neoforge_26_3//:neoforge",
     server = "@minecraft//26.3:server",
     version = "26.3",
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "fabric_api_named",
     actual = "@maven_fabric_26_3//:net_fabricmc_fabric_api_fabric_api",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "modmenu_named",
     actual = "@maven_fabric_26_3//:com_terraformersmc_modmenu",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "sodium_named",
     actual = "@sodium_fabric_26_3//:primary",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "sodium_neoforge",
     actual = "@sodium_neoforge_26_3//:primary",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "iris_named",
     actual = "@iris_fabric_26_3//:primary",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "iris_neoforge",
     actual = "@iris_neoforge_26_3//:primary",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "kotlinforforge",
     actual = "@kotlinforforge_neoforge_26_3//:primary",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )

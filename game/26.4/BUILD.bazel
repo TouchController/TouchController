@@ -1,5 +1,7 @@
 load("//game:game.bzl", "game_version")
 
+package(default_visibility = ["//visibility:public"])
+
 game_version(
     name = "game",
     client = "@minecraft//26.4-snapshot-3:client",
@@ -8,19 +10,16 @@ game_version(
     client_libraries = "@minecraft//26.4-snapshot-3:client_libraries",
     server = "@minecraft//26.4-snapshot-3:server",
     version = "26.4-snapshot-3",
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "fabric_api_named",
     actual = "@maven_fabric_26_4//:net_fabricmc_fabric_api_fabric_api",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "modmenu_named",
     actual = "@maven_fabric_26_4//:com_terraformersmc_modmenu",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )

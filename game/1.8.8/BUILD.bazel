@@ -1,5 +1,7 @@
 load("//game:game.bzl", "game_version")
 
+package(default_visibility = ["//visibility:public"])
+
 game_version(
     name = "game",
     client = "@minecraft//1.8.8:client",
@@ -11,6 +13,5 @@ game_version(
     server = "@minecraft//1.8.8:server",
     server_legacy = True,
     version = "1.8.8",
-    visibility = ["//visibility:public"],
     yarn = "@maven_fabric_1_8_8//:net_legacyfabric_yarn_v2",
 )

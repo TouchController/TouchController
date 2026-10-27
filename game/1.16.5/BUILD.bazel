@@ -1,6 +1,8 @@
 load("//game:game.bzl", "game_version")
 load("//rule:remap_jar.bzl", "remap_jar")
 
+package(default_visibility = ["//visibility:public"])
+
 game_version(
     name = "game",
     client = "@minecraft//1.16.5:client",
@@ -14,7 +16,6 @@ game_version(
     server = "@minecraft//1.16.5:server",
     server_legacy = True,
     version = "1.16.5",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -29,7 +30,6 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -46,7 +46,6 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -60,7 +59,6 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )
 
 remap_jar(
@@ -77,12 +75,10 @@ remap_jar(
     remove_jar_in_jar = True,
     tags = ["manual"],
     to_namespace = "named",
-    visibility = ["//visibility:public"],
 )
 
 alias(
     name = "kotlinforforge",
     actual = "@kotlinforforge_forge_1_16_5//:primary",
     tags = ["manual"],
-    visibility = ["//visibility:public"],
 )
