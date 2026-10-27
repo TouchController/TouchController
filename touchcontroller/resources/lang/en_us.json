@@ -263,6 +263,7 @@
     "touchcontroller.screen.component_list.search_placeholder": "Search…",
     "touchcontroller.screen.component_list.remove": "Remove >",
     "touchcontroller.screen.component_list.add": "Add +",
+    "touchcontroller.screen.entity_type_list.search_placeholder": "Search…",
     "touchcontroller.screen.license.title": "License",
     "touchcontroller.widget.texture.type.empty": "Empty",
     "touchcontroller.widget.texture.type.fill": "Fill",

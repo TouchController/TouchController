@@ -8,6 +8,7 @@ kt_merge_library(
     merge_deps = [
         "//touchcontroller/common/gal/entity",
         "//touchcontroller/common/gal/gamestate",
+        "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [

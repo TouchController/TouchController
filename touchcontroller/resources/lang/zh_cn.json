@@ -262,6 +262,7 @@
     "touchcontroller.screen.component_list.search_placeholder": "搜索…",
     "touchcontroller.screen.component_list.remove": "移除 >",
     "touchcontroller.screen.component_list.add": "添加 +",
+    "touchcontroller.screen.entity_type_list.search_placeholder": "搜索…",
     "touchcontroller.screen.license.title": "许可证",
     "touchcontroller.widget.texture.type.empty": "无",
     "touchcontroller.widget.texture.type.fill": "填充",
