@@ -144,7 +144,7 @@ java_binary(
     runtime_deps = [
         "//game/1.21.10:game_client_libraries",
         "//game/1.21.10:game_client_neoforge",
-        "//game/1.21.10:game_kotlinforforge",
+        "//game/1.21.10:kotlinforforge",
     ] + [
         ":neoforge_merged",
         "//combine/backend/minecraft:combine_neoforge_libraries",

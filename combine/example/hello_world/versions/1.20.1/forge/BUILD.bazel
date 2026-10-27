@@ -1,7 +1,6 @@
 load("@rules_java//java:java_binary.bzl", "java_binary")
 load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_forge")
 load("//rule:merge_library.bzl", "kt_merge_library", "merge_library_jar")
-load("//rule:remap_jar.bzl", "remap_jar")
 load("//rule:unified_jar.bzl", "unified_jar")
 
 kt_merge_library(
@@ -44,12 +43,6 @@ merge_library_jar(
     ],
 )
 
-alias(
-    name = "1.20.1",
-    actual = ":hello_world",
-    visibility = ["//visibility:public"],
-)
-
 unified_jar(
     name = "hello_world_unmapped_merged",
     forge_rules = combine_unified_forge | {
@@ -64,6 +57,12 @@ unified_jar(
     },
 )
 
+alias(
+    name = "1.20.1",
+    actual = ":hello_world_unmapped",
+    visibility = ["//visibility:public"],
+)
+
 java_binary(
     name = "dev_client",
     srcs = [],
@@ -71,7 +70,7 @@ java_binary(
         "//game/1.20.1:game_client_assets",
         "//game/1.20.1:game_client_assets_version",
         "//game/1.20.1:game_client_forge_named",
-        "//game/1.20.1:game_kotlinforforge",
+        "//game/1.20.1:kotlinforforge",
     ] + [
         ":hello_world_unmapped_merged",
         "@forge_1_20_1//:forge_modules",
@@ -95,7 +94,7 @@ java_binary(
         "-Ddev.launch.ignoreList=$(rlocationpath @forge_1_20_1//:ignore_list_client)",
         "-Ddev.launch.assetsVersion=$(rlocationpath //game/1.20.1:game_client_assets_version)",
         "-Ddev.launch.classPath=$(rlocationpath :hello_world_unmapped_merged)",
-        "-Ddev.launch.classPath=$(rlocationpath //game/1.20.1:game_kotlinforforge)",
+        "-Ddev.launch.classPath=$(rlocationpath //game/1.20.1:kotlinforforge)",
         "-Ddev.launch.copyFile=$(rlocationpath @forge_1_20_1//:resources_jar):client-extra.jar",
         "-classpath",
         "./client-extra.jar",

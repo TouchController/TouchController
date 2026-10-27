@@ -148,7 +148,7 @@ java_binary(
         "//blazesdl/26.1",
         "//game/26.1.2:game_client_libraries",
         "//game/26.1.2:game_client_neoforge",
-        "//game/26.1.2:game_kotlinforforge",
+        "//game/26.1.2:kotlinforforge",
     ] + [
         ":neoforge_merged",
         "//combine/backend/minecraft:combine_neoforge_libraries",

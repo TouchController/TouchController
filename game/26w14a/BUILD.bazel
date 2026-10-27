@@ -10,3 +10,10 @@ game_version(
     version = "26w14a",
     visibility = ["//visibility:public"],
 )
+
+alias(
+    name = "fabric_api_named",
+    actual = "@maven_fabric_26w14a//:net_fabricmc_fabric_api_fabric_api",
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)

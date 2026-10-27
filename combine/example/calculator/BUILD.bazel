@@ -16,8 +16,6 @@ kt_jvm_library(
         "//combine/theme/oreui:oreui_vanilla",
     ],
     deps = [
-        "//game/1.21.10:game_client_libraries",
-    ] + [
         "//:compose",
         "//combine/backend/minecraft/game/1.21.10",
         "//combine/core/data",
@@ -29,19 +27,24 @@ kt_jvm_library(
         "//combine/core/screen",
         "//combine/core/widget/layout",
         "//combine/data",
-        "//combine/example/versions/1.21.10:remapped_deps",
         "//combine/theme/base",
         "//combine/theme/blackstone",
         "//combine/theme/oreui",
         "//combine/theme/vanilla",
         "//combine/widget",
+        "//game/1.21.10:fabric_api_named",
+        "//game/1.21.10:game_client_libraries",
+        "//game/1.21.10:modmenu_named",
         "@maven_fabric_1_21_10//:net_fabricmc_fabric_loader",
     ],
 )
 
 remap_jar(
     name = "calculator",
-    classpath = ["//combine/example/versions/1.21.10:remapped_deps"],
+    classpath = [
+        "//game/1.21.10:fabric_api_named",
+        "//game/1.21.10:modmenu_named",
+    ],
     from_namespace = "named",
     inputs = [":calculator_unmapped"],
     mapping = "//game/1.21.10:game_merged_mapping",

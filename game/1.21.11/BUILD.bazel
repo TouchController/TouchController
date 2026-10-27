@@ -1,4 +1,7 @@
 load("//game:game.bzl", "game_version")
+load("//rule:remap_jar.bzl", "remap_jar")
+
+package(default_visibility = ["//visibility:public"])
 
 game_version(
     name = "game",
@@ -9,9 +12,102 @@ game_version(
     client_mappings = "@minecraft//1.21.11:client_mappings",
     client_parchment = "@parchment_1_21_11//:json",
     intermediary = "@maven_fabric_1_21_11//:net_fabricmc_intermediary_v2",
-    kotlinforforge = "@kotlinforforge_neoforge_1_21_11//:primary",
     neoforge = "@neoforge_1_21_11//:neoforge",
     server = "@minecraft//1.21.11:server",
     version = "1.21.11",
+)
+
+alias(
+    name = "kotlinforforge",
+    actual = "@kotlinforforge_neoforge_1_21_11//:primary",
+    tags = ["manual"],
+)
+
+alias(
+    name = "sodium_neoforge",
+    actual = "@sodium_neoforge_1_21_11//:primary",
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "iris_neoforge",
+    actual = "@iris_neoforge_1_21_11//:primary",
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+remap_jar(
+    name = "fabric_api_named",
+    classpath = [":game_client_intermediary"],
+    from_namespace = "intermediary",
+    inputs = ["@maven_fabric_1_21_11//:net_fabricmc_fabric_api_fabric_api"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remap_transitive_deps = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
+    visibility = ["//visibility:public"],
+)
+
+remap_jar(
+    name = "modmenu_named",
+    classpath = [
+        ":game_client_intermediary",
+        "@maven_fabric_1_21_11//:net_fabricmc_fabric_api_fabric_api",
+    ],
+    from_namespace = "intermediary",
+    inputs = ["@maven_fabric_1_21_11//:com_terraformersmc_modmenu"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
+    visibility = ["//visibility:public"],
+)
+
+remap_jar(
+    name = "placeholder_api_named",
+    classpath = [
+        ":game_client_intermediary",
+        "@maven_fabric_1_21_11//:net_fabricmc_fabric_api_fabric_api",
+    ],
+    from_namespace = "intermediary",
+    inputs = ["@maven_fabric_1_21_11//:eu_pb4_placeholder_api"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
+    visibility = ["//visibility:public"],
+)
+
+remap_jar(
+    name = "sodium_named",
+    classpath = [":game_client_intermediary"],
+    from_namespace = "intermediary",
+    inputs = ["@sodium_fabric_1_21_11//:primary"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
+    visibility = ["//visibility:public"],
+)
+
+remap_jar(
+    name = "iris_named",
+    classpath = [
+        ":game_client_intermediary",
+        "@sodium_fabric_1_21_11//:primary",
+    ],
+    from_namespace = "intermediary",
+    inputs = ["@iris_fabric_1_21_11//:primary"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
     visibility = ["//visibility:public"],
 )

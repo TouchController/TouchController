@@ -49,9 +49,9 @@ kt_merge_library(
     visibility = ["//blazerod/render:__subpackages__"],
     deps = [
         "//blazerod/render/versions/1.21.8/game:remapped_client_access_widened_neoforge",
-        "@iris_neoforge_1_21_6//:primary",
+        "//game/1.21.8:iris_neoforge",
+        "//game/1.21.8:sodium_neoforge",
         "@neoforge_1_21_8//:neoforge_deps",
-        "@sodium_neoforge_1_21_6//:primary",
     ],
 )
 

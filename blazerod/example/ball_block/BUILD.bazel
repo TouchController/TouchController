@@ -4,23 +4,9 @@ load("//rule:extract_access_widener.bzl", "extract_access_widener")
 load("//rule:remap_jar.bzl", "remap_jar")
 load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
 
-remap_jar(
-    name = "remapped_deps",
-    classpath = [
-        "//game/1.21.8:game_client_intermediary",
-    ],
-    from_namespace = "intermediary",
-    inputs = ["@maven_fabric_1_21_8//:net_fabricmc_fabric_api_fabric_api"],
-    mapping = "//game/1.21.8:game_merged_mapping",
-    mixin = True,
-    remap_transitive_deps = True,
-    remove_jar_in_jar = True,
-    to_namespace = "named",
-)
-
 extract_access_widener(
     name = "access_widener_dep_named",
-    inputs = [":remapped_deps"],
+    inputs = ["//game/1.21.8:fabric_api_named"],
 )
 
 apply_access_widener(
@@ -37,15 +23,14 @@ java_library(
         "//blazerod:blazerod_fabric_without_jij",
     ],
     deps = [
-        "//game/1.21.8:game_client_libraries",
-    ] + [
         ":remapped_client_access_widened_named",
-        ":remapped_deps",
         "//blazerod/model/model-base",
         "//blazerod/model/model-formats",
         "//blazerod/render/api/loader",
         "//blazerod/render/api/resource",
         "//blazerod/render/versions/1.21.8/api/render",
+        "//game/1.21.8:fabric_api_named",
+        "//game/1.21.8:game_client_libraries",
         "@maven_fabric_1_21_8//:net_fabricmc_fabric_loader",
     ],
 )

@@ -1,4 +1,5 @@
 load("//game:game.bzl", "game_version")
+load("//rule:remap_jar.bzl", "remap_jar")
 
 game_version(
     name = "game",
@@ -14,4 +15,17 @@ game_version(
     version = "b1.7.3",
     visibility = ["//visibility:public"],
     yarn = "@maven_fabric_b1_7_3//:net_glasslauncher_biny_v2",
+)
+
+remap_jar(
+    name = "modmenu_named",
+    classpath = [":game_client_intermediary"],
+    from_namespace = "intermediary",
+    inputs = ["@maven_fabric_b1_7_3//:net_glasslauncher_mods_ModMenu"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
+    visibility = ["//visibility:public"],
 )

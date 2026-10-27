@@ -17,8 +17,6 @@ kt_merge_library(
         "//combine/theme/oreui:oreui_vanilla",
     ],
     deps = [
-        "//game/1.21.11:game_client_libraries",
-    ] + [
         "//:compose",
         "//combine/backend/minecraft/game/1.21.11",
         "//combine/core/data",
@@ -31,7 +29,6 @@ kt_merge_library(
         "//combine/core/screen",
         "//combine/core/widget/layout",
         "//combine/data",
-        "//combine/example/versions/1.21.11:remapped_deps",
         "//combine/example/widget_factory/common",
         "//combine/style",
         "//combine/theme/base",
@@ -39,6 +36,9 @@ kt_merge_library(
         "//combine/theme/oreui",
         "//combine/theme/vanilla",
         "//combine/widget",
+        "//game/1.21.11:fabric_api_named",
+        "//game/1.21.11:game_client_libraries",
+        "//game/1.21.11:modmenu_named",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
         "@maven_fabric_1_21_11//:net_fabricmc_fabric_loader",
     ],
@@ -54,7 +54,10 @@ merge_library_jar(
 
 remap_jar(
     name = "widget_factory",
-    classpath = ["//combine/example/versions/1.21.11:remapped_deps"],
+    classpath = [
+        "//game/1.21.11:fabric_api_named",
+        "//game/1.21.11:modmenu_named",
+    ],
     from_namespace = "named",
     inputs = [":widget_factory_unmapped"],
     mapping = "//game/1.21.11:game_merged_mapping",

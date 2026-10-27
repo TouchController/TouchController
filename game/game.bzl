@@ -29,10 +29,7 @@ def _game_version_impl(
         intermediary,
         mcp_mappings_tsrg,
         mcp_mappings_variant,
-        yarn,
-        sodium_intermediary,
-        iris_intermediary,
-        kotlinforforge):
+        yarn):
     intermediary_mapping = name + "_intermediary_mapping"
     intermediary_input = name + "_intermediary_input"
     yarn_mapping = name + "_yarn_mapping"
@@ -50,8 +47,6 @@ def _game_version_impl(
     server_jar_file = name + "_server_jar_file"
     server_jar = name + "_server_jar"
     server_named = name + "_server_named"
-    sodium_named = name + "_sodium_named"
-    iris_named = name + "_iris_named"
     vanilla_client = name + "_vanilla_client"
     parchment_input = name + "_parchment_input"
     mcp_tsrg_input = name + "_mcp_tsrg_input"
@@ -290,14 +285,6 @@ def _game_version_impl(
             tags = ["manual"],
         )
 
-    if kotlinforforge:
-        native.alias(
-            name = name + "_kotlinforforge",
-            actual = kotlinforforge,
-            visibility = visibility,
-            tags = ["manual"],
-        )
-
     if server:
         if server_legacy:
             native.alias(
@@ -332,37 +319,6 @@ def _game_version_impl(
             mapping = ":" + merged_mapping,
             to_namespace = "named",
             visibility = visibility,
-            tags = ["manual"],
-        )
-
-    if intermediary and sodium_intermediary:
-        remap_jar(
-            name = sodium_named,
-            from_namespace = "intermediary",
-            inputs = [sodium_intermediary],
-            classpath = [":" + client_intermediary],
-            mapping = ":" + merged_mapping,
-            to_namespace = "named",
-            visibility = visibility,
-            mixin = True,
-            remove_jar_in_jar = True,
-            tags = ["manual"],
-        )
-
-    if intermediary and sodium_intermediary and iris_intermediary:
-        remap_jar(
-            name = iris_named,
-            from_namespace = "intermediary",
-            inputs = [iris_intermediary],
-            classpath = [
-                ":" + client_intermediary,
-                sodium_intermediary,
-            ],
-            mapping = ":" + merged_mapping,
-            to_namespace = "named",
-            visibility = visibility,
-            mixin = True,
-            remove_jar_in_jar = True,
             tags = ["manual"],
         )
 
@@ -505,21 +461,6 @@ game_version = macro(
         "yarn": attr.label(
             mandatory = False,
             doc = "Yarn mappings. For those versions without official mapping.",
-            configurable = False,
-        ),
-        "sodium_intermediary": attr.label(
-            mandatory = False,
-            doc = "Sodium to be remapped from intermediary",
-            configurable = False,
-        ),
-        "iris_intermediary": attr.label(
-            mandatory = False,
-            doc = "Sodium to be remapped from intermediary",
-            configurable = False,
-        ),
-        "kotlinforforge": attr.label(
-            mandatory = False,
-            doc = "KotlinForForge mod JAR from Modrinth",
             configurable = False,
         ),
     },

@@ -10,3 +10,17 @@ game_version(
     version = "26.4-snapshot-3",
     visibility = ["//visibility:public"],
 )
+
+alias(
+    name = "fabric_api_named",
+    actual = "@maven_fabric_26_4//:net_fabricmc_fabric_api_fabric_api",
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "modmenu_named",
+    actual = "@maven_fabric_26_4//:com_terraformersmc_modmenu",
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)

@@ -5,7 +5,11 @@ load("//rule/neoforge:convert_access_widener.bzl", "convert_access_widener")
 
 extract_access_widener(
     name = "access_widener_dep_named",
-    inputs = ["//armorstand/fabric_client:remapped_deps"],
+    inputs = [
+        "//game/1.21.8:fabric_api_named",
+        "//game/1.21.8:modmenu_named",
+        "//game/1.21.8:placeholder_api_named",
+    ],
 )
 
 apply_access_widener(

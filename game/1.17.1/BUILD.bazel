@@ -1,4 +1,5 @@
 load("//game:game.bzl", "game_version")
+load("//rule:remap_jar.bzl", "remap_jar")
 
 game_version(
     name = "game",
@@ -8,11 +9,81 @@ game_version(
     client_libraries = "@minecraft//1.17.1:client_libraries",
     client_mappings = "@minecraft//1.17.1:client_mappings",
     client_parchment = "@parchment_1_17_1//:json",
+    forge = "@forge_1_17_1//:forge",
     intermediary = "@maven_fabric_1_17_1//:net_fabricmc_intermediary_v2",
     mcp_mappings_tsrg = "@mcp_1_17_1//tasks/joined_merge_mappings",
-    forge = "@forge_1_17_1//:forge",
     server = "@minecraft//1.17.1:server",
     server_legacy = True,
     version = "1.17.1",
+    visibility = ["//visibility:public"],
+)
+
+remap_jar(
+    name = "fabric_api_named",
+    classpath = [":game_client_intermediary"],
+    from_namespace = "intermediary",
+    inline_refmap = True,
+    inputs = ["@maven_fabric_1_17_1//:net_fabricmc_fabric_api_fabric_api"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remap_transitive_deps = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
+    visibility = ["//visibility:public"],
+)
+
+remap_jar(
+    name = "modmenu_named",
+    classpath = [
+        ":game_client_intermediary",
+        "@maven_fabric_1_17_1//:net_fabricmc_fabric_api_fabric_api",
+    ],
+    from_namespace = "intermediary",
+    inline_refmap = True,
+    inputs = ["@maven_fabric_1_17_1//:com_terraformersmc_modmenu"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
+    visibility = ["//visibility:public"],
+)
+
+remap_jar(
+    name = "sodium_named",
+    classpath = [":game_client_intermediary"],
+    from_namespace = "intermediary",
+    inline_refmap = True,
+    inputs = ["@sodium_fabric_1_17_1//:primary"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
+    visibility = ["//visibility:public"],
+)
+
+remap_jar(
+    name = "iris_named",
+    classpath = [
+        ":game_client_intermediary",
+        "@sodium_fabric_1_17_1//:primary",
+    ],
+    from_namespace = "intermediary",
+    inline_refmap = True,
+    inputs = ["@iris_fabric_1_17_1//:primary"],
+    mapping = ":game_merged_mapping",
+    mixin = True,
+    remove_jar_in_jar = True,
+    tags = ["manual"],
+    to_namespace = "named",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "kotlinforforge",
+    actual = "@kotlinforforge_forge_1_17_1//:primary",
+    tags = ["manual"],
     visibility = ["//visibility:public"],
 )

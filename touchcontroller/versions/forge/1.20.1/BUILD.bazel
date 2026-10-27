@@ -157,7 +157,7 @@ java_binary(
         "//game/1.20.1:game_client_assets",
         "//game/1.20.1:game_client_assets_version",
         "//game/1.20.1:game_client_forge_named",
-        "//game/1.20.1:game_kotlinforforge",
+        "//game/1.20.1:kotlinforforge",
     ] + [
         ":forge_merged_unmapped",
         "@forge_1_20_1//:forge_modules",
@@ -181,7 +181,7 @@ java_binary(
         "-Ddev.launch.ignoreList=$(rlocationpath @forge_1_20_1//:ignore_list_client)",
         "-Ddev.launch.assetsVersion=$(rlocationpath //game/1.20.1:game_client_assets_version)",
         "-Ddev.launch.classPath=$(rlocationpath :forge_merged_unmapped)",
-        "-Ddev.launch.classPath=$(rlocationpath //game/1.20.1:game_kotlinforforge)",
+        "-Ddev.launch.classPath=$(rlocationpath //game/1.20.1:kotlinforforge)",
         "-Ddev.launch.copyFile=$(rlocationpath @forge_1_20_1//:resources_jar):client-extra.jar",
         "-classpath",
         "./client-extra.jar",

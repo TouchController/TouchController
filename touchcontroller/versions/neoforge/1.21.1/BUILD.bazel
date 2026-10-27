@@ -139,7 +139,7 @@ java_binary(
         "//game/1.21.1:game_client_assets",
         "//game/1.21.1:game_client_assets_version",
         "//game/1.21.1:game_client_neoforge",
-        "//game/1.21.1:game_kotlinforforge",
+        "//game/1.21.1:kotlinforforge",
     ] + [
         ":neoforge_merged",
         "@neoforge_1_21_1//:ignore_list_client",
@@ -166,7 +166,7 @@ java_binary(
         "-Ddev.launch.classPath=$(rlocationpath //game/1.21.1:game_client_neoforge)",
         "-Ddev.launch.classPath=$(rlocationpath @neoforge_1_21_1//:resources_jar)",
         "-Ddev.launch.classPath=$(rlocationpath :neoforge_merged)",
-        "-Ddev.launch.classPath=$(rlocationpath //game/1.21.1:game_kotlinforforge)",
+        "-Ddev.launch.classPath=$(rlocationpath //game/1.21.1:kotlinforforge)",
         "-Xmx4G",
         "START_MODULEPATH",
         "$(rlocationpaths @neoforge_1_21_1//:neoforge_modules)",

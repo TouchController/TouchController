@@ -10,8 +10,6 @@ kt_merge_library(
     resource_strip_prefix = "combine/example/hello_world/versions/1.21.10/resources",
     resources = glob(["resources/**"]),
     deps = [
-        "//game/1.21.10:game_client_libraries",
-    ] + [
         "//:compose",
         "//combine/backend/minecraft/game/1.21.10",
         "//combine/core/data",
@@ -22,10 +20,12 @@ kt_merge_library(
         "//combine/core/widget/layout",
         "//combine/data",
         "//combine/example/hello_world/common",
-        "//combine/example/versions/1.21.10:remapped_deps",
         "//combine/theme/base",
         "//combine/theme/vanilla",
         "//combine/widget",
+        "//game/1.21.10:fabric_api_named",
+        "//game/1.21.10:game_client_libraries",
+        "//game/1.21.10:modmenu_named",
         "@maven_fabric_1_21_10//:net_fabricmc_fabric_loader",
     ],
 )
@@ -40,7 +40,10 @@ merge_library_jar(
 
 remap_jar(
     name = "hello_world",
-    classpath = ["//combine/example/versions/1.21.10:remapped_deps"],
+    classpath = [
+        "//game/1.21.10:fabric_api_named",
+        "//game/1.21.10:modmenu_named",
+    ],
     from_namespace = "named",
     inputs = [":hello_world_unmapped"],
     mapping = "//game/1.21.10:game_merged_mapping",
