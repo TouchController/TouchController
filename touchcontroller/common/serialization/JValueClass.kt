@@ -27,4 +27,6 @@ fun <T, R, N : JsonNode> JValueClass(
 
     override fun appendValue(app: CharWriter, style: JsonStyle, offset: Int, value: T) =
         converter.appendValue(app, style, offset, getter(value))
+
+    override fun schema() = converter.schema()
 }

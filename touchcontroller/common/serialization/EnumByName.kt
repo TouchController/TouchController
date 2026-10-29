@@ -6,6 +6,11 @@
 package top.fifthlight.touchcontroller.common.serialization
 
 import com.ubertob.kondor.json.JStringRepresentable
+import com.ubertob.kondor.json.jsonnode.JsonNodeArray
+import com.ubertob.kondor.json.jsonnode.JsonNodeObject
+import com.ubertob.kondor.json.jsonnode.JsonNodeString
+import com.ubertob.kondor.json.jsonnode.nodeObject
+import com.ubertob.kondor.json.jsonnode.toNode
 import java.util.*
 import kotlin.enums.EnumEntries
 import kotlin.enums.enumEntries
@@ -61,6 +66,18 @@ inline fun <reified E : Enum<E>> enumByName(
 
         override val render: (E) -> String = { value ->
             requireNotNull(table.byValue[value]) { "Unregistered $enumName value: $value" }
+        }
+
+        override fun schema(): JsonNodeObject {
+            val names = table.byValue.values.map { JsonNodeString(it) }
+            return if (names.isEmpty()) {
+                nodeObject("type" toNode "string")
+            } else {
+                nodeObject(
+                    "type" toNode "string",
+                    "enum" to JsonNodeArray(names),
+                )
+            }
         }
     }
 }
