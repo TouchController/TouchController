@@ -15,14 +15,14 @@ import top.fifthlight.combine.core.widget.layout.Column
 import top.fifthlight.combine.widget.EditText
 import top.fifthlight.combine.widget.Text
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
-import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 
 @Immutable
 class NameProperty<Config : ControllerWidget>(
-    getValue: (Config) -> ControllerWidgetName,
-    setValue: (Config, ControllerWidgetName) -> Config,
+    getValue: (Config) -> TranslatableName,
+    setValue: (Config, TranslatableName) -> Config,
     private val name: Text,
-) : ControllerWidget.Property<Config, ControllerWidgetName>(getValue, setValue) {
+) : ControllerWidget.Property<Config, TranslatableName>(getValue, setValue) {
     @Composable
     override fun controller(
         modifier: Modifier,
@@ -41,7 +41,7 @@ class NameProperty<Config : ControllerWidget>(
                 modifier = Modifier.fillMaxWidth(),
                 value = getValue(widgetConfig).asString(),
                 onValueChanged = {
-                    onConfigChanged(setValue(config, ControllerWidgetName.Literal(it)))
+                    onConfigChanged(setValue(config, TranslatableName.Literal(it)))
                 }
             )
         }

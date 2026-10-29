@@ -12,16 +12,16 @@ import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntSize
 import top.fifthlight.touchcontroller.common.config.preset.info.PresetControlInfo
-import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.align.Align
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.uuid.Uuid
 
 @Immutable
 abstract class ControllerWidget {
     abstract val id: Uuid
-    abstract val name: ControllerWidgetName
+    abstract val name: TranslatableName
     abstract val align: Align
     abstract val autoAlign: Boolean
     abstract val offset: IntOffset
@@ -58,7 +58,7 @@ abstract class ControllerWidget {
 
     abstract fun cloneBase(
         id: Uuid = this.id,
-        name: ControllerWidgetName = this.name,
+        name: TranslatableName = this.name,
         align: Align = this.align,
         autoAlign: Boolean = this.autoAlign,
         offset: IntOffset = this.offset,

@@ -13,7 +13,6 @@ import top.fifthlight.data.IntOffset
 import top.fifthlight.data.IntPadding
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.serialization.JButtonTrigger
-import top.fifthlight.touchcontroller.common.control.name.serialization.JControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonActiveTexture
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonTexture
 import top.fifthlight.touchcontroller.common.control.widget.custom.CustomWidget
@@ -22,6 +21,7 @@ import top.fifthlight.touchcontroller.common.layout.align.serialization.JAlign
 import top.fifthlight.touchcontroller.common.serialization.JColor
 import top.fifthlight.touchcontroller.common.serialization.JIntOffset
 import top.fifthlight.touchcontroller.common.serialization.JUuid
+import top.fifthlight.touchcontroller.common.util.name.serialization.JTranslatableName
 
 object JCustomWidget : JObj<CustomWidget>() {
     val normalTexture by JFieldMaybe(CustomWidget::normalTexture, JButtonTexture)
@@ -33,7 +33,7 @@ object JCustomWidget : JObj<CustomWidget>() {
     val moveView by JFieldMaybe(CustomWidget::moveView, JBoolean)
     val action by JFieldMaybe(CustomWidget::action, JButtonTrigger)
     val id by str(JUuid, CustomWidget::id)
-    val name by JFieldMaybe(CustomWidget::name, JControllerWidgetName)
+    val name by JFieldMaybe(CustomWidget::name, JTranslatableName)
     val align by JFieldMaybe(CustomWidget::align, JAlign)
     val autoAlign by JFieldMaybe(CustomWidget::autoAlign, JBoolean)
     val offset by JFieldMaybe(CustomWidget::offset, JIntOffset)

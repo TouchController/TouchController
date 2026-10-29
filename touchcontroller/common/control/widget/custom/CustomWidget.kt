@@ -19,7 +19,6 @@ import top.fifthlight.data.IntSize
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
-import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.property.base.BooleanProperty
 import top.fifthlight.touchcontroller.common.control.property.base.ColorProperty
 import top.fifthlight.touchcontroller.common.control.property.base.StringProperty
@@ -29,6 +28,7 @@ import top.fifthlight.touchcontroller.common.layout.align.Align
 import top.fifthlight.touchcontroller.common.layout.widget.Texture
 import top.fifthlight.touchcontroller.common.layout.widget.button.Button
 import top.fifthlight.touchcontroller.common.util.color.ColorHelper
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.uuid.Uuid
 
@@ -42,7 +42,7 @@ data class CustomWidget(
     val moveView: Boolean = false,
     val action: ButtonTrigger = ButtonTrigger(),
     override val id: Uuid = fastRandomUuid(),
-    override val name: ControllerWidgetName = ControllerWidgetName.Translatable(Texts.WIDGET_CUSTOM_BUTTON_NAME),
+    override val name: TranslatableName = TranslatableName.Translatable(Texts.WIDGET_CUSTOM_BUTTON_NAME),
     override val align: Align = Align.CENTER_CENTER,
     override val autoAlign: Boolean = true,
     override val offset: IntOffset = IntOffset.ZERO,
@@ -270,7 +270,7 @@ data class CustomWidget(
 
     override fun cloneBase(
         id: Uuid,
-        name: ControllerWidgetName,
+        name: TranslatableName,
         align: Align,
         autoAlign: Boolean,
         offset: IntOffset,

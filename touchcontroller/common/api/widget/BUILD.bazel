@@ -13,10 +13,10 @@ kt_merge_library(
         "//touchcontroller/common/control",
         "//touchcontroller/common/control/action",
         "//touchcontroller/common/control/builtin",
-        "//touchcontroller/common/control/name",
         "//touchcontroller/common/control/texture",
         "//touchcontroller/common/control/widget/custom",
         "//touchcontroller/common/layout/align",
+        "//touchcontroller/common/util/name",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [

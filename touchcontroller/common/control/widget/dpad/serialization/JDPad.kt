@@ -14,8 +14,6 @@ import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.assets.serialization.JTextureSet
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.serialization.JButtonTrigger
-import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
-import top.fifthlight.touchcontroller.common.control.name.serialization.JControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.texture.serialization.JTextureCoordinate
 import top.fifthlight.touchcontroller.common.control.widget.dpad.DPad
 import top.fifthlight.touchcontroller.common.control.widget.dpad.DPadExtraButton
@@ -25,6 +23,8 @@ import top.fifthlight.touchcontroller.common.serialization.JIntOffset
 import top.fifthlight.touchcontroller.common.serialization.JUuid
 import top.fifthlight.touchcontroller.common.serialization.objectConverter
 import top.fifthlight.touchcontroller.common.serialization.sealedByName
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
+import top.fifthlight.touchcontroller.common.util.name.serialization.JTranslatableName
 
 val JSameDPadActiveTexture = objectConverter(DPadExtraButton.ActiveTexture.Same)
 
@@ -111,7 +111,7 @@ object JDPad : JObj<DPad>() {
     val idRightBackward by str(JUuid, DPad::idRightBackward)
     val idExtraButton by str(JUuid, DPad::idExtraButton)
     val id by str(JUuid, DPad::id)
-    val name by JFieldMaybe(DPad::name, JControllerWidgetName)
+    val name by JFieldMaybe(DPad::name, JTranslatableName)
     val align by JFieldMaybe(DPad::align, JAlign)
     val autoAlign by JFieldMaybe(DPad::autoAlign, JBoolean)
     val offset by JFieldMaybe(DPad::offset, JIntOffset)
@@ -134,7 +134,7 @@ object JDPad : JObj<DPad>() {
         idRightBackward = +idRightBackward,
         idExtraButton = +idExtraButton,
         id = +id,
-        name = (+name) ?: ControllerWidgetName.Translatable(Texts.WIDGET_DPAD_NAME),
+        name = (+name) ?: TranslatableName.Translatable(Texts.WIDGET_DPAD_NAME),
         align = (+align) ?: Align.CENTER_CENTER,
         autoAlign = (+autoAlign) ?: true,
         offset = (+offset) ?: IntOffset.ZERO,

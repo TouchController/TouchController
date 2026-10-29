@@ -20,7 +20,6 @@ import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
-import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.property.base.BooleanProperty
 import top.fifthlight.touchcontroller.common.control.property.base.FloatProperty
 import top.fifthlight.touchcontroller.common.control.property.base.IntProperty
@@ -37,6 +36,7 @@ import top.fifthlight.touchcontroller.common.layout.widget.button.Button
 import top.fifthlight.touchcontroller.common.layout.widget.button.SwipeButton
 import top.fifthlight.touchcontroller.common.layout.withAlign
 import top.fifthlight.touchcontroller.common.state.PointerState
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.math.round
 import kotlin.uuid.Uuid
@@ -58,7 +58,7 @@ data class DPad internal constructor(
     val idRightBackward: Uuid = fastRandomUuid(),
     val idExtraButton: Uuid = fastRandomUuid(),
     override val id: Uuid = fastRandomUuid(),
-    override val name: ControllerWidgetName = ControllerWidgetName.Translatable(Texts.WIDGET_DPAD_NAME),
+    override val name: TranslatableName = TranslatableName.Translatable(Texts.WIDGET_DPAD_NAME),
     override val align: Align = Align.CENTER_CENTER,
     override val autoAlign: Boolean = true,
     override val offset: IntOffset = IntOffset.ZERO,
@@ -129,7 +129,7 @@ data class DPad internal constructor(
             size: Float = 2f,
             padding: Int = if (textureSet.classic) 4 else -1,
             extraButton: DPadExtraButton = DPadExtraButton.None,
-            name: ControllerWidgetName = ControllerWidgetName.Translatable(Texts.WIDGET_DPAD_NAME),
+            name: TranslatableName = TranslatableName.Translatable(Texts.WIDGET_DPAD_NAME),
             align: Align = Align.CENTER_CENTER,
             offset: IntOffset = IntOffset.ZERO,
             opacity: Float = 1f,
@@ -175,7 +175,7 @@ data class DPad internal constructor(
 
     override fun cloneBase(
         id: Uuid,
-        name: ControllerWidgetName,
+        name: TranslatableName,
         align: Align,
         autoAlign: Boolean,
         offset: IntOffset,
@@ -210,7 +210,7 @@ data class DPad internal constructor(
         padding: Int = this.padding,
         extraButton: DPadExtraButton = this.extraButton,
         showBackwardButton: Boolean = this.showBackwardButton,
-        name: ControllerWidgetName = this.name,
+        name: TranslatableName = this.name,
         align: Align = this.align,
         offset: IntOffset = this.offset,
         opacity: Float = this.opacity,

@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.getAndUpdate
 import top.fifthlight.touchcontroller.common.config.widget.WidgetPresetManager
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
-import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.model.CustomControlLayoutTabModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.widgets.state.WidgetsTabState
 import top.fifthlight.touchcontroller.common.ui.model.TouchControllerScreenModel
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 import top.fifthlight.touchcontroller.common.util.state.combineStates
 
 class WidgetsTabModel(
@@ -72,7 +72,7 @@ class WidgetsTabModel(
         tabState.getAndUpdate {
             var params = it.dialogState
             if (params is WidgetsTabState.DialogState.RenameWidgetPresetItem) {
-                params = params.copy(name = ControllerWidgetName.Literal(newName))
+                params = params.copy(name = TranslatableName.Literal(newName))
             }
             it.copy(dialogState = params)
         }
@@ -90,7 +90,7 @@ class WidgetsTabModel(
         }
     }
 
-    fun renameWidgetPresetItem(index: Int, newName: ControllerWidgetName) {
+    fun renameWidgetPresetItem(index: Int, newName: TranslatableName) {
         val presets = WidgetPresetManager.presets.value
         val widget = presets[index].cloneBase(name = newName)
         WidgetPresetManager.save(presets.set(index, widget))

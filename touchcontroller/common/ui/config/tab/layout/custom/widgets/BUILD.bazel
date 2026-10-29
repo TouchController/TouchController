@@ -8,7 +8,6 @@ kt_merge_library(
     merge_deps = [
         "//touchcontroller/common/assets",
         "//touchcontroller/common/control",
-        "//touchcontroller/common/control/name",
         "//touchcontroller/common/ui/config/tab/layout/custom/model",
         "//touchcontroller/common/ui/config/tab/layout/custom/state",
         "//touchcontroller/common/ui/config/tab/layout/custom/tab",
@@ -16,6 +15,7 @@ kt_merge_library(
         "//touchcontroller/common/ui/config/tab/layout/custom/widgets/state",
         "//touchcontroller/common/ui/control",
         "//touchcontroller/common/ui/model",
+        "//touchcontroller/common/util/name",
         "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],

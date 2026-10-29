@@ -17,7 +17,6 @@ import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
 import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureSets
 import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
-import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.property.base.EnumProperty
 import top.fifthlight.touchcontroller.common.control.property.base.FloatProperty
 import top.fifthlight.touchcontroller.common.control.property.texture.TextureSetProperty
@@ -25,6 +24,7 @@ import top.fifthlight.touchcontroller.common.layout.Context
 import top.fifthlight.touchcontroller.common.layout.align.Align
 import top.fifthlight.touchcontroller.common.layout.widget.Texture
 import top.fifthlight.touchcontroller.common.layout.widget.button.Button
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.math.round
 import kotlin.uuid.Uuid
@@ -63,7 +63,7 @@ data class BoatButton(
     val size: Float = 3f,
     val side: BoatButtonSide = BoatButtonSide.LEFT,
     override val id: Uuid = fastRandomUuid(),
-    override val name: ControllerWidgetName = ControllerWidgetName.Translatable(Texts.WIDGET_BOAT_BUTTON_NAME),
+    override val name: TranslatableName = TranslatableName.Translatable(Texts.WIDGET_BOAT_BUTTON_NAME),
     override val align: Align = Align.CENTER_CENTER,
     override val autoAlign: Boolean = true,
     override val offset: IntOffset = IntOffset.ZERO,
@@ -119,7 +119,7 @@ data class BoatButton(
 
     override fun cloneBase(
         id: Uuid,
-        name: ControllerWidgetName,
+        name: TranslatableName,
         align: Align,
         autoAlign: Boolean,
         offset: IntOffset,

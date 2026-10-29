@@ -119,6 +119,8 @@ merge_library_group(
         "//touchcontroller/common/ui/widget/navigation",
         "//touchcontroller/common/util/color",
         "//touchcontroller/common/util/crosshair",
+        "//touchcontroller/common/util/name",
+        "//touchcontroller/common/util/name/serialization",
         "//touchcontroller/common/util/offset",
         "//touchcontroller/common/util/registry",
         "//touchcontroller/common/util/registry/serialization",

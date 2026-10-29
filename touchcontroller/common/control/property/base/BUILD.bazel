@@ -8,8 +8,8 @@ kt_merge_library(
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     merge_deps = [
         "//touchcontroller/common/control",
-        "//touchcontroller/common/control/name",
         "//touchcontroller/common/layout/align",
+        "//touchcontroller/common/util/name",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [

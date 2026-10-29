@@ -19,7 +19,6 @@ import top.fifthlight.touchcontroller.common.control.action.ButtonTrigger
 import top.fifthlight.touchcontroller.common.control.action.GameActions
 import top.fifthlight.touchcontroller.common.control.action.PlayerActions
 import top.fifthlight.touchcontroller.common.control.action.WidgetTriggerAction
-import top.fifthlight.touchcontroller.common.control.name.ControllerWidgetName
 import top.fifthlight.touchcontroller.common.control.texture.TextureCoordinate
 import top.fifthlight.touchcontroller.common.control.widget.boat.BoatButton
 import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonActiveTexture
@@ -31,6 +30,7 @@ import top.fifthlight.touchcontroller.common.control.widget.joystick.Joystick
 import top.fifthlight.touchcontroller.common.gal.key.DefaultKeyBindingType
 import top.fifthlight.touchcontroller.common.gal.key.KeyBindingHandlerFactory
 import top.fifthlight.touchcontroller.common.layout.align.Align
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 import top.fifthlight.touchcontroller.common.util.registry.SimpleRegistry
 
 object BuiltinWidgets {
@@ -85,7 +85,7 @@ object BuiltinWidgets {
         grabTrigger = grabTrigger,
         moveView = moveView,
         action = action,
-        name = ControllerWidgetName.Translatable(name),
+        name = TranslatableName.Translatable(name),
         align = align,
         offset = offset,
     )
