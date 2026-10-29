@@ -121,6 +121,7 @@ merge_library_group(
         "//touchcontroller/common/util/crosshair",
         "//touchcontroller/common/util/offset",
         "//touchcontroller/common/util/registry",
+        "//touchcontroller/common/util/registry/serialization",
         "//touchcontroller/common/util/state",
         "//touchcontroller/common/util/uuid",
     ],
