@@ -49,6 +49,7 @@ object BuiltinPresetsProviderImpl : BuiltinPresetsProvider {
             ),
             layout = controllerLayoutOf(
                 layers.controlLayer,
+                layers.guiLayer,
                 layers.interactionLayer.takeIf {
                     controlStyle is BuiltinPresetKey.ControlStyle.SplitControls && controlStyle.buttonInteraction
                 },
