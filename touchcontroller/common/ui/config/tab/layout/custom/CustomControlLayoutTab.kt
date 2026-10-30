@@ -270,6 +270,13 @@ object CustomControlLayoutTab : Tab() {
         val navigator = LocalNavigator.current
         val configScreenModel = LocalConfigScreenModel.current
         val screenModel = rememberScreenModel { CustomControlLayoutTabModel(configScreenModel) }
+
+        DisposableEffect(Unit) {
+            onDispose {
+                screenModel.savePreset()
+            }
+        }
+
         val currentUiState by screenModel.uiState.collectAsState()
         val uiState = currentUiState
         if (uiState is CustomControlLayoutTabState.Enabled) {

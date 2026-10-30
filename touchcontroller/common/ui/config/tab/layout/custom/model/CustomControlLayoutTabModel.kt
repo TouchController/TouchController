@@ -90,18 +90,6 @@ class CustomControlLayoutTabModel(
                 }
             }
         }
-        coroutineScope.launch {
-            try {
-                awaitCancellation()
-            } finally {
-                pageState.value.editState?.let { editState ->
-                    PresetManager.savePreset(
-                        uuid = editState.presetUuid,
-                        editState.undoStack.currentItem,
-                    )
-                }
-            }
-        }
     }
 
     fun enableCustomLayout() {
