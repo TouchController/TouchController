@@ -5,6 +5,7 @@
 
 package top.fifthlight.touchcontroller.common.config.holder
 
+import com.ubertob.kondor.json.JJsonNode
 import com.ubertob.kondor.json.toJson
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,9 +23,12 @@ import top.fifthlight.touchcontroller.common.config.widget.WidgetPresetManager
 import top.fifthlight.touchcontroller.common.gal.config.ConfigDirectoryProviderFactory
 import top.fifthlight.touchcontroller.common.gal.gameconfig.GameConfigEditor
 import top.fifthlight.touchcontroller.common.gal.gameconfig.GameConfigEditorFactory
+import top.fifthlight.touchcontroller.common.serialization.JObjWithSchema
 import top.fifthlight.touchcontroller.common.serialization.jsonStyle
+import top.fifthlight.touchcontroller.common.serialization.schemaObj
 import top.fifthlight.touchcontroller.common.util.state.combineStates
 import top.fifthlight.touchcontroller.common.util.state.mapState
+import java.io.IOException
 import java.nio.file.NoSuchFileException
 import kotlin.io.path.*
 
@@ -53,12 +57,24 @@ object GlobalConfigHolder : PlatformConfigProvider {
     }
     val currentPresetUuid = config.mapState { (it.preset as? PresetConfig.Custom)?.uuid }
 
+    private val schemaDir = configDir.resolve("schema")
+    private const val CONFIG_SCHEMA_FILENAME = "config.schema.json"
+    private val configSchemaFile = schemaDir.resolve(CONFIG_SCHEMA_FILENAME)
+    private val JGlobalConfigWithSchema = JObjWithSchema("./schema/$CONFIG_SCHEMA_FILENAME", JGlobalConfig)
+
     fun load() {
         try {
             createConfigDirectory()
         } catch (ex: Exception) {
             logger.warn("Failed to create config folder: ", ex)
             return
+        }
+        try {
+            logger.info("Exporting TouchController config schema")
+            schemaDir.createDirectories()
+            configSchemaFile.writeText(text = JJsonNode.toJson(JGlobalConfigWithSchema.schemaObj(), jsonStyle))
+        } catch (ex: Exception) {
+            logger.warn("Failed to export config schema: ", ex)
         }
         try {
             logger.info("Reading TouchController config file")
@@ -87,7 +103,7 @@ object GlobalConfigHolder : PlatformConfigProvider {
         }
         try {
             configDir.createDirectories()
-        } catch (_: java.io.IOException) {
+        } catch (_: IOException) {
         }
     }
 
@@ -95,6 +111,6 @@ object GlobalConfigHolder : PlatformConfigProvider {
         val config = _config.updateAndGet(editor)
         createConfigDirectory()
         logger.info("Saving TouchController config file")
-        configFile.writeText(JGlobalConfig.toJson(config, jsonStyle))
+        configFile.writeText(JGlobalConfigWithSchema.toJson(config, jsonStyle))
     }
 }

@@ -68,16 +68,13 @@ inline fun <reified E : Enum<E>> enumByName(
             requireNotNull(table.byValue[value]) { "Unregistered $enumName value: $value" }
         }
 
-        override fun schema(): JsonNodeObject {
-            val names = table.byValue.values.map { JsonNodeString(it) }
-            return if (names.isEmpty()) {
-                nodeObject("type" toNode "string")
-            } else {
-                nodeObject(
-                    "type" toNode "string",
-                    "enum" to JsonNodeArray(names),
-                )
-            }
+        override fun schema() = if (table.byValue.isEmpty()) {
+            nodeObject("type" toNode "string")
+        } else {
+            nodeObject(
+                "type" toNode "string",
+                "enum" to JsonNodeArray(table.byValue.values.map { JsonNodeString(it) }),
+            )
         }
     }
 }

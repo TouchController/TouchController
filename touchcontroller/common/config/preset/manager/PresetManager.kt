@@ -5,6 +5,7 @@
 
 package top.fifthlight.touchcontroller.common.config.preset.manager
 
+import com.ubertob.kondor.json.JJsonNode
 import com.ubertob.kondor.json.JList
 import com.ubertob.kondor.json.toJson
 import kotlinx.collections.immutable.*
@@ -17,8 +18,10 @@ import top.fifthlight.touchcontroller.common.config.preset.PresetsContainer
 import top.fifthlight.touchcontroller.common.config.preset.serialization.JLayoutPreset
 import top.fifthlight.touchcontroller.common.gal.config.ConfigDirectoryProvider
 import top.fifthlight.touchcontroller.common.gal.config.ConfigDirectoryProviderFactory
+import top.fifthlight.touchcontroller.common.serialization.JObjWithSchema
 import top.fifthlight.touchcontroller.common.serialization.JUuid
 import top.fifthlight.touchcontroller.common.serialization.jsonStyle
+import top.fifthlight.touchcontroller.common.serialization.schemaObj
 import java.io.IOException
 import java.nio.file.NoSuchFileException
 import java.nio.file.Path
@@ -34,10 +37,28 @@ object PresetManager {
     private val _presets = MutableStateFlow(PresetsContainer())
     val presets = _presets.asStateFlow()
 
+    private val schemaDir = presetDir.resolve("schema")
+    private const val PRESET_SCHEMA_FILENAME = "preset.schema.json"
+    private val presetSchemaFile = schemaDir.resolve(PRESET_SCHEMA_FILENAME)
+    private val JLayoutPresetWithSchema = JObjWithSchema("./schema/$PRESET_SCHEMA_FILENAME", JLayoutPreset)
+
     fun load() {
         try {
+            presetDir.createDirectories()
+        } catch (ex: Exception) {
+            logger.warn("Failed to create preset folder: ", ex)
+            return
+        }
+        try {
+            logger.info("Exporting TouchController preset schemas")
+            schemaDir.createDirectories()
+            presetSchemaFile.writeText(text = JJsonNode.toJson(JLayoutPresetWithSchema.schemaObj(), jsonStyle))
+        } catch (ex: Exception) {
+            logger.warn("Failed to export preset schemas: ", ex)
+        }
+        try {
             logger.info("Reading TouchController preset file")
-            val order = runCatching<PresetManager, List<Uuid>> {
+            val order = runCatching {
                 JList(JUuid).fromJson(orderFile.readText()).orThrow()
             }.getOrNull()?.toPersistentList() ?: persistentListOf()
             val presets = buildMap {
@@ -47,7 +68,7 @@ object PresetManager {
                         Uuid.parse(uuidStr)
                     }.getOrNull() ?: continue
                     try {
-                        put(uuid, JLayoutPreset.fromJson(entry.readText()).orThrow())
+                        put(uuid, JLayoutPresetWithSchema.fromJson(entry.readText()).orThrow())
                     } catch (ex: Exception) {
                         logger.warn("Failed to load preset $uuidStr", ex)
                         continue
@@ -77,7 +98,7 @@ object PresetManager {
         presetDir.createDirectories()
         try {
             getPresetFile(uuid).writeText(
-                text = JLayoutPreset.toJson(preset, jsonStyle),
+                text = JLayoutPresetWithSchema.toJson(preset, jsonStyle),
                 options = if (create) {
                     arrayOf(StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE, StandardOpenOption.CREATE)
                 } else {
