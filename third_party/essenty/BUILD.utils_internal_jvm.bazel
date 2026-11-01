@@ -9,6 +9,7 @@ kt_kotlinc_options(
     x_lambdas = "indy",
     warn = "off",
 )
+
 kt_jvm_library(
     name = "utils_internal_jvm_lib",
     srcs = glob(["commonMain/**/*.kt"]),

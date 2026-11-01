@@ -17,7 +17,7 @@ kt_kotlinc_options(
 )
 
 kt_common_library(
-    name = "commonMain",
+    name = "common",
     srcs = glob(["commonMain/**/*.kt"]),
     fragment_name = "commonMain",
     deps = [
@@ -31,10 +31,10 @@ kt_common_library(
 )
 
 kt_common_library(
-    name = "nonWebMain",
+    name = "non_web",
     srcs = glob(["nonWebMain/**/*.kt"]),
     fragment_name = "nonWebMain",
-    deps = [":commonMain"],
+    deps = [":common"],
 )
 
 kt_jvm_library(
@@ -43,8 +43,8 @@ kt_jvm_library(
     plugins = ["@//:kotlin_serialization_plugin"],
     kotlinc_opts = ":kotlinc_opts_jvm_8",
     deps = [
-        ":commonMain",
-        ":nonWebMain",
+        ":common",
+        ":non_web",
         "@essenty_back_handler//:back_handler_jvm",
         "@essenty_instance_keeper//:instance_keeper_jvm",
         "@essenty_lifecycle//:lifecycle_jvm",

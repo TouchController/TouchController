@@ -11,7 +11,7 @@ kt_kotlinc_options(
 )
 
 kt_common_library(
-    name = "commonMain",
+    name = "common",
     srcs = glob(
         include = ["commonMain/**/*.kt"],
         exclude = ["commonMain/**/PolymorphicSerializer.kt"],
@@ -26,13 +26,12 @@ kt_common_library(
 kt_jvm_library(
     name = "state_keeper_jvm_lib",
     srcs = glob(["javaMain/**/*.kt"]),
-    plugins = ["@//:kotlin_serialization_plugin"],
     kotlinc_opts = ":kotlinc_opts_jvm_8",
     deps = [
-        ":commonMain",
+        ":common",
         "@essenty_utils_internal//:utils_internal_jvm",
-        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
         "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_json_jvm",
+        "@//:kotlin_serialization",
     ],
 )
 

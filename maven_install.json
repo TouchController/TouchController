@@ -13,6 +13,7 @@
     "com.arkivanov.decompose:decompose-jvm": 1304895778,
     "com.arkivanov.essenty:back-handler-jvm": -662905396,
     "com.arkivanov.essenty:instance-keeper-jvm": 2021833820,
+    "com.arkivanov.essenty:lifecycle-coroutines-jvm": 441037254,
     "com.arkivanov.essenty:lifecycle-jvm": 1346052188,
     "com.arkivanov.essenty:state-keeper-jvm": 2075121046,
     "com.arkivanov.essenty:utils-internal-jvm": 1014394177,
@@ -132,6 +133,8 @@
     "com.arkivanov.essenty:back-handler-jvm:jar:sources": 2139256675,
     "com.arkivanov.essenty:instance-keeper-jvm": 1601501973,
     "com.arkivanov.essenty:instance-keeper-jvm:jar:sources": -2115449246,
+    "com.arkivanov.essenty:lifecycle-coroutines-jvm": 1140491198,
+    "com.arkivanov.essenty:lifecycle-coroutines-jvm:jar:sources": 853780570,
     "com.arkivanov.essenty:lifecycle-jvm": 1436736446,
     "com.arkivanov.essenty:lifecycle-jvm:jar:sources": -1823073417,
     "com.arkivanov.essenty:state-keeper-jvm": -315332109,
@@ -569,6 +572,13 @@
       "shasums": {
         "jar": "0b50cb95caf2c904763f3b6b4796c89c60a0dcc0b93e204f859cc8832c2e4633",
         "sources": "dce562c5339b3dc8cf97a461529fd3ee2b67233b6d9f44b4e5773d3171bae7ae"
+      },
+      "version": "2.5.0"
+    },
+    "com.arkivanov.essenty:lifecycle-coroutines-jvm": {
+      "shasums": {
+        "jar": "5f47c0713e9b0be987a3cc1c5873d5df43687915dd4d6aafb917fdc119fd3aff",
+        "sources": "5dc11d7ae8d8e9517d7c31c430356eec64fea83f347ec09668bdcddb73afae50"
       },
       "version": "2.5.0"
     },
@@ -1546,6 +1556,11 @@
       "com.arkivanov.essenty:utils-internal-jvm",
       "org.jetbrains.kotlin:kotlin-stdlib"
     ],
+    "com.arkivanov.essenty:lifecycle-coroutines-jvm": [
+      "com.arkivanov.essenty:lifecycle-jvm",
+      "org.jetbrains.kotlin:kotlin-stdlib",
+      "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm"
+    ],
     "com.arkivanov.essenty:lifecycle-jvm": [
       "com.arkivanov.essenty:utils-internal-jvm",
       "org.jetbrains.kotlin:kotlin-stdlib"
@@ -2090,6 +2105,9 @@
     ],
     "com.arkivanov.essenty:instance-keeper-jvm": [
       "com.arkivanov.essenty.instancekeeper"
+    ],
+    "com.arkivanov.essenty:lifecycle-coroutines-jvm": [
+      "com.arkivanov.essenty.lifecycle.coroutines"
     ],
     "com.arkivanov.essenty:lifecycle-jvm": [
       "com.arkivanov.essenty.lifecycle"
@@ -4724,6 +4742,8 @@
       "com.arkivanov.essenty:back-handler-jvm:jar:sources",
       "com.arkivanov.essenty:instance-keeper-jvm",
       "com.arkivanov.essenty:instance-keeper-jvm:jar:sources",
+      "com.arkivanov.essenty:lifecycle-coroutines-jvm",
+      "com.arkivanov.essenty:lifecycle-coroutines-jvm:jar:sources",
       "com.arkivanov.essenty:lifecycle-jvm",
       "com.arkivanov.essenty:lifecycle-jvm:jar:sources",
       "com.arkivanov.essenty:state-keeper-jvm",
@@ -5040,6 +5060,8 @@
       "com.arkivanov.essenty:back-handler-jvm:jar:sources",
       "com.arkivanov.essenty:instance-keeper-jvm",
       "com.arkivanov.essenty:instance-keeper-jvm:jar:sources",
+      "com.arkivanov.essenty:lifecycle-coroutines-jvm",
+      "com.arkivanov.essenty:lifecycle-coroutines-jvm:jar:sources",
       "com.arkivanov.essenty:lifecycle-jvm",
       "com.arkivanov.essenty:lifecycle-jvm:jar:sources",
       "com.arkivanov.essenty:state-keeper-jvm",
@@ -5356,6 +5378,8 @@
       "com.arkivanov.essenty:back-handler-jvm:jar:sources",
       "com.arkivanov.essenty:instance-keeper-jvm",
       "com.arkivanov.essenty:instance-keeper-jvm:jar:sources",
+      "com.arkivanov.essenty:lifecycle-coroutines-jvm",
+      "com.arkivanov.essenty:lifecycle-coroutines-jvm:jar:sources",
       "com.arkivanov.essenty:lifecycle-jvm",
       "com.arkivanov.essenty:lifecycle-jvm:jar:sources",
       "com.arkivanov.essenty:state-keeper-jvm",
@@ -5672,6 +5696,8 @@
       "com.arkivanov.essenty:back-handler-jvm:jar:sources",
       "com.arkivanov.essenty:instance-keeper-jvm",
       "com.arkivanov.essenty:instance-keeper-jvm:jar:sources",
+      "com.arkivanov.essenty:lifecycle-coroutines-jvm",
+      "com.arkivanov.essenty:lifecycle-coroutines-jvm:jar:sources",
       "com.arkivanov.essenty:lifecycle-jvm",
       "com.arkivanov.essenty:lifecycle-jvm:jar:sources",
       "com.arkivanov.essenty:state-keeper-jvm",

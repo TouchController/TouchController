@@ -11,7 +11,7 @@ kt_kotlinc_options(
 )
 
 kt_common_library(
-    name = "commonMain",
+    name = "common",
     srcs = glob(["commonMain/**/*.kt"]),
     fragment_name = "commonMain",
     deps = ["@essenty_utils_internal//:utils_internal_jvm"],
@@ -22,7 +22,7 @@ kt_jvm_library(
     srcs = [],
     kotlinc_opts = ":kotlinc_opts_jvm_8",
     deps = [
-        ":commonMain",
+        ":common",
         "@essenty_utils_internal//:utils_internal_jvm",
     ],
 )

@@ -37,6 +37,13 @@ http_archive(
     url = "https://repo1.maven.org/maven2/com/arkivanov/essenty/utils-internal-jvm/2.5.0/utils-internal-jvm-2.5.0-sources.jar",
 )
 
+http_archive(
+    name = "essenty_lifecycle_coroutines",
+    build_file = "@//third_party/essenty:BUILD.lifecycle_coroutines_jvm.bazel",
+    sha256 = "5dc11d7ae8d8e9517d7c31c430356eec64fea83f347ec09668bdcddb73afae50",
+    url = "https://repo1.maven.org/maven2/com/arkivanov/essenty/lifecycle-coroutines-jvm/2.5.0/lifecycle-coroutines-jvm-2.5.0-sources.jar",
+)
+
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.override(
     coordinates = "com.arkivanov.essenty:lifecycle-jvm",
@@ -57,4 +64,8 @@ maven.override(
 maven.override(
     coordinates = "com.arkivanov.essenty:utils-internal-jvm",
     target = "@essenty_utils_internal//:utils_internal_jvm",
+)
+maven.override(
+    coordinates = "com.arkivanov.essenty:lifecycle-coroutines-jvm",
+    target = "@essenty_lifecycle_coroutines//:lifecycle_coroutines_jvm",
 )
