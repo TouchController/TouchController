@@ -1,0 +1,70 @@
+load("@rules_java//java:defs.bzl", "java_import")
+load("@rules_kotlin//kotlin:core.bzl", "kt_kotlinc_options")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_common_library", "kt_jvm_library")
+
+kt_kotlinc_options(
+    name = "kotlinc_opts_jvm_8",
+    jvm_target = "1.8",
+    x_jdk_release = "1.8",
+    x_lambdas = "indy",
+    warn = "off",
+    x_optin = [
+        "com.arkivanov.decompose.ExperimentalDecomposeApi",
+        "com.arkivanov.decompose.InternalDecomposeApi",
+        "com.arkivanov.essenty.ExperimentalEssentyApi",
+        "com.arkivanov.essenty.InternalEssentyApi",
+    ],
+)
+
+kt_common_library(
+    name = "commonMain",
+    srcs = glob(["commonMain/**/*.kt"]),
+    fragment_name = "commonMain",
+    deps = [
+        "@essenty_back_handler//:back_handler_jvm",
+        "@essenty_instance_keeper//:instance_keeper_jvm",
+        "@essenty_lifecycle//:lifecycle_jvm",
+        "@essenty_state_keeper//:state_keeper_jvm",
+        "@essenty_utils_internal//:utils_internal_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
+    ],
+)
+
+kt_common_library(
+    name = "nonWebMain",
+    srcs = glob(["nonWebMain/**/*.kt"]),
+    fragment_name = "nonWebMain",
+    deps = [":commonMain"],
+)
+
+kt_jvm_library(
+    name = "decompose_jvm_lib",
+    srcs = glob(["jvmMain/**/*.kt"]),
+    plugins = ["@//:kotlin_serialization_plugin"],
+    kotlinc_opts = ":kotlinc_opts_jvm_8",
+    deps = [
+        ":commonMain",
+        ":nonWebMain",
+        "@essenty_back_handler//:back_handler_jvm",
+        "@essenty_instance_keeper//:instance_keeper_jvm",
+        "@essenty_lifecycle//:lifecycle_jvm",
+        "@essenty_state_keeper//:state_keeper_jvm",
+        "@essenty_utils_internal//:utils_internal_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
+    ],
+)
+
+java_import(
+    name = "decompose_jvm",
+    jars = ["decompose_jvm_lib.jar"],
+    srcjar = "decompose_jvm_lib-sources.jar",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@essenty_back_handler//:back_handler_jvm",
+        "@essenty_instance_keeper//:instance_keeper_jvm",
+        "@essenty_lifecycle//:lifecycle_jvm",
+        "@essenty_state_keeper//:state_keeper_jvm",
+        "@essenty_utils_internal//:utils_internal_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
+    ],
+)
