@@ -24,8 +24,8 @@ On different mod loaders, TouchController needs dependency mod as below:
 
 - Fabric: [Fabric API](https://github.com/FabricMC/fabric),
   [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin)
-- Forge: None
-- NeoForge: None
+- Forge: [Kotlin for Forge](https://github.com/thedarkcolour/KotlinForForge)
+- NeoForge: [Kotlin for Forge](https://github.com/thedarkcolour/KotlinForForge)
 
 ## Supported game version and platforms
 
@@ -38,21 +38,22 @@ Below are game versions and mod loaders TouchController supports now:
 - 26.1.1  (NeoForge, Fabric)
 - 26.1.2  (NeoForge, Fabric)
 - 26.2    (NeoForge, Fabric)
+- 26.3    (NeoForge, Fabric)
 
 Support for more game versions and mod loaders is under development.
 
 Below are platforms TouchController supports:
 
 - Windows (minimum supported version is Windows 7, supports x86, x86_64 and ARM64 architecture)
-- BlazeSDL
-- Linux Wayland (without touch to mouse emulation support, prefer BlazeSDL)
+- BlazeSDL & SDL3 (supported natively in 26.3+)
+- Linux Wayland (without touch to mouse emulation support, BlazeSDL is preferred in 26.1 & 26.2)
 - [Fold Craft Launcher](https://github.com/FCL-Team/FoldCraftLauncher)
 - [Zalith Launcher](https://github.com/ZalithLauncher/ZalithLauncher)
 - [Zalith Launcher 2](https://github.com/ZalithLauncher/ZalithLauncher2)
 - [Pojav Glow·Worm](https://github.com/Vera-Firefly/Pojav-Glow-Worm)
 - [Amethyst Android](https://github.com/AngelAuraMC/Amethyst-Android)
 
-Support for touch screen for X11 on Linux may be added in the future. iOS support will be added in the future.
+Support for touch screen for X11 on Linux may be added in the future.
 
 ## Features supported by now
 
@@ -95,8 +96,8 @@ TouchController.
 
 - Fabric：[Fabric API](https://github.com/FabricMC/fabric)、
   [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin)
-- Forge：无前置
-- NeoForge: 无前置
+- Forge：[Kotlin for Forge](https://github.com/thedarkcolour/KotlinForForge)
+- NeoForge: [Kotlin for Forge](https://github.com/thedarkcolour/KotlinForForge)
 
 ## 支持的游戏版本和平台
 
@@ -109,21 +110,22 @@ TouchController.
 - 26.1.1  (NeoForge, Fabric)
 - 26.1.2  (NeoForge, Fabric)
 - 26.2    (NeoForge, Fabric)
+- 26.3    (NeoForge, Fabric)
 
 更多游戏版本、mod 加载器的支持正在开发中。
 
 目前支持的平台有：
 
 - Windows（版本最低为 Windows 7，支持 x86、x86_64 和 ARM64 架构）
-- BlazeSDL
-- Linux Wayland（但是没有触控模拟鼠标支持，建议使用 BlazeSDL）
+- BlazeSDL 和 SDL3（26.3+ 原生支持）
+- Linux Wayland（但是没有触控模拟鼠标支持，建议在 26.1 和 26.2 使用 BlazeSDL）
 - [Fold Craft Launcher](https://github.com/FCL-Team/FoldCraftLauncher)
 - [Zalith Launcher](https://github.com/ZalithLauncher/ZalithLauncher)
 - [Zalith Launcher 2](https://github.com/ZalithLauncher/ZalithLauncher2)
 - [Pojav Glow·Worm](https://github.com/Vera-Firefly/Pojav-Glow-Worm)
 - [Amethyst Android](https://github.com/AngelAuraMC/Amethyst-Android)
 
-在未来可能会添加 Linux 上 X11 触屏的支持。未来会加入 iOS 支持。
+在未来可能会添加 Linux 上 X11 触屏的支持。
 
 ## 目前支持的功能
 
