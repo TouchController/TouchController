@@ -1,10 +1,12 @@
 {
     "pack": {
         "description": "Textures for TouchController. For Minecraft < 1.21.2.",
-        "pack_format": 4,
+        "pack_format": 15,
         "supported_formats": {
-            "min_inclusive": 4,
+            "min_inclusive": 15,
             "max_inclusive": 48
-        }
+        },
+        "min_format": 15,
+        "max_format": 48
     }
 }
