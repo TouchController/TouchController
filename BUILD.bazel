@@ -29,7 +29,6 @@ kt_compiler_plugin(
     compile_phase = True,
     id = "org.jetbrains.kotlin.serialization",
     stubs_phase = True,
-    visibility = ["//visibility:public"],
     deps = [
         "@rules_kotlin//kotlin/compiler:kotlinx-serialization-compiler-plugin",
     ],

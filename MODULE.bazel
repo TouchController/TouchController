@@ -155,8 +155,6 @@ include("//module/third_party:aboutlibraries.MODULE.bazel")
 include("//module/third_party:androidx_compose_runtime.MODULE.bazel")
 include("//module/third_party:androidx_savedstate.MODULE.bazel")
 include("//module/third_party:androidx_lifecycle.MODULE.bazel")
-include("//module/third_party:essenty.MODULE.bazel")
-include("//module/third_party:decompose.MODULE.bazel")
 include("//module/third_party:intellij.MODULE.bazel")
 include("//module/third_party:intellij_bazel.MODULE.bazel")
 

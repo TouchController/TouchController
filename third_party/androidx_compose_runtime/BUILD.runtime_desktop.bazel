@@ -7,7 +7,6 @@ kt_kotlinc_options(
     jvm_target = "1.8",
     x_jdk_release = "1.8",
     x_lambdas = "indy",
-    warn = "off",
 )
 
 kt_jvm_library(

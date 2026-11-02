@@ -9,13 +9,13 @@
  )
  load(
 @@ -42,6 +43,8 @@ KSP_COMPILER_PLUGIN_REPO = "com_github_google_ksp"
-
+ 
  KtJvmInfo = _KtJvmInfo
-
+ 
 +KtCommonInfo = _KtCommonInfo
 +
  KtCompilerPluginInfo = _KtCompilerPluginInfo
-
+ 
  KspPluginInfo = _KspPluginInfo
 
 --- a/kotlin/internal/jvm/compile.bzl
@@ -31,7 +31,7 @@
 @@ -105,6 +106,33 @@ def _partitioned_srcs(srcs):
          src_jars = src_jars,
      )
-
+ 
 +def _collect_fragments(deps):
 +    """Collects fragment metadata from KtCommonInfo deps.
 +
@@ -70,7 +70,7 @@
 +        plugins,
 +        common_srcs = None):
      """Runs KAPT using the KotlinBuilder tool.
-
+ 
      Args:
 @@ -480,6 +509,7 @@ def _run_kapt_builder_actions(
          },
@@ -78,12 +78,12 @@
          mnemonic = "KotlinKapt",
 +        common_srcs = common_srcs,
      )
-
+ 
      return struct(
 @@ -620,6 +650,17 @@ def btapi_runtime_worker_args(runtime):
  def _plugins_payload_to_json(payload):
      return _plugin_payload.plugins_payload_json(payload.plugins)
-
+ 
 +def _map_fragments_to_name(fragment):
 +    return fragment.fragment_name
 +
@@ -109,7 +109,7 @@
      if not mnemonic:
          fail("Error: A `mnemonic` must be provided for every invocation of `_run_kt_builder_action`!")
 @@ -676,6 +718,28 @@ def _run_kt_builder_action(
-
+ 
      # Unwrap kotlinc_options/javac_options options or default to the ones being provided by the toolchain
      args.add_all("--kotlin_passthrough_flags", kotlinc_options_to_flags(kotlinc_options))
 +    if common_srcs:
@@ -135,7 +135,7 @@
 +        # --sources are validated as .kt/.java file paths.
 +        args.add_all("--sources", common_srcs.srcs, omit_if_empty = True)
      args.add_all("--javacopts", javac_options_to_flags(javac_options))
-
+ 
      # Associates contribute their own jars to the classpath, and which flavor (compile jar or class
 @@ -770,7 +834,7 @@ def _run_kt_builder_action(
                  transitive_runtime_jars,
@@ -149,7 +149,7 @@
 @@ -850,6 +914,8 @@ def _kt_jvm_produce_output_jar_actions(
      toolchains = _compiler_toolchains(ctx)
      srcs = _partitioned_srcs(ctx.files.srcs)
-
+ 
 +    common_srcs = _collect_fragments(ctx.attr.deps)
 +
      annotation_processors = _plugin_mappers.targets_to_annotation_processors(ctx.attr.plugins + ctx.attr.deps)
@@ -171,7 +171,7 @@
 +        output_jdeps,
 +        common_srcs = None):
      """Runs the necessary KotlinBuilder and JavaBuilder actions to compile a jar
-
+ 
      Returns:
 @@ -1011,6 +1079,7 @@ def _run_kt_java_builder_actions(
              annotation_processors = annotation_processors,
@@ -187,7 +187,7 @@
              mnemonic = "KotlinCompile",
 +            common_srcs = common_srcs,
          )
-
+ 
          compile_jars.append(kt_compile_jar)
 
 --- a/kotlin/internal/jvm/jvm.bzl
@@ -209,7 +209,7 @@
 +    _kt_common_library = "kt_common_library",
 +)
  load("//kotlin/internal/utils:utils.bzl", "utils")
-
+ 
  # Toolchain type for the Windows launcher maker
 @@ -224,6 +229,7 @@ _common_attr = utils.add_dicts(
              providers = [
@@ -344,7 +344,7 @@
      _kt_jvm_library = "kt_jvm_library",
 @@ -13,6 +14,7 @@ load(
  )
-
+ 
  kt_javac_options = _kt_javac_options
 +kt_common_library = _kt_common_library
  kt_jvm_binary = _kt_jvm_binary
@@ -596,54 +596,3 @@
 +        "transitive_srcs": "depset of all source files in the transitive closure.",
 +    },
 +)
-
---- a/kotlin/internal/jvm/impl.bzl
-+++ b/kotlin/internal/jvm/impl.bzl
-@@ -18,6 +18,7 @@
- load(
-     "//kotlin/internal:defs.bzl",
-     _KspPluginInfo = "KspPluginInfo",
-+    _KtCommonInfo = "KtCommonInfo",
-     _KtCompilerPluginInfo = "KtCompilerPluginInfo",
-     _KtJvmInfo = "KtJvmInfo",
-     _TOOLCHAIN_TYPE = "TOOLCHAIN_TYPE",
-@@ -360,7 +361,12 @@
-     if ctx.attr.neverlink and ctx.attr.runtime_deps:
-         fail("runtime_deps and neverlink is nonsensical.", attr = "runtime_deps")
-
--    if not ctx.attr.srcs and len(ctx.attr.deps) > 0:
-+    has_common_fragments = False
-+    for dep in ctx.attr.deps:
-+        if _KtCommonInfo in dep:
-+            has_common_fragments = True
-+            break
-+    if not ctx.attr.srcs and len(ctx.attr.deps) > 0 and not has_common_fragments:
-         fail(
-             "deps without srcs is invalid." +
-             "\nTo add runtime dependencies use runtime_deps." +
-@@ -369,7 +378,7 @@
-         )
-     return _make_providers(
-         ctx,
--        providers = _compile.kt_jvm_produce_jar_actions(ctx, "kt_jvm_library") if ctx.attr.srcs or ctx.attr.resources else _compile.export_only_providers(
-+        providers = _compile.kt_jvm_produce_jar_actions(ctx, "kt_jvm_library") if ctx.attr.srcs or ctx.attr.resources or has_common_fragments else _compile.export_only_providers(
-             ctx = ctx,
-             actions = ctx.actions,
-             outputs = ctx.outputs,
-
---- a/kotlin/internal/jvm/compile.bzl
-+++ b/kotlin/internal/jvm/compile.bzl
-@@ -1065,6 +1065,11 @@
-     compile_jars = []
-     output_jars = []
-     kt_stubs_for_java = []
--    has_kt_sources = srcs.kt or srcs.src_jars
-+    has_common_fragments = False
-+    for dep in ctx.attr.deps:
-+        if _KtCommonInfo in dep:
-+            has_common_fragments = True
-+            break
-+    has_kt_sources = srcs.kt or srcs.src_jars or has_common_fragments
-
-     # Run KAPT
-     if has_kt_sources and annotation_processors:
