@@ -140,7 +140,7 @@ public class CurseForgeUploader implements Callable<Integer> {
                     .filePart("file", uploadFile, MediaType.APPLICATION_OCTET_STREAM)
                     .build();
 
-            var uploadRequest = HttpRequest.newBuilder(URI.create("https://curseforge.com/api/projects/" + projectId + "/upload-file"))
+            var uploadRequest = HttpRequest.newBuilder(URI.create("https://minecraft.curseforge.com/api/projects/" + projectId + "/upload-file"))
                     .header("X-Api-Token", token)
                     .header("User-Agent", CurseForgeUploader.userAgent)
                     .header("Accept", "application/json")
