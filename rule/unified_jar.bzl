@@ -2,8 +2,32 @@
 
 load("@rules_java//java/common:java_info.bzl", "JavaInfo")
 
+def _version_included(versions, dep_versions):
+    for version in dep_versions:
+        if version in versions:
+            return True
+    return False
+
+def _filter_by_versions(entries, versions, deps_versions):
+    filtered = {}
+    for key, value in entries.items():
+        dep_versions = deps_versions.get(key)
+        if dep_versions == None or _version_included(versions, dep_versions):
+            filtered[key] = value
+    return filtered
+
 def _unified_jar_impl(ctx):
     output_jar = ctx.actions.declare_file(ctx.label.name + ".jar")
+
+    versions = {version: True for version in ctx.attr.versions}
+    if ctx.attr.deps_versions and not versions:
+        fail("deps_versions requires a non-empty versions list")
+
+    deps = _filter_by_versions(ctx.attr.deps, versions, ctx.attr.deps_versions)
+    fabric_deps = _filter_by_versions(ctx.attr.fabric_deps, versions, ctx.attr.deps_versions)
+    forge_rules = _filter_by_versions(ctx.attr.forge_rules, versions, ctx.attr.deps_versions)
+    neoforge_rules = _filter_by_versions(ctx.attr.neoforge_rules, versions, ctx.attr.deps_versions)
+    merge_deps = _filter_by_versions(ctx.attr.merge_deps, versions, ctx.attr.deps_versions)
 
     args = ctx.actions.args()
     args.add("--plugin", "manifest")
@@ -42,7 +66,7 @@ def _unified_jar_impl(ctx):
 
     # deps: modid -> label (jar-in-jar entries)
     dep_files = []
-    for key, target in ctx.attr.deps.items():
+    for key, target in deps.items():
         jar = target.files.to_list()[0]
         dep_files.append(jar)
         args.add("--jar-in-jar")
@@ -50,25 +74,25 @@ def _unified_jar_impl(ctx):
         args.add(jar)
 
     # fabric_deps: modid -> version (for FabricJijPlugin)
-    for key, value in ctx.attr.fabric_deps.items():
+    for key, value in fabric_deps.items():
         args.add("--jij-fabric")
         args.add(key)
         args.add(value)
 
     # neoforge_rules: modid -> condition spec string (for UnifiedJarManifestPlugin)
-    for key, value in ctx.attr.neoforge_rules.items():
+    for key, value in neoforge_rules.items():
         args.add("--unified-neoforge-rule")
         args.add(key)
         args.add(value)
 
     # forge_rules: modid -> condition spec string (for UnifiedJarManifestPlugin)
-    for key, value in ctx.attr.forge_rules.items():
+    for key, value in forge_rules.items():
         args.add("--unified-forge-rule")
         args.add(key)
         args.add(value)
 
     # merge_deps: modid -> modid (for UnifiedJarManifestPlugin)
-    for key, value in ctx.attr.merge_deps.items():
+    for key, value in merge_deps.items():
         args.add("--merge-deps")
         args.add(key)
         args.add(value)
@@ -106,6 +130,14 @@ unified_jar = rule(
             mandatory = True,
             allow_files = [".jar"],
             doc = "All JARs to embed: modid -> label",
+        ),
+        "versions": attr.string_list(
+            default = [],
+            doc = "Game versions this JAR is built for; dependencies with a deps_versions entry are only included when at least one of their versions is listed here",
+        ),
+        "deps_versions": attr.string_list_dict(
+            default = {},
+            doc = "Game versions supported by each dependency: modid -> version list; dependencies not listed are always included",
         ),
         "fabric_deps": attr.string_dict(
             default = {},

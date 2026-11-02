@@ -27,6 +27,23 @@ combine_neoforge_deps = {
     "combine-neoforge-1-21-11": "//combine/backend/minecraft/neoforge/1.21.11",
 }
 
+combine_deps_versions = {
+    "combine-26-1": ["26.1", "26.1.1", "26.1.2"],
+    "combine-26-2": ["26.2"],
+    "combine-26-3": ["26.3"],
+    "combine-26-4": ["26.4"],
+    "combine-fabric-1-20-1": ["1.20.1"],
+    "combine-fabric-1-21-1": ["1.21.1"],
+    "combine-fabric-1-21-8": ["1.21.8"],
+    "combine-fabric-1-21-10": ["1.21.10"],
+    "combine-fabric-1-21-11": ["1.21.11"],
+    "combine-forge-1-20-1": ["1.20.1"],
+    "combine-neoforge-1-21-1": ["1.21.1"],
+    "combine-neoforge-1-21-8": ["1.21.8"],
+    "combine-neoforge-1-21-10": ["1.21.10"],
+    "combine-neoforge-1-21-11": ["1.21.11"],
+}
+
 combine_fabric_config = {
     "combine-common": "=",
     "combine-26-1": "=",
@@ -53,7 +70,6 @@ combine_neoforge_config = {
     "combine-26-1": "minecraft: +[26.1,26.2)",
     "combine-26-2": "minecraft: +[26.2]",
     "combine-26-3": "minecraft: +[26.3]",
-    "combine-26-4": "minecraft: +[26.4]",
 }
 
 combine_fabric_jij_deps = fabric_jij_deps(

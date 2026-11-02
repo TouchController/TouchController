@@ -78,7 +78,6 @@ combine_neoforge_config = {
     "combine-26-1": "minecraft: +[26.1,26.2)",
     "combine-26-2": "minecraft: +[26.2]",
     "combine-26-3": "minecraft: +[26.3]",
-    "combine-26-4": "minecraft: +[26.4]",
 }
 
 touchcontroller_common_deps = combine_common_deps | {
@@ -142,7 +141,6 @@ touchcontroller_neoforge_config = combine_neoforge_config | {
     "touchcontroller-26-2-neoforge": "minecraft: +[26.2]",
     "touchcontroller-26-3": "minecraft: +[26.3]",
     "touchcontroller-26-3-neoforge": "minecraft: +[26.3]",
-    "touchcontroller-26-4": "minecraft: +[26.4]",
 }
 
 touchcontroller_fabric_deps = combine_fabric_deps | {
@@ -195,4 +193,45 @@ touchcontroller_fabric_jij_deps = fabric_jij_deps(
     excludes = ["combine-common"],
 ) | {
     "//combine/backend/minecraft/fabric:fabric_unmerged": "combine:=",
+}
+
+touchcontroller_deps_versions = {
+    "combine-26-1": ["26.1", "26.1.1", "26.1.2"],
+    "combine-26-2": ["26.2"],
+    "combine-26-3": ["26.3"],
+    "combine-26-4": ["26.4", "26.4-snapshot-3"],
+    "combine-fabric-1-20-1": ["1.20.1"],
+    "combine-fabric-1-21-1": ["1.21.1"],
+    "combine-fabric-1-21-10": ["1.21.10"],
+    "combine-fabric-1-21-11": ["1.21.11"],
+    "combine-forge-1-20-1": ["1.20.1"],
+    "combine-neoforge-1-21-1": ["1.21.1"],
+    "combine-neoforge-1-21-10": ["1.21.10"],
+    "combine-neoforge-1-21-11": ["1.21.11"],
+    "touchcontroller-1-20-1-fabric": ["1.20.1"],
+    "touchcontroller-1-20-1-forge": ["1.20.1"],
+    "touchcontroller-1-21-1-fabric": ["1.21.1"],
+    "touchcontroller-1-21-1-neoforge": ["1.21.1"],
+    "touchcontroller-1-21-10-fabric": ["1.21.10"],
+    "touchcontroller-1-21-10-neoforge": ["1.21.10"],
+    "touchcontroller-1-21-11-fabric": ["1.21.11"],
+    "touchcontroller-1-21-11-neoforge": ["1.21.11"],
+    "touchcontroller-26-1": ["26.1", "26.1.1", "26.1.2"],
+    "touchcontroller-26-1-2-neoforge": ["26.1.2"],
+    "touchcontroller-26-1-fabric": ["26.1", "26.1.1", "26.1.2"],
+    "touchcontroller-26-1-neoforge": ["26.1", "26.1.1"],
+    "touchcontroller-26-2": ["26.2"],
+    "touchcontroller-26-2-fabric": ["26.2"],
+    "touchcontroller-26-2-neoforge": ["26.2"],
+    "touchcontroller-26-3": ["26.3"],
+    "touchcontroller-26-3-fabric": ["26.3"],
+    "touchcontroller-26-3-neoforge": ["26.3"],
+    "touchcontroller-26-4": ["26.4", "26.4-snapshot-3"],
+    "touchcontroller-26-4-fabric": ["26.4", "26.4-snapshot-3"],
+}
+
+touchcontroller_fabric_deps_versions = {
+    label: touchcontroller_deps_versions[key]
+    for key, label in (touchcontroller_common_deps | touchcontroller_fabric_deps).items()
+    if key in touchcontroller_deps_versions
 }

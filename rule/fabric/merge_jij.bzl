@@ -97,3 +97,31 @@ fabric_merge_jij = rule(
     },
     doc = "Merge JAR to a main JAR as Fabric jar-in-jar",
 )
+
+def _version_included(versions, dep_versions):
+    for version in dep_versions:
+        if version in versions:
+            return True
+    return False
+
+def versioned_fabric_merge_jij(name, deps, versions, deps_versions, **kwargs):
+    """Merge a Fabric mod JAR while filtering version-specific jar-in-jar dependencies.
+
+    Args:
+        name: Target name.
+        deps: Label-keyed dict of JAR descriptions, as for fabric_merge_jij.
+        versions: Game versions this JAR is built for.
+        deps_versions: Dep key -> supported game version list. Keys may be labels or label strings.
+    """
+    if deps_versions and not versions:
+        fail("versioned_fabric_merge_jij: deps_versions requires a non-empty versions list")
+
+    version_set = {version: True for version in versions}
+    normalized_deps_versions = {str(key): value for key, value in deps_versions.items()}
+    filtered_deps = {}
+    for dep, description in deps.items():
+        dep_versions = normalized_deps_versions.get(str(dep))
+        if dep_versions == None or _version_included(version_set, dep_versions):
+            filtered_deps[dep] = description
+
+    fabric_merge_jij(name = name, deps = filtered_deps, **kwargs)

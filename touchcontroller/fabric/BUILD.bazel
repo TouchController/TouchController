@@ -2,9 +2,9 @@ load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//combine:libraries.bzl", "combine_fabric_libraries")
 load("//combine:properties.bzl", "combine_version")
 load("//rule:jar.bzl", "jar")
-load("//rule/fabric:merge_jij.bzl", "fabric_merge_jij")
-load("//touchcontroller:libraries.bzl", "touchcontroller_fabric_jij_deps", "touchcontroller_fabric_libraries")
-load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_fabric_mod_json_versions", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+load("//rule/fabric:merge_jij.bzl", "versioned_fabric_merge_jij")
+load("//touchcontroller:libraries.bzl", "touchcontroller_fabric_deps_versions", "touchcontroller_fabric_jij_deps", "touchcontroller_fabric_libraries")
+load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_fabric_game_versions", "touchcontroller_fabric_mod_json_versions", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
 expand_template(
     name = "fabric_mod_json",
@@ -33,9 +33,11 @@ jar(
     },
 )
 
-fabric_merge_jij(
+versioned_fabric_merge_jij(
     name = "fabric",
+    deps_versions = touchcontroller_fabric_deps_versions,
     input = ":fabric_unmerged",
+    versions = touchcontroller_fabric_game_versions,
     visibility = ["//visibility:public"],
     deps = touchcontroller_fabric_jij_deps | combine_fabric_libraries | touchcontroller_fabric_libraries,
 )

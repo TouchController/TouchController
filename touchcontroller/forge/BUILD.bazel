@@ -3,8 +3,8 @@ load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("//combine:libraries.bzl", "combine_unified_deps", "combine_unified_forge")
 load("//combine:properties.bzl", "combine_version")
 load("//rule:unified_jar.bzl", "unified_jar")
-load("//touchcontroller:libraries.bzl", "touchcontroller_common_deps", "touchcontroller_forge_config", "touchcontroller_forge_deps", "touchcontroller_merge_deps", "touchcontroller_unified_deps", "touchcontroller_unified_forge")
-load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
+load("//touchcontroller:libraries.bzl", "touchcontroller_common_deps", "touchcontroller_deps_versions", "touchcontroller_forge_config", "touchcontroller_forge_deps", "touchcontroller_merge_deps", "touchcontroller_unified_deps", "touchcontroller_unified_forge")
+load("//touchcontroller:properties.bzl", "touchcontroller_authors", "touchcontroller_contributors", "touchcontroller_description", "touchcontroller_forge_game_versions", "touchcontroller_homepage", "touchcontroller_issue_tracker", "touchcontroller_license", "touchcontroller_source", "touchcontroller_version")
 
 expand_template(
     name = "forge_mods_toml",
@@ -36,10 +36,12 @@ copy_file(
 
 unified_jar(
     name = "forge",
+    deps_versions = touchcontroller_deps_versions,
     forge_mods_toml = ":forge_mods_toml",
     forge_rules = touchcontroller_forge_config | combine_unified_forge | touchcontroller_unified_forge,
     merge_deps = touchcontroller_merge_deps,
     resources = {":icon": "touchcontroller/forge"},
+    versions = touchcontroller_forge_game_versions,
     visibility = ["//visibility:public"],
     deps = touchcontroller_common_deps | touchcontroller_forge_deps | combine_unified_deps | touchcontroller_unified_deps,
 )
