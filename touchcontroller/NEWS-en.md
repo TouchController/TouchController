@@ -2,6 +2,7 @@
 
 ## 0.3.1-alpha16
 
+- Fixed crash on devices supporting SDL 3 haptics
 - Added JSON schema for JSON configuration
 - Added filter for entity type
 - Fixed slider behavior in scrolling view
