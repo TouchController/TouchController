@@ -1,5 +1,12 @@
 # TouchController NEWS - User visible changes
 
+## 0.3.1-alpha16
+
+- Added JSON schema for JSON configuration
+- Added filter for entity type
+- Fixed slider behavior in scrolling view
+- Added Forge 1.20.1 support
+
 ## 0.3.1-alpha15
 
 - Added automatic anchor for widget
