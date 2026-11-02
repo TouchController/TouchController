@@ -9,13 +9,13 @@ import top.fifthlight.touchcontroller.common.layout.align.Align
 import top.fifthlight.touchcontroller.common.serialization.enumByName
 
 val JAlign = enumByName<Align> {
-    "left_top" encodes Align.LEFT_TOP
-    "center_top" encodes Align.CENTER_TOP
-    "right_top" encodes Align.RIGHT_TOP
-    "left_center" encodes Align.LEFT_CENTER
-    "center_center" encodes Align.CENTER_CENTER
-    "right_center" encodes Align.RIGHT_CENTER
-    "left_bottom" encodes Align.LEFT_BOTTOM
-    "center_bottom" encodes Align.CENTER_BOTTOM
-    "right_bottom" encodes Align.RIGHT_BOTTOM
+    listOf("left_top", "LEFT_TOP") encodes Align.LEFT_TOP
+    listOf("center_top", "CENTER_TOP") encodes Align.CENTER_TOP
+    listOf("right_top", "RIGHT_TOP") encodes Align.RIGHT_TOP
+    listOf("left_center", "LEFT_CENTER") encodes Align.LEFT_CENTER
+    listOf("center_center", "CENTER_CENTER", "center", "CENTER") encodes Align.CENTER_CENTER
+    listOf("right_center", "RIGHT_CENTER") encodes Align.RIGHT_CENTER
+    listOf("left_bottom", "LEFT_BOTTOM") encodes Align.LEFT_BOTTOM
+    listOf("center_bottom", "CENTER_BOTTOM") encodes Align.CENTER_BOTTOM
+    listOf("right_bottom", "RIGHT_BOTTOM") encodes Align.RIGHT_BOTTOM
 }
