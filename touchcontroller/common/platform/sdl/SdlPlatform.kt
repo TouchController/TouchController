@@ -5,13 +5,14 @@
 
 package top.fifthlight.touchcontroller.common.platform.sdl
 
+import org.lwjgl.sdl.SDLError
 import org.lwjgl.sdl.SDLEvents
 import org.lwjgl.sdl.SDLHaptic
 import org.lwjgl.sdl.SDLInit
 import org.lwjgl.sdl.SDLStdinc
 import org.lwjgl.sdl.SDL_Event
 import org.lwjgl.sdl.SDL_TouchFingerEvent
-import top.fifthlight.blazesdl.api.BlazeSDLAPI
+import org.slf4j.LoggerFactory
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.platform.PlatformConfigProvider
@@ -21,11 +22,9 @@ import top.fifthlight.touchcontroller.proxy.message.ProxyMessage
 import top.fifthlight.touchcontroller.proxy.message.RemovePointerMessage
 import top.fifthlight.touchcontroller.proxy.message.VibrateMessage
 import kotlin.collections.getOrPut
-import kotlin.jvm.java
-import kotlin.let
 
 class SdlPlatform(private val eventRegister: (handler: (event: SDL_Event) -> Boolean) -> Unit) : Platform {
-    private val logger = org.slf4j.LoggerFactory.getLogger(SdlPlatform::class.java)
+    private val logger = LoggerFactory.getLogger(SdlPlatform::class.java)
     private var haptic: Long? = null
 
     override fun init() {
@@ -37,20 +36,19 @@ class SdlPlatform(private val eventRegister: (handler: (event: SDL_Event) -> Boo
     private fun initHaptics() {
         val haptics = SDLHaptic.SDL_GetHaptics() ?: return
         try {
-            if (!haptics.hasRemaining()) {
-                return
+            if (haptics.hasRemaining()) {
+                val haptic = SDLHaptic.SDL_OpenHaptic(haptics.get(0))
+                if (haptic == 0L) {
+                    logger.warn("Failed to call SDL_OpenHaptic: {}", SDLError.SDL_GetError())
+                    return
+                }
+                if (!SDLHaptic.SDL_InitHapticRumble(haptic)) {
+                    logger.warn("Failed to call SDL_InitHapticRumble: {}", SDLError.SDL_GetError())
+                    SDLHaptic.SDL_CloseHaptic(haptic)
+                    return
+                }
+                this.haptic = haptic
             }
-            val haptic = SDLHaptic.SDL_OpenHaptic(haptics.get())
-            if (haptic == 0L) {
-                logger.warn("Failed to call SDL_OpenHaptic: {}", org.lwjgl.sdl.SDLError.SDL_GetError())
-                return
-            }
-            if (!SDLHaptic.SDL_InitHapticRumble(haptic)) {
-                logger.warn("Failed to call SDL_InitHapticRumble: {}", org.lwjgl.sdl.SDLError.SDL_GetError())
-                SDLHaptic.SDL_CloseHaptic(haptic)
-                return
-            }
-            this.haptic = haptic
         } finally {
             SDLStdinc.SDL_free(haptics)
         }
