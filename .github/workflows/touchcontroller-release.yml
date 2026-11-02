@@ -51,7 +51,13 @@ jobs:
           netrc: ${{ secrets.BAZEL_NETRC }}
 
       - name: Build
-        run: bazel build --verbose_failures --config=opt --jobs=2 //touchcontroller:update_log //touchcontroller //touchcontroller/fabric //touchcontroller/neoforge
+        run: |
+          bazel build --verbose_failures --config=opt --jobs=2 \
+            //touchcontroller:update_log \
+            //touchcontroller \
+            //touchcontroller/fabric \
+            //touchcontroller/neoforge \
+            //touchcontroller/forge
 
       - name: Attest
         uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
@@ -61,6 +67,7 @@ jobs:
             bazel-bin/touchcontroller/touchcontroller.jar
             bazel-bin/touchcontroller/fabric/fabric.jar
             bazel-bin/touchcontroller/neoforge/neoforge.jar
+            bazel-bin/touchcontroller/forge/forge.jar
 
       - name: Upload artifacts
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -71,6 +78,7 @@ jobs:
             bazel-bin/touchcontroller/touchcontroller.jar
             bazel-bin/touchcontroller/fabric/fabric.jar
             bazel-bin/touchcontroller/neoforge/neoforge.jar
+            bazel-bin/touchcontroller/forge/forge.jar
 
   publish-modrinth:
     name: Publish to Modrinth
@@ -142,6 +150,18 @@ jobs:
             --file-name "TouchController-${mod_version}+neoforge.jar" \
             "$(realpath release/neoforge/neoforge.jar)" \
             $(jq -cr .touchcontroller_neoforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
+            --dependency required:ordsPcFz && \
+          bazel run //rule/modrinth_uploader -- \
+            --use-token-from-environment \
+            --project-id "${MODRINTH_ID}" \
+            --version-name "${mod_version}" \
+            --version-id "${mod_version}+forge" \
+            --version-type "${mod_state}" \
+            --loader forge \
+            --changelog "$(realpath release/update_log.md)" \
+            --file-name "TouchController-${mod_version}+forge.jar" \
+            "$(realpath release/forge/forge.jar)" \
+            $(jq -cr .touchcontroller_forge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
             --dependency required:ordsPcFz
 
   publish-curseforge:
@@ -191,6 +211,7 @@ jobs:
           mod_state="$(jq -r .touchcontroller_state <<< "${properties}")"
           mv release/fabric/fabric.jar "release/TouchController-${mod_version}+fabric.jar"
           mv release/neoforge/neoforge.jar "release/TouchController-${mod_version}+neoforge.jar"
+          mv release/forge/forge.jar "release/TouchController-${mod_version}+forge.jar"
           bazel run //rule/curseforge_uploader -- \
             --use-token-from-environment \
             --project-id "${CURSEFORGE_ID}" \
@@ -218,7 +239,19 @@ jobs:
             --game-version java:java-25 \
             $(jq -cr .touchcontroller_neoforge_curseforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
             --dependency kotlin-for-forge:351264:requiredDependency \
-            --file "$(realpath "release/TouchController-${mod_version}+neoforge.jar")"
+            --file "$(realpath "release/TouchController-${mod_version}+neoforge.jar")" && \
+          bazel run //rule/curseforge_uploader -- \
+            --use-token-from-environment \
+            --project-id "${CURSEFORGE_ID}" \
+            --changelog "$(realpath release/update_log.md)" \
+            --changelog-type markdown \
+            --display-name "${mod_version}+forge" \
+            --release-type "${mod_state}" \
+            --game-version modloader:forge \
+            --game-version java:java-17 \
+            $(jq -cr .touchcontroller_forge_curseforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
+            --dependency kotlin-for-forge:351264:requiredDependency \
+            --file "$(realpath "release/TouchController-${mod_version}+forge.jar")"
 
   publish-github:
     name: Publish to GitHub Release
@@ -271,6 +304,7 @@ jobs:
           mv release/touchcontroller.jar "release/TouchController-${mod_version}.jar"
           mv release/fabric/fabric.jar "release/TouchController-${mod_version}+fabric.jar"
           mv release/neoforge/neoforge.jar "release/TouchController-${mod_version}+neoforge.jar"
+          mv release/forge/forge.jar "release/TouchController-${mod_version}+forge.jar"
 
       - name: Publish to GitHub Releases
         uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3
@@ -283,3 +317,4 @@ jobs:
             release/TouchController-*.jar
             release/TouchController-*+fabric.jar
             release/TouchController-*+neoforge.jar
+            release/TouchController-*+forge.jar
