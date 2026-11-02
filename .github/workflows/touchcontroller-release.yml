@@ -52,12 +52,7 @@ jobs:
 
       - name: Build
         run: |
-          bazel build --verbose_failures --config=opt --jobs=2 \
-            //touchcontroller:update_log \
-            //touchcontroller \
-            //touchcontroller/fabric \
-            //touchcontroller/neoforge \
-            //touchcontroller/forge
+          bazel build --verbose_failures --config=opt --jobs=2 //touchcontroller:update_log  //touchcontroller //touchcontroller/fabric //touchcontroller/neoforge //touchcontroller/forge
 
       - name: Attest
         uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4

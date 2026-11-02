@@ -38,12 +38,7 @@ jobs:
           downloader_cfg: ${{ vars.BAZEL_DOWNLOADER_CONFIG }}
           netrc: ${{ secrets.BAZEL_NETRC }}
       - name: Build
-        run: |
-          bazel build --verbose_failures --config=opt \
-            //touchcontroller \
-            //touchcontroller/fabric \
-            //touchcontroller/neoforge \
-            //touchcontroller/forge
+        run: bazel build --verbose_failures --config=opt //touchcontroller:update_log  //touchcontroller //touchcontroller/fabric //touchcontroller/neoforge //touchcontroller/forge
       - name: Upload artifacts
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
