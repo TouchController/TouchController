@@ -41,6 +41,10 @@ import top.fifthlight.touchcontroller.gal.key.v1_20_1.KeyBindingStateImpl
 
 @Mod("touchcontroller_1_20_1")
 class TouchController(val fmlContext: FMLJavaModLoadingContext) {
+
+    @Suppress("DEPRECATION", "removal", "unused") // To support older Forge loader
+    constructor(): this(FMLJavaModLoadingContext.get())
+
     private val logger = LoggerFactory.getLogger(TouchController::class.java)
 
     init {
@@ -56,11 +60,19 @@ class TouchController(val fmlContext: FMLJavaModLoadingContext) {
     }
 
     private fun initialize(event: FMLClientSetupEvent) {
-        fmlContext.registerExtensionPoint(
-            ConfigScreenHandler.ConfigScreenFactory::class.java
-        ) {
-            ConfigScreenHandler.ConfigScreenFactory { _, parent ->
-                getConfigScreen(parent) as Screen
+        val configScreenFactory = ConfigScreenHandler.ConfigScreenFactory { _, parent ->
+            getConfigScreen(parent) as Screen
+        }
+        try {
+            fmlContext.registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory::class.java) {
+                configScreenFactory
+            }
+        } catch (_: IncompatibleClassChangeError) {
+            @Suppress("DEPRECATION", "removal") // To support older Forge loader
+            ModLoadingContext.get().activeContainer.registerExtensionPoint(
+                ConfigScreenHandler.ConfigScreenFactory::class.java
+            ) {
+                configScreenFactory
             }
         }
 
