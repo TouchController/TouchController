@@ -144,6 +144,7 @@ public class CurseForgeUploader implements Callable<Integer> {
                     .header("X-Api-Token", token)
                     .header("User-Agent", CurseForgeUploader.userAgent)
                     .header("Accept", "application/json")
+                    .header("Content-Type", bodyPublisher.mediaType().toString())
                     .POST(bodyPublisher)
                     .build();
 

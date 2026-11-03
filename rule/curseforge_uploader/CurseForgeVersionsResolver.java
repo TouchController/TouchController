@@ -20,6 +20,7 @@ public class CurseForgeVersionsResolver {
                 .GET()
                 .header("X-Api-Token", token)
                 .header("User-Agent", CurseForgeUploader.userAgent)
+                .header("Accept", "application/json")
                 .build();
         var versionTypesResponse = client.send(versionTypesRequest, HttpResponse.BodyHandlers.ofInputStream());
         if (versionTypesResponse.statusCode() != 200) {
@@ -31,6 +32,7 @@ public class CurseForgeVersionsResolver {
                 .GET()
                 .header("X-Api-Token", token)
                 .header("User-Agent", CurseForgeUploader.userAgent)
+                .header("Accept", "application/json")
                 .build();
         var versionsResponse = client.send(versionsRequest, HttpResponse.BodyHandlers.ofInputStream());
         if (versionsResponse.statusCode() != 200) {

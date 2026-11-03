@@ -215,6 +215,7 @@ jobs:
             --display-name "${mod_version}+fabric" \
             --release-type "${mod_state}" \
             --game-version modloader:fabric \
+            --game-version environment:client \
             --game-version java:java-21 \
             --game-version java:java-25 \
             $(jq -cr .touchcontroller_fabric_curseforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
@@ -230,6 +231,7 @@ jobs:
             --display-name "${mod_version}+neoforge" \
             --release-type "${mod_state}" \
             --game-version modloader:neoforge \
+            --game-version environment:client \
             --game-version java:java-21 \
             --game-version java:java-25 \
             $(jq -cr .touchcontroller_neoforge_curseforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
@@ -243,6 +245,7 @@ jobs:
             --display-name "${mod_version}+forge" \
             --release-type "${mod_state}" \
             --game-version modloader:forge \
+            --game-version environment:client \
             --game-version java:java-17 \
             $(jq -cr .touchcontroller_forge_curseforge_game_versions.[] <<< "${properties}" | sed 's/^/--game-version /' | tr '\n' ' ') \
             --dependency kotlin-for-forge:351264:requiredDependency \
