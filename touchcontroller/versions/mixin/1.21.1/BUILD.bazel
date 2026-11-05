@@ -22,6 +22,7 @@ java_merge_library(
         "//touchcontroller/common/config/data",
         "//touchcontroller/common/config/holder",
         "//touchcontroller/common/event/render",
+        "//touchcontroller/common/gal/gamestate",
         "//touchcontroller/common/model",
         "//touchcontroller/common/ui/config/screen",
         "//touchcontroller/common/util/crosshair",

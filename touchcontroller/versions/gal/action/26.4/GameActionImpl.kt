@@ -30,6 +30,10 @@ object GameActionImpl : GameAction {
         client.pauseGame(false)
     }
 
+    override fun closeScreen() {
+        client.gui.screen()?.onClose()
+    }
+
     override fun sendMessage(text: Text) {
         client.gui.hud.chat.addClientSystemMessage(text.toMinecraft())
     }

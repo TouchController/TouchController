@@ -374,6 +374,20 @@ object BuiltinWidgets {
         )
     }
 
+    val exit = register("exit") {
+        customWidget(
+            texture = fixed(BuiltInTextureItems.exit, scale = 1f),
+            activeTexture = fixed(BuiltInTextureItems.exitActive, scale = 1f),
+            grayOnClassic = true,
+            swipeTrigger = false,
+            action = ButtonTrigger(
+                release = WidgetTriggerAction.Game(GameActions.closeScreen),
+            ),
+            name = Texts.WIDGET_EXIT_BUTTON_NAME,
+            align = Align.RIGHT_TOP,
+        )
+    }
+
     val chat = register("chat") {
         customWidget(
             texture = fixed(BuiltInTextureItems.chat, scale = 1f),

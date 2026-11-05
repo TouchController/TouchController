@@ -10,6 +10,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.touchcontroller.assets.lang.Texts
+import top.fifthlight.touchcontroller.common.config.condition.input.BuiltinLayerCondition
 import top.fifthlight.touchcontroller.common.config.condition.input.LayerConditionInput
 
 data class LayerConditions(
@@ -33,6 +34,16 @@ data class LayerConditions(
     }
 
     fun check(input: LayerConditionInput): Boolean {
+        if (BuiltinLayerCondition.IN_GUI in input.builtinCondition) {
+            val inGuiConditionKey = BuiltinLayerConditionKey(BuiltinLayerCondition.IN_GUI)
+            val allowInGui = conditions.any { (key, value) ->
+                key == inGuiConditionKey && (value == Value.WANT || value == Value.REQUIRE)
+            }
+            if (!allowInGui) {
+                return false
+            }
+        }
+
         var haveWant = false
         var haveFulfilledWant = false
 

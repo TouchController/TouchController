@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="armorstand" pattern="file[armorstand*]:*//*||src[armorstand*]:*..*" />
-</component>
