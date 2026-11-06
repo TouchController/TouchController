@@ -82,6 +82,7 @@ object ItemSubclassProviderImpl : ItemSubclassProvider {
 
     override val itemSubclasses: PersistentList<ItemSubclass> = persistentListOf(
         rangedWeaponSubclass,
+        armorSubclass,
         projectileSubclass,
         bucketSubclass,
         boatSubclass,
