@@ -19,6 +19,8 @@ import top.fifthlight.touchcontroller.common.gal.item.ItemDataComponentTypeFacto
 import top.fifthlight.touchcontroller.common.gal.item.ItemSubclass
 import top.fifthlight.touchcontroller.common.gal.item.ItemSubclassProvider
 import top.fifthlight.touchcontroller.common.serialization.JItem
+import top.fifthlight.touchcontroller.common.serialization.JPersistentList
+import top.fifthlight.touchcontroller.common.serialization.JPersistentSet
 
 object JItemDataComponentType : JStringRepresentable<ItemDataComponentType>() {
     override val cons: (String) -> ItemDataComponentType = { id ->
@@ -41,15 +43,15 @@ object JItemSubclass : JStringRepresentable<ItemSubclass>() {
 }
 
 object JItemList : JObj<ItemList>() {
-    private val whitelist by JFieldMaybe(ItemList::whitelist, JList(JItem))
-    private val blacklist by JFieldMaybe(ItemList::blacklist, JList(JItem))
-    private val components by JFieldMaybe(ItemList::components, JList(JItemDataComponentType))
-    private val subclasses by JFieldMaybe(ItemList::subclasses, JSet(JItemSubclass))
+    private val whitelist by JFieldMaybe(ItemList::whitelist, JPersistentList(JItem, ignoreFailedItem = true))
+    private val blacklist by JFieldMaybe(ItemList::blacklist, JPersistentList(JItem, ignoreFailedItem = true))
+    private val components by JFieldMaybe(ItemList::components, JPersistentList(JItemDataComponentType, ignoreFailedItem = true))
+    private val subclasses by JFieldMaybe(ItemList::subclasses, JPersistentSet(JItemSubclass, ignoreFailedItem = true))
 
     override fun FieldsValues.deserializeOrThrow(path: NodePath) = ItemList(
-        whitelist = (+whitelist)?.toPersistentList() ?: persistentListOf(),
-        blacklist = (+blacklist)?.toPersistentList() ?: persistentListOf(),
-        components = (+components)?.toPersistentList() ?: persistentListOf(),
-        subclasses = (+subclasses)?.toPersistentSet() ?: persistentSetOf(),
+        whitelist = (+whitelist) ?: persistentListOf(),
+        blacklist = (+blacklist) ?: persistentListOf(),
+        components = (+components) ?: persistentListOf(),
+        subclasses = (+subclasses) ?: persistentSetOf(),
     )
 }

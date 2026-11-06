@@ -69,5 +69,5 @@ object JLayerConditionsItem : JObj<LayerConditions.Item>() {
 val JLayerConditions = JValueClass(
     getter = LayerConditions::conditions,
     factory = ::LayerConditions,
-    converter = JPersistentList(JLayerConditionsItem),
+    converter = JPersistentList(JLayerConditionsItem, ignoreFailedItem = true),
 )
