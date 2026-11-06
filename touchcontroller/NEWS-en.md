@@ -1,5 +1,10 @@
 # TouchController NEWS - User visible changes
 
+## 0.3.1-alpha17
+
+- Fixed configuration lost because item subclasses failed to deserialize under 1.21.1 and 1.20.1
+- Ignore failures when deserializing item list and layer condition in configuration
+
 ## 0.3.1-alpha16
 
 - Fixed crash on devices supporting SDL 3 haptics
