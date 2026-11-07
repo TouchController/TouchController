@@ -8,6 +8,7 @@ package top.fifthlight.touchcontroller.common.config.preset.builtin
 import kotlinx.collections.immutable.toPersistentList
 import top.fifthlight.mergetools.api.ActualConstructor
 import top.fifthlight.mergetools.api.ActualImpl
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.assets.texture.set.BuiltInTextureItems
 import top.fifthlight.touchcontroller.common.config.layout.controllerLayoutOf
 import top.fifthlight.touchcontroller.common.config.preset.LayoutPreset
@@ -21,6 +22,7 @@ import top.fifthlight.touchcontroller.common.control.widget.custom.ButtonTexture
 import top.fifthlight.touchcontroller.common.control.widget.custom.CustomWidget
 import top.fifthlight.touchcontroller.common.control.widget.dpad.DPad
 import top.fifthlight.touchcontroller.common.control.widget.joystick.Joystick
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 
 @ActualImpl(BuiltinPresetsProvider::class)
 object BuiltinPresetsProviderImpl : BuiltinPresetsProvider {
@@ -41,7 +43,7 @@ object BuiltinPresetsProviderImpl : BuiltinPresetsProvider {
         }
         val controlStyle = key.controlStyle
         return LayoutPreset(
-            name = "Built-in preset",
+            name = TranslatableName.Translatable(Texts.PRESET_NAME_BUILTIN),
             controlInfo = PresetControlInfo(
                 splitControls = controlStyle is BuiltinPresetKey.ControlStyle.SplitControls,
                 disableCrosshair = controlStyle !is BuiltinPresetKey.ControlStyle.SplitControls,

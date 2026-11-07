@@ -7,9 +7,10 @@ package top.fifthlight.touchcontroller.common.ui.layer.state
 
 import top.fifthlight.touchcontroller.common.config.condition.LayerConditions
 import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 
 data class LayerEditorScreenState(
-    val name: String,
+    val name: TranslatableName,
     val conditions: LayerConditions,
 ) {
     constructor(layer: LayoutLayer) : this(

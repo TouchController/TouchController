@@ -31,6 +31,7 @@ import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.presets
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.tab.CustomTab
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.tab.LocalCustomTabContext
 import top.fifthlight.touchcontroller.common.ui.importpreset.screen.ImportPresetScreen
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 import kotlin.uuid.Uuid
 
 @Composable
@@ -58,7 +59,7 @@ private fun PresetsList(
                 ) {
                     Text(
                         modifier = Modifier.alignment(Alignment.CenterLeft),
-                        text = preset.name,
+                        text = preset.name.getText(),
                     )
                 }
 
@@ -190,9 +191,9 @@ object PresetsTab : CustomTab() {
             ) {
                 EditText(
                     modifier = Modifier.fillMaxWidth(),
-                    value = state.name,
+                    value = state.name.asString(),
                     onValueChanged = {
-                        tabModel.updateCreatePresetState { copy(name = it) }
+                        tabModel.updateCreatePresetState { copy(name = TranslatableName.Literal(it)) }
                     },
                     placeholder = Text.translatable(Texts.SCREEN_CUSTOM_CONTROL_LAYOUT_PRESETS_NAME_PLACEHOLDER),
                 )
@@ -284,9 +285,9 @@ object PresetsTab : CustomTab() {
             ) {
                 EditText(
                     modifier = Modifier.fillMaxWidth(),
-                    value = state.name,
+                    value = state.name.asString(),
                     onValueChanged = {
-                        tabModel.updateEditPresetState { copy(name = it) }
+                        tabModel.updateEditPresetState { copy(name = TranslatableName.Literal(it)) }
                     },
                     placeholder = Text.translatable(Texts.SCREEN_CUSTOM_CONTROL_LAYOUT_PRESETS_NAME_PLACEHOLDER),
                 )
@@ -365,7 +366,7 @@ object PresetsTab : CustomTab() {
                 }
             }
         ) { state ->
-            val presetName = uiState.allPresets[state.uuid]?.name ?: "ERROR"
+            val presetName = uiState.allPresets[state.uuid]?.name?.asString() ?: "ERROR"
             Column(
                 verticalArrangement = Arrangement.spacedBy(4),
                 horizontalAlignment = Alignment.CenterHorizontally,

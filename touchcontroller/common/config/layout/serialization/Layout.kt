@@ -8,7 +8,6 @@ package top.fifthlight.touchcontroller.common.config.layout.serialization
 import com.ubertob.kondor.json.JFieldMaybe
 import com.ubertob.kondor.json.JList
 import com.ubertob.kondor.json.JObj
-import com.ubertob.kondor.json.JString
 import com.ubertob.kondor.json.jsonnode.FieldsValues
 import com.ubertob.kondor.json.jsonnode.NodePath
 import kotlinx.collections.immutable.persistentListOf
@@ -21,9 +20,10 @@ import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer.Companion
 import top.fifthlight.touchcontroller.common.control.serialization.JControllerWidget
 import top.fifthlight.touchcontroller.common.serialization.JPersistentList
 import top.fifthlight.touchcontroller.common.serialization.JValueClass
+import top.fifthlight.touchcontroller.common.util.name.serialization.JTranslatableName
 
 object JLayoutLayer : JObj<LayoutLayer>() {
-    val name by JFieldMaybe(LayoutLayer::name, JString)
+    val name by JFieldMaybe(LayoutLayer::name, JTranslatableName)
     val widgets by JFieldMaybe(LayoutLayer::widgets, JList(JControllerWidget))
     val conditions by JFieldMaybe(LayoutLayer::conditions, JLayerConditions)
 

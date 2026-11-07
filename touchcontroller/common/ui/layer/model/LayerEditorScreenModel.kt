@@ -12,6 +12,7 @@ import top.fifthlight.touchcontroller.common.config.condition.LayerConditions
 import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
 import top.fifthlight.touchcontroller.common.ui.layer.state.LayerEditorScreenState
 import top.fifthlight.touchcontroller.common.ui.model.TouchControllerScreenModel
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 
 class LayerEditorScreenModel(
     private val initialValue: LayoutLayer,
@@ -22,7 +23,7 @@ class LayerEditorScreenModel(
 
     fun editName(newName: String) {
         _uiState.getAndUpdate {
-            it.copy(name = newName)
+            it.copy(name = TranslatableName.Literal(newName))
         }
     }
 

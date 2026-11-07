@@ -8,9 +8,12 @@ kt_merge_library(
     merge_deps = [
         "//touchcontroller/common/config/condition",
         "//touchcontroller/common/control",
+        "//touchcontroller/common/util/name",
+        "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
+        "//combine/core/data",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],
 )

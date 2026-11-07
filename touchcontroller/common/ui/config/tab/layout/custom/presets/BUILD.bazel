@@ -16,6 +16,7 @@ kt_merge_library(
         "//touchcontroller/common/ui/config/tab/layout/custom/tab",
         "//touchcontroller/common/ui/importpreset/screen",
         "//touchcontroller/common/ui/model",
+        "//touchcontroller/common/util/name",
         "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],

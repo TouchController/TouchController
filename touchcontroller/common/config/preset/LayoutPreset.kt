@@ -7,14 +7,16 @@ package top.fifthlight.touchcontroller.common.config.preset
 
 import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.toPersistentList
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.layout.ControllerLayout
 import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
 import top.fifthlight.touchcontroller.common.config.preset.info.PresetControlInfo
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 
 @Immutable
 data class LayoutPreset(
-    val name: String = DEFAULT_PRESET_NAME,
+    val name: TranslatableName = DEFAULT_PRESET_NAME,
     val controlInfo: PresetControlInfo = PresetControlInfo(),
     val layout: ControllerLayout = ControllerLayout(),
 ) {
@@ -29,6 +31,6 @@ data class LayoutPreset(
     )
 
     companion object {
-        const val DEFAULT_PRESET_NAME = "Unnamed preset"
+        val DEFAULT_PRESET_NAME = TranslatableName.Translatable(Texts.PRESET_NAME_UNNAMED)
     }
 }

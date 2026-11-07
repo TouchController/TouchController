@@ -420,5 +420,17 @@
     "touchcontroller.item.subclass.bundle": "Bundle",
     "touchcontroller.item.subclass.boat": "Boat",
     "touchcontroller.item.subclass.placeable_on_water": "Placeable on water",
-    "touchcontroller.item.subclass.spawn_egg": "Spawn egg"
+    "touchcontroller.item.subclass.spawn_egg": "Spawn egg",
+    "touchcontroller.preset.name.unnamed": "Unnamed preset",
+    "touchcontroller.preset.name.new": "New preset",
+    "touchcontroller.preset.name.builtin": "Built-in preset",
+    "touchcontroller.layer.name.unnamed": "Unnamed layer",
+    "touchcontroller.layer.name.control": "Control",
+    "touchcontroller.layer.name.interaction": "Interaction",
+    "touchcontroller.layer.name.normal": "Normal",
+    "touchcontroller.layer.name.swimming": "Swimming",
+    "touchcontroller.layer.name.flying": "Flying",
+    "touchcontroller.layer.name.on_minecart": "On minecart",
+    "touchcontroller.layer.name.on_boat": "On boat",
+    "touchcontroller.layer.name.riding_on_entity": "Riding on entity"
 }

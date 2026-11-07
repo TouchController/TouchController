@@ -10,6 +10,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.plus
 import kotlinx.collections.immutable.toPersistentList
 import top.fifthlight.data.IntOffset
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.assets.TextureSet
 import top.fifthlight.touchcontroller.common.config.condition.BuiltinLayerConditionKey
 import top.fifthlight.touchcontroller.common.config.condition.LayerConditions
@@ -31,6 +32,7 @@ import top.fifthlight.touchcontroller.common.control.widget.dpad.DPad
 import top.fifthlight.touchcontroller.common.control.widget.joystick.Joystick
 import top.fifthlight.touchcontroller.common.gal.entity.EntityTypeProvider
 import top.fifthlight.touchcontroller.common.layout.align.Align
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 
 data class BuiltinLayers(
     val textureSet: TextureSet,
@@ -40,7 +42,7 @@ data class BuiltinLayers(
     ),
 ) {
     data class Layers(
-        val name: String,
+        val name: TranslatableName,
         val conditions: LayerConditions,
         val dpadNormal: PersistentList<ControllerWidget>,
         val dpadSwap: PersistentList<ControllerWidget> = dpadNormal,
@@ -81,7 +83,7 @@ data class BuiltinLayers(
     }
 
     val controlLayer = LayoutLayer(
-        name = "Control",
+        name = TranslatableName.Translatable(Texts.LAYER_NAME_CONTROL),
         conditions = layerConditionsOf(),
         widgets = run {
             val widgets = topBarWidgets.map { it[textureSet] }
@@ -104,7 +106,7 @@ data class BuiltinLayers(
     )
 
     val interactionLayer = LayoutLayer(
-        name = "Interaction",
+        name = TranslatableName.Translatable(Texts.LAYER_NAME_INTERACTION),
         conditions = LayerConditions(),
         widgets = persistentListOf(
             BuiltinWidgets.attack[textureSet].cloneBase(
@@ -129,7 +131,7 @@ data class BuiltinLayers(
     )
 
     val normalLayer = Layers(
-        name = "Normal",
+        name = TranslatableName.Translatable(Texts.LAYER_NAME_NORMAL),
         conditions = layerConditionsOf(
             BuiltinLayerConditionKey(BuiltinLayerCondition.SWIMMING) to LayerConditions.Value.NEVER,
             BuiltinLayerConditionKey(BuiltinLayerCondition.FLYING) to LayerConditions.Value.NEVER,
@@ -202,7 +204,7 @@ data class BuiltinLayers(
     )
 
     val swimmingLayer = Layers(
-        name = "Swimming",
+        name = TranslatableName.Translatable(Texts.LAYER_NAME_SWIMMING),
         conditions = layerConditionsOf(
             BuiltinLayerConditionKey(BuiltinLayerCondition.RIDING) to LayerConditions.Value.NEVER,
             BuiltinLayerConditionKey(BuiltinLayerCondition.FLYING) to LayerConditions.Value.NEVER,
@@ -254,7 +256,7 @@ data class BuiltinLayers(
     )
 
     val flyingLayer = Layers(
-        name = "Flying",
+        name = TranslatableName.Translatable(Texts.LAYER_NAME_FLYING),
         conditions = layerConditionsOf(
             BuiltinLayerConditionKey(BuiltinLayerCondition.FLYING) to LayerConditions.Value.REQUIRE,
             BuiltinLayerConditionKey(BuiltinLayerCondition.RIDING) to LayerConditions.Value.NEVER,
@@ -305,7 +307,7 @@ data class BuiltinLayers(
 
     val onMinecartLayer = EntityTypeProvider.minecart?.let { minecart ->
         Layers(
-            name = "On minecart",
+            name = TranslatableName.Translatable(Texts.LAYER_NAME_ON_MINECART),
             conditions = layerConditionsOf(
                 RidingEntityLayerConditionKey(minecart) to LayerConditions.Value.REQUIRE,
             ),
@@ -345,7 +347,7 @@ data class BuiltinLayers(
     // TODO: use tag to filter
     val onBoatLayer = EntityTypeProvider.boats.takeIf { it.isNotEmpty() }?.let {
         Layers(
-            name = "On boat",
+            name = TranslatableName.Translatable(Texts.LAYER_NAME_ON_BOAT),
             conditions = LayerConditions(it.map {
                 LayerConditions.Item(
                     key = RidingEntityLayerConditionKey(it),
@@ -385,7 +387,7 @@ data class BuiltinLayers(
         this?.let { persistentListOf(this) } ?: persistentListOf<T>()
 
     val ridingOnEntityLayer = Layers(
-        name = "Riding on entity",
+        name = TranslatableName.Translatable(Texts.LAYER_NAME_RIDING_ON_ENTITY),
         conditions = LayerConditions(
             persistentListOf(
                 LayerConditions.Item(

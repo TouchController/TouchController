@@ -16,6 +16,7 @@ kt_merge_library(
         "//touchcontroller/common/ui/config/tab/layout/custom/tab",
         "//touchcontroller/common/ui/layer/screen",
         "//touchcontroller/common/ui/model",
+        "//touchcontroller/common/util/name",
         "//touchcontroller/common/util/state",
         "//touchcontroller/resources/lang:text_binding",
     ],

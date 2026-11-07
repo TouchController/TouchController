@@ -10,6 +10,7 @@ kt_merge_library(
         "//touchcontroller/common/config/preset/serialization",
         "//touchcontroller/common/gal/config",
         "//touchcontroller/common/serialization",
+        "//touchcontroller/common/util/name",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [

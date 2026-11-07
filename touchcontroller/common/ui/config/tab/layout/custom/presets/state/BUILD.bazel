@@ -9,6 +9,7 @@ kt_merge_library(
         "//touchcontroller/common/config/layout",
         "//touchcontroller/common/config/preset",
         "//touchcontroller/common/config/preset/info",
+        "//touchcontroller/common/util/name",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [

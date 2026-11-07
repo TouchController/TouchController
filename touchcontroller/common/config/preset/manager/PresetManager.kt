@@ -94,7 +94,7 @@ object PresetManager {
     }
 
     fun savePreset(uuid: Uuid, preset: LayoutPreset, create: Boolean = true) {
-        logger.info("Saving TouchController preset ${preset.name}($uuid)")
+        logger.info("Saving TouchController preset ${preset.name.asString()}($uuid)")
         presetDir.createDirectories()
         try {
             getPresetFile(uuid).writeText(

@@ -176,7 +176,7 @@ class LayerEditorScreen(
                     ) {
                         EditText(
                             modifier = Modifier.weight(1f),
-                            value = uiState.name,
+                            value = uiState.name.asString(),
                             onValueChanged = screenModel::editName,
                             placeholder = Text.translatable(Texts.SCREEN_LAYER_EDITOR_NAME_PLACEHOLDER),
                         )

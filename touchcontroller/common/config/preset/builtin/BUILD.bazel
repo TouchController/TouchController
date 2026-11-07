@@ -24,10 +24,13 @@ kt_merge_library(
         "//touchcontroller/common/control/widget/joystick",
         "//touchcontroller/common/gal/entity",
         "//touchcontroller/common/layout/align",
+        "//touchcontroller/common/util/name",
+        "//touchcontroller/resources/lang:text_binding",
         "//touchcontroller/resources/texture:texture_set_lib",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
+        "//combine/core/data",
         "//combine/data",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],

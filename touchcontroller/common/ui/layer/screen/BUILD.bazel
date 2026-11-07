@@ -20,6 +20,7 @@ kt_merge_library(
         "//touchcontroller/common/ui/theme",
         "//touchcontroller/common/ui/widget",
         "//touchcontroller/common/ui/widget/navigation",
+        "//touchcontroller/common/util/name",
         "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],

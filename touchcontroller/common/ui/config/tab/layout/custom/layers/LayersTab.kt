@@ -59,7 +59,7 @@ private fun LayersList(
                 ) {
                     Text(
                         modifier = Modifier.alignment(Alignment.CenterLeft),
-                        text = preset.name,
+                        text = preset.name.getText(),
                     )
                 }
 
@@ -146,7 +146,7 @@ object LayersTab : CustomTab() {
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(Text.translatable(Texts.SCREEN_CUSTOM_CONTROL_LAYOUT_LAYERS_DELETE_LAYER_1))
-                Text(Text.format(Texts.SCREEN_CUSTOM_CONTROL_LAYOUT_LAYERS_DELETE_LAYER_2, state.layer.name))
+                Text(Text.format(Texts.SCREEN_CUSTOM_CONTROL_LAYOUT_LAYERS_DELETE_LAYER_2, state.layer.name.asString()))
             }
         }
         SideBarContainer(

@@ -9,6 +9,7 @@ import kotlinx.collections.immutable.plus
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.PresetConfig
 import top.fifthlight.touchcontroller.common.config.layout.ControllerLayout
 import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
@@ -20,6 +21,7 @@ import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.ui.config.model.ConfigScreenModel
 import top.fifthlight.touchcontroller.common.ui.config.tab.layout.custom.state.CustomControlLayoutTabState
 import top.fifthlight.touchcontroller.common.ui.model.TouchControllerScreenModel
+import top.fifthlight.touchcontroller.common.util.name.TranslatableName
 import top.fifthlight.touchcontroller.common.util.state.combineStates
 import top.fifthlight.touchcontroller.common.util.uuid.fastRandomUuid
 import kotlin.uuid.Uuid
@@ -209,7 +211,7 @@ class CustomControlLayoutTabModel(
         }
         val uuid = fastRandomUuid()
         val preset = preset ?: BuiltinPresetKey.DEFAULT.preset.copy(
-            name = "New preset"
+            name = TranslatableName.Translatable(Texts.PRESET_NAME_NEW)
         )
         PresetManager.savePreset(uuid, preset)
         configScreenModel.updateConfig {
