@@ -1,0 +1,16 @@
+"MODULE.bazel Decompose source build"
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "decompose",
+    build_file = "@//third_party/decompose:BUILD.decompose_jvm.bazel",
+    sha256 = "4eef65a7674800b8d333c079fe850f58b780cbbfa0c1a644f90bf32eb37b5f4f",
+    url = "https://repo1.maven.org/maven2/com/arkivanov/decompose/decompose-jvm/3.5.0/decompose-jvm-3.5.0-sources.jar",
+)
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.override(
+    coordinates = "com.arkivanov.decompose:decompose-jvm",
+    target = "@decompose//:decompose_jvm",
+)

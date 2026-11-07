@@ -211,6 +211,96 @@
             "website": "https://github.com/adrielcafe/voyager"
         },
         {
+            "uniqueId": "com.arkivanov.decompose:decompose-jvm",
+            "name": "Decompose",
+            "artifactVersion": "2.5.0",
+            "description": "Kotlin Multiplatform lifecycle-aware business logic components",
+            "developers": [
+                {
+                    "name": "Arkadii Ivanov"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/arkivanov/Essenty"
+        },
+        {
+            "uniqueId": "com.arkivanov.essenty:lifecycle-jvm",
+            "name": "Essenty Lifecycle",
+            "artifactVersion": "2.5.0",
+            "description": "Kotlin Multiplatform lifecycle",
+            "developers": [
+                {
+                    "name": "Arkadii Ivanov"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/arkivanov/Essenty"
+        },
+        {
+            "uniqueId": "com.arkivanov.essenty:instance-keeper-jvm",
+            "name": "Essenty InstanceKeeper",
+            "artifactVersion": "2.5.0",
+            "description": "Kotlin Multiplatform instance retaining",
+            "developers": [
+                {
+                    "name": "Arkadii Ivanov"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/arkivanov/Essenty"
+        },
+        {
+            "uniqueId": "com.arkivanov.essenty:state-keeper-jvm",
+            "name": "Essenty StateKeeper",
+            "artifactVersion": "2.5.0",
+            "description": "Kotlin Multiplatform state preservation",
+            "developers": [
+                {
+                    "name": "Arkadii Ivanov"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/arkivanov/Essenty"
+        },
+        {
+            "uniqueId": "com.arkivanov.essenty:back-handler-jvm",
+            "name": "Essenty BackHandler",
+            "artifactVersion": "2.5.0",
+            "description": "Kotlin Multiplatform back handling",
+            "developers": [
+                {
+                    "name": "Arkadii Ivanov"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/arkivanov/Essenty"
+        },
+        {
+            "uniqueId": "com.arkivanov.essenty:utils-internal-jvm",
+            "name": "Essenty Utils Internal",
+            "artifactVersion": "2.5.0",
+            "description": "Kotlin Multiplatform internal utils",
+            "developers": [
+                {
+                    "name": "Arkadii Ivanov"
+                }
+            ],
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "website": "https://github.com/arkivanov/Essenty"
+        },
+        {
             "uniqueId": "com.ubertob.kondor:kondor-core",
             "name": "kondor-core",
             "artifactVersion": "4.1.0",

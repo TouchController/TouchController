@@ -11,6 +11,12 @@ _libraries = [
     _library("cafe.adriel.voyager:voyager-core-desktop:1.1.0-beta03"),
     _library("cafe.adriel.voyager:voyager-navigator-desktop:1.1.0-beta03"),
     _library("cafe.adriel.voyager:voyager-screenmodel-desktop:1.1.0-beta03"),
+    _library("com.arkivanov.decompose:decompose-jvm:3.5.0"),
+    _library("com.arkivanov.essenty:lifecycle-jvm:2.5.0"),
+    _library("com.arkivanov.essenty:instance-keeper-jvm:2.5.0"),
+    _library("com.arkivanov.essenty:state-keeper-jvm:2.5.0"),
+    _library("com.arkivanov.essenty:back-handler-jvm:2.5.0"),
+    _library("com.arkivanov.essenty:utils-internal-jvm:2.5.0"),
     _library("com.ubertob.kondor:kondor-core:4.1.0"),
     _library("com.ubertob.kondor:kondor-outcome:4.1.0"),
 ]
