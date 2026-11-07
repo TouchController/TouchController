@@ -5,6 +5,18 @@ merge_library_jar(
     manifest_entries = {
         "Automatic-Module-Name": "multijar.loader",
     },
+    service_wrappers = {
+        "net.neoforged.neoforgespi.locating.IDependencyLocator": [
+            "top.fifthlight.multijar.neoforge.DependencyLocatorWrapper",
+            "top.fifthlight.multijar.neov10.NeoV10Locator",
+            "top.fifthlight.multijar.neov3.NeoV3Locator",
+        ],
+        "net.neoforged.neoforgespi.locating.IModFileReader": [
+            "top.fifthlight.multijar.neoforge.ModFileReaderWrapper",
+            "top.fifthlight.multijar.neov10.NeoV10ModReader",
+            "top.fifthlight.multijar.neov3.NeoV3ModReader",
+        ],
+    },
     visibility = ["//visibility:public"],
     deps = [
         "//multijar/legacy",

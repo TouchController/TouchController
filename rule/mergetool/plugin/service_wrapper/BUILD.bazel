@@ -1,0 +1,18 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+java_library(
+    name = "service_wrapper",
+    srcs = glob(["*.java"]),
+    resource_strip_prefix = "rule/mergetool/plugin/service_wrapper/resources",
+    resources = glob(["resources/**"]),
+    visibility = [
+        "//rule/mergetool:__pkg__",
+        "//rule/mergetool/plugin/service_wrapper/test:__pkg__",
+    ],
+    deps = [
+        "//rule/mergetool/api",
+        "//rule/mergetool/plugin/service_wrapper/api",
+        "@maven//:org_jspecify_jspecify",
+        "@maven//:org_ow2_asm_asm",
+    ],
+)

@@ -11,10 +11,8 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.stream.Stream;
 
-/**
- * ClasspathTransformerDiscoverer only flag JAR with IModLocator as early service JAR,
- * so create a placeholder ModLocator here.
- */
+/// ClasspathTransformerDiscoverer only flag JAR with IModLocator as early service JAR,
+/// so create a placeholder ModLocator here.
 public class LegacyModLocator extends AbstractJarFileModLocator {
     public LegacyModLocator() throws NoSuchMethodException, NoSuchFieldException {
         new LegacyLocator();

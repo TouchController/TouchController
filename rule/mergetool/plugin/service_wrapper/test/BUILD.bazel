@@ -1,0 +1,25 @@
+load("@rules_java//java:defs.bzl", "java_library", "java_test")
+
+java_library(
+    name = "fixtures",
+    srcs = glob(["fixtures/*.java"]),
+    deps = ["//rule/mergetool/plugin/service_wrapper/api"],
+)
+
+java_test(
+    name = "wrapper-class-merge-entry-test",
+    size = "small",
+    srcs = ["WrapperClassMergeEntryTest.java"],
+    test_class = "top.fifthlight.mergetools.merger.plugin.servicewrapper.test.WrapperClassMergeEntryTest",
+    deps = [
+        ":fixtures",
+        "//rule/mergetool/api",
+        "//rule/mergetool/plugin/service_wrapper",
+        "@maven//:junit_junit",
+    ],
+)
+
+test_suite(
+    name = "test",
+    tests = [":wrapper-class-merge-entry-test"],
+)

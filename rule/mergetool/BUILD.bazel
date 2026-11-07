@@ -25,6 +25,7 @@ java_binary(
         "//rule/mergetool/plugin/manifest",
         "//rule/mergetool/plugin/neoforge_jij",
         "//rule/mergetool/plugin/resource",
+        "//rule/mergetool/plugin/service_wrapper",
         "//rule/mergetool/plugin/services",
         "//rule/mergetool/plugin/unified_jar",
     ],

@@ -83,6 +83,11 @@ rules_kotlin_extensions = use_extension(
 use_repo(rules_kotlin_extensions, "btapi_impl", "com_github_google_ksp", "com_github_jetbrains_kotlin", "com_github_jetbrains_kotlin_git", "com_github_pinterest_ktlint", "kotlin_build_tools_api", "kotlinx_coroutines_core_jvm", "kotlinx_serialization_core_jvm", "kotlinx_serialization_json", "kotlinx_serialization_json_jvm")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
+
+# Vendored tools for editing BUILD.bazel / MODULE.bazel:
+#   bazel run @buildifier_prebuilt//:buildifier / @buildifier_prebuilt//:buildozer
+bazel_dep(name = "buildifier_prebuilt", version = "10.1.0", dev_dependency = True)
+
 git_override(
     module_name = "hedron_compile_commands",
     commit = "7fe1eab26d2b8eeb5e1c6a2f38bddb001e3f9696",

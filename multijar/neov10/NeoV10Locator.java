@@ -9,6 +9,7 @@ import net.neoforged.neoforgespi.locating.IModFile;
 import net.neoforged.neoforgespi.locating.ModFileDiscoveryAttributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import top.fifthlight.mergetools.api.MergeServiceMethod;
 import top.fifthlight.multijar.common.ComparableMultiJarManifest;
 import top.fifthlight.multijar.common.JarItem;
 import top.fifthlight.multijar.common.MultiJarManifest;
@@ -34,7 +35,7 @@ public class NeoV10Locator implements IDependencyLocator {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeoV10Locator.class);
     private final ModFileDiscoveryAttributes attributes;
 
-    @SuppressWarnings("ReturnValueIgnored")
+    @SuppressWarnings({"ReturnValueIgnored", "ResultOfMethodCallIgnored"})
     public NeoV10Locator() throws NoSuchMethodException, NoSuchFieldException {
         IDependencyLocator.class.getMethod("scanMods", List.class, IDiscoveryPipeline.class);
         IModFile.class.getMethod("getModInfos");
@@ -50,6 +51,7 @@ public class NeoV10Locator implements IDependencyLocator {
     }
 
     @Override
+    @MergeServiceMethod
     public void scanMods(List<IModFile> loadedMods, IDiscoveryPipeline pipeline) {
         var modVersions = new HashMap<String, MavenVersionItem>();
         for (var modFile : loadedMods) {
@@ -189,6 +191,7 @@ public class NeoV10Locator implements IDependencyLocator {
     }
 
     @Override
+    @MergeServiceMethod
     public String toString() {
         return "MultiJar NeoV10";
     }

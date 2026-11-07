@@ -9,7 +9,7 @@ public interface Plugin extends AutoCloseable {
         return 500;
     }
 
-    default boolean processArg(String arg, PreprocessEnvironment environment) {
+    default boolean processArg(String arg, PreprocessEnvironment environment) throws Exception {
         return false;
     }
 
@@ -17,8 +17,8 @@ public interface Plugin extends AutoCloseable {
         return false;
     }
 
-    default void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries, AttributeEnvironment environment) {}
+    default void preSorting(Map<String, MergeEntry> mergeEntries, Map<String, String> manifestEntries, AttributeEnvironment environment) throws Exception {}
 
     @Override
-    default void close() {}
+    default void close() throws Exception {}
 }

@@ -39,7 +39,7 @@ import java.util.function.Function;
 public class LegacyLocator extends AbstractJarFileDependencyLocator {
     private static final Logger LOGGER = LoggerFactory.getLogger(LegacyLocator.class);
 
-    @SuppressWarnings("ReturnValueIgnored")
+    @SuppressWarnings({"ReturnValueIgnored", "ResultOfMethodCallIgnored"})
     public LegacyLocator() throws NoSuchMethodException, NoSuchFieldException {
         IDependencyLocator.class.getMethod("scanMods", Iterable.class);
         IModProvider.class.getMethod("name");

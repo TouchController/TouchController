@@ -7,9 +7,10 @@ import net.neoforged.neoforgespi.locating.IModFileReader;
 import net.neoforged.neoforgespi.locating.ModFileDiscoveryAttributes;
 import net.neoforged.neoforgespi.locating.ModFileInfoParser;
 import org.jspecify.annotations.Nullable;
+import top.fifthlight.mergetools.api.MergeServiceMethod;
 
 public class NeoV10ModReader implements IModFileReader {
-    @SuppressWarnings("ReturnValueIgnored")
+    @SuppressWarnings({"ReturnValueIgnored", "ResultOfMethodCallIgnored"})
     public NeoV10ModReader() throws NoSuchMethodException {
         ModFileDiscoveryAttributes.class.getMethod("dependencyLocator");
         JarModsDotTomlModFileReader.class.getMethod("manifestParser", IModFile.class);
@@ -17,6 +18,7 @@ public class NeoV10ModReader implements IModFileReader {
     }
 
     @Override
+    @MergeServiceMethod
     public @Nullable IModFile read(JarContents jar, ModFileDiscoveryAttributes discoveryAttributes) {
         if (discoveryAttributes.dependencyLocator() instanceof NeoV10Locator) {
             return IModFile.create(jar, JarModsDotTomlModFileReader::manifestParser, IModFile.Type.LIBRARY, discoveryAttributes);
@@ -25,11 +27,13 @@ public class NeoV10ModReader implements IModFileReader {
     }
 
     @Override
+    @MergeServiceMethod
     public String toString() {
         return "MultiJar NeoV10";
     }
 
     @Override
+    @MergeServiceMethod
     public int getPriority() {
         return LOWEST_SYSTEM_PRIORITY;
     }

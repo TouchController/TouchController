@@ -236,7 +236,14 @@ def _merge_library_jar_impl(ctx):
     args.add("--plugin", "services")
     args.add("--plugin", "resource")
     args.add("--plugin", "expect_actual")
+    if ctx.attr.service_wrappers:
+        args.add("--plugin", "service_wrapper")
     args.add(output_jar)
+
+    for interface, specs in ctx.attr.service_wrappers.items():
+        if len(specs) < 2:
+            fail("service_wrappers value must be [wrapper] + implementations: %s" % interface)
+        args.add("--services=%s:%s:%s" % (interface, specs[0], ",".join(specs[1:])))
 
     if ctx.attr.aspect:
         args.add("--aspect-class", ctx.attr.aspect_class)
@@ -326,6 +333,11 @@ _merge_library_jar = rule(
             mandatory = False,
             default = {},
             doc = "Manifest entries to be include in final JAR.",
+        ),
+        "service_wrappers": attr.string_list_dict(
+            mandatory = False,
+            default = {},
+            doc = "SPI interfaces to be wrapped. Key is FQN of the interface, value is [wrapper FQN, impl FQNs...]",
         ),
         "sources_jar": attr.output(),
         "_mergetool_executable": attr.label(
