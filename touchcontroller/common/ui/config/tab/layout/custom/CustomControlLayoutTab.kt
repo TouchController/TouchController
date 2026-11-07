@@ -10,6 +10,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import kotlinx.collections.immutable.PersistentList
 import top.fifthlight.combine.core.animation.animateFloatAsState
 import top.fifthlight.combine.core.data.Text
@@ -269,6 +270,13 @@ object CustomControlLayoutTab : Tab() {
         val navigator = LocalNavigator.current
         val configScreenModel = LocalConfigScreenModel.current
         val screenModel = rememberScreenModel { CustomControlLayoutTabModel(configScreenModel) }
+
+        DisposableEffect(Unit) {
+            onDispose {
+                screenModel.savePreset()
+            }
+        }
+
         val currentUiState by screenModel.uiState.collectAsState()
         val uiState = currentUiState
         if (uiState is CustomControlLayoutTabState.Enabled) {
@@ -395,7 +403,12 @@ object CustomControlLayoutTab : Tab() {
                         }
                     }
 
-                    TouchControllerNavigator(allCustomTabs.first()) { innerNavigator ->
+                    TouchControllerNavigator(
+                        screen = allCustomTabs.first(),
+                        disposeBehavior = NavigatorDisposeBehavior(
+                            disposeSteps = false,
+                        ),
+                    ) { innerNavigator ->
                         SideEffect {
                             sideBarNavigator = innerNavigator
                         }

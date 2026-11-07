@@ -1,0 +1,48 @@
+load("@rules_java//java:defs.bzl", "java_import")
+load("@rules_kotlin//kotlin:core.bzl", "kt_kotlinc_options")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_common_library", "kt_jvm_library")
+
+kt_kotlinc_options(
+    name = "kotlinc_opts_jvm_8",
+    jvm_target = "1.8",
+    x_jdk_release = "1.8",
+    x_lambdas = "indy",
+    warn = "off",
+)
+
+kt_common_library(
+    name = "common",
+    srcs = glob(
+        include = ["commonMain/**/*.kt"],
+        exclude = ["commonMain/**/PolymorphicSerializer.kt"],
+    ),
+    fragment_name = "commonMain",
+    deps = [
+        "@essenty_utils_internal//:utils_internal_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
+    ],
+)
+
+kt_jvm_library(
+    name = "state_keeper_jvm_lib",
+    srcs = glob(["javaMain/**/*.kt"]),
+    kotlinc_opts = ":kotlinc_opts_jvm_8",
+    deps = [
+        ":common",
+        "@essenty_utils_internal//:utils_internal_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_json_jvm",
+        "@//:kotlin_serialization",
+    ],
+)
+
+java_import(
+    name = "state_keeper_jvm",
+    jars = ["state_keeper_jvm_lib.jar"],
+    srcjar = "state_keeper_jvm_lib-sources.jar",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@essenty_utils_internal//:utils_internal_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_core_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_json_jvm",
+    ],
+)

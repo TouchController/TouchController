@@ -1,0 +1,31 @@
+load("@rules_java//java:defs.bzl", "java_import")
+load("@rules_kotlin//kotlin:core.bzl", "kt_kotlinc_options")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_common_library", "kt_jvm_library")
+
+kt_kotlinc_options(
+    name = "kotlinc_opts_jvm_8",
+    jvm_target = "1.8",
+    x_jdk_release = "1.8",
+    x_lambdas = "indy",
+    warn = "off",
+)
+
+kt_common_library(
+    name = "common",
+    srcs = glob(["commonMain/**/*.kt"]),
+    fragment_name = "commonMain",
+)
+
+kt_jvm_library(
+    name = "lifecycle_jvm_lib",
+    srcs = [],
+    kotlinc_opts = ":kotlinc_opts_jvm_8",
+    deps = [":common"],
+)
+
+java_import(
+    name = "lifecycle_jvm",
+    jars = ["lifecycle_jvm_lib.jar"],
+    srcjar = "lifecycle_jvm_lib-sources.jar",
+    visibility = ["//visibility:public"],
+)

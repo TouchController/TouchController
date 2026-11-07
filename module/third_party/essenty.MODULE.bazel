@@ -1,0 +1,71 @@
+"MODULE.bazel Essenty source build"
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "essenty_lifecycle",
+    build_file = "@//third_party/essenty:BUILD.lifecycle_jvm.bazel",
+    sha256 = "980079e567918ec0d226b57ae5b5354bfe25a84e7837a0d70598ecade172d33f",
+    url = "https://repo1.maven.org/maven2/com/arkivanov/essenty/lifecycle-jvm/2.5.0/lifecycle-jvm-2.5.0-sources.jar",
+)
+
+http_archive(
+    name = "essenty_instance_keeper",
+    build_file = "@//third_party/essenty:BUILD.instance_keeper_jvm.bazel",
+    sha256 = "dce562c5339b3dc8cf97a461529fd3ee2b67233b6d9f44b4e5773d3171bae7ae",
+    url = "https://repo1.maven.org/maven2/com/arkivanov/essenty/instance-keeper-jvm/2.5.0/instance-keeper-jvm-2.5.0-sources.jar",
+)
+
+http_archive(
+    name = "essenty_state_keeper",
+    build_file = "@//third_party/essenty:BUILD.state_keeper_jvm.bazel",
+    sha256 = "99c8a4ee6a7acb595c744c1ce2db308b4f7854eb28fbd7106d6e78eec6e83596",
+    url = "https://repo1.maven.org/maven2/com/arkivanov/essenty/state-keeper-jvm/2.5.0/state-keeper-jvm-2.5.0-sources.jar",
+)
+
+http_archive(
+    name = "essenty_back_handler",
+    build_file = "@//third_party/essenty:BUILD.back_handler_jvm.bazel",
+    sha256 = "1836d3f1aeded2806e0e4989ce91b1d6b0f31213b9dce472ded2586827ca0d0d",
+    url = "https://repo1.maven.org/maven2/com/arkivanov/essenty/back-handler-jvm/2.5.0/back-handler-jvm-2.5.0-sources.jar",
+)
+
+http_archive(
+    name = "essenty_utils_internal",
+    build_file = "@//third_party/essenty:BUILD.utils_internal_jvm.bazel",
+    sha256 = "f09789269a507f8b1eaad013613eb6a613309caa786a048637fde160ff2e5a08",
+    url = "https://repo1.maven.org/maven2/com/arkivanov/essenty/utils-internal-jvm/2.5.0/utils-internal-jvm-2.5.0-sources.jar",
+)
+
+http_archive(
+    name = "essenty_lifecycle_coroutines",
+    build_file = "@//third_party/essenty:BUILD.lifecycle_coroutines_jvm.bazel",
+    sha256 = "5dc11d7ae8d8e9517d7c31c430356eec64fea83f347ec09668bdcddb73afae50",
+    url = "https://repo1.maven.org/maven2/com/arkivanov/essenty/lifecycle-coroutines-jvm/2.5.0/lifecycle-coroutines-jvm-2.5.0-sources.jar",
+)
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.override(
+    coordinates = "com.arkivanov.essenty:lifecycle-jvm",
+    target = "@essenty_lifecycle//:lifecycle_jvm",
+)
+maven.override(
+    coordinates = "com.arkivanov.essenty:instance-keeper-jvm",
+    target = "@essenty_instance_keeper//:instance_keeper_jvm",
+)
+maven.override(
+    coordinates = "com.arkivanov.essenty:state-keeper-jvm",
+    target = "@essenty_state_keeper//:state_keeper_jvm",
+)
+maven.override(
+    coordinates = "com.arkivanov.essenty:back-handler-jvm",
+    target = "@essenty_back_handler//:back_handler_jvm",
+)
+maven.override(
+    coordinates = "com.arkivanov.essenty:utils-internal-jvm",
+    target = "@essenty_utils_internal//:utils_internal_jvm",
+)
+maven.override(
+    coordinates = "com.arkivanov.essenty:lifecycle-coroutines-jvm",
+    target = "@essenty_lifecycle_coroutines//:lifecycle_coroutines_jvm",
+)
