@@ -54,6 +54,12 @@ object GameActions {
         action = GameAction::openGameMenu,
     )
 
+    val closeScreen = registry.register(
+        id = "close_screen",
+        name = Texts.WIDGET_TRIGGER_GAME_ACTION_CLOSE_SCREEN,
+        action = GameAction::closeScreen,
+    )
+
     val nextPerspective = registry.register(
         id = "next_perspective",
         name = Texts.WIDGET_TRIGGER_GAME_ACTION_NEXT_PERSPECTIVE,

@@ -7,6 +7,7 @@ java_merge_library(
     merge_deps = [
         "//touchcontroller/versions/event/1.21.11",
         "//touchcontroller/versions/extension/1.21.11",
+        "//touchcontroller/versions/gal/window/1.21.11",
     ],
     resource_strip_prefix = "touchcontroller/versions/mixin/1.21.11/resources",
     resources = ["resources/touchcontroller.mixins.json"],
@@ -22,6 +23,7 @@ java_merge_library(
         "//touchcontroller/common/config/data",
         "//touchcontroller/common/config/holder",
         "//touchcontroller/common/event/render",
+        "//touchcontroller/common/gal/gamestate",
         "//touchcontroller/common/model",
         "//touchcontroller/common/ui/config/screen",
         "//touchcontroller/common/util/crosshair",

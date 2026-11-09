@@ -105,6 +105,16 @@ data class BuiltinLayers(
         }
     )
 
+    val guiLayer = LayoutLayer(
+        name = "GUI",
+        conditions = layerConditionsOf(
+            BuiltinLayerConditionKey(BuiltinLayerCondition.IN_GUI) to LayerConditions.Value.REQUIRE,
+        ),
+        widgets = persistentListOf(
+            BuiltinWidgets.exit[textureSet],
+        ),
+    )
+
     val interactionLayer = LayoutLayer(
         name = TranslatableName.Translatable(Texts.LAYER_NAME_INTERACTION),
         conditions = LayerConditions(),
