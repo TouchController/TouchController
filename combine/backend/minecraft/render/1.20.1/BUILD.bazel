@@ -20,6 +20,5 @@ kt_merge_library(
         "//combine/data",
         "//combine/item/data",
         "//combine/item/paint",
-        "@maven_fabric_1_20_1//:net_fabricmc_sponge_mixin",
     ],
 )
