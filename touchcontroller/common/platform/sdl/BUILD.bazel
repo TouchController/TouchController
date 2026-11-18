@@ -13,7 +13,6 @@ kt_merge_library(
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
-        "//blazesdl/api",
         "//combine/core/data",
         "@maven//:org_slf4j_slf4j_api",
         "@maven_blazesdl//:org_lwjgl_lwjgl_sdl",
