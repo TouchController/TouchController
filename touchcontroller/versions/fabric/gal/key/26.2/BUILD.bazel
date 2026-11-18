@@ -6,14 +6,12 @@ kt_merge_library(
     actual = True,
     javac_opts = "//touchcontroller:javac_opts_jvm_25",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_25",
-    merge_deps = [
-        "//touchcontroller/versions/gal/key/26.2",
-        "//touchcontroller/versions/mixin/26.2",
-    ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//game/26.2:game_client",
     ] + [
         "//touchcontroller/common/gal/key",
+        "//touchcontroller/versions/gal/key/26.2",
+        "//touchcontroller/versions/mixin/26.2",
     ],
 )
