@@ -28,7 +28,6 @@ combine_theme(
         "//combine/core/modifier",
         "//combine/core/modifier/drawing",
         "//combine/core/modifier/placement",
-        "//combine/core/modifier/pointer",
         "//combine/core/widget",
         "//combine/core/widget/layout",
         "//combine/data",
