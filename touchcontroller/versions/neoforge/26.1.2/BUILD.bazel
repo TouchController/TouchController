@@ -53,12 +53,8 @@ kt_merge_library(
         "//game/26.1.2:game_client_libraries",
         "//game/26.1.2:game_client_neoforge",
     ] + [
-        "//combine/backend/minecraft/identifier/26.1",
         "//combine/backend/minecraft/render/26.1",
-        "//combine/core/data",
-        "//touchcontroller/api",
         "//touchcontroller/buildinfo",
-        "//touchcontroller/common/api",
         "//touchcontroller/common/config",
         "//touchcontroller/common/config/data",
         "//touchcontroller/common/config/holder",

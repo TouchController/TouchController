@@ -13,7 +13,6 @@ kt_merge_library(
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//game/26.1:game_client",
-        "//game/26.1:game_client_libraries",
     ] + [
         "//touchcontroller/common/gal/view",
     ],

@@ -13,25 +13,13 @@ kt_merge_library(
     deps = [
         "//game/1.20.1:game_client_forge_named",
     ] + [
-        "//:compose",
         "//combine/backend/minecraft/game/1.20.1",
         "//combine/core/data",
-        "//combine/core/layout",
-        "//combine/core/modifier",
-        "//combine/core/modifier/placement",
         "//combine/core/screen",
-        "//combine/core/widget/layout",
-        "//combine/data",
         "//combine/example/hello_world/common",
-        "//combine/theme/base",
-        "//combine/theme/vanilla",
-        "//combine/widget",
         "@forge_1_20_1//:net_minecraftforge_eventbus",
         "@forge_1_20_1//:net_minecraftforge_fmlcore",
-        "@forge_1_20_1//:net_minecraftforge_fmlloader",
-        "@forge_1_20_1//:net_minecraftforge_forgespi",
         "@forge_1_20_1//:net_minecraftforge_javafmllanguage",
-        "@forge_1_20_1//:net_minecraftforge_mergetool",
     ],
 )
 

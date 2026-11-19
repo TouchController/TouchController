@@ -37,7 +37,6 @@ kt_merge_library(
         "//touchcontroller/versions/extension/1.21.10",
         "//touchcontroller/versions/gal/gameconfig/1.21.10",
         "//touchcontroller/versions/gal/key/1.21.10",
-        "//touchcontroller/versions/neoforge/gal/config/1.21.10",
         "//touchcontroller/versions/neoforge/gal/key/1.21.10",
     ],
     merge_only_deps = [

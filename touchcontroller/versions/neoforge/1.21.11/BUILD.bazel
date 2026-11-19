@@ -37,7 +37,6 @@ kt_merge_library(
         "//touchcontroller/versions/extension/1.21.11",
         "//touchcontroller/versions/gal/gameconfig/1.21.11",
         "//touchcontroller/versions/gal/key/1.21.11",
-        "//touchcontroller/versions/neoforge/gal/config/1.21.11",
         "//touchcontroller/versions/neoforge/gal/key/1.21.11",
     ],
     merge_only_deps = [
@@ -58,12 +57,8 @@ kt_merge_library(
         "//game/1.21.11:game_client_libraries",
         "//game/1.21.11:game_client_neoforge",
     ] + [
-        "//combine/backend/minecraft/identifier/1.21.11",
         "//combine/backend/minecraft/render/1.21.11",
-        "//combine/core/data",
-        "//touchcontroller/api",
         "//touchcontroller/buildinfo",
-        "//touchcontroller/common/api",
         "//touchcontroller/common/config",
         "//touchcontroller/common/config/data",
         "//touchcontroller/common/config/holder",

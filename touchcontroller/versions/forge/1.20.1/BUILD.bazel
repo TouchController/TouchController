@@ -62,7 +62,6 @@ kt_merge_library(
     ] + [
         "//combine/backend/minecraft/render/1.20.1",
         "//game/1.20.1:game_client_libraries",
-        "//touchcontroller/buildinfo",
         "//touchcontroller/common/config",
         "//touchcontroller/common/config/data",
         "//touchcontroller/common/config/holder",
@@ -80,10 +79,7 @@ kt_merge_library(
         "//touchcontroller/common/ui/config/screen",
         "@forge_1_20_1//:net_minecraftforge_eventbus",
         "@forge_1_20_1//:net_minecraftforge_fmlcore",
-        "@forge_1_20_1//:net_minecraftforge_fmlloader",
-        "@forge_1_20_1//:net_minecraftforge_forgespi",
         "@forge_1_20_1//:net_minecraftforge_javafmllanguage",
-        "@forge_1_20_1//:net_minecraftforge_mergetool",
         "@forge_1_20_1//:org_spongepowered_mixin",
     ],
 )

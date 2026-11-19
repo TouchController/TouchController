@@ -13,7 +13,6 @@ kt_merge_library(
     ] + [
         "//combine/backend/minecraft/text/26.1",
         "//combine/core/data",
-        "//combine/data",
         "//touchcontroller/common/gal/action",
     ],
 )

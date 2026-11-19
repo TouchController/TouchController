@@ -11,12 +11,9 @@ kt_merge_library(
         "//game/1.21.1:game_client_libraries",
         "//game/1.21.1:game_client_named",
     ] + [
-        "//combine/backend/minecraft/identifier/1.21.1",
         "//combine/backend/minecraft/render/1.21.1",
-        "//combine/core/data",
         "//combine/core/paint",
         "//combine/data",
-        "//touchcontroller/buildinfo",
         "//touchcontroller/common/gal/paint",
     ],
 )

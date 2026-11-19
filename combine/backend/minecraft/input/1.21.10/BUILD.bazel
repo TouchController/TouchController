@@ -7,9 +7,5 @@ kt_merge_library(
     javac_opts = "//combine:javac_opts_jvm_21",
     kotlinc_opts = "//combine:kotlinc_opts_jvm_21",
     visibility = ["//visibility:public"],
-    deps = [
-        "//combine/core/input/text",
-        "//combine/data",
-        "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
-    ],
+    deps = ["//combine/core/input/text"],
 )
