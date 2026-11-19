@@ -6,7 +6,7 @@ module(
 )
 
 bazel_dep(name = "rules_java", version = "9.9.0")
-bazel_dep(name = "rules_kotlin", version = "2.4.20")
+bazel_dep(name = "rules_kotlin", version = "2.4.21")
 bazel_dep(name = "rules_jvm_external", version = "7.1")
 bazel_dep(name = "bazel_skylib", version = "1.9.2")
 bazel_dep(name = "bazel_lib", version = "3.7.2")
@@ -72,8 +72,9 @@ single_version_override(
     patch_strip = 1,
     patches = [
         "//third_party/rules_kotlin/patches:common_library.patch",
+        "//third_party/rules_kotlin/patches:jdeps_merge_sandbox.patch",
     ],
-    version = "2.4.20",
+    version = "2.4.21",
 )
 
 rules_kotlin_extensions = use_extension(

@@ -1,0 +1,67 @@
+--- a/kotlin/internal/jvm/compile.bzl
++++ b/kotlin/internal/jvm/compile.bzl
+@@ -444,6 +444,6 @@
+     )
+     return resources_jar_output
+ 
+-def _run_merge_jdeps_action(ctx, toolchains, jdeps, outputs, deps, classpath_jars, associate_jars = depset()):
++def _run_merge_jdeps_action(ctx, toolchains, jdeps, outputs, deps, classpath_jars, associate_jars = depset(), self_jars = []):
+     """Creates a Jdeps merger action invocation."""
+     args = ctx.actions.args()
+@@ -464,17 +464,18 @@
+         len(jdeps),
+     )
+ 
+-    inputs = depset(jdeps)
++    inputs = depset(jdeps + self_jars)
+     if not toolchains.kt.experimental_report_unused_deps == "off":
+         # For sandboxing to work, and for this action to be deterministic, the jars named in the merged jdeps need to
+-        # be passed as inputs. They can come from either the compile classpath or the direct dependency list.
++        # be passed as inputs. They can come from either the compile classpath, the direct dependency list, or the
++        # target's own intermediate jars (kt runtime jar, kapt stub jar) that javac puts on its classpath.
+         inputs = depset(
+-            jdeps,
++            jdeps + self_jars,
+             transitive = [
+                 classpath_jars,
+                 _java_infos_to_compile_jars(deps),
+                 associate_jars,
+             ],
+         )
+ 
+     ctx.actions.run(
+@@ -1095,5 +1096,6 @@
+     compile_jars = []
+     output_jars = []
++    self_jars = []
+     kt_stubs_for_java = []
+     has_kt_sources = srcs.kt or srcs.src_jars
+ 
+@@ -1115,5 +1117,6 @@
+         generated_kapt_src_jars.append(kapt_outputs.ap_generated_src_jar)
+         output_jars.append(kapt_outputs.kapt_generated_class_jar)
++        self_jars.append(kapt_outputs.kapt_generated_stub_jar)
+         kt_stubs_for_java.append(
+             JavaInfo(
+                 compile_jar = kapt_outputs.kapt_generated_stub_jar,
+@@ -1181,6 +1184,7 @@
+         )
+ 
+         compile_jars.append(kt_compile_jar)
+         output_jars.append(kt_runtime_jar)
++        self_jars.append(kt_runtime_jar)
+ 
+         # Only output metadata is consumed below. The public JavaInfo, including
+@@ -1293,10 +1297,11 @@
+         if jdeps:
+             _run_merge_jdeps_action(
+                 ctx = ctx,
+                 toolchains = toolchains,
+                 jdeps = jdeps,
+                 deps = compile_deps.deps,
+                 associate_jars = compile_deps.associate_jars,
+                 outputs = {"output": output_jdeps},
+                 classpath_jars = compile_deps.compile_jars,
++                self_jars = self_jars,
+             )
+         else:
