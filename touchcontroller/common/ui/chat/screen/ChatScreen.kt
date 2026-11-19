@@ -6,6 +6,9 @@
 package top.fifthlight.touchcontroller.common.ui.chat.screen
 
 import androidx.compose.runtime.*
+import com.arkivanov.decompose.DefaultComponentContext
+import com.arkivanov.essenty.backhandler.BackDispatcher
+import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.input.interaction.MutableInteractionSource
 import top.fifthlight.combine.core.layout.Alignment
@@ -21,8 +24,8 @@ import top.fifthlight.combine.core.modifier.placement.height
 import top.fifthlight.combine.core.modifier.placement.width
 import top.fifthlight.combine.core.modifier.scroll.verticalScroll
 import top.fifthlight.combine.core.paint.Colors
+import top.fifthlight.combine.core.screen.LocalCloseHandler
 import top.fifthlight.combine.core.screen.ScreenFactory
-import top.fifthlight.combine.core.screen.ScreenFactoryFactory
 import top.fifthlight.combine.core.text.TextHitTestResult
 import top.fifthlight.combine.core.widget.layout.Column
 import top.fifthlight.combine.core.widget.layout.Row
@@ -35,7 +38,11 @@ import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.control.action.provider.ChatScreenProvider
 import top.fifthlight.touchcontroller.common.gal.chat.ChatMessageProvider
 import top.fifthlight.touchcontroller.common.gal.chat.ChatMessageProviderFactory
-import top.fifthlight.touchcontroller.common.ui.chat.model.ChatScreenModel
+import top.fifthlight.touchcontroller.common.ui.chat.component.ChatComponent
+import top.fifthlight.touchcontroller.common.ui.chat.component.ChatSettingsComponent
+import top.fifthlight.touchcontroller.common.ui.navigation.BackController
+import top.fifthlight.touchcontroller.common.ui.navigation.LifecycleController
+import top.fifthlight.touchcontroller.common.ui.state.subscribeAsState
 import top.fifthlight.touchcontroller.common.ui.theme.TouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.widget.ColorPreferenceItem
 import top.fifthlight.touchcontroller.common.ui.widget.IntSliderPreferenceItem
@@ -44,59 +51,62 @@ import top.fifthlight.touchcontroller.common.ui.widget.navigation.AppBar
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.BackButton
 
 @Composable
-private fun ChatScreen() {
-    val screenModel = remember { ChatScreenModel() }
-    DisposableEffect(screenModel) {
-        onDispose {
-            screenModel.onDispose()
+fun ChatSettingsDialog(
+    component: ChatSettingsComponent?,
+    onClose: () -> Unit,
+) = AlertDialog(
+    value = component,
+    valueTransformer = { it },
+    modifier = Modifier.fillMaxWidth(.6f),
+    onDismissRequest = onClose,
+    actions = { component ->
+        WarningButton(onClick = {
+            component.resetSettings()
+        }) {
+            Text(Text.translatable(Texts.SCREEN_CHAT_SETTINGS_RESET))
         }
-    }
-
-    TouchControllerTheme {
-        val uiState by screenModel.uiState.collectAsState()
-        AlertDialog(
-            visible = uiState.settingsDialogOpened,
-            modifier = Modifier.fillMaxWidth(.6f),
-            onDismissRequest = {
-                screenModel.closeSettingsDialog()
-            },
-            actions = {
-                WarningButton(onClick = {
-                    screenModel.resetSettings()
-                }) {
-                    Text(Text.translatable(Texts.SCREEN_CHAT_SETTINGS_RESET))
-                }
-                GuideButton(onClick = {
-                    screenModel.closeSettingsDialog()
-                }) {
-                    Text(Text.translatable(Texts.SCREEN_CHAT_SETTINGS_OK))
-                }
-            },
-        ) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(4)
-            ) {
-                IntSliderPreferenceItem(
-                    modifier = Modifier.fillMaxWidth(),
-                    title = Text.translatable(Texts.SCREEN_CHAT_SETTINGS_LINE_SPACING),
-                    range = 0..16,
-                    value = uiState.lineSpacing,
-                    onValueChanged = {
-                        screenModel.updateLineSpacing(it)
-                    }
-                )
-
-                ColorPreferenceItem(
-                    modifier = Modifier.fillMaxWidth(),
-                    title = Text.translatable(Texts.SCREEN_CHAT_SETTINGS_TEXT_COLOR),
-                    value = uiState.textColor,
-                    onValueChanged = {
-                        screenModel.updateTextColor(it)
-                    }
-                )
+        GuideButton(onClick = onClose) {
+            Text(Text.translatable(Texts.SCREEN_CHAT_SETTINGS_OK))
+        }
+    },
+) { component ->
+    val uiState by component.uiState.subscribeAsState()
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(4)
+    ) {
+        IntSliderPreferenceItem(
+            modifier = Modifier.fillMaxWidth(),
+            title = Text.translatable(Texts.SCREEN_CHAT_SETTINGS_LINE_SPACING),
+            range = 0..16,
+            value = uiState.lineSpacing,
+            onValueChanged = {
+                component.updateLineSpacing(it)
             }
-        }
+        )
+
+        ColorPreferenceItem(
+            modifier = Modifier.fillMaxWidth(),
+            title = Text.translatable(Texts.SCREEN_CHAT_SETTINGS_TEXT_COLOR),
+            value = uiState.textColor,
+            onValueChanged = {
+                component.updateTextColor(it)
+            }
+        )
+    }
+}
+
+@Composable
+fun ChatScreen(component: ChatComponent) {
+    TouchControllerTheme {
+        val uiState by component.uiState.subscribeAsState()
+
+        val dialog by component.dialog.subscribeAsState()
+        val instance = dialog.child?.instance
+        ChatSettingsDialog(
+            component = (instance as? ChatComponent.ChildModel.Settings)?.component,
+            onClose = component::closeSettingsDialog,
+        )
 
         Scaffold(
             topBar = {
@@ -105,6 +115,9 @@ private fun ChatScreen() {
                     leading = {
                         BackButton(
                             screenName = Text.translatable(Texts.SCREEN_CHAT_EXIT),
+                            onClick = {
+                                component.onBack()
+                            },
                         )
                     },
                     title = {
@@ -129,10 +142,10 @@ private fun ChatScreen() {
                     LocalTextHitHandler provides {
                         when (it) {
                             is TextHitTestResult.InsertText -> if (it.overwrite) {
-                                screenModel.updateText(it.text)
+                                component.updateText(it.text)
                             } else {
                                 // TODO: append after cursor. there is no good way to do it currently
-                                screenModel.updateText(uiState.text + it.text)
+                                component.updateText(uiState.text + it.text)
                             }
 
                             is TextHitTestResult.Native -> it.action()
@@ -198,7 +211,7 @@ private fun ChatScreen() {
                             .fillMaxHeight()
                             .width(bottomBarHeight),
                         onClick = {
-                            screenModel.openSettingsDialog()
+                            component.openSettingsDialog()
                         },
                     ) {
                         Icon(Textures.icon_chat_setting)
@@ -210,14 +223,14 @@ private fun ChatScreen() {
                             .weight(1f)
                             .fillMaxHeight(),
                         value = uiState.text,
-                        onValueChanged = screenModel::updateText,
-                        onEnter = screenModel::sendText,
+                        onValueChanged = component::updateText,
+                        onEnter = component::sendText,
                     )
                     IconButton(
                         modifier = Modifier
                             .width(64)
                             .fillMaxHeight(),
-                        onClick = screenModel::sendText,
+                        onClick = component::sendText,
                     ) {
                         Icon(Textures.icon_chat_send)
                     }
@@ -234,12 +247,30 @@ object ChatScreenProviderFactoryImpl : ChatScreenProvider {
     fun of(): ChatScreenProvider = this
 
     override fun openChatScreen() {
-        val screenFactory: ScreenFactory = ScreenFactoryFactory.of()
-        screenFactory.openScreen(
+        val lifecycleRegistry = LifecycleRegistry()
+        val backDispatcher = BackDispatcher()
+
+        ScreenFactory.openScreen(
             renderBackground = false,
             title = Text.translatable(Texts.SCREEN_CHAT_TITLE),
         ) {
-            ChatScreen()
+            val closeHandler = LocalCloseHandler.current
+            val viewModel = remember(closeHandler) {
+                ChatComponent(
+                    componentContext = DefaultComponentContext(
+                        lifecycle = lifecycleRegistry,
+                        backHandler = backDispatcher,
+                    ),
+                    onBack = {
+                        closeHandler.close()
+                    },
+                )
+            }
+
+            BackController(backDispatcher)
+            LifecycleController(lifecycleRegistry)
+
+            ChatScreen(viewModel)
         }
     }
 }

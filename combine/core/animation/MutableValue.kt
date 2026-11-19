@@ -18,7 +18,7 @@ fun <T> animateValueAsState(
     var changed by remember { mutableStateOf(false) }
     val animateState = remember { AnimateState(targetValue, converter) }
 
-    LaunchedEffect(targetValue, tweenSpec, manager) {
+    LaunchedEffect(targetValue, tweenSpec, manager, converter) {
         if (!changed) {
             changed = true
             return@LaunchedEffect

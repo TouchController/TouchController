@@ -6,13 +6,9 @@ kt_merge_library(
     javac_opts = "//touchcontroller:javac_opts_jvm_8",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     merge_deps = [
-        "//touchcontroller/common/config/preset",
         "//touchcontroller/common/config/preset/info",
         "//touchcontroller/common/control",
-        "//touchcontroller/common/ui/config/tab/layout/custom/model",
-        "//touchcontroller/common/ui/config/tab/layout/custom/state",
-        "//touchcontroller/common/ui/config/tab/layout/custom/tab",
-        "//touchcontroller/common/ui/model",
+        "//touchcontroller/common/ui/config/tab/layout/custom/widget",
         "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
@@ -29,8 +25,6 @@ kt_merge_library(
         "//combine/style",
         "//combine/widget",
         "//touchcontroller/resources/texture:texture_lib",
-        "@maven//:cafe_adriel_voyager_voyager_core_desktop",
-        "@maven//:cafe_adriel_voyager_voyager_screenmodel_desktop",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],
 )

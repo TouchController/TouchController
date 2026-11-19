@@ -6,8 +6,8 @@
 package top.fifthlight.touchcontroller.common.ui.preset
 
 import androidx.compose.runtime.*
-import cafe.adriel.voyager.core.screen.Screen
 import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.toPersistentList
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.layout.Alignment
 import top.fifthlight.combine.core.layout.Arrangement
@@ -26,7 +26,7 @@ import top.fifthlight.combine.widget.IconButton
 import top.fifthlight.combine.widget.Text
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.assets.texture.Textures
-import top.fifthlight.touchcontroller.common.assets.TextureSet
+import top.fifthlight.touchcontroller.common.config.preset.builtin.key.BuiltinPresetKey
 import top.fifthlight.touchcontroller.common.config.preset.topbar.TopBarWidgets
 import top.fifthlight.touchcontroller.common.control.builtin.BuiltInWidget
 import top.fifthlight.touchcontroller.common.ui.control.AutoScaleControllerWidget
@@ -36,159 +36,76 @@ import top.fifthlight.touchcontroller.common.ui.widget.Scaffold
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.AppBar
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.BackButton
 
-data class TopBarConfigureScreen(
-    val textureSet: TextureSet,
-    val value: PersistentList<BuiltInWidget>,
-    val onValueChanged: (PersistentList<BuiltInWidget>) -> Unit,
-) : Screen {
-    @Composable
-    override fun Content() {
-        var selectedWidgets by remember { mutableStateOf(value) }
+@Composable
+fun TopBarConfigureScreen(
+    key: BuiltinPresetKey,
+    onWidgetsChanged: (PersistentList<BuiltInWidget>) -> Unit,
+    onBack: () -> Unit,
+) {
+    val textureSet = key.textureSet
+    var selectedWidgets by remember {
+        mutableStateOf(key.topBar.widgets ?: TopBarWidgets.defaultAdded.toPersistentList())
+    }
 
-        val availableWidgets = remember(selectedWidgets, textureSet) {
-            TopBarWidgets.registry.values().filter { widget ->
-                widget !in selectedWidgets && (widget.hidden?.invoke(textureSet) != true)
-            }
+    val availableWidgets = remember(selectedWidgets, textureSet) {
+        TopBarWidgets.registry.values().filter { widget ->
+            widget !in selectedWidgets && (widget.hidden?.invoke(textureSet) != true)
         }
+    }
 
-        Scaffold(
-            topBar = {
-                AppBar(
-                    modifier = Modifier.fillMaxWidth(),
-                    leading = {
-                        BackButton(screenName = Text.translatable(Texts.SCREEN_TOP_BAR_CUSTOMIZE_TITLE))
-                    },
-                )
-            },
-        ) { modifier ->
-            Row(
+    Scaffold(
+        topBar = {
+            AppBar(
+                modifier = Modifier.fillMaxWidth(),
+                leading = {
+                    BackButton(
+                        screenName = Text.translatable(Texts.SCREEN_TOP_BAR_CUSTOMIZE_TITLE),
+                        onClick = onBack,
+                    )
+                },
+            )
+        },
+    ) { modifier ->
+        Row(
+            modifier = Modifier
+                .background(LocalTouchControllerTheme.current.background)
+                .then(modifier)
+        ) {
+            Column(
                 modifier = Modifier
-                    .background(LocalTouchControllerTheme.current.background)
-                    .then(modifier)
+                    .fillMaxHeight()
+                    .weight(1f),
             ) {
-                Column(
+                Row(
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .weight(1f),
+                        .fillMaxWidth()
+                        .weight(3f),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
                 ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(3f),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center,
-                    ) {
-                        for (widget in selectedWidgets) {
-                            ControllerWidget(widget = widget[textureSet])
-                        }
-                    }
-                    if (selectedWidgets.isNotEmpty()) {
-                        Column(
-                            modifier = Modifier
-                                .padding(4)
-                                .verticalScroll()
-                                .border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                                .fillMaxWidth()
-                                .weight(7f),
-                        ) {
-                            for ((index, widget) in selectedWidgets.withIndex()) {
-                                val widget = widget[textureSet]
-                                Row(
-                                    modifier = Modifier.height(IntrinsicSize.Min),
-                                ) {
-                                    Row(
-                                        modifier = Modifier
-                                            .border(LocalListButtonTheme.current.drawableSet.off.normal)
-                                            .weight(1f)
-                                            .fillMaxHeight(),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(4),
-                                    ) {
-                                        AutoScaleControllerWidget(
-                                            modifier = Modifier.size(16),
-                                            widget = widget,
-                                        )
-                                        Text(
-                                            modifier = Modifier.weight(1f),
-                                            text = widget.name.getText(),
-                                        )
-                                    }
-                                    IconButton(
-                                        modifier = Modifier
-                                            .width(24)
-                                            .fillMaxHeight(),
-                                        onClick = {
-                                            if (index == 0) return@IconButton
-                                            val item = selectedWidgets[index]
-                                            val newList = selectedWidgets.removeAt(index).add(index - 1, item)
-                                            selectedWidgets = newList
-                                            onValueChanged(newList)
-                                        },
-                                    ) {
-                                        Icon(Textures.icon_up)
-                                    }
-                                    IconButton(
-                                        modifier = Modifier
-                                            .width(24)
-                                            .fillMaxHeight(),
-                                        onClick = {
-                                            if (index >= selectedWidgets.size - 1) return@IconButton
-                                            val item = selectedWidgets[index]
-                                            val newList = selectedWidgets.removeAt(index).add(index + 1, item)
-                                            selectedWidgets = newList
-                                            onValueChanged(newList)
-                                        },
-                                    ) {
-                                        Icon(Textures.icon_down)
-                                    }
-                                    IconButton(
-                                        modifier = Modifier
-                                            .width(24)
-                                            .fillMaxHeight(),
-                                        onClick = {
-                                            val newList = selectedWidgets.removeAt(index)
-                                            selectedWidgets = newList
-                                            onValueChanged(newList)
-                                        },
-                                    ) {
-                                        Icon(Textures.icon_delete)
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        Box(
-                            modifier = Modifier
-                                .border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                                .fillMaxWidth()
-                                .weight(7f),
-                            alignment = Alignment.Center,
-                        ) {
-                            Text(Text.translatable(Texts.SCREEN_TOP_BAR_CUSTOMIZE_NO_WIDGET_SELECTED))
-                        }
+                    for (widget in selectedWidgets) {
+                        ControllerWidget(widget = widget[textureSet])
                     }
                 }
-                if (availableWidgets.isNotEmpty()) {
+                if (selectedWidgets.isNotEmpty()) {
                     Column(
                         modifier = Modifier
                             .padding(4)
                             .verticalScroll()
                             .border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                            .fillMaxHeight()
-                            .weight(1f),
+                            .fillMaxWidth()
+                            .weight(7f),
                     ) {
-                        for (widgetItem in availableWidgets) {
-                            val widget = widgetItem[textureSet]
-                            ListButton(
-                                modifier = Modifier.fillMaxWidth(),
-                                onClick = {
-                                    val newList = selectedWidgets.add(widgetItem)
-                                    selectedWidgets = newList
-                                    onValueChanged(newList)
-                                },
+                        for ((index, widget) in selectedWidgets.withIndex()) {
+                            val widget = widget[textureSet]
+                            Row(
+                                modifier = Modifier.height(IntrinsicSize.Min),
                             ) {
                                 Row(
-                                    modifier = Modifier.fillMaxWidth(),
+                                    modifier = Modifier
+                                        .border(LocalListButtonTheme.current.drawableSet.off.normal)
+                                        .weight(1f)
+                                        .fillMaxHeight(),
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(4),
                                 ) {
@@ -200,7 +117,46 @@ data class TopBarConfigureScreen(
                                         modifier = Modifier.weight(1f),
                                         text = widget.name.getText(),
                                     )
-                                    Text(Text.translatable(Texts.SCREEN_TOP_BAR_CUSTOMIZE_LIST_ADD))
+                                }
+                                IconButton(
+                                    modifier = Modifier
+                                        .width(24)
+                                        .fillMaxHeight(),
+                                    onClick = {
+                                        if (index == 0) return@IconButton
+                                        val item = selectedWidgets[index]
+                                        val newList = selectedWidgets.removeAt(index).add(index - 1, item)
+                                        selectedWidgets = newList
+                                        onWidgetsChanged(newList)
+                                    },
+                                ) {
+                                    Icon(Textures.icon_up)
+                                }
+                                IconButton(
+                                    modifier = Modifier
+                                        .width(24)
+                                        .fillMaxHeight(),
+                                    onClick = {
+                                        if (index >= selectedWidgets.size - 1) return@IconButton
+                                        val item = selectedWidgets[index]
+                                        val newList = selectedWidgets.removeAt(index).add(index + 1, item)
+                                        selectedWidgets = newList
+                                        onWidgetsChanged(newList)
+                                    },
+                                ) {
+                                    Icon(Textures.icon_down)
+                                }
+                                IconButton(
+                                    modifier = Modifier
+                                        .width(24)
+                                        .fillMaxHeight(),
+                                    onClick = {
+                                        val newList = selectedWidgets.removeAt(index)
+                                        selectedWidgets = newList
+                                        onWidgetsChanged(newList)
+                                    },
+                                ) {
+                                    Icon(Textures.icon_delete)
                                 }
                             }
                         }
@@ -209,12 +165,60 @@ data class TopBarConfigureScreen(
                     Box(
                         modifier = Modifier
                             .border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                            .fillMaxHeight()
-                            .weight(1f),
+                            .fillMaxWidth()
+                            .weight(7f),
                         alignment = Alignment.Center,
                     ) {
-                        Text(Text.translatable(Texts.SCREEN_TOP_BAR_CUSTOMIZE_NO_MORE_WIDGET_TO_ADD))
+                        Text(Text.translatable(Texts.SCREEN_TOP_BAR_CUSTOMIZE_NO_WIDGET_SELECTED))
                     }
+                }
+            }
+            if (availableWidgets.isNotEmpty()) {
+                Column(
+                    modifier = Modifier
+                        .padding(4)
+                        .verticalScroll()
+                        .border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                        .fillMaxHeight()
+                        .weight(1f),
+                ) {
+                    for (widgetItem in availableWidgets) {
+                        val widget = widgetItem[textureSet]
+                        ListButton(
+                            modifier = Modifier.fillMaxWidth(),
+                            onClick = {
+                                val newList = selectedWidgets.add(widgetItem)
+                                selectedWidgets = newList
+                                onWidgetsChanged(newList)
+                            },
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4),
+                            ) {
+                                AutoScaleControllerWidget(
+                                    modifier = Modifier.size(16),
+                                    widget = widget,
+                                )
+                                Text(
+                                    modifier = Modifier.weight(1f),
+                                    text = widget.name.getText(),
+                                )
+                                Text(Text.translatable(Texts.SCREEN_TOP_BAR_CUSTOMIZE_LIST_ADD))
+                            }
+                        }
+                    }
+                }
+            } else {
+                Box(
+                    modifier = Modifier
+                        .border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                        .fillMaxHeight()
+                        .weight(1f),
+                    alignment = Alignment.Center,
+                ) {
+                    Text(Text.translatable(Texts.SCREEN_TOP_BAR_CUSTOMIZE_NO_MORE_WIDGET_TO_ADD))
                 }
             }
         }

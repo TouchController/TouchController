@@ -5,8 +5,8 @@
 
 package top.fifthlight.touchcontroller.common.input
 
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import top.fifthlight.combine.core.input.text.InputHandler
 import top.fifthlight.combine.core.input.text.InputHandlerFactory
 import top.fifthlight.combine.core.input.text.TextInputState
-import top.fifthlight.combine.core.util.dispatcher.GameDispatcherProviderFactory
+import top.fifthlight.combine.core.util.dispatcher.Game
 import top.fifthlight.data.IntRect
 import top.fifthlight.touchcontroller.common.gal.window.WindowHandle
 import top.fifthlight.touchcontroller.common.gal.window.WindowHandleFactory
@@ -38,8 +38,7 @@ object InputManager : InputHandler {
     private val windowHandle: WindowHandle = WindowHandleFactory.of()
     private val _events = MutableSharedFlow<TextInputState>()
     override val events = _events.asSharedFlow()
-    private val gameDispatcher: CoroutineDispatcher = GameDispatcherProviderFactory.of().gameDispatcher
-    private val scope = CoroutineScope(SupervisorJob() + gameDispatcher)
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Game)
 
     fun updateNativeState(textInputState: TextInputState) {
         inputState = textInputState

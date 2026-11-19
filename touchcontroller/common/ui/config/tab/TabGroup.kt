@@ -21,4 +21,8 @@ sealed class TabGroup(
     data object LayoutGroup : TabGroup(Texts.SCREEN_CONFIG_LAYOUT_TITLE)
     data object GeneralGroup : TabGroup(Texts.SCREEN_CONFIG_GENERAL_TITLE)
     data object ItemGroup : TabGroup(Texts.SCREEN_CONFIG_ITEM_TITLE)
+
+    companion object {
+        val all = listOf(SystemGroup, LayoutGroup, GeneralGroup, ItemGroup)
+    }
 }

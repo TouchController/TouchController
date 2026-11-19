@@ -26,7 +26,7 @@ val LocalCombineOwner: ProvidableCompositionLocal<CombineOwner> =
 val LocalInputHandler: ProvidableCompositionLocal<InputHandler?> =
     staticCompositionLocalOf { InputHandlerFactory.ofDefault() }
 val LocalScreenSize: ProvidableCompositionLocal<IntSize> =
-    staticCompositionLocalOf { error("No ScreenSize in context") }
+    compositionLocalOf { error("No ScreenSize in context") }
 
 interface DisposableLayer {
     fun dispose()

@@ -11,11 +11,12 @@ fun Popup(
     val owner = LocalCombineOwner.current
     val parentComposition = rememberCompositionContext()
     val currentContent by rememberUpdatedState(content)
-    DisposableEffect(owner, parentComposition, onDismissRequest, currentContent) {
+    val currentOnDismiss by rememberUpdatedState(onDismissRequest)
+    DisposableEffect(owner, parentComposition) {
         val layer = owner.addLayer(
             parentContext = parentComposition,
-            onDismissRequest = onDismissRequest,
-            content = currentContent,
+            onDismissRequest = { currentOnDismiss?.invoke() },
+            content = { currentContent() },
         )
         onDispose {
             layer.dispose()

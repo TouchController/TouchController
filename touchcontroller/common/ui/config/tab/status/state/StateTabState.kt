@@ -6,8 +6,10 @@
 package top.fifthlight.touchcontroller.common.ui.config.tab.status.state
 
 import top.fifthlight.combine.core.data.Text
+import top.fifthlight.touchcontroller.common.config.data.StatusConfig
 
 data class StateTabState(
+    val config: StatusConfig = StatusConfig(),
     val currentPlatform: Text? = null,
     val systemInfo: SystemInfo? = null,
     val warningMessage: Text? = null,

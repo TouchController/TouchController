@@ -22,6 +22,5 @@ kt_merge_library(
         "//combine/core/modifier/scroll",
         "//combine/core/paint",
         "//combine/widget",
-        "@maven//:cafe_adriel_voyager_voyager_core_desktop",
     ],
 )

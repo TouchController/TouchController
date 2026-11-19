@@ -6,23 +6,22 @@
 package top.fifthlight.touchcontroller.common.ui.item.screen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.layout.Alignment
 import top.fifthlight.combine.core.modifier.Modifier
 import top.fifthlight.combine.core.modifier.drawing.border
 import top.fifthlight.combine.core.modifier.placement.fillMaxSize
 import top.fifthlight.combine.core.widget.layout.Box
-import top.fifthlight.combine.item.data.Item
 import top.fifthlight.combine.widget.Text
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.gal.gamestate.GameState
+import top.fifthlight.touchcontroller.common.ui.item.component.ItemChooserComponent
+import top.fifthlight.touchcontroller.common.ui.state.subscribeAsState
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
-import top.fifthlight.touchcontroller.common.ui.widget.navigation.TouchControllerNavigator
 
 @Composable
-fun ItemChooser(
-    onItemChosen: (Item) -> Unit,
-) {
+fun ItemChooser(component: ItemChooserComponent) {
     if (!GameState.inGame) {
         Box(
             modifier = Modifier
@@ -35,5 +34,14 @@ fun ItemChooser(
         return
     }
 
-    TouchControllerNavigator(ItemListChooseScreen(onItemChosen))
+    val slot by component.slot.subscribeAsState()
+    when (val child = slot.child?.instance) {
+        null -> ItemListChooseScreen(component)
+        ItemChooserComponent.ChildComponent.DefaultList -> DefaultListItemChooseScreen(component)
+        is ItemChooserComponent.ChildComponent.CreativeTab -> CreativeTabItemChooseScreen(
+            component = component,
+            tabs = child.tabs,
+            playerInventory = child.playerInventory,
+        )
+    }
 }

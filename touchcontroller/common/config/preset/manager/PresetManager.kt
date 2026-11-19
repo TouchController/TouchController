@@ -88,8 +88,9 @@ object PresetManager {
 
     private fun getPresetFile(uuid: Uuid) = presetDir.resolve("$uuid.json")
 
-    private fun saveOrder(order: ImmutableList<Uuid>) {
+    fun saveOrder(order: ImmutableList<Uuid>) {
         logger.info("Saving TouchController preset order file")
+        _presets.updateAndGet { PresetsContainer(presets = it, order = order) }
         orderFile.writeText(JList(JUuid).toJson(order, jsonStyle))
     }
 
@@ -119,24 +120,13 @@ object PresetManager {
             if (addedPresets) {
                 saveOrder(newPresets.order)
             }
-        } catch (ex: IOException) {
+        } catch (ex: NoSuchFileException) {
             if (create) {
                 logger.warn("Failed to save preset: ", ex)
             }
+        } catch (ex: IOException) {
+            logger.warn("Failed to save preset: ", ex)
         }
-    }
-
-    fun movePreset(uuid: Uuid, offset: Int) {
-        val newPresets = _presets.updateAndGet {
-            val index = it.orderedEntries
-                .indexOfFirst { (id, _) -> id == uuid }
-                .takeIf { it != -1 } ?: return@updateAndGet it
-            val newIndex = (index + offset).coerceIn(it.orderedEntries.indices)
-            val preset = it.orderedEntries[index]
-            val newEntries = it.orderedEntries.removeAt(index).add(newIndex, preset)
-            PresetsContainer(newEntries)
-        }
-        saveOrder(newPresets.order)
     }
 
     fun removePreset(uuid: Uuid) {

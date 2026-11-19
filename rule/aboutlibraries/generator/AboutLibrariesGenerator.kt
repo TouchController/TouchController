@@ -52,7 +52,14 @@ class AboutLibrariesGenerator @Inject constructor(
     private val jsonStyle = JsonStyle(
         appendFieldSeparator = JsonStyle.Companion::comma,
         appendValueSeparator = JsonStyle.Companion::colonSpace,
-        appendNewline = JsonStyle.Companion::appendNewLineIndent,
+        appendNewline = { app, indent ->
+            app.apply {
+                write('\n')
+                repeat(indent) {
+                    write("    ")
+                }
+            }
+        },
         sortedObjectFields = false,
         explicitNulls = false,
     )

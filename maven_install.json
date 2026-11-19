@@ -7,8 +7,6 @@
     "androidx.savedstate:savedstate-compose-desktop": -119589906,
     "androidx.savedstate:savedstate-desktop": -82503895,
     "at.yawk.lz4:lz4-java": 1055460133,
-    "cafe.adriel.voyager:voyager-navigator-desktop": -1034036741,
-    "cafe.adriel.voyager:voyager-screenmodel-desktop": -1859791851,
     "ch.qos.logback:logback-classic": -495381972,
     "com.arkivanov.decompose:decompose-jvm": 1304895778,
     "com.arkivanov.essenty:back-handler-jvm": -662905396,
@@ -117,12 +115,6 @@
     "at.favre.lib:hkdf:jar:sources": 314347625,
     "at.yawk.lz4:lz4-java": -869829796,
     "at.yawk.lz4:lz4-java:jar:sources": -212797774,
-    "cafe.adriel.voyager:voyager-core-desktop": 1303280642,
-    "cafe.adriel.voyager:voyager-core-desktop:jar:sources": 375558650,
-    "cafe.adriel.voyager:voyager-navigator-desktop": 479880030,
-    "cafe.adriel.voyager:voyager-navigator-desktop:jar:sources": 1884241016,
-    "cafe.adriel.voyager:voyager-screenmodel-desktop": -1049013271,
-    "cafe.adriel.voyager:voyager-screenmodel-desktop:jar:sources": -1482951702,
     "ch.qos.logback:logback-classic": 1251526921,
     "ch.qos.logback:logback-classic:jar:sources": -1227816428,
     "ch.qos.logback:logback-core": 1941568752,
@@ -518,27 +510,6 @@
         "sources": "131c7ba5fb00b5c06ef5eafe6acc20e2f324c1c93ffb71c0daacead102b08d58"
       },
       "version": "1.11.0"
-    },
-    "cafe.adriel.voyager:voyager-core-desktop": {
-      "shasums": {
-        "jar": "d6c1860fbcd1135249cc430fdc787ab1bb162c5cae7c1cf88dcf72737866338c",
-        "sources": "93ee890070fa6f73ff3a420bc7517c5ce449d75be6d2c05f099f7d22f4fbd086"
-      },
-      "version": "1.1.0-beta03"
-    },
-    "cafe.adriel.voyager:voyager-navigator-desktop": {
-      "shasums": {
-        "jar": "7ebf1bfcfce25206da6fefc27e255d68e8162a2f22645b9962387f94aa1bf549",
-        "sources": "e316cf578488d96c5d3266903741c72684a2845002dcc72617a278858ed59a96"
-      },
-      "version": "1.1.0-beta03"
-    },
-    "cafe.adriel.voyager:voyager-screenmodel-desktop": {
-      "shasums": {
-        "jar": "46bb5f99bae0f70f67f15d3e26a39ff80d73f7ec48f9653c9a89baf031dd362e",
-        "sources": "49e2053663f44278cca37d33fd10c08e41bfd2fbec3d67e0d01cddf6c6572f59"
-      },
-      "version": "1.1.0-beta03"
     },
     "ch.qos.logback:logback-classic": {
       "shasums": {
@@ -1522,20 +1493,6 @@
       "org.jetbrains.kotlinx:kotlinx-coroutines-core",
       "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm"
     ],
-    "cafe.adriel.voyager:voyager-core-desktop": [
-      "org.jetbrains.kotlin:kotlin-stdlib",
-      "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm"
-    ],
-    "cafe.adriel.voyager:voyager-navigator-desktop": [
-      "cafe.adriel.voyager:voyager-core-desktop",
-      "org.jetbrains.kotlin:kotlin-stdlib"
-    ],
-    "cafe.adriel.voyager:voyager-screenmodel-desktop": [
-      "cafe.adriel.voyager:voyager-core-desktop",
-      "cafe.adriel.voyager:voyager-navigator-desktop",
-      "org.jetbrains.kotlin:kotlin-stdlib",
-      "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm"
-    ],
     "ch.qos.logback:logback-classic": [
       "ch.qos.logback:logback-core",
       "org.slf4j:slf4j-api"
@@ -1993,23 +1950,6 @@
       "net.jpountz.lz4",
       "net.jpountz.util",
       "net.jpountz.xxhash"
-    ],
-    "cafe.adriel.voyager:voyager-core-desktop": [
-      "cafe.adriel.voyager.core.annotation",
-      "cafe.adriel.voyager.core.concurrent",
-      "cafe.adriel.voyager.core.lifecycle",
-      "cafe.adriel.voyager.core.platform",
-      "cafe.adriel.voyager.core.registry",
-      "cafe.adriel.voyager.core.screen",
-      "cafe.adriel.voyager.core.stack"
-    ],
-    "cafe.adriel.voyager:voyager-navigator-desktop": [
-      "cafe.adriel.voyager.navigator",
-      "cafe.adriel.voyager.navigator.internal",
-      "cafe.adriel.voyager.navigator.lifecycle"
-    ],
-    "cafe.adriel.voyager:voyager-screenmodel-desktop": [
-      "cafe.adriel.voyager.core.model"
     ],
     "ch.qos.logback:logback-classic": [
       "ch.qos.logback.classic",
@@ -4726,12 +4666,6 @@
       "at.favre.lib:hkdf:jar:sources",
       "at.yawk.lz4:lz4-java",
       "at.yawk.lz4:lz4-java:jar:sources",
-      "cafe.adriel.voyager:voyager-core-desktop",
-      "cafe.adriel.voyager:voyager-core-desktop:jar:sources",
-      "cafe.adriel.voyager:voyager-navigator-desktop",
-      "cafe.adriel.voyager:voyager-navigator-desktop:jar:sources",
-      "cafe.adriel.voyager:voyager-screenmodel-desktop",
-      "cafe.adriel.voyager:voyager-screenmodel-desktop:jar:sources",
       "ch.qos.logback:logback-classic",
       "ch.qos.logback:logback-classic:jar:sources",
       "ch.qos.logback:logback-core",
@@ -5044,12 +4978,6 @@
       "at.favre.lib:hkdf:jar:sources",
       "at.yawk.lz4:lz4-java",
       "at.yawk.lz4:lz4-java:jar:sources",
-      "cafe.adriel.voyager:voyager-core-desktop",
-      "cafe.adriel.voyager:voyager-core-desktop:jar:sources",
-      "cafe.adriel.voyager:voyager-navigator-desktop",
-      "cafe.adriel.voyager:voyager-navigator-desktop:jar:sources",
-      "cafe.adriel.voyager:voyager-screenmodel-desktop",
-      "cafe.adriel.voyager:voyager-screenmodel-desktop:jar:sources",
       "ch.qos.logback:logback-classic",
       "ch.qos.logback:logback-classic:jar:sources",
       "ch.qos.logback:logback-core",
@@ -5362,12 +5290,6 @@
       "at.favre.lib:hkdf:jar:sources",
       "at.yawk.lz4:lz4-java",
       "at.yawk.lz4:lz4-java:jar:sources",
-      "cafe.adriel.voyager:voyager-core-desktop",
-      "cafe.adriel.voyager:voyager-core-desktop:jar:sources",
-      "cafe.adriel.voyager:voyager-navigator-desktop",
-      "cafe.adriel.voyager:voyager-navigator-desktop:jar:sources",
-      "cafe.adriel.voyager:voyager-screenmodel-desktop",
-      "cafe.adriel.voyager:voyager-screenmodel-desktop:jar:sources",
       "ch.qos.logback:logback-classic",
       "ch.qos.logback:logback-classic:jar:sources",
       "ch.qos.logback:logback-core",
@@ -5680,12 +5602,6 @@
       "at.favre.lib:hkdf:jar:sources",
       "at.yawk.lz4:lz4-java",
       "at.yawk.lz4:lz4-java:jar:sources",
-      "cafe.adriel.voyager:voyager-core-desktop",
-      "cafe.adriel.voyager:voyager-core-desktop:jar:sources",
-      "cafe.adriel.voyager:voyager-navigator-desktop",
-      "cafe.adriel.voyager:voyager-navigator-desktop:jar:sources",
-      "cafe.adriel.voyager:voyager-screenmodel-desktop",
-      "cafe.adriel.voyager:voyager-screenmodel-desktop:jar:sources",
       "ch.qos.logback:logback-classic",
       "ch.qos.logback:logback-classic:jar:sources",
       "ch.qos.logback:logback-core",

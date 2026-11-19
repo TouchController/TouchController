@@ -6,12 +6,9 @@ kt_merge_library(
     javac_opts = "//touchcontroller:javac_opts_jvm_8",
     kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
     merge_deps = [
-        "//touchcontroller/common/config",
         "//touchcontroller/common/config/data",
-        "//touchcontroller/common/ui/config/model",
-        "//touchcontroller/common/ui/config/state",
         "//touchcontroller/common/ui/config/tab",
-        "//touchcontroller/common/ui/model",
+        "//touchcontroller/common/ui/state",
         "//touchcontroller/common/ui/theme",
         "//touchcontroller/common/ui/widget",
         "//touchcontroller/resources/lang:text_binding",
@@ -26,6 +23,5 @@ kt_merge_library(
         "//combine/core/modifier/scroll",
         "//combine/core/paint",
         "//combine/core/widget/layout",
-        "@maven//:cafe_adriel_voyager_voyager_core_desktop",
     ],
 )

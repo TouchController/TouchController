@@ -1,6 +1,7 @@
 package top.fifthlight.combine.core.util.dispatcher
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import top.fifthlight.mergetools.api.ExpectFactory
 
 interface GameDispatcherProvider {
@@ -15,3 +16,7 @@ interface GameDispatcherProvider {
 val gameDispatcher by lazy {
     GameDispatcherProviderFactory.of().gameDispatcher
 }
+
+@Suppress("UnusedReceiverParameter")
+val Dispatchers.Game
+    get() = gameDispatcher

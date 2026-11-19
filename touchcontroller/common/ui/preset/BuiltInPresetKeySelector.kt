@@ -6,8 +6,6 @@
 package top.fifthlight.touchcontroller.common.ui.preset
 
 import androidx.compose.runtime.*
-import cafe.adriel.voyager.navigator.LocalNavigator
-import kotlinx.collections.immutable.toPersistentList
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.layout.Alignment
 import top.fifthlight.combine.core.layout.Arrangement
@@ -31,7 +29,6 @@ import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.assets.TextureSets
 import top.fifthlight.touchcontroller.common.config.layout.ControllerLayout
 import top.fifthlight.touchcontroller.common.config.preset.builtin.key.BuiltinPresetKey
-import top.fifthlight.touchcontroller.common.config.preset.topbar.TopBarWidgets
 import top.fifthlight.touchcontroller.common.control.ControllerWidget
 import top.fifthlight.touchcontroller.common.layout.data.ContextInput
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
@@ -79,15 +76,12 @@ private fun PresetPreview(
             }
         }
     ) {
-        val currentScale = scale
-        if (currentScale == null) {
-            return@Layout
-        }
-        for (layer in preset.layers) {
-            if (!layer.conditions.check(ContextInput.EMPTY)) {
+        val currentScale = scale ?: return@Layout
+        for ((_, widgets, conditions) in preset.layers) {
+            if (!conditions.check(ContextInput.EMPTY)) {
                 continue
             }
-            for (widget in layer.widgets) {
+            for (widget in widgets) {
                 top.fifthlight.touchcontroller.common.ui.control.ControllerWidget(
                     modifier = Modifier.then(ControllerWidgetModifierNode(widget)),
                     widget = widget,
@@ -103,6 +97,7 @@ fun BuiltInPresetKeySelector(
     modifier: Modifier = Modifier,
     value: BuiltinPresetKey,
     onValueChanged: (BuiltinPresetKey) -> Unit,
+    onConfigureTopBar: (() -> Unit)? = null,
 ) {
     @Composable
     fun StyleBox(
@@ -214,21 +209,10 @@ fun BuiltInPresetKeySelector(
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.spacedBy(4),
         ) {
-            val navigator = LocalNavigator.current
-            navigator?.let {
+            onConfigureTopBar?.let { onConfigureTopBar ->
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = {
-                        navigator.push(
-                            TopBarConfigureScreen(
-                                textureSet = value.textureSet,
-                                value = value.topBar.widgets ?: TopBarWidgets.defaultAdded.toPersistentList(),
-                                onValueChanged = {
-                                    onValueChanged(value.copy(topBar = value.topBar.copy(widgets = it)))
-                                },
-                            )
-                        )
-                    },
+                    onClick = onConfigureTopBar,
                 ) {
                     Text(Text.translatable(Texts.SCREEN_MANAGE_CONTROL_PRESET_CUSTOMIZE_TOP_BAR))
                 }

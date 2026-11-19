@@ -6,11 +6,7 @@
 package top.fifthlight.touchcontroller.common.ui.config.tab.item
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import cafe.adriel.voyager.navigator.LocalNavigator
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.layout.Arrangement
 import top.fifthlight.combine.core.modifier.Modifier
@@ -22,146 +18,87 @@ import top.fifthlight.combine.widget.Button
 import top.fifthlight.combine.widget.Switch
 import top.fifthlight.combine.widget.Text
 import top.fifthlight.touchcontroller.assets.lang.Texts
-import top.fifthlight.touchcontroller.common.config.item.ItemList
 import top.fifthlight.touchcontroller.common.gal.item.ItemSubclassProvider
-import top.fifthlight.touchcontroller.common.gal.itemlist.DefaultItemListProvider
 import top.fifthlight.touchcontroller.common.ui.component.screen.ComponentScreen
-import top.fifthlight.touchcontroller.common.ui.config.model.ConfigScreenModel
-import top.fifthlight.touchcontroller.common.ui.config.tab.Tab
-import top.fifthlight.touchcontroller.common.ui.config.tab.TabGroup
-import top.fifthlight.touchcontroller.common.ui.config.tab.TabOptions
+import top.fifthlight.touchcontroller.common.ui.config.tab.item.component.ItemScreenComponent
+import top.fifthlight.touchcontroller.common.ui.config.tab.item.component.ItemTabComponent
 import top.fifthlight.touchcontroller.common.ui.item.screen.ItemListScreen
+import top.fifthlight.touchcontroller.common.ui.state.subscribeAsState
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.widget.HorizontalPreferenceItem
 
-class ItemTabs(
-    private val configScreenModel: ConfigScreenModel,
-) {
-    val usableItemsTab = ItemTab(
-        options = TabOptions(
-            titleId = Texts.SCREEN_CONFIG_ITEM_USABLE_ITEMS_TITLE,
-            group = TabGroup.ItemGroup,
-            index = 0,
-            onReset = { copy(item = item.copy(usableItems = DefaultItemListProvider.usableItems)) },
-        ),
-        value = configScreenModel.uiState.map { it.config.item.usableItems },
-        onValueChanged = {
-            configScreenModel.updateConfig { copy(item = item.copy(usableItems = it)) }
-        }
-    )
-
-    val showCrosshairItemsTab = ItemTab(
-        options = TabOptions(
-            titleId = Texts.SCREEN_CONFIG_ITEM_SHOW_CROSSHAIR_ITEMS_TITLE,
-            group = TabGroup.ItemGroup,
-            index = 1,
-            onReset = { copy(item = item.copy(showCrosshairItems = DefaultItemListProvider.showCrosshairItems)) },
-        ),
-        value = configScreenModel.uiState.map { it.config.item.showCrosshairItems },
-        onValueChanged = {
-            configScreenModel.updateConfig { copy(item = item.copy(showCrosshairItems = it)) }
-        }
-    )
-
-    val usingAimingItemsTab = ItemTab(
-        options = TabOptions(
-            titleId = Texts.SCREEN_CONFIG_ITEM_USING_AIMING_ITEMS_TITLE,
-            group = TabGroup.ItemGroup,
-            index = 2,
-            onReset = { copy(item = item.copy(usingAimingItems = DefaultItemListProvider.usingAimingItems)) },
-        ),
-        value = configScreenModel.uiState.map { it.config.item.usingAimingItems },
-        onValueChanged = {
-            configScreenModel.updateConfig { copy(item = item.copy(usingAimingItems = it)) }
-        }
-    )
-}
-
-class ItemTab(
-    override val options: TabOptions,
-    val value: Flow<ItemList>,
-    val onValueChanged: (ItemList) -> Unit,
-) : Tab() {
-    @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.current
-        val value by value.collectAsState(null)
-        Column(
-            modifier = Modifier
-                .padding(8)
-                .verticalScroll(background = LocalTouchControllerTheme.current.background)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(8),
+@Composable
+fun ItemScreen(component: ItemScreenComponent) {
+    val value by component.itemList.subscribeAsState()
+    Column(
+        modifier = Modifier
+            .padding(8)
+            .verticalScroll(background = LocalTouchControllerTheme.current.background)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(8),
+    ) {
+        HorizontalPreferenceItem(
+            title = Text.translatable(Texts.SCREEN_CONFIG_ITEM_WHITELIST_TITLE),
+            description = Text.translatable(Texts.SCREEN_CONFIG_ITEM_WHITELIST_DESCRIPTION),
         ) {
-            value?.let { value ->
-                HorizontalPreferenceItem(
-                    title = Text.translatable(Texts.SCREEN_CONFIG_ITEM_WHITELIST_TITLE),
-                    description = Text.translatable(Texts.SCREEN_CONFIG_ITEM_WHITELIST_DESCRIPTION),
-                ) {
-                    Button(
-                        onClick = {
-                            navigator?.push(
-                                ItemListScreen(
-                                    initialValue = value.whitelist,
-                                    onValueChanged = { onValueChanged(value.copy(whitelist = it)) },
-                                )
-                            )
-                        }
-                    ) {
-                        Text(Text.translatable(Texts.SCREEN_CONFIG_ITEM_EDIT_TITLE))
-                    }
-                }
-                HorizontalPreferenceItem(
-                    title = Text.translatable(Texts.SCREEN_CONFIG_ITEM_BLACKLIST_TITLE),
-                    description = Text.translatable(Texts.SCREEN_CONFIG_ITEM_BLACKLIST_DESCRIPTION),
-                ) {
-                    Button(
-                        onClick = {
-                            navigator?.push(
-                                ItemListScreen(
-                                    initialValue = value.blacklist,
-                                    onValueChanged = { onValueChanged(value.copy(blacklist = it)) },
-                                )
-                            )
-                        }
-                    ) {
-                        Text(Text.translatable(Texts.SCREEN_CONFIG_ITEM_EDIT_TITLE))
-                    }
-                }
-                HorizontalPreferenceItem(
-                    title = Text.translatable(Texts.SCREEN_CONFIG_ITEM_COMPONENT_TITLE),
-                    description = Text.translatable(Texts.SCREEN_CONFIG_ITEM_COMPONENT_DESCRIPTION),
-                ) {
-                    Button(
-                        onClick = {
-                            navigator?.push(
-                                ComponentScreen(
-                                    initialValue = value.components,
-                                    onValueChanged = { onValueChanged(value.copy(components = it)) }
-                                )
-                            )
-                        }
-                    ) {
-                        Text(Text.translatable(Texts.SCREEN_CONFIG_ITEM_EDIT_TITLE))
-                    }
-                }
-                for (subclass in ItemSubclassProvider.itemSubclasses) {
-                    HorizontalPreferenceItem(
-                        title = subclass.name,
-                    ) {
-                        Switch(
-                            value = value.subclasses.contains(subclass),
-                            onValueChanged = {
-                                if (it) {
-                                    onValueChanged(value.copy(subclasses = value.subclasses.add(subclass)))
-                                } else {
-                                    onValueChanged(value.copy(subclasses = value.subclasses.remove(subclass)))
-                                }
-                            }
-                        )
-                    }
-                }
+            Button(
+                onClick = {
+                    component.openWhitelistEditor()
+                },
+            ) {
+                Text(Text.translatable(Texts.SCREEN_CONFIG_ITEM_EDIT_TITLE))
             }
         }
+        HorizontalPreferenceItem(
+            title = Text.translatable(Texts.SCREEN_CONFIG_ITEM_BLACKLIST_TITLE),
+            description = Text.translatable(Texts.SCREEN_CONFIG_ITEM_BLACKLIST_DESCRIPTION),
+        ) {
+            Button(
+                onClick = {
+                    component.openBlacklistEditor()
+                },
+            ) {
+                Text(Text.translatable(Texts.SCREEN_CONFIG_ITEM_EDIT_TITLE))
+            }
+        }
+        HorizontalPreferenceItem(
+            title = Text.translatable(Texts.SCREEN_CONFIG_ITEM_COMPONENT_TITLE),
+            description = Text.translatable(Texts.SCREEN_CONFIG_ITEM_COMPONENT_DESCRIPTION),
+        ) {
+            Button(
+                onClick = {
+                    component.openComponentListEditor()
+                },
+            ) {
+                Text(Text.translatable(Texts.SCREEN_CONFIG_ITEM_EDIT_TITLE))
+            }
+        }
+        for (subclass in ItemSubclassProvider.itemSubclasses) {
+            HorizontalPreferenceItem(
+                title = subclass.name,
+            ) {
+                Switch(
+                    value = value.subclasses.contains(subclass),
+                    onValueChanged = {
+                        if (it) {
+                            component.onItemListChanged(value.copy(subclasses = value.subclasses.add(subclass)))
+                        } else {
+                            component.onItemListChanged(value.copy(subclasses = value.subclasses.remove(subclass)))
+                        }
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun ItemTab(component: ItemTabComponent) {
+    val stack by component.childStack.subscribeAsState()
+    when (val instance = stack.active.instance) {
+        is ItemTabComponent.ChildComponent.Tab -> ItemScreen(instance.component)
+        is ItemTabComponent.ChildComponent.Whitelist -> ItemListScreen(instance.component)
+        is ItemTabComponent.ChildComponent.Blacklist -> ItemListScreen(instance.component)
+        is ItemTabComponent.ChildComponent.Components -> ComponentScreen(instance.component)
     }
 }

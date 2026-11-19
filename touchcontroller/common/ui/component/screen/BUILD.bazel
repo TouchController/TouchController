@@ -8,8 +8,8 @@ kt_merge_library(
     merge_deps = [
         "//touchcontroller/common/gal/gamestate",
         "//touchcontroller/common/gal/item",
-        "//touchcontroller/common/ui/component/model",
-        "//touchcontroller/common/ui/model",
+        "//touchcontroller/common/ui/component/component",
+        "//touchcontroller/common/ui/state",
         "//touchcontroller/common/ui/theme",
         "//touchcontroller/common/ui/widget",
         "//touchcontroller/common/ui/widget/navigation",
@@ -33,9 +33,7 @@ kt_merge_library(
         "//combine/theme/blackstone",
         "//combine/widget",
         "//touchcontroller/resources/texture:texture_lib",
-        "@maven//:cafe_adriel_voyager_voyager_core_desktop",
-        "@maven//:cafe_adriel_voyager_voyager_screenmodel_desktop",
+        "@maven//:com_arkivanov_decompose_decompose_jvm",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
-        "@maven//:org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm",
     ],
 )

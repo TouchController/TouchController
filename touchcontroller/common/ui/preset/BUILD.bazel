@@ -42,8 +42,6 @@ kt_merge_library(
         "//combine/theme/blackstone",
         "//combine/widget",
         "//touchcontroller/resources/texture:texture_lib",
-        "@maven//:cafe_adriel_voyager_voyager_core_desktop",
-        "@maven//:cafe_adriel_voyager_voyager_navigator_desktop",
         "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
     ],
 )

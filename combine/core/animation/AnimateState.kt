@@ -11,10 +11,6 @@ class AnimateState<T>(
     initialState: T,
     private val converter: TwoWayConverter<T>,
 ) : State<T> {
-    init {
-        Tween.registerAccessor(AnimateState::class.java, Accessor)
-    }
-
     override var value: T by mutableStateOf(initialState)
         internal set
 
@@ -31,6 +27,10 @@ class AnimateState<T>(
     }
 
     companion object Accessor: TweenAccessor<AnimateState<*>> {
+        init {
+            Tween.registerAccessor(AnimateState::class.java, Accessor)
+        }
+
         override fun getValues(
             target: AnimateState<*>,
             tweenType: Int,

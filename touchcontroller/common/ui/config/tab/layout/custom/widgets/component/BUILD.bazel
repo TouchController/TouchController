@@ -1,0 +1,21 @@
+load("//rule:merge_library.bzl", "kt_merge_library")
+
+kt_merge_library(
+    name = "component",
+    srcs = glob(["*.kt"]),
+    javac_opts = "//touchcontroller:javac_opts_jvm_8",
+    kotlinc_opts = "//touchcontroller:kotlinc_opts_jvm_8",
+    merge_deps = [
+        "//touchcontroller/common/assets",
+        "//touchcontroller/common/control",
+        "//touchcontroller/common/control/builtin",
+        "//touchcontroller/common/util/name",
+    ],
+    visibility = ["//touchcontroller:__subpackages__"],
+    deps = [
+        "//touchcontroller/common/ui/state",
+        "//touchcontroller/resources/texture:texture_set_lib",
+        "@maven//:com_arkivanov_decompose_decompose_jvm",
+        "@maven//:org_jetbrains_kotlinx_kotlinx_collections_immutable_jvm",
+    ],
+)

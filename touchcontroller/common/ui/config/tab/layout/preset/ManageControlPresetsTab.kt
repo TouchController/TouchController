@@ -6,10 +6,7 @@
 package top.fifthlight.touchcontroller.common.ui.config.tab.layout.preset
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import cafe.adriel.voyager.core.model.rememberScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.layout.Alignment
 import top.fifthlight.combine.core.layout.Arrangement
@@ -26,84 +23,79 @@ import top.fifthlight.combine.widget.Text
 import top.fifthlight.combine.widget.WarningButton
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.common.config.PresetConfig
-import top.fifthlight.touchcontroller.common.ui.config.model.LocalConfigScreenModel
-import top.fifthlight.touchcontroller.common.ui.config.tab.Tab
-import top.fifthlight.touchcontroller.common.ui.config.tab.TabGroup
-import top.fifthlight.touchcontroller.common.ui.config.tab.TabOptions
-import top.fifthlight.touchcontroller.common.ui.config.tab.layout.preset.model.ManageControlPresetsTabModel
-import top.fifthlight.touchcontroller.common.ui.config.tab.layout.provider.CustomTabProvider
+import top.fifthlight.touchcontroller.common.ui.config.tab.layout.preset.component.ManageControlPresetsTabComponent
 import top.fifthlight.touchcontroller.common.ui.preset.BuiltInPresetKeySelector
+import top.fifthlight.touchcontroller.common.ui.preset.TopBarConfigureScreen
+import top.fifthlight.touchcontroller.common.ui.state.subscribeAsState
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.widget.Scaffold
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.AppBar
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.BackButton
 
-object ManageControlPresetsTab : Tab() {
-    override val options = TabOptions(
-        titleId = Texts.SCREEN_CONFIG_LAYOUT_MANAGE_CONTROL_PRESET,
-        group = TabGroup.LayoutGroup,
-        index = 0,
-        openAsScreen = true,
-    )
-
-    @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.current
-        Scaffold(
-            topBar = {
-                AppBar(
-                    modifier = Modifier.fillMaxWidth(),
-                    leading = {
-                        BackButton(
-                            screenName = Text.translatable(Texts.SCREEN_MANAGE_CONTROL_PRESET_TITLE),
-                        )
-                    },
+@Composable
+fun ManageControlPresetsTab(component: ManageControlPresetsTabComponent) {
+    val stack by component.childStack.subscribeAsState()
+    when (val instance = stack.active.instance) {
+        is ManageControlPresetsTabComponent.ChildComponent.Preset -> PresetScreen(component)
+        is ManageControlPresetsTabComponent.ChildComponent.TopBarEditor -> TopBarConfigureScreen(
+            key = instance.key,
+            onWidgetsChanged = { widgets ->
+                component.updateKey(
+                    instance.key.copy(topBar = instance.key.topBar.copy(widgets = widgets)),
                 )
             },
-        ) { modifier ->
-            val configScreenModel = LocalConfigScreenModel.current
-            val screenModel = rememberScreenModel { ManageControlPresetsTabModel(configScreenModel) }
-            val presetConfig by screenModel.presetConfig.collectAsState()
-            val currentPresetConfig = presetConfig
-            if (currentPresetConfig != null) {
-                BuiltInPresetKeySelector(
-                    modifier = modifier,
-                    value = currentPresetConfig.key,
-                    onValueChanged = screenModel::updateKey,
-                )
-            } else {
-                Box(
+            onBack = component::onBack,
+        )
+    }
+}
+
+@Composable
+private fun PresetScreen(component: ManageControlPresetsTabComponent) {
+    val config by component.presetConfig.subscribeAsState()
+    Scaffold(
+        topBar = {
+            AppBar(
+                modifier = Modifier.fillMaxWidth(),
+                leading = {
+                    BackButton(
+                        screenName = Text.translatable(Texts.SCREEN_MANAGE_CONTROL_PRESET_TITLE),
+                        onClick = component::onBack,
+                    )
+                },
+            )
+        },
+    ) { modifier ->
+        when (val preset = config) {
+            is PresetConfig.BuiltIn -> BuiltInPresetKeySelector(
+                modifier = modifier,
+                value = preset.key,
+                onValueChanged = component::updateKey,
+                onConfigureTopBar = component::openTopBarEditor,
+            )
+
+            is PresetConfig.Custom -> Box(
+                modifier = Modifier
+                    .background(LocalTouchControllerTheme.current.background)
+                    .then(modifier),
+                alignment = Alignment.Center,
+            ) {
+                Column(
                     modifier = Modifier
-                        .background(LocalTouchControllerTheme.current.background)
-                        .then(modifier),
-                    alignment = Alignment.Center,
+                        .padding(12)
+                        .border(LocalTouchControllerTheme.current.borderBackgroundDark),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(12),
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .padding(12)
-                            .border(LocalTouchControllerTheme.current.borderBackgroundDark),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(12),
+                    Text(Text.translatable(Texts.SCREEN_MANAGE_CONTROL_PRESET_SWITCH_MESSAGE))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12),
                     ) {
-                        Text(Text.translatable(Texts.SCREEN_MANAGE_CONTROL_PRESET_SWITCH_MESSAGE))
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(12),
-                        ) {
-                            WarningButton(
-                                onClick = {
-                                    screenModel.update(PresetConfig.BuiltIn())
-                                }
-                            ) {
-                                Text(Text.translatable(Texts.SCREEN_MANAGE_CONTROL_PRESET_SWITCH_SWITCH))
-                            }
-                            GuideButton(
-                                onClick = {
-                                    navigator?.replace(CustomTabProvider.customTab)
-                                }
-                            ) {
-                                Text(Text.translatable(Texts.SCREEN_MANAGE_CONTROL_PRESET_SWITCH_GOTO_CUSTOM))
-                            }
+                        WarningButton(onClick = component::openControlPresets) {
+                            Text(Text.translatable(Texts.SCREEN_MANAGE_CONTROL_PRESET_SWITCH_SWITCH))
+                        }
+                        GuideButton(onClick = component.onOpenCustomLayout) {
+                            Text(Text.translatable(Texts.SCREEN_MANAGE_CONTROL_PRESET_SWITCH_GOTO_CUSTOM))
                         }
                     }
                 }

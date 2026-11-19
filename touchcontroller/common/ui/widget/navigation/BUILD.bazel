@@ -10,9 +10,6 @@ kt_merge_library(
         "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
-    runtime_deps = [
-        "@maven//:androidx_compose_runtime_runtime_saveable_desktop",
-    ],
     deps = [
         "//:compose",
         "//combine/core/data",
@@ -21,12 +18,9 @@ kt_merge_library(
         "//combine/core/modifier/drawing",
         "//combine/core/modifier/placement",
         "//combine/core/paint",
-        "//combine/core/screen",
         "//combine/core/widget/layout",
         "//combine/data",
         "//combine/style",
         "//combine/widget",
-        "@maven//:cafe_adriel_voyager_voyager_core_desktop",
-        "@maven//:cafe_adriel_voyager_voyager_navigator_desktop",
     ],
 )

@@ -10,7 +10,6 @@ kt_merge_library(
         "//touchcontroller/buildinfo",
         "//touchcontroller/common/about",
         "//touchcontroller/common/about/serialization",
-        "//touchcontroller/common/serialization",
     ],
     resource_jars = [
         "//touchcontroller/resources/about",

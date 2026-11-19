@@ -12,5 +12,4 @@ data class ChatScreenState(
     val text: String = "",
     val lineSpacing: Int = 0,
     val textColor: Color = Colors.WHITE,
-    val settingsDialogOpened: Boolean = false,
 )

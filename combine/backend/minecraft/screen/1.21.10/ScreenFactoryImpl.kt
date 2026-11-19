@@ -203,8 +203,11 @@ class CombineScreen(
     }
 
     override fun onClose() {
-        owner.close()
         client.setScreen(parent)
+    }
+
+    override fun removed() {
+        owner.close()
     }
 }
 

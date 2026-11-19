@@ -6,14 +6,7 @@
 package top.fifthlight.touchcontroller.common.ui.layer.screen
 
 import androidx.compose.runtime.*
-import cafe.adriel.voyager.core.model.rememberScreenModel
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.CurrentScreen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
 import kotlinx.collections.immutable.toPersistentList
-import kotlinx.coroutines.flow.StateFlow
-import top.fifthlight.combine.core.data.Identifier
 import top.fifthlight.combine.core.data.Text
 import top.fifthlight.combine.core.layout.Alignment
 import top.fifthlight.combine.core.layout.Arrangement
@@ -32,20 +25,21 @@ import top.fifthlight.combine.widget.*
 import top.fifthlight.touchcontroller.assets.lang.Texts
 import top.fifthlight.touchcontroller.assets.texture.Textures
 import top.fifthlight.touchcontroller.common.config.condition.*
-import top.fifthlight.touchcontroller.common.config.layout.LayoutLayer
 import top.fifthlight.touchcontroller.common.config.preset.LayoutPreset
-import top.fifthlight.touchcontroller.common.config.preset.info.LayerCustomConditions
-import top.fifthlight.touchcontroller.common.ui.layer.model.LayerEditorScreenModel
-import top.fifthlight.touchcontroller.common.ui.layer.tab.LayerConditionTab
-import top.fifthlight.touchcontroller.common.ui.layer.tab.LayerConditionTabContext
-import top.fifthlight.touchcontroller.common.ui.layer.tab.LocalLayerConditionTabContext
-import top.fifthlight.touchcontroller.common.ui.layer.tab.all.allLayerConditionTabs
+import top.fifthlight.touchcontroller.common.ui.layer.component.LayerEditorComponent
+import top.fifthlight.touchcontroller.common.ui.layer.tab.LayerConditionTabComponent
+import top.fifthlight.touchcontroller.common.ui.layer.tab.builtin.BuiltInTab
+import top.fifthlight.touchcontroller.common.ui.layer.tab.custom.CustomTab
+import top.fifthlight.touchcontroller.common.ui.layer.tab.holdingitem.HoldingItemTab
+import top.fifthlight.touchcontroller.common.ui.layer.tab.ridingentity.RidingEntityTab
+import top.fifthlight.touchcontroller.common.ui.layer.tab.selectedentity.SelectingEntityTab
+import top.fifthlight.touchcontroller.common.ui.state.subscribeAsState
 import top.fifthlight.touchcontroller.common.ui.theme.LocalTouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.theme.TouchControllerTheme
 import top.fifthlight.touchcontroller.common.ui.widget.Scaffold
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.AppBar
 import top.fifthlight.touchcontroller.common.ui.widget.navigation.BackButton
-import top.fifthlight.touchcontroller.common.ui.widget.navigation.TouchControllerNavigator
+import kotlin.jvm.optionals.getOrNull
 
 @Composable
 private fun LayerConditionItem(
@@ -73,8 +67,8 @@ private fun LayerConditionItem(
                 }
 
                 is CustomLayerConditionKey -> {
-                    preset?.controlInfo?.customConditions?.conditions?.firstOrNull { it.uuid == key.key }?.let {
-                        Text(it.name?.let { Text.literal(it) }
+                    preset?.controlInfo?.customConditions?.conditions?.firstOrNull { it.uuid == key.key }?.let { condition ->
+                        Text(condition.name?.let { name -> Text.literal(name) }
                             ?: Text.translatable(Texts.SCREEN_LAYER_EDITOR_CUSTOM_CONDITION_UNNAMED))
                     } ?: Text(Text.translatable(Texts.SCREEN_LAYER_EDITOR_CUSTOM_CONDITION_UNKNOWN))
                 }
@@ -135,152 +129,130 @@ private fun LayerConditionItem(
     }
 }
 
-class LayerEditorScreen(
-    private val screenName: Identifier,
-    private val preset: StateFlow<LayoutPreset?>,
-    private val onCustomConditionsChanged: (LayerCustomConditions) -> Unit,
-    private val initialValue: LayoutLayer,
-    private val onValueChanged: (LayoutLayer) -> Unit,
-) : Screen {
-    @Composable
-    override fun Content() {
-        val screenModel = rememberScreenModel { LayerEditorScreenModel(initialValue, onValueChanged) }
-        val uiState by screenModel.uiState.collectAsState()
-        val navigator = LocalNavigator.current
-        val preset by preset.collectAsState()
-        var innerNavigator by remember { mutableStateOf<Navigator?>(null) }
-        TouchControllerTheme {
-            Scaffold(
-                topBar = {
-                    AppBar(
-                        modifier = Modifier.fillMaxWidth(),
-                        leading = {
-                            BackButton(screenName = Text.translatable(screenName))
-                        },
-                        trailing = {
-                            Button(
-                                onClick = {
-                                    screenModel.applyChanges()
-                                    navigator?.pop()
-                                }
-                            ) {
-                                Text(Text.translatable(Texts.SCREEN_LAYER_EDITOR_SAVE))
-                            }
-                        },
-                    )
-                },
-            ) { modifier ->
-                Column(modifier = modifier) {
-                    Row(
-                        modifier = Modifier.height(IntrinsicSize.Min),
-                    ) {
-                        EditText(
-                            modifier = Modifier.weight(1f),
-                            value = uiState.name.asString(),
-                            onValueChanged = screenModel::editName,
-                            placeholder = Text.translatable(Texts.SCREEN_LAYER_EDITOR_NAME_PLACEHOLDER),
+@Composable
+fun LayerEditorScreen(component: LayerEditorComponent) {
+    TouchControllerTheme {
+        val uiState by component.uiState.subscribeAsState()
+        val presetOptional by component.preset.subscribeAsState()
+        val preset = presetOptional.getOrNull()
+        val pages by component.childPages.subscribeAsState()
+        val active = pages.items[pages.selectedIndex]
+
+        Scaffold(
+            topBar = {
+                AppBar(
+                    modifier = Modifier.fillMaxWidth(),
+                    leading = {
+                        BackButton(
+                            screenName = Text.translatable(component.screenName),
+                            onClick = component::onBack,
                         )
-                        Row {
-                            innerNavigator?.let { innerNavigator ->
-                                for (tab in allLayerConditionTabs) {
-                                    if (tab == innerNavigator.lastItem) {
-                                        ListButton(
-                                            modifier = Modifier
-                                                .minWidth(100)
-                                                .fillMaxHeight(),
-                                            onClick = {},
-                                        ) {
-                                            Text(Text.translatable(tab.name))
-                                        }
-                                    } else {
-                                        IconButton(
-                                            modifier = Modifier.fillMaxHeight(),
-                                            onClick = {
-                                                innerNavigator.replace(tab)
-                                            },
-                                        ) {
-                                            tab.Icon()
-                                        }
-                                    }
+                    },
+                    trailing = {
+                        Button(
+                            onClick = component::applyChanges,
+                        ) {
+                            Text(Text.translatable(Texts.SCREEN_LAYER_EDITOR_SAVE))
+                        }
+                    },
+                )
+            },
+        ) { modifier ->
+            Column(modifier = modifier) {
+                Row(
+                    modifier = Modifier.height(IntrinsicSize.Min),
+                ) {
+                    EditText(
+                        modifier = Modifier.weight(1f),
+                        value = uiState.name.asString(),
+                        onValueChanged = component::editName,
+                        placeholder = Text.translatable(Texts.SCREEN_LAYER_EDITOR_NAME_PLACEHOLDER),
+                    )
+                    Row {
+                        for ((index, page) in pages.items.withIndex()) {
+                            val tab = page.configuration
+                            if (index == pages.selectedIndex) {
+                                ListButton(
+                                    modifier = Modifier
+                                        .minWidth(100)
+                                        .fillMaxHeight(),
+                                    onClick = {},
+                                ) {
+                                    Text(tab.title)
+                                }
+                            } else {
+                                IconButton(
+                                    modifier = Modifier.fillMaxHeight(),
+                                    onClick = {
+                                        component.selectTab(tab)
+                                    },
+                                ) {
+                                    tab.Icon()
                                 }
                             }
                         }
                     }
-                    Row(
-                        modifier = Modifier.weight(1f),
-                    ) {
-                        if (uiState.conditions.conditions.isEmpty()) {
-                            Box(
-                                modifier = Modifier
-                                    .border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                                    .weight(.4f)
-                                    .fillMaxHeight(),
-                            ) {
-                                Text(
-                                    modifier = Modifier.alignment(Alignment.Center),
-                                    text = Text.translatable(Texts.SCREEN_LAYER_EDITOR_CONDITION_EMPTY),
+                }
+                Row(
+                    modifier = Modifier.weight(1f),
+                ) {
+                    if (uiState.conditions.conditions.isEmpty()) {
+                        Box(
+                            modifier = Modifier
+                                .border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                                .weight(.4f)
+                                .fillMaxHeight(),
+                        ) {
+                            Text(
+                                modifier = Modifier.alignment(Alignment.Center),
+                                text = Text.translatable(Texts.SCREEN_LAYER_EDITOR_CONDITION_EMPTY),
+                            )
+                        }
+                    } else {
+                        Column(
+                            modifier = Modifier
+                                .padding(4)
+                                .verticalScroll()
+                                .border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                                .weight(.4f)
+                                .fillMaxHeight(),
+                        ) {
+                            for ((index, condition) in uiState.conditions.conditions.withIndex()) {
+                                LayerConditionItem(
+                                    preset = preset,
+                                    item = condition,
+                                    onValueChanged = {
+                                        component.editCondition(index) {
+                                            copy(value = it)
+                                        }
+                                    },
+                                    onItemRemoved = {
+                                        component.removeCondition(index)
+                                    },
                                 )
                             }
-                        } else {
-                            Column(
-                                modifier = Modifier
-                                    .padding(4)
-                                    .verticalScroll()
-                                    .border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                                    .weight(.4f)
-                                    .fillMaxHeight(),
-                            ) {
-                                for ((index, condition) in uiState.conditions.conditions.withIndex()) {
-                                    LayerConditionItem(
-                                        preset = preset,
-                                        item = condition,
-                                        onValueChanged = {
-                                            screenModel.editCondition(index) {
-                                                copy(value = it)
-                                            }
-                                        },
-                                        onItemRemoved = {
-                                            screenModel.removeCondition(index)
-                                        },
-                                    )
-                                }
-                            }
                         }
-                        TouchControllerNavigator(allLayerConditionTabs.first()) { navigator ->
-                            innerNavigator = navigator
-                            val currentLayerConditionTabContext = LayerConditionTabContext(
-                                preset = preset,
-                                onCustomConditionsChanged = onCustomConditionsChanged,
-                                onConditionAdded = {
-                                    screenModel.addCondition(
-                                        LayerConditions.Item(
-                                            key = it,
-                                            value = LayerConditions.Value.WANT,
-                                        )
-                                    )
-                                },
-                            )
-                            CompositionLocalProvider(
-                                LocalLayerConditionTabContext provides currentLayerConditionTabContext,
-                            ) {
-                                val needBorder by derivedStateOf {
-                                    (navigator.lastItem as? LayerConditionTab)?.needBorder ?: true
-                                }
-                                val borderModifier = if (needBorder) {
-                                    Modifier.border(LocalTouchControllerTheme.current.borderBackgroundDark)
-                                } else {
-                                    Modifier
-                                }
-                                Box(
-                                    modifier = Modifier
-                                        .then(borderModifier)
-                                        .weight(.6f)
-                                        .fillMaxHeight(),
-                                    alignment = Alignment.Center,
-                                ) {
-                                    CurrentScreen()
-                                }
-                            }
+                    }
+
+                    val borderModifier = if (active.configuration.needBorder) {
+                        Modifier.border(LocalTouchControllerTheme.current.borderBackgroundDark)
+                    } else {
+                        Modifier
+                    }
+                    Box(
+                        modifier = Modifier
+                            .then(borderModifier)
+                            .weight(.6f)
+                            .fillMaxHeight(),
+                        alignment = Alignment.Center,
+                    ) {
+                        when (val instance = active.instance) {
+                            is LayerConditionTabComponent.BuiltIn -> BuiltInTab(instance)
+                            is LayerConditionTabComponent.HoldingItem -> HoldingItemTab(instance)
+                            is LayerConditionTabComponent.RidingEntity -> RidingEntityTab(instance)
+                            is LayerConditionTabComponent.SelectingEntity -> SelectingEntityTab(instance)
+                            is LayerConditionTabComponent.Custom -> CustomTab(instance.component)
+                            null -> {}
                         }
                     }
                 }

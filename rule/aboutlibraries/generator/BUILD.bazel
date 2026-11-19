@@ -1,7 +1,7 @@
 load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_binary")
 
 kt_jvm_binary(
-    name = "aboutlibraries_generator",
+    name = "generator",
     srcs = glob(["*.kt"]),
     main_class = "top.fifthlight.aboutlibraries.generator.AboutLibrariesGeneratorKt",
     visibility = ["//visibility:public"],

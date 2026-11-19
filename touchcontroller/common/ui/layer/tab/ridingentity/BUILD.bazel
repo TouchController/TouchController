@@ -11,18 +11,12 @@ kt_merge_library(
         "//touchcontroller/common/ui/entitypicker",
         "//touchcontroller/common/ui/layer/tab",
         "//touchcontroller/common/ui/theme",
-        "//touchcontroller/resources/lang:text_binding",
     ],
     visibility = ["//touchcontroller:__subpackages__"],
     deps = [
         "//:compose",
-        "//combine/core/data",
         "//combine/core/modifier",
         "//combine/core/modifier/drawing",
         "//combine/core/paint",
-        "//combine/data",
-        "//combine/widget",
-        "//touchcontroller/resources/texture:texture_lib",
-        "@maven//:cafe_adriel_voyager_voyager_core_desktop",
     ],
 )
