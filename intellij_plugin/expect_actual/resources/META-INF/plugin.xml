@@ -1,12 +1,13 @@
 <idea-plugin>
     <id>fifthlight.expectactual</id>
     <name>Expect/Actual</name>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <vendor>fifth_light</vendor>
+    <idea-version since-build="263.7307" until-build="263.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
-    <depends>com.intellij.modules.kotlin.k2</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider
