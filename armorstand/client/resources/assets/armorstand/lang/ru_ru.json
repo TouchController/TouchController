@@ -103,7 +103,5 @@
     "armorstand.vmc.port": "Порт:",
     "armorstand.config.hide_player_armor": "Спрятать броню от игроков",
     "armorstand.metadata.license_description": "Лицензия: %s",
-    "armorstand.metadata.author.contact": "%s: %s",
-    "armorstand.metadata.link_donate": "",
-    "armorstand.metadata.link_home": ""
+    "armorstand.metadata.author.contact": "%s: %s"
 }
