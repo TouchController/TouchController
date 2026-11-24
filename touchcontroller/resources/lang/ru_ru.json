@@ -368,7 +368,6 @@
     "touchcontroller.widget.trigger.layer_condition.condition.empty": "Пусто",
     "touchcontroller.widget.double_trigger.interval": "Интервал тригера",
     "touchcontroller.widget.double_trigger.action": "Тригер действия",
-    "touchcontroller.screen.item_list.warning_not_in_game": "",
     "touchcontroller.platform.proxy": "Устаревший UDP",
     "touchcontroller.screen.config.system.title": "Система",
     "touchcontroller.screen.config.status.status.enable.title": "Вкл.",
@@ -388,7 +387,6 @@
     "touchcontroller.platform.android": "Android",
     "touchcontroller.platform.wayland": "Wayland",
     "touchcontroller.screen.config.platform.title": "Платформа",
-    "touchcontroller.screen.config.status.status.only_view.aiming_by_crosshair.title": "",
     "touchcontroller.screen.config.status.status.enable.description": "Включает функционал TouchController.",
     "touchcontroller.screen.config.general.control.creative_break_hold_ticks.title": "Время ломания блока в креативе",
     "touchcontroller.screen.custom_control_layout.layers.conditions.selecting_entity_type": "Выбрать сущность",
@@ -396,10 +394,7 @@
     "touchcontroller.screen.config.status.platform.unavailable": "Недоступно",
     "touchcontroller.screen.custom_control_layout.layers.conditions.riding_entity_type": "Оседлать сущность",
     "touchcontroller.screen.config.status.status.disable.title": "Выкл.",
-    "touchcontroller.screen.component_list.warning_not_in_game": "",
     "touchcontroller.widget.trigger.player_action.unknown": "Неизвестно",
-    "touchcontroller.screen.config.status.status.only_view.aiming_by_crosshair.description": "",
-    "touchcontroller.screen.config.status.debug_info.title": "",
     "touchcontroller.platform.sdl": "SDL",
     "touchcontroller.warning.take_panorama_unsupported": "Эта версия игры не поддерживает снимок панорамы.",
     "touchcontroller.screen.config.status.status.only_view.click_to_interact.description": "Отключает слои и виджеты TouchController. При включении функционирует только кольцо касания.",
@@ -408,6 +403,5 @@
     "touchcontroller.screen.config.status.platform": "Текущая платформа: %s",
     "touchcontroller.screen.config.platform.sdl.vibration_strength.title": "Сила вибрации",
     "touchcontroller.widget.forward_button.name": "Передняя кнопка",
-    "touchcontroller.widget.vanilla_chat_button.name": "Ванильная кнопка чата",
-    "touchcontroller.platform.android.native": ""
+    "touchcontroller.widget.vanilla_chat_button.name": "Ванильная кнопка чата"
 }
