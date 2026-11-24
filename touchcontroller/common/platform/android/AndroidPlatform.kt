@@ -21,10 +21,15 @@ class AndroidPlatform(name: String) : LargeMessageWrappedPlatform() {
         get() = true
 
     private val logger = LoggerFactory.getLogger(AndroidPlatform::class.java)
-    private val handle = Transport.new(name)
+    @Volatile
+    private var handle = Transport.new(name)
     private val readBuffer = ByteArray(256)
 
     override fun pollSmallEvent(): ProxyMessage? {
+        val handle = handle
+        if (handle == 0L) {
+            return null
+        }
         val receivedLength = Transport.receive(handle, readBuffer)
         val length = receivedLength.takeIf { it > 0 } ?: return null
         val buffer = ByteBuffer.wrap(readBuffer)
@@ -42,13 +47,23 @@ class AndroidPlatform(name: String) : LargeMessageWrappedPlatform() {
     }
 
     override fun sendSmallEvent(message: ProxyMessage) {
+        val handle = handle
+        if (handle == 0L) {
+            return
+        }
         val buffer = ByteBuffer.allocate(256)
         message.encode(buffer)
         buffer.flip()
         Transport.send(handle, buffer.array(), buffer.arrayOffset() + buffer.position(), buffer.remaining())
     }
 
+    @Synchronized
     override fun close() {
+        val handle = handle
+        if (handle == 0L) {
+            return
+        }
+        this.handle = 0L
         Transport.destroy(handle)
     }
 }
