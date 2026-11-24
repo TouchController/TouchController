@@ -24,16 +24,20 @@ import top.fifthlight.touchcontroller.proxy.message.VibrateMessage
 import kotlin.collections.getOrPut
 
 class SdlPlatform(private val eventRegister: (handler: (event: SDL_Event) -> Boolean) -> Unit) : Platform {
+    private var closed = false
+
     private val logger = LoggerFactory.getLogger(SdlPlatform::class.java)
     private var haptic: Long? = null
 
     override fun init() {
+        require(!closed) { "Already closed" }
         eventRegister(::handleEvent)
         SDLInit.SDL_InitSubSystem(SDLInit.SDL_INIT_HAPTIC)
         initHaptics()
     }
 
     private fun initHaptics() {
+        require(!closed) { "Already closed" }
         val haptics = SDLHaptic.SDL_GetHaptics() ?: return
         try {
             if (haptics.hasRemaining()) {
@@ -70,6 +74,7 @@ class SdlPlatform(private val eventRegister: (handler: (event: SDL_Event) -> Boo
     private var nextPointerIndex = 0
 
     private fun handleEvent(event: SDL_Event): Boolean {
+        if (closed) return false
         when (event.type()) {
             SDLEvents.SDL_EVENT_FINGER_DOWN -> {
                 val event = event.tfinger()
@@ -112,9 +117,13 @@ class SdlPlatform(private val eventRegister: (handler: (event: SDL_Event) -> Boo
     override val useDefaultInputHandler: Boolean
         get() = true
 
-    override fun pollEvent(): ProxyMessage? = queue.removeFirstOrNull()
+    override fun pollEvent(): ProxyMessage? {
+        require(!closed) { "Already closed" }
+        return queue.removeFirstOrNull()
+    }
 
     override fun sendEvent(message: ProxyMessage) {
+        require(!closed) { "Already closed" }
         when (message) {
             is VibrateMessage -> {
                 val haptic = haptic ?: return
@@ -127,6 +136,10 @@ class SdlPlatform(private val eventRegister: (handler: (event: SDL_Event) -> Boo
     }
 
     override fun close() {
+        synchronized(this) {
+            if (closed) return
+            closed = true
+        }
         haptic?.let { SDLHaptic.SDL_CloseHaptic(it) }
         SDLInit.SDL_QuitSubSystem(SDLInit.SDL_INIT_HAPTIC)
     }

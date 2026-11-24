@@ -141,7 +141,7 @@ class TouchController(val fmlContext: FMLJavaModLoadingContext) {
 
         @JvmStatic
         fun clientClose() {
-            PlatformProvider.platform?.close()
+            PlatformProvider.destroy()
         }
     }
 }

@@ -56,8 +56,9 @@ object RenderEvents {
         ControllerHudModel.timer.renderTick()
         keyBindingHandler.renderTick(ControllerHudModel.timer.renderTick)
 
+        val platform = PlatformProvider.platform
         if (ControllerHudModel.status.vibrate) {
-            PlatformProvider.platform?.sendEvent(VibrateMessage(VibrateMessage.Kind.BLOCK_BROKEN))
+            platform?.sendEvent(VibrateMessage(VibrateMessage.Kind.BLOCK_BROKEN))
             ControllerHudModel.status.vibrate = false
         }
 
@@ -74,7 +75,6 @@ object RenderEvents {
         }
 
         val playerHandle = PlayerHandleFactory.current()
-        val platform = PlatformProvider.platform
         if (platform != null) {
             while (true) {
                 val width = WindowEvents.windowWidth

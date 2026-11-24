@@ -137,7 +137,7 @@ class TouchController(modEventBus: IEventBus, private val container: ModContaine
 
         @JvmStatic
         fun clientClose() {
-            PlatformProvider.platform?.close()
+            PlatformProvider.destroy()
         }
     }
 }

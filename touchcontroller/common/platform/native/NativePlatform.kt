@@ -17,6 +17,8 @@ class NativePlatform(
     private val artJvmPtr: Long,
     private val artApplication: Long,
 ) : Platform {
+    private var closed = false
+
     private val logger = LoggerFactory.getLogger(NativePlatform::class.java)
 
     override val name: Text
@@ -26,11 +28,13 @@ class NativePlatform(
         get() = true
 
     override fun init() {
+        require(!closed) { "Already closed" }
         Interface.init(artJvmPtr, artApplication)
     }
 
     private val readBuffer = ByteBuffer.allocate(65536)
     override fun pollEvent(): ProxyMessage? {
+        require(!closed) { "Already closed" }
         readBuffer.clear()
         val length = Interface.poll(readBuffer.array()).takeIf { it > 0 } ?: return null
         readBuffer.limit(length)
@@ -49,12 +53,17 @@ class NativePlatform(
 
     private val sendBuffer = ByteBuffer.allocate(65536)
     override fun sendEvent(message: ProxyMessage) {
+        require(!closed) { "Already closed" }
         sendBuffer.clear()
         message.encode(sendBuffer)
         Interface.send(sendBuffer.array(), sendBuffer.position())
     }
 
     override fun close() {
+        synchronized(this) {
+            if (closed) return
+            closed = true
+        }
         Interface.stop()
     }
 }

@@ -201,4 +201,9 @@ object PlatformProvider {
         platformLoaded = true
         platform = platformProvider?.invoke().also { it?.init() }
     }
+
+    fun destroy() = synchronized(this) {
+        platform?.close()
+        platform = null
+    }
 }

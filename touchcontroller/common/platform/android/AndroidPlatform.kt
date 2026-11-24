@@ -14,6 +14,8 @@ import top.fifthlight.touchcontroller.proxy.message.ProxyMessage
 import java.nio.ByteBuffer
 
 class AndroidPlatform(name: String) : LargeMessageWrappedPlatform() {
+    private var closed = false
+
     override val name: Text
         get() = Text.translatable(Texts.PLATFORM_ANDROID)
 
@@ -25,6 +27,7 @@ class AndroidPlatform(name: String) : LargeMessageWrappedPlatform() {
     private val readBuffer = ByteArray(256)
 
     override fun pollSmallEvent(): ProxyMessage? {
+        require(!closed) { "Already closed" }
         val receivedLength = Transport.receive(handle, readBuffer)
         val length = receivedLength.takeIf { it > 0 } ?: return null
         val buffer = ByteBuffer.wrap(readBuffer)
@@ -42,6 +45,7 @@ class AndroidPlatform(name: String) : LargeMessageWrappedPlatform() {
     }
 
     override fun sendSmallEvent(message: ProxyMessage) {
+        require(!closed) { "Already closed" }
         val buffer = ByteBuffer.allocate(256)
         message.encode(buffer)
         buffer.flip()
@@ -49,6 +53,10 @@ class AndroidPlatform(name: String) : LargeMessageWrappedPlatform() {
     }
 
     override fun close() {
+        synchronized(this) {
+            if (closed) return
+            closed = true
+        }
         Transport.destroy(handle)
     }
 }
