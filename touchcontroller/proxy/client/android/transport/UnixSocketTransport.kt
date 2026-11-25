@@ -12,8 +12,6 @@ import top.fifthlight.touchcontroller.proxy.client.MessageTransport
 import java.io.IOException
 import java.nio.ByteBuffer
 import java.util.concurrent.atomic.AtomicBoolean
-import java.util.concurrent.locks.ReentrantLock
-import kotlin.concurrent.withLock
 
 private const val TAG = "UnixSocketTransport"
 
@@ -21,13 +19,36 @@ private class UnixSocketTransport(
     private val serverSocket: LocalServerSocket,
 ) : MessageTransport {
     private val closed = AtomicBoolean(false)
+    private val accepting = AtomicBoolean(false)
     @Volatile
     private var clientSocket: LocalSocket? = null
 
     override fun close() {
-        if (closed.compareAndSet(false, true)) {
-            Log.d("TouchControllerBridge", "Unix closing")
-            clientSocket?.close()
+        if (!closed.compareAndSet(false, true)) return
+        Log.d("TouchControllerBridge", "Unix closing")
+        clientSocket?.let { client ->
+            try {
+                client.shutdownInput()
+            } catch (_: IOException) {
+            }
+            try {
+                client.close()
+            } catch (_: IOException) {
+            }
+        }
+        clientSocket = null
+        if (accepting.get()) {
+            // Closing the server socket would leave the blocked accept() and its
+            // AsynchronousCloseMonitor registration behind; connect a throwaway client
+            // instead so accept() returns and the receive thread can exit cleanly.
+            try {
+                LocalSocket().use { socket ->
+                    socket.connect(serverSocket.localSocketAddress)
+                }
+            } catch (ex: IOException) {
+                Log.w(TAG, "Failed to wake up accept: ", ex)
+            }
+        } else {
             serverSocket.close()
         }
     }
@@ -69,16 +90,28 @@ private class UnixSocketTransport(
     }
 
     override fun receive(buffer: ByteBuffer): Boolean {
-        clientLoop@ while (true) {
-            val client = try {
-                clientSocket ?: run {
-                    serverSocket.accept().apply {
-                        clientSocket = this
-                    }
+        clientLoop@ while (!closed.get()) {
+            var client = clientSocket
+            if (client == null) {
+                accepting.set(true)
+                val accepted: LocalSocket
+                try {
+                    accepted = serverSocket.accept()
+                } catch (ex: IOException) {
+                    ex.printStackTrace()
+                    break
+                } finally {
+                    accepting.set(false)
                 }
-            } catch (ex: IOException) {
-                ex.printStackTrace()
-                break
+                if (closed.get()) {
+                    try {
+                        accepted.close()
+                    } catch (_: IOException) {
+                    }
+                    break
+                }
+                clientSocket = accepted
+                client = accepted
             }
 
             try {
@@ -142,6 +175,7 @@ private class UnixSocketTransport(
                 clientSocket = null
             }
         }
+        serverSocket.close()
         return false
     }
 }
