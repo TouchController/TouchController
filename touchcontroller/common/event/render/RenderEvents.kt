@@ -50,6 +50,7 @@ object RenderEvents {
     private val touchStateModel: TouchStateModel = TouchStateModel()
     private var prevWidth = 0
     private var prevHeight = 0
+    private var prevInGui = false
 
     @JvmStatic
     fun onRenderStart() {
@@ -129,20 +130,22 @@ object RenderEvents {
                     }
 
                     is MoveViewMessage -> {
-                        playerHandle?.let {
-                            val rawDelta = Offset(
-                                x = message.deltaYaw,
-                                y = message.deltaPitch,
-                            )
-                            val offset = if (message.screenBased) {
-                                rawDelta.fixAspectRadio(window.size) * config.control.viewMovementSensitivity
-                            } else {
-                                rawDelta
+                        if (!GameState.inGui) {
+                            playerHandle?.let {
+                                val rawDelta = Offset(
+                                    x = message.deltaYaw,
+                                    y = message.deltaPitch,
+                                )
+                                val offset = if (message.screenBased) {
+                                    rawDelta.fixAspectRadio(window.size) * config.control.viewMovementSensitivity
+                                } else {
+                                    rawDelta
+                                }
+                                playerHandle.changeLookDirection(
+                                    deltaYaw = offset.x.toDouble(),
+                                    deltaPitch = offset.y.toDouble(),
+                                )
                             }
-                            playerHandle.changeLookDirection(
-                                deltaYaw = offset.x.toDouble(),
-                                deltaPitch = offset.y.toDouble(),
-                            )
                         }
                     }
 
@@ -164,9 +167,14 @@ object RenderEvents {
         }
 
         if (!GameState.inGame) {
+            prevInGui = false
+            touchStateModel.clearPointer()
+            ControllerHudModel.pendingDrawQueue = null
             return
         }
-        if (GameState.inGui) {
+        val inGui = GameState.inGui
+        if (inGui != prevInGui) {
+            prevInGui = inGui
             touchStateModel.clearPointer()
         }
         val player = playerHandle ?: return
@@ -209,6 +217,7 @@ object RenderEvents {
             put(BuiltinLayerCondition.RIDING, ridingType != null)
             put(BuiltinLayerCondition.ENTITY_SELECTED, crosshairTarget is CrosshairTarget.Entity)
             put(BuiltinLayerCondition.BLOCK_SELECTED, crosshairTarget == CrosshairTarget.Block)
+            put(BuiltinLayerCondition.IN_GUI, inGui)
         }.toPersistentSet()
 
         val drawQueue = DrawQueue()
@@ -220,7 +229,7 @@ object RenderEvents {
             screenOffset = IntOffset.ZERO,
             pointers = touchStateModel.pointers,
             input = ContextInput(
-                inGui = GameState.inGui,
+                inGui = inGui,
                 builtinCondition = condition,
                 customCondition = ControllerHudModel.status.enabledCustomConditions.toPersistentSet(),
                 crosshairTarget = crosshairTarget,
@@ -261,7 +270,23 @@ object RenderEvents {
         }
     }
 
+    @JvmStatic
     fun onHudRender(canvas: Canvas) {
+        if (GameState.inGui) {
+            return
+        }
+        val queue = ControllerHudModel.pendingDrawQueue
+        queue?.let {
+            queue.execute(canvas)
+            ControllerHudModel.pendingDrawQueue = null
+        }
+    }
+
+    @JvmStatic
+    fun onScreenRender(canvas: Canvas) {
+        if (!GameState.inGame || !GameState.inGui) {
+            return
+        }
         val queue = ControllerHudModel.pendingDrawQueue
         queue?.let {
             queue.execute(canvas)

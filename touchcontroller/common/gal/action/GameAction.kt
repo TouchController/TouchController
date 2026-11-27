@@ -12,6 +12,7 @@ import top.fifthlight.touchcontroller.assets.lang.Texts
 interface GameAction {
     fun openChatScreen()
     fun openGameMenu()
+    fun closeScreen()
     fun sendMessage(text: Text)
     fun nextPerspective()
     fun takeScreenshot()

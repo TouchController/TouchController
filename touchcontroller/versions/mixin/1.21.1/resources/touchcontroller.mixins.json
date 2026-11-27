@@ -18,6 +18,7 @@
     "LocalPlayerMixin",
     "MinecraftMixin",
     "MultiPlayerGameModeMixin",
-    "OptionsSubScreenAccessor"
+    "OptionsSubScreenAccessor",
+    "ScreenMixin"
   ]
 }

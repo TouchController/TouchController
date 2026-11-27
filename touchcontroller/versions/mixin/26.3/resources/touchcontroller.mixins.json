@@ -21,6 +21,7 @@
     "MultiPlayerGameModeMixin",
     "OptionsSubScreenAccessor",
     "ProjectileUtilMixin",
+    "ScreenMixin",
     "WindowMixin"
   ]
 }

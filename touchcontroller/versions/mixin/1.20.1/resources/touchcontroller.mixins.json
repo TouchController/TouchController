@@ -18,6 +18,7 @@
     "KeyMappingAccessor",
     "LocalPlayerMixin",
     "MinecraftMixin",
-    "MultiPlayerGameModeMixin"
+    "MultiPlayerGameModeMixin",
+    "ScreenMixin"
   ]
 }

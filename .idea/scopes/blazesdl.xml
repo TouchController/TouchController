@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="blazesdl" pattern="(file[blazesdl*]:*//*&amp;&amp;!file[blazesdl.api*]:*//*||src[blazesdl*]:*..*)&amp;&amp;!src[blazesdl.api*]:*..*" />
-</component>

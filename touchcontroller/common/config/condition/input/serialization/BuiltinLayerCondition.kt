@@ -21,4 +21,5 @@ val JBuiltinLayerCondition = enumByName<BuiltinLayerCondition> {
     "riding" encodes BuiltinLayerCondition.RIDING
     "entity_selected" encodes BuiltinLayerCondition.ENTITY_SELECTED
     "block_selected" encodes BuiltinLayerCondition.BLOCK_SELECTED
+    "in_gui" encodes BuiltinLayerCondition.IN_GUI
 }
